@@ -1,19 +1,24 @@
 package co.coffeery.app.ui.screens.root
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import co.coffeery.app.data.local.AppDatabase
 import co.coffeery.app.data.local.CustomEquipmentEntity
 import co.coffeery.app.data.local.RecipeEntity
+import co.coffeery.app.data.local.SettingsEntity
 import co.coffeery.app.data.model.BrewCategory
 import co.coffeery.app.data.model.Equipment
 import co.coffeery.app.data.model.RoastLevel
+import co.coffeery.app.data.model.ThemeMode
 import co.coffeery.app.data.repo.CoffeeRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.UUID
@@ -30,6 +35,8 @@ data class AppUiState(
     val byCups: Boolean = true,
     val cups: Int = 2,
     val waterMl: Int = 500,
+    val themeMode: ThemeMode = ThemeMode.SYSTEM,
+    val settings: SettingsEntity = SettingsEntity(),
 ) {
     val selectedEquipment: Equipment?
         get() = equipment.firstOrNull { it.id == selectedEquipmentId }
@@ -58,6 +65,41 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
         viewModelScope.launch {
             repo.recipes.collect { list -> _state.update { it.copy(recipes = list) } }
+        }
+        viewModelScope.launch {
+            repo.settings.collect { entity ->
+                val s = entity ?: SettingsEntity()
+                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(s.language))
+                _state.update {
+                    it.copy(themeMode = ThemeMode.fromKey(s.themeMode), settings = s)
+                }
+            }
+        }
+    }
+
+    // --- Settings ---
+    fun setThemeMode(mode: ThemeMode) {
+        _state.update { it.copy(themeMode = mode) }
+        viewModelScope.launch {
+            val cur = (repo.settings.first() ?: SettingsEntity())
+                .copy(themeMode = mode.name)
+            repo.upsertSettings(cur)
+        }
+    }
+
+    fun setLanguage(lang: String) {
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(lang))
+        viewModelScope.launch {
+            val cur = (repo.settings.first() ?: SettingsEntity())
+                .copy(language = lang)
+            repo.upsertSettings(cur)
+        }
+    }
+
+    fun setTimerSetting(update: (SettingsEntity) -> SettingsEntity) {
+        viewModelScope.launch {
+            val cur = repo.settings.first() ?: SettingsEntity()
+            repo.upsertSettings(update(cur))
         }
     }
 

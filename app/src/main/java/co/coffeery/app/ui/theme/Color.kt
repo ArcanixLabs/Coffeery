@@ -28,6 +28,13 @@ data class CoffeeColors(
     /** Coffee shade for the strength slider fill; darkens as strength rises. */
     fun coffeeFor(strength: Float): Color =
         lerp(cremaLight, cremaDark, strength.coerceIn(0f, 1f))
+
+    /** Text colour that stays readable over [coffeeFor] at any strength. */
+    fun coffeeTextFor(strength: Float): Color =
+        if (strength.coerceIn(0f, 1f) > 0.45f) {
+            if (isDark) lerp(cremaLight, textPrimary, strength.coerceIn(0f, 1f))
+            else onAccent
+        } else textPrimary
 }
 
 val LightCoffeeColors = CoffeeColors(

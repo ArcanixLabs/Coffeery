@@ -18,6 +18,7 @@ sealed interface Route {
     data object Tabs : Route
     data object AddEquipment : Route
     data object Timer : Route
+    data object Settings : Route
     data class LearnDetail(val cardIndex: Int) : Route
     data class DrinkDetail(val index: Int) : Route
 }

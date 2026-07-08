@@ -328,4 +328,33 @@
     <string name="drink_viennese_name">Viyana Kahvesi</string>
     <string name="drink_viennese_summary">Çırpılmış kremayla taçlandırılmış güçlü kahve</string>
     <string name="drink_viennese_body">Çırpılmış kremayla taçlandırılmış güçlü kahve (Wiener Melange geleneği).\n\nMalzemeler:\n• 2 shot güçlü kahve/espresso\n• Çırpılmış krema\n• İsteğe bağlı: kakao/çikolata rendesi\n\nHazırlanışı:\n1. Sıcak güçlü kahveyi bir fincana dökün.\n2. Üzerini bolca çırpılmış kremayla kaplayın.\n3. Kakao veya çikolata serpin.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_appearance">Görünüm</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_system">Sistem</string>
+    <string name="theme_light">Açık</string>
+    <string name="theme_dark">Koyu</string>
+    <string name="settings_language">Dil</string>
+    <string name="settings_language_desc">Tam etki için değişiklik sonrası uygulamayı yeniden başlatın.</string>
+    <string name="settings_timer">Zamanlayıcı</string>
+    <string name="settings_timer_pip">Resim içinde resim</string>
+    <string name="settings_timer_background">Arka planda zamanlayıcıyı sürdür</string>
+    <string name="settings_timer_sound">Adım değişim sesi</string>
+    <string name="settings_timer_vibrate">Adım değişim titreşimi</string>
+    <string name="settings_timer_show_next">Sonraki adımı göster</string>
+    <string name="settings_timer_merge_weight">Ağırlık göstergesini birleştir</string>
+    <string name="settings_notifications">Bildirimler</string>
+    <string name="settings_notify_brew_complete">Demleme tamamlandı</string>
+    <string name="settings_notify_step_change">Adım değişikliği</string>
+    <string name="settings_my_data">Verilerim</string>
+    <string name="settings_export_data">Tarifleri ve ekipmanı dışa aktar</string>
+    <string name="settings_import_data">Tarifleri ve ekipmanı içe aktar</string>
+    <string name="settings_backup">Yedekleme ve Geri Yükleme</string>
+    <string name="settings_restore_defaults">Varsayılanlara sıfırla</string>
+    <string name="settings_about">Hakkında</string>
+    <string name="settings_version">Sürüm</string>
+    <string name="settings_github">GitHub deposu</string>
+    <string name="settings_whats_new">Yenilikler</string>
 </resources>

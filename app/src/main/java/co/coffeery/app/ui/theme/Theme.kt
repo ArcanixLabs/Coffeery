@@ -5,14 +5,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.text.TextStyle
+import co.coffeery.app.data.model.ThemeMode
 
 /** Entry point for the design system. Provides colours, type and spacing and
  *  keeps a single identity across light/dark rather than a bare inversion. */
 @Composable
 fun CoffeeTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    themeMode: ThemeMode = ThemeMode.SYSTEM,
     content: @Composable () -> Unit,
 ) {
+    val systemDark = isSystemInDarkTheme()
+    val darkTheme = when (themeMode) {
+        ThemeMode.SYSTEM -> systemDark
+        ThemeMode.LIGHT -> false
+        ThemeMode.DARK -> true
+    }
     val colors = if (darkTheme) DarkCoffeeColors else LightCoffeeColors
     CompositionLocalProvider(
         LocalCoffeeColors provides colors,

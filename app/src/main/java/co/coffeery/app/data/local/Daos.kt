@@ -33,3 +33,12 @@ interface CustomEquipmentDao {
     @Query("DELETE FROM custom_equipment WHERE id = :id")
     suspend fun deleteById(id: String)
 }
+
+@Dao
+interface SettingsDao {
+    @Query("SELECT * FROM settings WHERE id = 'app'")
+    fun observe(): Flow<SettingsEntity?>
+
+    @androidx.room.Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun upsert(settings: SettingsEntity)
+}

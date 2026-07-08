@@ -328,4 +328,33 @@
     <string name="drink_viennese_name">Viennese Coffee</string>
     <string name="drink_viennese_summary">Strong coffee topped with whipped cream</string>
     <string name="drink_viennese_body">Strong coffee crowned with whipped cream (Wiener Melange tradition).\n\nIngredients:\n• 2 shots strong coffee/espresso\n• Whipped cream\n• Optional: cocoa/chocolate shavings\n\nSteps:\n1. Pour hot strong coffee into a cup.\n2. Top generously with whipped cream.\n3. Dust with cocoa or chocolate.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_desc">Restart the app after changing for full effect.</string>
+    <string name="settings_timer">Timer</string>
+    <string name="settings_timer_pip">Picture-in-picture</string>
+    <string name="settings_timer_background">Allow background timer</string>
+    <string name="settings_timer_sound">Step change sound</string>
+    <string name="settings_timer_vibrate">Step change vibration</string>
+    <string name="settings_timer_show_next">Show next step</string>
+    <string name="settings_timer_merge_weight">Merge weight display</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_notify_brew_complete">Brew completed</string>
+    <string name="settings_notify_step_change">Step change</string>
+    <string name="settings_my_data">My Data</string>
+    <string name="settings_export_data">Export recipes &amp; gear</string>
+    <string name="settings_import_data">Import recipes &amp; gear</string>
+    <string name="settings_backup">Backup &amp; Restore</string>
+    <string name="settings_restore_defaults">Reset to defaults</string>
+    <string name="settings_about">About</string>
+    <string name="settings_version">Version</string>
+    <string name="settings_github">GitHub repository</string>
+    <string name="settings_whats_new">What\'s new</string>
 </resources>

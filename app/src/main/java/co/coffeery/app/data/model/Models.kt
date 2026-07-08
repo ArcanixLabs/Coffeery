@@ -54,6 +54,17 @@ enum class TempMode { RANGE, SLOW, COLD;
     }
 }
 
+enum class ThemeMode(@StringRes val labelRes: Int) {
+    SYSTEM(R.string.theme_system),
+    LIGHT(R.string.theme_light),
+    DARK(R.string.theme_dark);
+
+    companion object {
+        fun fromKey(key: String?): ThemeMode =
+            entries.firstOrNull { it.name == key } ?: SYSTEM
+    }
+}
+
 /**
  * Roast level fine-tunes the recipe. Faithful to the research report's water
  * table (light roasts brew hotter, dark roasts cooler) and extraction theory

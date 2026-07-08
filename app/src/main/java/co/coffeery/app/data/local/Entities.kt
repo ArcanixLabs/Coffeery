@@ -17,6 +17,22 @@ data class RecipeEntity(
     val createdAt: Long = System.currentTimeMillis(),
 )
 
+/** Single-row app settings. Primary key is always "app". */
+@Entity(tableName = "settings")
+data class SettingsEntity(
+    @PrimaryKey val id: String = "app",
+    val themeMode: String = "system",
+    val language: String = "en",
+    val timerPip: Boolean = true,
+    val timerBackground: Boolean = true,
+    val timerSound: Boolean = true,
+    val timerVibrate: Boolean = true,
+    val timerShowNext: Boolean = true,
+    val timerMergeWeight: Boolean = false,
+    val notificationsBrewComplete: Boolean = true,
+    val notificationsStepChange: Boolean = false,
+)
+
 /**
  * User-created custom gear. Steps are synthesized from [category] at load time,
  * so only the tuning parameters are persisted.

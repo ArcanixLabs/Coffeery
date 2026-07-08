@@ -1,5 +1,7 @@
 package co.coffeery.app.ui.screens.brew
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -61,7 +63,18 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
             .padding(top = 12.dp, bottom = 28.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
-        ScreenHeader(title = stringResource(R.string.calc_title))
+        ScreenHeader(
+            title = stringResource(R.string.calc_title),
+            trailing = {
+                LineIcon(
+                    Glyph.GEAR,
+                    CoffeeTheme.colors.textSecondary,
+                    Modifier.size(22.dp).clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) {
+                        vm.openRoute(co.coffeery.app.ui.screens.root.Route.Settings)
+                    },
+                )
+            },
+        )
 
         GearSelector(eq) { vm.selectTab(co.coffeery.app.ui.screens.root.NavTab.GEAR) }
 
@@ -159,7 +172,7 @@ private fun StrengthSection(state: AppUiState, vm: AppViewModel, result: co.coff
                     stringResource(result.strengthBandRes),
                 ),
                 background = colors.coffeeFor(state.strength),
-                textColor = if (state.strength > 0.45f) colors.onAccent else colors.textPrimary,
+                textColor = colors.coffeeTextFor(state.strength),
             )
         }
         Spacer(Modifier.height(10.dp))

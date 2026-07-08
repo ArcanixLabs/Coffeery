@@ -16,7 +16,7 @@ import co.coffeery.app.data.model.BrewCategory
 import co.coffeery.app.data.model.StepKind
 
 /** The single, consistent line-art illustration set for the whole app. */
-enum class Glyph { DROP, CONE, BOOKMARK, BOOK, CUP, WAVES, ARROW_DOWN, FLAME, SWIRL, FUNNEL, TIMER, PLUS, BEAN }
+enum class Glyph { DROP, CONE, BOOKMARK, BOOK, CUP, WAVES, ARROW_DOWN, FLAME, SWIRL, FUNNEL, TIMER, PLUS, BEAN, GEAR }
 
 @Composable
 fun LineIcon(
@@ -160,6 +160,16 @@ private fun DrawScope.drawGlyph(glyph: Glyph, tint: Color, stroke: Stroke) {
                 cubicTo(w * 0.38f, h * 0.4f, w * 0.62f, h * 0.6f, w * 0.5f, h * 0.78f)
             }
             drawPath(p, tint, style = stroke)
+        }
+        Glyph.GEAR -> {
+            drawCircle(tint, radius = w * 0.16f, center = Offset(w * 0.5f, h * 0.5f), style = stroke)
+            drawCircle(tint, radius = w * 0.3f, center = Offset(w * 0.5f, h * 0.5f), style = stroke)
+            for (i in 0..7) {
+                val a = Math.toRadians((i * 45.0 + 10.0))
+                val inner = Offset((w * 0.5f + w * 0.18f * kotlin.math.cos(a)).toFloat(), (h * 0.5f + h * 0.18f * kotlin.math.sin(a)).toFloat())
+                val outer = Offset((w * 0.5f + w * 0.36f * kotlin.math.cos(a)).toFloat(), (h * 0.5f + h * 0.36f * kotlin.math.sin(a)).toFloat())
+                drawLine(tint, inner, outer, stroke.width, StrokeCap.Round)
+            }
         }
     }
 }

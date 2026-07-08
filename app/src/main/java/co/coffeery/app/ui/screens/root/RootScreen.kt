@@ -29,7 +29,7 @@ fun RootScreen(vm: AppViewModel) {
     val state by vm.state.collectAsStateWithLifecycle()
     // System back closes full-screen routes before exiting the app.
     BackHandler(enabled = state.route !is Route.Tabs) { vm.back() }
-    CoffeeTheme {
+    CoffeeTheme(themeMode = state.themeMode) {
         val colors = CoffeeTheme.colors
         Box(
             modifier = Modifier
@@ -47,6 +47,7 @@ fun RootScreen(vm: AppViewModel) {
                         is Route.AddEquipment -> AddEquipmentScreen(vm)
                         is Route.LearnDetail -> LearnDetailScreen(route.cardIndex, vm)
                         is Route.DrinkDetail -> DrinkDetailScreen(route.index, vm)
+                        is Route.Settings -> SettingsScreen(vm)
                         is Route.Tabs -> TabContent(state, vm)
                     }
                 }
