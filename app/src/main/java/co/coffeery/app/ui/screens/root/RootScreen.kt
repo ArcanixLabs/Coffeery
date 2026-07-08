@@ -16,6 +16,8 @@ import co.coffeery.app.ui.components.BottomNav
 import co.coffeery.app.ui.screens.brew.BrewTimerScreen
 import co.coffeery.app.ui.screens.brew.CalculatorScreen
 import co.coffeery.app.ui.screens.equipment.AddEquipmentScreen
+import co.coffeery.app.ui.screens.drinks.DrinkDetailScreen
+import co.coffeery.app.ui.screens.drinks.DrinksScreen
 import co.coffeery.app.ui.screens.equipment.EquipmentScreen
 import co.coffeery.app.ui.screens.learn.LearnDetailScreen
 import co.coffeery.app.ui.screens.learn.LearnScreen
@@ -44,6 +46,7 @@ fun RootScreen(vm: AppViewModel) {
                         is Route.Timer -> BrewTimerScreen(state, vm)
                         is Route.AddEquipment -> AddEquipmentScreen(vm)
                         is Route.LearnDetail -> LearnDetailScreen(route.cardIndex, vm)
+                        is Route.DrinkDetail -> DrinkDetailScreen(route.index, vm)
                         is Route.Tabs -> TabContent(state, vm)
                     }
                 }
@@ -67,6 +70,7 @@ private fun TabContent(state: AppUiState, vm: AppViewModel) {
         NavTab.BREW -> CalculatorScreen(state, vm)
         NavTab.GEAR -> EquipmentScreen(state, vm)
         NavTab.RECIPES -> RecipesScreen(state, vm)
+        NavTab.DRINKS -> DrinksScreen(vm)
         NavTab.LEARN -> LearnScreen(vm)
     }
 }

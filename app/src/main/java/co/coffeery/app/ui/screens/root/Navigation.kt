@@ -9,6 +9,7 @@ enum class NavTab(@StringRes val labelRes: Int, val glyph: Glyph) {
     BREW(R.string.nav_brew, Glyph.DROP),
     GEAR(R.string.nav_equipment, Glyph.CONE),
     RECIPES(R.string.nav_recipes, Glyph.BOOKMARK),
+    DRINKS(R.string.nav_drinks, Glyph.CUP),
     LEARN(R.string.nav_learn, Glyph.BOOK),
 }
 
@@ -18,4 +19,5 @@ sealed interface Route {
     data object AddEquipment : Route
     data object Timer : Route
     data class LearnDetail(val cardIndex: Int) : Route
+    data class DrinkDetail(val index: Int) : Route
 }

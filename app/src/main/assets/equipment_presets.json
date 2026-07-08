@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "note": "v2: expanded catalog (research-sourced: SCA, James Hoffmann, Barista Hustle, manufacturer guides). Uncertain ratios/temps derived from category + research grind/time.",
+  "note": "Coffeery v2 — numbers sourced from the bundled research report master tables (SCA/James Hoffmann/Barista Hustle/manufacturer guides). Unverified values are marked TODO_verify in code review.",
   "equipment": [
     {
       "id": "v60",
@@ -934,6 +934,90 @@
           "titleKey": "step_serve",
           "kind": "SERVE",
           "durationSec": 10,
+          "waterTargetPct": -1
+        }
+      ]
+    },
+    {
+      "id": "cafec",
+      "nameKey": "equip_cafec_name",
+      "tagKey": "equip_cafec_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.7,
+      "tempMode": "RANGE",
+      "tempMin": 90,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "2:30-3:15",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 40,
+          "waterTargetPct": 0.2
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 45,
+          "waterTargetPct": 0.6
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 45,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 50,
+          "waterTargetPct": -1
+        }
+      ]
+    },
+    {
+      "id": "ibrik",
+      "nameKey": "equip_ibrik_name",
+      "tagKey": "equip_ibrik_tag",
+      "category": "OTHER",
+      "ratioMin": 8.0,
+      "ratioMax": 12.0,
+      "ratioDefault": 10.0,
+      "tempMode": "SLOW",
+      "tempMin": 0,
+      "tempMax": 0,
+      "grind": "EXTRA_FINE",
+      "cupMl": 60,
+      "timeLabel": "3-5 min",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "STIR",
+          "durationSec": 20,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_heat",
+          "kind": "HEAT",
+          "durationSec": 170,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_remove_heat",
+          "kind": "REMOVE_HEAT",
+          "durationSec": 20,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 30,
           "waterTargetPct": -1
         }
       ]

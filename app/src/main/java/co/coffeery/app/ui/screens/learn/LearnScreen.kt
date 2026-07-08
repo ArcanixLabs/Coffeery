@@ -47,7 +47,19 @@ fun LearnScreen(vm: AppViewModel) {
 
         TroubleshootCard()
 
+        // Render a chapter header whenever the chapter changes, keeping the
+        // card's global index stable for detail navigation.
+        var lastChapter = 0
         LearnContent.cards.forEachIndexed { index, card ->
+            if (card.chapterRes != lastChapter) {
+                lastChapter = card.chapterRes
+                Spacer(Modifier.height(2.dp))
+                AppText(
+                    stringResource(card.chapterRes),
+                    style = CoffeeTheme.type.label,
+                    color = colors.accent,
+                )
+            }
             CoffeeCard(onClick = { vm.openRoute(Route.LearnDetail(index)) }, modifier = Modifier.fillMaxWidth()) {
                 AppText(stringResource(card.titleRes), style = CoffeeTheme.type.headline)
                 Spacer(Modifier.height(6.dp))
