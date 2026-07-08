@@ -280,12 +280,13 @@ private fun SaveBrewDialog(
     var rating by remember { mutableIntStateOf(0) }
     var notes by remember { mutableStateOf("") }
     var grindSize by remember { mutableStateOf("") }
+    val name = eq.displayName()
 
     CoffeeDialog(onDismiss = onDismiss) {
         Column(modifier = Modifier.fillMaxWidth()) {
             AppText(stringResource(R.string.save_brew_log), style = CoffeeTheme.type.title)
             Spacer(Modifier.height(8.dp))
-            AppText(equipmentName + " · " + stringResource(R.string.calc_grams, Format.grams(result.coffeeGrams)) + " : " + result.waterMl + " ml", style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            AppText(name + " · " + stringResource(R.string.calc_grams, Format.grams(result.coffeeGrams)) + " : " + result.waterMl + " ml", style = CoffeeTheme.type.caption, color = colors.textSecondary)
             Spacer(Modifier.height(14.dp))
 
             AppText(stringResource(R.string.log_rating), style = CoffeeTheme.type.label, color = colors.textSecondary)
@@ -328,7 +329,7 @@ private fun SaveBrewDialog(
                     onSave(
                         BrewLogEntity(
                             equipmentId = eq.id,
-                            equipmentName = equipmentName,
+                            equipmentName = name,
                             strength = result.ratioDenominator.toFloat(), // placeholder
                             roast = "MEDIUM",
                             ratioDenominator = result.ratioDenominator,
