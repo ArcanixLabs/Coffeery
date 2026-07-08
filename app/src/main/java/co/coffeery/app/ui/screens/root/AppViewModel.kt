@@ -12,6 +12,7 @@ import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import co.coffeery.app.R
 import co.coffeery.app.data.local.AppDatabase
 import co.coffeery.app.data.local.BeanEntity
 import co.coffeery.app.data.local.BrewLogEntity
