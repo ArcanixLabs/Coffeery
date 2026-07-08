@@ -293,6 +293,7 @@ private fun BrewComplete(
     if (showSave) {
         SaveBrewDialog(
             eq = eq,
+            state = state,
             result = result,
             elapsedTotal = elapsedTotal,
             onDismiss = { showSave = false },
@@ -308,6 +309,7 @@ private fun BrewComplete(
 @Composable
 private fun SaveBrewDialog(
     eq: co.coffeery.app.data.model.Equipment,
+    state: AppUiState,
     result: co.coffeery.app.util.BrewResult,
     elapsedTotal: Int,
     onDismiss: () -> Unit,
@@ -367,8 +369,8 @@ private fun SaveBrewDialog(
                         BrewLogEntity(
                             equipmentId = eq.id,
                             equipmentName = name,
-                            strength = result.ratioDenominator.toFloat(), // placeholder
-                            roast = "MEDIUM",
+                            strength = state.strength,
+                            roast = state.roast.name,
                             ratioDenominator = result.ratioDenominator,
                             coffeeGrams = result.coffeeGrams,
                             waterMl = result.waterMl,
