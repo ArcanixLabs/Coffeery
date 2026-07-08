@@ -42,6 +42,10 @@ object LearnContent {
         LearnCard(R.string.learn_c10_title, R.string.learn_c10_body, R.string.learn_ch_equipment),
         LearnCard(R.string.learn_l12_title, R.string.learn_l12_body, R.string.learn_ch_equipment),
         LearnCard(R.string.learn_l16_title, R.string.learn_l16_body, R.string.learn_ch_equipment),
+        LearnCard(R.string.learn_l17_title, R.string.learn_l17_body, R.string.learn_ch_methods),
+        LearnCard(R.string.learn_l18_title, R.string.learn_l18_body, R.string.learn_ch_equipment),
+        LearnCard(R.string.learn_l19_title, R.string.learn_l19_body, R.string.learn_ch_extraction),
+        LearnCard(R.string.learn_l20_title, R.string.learn_l20_body, R.string.learn_ch_tasting),
     )
 
     val tasteOptions: List<TasteOption> = listOf(
