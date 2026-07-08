@@ -191,10 +191,10 @@
 
     <!-- Öğren kart başlıkları -->
     <string name="learn_c1_title">Altın Fincan (Golden Cup)</string>
-    <string name="learn_c1_body">Bir kahve çekirdeğinin yalnızca ~%%28–30\'u suda çözünür. İyi bir demleme bu katıların %%18–22\'sini, %%1.15–1.45 sertlikte (TDS) fincana taşır. Aralığın altında kahve ekşi ve ince; üstünde acı ve buruk olur.</string>
+    <string name="learn_c1_body">Bir kahve çekirdeğinin yalnızca ~%28–30\'u suda çözünür. İyi bir demleme bu katıların %18–22\'sini, %1.15–1.45 sertlikte (TDS) fincana taşır. Aralığın altında kahve ekşi ve ince; üstünde acı ve buruk olur.</string>
     <string name="learn_c2_title">Öğütüm her şeydir</string>
-    <string name="learn_c2_body">Partikül boyutu ekstraksiyonu belirler. Burr değirmenler kahvenin ~%%75–85\'ini hedef boyutta tutar; bıçaklı değirmenler ince toz ve iri parça saçarak aynı fincanda hem ekşilik hem acılık yaratır. Demlemeden hemen önce öğütün — öğütülmüş kahve 15 dakikada bayatlar.</string>
-    <string name="learn_c3_title">Su, fincanının %%98\'i</string>
+    <string name="learn_c2_body">Partikül boyutu ekstraksiyonu belirler. Burr değirmenler kahvenin ~%75–85\'ini hedef boyutta tutar; bıçaklı değirmenler ince toz ve iri parça saçarak aynı fincanda hem ekşilik hem acılık yaratır. Demlemeden hemen önce öğütün — öğütülmüş kahve 15 dakikada bayatlar.</string>
+    <string name="learn_c3_title">Su, fincanının %98\'i</string>
     <string name="learn_c3_body">~150 ppm TDS hedefleyin (SCA: 75–250), genel sertlik 50–175 ppm, alkalinite 40–70 ppm. Klor narin aromatikleri bozar — yapabileceğin en ucuz iyileştirme basit bir karbon filtredir.</string>
     <string name="learn_c4_title">Su sıcaklığı</string>
     <string name="learn_c4_body">Çoğu yönteme 90–96°C uyar. Kaynar suyu önce 30–60 saniye dinlendirin. Açık kavrumlar narin aromatikleri korumak için alt sınırı sever; daha serin bir döküm (≈88°C) koyu kavrumun acılığını dengeler.</string>
@@ -205,9 +205,34 @@
     <string name="learn_c7_title">Fincanını okumak</string>
     <string name="learn_c7_body">Ekşi ve keskin → yetersiz ekstraksiyon: daha ince, daha sıcak, daha uzun. Acı ve kuru → fazla ekstraksiyon: daha kaba, daha serin, daha kısa. Düz ve boş → oranı güçlendir ve daha çok karıştır.</string>
     <string name="learn_c8_title">Çekirdek türleri</string>
-    <string name="learn_c8_body">Arabica (üretimin %%60–70\'i) daha tatlı ve asidik, ~%%1.2 kafein. Robusta (%%30–40) daha güçlü, daha acı, ~%%2.4 kafein ve espresso karışımlarında krema oluşturur.</string>
+    <string name="learn_c8_body">Arabica (üretimin %60–70\'i) daha tatlı ve asidik, ~%1.2 kafein. Robusta (%30–40) daha güçlü, daha acı, ~%2.4 kafein ve espresso karışımlarında krema oluşturur.</string>
     <string name="learn_c9_title">İşleme yöntemleri</string>
     <string name="learn_c9_body">Washed = temiz ve parlak, köken karakteri önde. Natural = meyvemsi, şarap benzeri, ağır gövde. Honey = arada, şurup benzeri tatlılık. Anaerobik = yoğun, egzotik, deneysel.</string>
     <string name="learn_c10_title">Önemli ekipmanlar</string>
     <string name="learn_c10_body">İyi bir burr değirmen en iyi yatırımdır. 0.1 g terazi + zamanlayıcı her demlemeyi tekrarlanabilir kılar. Kuğu boyunlu kettle, eşit süzme yatağı için 2–5 g/sn döküm kontrolü verir.</string>
+
+    <!-- v2 genişletilmiş ekipman -->
+    <string name="step_flip">Cezveyi ters çevir</string>
+    <string name="equip_switch_name">Hario Switch</string>
+    <string name="equip_switch_tag">Daldırma + süzme hibrit</string>
+    <string name="equip_origami_name">Origami Dripper</string>
+    <string name="equip_origami_tag">Çok yönlü konik dripper</string>
+    <string name="equip_april_name">April Brewer</string>
+    <string name="equip_april_tag">Düz tabanlı, tek dökme</string>
+    <string name="equip_stagg_name">Fellow Stagg [X]</string>
+    <string name="equip_stagg_tag">Oran rehberli dripper</string>
+    <string name="equip_timemore_name">Timemore Crystal Eye</string>
+    <string name="equip_timemore_tag">Cam konik dripper</string>
+    <string name="equip_beehouse_name">Beehouse Dripper</string>
+    <string name="equip_beehouse_tag">Çift delikli, bağışlayıcı akış</string>
+    <string name="equip_phin_name">Vietnam Phin</string>
+    <string name="equip_phin_tag">Güçlü tek fincan damla</string>
+    <string name="equip_colddrip_name">Cold Drip Kulesi</string>
+    <string name="equip_colddrip_tag">Yavaş soğuk su damlaması</string>
+    <string name="equip_percolator_name">Perkolatör</string>
+    <string name="equip_percolator_tag">Döngüsel ocak demleme</string>
+    <string name="equip_batchbrew_name">Batch Brew</string>
+    <string name="equip_batchbrew_tag">Otomatik filtre makinesi</string>
+    <string name="equip_napoletana_name">Napoletana</string>
+    <string name="equip_napoletana_tag">Napoli çevirmeli cezve</string>
 </resources>

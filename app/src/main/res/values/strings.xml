@@ -191,10 +191,10 @@
 
     <!-- Learn card titles -->
     <string name="learn_c1_title">The Golden Cup</string>
-    <string name="learn_c1_body">Only ~28–30%% of a coffee bean is soluble. A great brew extracts 18–22%% of those solids at a strength (TDS) of 1.15–1.45%%. Below the window coffee tastes sour and thin; above it, bitter and astringent.</string>
+    <string name="learn_c1_body">Only ~28–30% of a coffee bean is soluble. A great brew extracts 18–22% of those solids at a strength (TDS) of 1.15–1.45%. Below the window coffee tastes sour and thin; above it, bitter and astringent.</string>
     <string name="learn_c2_title">Grind is king</string>
-    <string name="learn_c2_body">Particle size decides extraction. Burr grinders keep ~75–85%% of grounds at the target size; blade grinders scatter fines and boulders, giving you sourness and bitterness in the same cup. Grind right before brewing — ground coffee goes stale within 15 minutes.</string>
-    <string name="learn_c3_title">Water is 98%% of your cup</string>
+    <string name="learn_c2_body">Particle size decides extraction. Burr grinders keep ~75–85% of grounds at the target size; blade grinders scatter fines and boulders, giving you sourness and bitterness in the same cup. Grind right before brewing — ground coffee goes stale within 15 minutes.</string>
+    <string name="learn_c3_title">Water is 98% of your cup</string>
     <string name="learn_c3_body">Aim for ~150 ppm TDS (SCA: 75–250), general hardness 50–175 ppm and alkalinity 40–70 ppm. Chlorine ruins delicate aromatics — a simple carbon filter is the cheapest upgrade you can make.</string>
     <string name="learn_c4_title">Water temperature</string>
     <string name="learn_c4_body">90–96°C suits most methods. Rest boiling water 30–60 seconds first. Light roasts like the lower end to protect delicate aromatics; a cooler pour (≈88°C) can tame a dark roast\'s bitterness.</string>
@@ -205,9 +205,34 @@
     <string name="learn_c7_title">Reading your cup</string>
     <string name="learn_c7_body">Sour &amp; sharp → under-extracted: grind finer, hotter, longer. Bitter &amp; dry → over-extracted: grind coarser, cooler, shorter. Flat &amp; hollow → strengthen the ratio and stir more.</string>
     <string name="learn_c8_title">Bean species</string>
-    <string name="learn_c8_body">Arabica (60–70%% of production) is sweeter and more acidic with ~1.2%% caffeine. Robusta (30–40%%) is bolder, more bitter, ~2.4%% caffeine, and builds crema in espresso blends.</string>
+    <string name="learn_c8_body">Arabica (60–70% of production) is sweeter and more acidic with ~1.2% caffeine. Robusta (30–40%) is bolder, more bitter, ~2.4% caffeine, and builds crema in espresso blends.</string>
     <string name="learn_c9_title">Processing</string>
     <string name="learn_c9_body">Washed = clean and bright, origin-forward. Natural = fruity, wine-like, heavy body. Honey = syrupy sweetness in between. Anaerobic = intense, exotic, experimental.</string>
     <string name="learn_c10_title">Tools that matter</string>
     <string name="learn_c10_body">A good burr grinder is the single best investment. A 0.1 g scale + timer make every brew repeatable. A gooseneck kettle gives 2–5 g/s pour control for even pour-over beds.</string>
+
+    <!-- v2 expanded equipment -->
+    <string name="step_flip">Flip the pot</string>
+    <string name="equip_switch_name">Hario Switch</string>
+    <string name="equip_switch_tag">Immersion + pour-over hybrid</string>
+    <string name="equip_origami_name">Origami Dripper</string>
+    <string name="equip_origami_tag">Versatile conical dripper</string>
+    <string name="equip_april_name">April Brewer</string>
+    <string name="equip_april_tag">Flat-bottom, single pour</string>
+    <string name="equip_stagg_name">Fellow Stagg [X]</string>
+    <string name="equip_stagg_tag">Ratio-guided dripper</string>
+    <string name="equip_timemore_name">Timemore Crystal Eye</string>
+    <string name="equip_timemore_tag">Glass conical dripper</string>
+    <string name="equip_beehouse_name">Beehouse Dripper</string>
+    <string name="equip_beehouse_tag">Twin-hole, forgiving flow</string>
+    <string name="equip_phin_name">Vietnamese Phin</string>
+    <string name="equip_phin_tag">Strong single-cup drip</string>
+    <string name="equip_colddrip_name">Cold Drip Tower</string>
+    <string name="equip_colddrip_tag">Slow cold-water drip</string>
+    <string name="equip_percolator_name">Percolator</string>
+    <string name="equip_percolator_tag">Recirculating stovetop brew</string>
+    <string name="equip_batchbrew_name">Batch Brew</string>
+    <string name="equip_batchbrew_tag">Automatic drip machine</string>
+    <string name="equip_napoletana_name">Napoletana</string>
+    <string name="equip_napoletana_tag">Neapolitan flip pot</string>
 </resources>

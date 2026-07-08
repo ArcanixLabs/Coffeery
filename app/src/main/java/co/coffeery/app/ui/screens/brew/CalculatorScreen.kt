@@ -29,6 +29,7 @@ import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.Chip
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.CoffeeDialog
+import co.coffeery.app.ui.components.EquipmentIcon
 import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
@@ -97,7 +98,7 @@ private fun GearSelector(eq: Equipment, onClick: () -> Unit) {
     val colors = CoffeeTheme.colors
     CoffeeCard(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-            LineIcon(eq.category.glyph(), colors.accent, Modifier.size(34.dp))
+            EquipmentIcon(eq, colors.accent, Modifier.size(34.dp))
             Column(Modifier.weight(1f)) {
                 AppText(stringResource(R.string.calc_choose_gear), style = CoffeeTheme.type.caption, color = colors.textSecondary)
                 AppText(eq.displayName(), style = CoffeeTheme.type.title, color = colors.textPrimary)

@@ -20,6 +20,7 @@ import co.coffeery.app.R
 import co.coffeery.app.data.model.Equipment
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.CoffeeCard
+import co.coffeery.app.ui.components.EquipmentIcon
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
 import co.coffeery.app.ui.components.ScreenHeader
@@ -89,7 +90,7 @@ private fun GearTile(eq: Equipment, selected: Boolean, modifier: Modifier = Modi
     val colors = CoffeeTheme.colors
     val outer = if (selected) modifier.border(2.dp, colors.accent, CoffeeShapes.medium) else modifier
     CoffeeCard(onClick = onClick, modifier = outer) {
-        LineIcon(eq.category.glyph(), colors.accent, Modifier.size(30.dp))
+        EquipmentIcon(eq, colors.accent, Modifier.size(30.dp))
         Spacer(Modifier.height(10.dp))
         AppText(eq.displayName(), style = CoffeeTheme.type.headline, maxLines = 1)
         val tag = eq.displayTag()
@@ -107,7 +108,7 @@ private fun CustomGearRow(eq: Equipment, selected: Boolean, onClick: () -> Unit,
     val outer = if (selected) Modifier.fillMaxWidth().border(2.dp, colors.accent, CoffeeShapes.medium) else Modifier.fillMaxWidth()
     CoffeeCard(onClick = onClick, modifier = outer) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-            LineIcon(eq.category.glyph(), colors.accent, Modifier.size(28.dp))
+            EquipmentIcon(eq, colors.accent, Modifier.size(28.dp))
             Column(Modifier.weight(1f)) {
                 AppText(eq.displayName(), style = CoffeeTheme.type.headline, maxLines = 1)
                 AppText(stringResource(eq.category.labelRes), style = CoffeeTheme.type.caption, color = colors.textSecondary)
