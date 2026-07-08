@@ -360,6 +360,16 @@
     <string name="log_grind_hint">e.g. 25 on Comandante, 3.5 on K-Ultra</string>
     <string name="log_notes">Tasting notes</string>
     <string name="log_notes_hint">Astringent, bright, chocolate finish…</string>
+
+    <!-- Beans -->
+    <string name="beans_title">Beans</string>
+    <string name="beans_empty">No beans added yet. Track your coffee bags here — origin, roaster, roast date.</string>
+    <string name="beans_add">Add beans</string>
+    <string name="beans_name_hint">Bean name (e.g. Ethiopia Yirgacheffe)</string>
+    <string name="beans_origin_hint">Origin / farm</string>
+    <string name="beans_roaster_hint">Roaster</string>
+    <string name="beans_date_hint">Roast date (yyyy-MM-dd)</string>
+    <string name="beans_notes_hint">Notes</string>
     <string name="log_reproduce">Reproduce</string>
     <string name="log_best_recipe_label">Your best %s</string>
     <string name="log_best_recipe_tap">Tap to load · based on your top brews</string>

@@ -55,6 +55,20 @@ data class BrewLogEntity(
     val beanId: Long? = null,
 )
 
+/** A bag of coffee beans. Local-first, no account needed. */
+@Entity(tableName = "beans")
+data class BeanEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val name: String,
+    val origin: String = "",
+    val roaster: String = "",
+    val roastDate: Long? = null,
+    val roastLevel: String = "MEDIUM",
+    val notes: String = "",
+    val isArchived: Boolean = false,
+    val createdAt: Long = System.currentTimeMillis(),
+)
+
 /**
  * User-created custom gear. Steps are synthesized from [category] at load time,
  * so only the tuning parameters are persisted.

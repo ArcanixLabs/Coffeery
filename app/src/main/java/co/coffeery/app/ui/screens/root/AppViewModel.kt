@@ -13,6 +13,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import co.coffeery.app.data.local.AppDatabase
+import co.coffeery.app.data.local.BeanEntity
 import co.coffeery.app.data.local.BrewLogEntity
 import co.coffeery.app.data.local.CustomEquipmentEntity
 import co.coffeery.app.data.local.RecipeEntity
@@ -47,6 +48,7 @@ data class AppUiState(
     val palette: Palette = Palette.TERRACOTTA,
     val settings: SettingsEntity = SettingsEntity(),
     val brewLogs: List<BrewLogEntity> = emptyList(),
+    val beans: List<BeanEntity> = emptyList(),
 ) {
     val selectedEquipment: Equipment?
         get() = equipment.firstOrNull { it.id == selectedEquipmentId }
@@ -78,6 +80,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
         viewModelScope.launch {
             repo.brewLogs.collect { list -> _state.update { it.copy(brewLogs = list) } }
+        }
+        viewModelScope.launch {
+            repo.beans.collect { list -> _state.update { it.copy(beans = list) } }
         }
         viewModelScope.launch {
             repo.settings.collect { entity ->
@@ -214,6 +219,14 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     fun saveBrewLog(log: BrewLogEntity) = viewModelScope.launch { repo.saveBrewLog(log) }
 
     fun deleteBrewLog(id: Long) = viewModelScope.launch { repo.deleteBrewLog(id) }
+
+    fun addBean(name: String, origin: String, roaster: String, roastDate: Long?, notes: String) =
+        viewModelScope.launch { repo.addBean(BeanEntity(
+            name = name, origin = origin, roaster = roaster,
+            roastDate = roastDate, notes = notes,
+        )) }
+
+    fun archiveBean(id: Long) = viewModelScope.launch { repo.archiveBean(id) }
 
     // --- Export / Import ---
     fun exportData(ctx: Context) {

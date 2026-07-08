@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [RecipeEntity::class, CustomEquipmentEntity::class, SettingsEntity::class, BrewLogEntity::class],
-    version = 3,
+    entities = [RecipeEntity::class, CustomEquipmentEntity::class, SettingsEntity::class, BrewLogEntity::class, BeanEntity::class],
+    version = 4,
     exportSchema = false,
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -15,6 +15,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun customEquipmentDao(): CustomEquipmentDao
     abstract fun settingsDao(): SettingsDao
     abstract fun brewLogDao(): BrewLogDao
+    abstract fun beanDao(): BeanDao
 
     companion object {
         @Volatile
