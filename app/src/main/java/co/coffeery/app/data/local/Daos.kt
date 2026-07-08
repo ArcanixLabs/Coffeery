@@ -20,6 +20,9 @@ interface RecipeDao {
 
     @Query("DELETE FROM recipes WHERE id = :id")
     suspend fun deleteById(id: Long)
+
+    @Query("DELETE FROM recipes")
+    suspend fun deleteAll()
 }
 
 @Dao
@@ -32,6 +35,9 @@ interface CustomEquipmentDao {
 
     @Query("DELETE FROM custom_equipment WHERE id = :id")
     suspend fun deleteById(id: String)
+
+    @Query("DELETE FROM custom_equipment")
+    suspend fun deleteAll()
 }
 
 @Dao
@@ -56,6 +62,9 @@ interface BrewLogDao {
 
     @Query("DELETE FROM brew_logs WHERE id = :id")
     suspend fun deleteById(id: Long)
+
+    @Query("DELETE FROM brew_logs")
+    suspend fun deleteAll()
 }
 
 @Dao
@@ -68,4 +77,7 @@ interface BeanDao {
 
     @Query("UPDATE beans SET isArchived = 1 WHERE id = :id")
     suspend fun archiveById(id: Long)
+
+    @Query("DELETE FROM beans")
+    suspend fun deleteAll()
 }

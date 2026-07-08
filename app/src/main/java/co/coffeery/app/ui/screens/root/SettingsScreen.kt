@@ -1,8 +1,9 @@
 package co.coffeery.app.ui.screens.root
 
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import android.content.Intent
 import android.net.Uri
-import android.widget.Toast
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,6 +23,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,9 +38,12 @@ import co.coffeery.app.data.model.Palette
 import co.coffeery.app.data.model.ThemeMode
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.CoffeeCard
+import co.coffeery.app.ui.components.CoffeeDialog
 import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.components.LineIcon
+import co.coffeery.app.ui.components.PrimaryButton
 import co.coffeery.app.ui.components.ScreenHeader
+import co.coffeery.app.ui.components.SecondaryButton
 import co.coffeery.app.ui.components.SegmentedControl
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
@@ -132,8 +139,22 @@ fun SettingsScreen(vm: AppViewModel) {
         }
 
         SettingsSection(R.string.settings_backup) {
+            var showConfirm by remember { mutableStateOf(false) }
             ActionRow(stringResource(R.string.settings_restore_defaults)) {
-                Toast.makeText(ctx, "Defaults restored", Toast.LENGTH_SHORT).show()
+                showConfirm = true
+            }
+            if (showConfirm) {
+                CoffeeDialog(onDismiss = { showConfirm = false }) {
+                    AppText(stringResource(R.string.settings_restore_confirm), style = CoffeeTheme.type.title)
+                    Spacer(Modifier.height(14.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                        SecondaryButton(stringResource(R.string.action_cancel), Modifier.weight(1f)) { showConfirm = false }
+                        PrimaryButton(stringResource(R.string.action_reset), Modifier.weight(1f)) {
+                            vm.restoreDefaults(ctx)
+                            showConfirm = false
+                        }
+                    }
+                }
             }
         }
 

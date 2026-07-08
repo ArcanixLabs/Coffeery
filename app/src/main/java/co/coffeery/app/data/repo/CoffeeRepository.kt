@@ -75,6 +75,14 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
 
     suspend fun archiveBean(id: Long) = db.beanDao().archiveById(id)
 
+    suspend fun clearAll() {
+        db.recipeDao().deleteAll()
+        db.customEquipmentDao().deleteAll()
+        db.brewLogDao().deleteAll()
+        db.beanDao().deleteAll()
+        db.settingsDao().upsert(SettingsEntity())
+    }
+
     // --- Export / Import ---
     suspend fun exportAllToJson(): String {
         val recipes = db.recipeDao().observeAll().first()

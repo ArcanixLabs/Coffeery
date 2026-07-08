@@ -423,6 +423,8 @@
     <string name="settings_import_data">Import recipes &amp; gear</string>
     <string name="settings_backup">Backup &amp; Restore</string>
     <string name="settings_restore_defaults">Reset to defaults</string>
+    <string name="settings_restore_confirm">This will delete all your data — recipes, brew logs, beans, and custom gear. Settings will be reset. This cannot be undone.</string>
+    <string name="settings_restored">All data cleared. Defaults restored.</string>
     <string name="settings_about">About</string>
     <string name="settings_version">Version</string>
     <string name="settings_github">GitHub repository</string>

@@ -228,6 +228,13 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     fun archiveBean(id: Long) = viewModelScope.launch { repo.archiveBean(id) }
 
+    fun restoreDefaults(ctx: Context) {
+        viewModelScope.launch {
+            repo.clearAll()
+            Toast.makeText(ctx, ctx.getString(R.string.settings_restored), Toast.LENGTH_SHORT).show()
+        }
+    }
+
     // --- Export / Import ---
     fun exportData(ctx: Context) {
         viewModelScope.launch {

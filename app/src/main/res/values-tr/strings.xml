@@ -423,6 +423,8 @@
     <string name="settings_import_data">Tarifleri ve ekipmanı içe aktar</string>
     <string name="settings_backup">Yedekleme ve Geri Yükleme</string>
     <string name="settings_restore_defaults">Varsayılanlara sıfırla</string>
+    <string name="settings_restore_confirm">Bu işlem tüm verilerini silecek — tarifler, demleme günlüğü, çekirdekler ve özel ekipman. Ayarlar sıfırlanacak. Geri alınamaz.</string>
+    <string name="settings_restored">Tüm veriler temizlendi. Varsayılanlar geri yüklendi.</string>
     <string name="settings_about">Hakkında</string>
     <string name="settings_version">Sürüm</string>
     <string name="settings_github">GitHub deposu</string>
