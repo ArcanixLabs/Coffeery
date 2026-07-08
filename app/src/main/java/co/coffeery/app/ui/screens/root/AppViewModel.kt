@@ -74,7 +74,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             repo.settings.collect { entity ->
                 val s = entity ?: SettingsEntity()
-                AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(s.language))
+                if (entity != null) {
+                    AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(s.language))
+                }
                 _state.update {
                     it.copy(themeMode = ThemeMode.fromKey(s.themeMode), settings = s)
                 }

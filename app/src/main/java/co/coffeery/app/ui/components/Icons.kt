@@ -82,17 +82,17 @@ private fun DrawScope.drawGlyph(glyph: Glyph, tint: Color, stroke: Stroke) {
         }
         Glyph.CUP -> {
             val p = Path().apply {
-                moveTo(w * 0.24f, h * 0.34f)
-                lineTo(w * 0.68f, h * 0.34f)
-                lineTo(w * 0.62f, h * 0.74f)
-                cubicTo(w * 0.6f, h * 0.8f, w * 0.32f, h * 0.8f, w * 0.3f, h * 0.74f)
+                moveTo(w * 0.2f, h * 0.26f)
+                lineTo(w * 0.7f, h * 0.26f)
+                lineTo(w * 0.64f, h * 0.76f)
+                cubicTo(w * 0.6f, h * 0.84f, w * 0.32f, h * 0.84f, w * 0.28f, h * 0.76f)
                 close()
             }
             drawPath(p, tint, style = stroke)
             // handle
             val hp = Path().apply {
-                moveTo(w * 0.68f, h * 0.4f)
-                cubicTo(w * 0.86f, h * 0.4f, w * 0.86f, h * 0.62f, w * 0.66f, h * 0.62f)
+                moveTo(w * 0.7f, h * 0.34f)
+                cubicTo(w * 0.88f, h * 0.34f, w * 0.88f, h * 0.64f, w * 0.66f, h * 0.64f)
             }
             drawPath(hp, tint, style = stroke)
         }
