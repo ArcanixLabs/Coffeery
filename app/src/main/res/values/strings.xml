@@ -7,6 +7,8 @@
     <string name="nav_brew">Brew</string>
     <string name="nav_equipment">Gear</string>
     <string name="nav_recipes">Recipes</string>
+    <string name="nav_log">Log</string>
+    <string name="nav_drinks">Drinks</string>
     <string name="nav_learn">Learn</string>
 
     <!-- Common -->
@@ -241,7 +243,6 @@
     <string name="equip_cafec_tag">Conical, flower ribs, fast even flow</string>
     <string name="equip_ibrik_name">Ibrik</string>
     <string name="equip_ibrik_tag">Regional cezve — unfiltered, extra-fine</string>
-    <string name="nav_drinks">Drinks</string>
     <string name="drinks_title">Drinks</string>
     <string name="drinks_intro">Milk-based classics and regional recipes — built, not brewed by ratio.</string>
     <string name="drink_read_more">View recipe</string>
@@ -328,6 +329,15 @@
     <string name="drink_viennese_name">Viennese Coffee</string>
     <string name="drink_viennese_summary">Strong coffee topped with whipped cream</string>
     <string name="drink_viennese_body">Strong coffee crowned with whipped cream (Wiener Melange tradition).\n\nIngredients:\n• 2 shots strong coffee/espresso\n• Whipped cream\n• Optional: cocoa/chocolate shavings\n\nSteps:\n1. Pour hot strong coffee into a cup.\n2. Top generously with whipped cream.\n3. Dust with cocoa or chocolate.</string>
+
+    <!-- Brew log -->
+    <string name="save_brew_log">Log this brew</string>
+    <string name="log_empty">No brews logged yet.\nComplete a brew and save it to start building your diary.</string>
+    <string name="log_rating">Rating</string>
+    <string name="log_grind_size">Grind size</string>
+    <string name="log_grind_hint">e.g. 25 on Comandante, 3.5 on K-Ultra</string>
+    <string name="log_notes">Tasting notes</string>
+    <string name="log_notes_hint">Astringent, bright, chocolate finish…</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>

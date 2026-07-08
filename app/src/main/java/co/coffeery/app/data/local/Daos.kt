@@ -42,3 +42,18 @@ interface SettingsDao {
     @androidx.room.Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(settings: SettingsEntity)
 }
+
+@Dao
+interface BrewLogDao {
+    @Query("SELECT * FROM brew_logs ORDER BY timestamp DESC")
+    fun observeAll(): Flow<List<BrewLogEntity>>
+
+    @Insert
+    suspend fun insert(log: BrewLogEntity): Long
+
+    @Delete
+    suspend fun delete(log: BrewLogEntity)
+
+    @Query("DELETE FROM brew_logs WHERE id = :id")
+    suspend fun deleteById(id: Long)
+}

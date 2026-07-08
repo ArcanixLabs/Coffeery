@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import co.coffeery.app.data.local.AppDatabase
+import co.coffeery.app.data.local.BrewLogEntity
 import co.coffeery.app.data.local.CustomEquipmentEntity
 import co.coffeery.app.data.local.RecipeEntity
 import co.coffeery.app.data.local.SettingsEntity
@@ -37,6 +38,7 @@ data class AppUiState(
     val waterMl: Int = 500,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val settings: SettingsEntity = SettingsEntity(),
+    val brewLogs: List<BrewLogEntity> = emptyList(),
 ) {
     val selectedEquipment: Equipment?
         get() = equipment.firstOrNull { it.id == selectedEquipmentId }
@@ -65,6 +67,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
         viewModelScope.launch {
             repo.recipes.collect { list -> _state.update { it.copy(recipes = list) } }
+        }
+        viewModelScope.launch {
+            repo.brewLogs.collect { list -> _state.update { it.copy(brewLogs = list) } }
         }
         viewModelScope.launch {
             repo.settings.collect { entity ->
@@ -185,6 +190,11 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun deleteCustomEquipment(id: String) = viewModelScope.launch { repo.deleteCustomEquipment(id) }
+
+    // --- Brew logs ---
+    fun saveBrewLog(log: BrewLogEntity) = viewModelScope.launch { repo.saveBrewLog(log) }
+
+    fun deleteBrewLog(id: Long) = viewModelScope.launch { repo.deleteBrewLog(id) }
 
     companion object {
         fun factory(app: Application): ViewModelProvider.Factory =

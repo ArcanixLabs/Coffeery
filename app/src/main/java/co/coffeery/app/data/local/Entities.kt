@@ -33,6 +33,27 @@ data class SettingsEntity(
     val notificationsStepChange: Boolean = false,
 )
 
+/** A completed brew session. Immutable after creation — history, not a preset. */
+@Entity(tableName = "brew_logs")
+data class BrewLogEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val timestamp: Long = System.currentTimeMillis(),
+    val equipmentId: String,
+    val equipmentName: String,
+    val strength: Float,
+    val roast: String,
+    val ratioDenominator: Double,
+    val coffeeGrams: Double,
+    val waterMl: Int,
+    val grind: String,
+    val customGrindSize: String = "",
+    val tempCelsius: Int,
+    val totalDurationSec: Int,
+    val rating: Int = 0,
+    val tastingNotes: String = "",
+    val beanId: Long? = null,
+)
+
 /**
  * User-created custom gear. Steps are synthesized from [category] at load time,
  * so only the tuning parameters are persisted.

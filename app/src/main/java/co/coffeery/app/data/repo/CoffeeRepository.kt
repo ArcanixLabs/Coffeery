@@ -3,6 +3,7 @@ package co.coffeery.app.data.repo
 import android.content.Context
 import co.coffeery.app.R
 import co.coffeery.app.data.local.AppDatabase
+import co.coffeery.app.data.local.BrewLogEntity
 import co.coffeery.app.data.local.CustomEquipmentEntity
 import co.coffeery.app.data.local.PresetLoader
 import co.coffeery.app.data.local.RecipeEntity
@@ -53,7 +54,13 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
 
     val settings: Flow<SettingsEntity?> = db.settingsDao().observe()
 
+    val brewLogs: Flow<List<BrewLogEntity>> = db.brewLogDao().observeAll()
+
     suspend fun upsertSettings(settings: SettingsEntity) = db.settingsDao().upsert(settings)
+
+    suspend fun saveBrewLog(log: BrewLogEntity) = db.brewLogDao().insert(log)
+
+    suspend fun deleteBrewLog(id: Long) = db.brewLogDao().deleteById(id)
 
     private fun CustomEquipmentEntity.toEquipment(): Equipment {
         val cat = BrewCategory.fromKey(category)

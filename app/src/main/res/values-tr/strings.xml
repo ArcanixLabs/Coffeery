@@ -7,7 +7,9 @@
     <string name="nav_brew">Demle</string>
     <string name="nav_equipment">Ekipman</string>
     <string name="nav_recipes">Tarifler</string>
+    <string name="nav_log">Günlük</string>
     <string name="nav_learn">Öğren</string>
+    <string name="nav_drinks">İçecekler</string>
 
     <!-- Ortak -->
     <string name="action_continue">Devam</string>
@@ -241,7 +243,6 @@
     <string name="equip_cafec_tag">Konik, çiçek yivli, hızlı ve eşit akış</string>
     <string name="equip_ibrik_name">İbrik</string>
     <string name="equip_ibrik_tag">Bölgesel cezve — filtresiz, extra-ince</string>
-    <string name="nav_drinks">İçecekler</string>
     <string name="drinks_title">İçecekler</string>
     <string name="drinks_intro">Süt bazlı klasikler ve bölgesel tarifler — oranla değil, hazırlanarak.</string>
     <string name="drink_read_more">Tarifi gör</string>
@@ -328,6 +329,15 @@
     <string name="drink_viennese_name">Viyana Kahvesi</string>
     <string name="drink_viennese_summary">Çırpılmış kremayla taçlandırılmış güçlü kahve</string>
     <string name="drink_viennese_body">Çırpılmış kremayla taçlandırılmış güçlü kahve (Wiener Melange geleneği).\n\nMalzemeler:\n• 2 shot güçlü kahve/espresso\n• Çırpılmış krema\n• İsteğe bağlı: kakao/çikolata rendesi\n\nHazırlanışı:\n1. Sıcak güçlü kahveyi bir fincana dökün.\n2. Üzerini bolca çırpılmış kremayla kaplayın.\n3. Kakao veya çikolata serpin.</string>
+
+    <!-- Brew log -->
+    <string name="save_brew_log">Bu demlemeyi kaydet</string>
+    <string name="log_empty">Henüz kayıtlı demleme yok.\nBir demleme tamamlayıp kaydederek günlüğünü oluştur.</string>
+    <string name="log_rating">Puan</string>
+    <string name="log_grind_size">Öğütüm boyutu</string>
+    <string name="log_grind_hint">örn. Comandante\'de 25, K-Ultra\'da 3.5</string>
+    <string name="log_notes">Tadım notları</string>
+    <string name="log_notes_hint">Buruk, parlak, çikolata bitişli…</string>
 
     <!-- Settings -->
     <string name="settings_title">Ayarlar</string>

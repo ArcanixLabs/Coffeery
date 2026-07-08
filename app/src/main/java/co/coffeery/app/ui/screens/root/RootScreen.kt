@@ -21,6 +21,7 @@ import co.coffeery.app.ui.screens.drinks.DrinksScreen
 import co.coffeery.app.ui.screens.equipment.EquipmentScreen
 import co.coffeery.app.ui.screens.learn.LearnDetailScreen
 import co.coffeery.app.ui.screens.learn.LearnScreen
+import co.coffeery.app.ui.screens.log.BrewLogScreen
 import co.coffeery.app.ui.screens.recipes.RecipesScreen
 import co.coffeery.app.ui.theme.CoffeeTheme
 
@@ -71,6 +72,7 @@ private fun TabContent(state: AppUiState, vm: AppViewModel) {
         NavTab.BREW -> CalculatorScreen(state, vm)
         NavTab.GEAR -> EquipmentScreen(state, vm)
         NavTab.RECIPES -> RecipesScreen(state, vm)
+        NavTab.LOG -> BrewLogScreen(vm)
         NavTab.DRINKS -> DrinksScreen(vm)
         NavTab.LEARN -> LearnScreen(vm)
     }

@@ -9,6 +9,7 @@ enum class NavTab(@StringRes val labelRes: Int, val glyph: Glyph) {
     BREW(R.string.nav_brew, Glyph.DROP),
     GEAR(R.string.nav_equipment, Glyph.CONE),
     RECIPES(R.string.nav_recipes, Glyph.BOOKMARK),
+    LOG(R.string.nav_log, Glyph.TIMER),
     DRINKS(R.string.nav_drinks, Glyph.CUP),
     LEARN(R.string.nav_learn, Glyph.BOOK),
 }

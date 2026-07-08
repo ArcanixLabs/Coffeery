@@ -6,14 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [RecipeEntity::class, CustomEquipmentEntity::class, SettingsEntity::class],
-    version = 2,
+    entities = [RecipeEntity::class, CustomEquipmentEntity::class, SettingsEntity::class, BrewLogEntity::class],
+    version = 3,
     exportSchema = false,
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun recipeDao(): RecipeDao
     abstract fun customEquipmentDao(): CustomEquipmentDao
     abstract fun settingsDao(): SettingsDao
+    abstract fun brewLogDao(): BrewLogDao
 
     companion object {
         @Volatile

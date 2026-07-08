@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.WindowManager
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -33,7 +35,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import co.coffeery.app.R
+import co.coffeery.app.data.local.BrewLogEntity
 import co.coffeery.app.ui.components.AppText
+import co.coffeery.app.ui.components.AppTextField
+import co.coffeery.app.ui.components.CoffeeDialog
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
 import co.coffeery.app.ui.components.ScreenHeader
@@ -62,6 +67,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     var running by remember { mutableStateOf(false) }
     var everStarted by remember { mutableStateOf(false) }
     var finished by remember { mutableStateOf(false) }
+    var elapsedTotal by remember { mutableIntStateOf(0) }
 
     // Keep the screen awake for the whole brew session.
     val view = LocalView.current
@@ -74,6 +80,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     LaunchedEffect(running) {
         while (running && !finished) {
             delay(1000)
+            elapsedTotal++
             val next = remaining - 1
             if (next <= 0) {
                 if (stepIndex < steps.lastIndex) {
@@ -103,7 +110,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         Spacer(Modifier.height(24.dp))
 
         if (finished) {
-            BrewComplete(eq.displayName(), plannedTotal) { vm.back() }
+            BrewComplete(eq, state, result, elapsedTotal, vm)
             return@Column
         }
 
@@ -208,8 +215,16 @@ private fun ProgressRing(progress: Float) {
 }
 
 @Composable
-private fun BrewComplete(equipmentName: String, plannedTotal: Int, onDone: () -> Unit) {
+private fun BrewComplete(
+    eq: co.coffeery.app.data.model.Equipment,
+    state: AppUiState,
+    result: co.coffeery.app.util.BrewResult,
+    elapsedTotal: Int,
+    vm: AppViewModel,
+) {
     val colors = CoffeeTheme.colors
+    var showSave by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -220,7 +235,7 @@ private fun BrewComplete(equipmentName: String, plannedTotal: Int, onDone: () ->
         AppText(stringResource(R.string.brew_complete), style = CoffeeTheme.type.display, align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
         Spacer(Modifier.height(8.dp))
         AppText(
-            stringResource(R.string.brew_complete_sub, equipmentName),
+            stringResource(R.string.brew_complete_sub, eq.displayName()),
             style = CoffeeTheme.type.body,
             color = colors.textSecondary,
             align = TextAlign.Center,
@@ -229,9 +244,105 @@ private fun BrewComplete(equipmentName: String, plannedTotal: Int, onDone: () ->
         Spacer(Modifier.height(6.dp))
         Row {
             AppText(stringResource(R.string.brew_elapsed) + ": ", style = CoffeeTheme.type.caption, color = colors.textSecondary)
-            AppText(Format.clock(plannedTotal), style = CoffeeTheme.type.caption, color = colors.textPrimary)
+            AppText(Format.clock(elapsedTotal), style = CoffeeTheme.type.caption, color = colors.textPrimary)
         }
-        Spacer(Modifier.height(32.dp))
-        PrimaryButton(stringResource(R.string.action_done), Modifier.fillMaxWidth()) { onDone() }
+        Spacer(Modifier.height(24.dp))
+        PrimaryButton(stringResource(R.string.save_brew_log), Modifier.fillMaxWidth()) { showSave = true }
+        Spacer(Modifier.height(10.dp))
+        SecondaryButton(stringResource(R.string.action_done), Modifier.fillMaxWidth()) { vm.back() }
+    }
+
+    if (showSave) {
+        SaveBrewDialog(
+            eq = eq,
+            result = result,
+            elapsedTotal = elapsedTotal,
+            onDismiss = { showSave = false },
+            onSave = { log ->
+                vm.saveBrewLog(log)
+                showSave = false
+                vm.back()
+            },
+        )
+    }
+}
+
+@Composable
+private fun SaveBrewDialog(
+    eq: co.coffeery.app.data.model.Equipment,
+    result: co.coffeery.app.util.BrewResult,
+    elapsedTotal: Int,
+    onDismiss: () -> Unit,
+    onSave: (BrewLogEntity) -> Unit,
+) {
+    val colors = CoffeeTheme.colors
+    var rating by remember { mutableIntStateOf(0) }
+    var notes by remember { mutableStateOf("") }
+    var grindSize by remember { mutableStateOf("") }
+
+    CoffeeDialog(onDismiss = onDismiss) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            AppText(stringResource(R.string.save_brew_log), style = CoffeeTheme.type.title)
+            Spacer(Modifier.height(8.dp))
+            AppText(eq.displayName() + " · " + stringResource(R.string.calc_grams, Format.grams(result.coffeeGrams)) + " : " + result.waterMl + " ml", style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            Spacer(Modifier.height(14.dp))
+
+            AppText(stringResource(R.string.log_rating), style = CoffeeTheme.type.label, color = colors.textSecondary)
+            Spacer(Modifier.height(6.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                for (i in 1..5) {
+                    AppText(
+                        if (i <= rating) "★" else "☆",
+                        style = CoffeeTheme.type.title,
+                        color = if (i <= rating) colors.accent else colors.outline,
+                        modifier = Modifier.clickable { rating = i },
+                    )
+                }
+            }
+            Spacer(Modifier.height(14.dp))
+
+            AppText(stringResource(R.string.log_grind_size), style = CoffeeTheme.type.label, color = colors.textSecondary)
+            Spacer(Modifier.height(4.dp))
+            AppTextField(
+                value = grindSize,
+                onValueChange = { grindSize = it },
+                hint = stringResource(R.string.log_grind_hint),
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Spacer(Modifier.height(10.dp))
+
+            AppText(stringResource(R.string.log_notes), style = CoffeeTheme.type.label, color = colors.textSecondary)
+            Spacer(Modifier.height(4.dp))
+            AppTextField(
+                value = notes,
+                onValueChange = { notes = it },
+                hint = stringResource(R.string.log_notes_hint),
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Spacer(Modifier.height(18.dp))
+
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                SecondaryButton(stringResource(R.string.action_cancel), Modifier.weight(1f)) { onDismiss() }
+                PrimaryButton(stringResource(R.string.action_save), Modifier.weight(1f)) {
+                    onSave(
+                        BrewLogEntity(
+                            equipmentId = eq.id,
+                            equipmentName = eq.displayName(),
+                            strength = result.ratioDenominator.toFloat(), // placeholder
+                            roast = "MEDIUM",
+                            ratioDenominator = result.ratioDenominator,
+                            coffeeGrams = result.coffeeGrams,
+                            waterMl = result.waterMl,
+                            grind = result.grind.name,
+                            customGrindSize = grindSize.trim(),
+                            tempCelsius = result.tempCelsius,
+                            totalDurationSec = elapsedTotal,
+                            rating = rating,
+                            tastingNotes = notes.trim(),
+                        )
+                    )
+                }
+            }
+        }
     }
 }
