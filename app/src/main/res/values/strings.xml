@@ -383,6 +383,11 @@
     <string name="theme_system">System</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
+    <string name="settings_palette">Color palette</string>
+    <string name="palette_terracotta">Terracotta</string>
+    <string name="palette_espresso">Espresso</string>
+    <string name="palette_matcha">Matcha</string>
+    <string name="palette_berry">Berry</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_desc">Restart the app after changing for full effect.</string>
     <string name="settings_timer">Timer</string>

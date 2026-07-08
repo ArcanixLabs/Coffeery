@@ -39,7 +39,7 @@ private val routeTransition =
 fun RootScreen(vm: AppViewModel) {
     val state by vm.state.collectAsStateWithLifecycle()
     BackHandler(enabled = state.route !is Route.Tabs) { vm.back() }
-    CoffeeTheme(themeMode = state.themeMode) {
+    CoffeeTheme(themeMode = state.themeMode, palette = state.palette) {
         val colors = CoffeeTheme.colors
         Box(
             modifier = Modifier

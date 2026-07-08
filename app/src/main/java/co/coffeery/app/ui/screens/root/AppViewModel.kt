@@ -13,6 +13,7 @@ import co.coffeery.app.data.local.RecipeEntity
 import co.coffeery.app.data.local.SettingsEntity
 import co.coffeery.app.data.model.BrewCategory
 import co.coffeery.app.data.model.Equipment
+import co.coffeery.app.data.model.Palette
 import co.coffeery.app.data.model.RoastLevel
 import co.coffeery.app.data.model.ThemeMode
 import co.coffeery.app.data.repo.CoffeeRepository
@@ -37,6 +38,7 @@ data class AppUiState(
     val cups: Int = 2,
     val waterMl: Int = 500,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
+    val palette: Palette = Palette.TERRACOTTA,
     val settings: SettingsEntity = SettingsEntity(),
     val brewLogs: List<BrewLogEntity> = emptyList(),
 ) {
@@ -78,7 +80,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(s.language))
                 }
                 _state.update {
-                    it.copy(themeMode = ThemeMode.fromKey(s.themeMode), settings = s)
+                    it.copy(themeMode = ThemeMode.fromKey(s.themeMode), palette = Palette.fromKey(s.paletteKey), settings = s)
                 }
             }
         }
@@ -90,6 +92,15 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             val cur = (repo.settings.first() ?: SettingsEntity())
                 .copy(themeMode = mode.name)
+            repo.upsertSettings(cur)
+        }
+    }
+
+    fun setPalette(palette: Palette) {
+        _state.update { it.copy(palette = palette) }
+        viewModelScope.launch {
+            val cur = (repo.settings.first() ?: SettingsEntity())
+                .copy(paletteKey = palette.name)
             repo.upsertSettings(cur)
         }
     }

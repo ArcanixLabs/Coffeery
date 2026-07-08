@@ -4,6 +4,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
+import co.coffeery.app.data.model.Palette
 
 /**
  * Coffeery's own colour tokens — deliberately not Material's ColorScheme.
@@ -68,3 +69,10 @@ val DarkCoffeeColors = CoffeeColors(
 )
 
 val LocalCoffeeColors = staticCompositionLocalOf { LightCoffeeColors }
+
+fun paletteAccent(palette: Palette, isDark: Boolean): Color = when (palette) {
+    Palette.TERRACOTTA -> if (isDark) Color(0xFFE0785B) else Color(0xFFC75B3C)
+    Palette.ESPRESSO -> if (isDark) Color(0xFFA67B5B) else Color(0xFF6F4E37)
+    Palette.MATCHA -> if (isDark) Color(0xFF6B9B6F) else Color(0xFF4A7C59)
+    Palette.BERRY -> if (isDark) Color(0xFFC77DB5) else Color(0xFF8B3A62)
+}

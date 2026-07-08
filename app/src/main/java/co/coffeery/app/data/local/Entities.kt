@@ -22,6 +22,7 @@ data class RecipeEntity(
 data class SettingsEntity(
     @PrimaryKey val id: String = "app",
     val themeMode: String = "system",
+    val paletteKey: String = "TERRACOTTA",
     val language: String = "en",
     val timerPip: Boolean = true,
     val timerBackground: Boolean = true,

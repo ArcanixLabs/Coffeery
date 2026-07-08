@@ -65,6 +65,18 @@ enum class ThemeMode(@StringRes val labelRes: Int) {
     }
 }
 
+enum class Palette(@StringRes val labelRes: Int) {
+    TERRACOTTA(R.string.palette_terracotta),
+    ESPRESSO(R.string.palette_espresso),
+    MATCHA(R.string.palette_matcha),
+    BERRY(R.string.palette_berry);
+
+    companion object {
+        fun fromKey(key: String?): Palette =
+            entries.firstOrNull { it.name == key } ?: TERRACOTTA
+    }
+}
+
 /**
  * Roast level fine-tunes the recipe. Faithful to the research report's water
  * table (light roasts brew hotter, dark roasts cooler) and extraction theory

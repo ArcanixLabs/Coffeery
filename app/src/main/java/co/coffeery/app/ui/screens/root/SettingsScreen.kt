@@ -30,6 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import co.coffeery.app.R
+import co.coffeery.app.data.model.Palette
 import co.coffeery.app.data.model.ThemeMode
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.CoffeeCard
@@ -64,6 +65,16 @@ fun SettingsScreen(vm: AppViewModel) {
                 selected = state.themeMode,
                 label = { stringResource(it.labelRes) },
                 onSelect = { vm.setThemeMode(it) },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Spacer(Modifier.height(12.dp))
+            AppText(stringResource(R.string.settings_palette), style = CoffeeTheme.type.body, color = colors.textPrimary)
+            Spacer(Modifier.height(8.dp))
+            SegmentedControl(
+                options = Palette.entries.toList(),
+                selected = state.palette,
+                label = { stringResource(it.labelRes) },
+                onSelect = { vm.setPalette(it) },
                 modifier = Modifier.fillMaxWidth(),
             )
         }

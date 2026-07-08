@@ -4,7 +4,9 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import co.coffeery.app.data.model.Palette
 import co.coffeery.app.data.model.ThemeMode
 
 /** Entry point for the design system. Provides colours, type and spacing and
@@ -12,6 +14,7 @@ import co.coffeery.app.data.model.ThemeMode
 @Composable
 fun CoffeeTheme(
     themeMode: ThemeMode = ThemeMode.SYSTEM,
+    palette: Palette = Palette.TERRACOTTA,
     content: @Composable () -> Unit,
 ) {
     val systemDark = isSystemInDarkTheme()
@@ -20,7 +23,15 @@ fun CoffeeTheme(
         ThemeMode.LIGHT -> false
         ThemeMode.DARK -> true
     }
-    val colors = if (darkTheme) DarkCoffeeColors else LightCoffeeColors
+    val base = if (darkTheme) DarkCoffeeColors else LightCoffeeColors
+    val accent = paletteAccent(palette, darkTheme)
+    val accentSoft = if (darkTheme) accent.copy(alpha = 0.25f) else accent.copy(alpha = 0.15f)
+    val colors = base.copy(
+        accent = accent,
+        onAccent = if (darkTheme) Color(0xFF1A0F0A) else Color.White,
+        accentSoft = accentSoft,
+        cremaLight = accent.copy(alpha = 0.4f),
+    )
     CompositionLocalProvider(
         LocalCoffeeColors provides colors,
         LocalCoffeeTypography provides DefaultCoffeeTypography,
