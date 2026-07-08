@@ -63,6 +63,10 @@ dependencies {
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.activity:activity-compose:1.9.2")
 
+    // AppCompat — needed for runtime theme/language switching via
+    // AppCompatDelegate.setApplicationLocales.
+    implementation("androidx.appcompat:appcompat:1.7.0")
+
     // Compose — deliberately NO material3 / material. We build our own design
     // system on top of foundation + ui to keep a unique visual identity.
     implementation("androidx.compose.ui:ui")
