@@ -182,9 +182,12 @@
     <string name="learn_troubleshoot_intro">Nasıl tat verdiğini söyle, bir sonraki için ayar önereyim.</string>
     <string name="taste_sour">Ekşi</string>
     <string name="taste_bitter">Acı</string>
-    <string name="taste_weak">Zayıf / boş</string>
-    <string name="taste_strong">Çok güçlü</string>
+    <string name="taste_astringent">Buruk</string>
+    <string name="taste_weak">Zayıf</string>
+    <string name="taste_strong">Güçlü</string>
     <string name="taste_balanced">Dengeli</string>
+    <string name="taste_dry">Kağıtsı</string>
+    <string name="taste_hollow">Boş</string>
     <string name="taste_sour_advice">Yetersiz ekstraksiyon. Öğütümü biraz inceltin, su sıcaklığını 2–3°C artırın veya süreyi uzatın.</string>
     <string name="taste_bitter_advice">Fazla ekstraksiyon. Öğütümü biraz kabalaştırın, su sıcaklığını 2–3°C düşürün veya süreyi kısaltın.</string>
     <string name="taste_weak_advice">Oranı güçlendirin (daha fazla kahve veya daha az su) ve karıştırmayı artırın. Çekirdeklerin taze olduğundan emin olun.</string>
