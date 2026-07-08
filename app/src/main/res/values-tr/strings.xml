@@ -344,6 +344,16 @@
     <string name="log_grind_hint">örn. Comandante\'de 25, K-Ultra\'da 3.5</string>
     <string name="log_notes">Tadım notları</string>
     <string name="log_notes_hint">Buruk, parlak, çikolata bitişli…</string>
+
+    <!-- Beans -->
+    <string name="beans_title">Çekirdekler</string>
+    <string name="beans_empty">Henüz çekirdek eklenmedi. Kahve çekirdeklerini burada takip et — menşei, kavurucu, kavrum tarihi.</string>
+    <string name="beans_add">Çekirdek ekle</string>
+    <string name="beans_name_hint">Çekirdek adı (örn. Etiyopya Yirgacheffe)</string>
+    <string name="beans_origin_hint">Menşei / çiftlik</string>
+    <string name="beans_roaster_hint">Kavurucu</string>
+    <string name="beans_date_hint">Kavrum tarihi (yyyy-AA-gg)</string>
+    <string name="beans_notes_hint">Notlar</string>
     <string name="log_reproduce">Tekrar yap</string>
     <string name="log_best_recipe_label">En iyi %s tarifin</string>
     <string name="log_best_recipe_tap">Yüklemek için dokun · en iyi demlemelerine göre</string>
