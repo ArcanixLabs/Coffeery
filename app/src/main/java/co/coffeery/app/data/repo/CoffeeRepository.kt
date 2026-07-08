@@ -83,33 +83,47 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
         val settings = db.settingsDao().observe().first()
         val json = JSONObject()
         json.put("version", 2)
-        json.put("recipes", JSONArray().apply { recipes.forEach { r -> put(JSONObject().apply {
-            put("name", r.name); put("equipmentId", r.equipmentId)
-            put("strength", r.strength.toDouble()); put("roast", r.roast)
-            put("inputByCups", r.inputByCups); put("cups", r.cups)
-            put("waterMl", r.waterMl); put("createdAt", r.createdAt)
-        })})
-        json.put("customEquipment", JSONArray().apply { custom.forEach { c -> put(JSONObject().apply {
-            put("id", c.id); put("name", c.name); put("category", c.category)
-            put("ratioMin", c.ratioMin); put("ratioMax", c.ratioMax)
-            put("ratioDefault", c.ratioDefault); put("tempMode", c.tempMode)
-            put("tempMin", c.tempMin); put("tempMax", c.tempMax)
-            put("grind", c.grind); put("cupMl", c.cupMl)
-            put("hasBloom", c.hasBloom); put("createdAt", c.createdAt)
-        })})
-        if (settings != null) json.put("settings", JSONObject().apply {
-            put("themeMode", settings.themeMode); put("paletteKey", settings.paletteKey)
-            put("language", settings.language)
-        })
-        json.put("brewLogs", JSONArray().apply { logs.forEach { l -> put(JSONObject().apply {
-            put("equipmentId", l.equipmentId); put("equipmentName", l.equipmentName)
-            put("strength", l.strength.toDouble()); put("roast", l.roast)
-            put("ratioDenominator", l.ratioDenominator); put("coffeeGrams", l.coffeeGrams)
-            put("waterMl", l.waterMl); put("grind", l.grind)
-            put("customGrindSize", l.customGrindSize); put("tempCelsius", l.tempCelsius)
-            put("totalDurationSec", l.totalDurationSec); put("rating", l.rating)
-            put("tastingNotes", l.tastingNotes); put("timestamp", l.timestamp)
-        })})
+        val recipeArr = JSONArray()
+        for (r in recipes) {
+            val o = JSONObject()
+            o.put("name", r.name); o.put("equipmentId", r.equipmentId)
+            o.put("strength", r.strength.toDouble()); o.put("roast", r.roast)
+            o.put("inputByCups", r.inputByCups); o.put("cups", r.cups)
+            o.put("waterMl", r.waterMl); o.put("createdAt", r.createdAt)
+            recipeArr.put(o)
+        }
+        json.put("recipes", recipeArr)
+        val customArr = JSONArray()
+        for (c in custom) {
+            val o = JSONObject()
+            o.put("id", c.id); o.put("name", c.name); o.put("category", c.category)
+            o.put("ratioMin", c.ratioMin); o.put("ratioMax", c.ratioMax)
+            o.put("ratioDefault", c.ratioDefault); o.put("tempMode", c.tempMode)
+            o.put("tempMin", c.tempMin); o.put("tempMax", c.tempMax)
+            o.put("grind", c.grind); o.put("cupMl", c.cupMl)
+            o.put("hasBloom", c.hasBloom); o.put("createdAt", c.createdAt)
+            customArr.put(o)
+        }
+        json.put("customEquipment", customArr)
+        if (settings != null) {
+            val o = JSONObject()
+            o.put("themeMode", settings.themeMode); o.put("paletteKey", settings.paletteKey)
+            o.put("language", settings.language)
+            json.put("settings", o)
+        }
+        val logArr = JSONArray()
+        for (l in logs) {
+            val o = JSONObject()
+            o.put("equipmentId", l.equipmentId); o.put("equipmentName", l.equipmentName)
+            o.put("strength", l.strength.toDouble()); o.put("roast", l.roast)
+            o.put("ratioDenominator", l.ratioDenominator); o.put("coffeeGrams", l.coffeeGrams)
+            o.put("waterMl", l.waterMl); o.put("grind", l.grind)
+            o.put("customGrindSize", l.customGrindSize); o.put("tempCelsius", l.tempCelsius)
+            o.put("totalDurationSec", l.totalDurationSec); o.put("rating", l.rating)
+            o.put("tastingNotes", l.tastingNotes); o.put("timestamp", l.timestamp)
+            logArr.put(o)
+        }
+        json.put("brewLogs", logArr)
         return json.toString(2)
     }
 
