@@ -86,8 +86,8 @@ private fun TroubleshootCard() {
         Spacer(Modifier.height(4.dp))
         AppText(stringResource(R.string.learn_troubleshoot_intro), style = CoffeeTheme.type.caption, color = colors.textSecondary)
         Spacer(Modifier.height(12.dp))
-        // Simple wrapping rows of chips (3 per row) — no experimental FlowRow.
-        LearnContent.tasteOptions.withIndex().chunked(3).forEach { rowItems ->
+        // Simple wrapping rows of chips (4 per row).
+        LearnContent.tasteOptions.withIndex().chunked(4).forEach { rowItems ->
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(bottom = 8.dp)) {
                 rowItems.forEach { (index, option) ->
                     val isSel = selected == index

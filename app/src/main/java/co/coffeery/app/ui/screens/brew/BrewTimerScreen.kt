@@ -224,6 +224,7 @@ private fun BrewComplete(
 ) {
     val colors = CoffeeTheme.colors
     var showSave by remember { mutableStateOf(false) }
+    val equipmentName = eq.displayName()
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -235,7 +236,7 @@ private fun BrewComplete(
         AppText(stringResource(R.string.brew_complete), style = CoffeeTheme.type.display, align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
         Spacer(Modifier.height(8.dp))
         AppText(
-            stringResource(R.string.brew_complete_sub, eq.displayName()),
+            stringResource(R.string.brew_complete_sub, equipmentName),
             style = CoffeeTheme.type.body,
             color = colors.textSecondary,
             align = TextAlign.Center,
@@ -284,7 +285,7 @@ private fun SaveBrewDialog(
         Column(modifier = Modifier.fillMaxWidth()) {
             AppText(stringResource(R.string.save_brew_log), style = CoffeeTheme.type.title)
             Spacer(Modifier.height(8.dp))
-            AppText(eq.displayName() + " · " + stringResource(R.string.calc_grams, Format.grams(result.coffeeGrams)) + " : " + result.waterMl + " ml", style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            AppText(equipmentName + " · " + stringResource(R.string.calc_grams, Format.grams(result.coffeeGrams)) + " : " + result.waterMl + " ml", style = CoffeeTheme.type.caption, color = colors.textSecondary)
             Spacer(Modifier.height(14.dp))
 
             AppText(stringResource(R.string.log_rating), style = CoffeeTheme.type.label, color = colors.textSecondary)
@@ -327,7 +328,7 @@ private fun SaveBrewDialog(
                     onSave(
                         BrewLogEntity(
                             equipmentId = eq.id,
-                            equipmentName = eq.displayName(),
+                            equipmentName = equipmentName,
                             strength = result.ratioDenominator.toFloat(), // placeholder
                             roast = "MEDIUM",
                             ratioDenominator = result.ratioDenominator,

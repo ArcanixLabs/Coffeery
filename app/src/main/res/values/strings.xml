@@ -180,11 +180,14 @@
     <string name="learn_read_more">Read</string>
     <string name="learn_troubleshoot_title">How was your cup?</string>
     <string name="learn_troubleshoot_intro">Tell me how it tasted and I\'ll suggest a tweak for next time.</string>
-    <string name="taste_sour">Sour</string>
+    <string name="taste_sour">Sour / sharp</string>
     <string name="taste_bitter">Bitter</string>
-    <string name="taste_weak">Weak / hollow</string>
+    <string name="taste_astringent">Astringent / dry</string>
+    <string name="taste_weak">Weak / watery</string>
     <string name="taste_strong">Too strong</string>
     <string name="taste_balanced">Balanced</string>
+    <string name="taste_dry">Dry / papery</string>
+    <string name="taste_hollow">Hollow / flat</string>
     <string name="taste_sour_advice">Under-extracted. Grind a touch finer, raise the water temperature 2–3°C, or extend the brew time.</string>
     <string name="taste_bitter_advice">Over-extracted. Grind a touch coarser, drop the water temperature 2–3°C, or shorten the brew time.</string>
     <string name="taste_weak_advice">Strengthen the ratio (more coffee or less water) and increase agitation. Check that your beans are fresh.</string>
@@ -193,7 +196,7 @@
 
     <!-- Learn card titles -->
     <string name="learn_c1_title">The Golden Cup</string>
-    <string name="learn_c1_body">Only ~28–30% of a coffee bean is soluble. A great brew extracts 18–22% of those solids at a strength (TDS) of 1.15–1.45%. Below the window coffee tastes sour and thin; above it, bitter and astringent.</string>
+    <string name="learn_c1_body" formatted="false">Only ~28–30% of a coffee bean is soluble. A great brew extracts 18–22% of those solids at a strength (TDS) of 1.15–1.45%. Below the window coffee tastes sour and thin; above it, bitter and astringent.</string>
     <string name="learn_c2_title">Grind is king</string>
     <string name="learn_c2_body">Particle size decides extraction. Burr grinders keep ~75–85% of grounds at the target size; blade grinders scatter fines and boulders, giving you sourness and bitterness in the same cup. Grind right before brewing — ground coffee goes stale within 15 minutes.</string>
     <string name="learn_c3_title">Water is 98% of your cup</string>
@@ -207,7 +210,7 @@
     <string name="learn_c7_title">Reading your cup</string>
     <string name="learn_c7_body">Sour &amp; sharp → under-extracted: grind finer, hotter, longer. Bitter &amp; dry → over-extracted: grind coarser, cooler, shorter. Flat &amp; hollow → strengthen the ratio and stir more.</string>
     <string name="learn_c8_title">Bean species</string>
-    <string name="learn_c8_body">Arabica (60–70% of production) is sweeter and more acidic with ~1.2% caffeine. Robusta (30–40%) is bolder, more bitter, ~2.4% caffeine, and builds crema in espresso blends.</string>
+    <string name="learn_c8_body" formatted="false">Arabica (60–70% of production) is sweeter and more acidic with ~1.2% caffeine. Robusta (30–40%) is bolder, more bitter, ~2.4% caffeine, and builds crema in espresso blends.</string>
     <string name="learn_c9_title">Processing</string>
     <string name="learn_c9_body">Washed = clean and bright, origin-forward. Natural = fruity, wine-like, heavy body. Honey = syrupy sweetness in between. Anaerobic = intense, exotic, experimental.</string>
     <string name="learn_c10_title">Tools that matter</string>
@@ -262,7 +265,7 @@
     <string name="learn_l2_title">Particle size &amp; distribution</string>
     <string name="learn_l2_body">Extraction happens at the surface of each particle, so grind size sets the pace. Fine grinds extract fast; coarse grinds slow. But uniformity matters as much as size: a good burr grinder keeps most particles near the target, while cheap grinders scatter \'fines\' (dust) and \'boulders\' (chunks). Fines over-extract into bitterness while boulders under-extract into sourness — in the same cup.\n\nMatch grind to method: espresso fine, pour-over medium, French press coarse.</string>
     <string name="learn_l3_title">The SCA Brewing Control Chart</string>
-    <string name="learn_l3_body">Two dials describe a brew: strength (TDS, how concentrated) and extraction yield (how much of the coffee dissolved). The SCA \'Golden Cup\' target is 18–22% extraction at 1.15–1.45% TDS. Ratio moves strength; grind, temperature and time move extraction.\n\nUse it as a map: too weak → tighten the ratio; sour → extract more (finer/hotter/longer); bitter → extract less (coarser/cooler/shorter).</string>
+    <string name="learn_l3_body" formatted="false">Two dials describe a brew: strength (TDS, how concentrated) and extraction yield (how much of the coffee dissolved). The SCA \'Golden Cup\' target is 18–22% extraction at 1.15–1.45% TDS. Ratio moves strength; grind, temperature and time move extraction.\n\nUse it as a map: too weak → tighten the ratio; sour → extract more (finer/hotter/longer); bitter → extract less (coarser/cooler/shorter).</string>
     <string name="learn_l4_title">Agitation &amp; channeling</string>
     <string name="learn_l4_body">Stirring, swirling and pour turbulence speed up extraction by refreshing water around the grounds. A little agitation boosts sweetness and evenness; too much drags out bitterness and can collapse the bed. \'Channeling\' is when water carves fast paths through the grounds, over-extracting some spots and skipping others — the cause of harsh, uneven cups. Even wetting during bloom and a level bed prevent it.</string>
     <string name="learn_l5_title">Pour-over vs immersion vs pressure</string>

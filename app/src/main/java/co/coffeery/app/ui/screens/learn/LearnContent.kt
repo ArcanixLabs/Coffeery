@@ -43,8 +43,11 @@ object LearnContent {
     val tasteOptions: List<TasteOption> = listOf(
         TasteOption(R.string.taste_sour, R.string.taste_sour_advice),
         TasteOption(R.string.taste_bitter, R.string.taste_bitter_advice),
+        TasteOption(R.string.taste_astringent, R.string.taste_astringent_advice),
         TasteOption(R.string.taste_weak, R.string.taste_weak_advice),
         TasteOption(R.string.taste_strong, R.string.taste_strong_advice),
         TasteOption(R.string.taste_balanced, R.string.taste_balanced_advice),
+        TasteOption(R.string.taste_dry, R.string.taste_dry_advice),
+        TasteOption(R.string.taste_hollow, R.string.taste_hollow_advice),
     )
 }

@@ -52,6 +52,9 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
     suspend fun addCustomEquipment(entity: CustomEquipmentEntity) =
         db.customEquipmentDao().insert(entity)
 
+    suspend fun deleteCustomEquipment(id: String) =
+        db.customEquipmentDao().deleteById(id)
+
     val settings: Flow<SettingsEntity?> = db.settingsDao().observe()
 
     val brewLogs: Flow<List<BrewLogEntity>> = db.brewLogDao().observeAll()

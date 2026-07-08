@@ -193,7 +193,7 @@
 
     <!-- Öğren kart başlıkları -->
     <string name="learn_c1_title">Altın Fincan (Golden Cup)</string>
-    <string name="learn_c1_body">Bir kahve çekirdeğinin yalnızca ~%28–30\'u suda çözünür. İyi bir demleme bu katıların %18–22\'sini, %1.15–1.45 sertlikte (TDS) fincana taşır. Aralığın altında kahve ekşi ve ince; üstünde acı ve buruk olur.</string>
+    <string name="learn_c1_body" formatted="false">Bir kahve çekirdeğinin yalnızca ~%28–30\'u suda çözünür. İyi bir demleme bu katıların %18–22\'sini, %1.15–1.45 sertlikte (TDS) fincana taşır. Aralığın altında kahve ekşi ve ince; üstünde acı ve buruk olur.</string>
     <string name="learn_c2_title">Öğütüm her şeydir</string>
     <string name="learn_c2_body">Partikül boyutu ekstraksiyonu belirler. Burr değirmenler kahvenin ~%75–85\'ini hedef boyutta tutar; bıçaklı değirmenler ince toz ve iri parça saçarak aynı fincanda hem ekşilik hem acılık yaratır. Demlemeden hemen önce öğütün — öğütülmüş kahve 15 dakikada bayatlar.</string>
     <string name="learn_c3_title">Su, fincanının %98\'i</string>
@@ -207,7 +207,7 @@
     <string name="learn_c7_title">Fincanını okumak</string>
     <string name="learn_c7_body">Ekşi ve keskin → yetersiz ekstraksiyon: daha ince, daha sıcak, daha uzun. Acı ve kuru → fazla ekstraksiyon: daha kaba, daha serin, daha kısa. Düz ve boş → oranı güçlendir ve daha çok karıştır.</string>
     <string name="learn_c8_title">Çekirdek türleri</string>
-    <string name="learn_c8_body">Arabica (üretimin %60–70\'i) daha tatlı ve asidik, ~%1.2 kafein. Robusta (%30–40) daha güçlü, daha acı, ~%2.4 kafein ve espresso karışımlarında krema oluşturur.</string>
+    <string name="learn_c8_body" formatted="false">Arabica (üretimin %60–70\'i) daha tatlı ve asidik, ~%1.2 kafein. Robusta (%30–40) daha güçlü, daha acı, ~%2.4 kafein ve espresso karışımlarında krema oluşturur.</string>
     <string name="learn_c9_title">İşleme yöntemleri</string>
     <string name="learn_c9_body">Washed = temiz ve parlak, köken karakteri önde. Natural = meyvemsi, şarap benzeri, ağır gövde. Honey = arada, şurup benzeri tatlılık. Anaerobik = yoğun, egzotik, deneysel.</string>
     <string name="learn_c10_title">Önemli ekipmanlar</string>
@@ -262,7 +262,7 @@
     <string name="learn_l2_title">Partikül boyutu ve dağılımı</string>
     <string name="learn_l2_body">Ekstraksiyon her partikülün yüzeyinde olur; bu yüzden öğütüm hızı belirler. İnce öğütüm hızlı, kaba öğütüm yavaş ekstrakte eder. Ancak boyut kadar homojenlik de önemlidir: iyi bir burr değirmen partikülleri hedefe yakın tutar; ucuz değirmenler \'fines\' (toz) ve \'boulders\' (iri parça) saçar. Fines acılığa aşırı ekstrakte olurken boulders ekşiliğe az ekstrakte olur — aynı fincanda.\n\nÖğütümü yönteme göre ayarlayın: espresso ince, süzme orta, French press kaba.</string>
     <string name="learn_l3_title">SCA Demleme Kontrol Tablosu</string>
-    <string name="learn_l3_body">Bir demlemeyi iki gösterge tanımlar: güçlülük (TDS, ne kadar yoğun) ve ekstraksiyon verimi (kahvenin ne kadarının çözündüğü). SCA \'Golden Cup\' hedefi %1.15–1.45 TDS\'de %18–22 ekstraksiyondur. Oran güçlülüğü; öğütüm, sıcaklık ve süre ekstraksiyonu değiştirir.\n\nHarita gibi kullanın: çok zayıf → oranı sıkın; ekşi → daha çok ekstrakte edin (ince/sıcak/uzun); acı → daha az ekstrakte edin (kaba/soğuk/kısa).</string>
+    <string name="learn_l3_body" formatted="false">Bir demlemeyi iki gösterge tanımlar: güçlülük (TDS, ne kadar yoğun) ve ekstraksiyon verimi (kahvenin ne kadarının çözündüğü). SCA \'Golden Cup\' hedefi %1.15–1.45 TDS\'de %18–22 ekstraksiyondur. Oran güçlülüğü; öğütüm, sıcaklık ve süre ekstraksiyonu değiştirir.\n\nHarita gibi kullanın: çok zayıf → oranı sıkın; ekşi → daha çok ekstrakte edin (ince/sıcak/uzun); acı → daha az ekstrakte edin (kaba/soğuk/kısa).</string>
     <string name="learn_l4_title">Agitasyon ve channeling</string>
     <string name="learn_l4_body">Karıştırma, çevirme ve döküm türbülansı, taneciklerin etrafındaki suyu yenileyerek ekstraksiyonu hızlandırır. Az agitasyon tatlılığı ve dengeyi artırır; fazlası acılığı çeker ve yatağı çökertebilir. \'Channeling\', suyun tanecikler arasında hızlı yollar açması, bazı bölgeleri aşırı ekstrakte edip bazılarını atlamasıdır — sert, dengesiz fincanların sebebi. Bloom sırasında eşit ıslatma ve düz bir yatak bunu önler.</string>
     <string name="learn_l5_title">Süzme, daldırma ve basınç</string>
