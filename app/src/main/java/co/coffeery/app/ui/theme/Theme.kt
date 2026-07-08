@@ -4,7 +4,6 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import co.coffeery.app.data.model.Palette
 import co.coffeery.app.data.model.ThemeMode
@@ -23,15 +22,7 @@ fun CoffeeTheme(
         ThemeMode.LIGHT -> false
         ThemeMode.DARK -> true
     }
-    val base = if (darkTheme) DarkCoffeeColors else LightCoffeeColors
-    val accent = paletteAccent(palette, darkTheme)
-    val accentSoft = if (darkTheme) accent.copy(alpha = 0.25f) else accent.copy(alpha = 0.15f)
-    val colors = base.copy(
-        accent = accent,
-        onAccent = if (darkTheme) Color(0xFF1A0F0A) else Color.White,
-        accentSoft = accentSoft,
-        cremaLight = accent.copy(alpha = 0.4f),
-    )
+    val colors = paletteColors(palette, darkTheme)
     CompositionLocalProvider(
         LocalCoffeeColors provides colors,
         LocalCoffeeTypography provides DefaultCoffeeTypography,

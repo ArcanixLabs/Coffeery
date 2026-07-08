@@ -70,9 +70,99 @@ val DarkCoffeeColors = CoffeeColors(
 
 val LocalCoffeeColors = staticCompositionLocalOf { LightCoffeeColors }
 
-fun paletteAccent(palette: Palette, isDark: Boolean): Color = when (palette) {
-    Palette.TERRACOTTA -> if (isDark) Color(0xFFE0785B) else Color(0xFFC75B3C)
-    Palette.ESPRESSO -> if (isDark) Color(0xFFA67B5B) else Color(0xFF6F4E37)
-    Palette.MATCHA -> if (isDark) Color(0xFF6B9B6F) else Color(0xFF4A7C59)
-    Palette.BERRY -> if (isDark) Color(0xFFC77DB5) else Color(0xFF8B3A62)
+fun paletteColors(palette: Palette, isDark: Boolean): CoffeeColors = when (palette) {
+    Palette.TERRACOTTA -> if (isDark) DarkCoffeeColors else LightCoffeeColors
+    Palette.ESPRESSO -> if (isDark) DarkEspressoColors else LightEspressoColors
+    Palette.MATCHA -> if (isDark) DarkMatchaColors else LightMatchaColors
+    Palette.BERRY -> if (isDark) DarkBerryColors else LightBerryColors
 }
+
+val LightEspressoColors = CoffeeColors(
+    background = Color(0xFFF5F0E8),
+    surface = Color(0xFFFFFFFF),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE3D9CB),
+    textPrimary = Color(0xFF1F1812),
+    textSecondary = Color(0xFF6B5D4C),
+    accent = Color(0xFF6F4E37),
+    accentSoft = Color(0xFFE0CFBB),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFC9A07A),
+    cremaDark = Color(0xFF3A2317),
+    isDark = false,
+)
+
+val DarkEspressoColors = CoffeeColors(
+    background = Color(0xFF0D0A08),
+    surface = Color(0xFF1A1410),
+    surfaceElevated = Color(0xFF241C17),
+    outline = Color(0xFF362D26),
+    textPrimary = Color(0xFFF0E8DD),
+    textSecondary = Color(0xFFB0A08C),
+    accent = Color(0xFFA67B5B),
+    accentSoft = Color(0xFF5A3D2A),
+    onAccent = Color(0xFF0D0805),
+    cremaLight = Color(0xFFB8956E),
+    cremaDark = Color(0xFF1A0D07),
+    isDark = true,
+)
+
+val LightMatchaColors = CoffeeColors(
+    background = Color(0xFFF4F7F0),
+    surface = Color(0xFFFFFFFF),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFDDE8D4),
+    textPrimary = Color(0xFF181C16),
+    textSecondary = Color(0xFF5E6A52),
+    accent = Color(0xFF4A7C59),
+    accentSoft = Color(0xFFCDE4CF),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFC5D8A0),
+    cremaDark = Color(0xFF1E2D19),
+    isDark = false,
+)
+
+val DarkMatchaColors = CoffeeColors(
+    background = Color(0xFF0D100C),
+    surface = Color(0xFF161A14),
+    surfaceElevated = Color(0xFF1E241B),
+    outline = Color(0xFF2F362A),
+    textPrimary = Color(0xFFEDF2E6),
+    textSecondary = Color(0xFFA2AD94),
+    accent = Color(0xFF6B9B6F),
+    accentSoft = Color(0xFF2A402C),
+    onAccent = Color(0xFF0A0D08),
+    cremaLight = Color(0xFFA0B878),
+    cremaDark = Color(0xFF141C0C),
+    isDark = true,
+)
+
+val LightBerryColors = CoffeeColors(
+    background = Color(0xFFF8F4F7),
+    surface = Color(0xFFFFFFFF),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFEBD8E2),
+    textPrimary = Color(0xFF1C141A),
+    textSecondary = Color(0xFF6E5262),
+    accent = Color(0xFF8B3A62),
+    accentSoft = Color(0xFFEBCDD9),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD9B8C4),
+    cremaDark = Color(0xFF2E1A26),
+    isDark = false,
+)
+
+val DarkBerryColors = CoffeeColors(
+    background = Color(0xFF100C0F),
+    surface = Color(0xFF1A1418),
+    surfaceElevated = Color(0xFF241C20),
+    outline = Color(0xFF362B30),
+    textPrimary = Color(0xFFF2E9EE),
+    textSecondary = Color(0xFFAF96A5),
+    accent = Color(0xFFC77DB5),
+    accentSoft = Color(0xFF5A3050),
+    onAccent = Color(0xFF0D080C),
+    cremaLight = Color(0xFFB88CA0),
+    cremaDark = Color(0xFF1C0E17),
+    isDark = true,
+)
