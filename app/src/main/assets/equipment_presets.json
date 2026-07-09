@@ -43,7 +43,8 @@
           "durationSec": 55,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=4BdwUKWU2cw"
     },
     {
       "id": "chemex",
@@ -86,7 +87,8 @@
           "durationSec": 90,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=-1OP3NnjLRA"
     },
     {
       "id": "kalita",
@@ -184,7 +186,8 @@
           "durationSec": 5,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=3FtPMI9_uBE"
     },
     {
       "id": "aeropress",
@@ -227,7 +230,8 @@
           "durationSec": 30,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=1yLo_RWWatA"
     },
     {
       "id": "moka",
@@ -270,7 +274,8 @@
           "durationSec": 10,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=0Fi6T370VwA"
     },
     {
       "id": "turkish",
@@ -313,7 +318,8 @@
           "durationSec": 30,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=ocEk0RFkmIk"
     },
     {
       "id": "coldbrew",
@@ -350,7 +356,8 @@
           "durationSec": 30,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=4o5BKQUU7Ew"
     },
     {
       "id": "siphon",
@@ -424,7 +431,8 @@
           "durationSec": 22,
           "waterTargetPct": 1.0
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=4ZC-_ek3JLs"
     },
     {
       "id": "clever",
@@ -1086,7 +1094,8 @@
           "durationSec": 30,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=ocEk0RFkmIk"
     }
   ]
 }
