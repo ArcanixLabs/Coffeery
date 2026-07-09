@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 import java.util.UUID
@@ -73,7 +74,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     init {
         viewModelScope.launch {
-            repo.allEquipment.collect { list ->
+            repo.allEquipment.collectSafely { list ->
                 _state.update { s ->
                     val selected = s.selectedEquipmentId
                         ?: list.firstOrNull()?.id
@@ -85,16 +86,16 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
         viewModelScope.launch {
-            repo.recipes.collect { list -> _state.update { it.copy(recipes = list) } }
+            repo.recipes.collectSafely { list -> _state.update { it.copy(recipes = list) } }
         }
         viewModelScope.launch {
-            repo.brewLogs.collect { list -> _state.update { it.copy(brewLogs = list) } }
+            repo.brewLogs.collectSafely { list -> _state.update { it.copy(brewLogs = list) } }
         }
         viewModelScope.launch {
-            repo.beans.collect { list -> _state.update { it.copy(beans = list) } }
+            repo.beans.collectSafely { list -> _state.update { it.copy(beans = list) } }
         }
         viewModelScope.launch {
-            repo.settings.collect { entity ->
+            repo.settings.collectSafely { entity ->
                 val s = entity ?: SettingsEntity()
                 if (entity != null) {
                     AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(s.language))
@@ -350,6 +351,17 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    fun importFromJsonString(ctx: Context, jsonString: String) {
+        viewModelScope.launch {
+            try {
+                repo.importFromJson(jsonString)
+                Toast.makeText(ctx, "Data imported. Restart the app.", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Toast.makeText(ctx, "Import failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     fun applyBrewLog(log: BrewLogEntity) = _state.update {
         it.copy(
             selectedEquipmentId = log.equipmentId,
@@ -369,5 +381,13 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T =
                     AppViewModel(app) as T
             }
+    }
+}
+
+private suspend fun <T> Flow<T>.collectSafely(action: suspend (T) -> Unit) {
+    try {
+        collect { action(it) }
+    } catch (e: Exception) {
+        android.util.Log.e("Coffeery", "Flow collection failed", e)
     }
 }

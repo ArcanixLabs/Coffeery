@@ -23,6 +23,7 @@
     <string name="action_add">Add</string>
     <string name="action_close">Close</string>
     <string name="action_reset">Reset</string>
+    <string name="action_import">Import</string>
     <string name="action_next">Next</string>
 
     <!-- Categories -->
@@ -447,6 +448,9 @@
     <string name="settings_my_data">My Data</string>
     <string name="settings_export_data">Export recipes &amp; gear</string>
     <string name="settings_import_data">Import recipes &amp; gear</string>
+    <string name="settings_import_paste">Paste from clipboard</string>
+    <string name="settings_import_manual">Enter backup text</string>
+    <string name="settings_import_dialog_title">Paste or type your backup JSON</string>
     <string name="settings_backup">Backup &amp; Restore</string>
     <string name="settings_restore_defaults">Reset to defaults</string>
     <string name="settings_restore_confirm">This will delete all your data — recipes, brew logs, beans, and custom gear. Settings will be reset. This cannot be undone.</string>

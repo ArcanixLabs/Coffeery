@@ -2,6 +2,8 @@ package co.coffeery.app.ui.screens.brew
 
 import android.app.Activity
 import android.content.Context
+import android.media.AudioManager
+import android.media.ToneGenerator
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -118,6 +120,13 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                             vibrator?.vibrate(50)
                         }
                     }
+                    if (state.settings.timerSound) {
+                        try {
+                            val tone = ToneGenerator(AudioManager.STREAM_NOTIFICATION, 50)
+                            tone.startTone(ToneGenerator.TONE_PROP_BEEP, 100)
+                        } catch (_: Exception) {
+                        }
+                    }
                 } else {
                     remaining = 0
                     running = false
@@ -130,13 +139,22 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     }
 
     LaunchedEffect(finished) {
-        if (finished && state.settings.timerVibrate) {
-            val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator?.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
-            } else {
-                @Suppress("DEPRECATION")
-                vibrator?.vibrate(50)
+        if (finished) {
+            if (state.settings.timerVibrate) {
+                val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    vibrator?.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+                } else {
+                    @Suppress("DEPRECATION")
+                    vibrator?.vibrate(50)
+                }
+            }
+            if (state.settings.timerSound) {
+                try {
+                    val tone = ToneGenerator(AudioManager.STREAM_NOTIFICATION, 50)
+                    tone.startTone(ToneGenerator.TONE_PROP_BEEP, 100)
+                } catch (_: Exception) {
+                }
             }
         }
     }

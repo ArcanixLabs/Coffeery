@@ -37,6 +37,7 @@ import co.coffeery.app.BuildConfig
 import co.coffeery.app.R
 import co.coffeery.app.data.model.Palette
 import co.coffeery.app.data.model.ThemeMode
+import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.CoffeeDialog
@@ -55,6 +56,7 @@ fun SettingsScreen(vm: AppViewModel) {
     val state by vm.state.collectAsStateWithLifecycle()
     val ctx = LocalContext.current
     val colors = CoffeeTheme.colors
+    var showImportDialog by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -204,8 +206,36 @@ fun SettingsScreen(vm: AppViewModel) {
             ActionRow(stringResource(R.string.settings_export_data)) {
                 vm.exportData(ctx)
             }
-            ActionRow(stringResource(R.string.settings_import_data)) {
+            ActionRow(stringResource(R.string.settings_import_paste)) {
                 vm.importData(ctx)
+            }
+            ActionRow(stringResource(R.string.settings_import_manual)) {
+                showImportDialog = true
+            }
+        }
+
+        if (showImportDialog) {
+            var importText by remember { mutableStateOf("") }
+            CoffeeDialog(onDismiss = { showImportDialog = false }) {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    AppText(stringResource(R.string.settings_import_dialog_title), style = CoffeeTheme.type.title)
+                    Spacer(Modifier.height(12.dp))
+                    AppTextField(
+                        value = importText,
+                        onValueChange = { importText = it },
+                        hint = "{ ... }",
+                        singleLine = false,
+                        modifier = Modifier.fillMaxWidth().height(200.dp),
+                    )
+                    Spacer(Modifier.height(16.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                        SecondaryButton(stringResource(R.string.action_cancel), Modifier.weight(1f)) { showImportDialog = false }
+                        PrimaryButton(stringResource(R.string.action_import), Modifier.weight(1f), enabled = importText.isNotBlank()) {
+                            vm.importFromJsonString(ctx, importText)
+                            showImportDialog = false
+                        }
+                    }
+                }
             }
         }
 
