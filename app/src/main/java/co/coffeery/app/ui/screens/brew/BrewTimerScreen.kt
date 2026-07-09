@@ -13,7 +13,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import androidx.core.app.NotificationCompat
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.EaseInOutCubic
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -21,8 +20,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -420,25 +417,20 @@ private fun BrewComplete(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(Modifier.height(40.dp))
-        AnimatedVisibility(
-            visible = true,
-            enter = scaleIn(initialScale = 0.6f) + fadeIn(),
-        ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                LineIcon(
-                    co.coffeery.app.ui.components.Glyph.CUP,
-                    colors.accent,
-                    Modifier.scale(pulse).size(64.dp),
-                )
-                Spacer(Modifier.height(20.dp))
-                AppText(
-                    stringResource(R.string.brew_complete),
-                    style = CoffeeTheme.type.display,
-                    align = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth(),
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            LineIcon(
+                co.coffeery.app.ui.components.Glyph.CUP,
+                colors.accent,
+                Modifier.scale(pulse).size(64.dp),
+            )
+            Spacer(Modifier.height(20.dp))
+            AppText(
+                stringResource(R.string.brew_complete),
+                style = CoffeeTheme.type.display,
+                align = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
                 )
             }
-        }
         Spacer(Modifier.height(8.dp))
         AppText(
             stringResource(R.string.brew_complete_sub, equipmentName),
