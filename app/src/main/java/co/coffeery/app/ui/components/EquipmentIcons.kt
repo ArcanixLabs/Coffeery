@@ -298,28 +298,43 @@ private fun DrawScope.drawEquipment(key: String, tint: Color, stroke: Stroke) {
             dot(w * 0.44f, h * 0.74f, w * 0.02f)
         }
 
-        // ---- Custom gear fallbacks (category-representative) ----
-        "cat_POUR_OVER" -> {
-            p { moveTo(w * 0.24f, h * 0.26f); lineTo(w * 0.76f, h * 0.26f); lineTo(w * 0.54f, h * 0.7f); lineTo(w * 0.46f, h * 0.7f); close() }
-            line(tint, w * 0.5f, h * 0.7f, w * 0.5f, h * 0.84f, sw)
+        // ---- Custom gear category icons (proper equipment, not stubs) ----
+        "cat_POUR_OVER" -> { // dripper over carafe — ridged cone + glass server + drip
+            p { moveTo(w * 0.24f, h * 0.22f); lineTo(w * 0.76f, h * 0.22f); lineTo(w * 0.58f, h * 0.52f); lineTo(w * 0.42f, h * 0.52f); close() }
+            line(tint, w * 0.34f, h * 0.28f, w * 0.42f, h * 0.52f, sw * 0.6f)
+            line(tint, w * 0.5f, h * 0.26f, w * 0.5f, h * 0.52f, sw * 0.6f)
+            line(tint, w * 0.66f, h * 0.28f, w * 0.58f, h * 0.52f, sw * 0.6f)
+            p { moveTo(w * 0.32f, h * 0.56f); lineTo(w * 0.3f, h * 0.78f); cubicTo(w * 0.3f, h * 0.88f, w * 0.7f, h * 0.88f, w * 0.7f, h * 0.78f); lineTo(w * 0.68f, h * 0.56f) }
+            line(tint, w * 0.3f, h * 0.54f, w * 0.7f, h * 0.54f, sw * 0.7f)
+            line(tint, w * 0.78f, h * 0.6f, w * 0.84f, h * 0.6f, sw * 0.8f)
+            line(tint, w * 0.5f, h * 0.52f, w * 0.5f, h * 0.56f, sw)
         }
-        "cat_IMMERSION" -> {
-            p { moveTo(w * 0.32f, h * 0.28f); lineTo(w * 0.32f, h * 0.82f); lineTo(w * 0.68f, h * 0.82f); lineTo(w * 0.68f, h * 0.28f) }
-            line(tint, w * 0.5f, h * 0.14f, w * 0.5f, h * 0.44f, sw)
-            line(tint, w * 0.34f, h * 0.44f, w * 0.66f, h * 0.44f, sw)
+        "cat_IMMERSION" -> { // French press style — glass body + plunger + side handle + grounds
+            p { moveTo(w * 0.3f, h * 0.26f); lineTo(w * 0.3f, h * 0.78f); lineTo(w * 0.7f, h * 0.78f); lineTo(w * 0.7f, h * 0.26f) }
+            line(tint, w * 0.5f, h * 0.1f, w * 0.5f, h * 0.42f, sw)
+            line(tint, w * 0.38f, h * 0.1f, w * 0.62f, h * 0.1f, sw)
+            line(tint, w * 0.34f, h * 0.42f, w * 0.66f, h * 0.42f, sw)
+            p { moveTo(w * 0.7f, h * 0.4f); cubicTo(w * 0.86f, h * 0.42f, w * 0.86f, h * 0.64f, w * 0.7f, h * 0.62f) }
+            dot(w * 0.42f, h * 0.68f, w * 0.018f); dot(w * 0.55f, h * 0.72f, w * 0.018f)
+            dot(w * 0.5f, h * 0.64f, w * 0.018f); dot(w * 0.6f, h * 0.7f, w * 0.018f)
         }
-        "cat_PRESSURE" -> {
-            p { moveTo(w * 0.34f, h * 0.5f); lineTo(w * 0.4f, h * 0.28f); lineTo(w * 0.6f, h * 0.28f); lineTo(w * 0.66f, h * 0.5f); close() }
-            p { moveTo(w * 0.32f, h * 0.5f); lineTo(w * 0.38f, h * 0.8f); lineTo(w * 0.62f, h * 0.8f); lineTo(w * 0.68f, h * 0.5f); close() }
+        "cat_PRESSURE" -> { // portafilter detail — group head + basket + handle + twin spouts + cup
+            line(tint, w * 0.26f, h * 0.24f, w * 0.74f, h * 0.24f, sw)
+            p { moveTo(w * 0.36f, h * 0.24f); lineTo(w * 0.4f, h * 0.48f); lineTo(w * 0.6f, h * 0.48f); lineTo(w * 0.64f, h * 0.24f) }
+            line(tint, w * 0.74f, h * 0.24f, w * 0.88f, h * 0.2f, sw)
+            line(tint, w * 0.46f, h * 0.48f, w * 0.46f, h * 0.56f, sw)
+            line(tint, w * 0.54f, h * 0.48f, w * 0.54f, h * 0.56f, sw)
+            p { moveTo(w * 0.38f, h * 0.64f); cubicTo(w * 0.36f, h * 0.76f, w * 0.64f, h * 0.76f, w * 0.62f, h * 0.64f); close() }
+            p { moveTo(w * 0.76f, h * 0.68f); cubicTo(w * 0.8f, h * 0.7f, w * 0.8f, h * 0.74f, w * 0.76f, h * 0.74f) }
         }
-        else -> { // OTHER / unknown → simple bean
-            p {
-                moveTo(w * 0.5f, h * 0.22f)
-                cubicTo(w * 0.82f, h * 0.28f, w * 0.82f, h * 0.72f, w * 0.5f, h * 0.78f)
-                cubicTo(w * 0.18f, h * 0.72f, w * 0.18f, h * 0.28f, w * 0.5f, h * 0.22f)
-                close()
-            }
-            drawPath(Path().apply { moveTo(w * 0.5f, h * 0.22f); cubicTo(w * 0.38f, h * 0.4f, w * 0.62f, h * 0.6f, w * 0.5f, h * 0.78f) }, tint, style = stroke)
+        else -> { // OTHER — elegant coffee cup with saucer + rising steam
+            p { moveTo(w * 0.35f, h * 0.62f); cubicTo(w * 0.37f, h * 0.74f, w * 0.63f, h * 0.74f, w * 0.65f, h * 0.62f); close() }
+            line(tint, w * 0.3f, h * 0.62f, w * 0.7f, h * 0.62f, sw)
+            p { moveTo(w * 0.68f, h * 0.48f); cubicTo(w * 0.7f, h * 0.58f, w * 0.7f, h * 0.62f, w * 0.65f, h * 0.62f); cubicTo(w * 0.62f, h * 0.5f, w * 0.38f, h * 0.5f, w * 0.35f, h * 0.62f); cubicTo(w * 0.3f, h * 0.62f, w * 0.3f, h * 0.58f, w * 0.32f, h * 0.48f); close() }
+            p { moveTo(w * 0.2f, h * 0.78f); cubicTo(w * 0.3f, h * 0.86f, w * 0.7f, h * 0.86f, w * 0.8f, h * 0.78f); cubicTo(w * 0.7f, h * 0.84f, w * 0.3f, h * 0.84f, w * 0.2f, h * 0.78f); close() }
+            line(tint, w * 0.42f, h * 0.42f, w * 0.48f, h * 0.32f, sw * 0.7f)
+            line(tint, w * 0.54f, h * 0.4f, w * 0.56f, h * 0.28f, sw * 0.6f)
+            line(tint, w * 0.5f, h * 0.36f, w * 0.5f, h * 0.22f, sw * 0.6f)
         }
     }
 }
