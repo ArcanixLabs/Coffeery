@@ -25,10 +25,10 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: "8.9"
+          gradle-version: "8.12"
 
       - name: Generate Gradle wrapper (isolated, checksum-safe)
-        run: gradle wrapper --gradle-version 8.9
+        run: gradle wrapper --gradle-version 8.12
 
       - name: Build debug APK
         run: ./gradlew assembleDebug --stacktrace --no-daemon
