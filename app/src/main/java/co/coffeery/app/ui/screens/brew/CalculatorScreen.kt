@@ -171,6 +171,7 @@ private fun CategoryChips(state: AppUiState, vm: AppViewModel, eq: Equipment) {
 @Composable
 private fun EquipmentDropdown(state: AppUiState, vm: AppViewModel, eq: Equipment) {
     val colors = CoffeeTheme.colors
+    val ctx = LocalContext.current
     val equipmentInCategory = state.equipment.filter { it.category == eq.category }
     var showPicker by remember { mutableStateOf(false) }
 
