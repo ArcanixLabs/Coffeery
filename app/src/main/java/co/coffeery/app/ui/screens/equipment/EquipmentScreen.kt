@@ -148,7 +148,6 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
                 color = colors.textSecondary,
                 modifier = Modifier.fillMaxWidth(),
             )
-            )
         } else {
             filteredBuiltIns.chunked(2).forEach { pair ->
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp)) {

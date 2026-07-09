@@ -246,11 +246,11 @@ private fun StreakBanner(streak: Int) {
         ) {
             AppText(stringResource(R.string.log_streak_keep), style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.weight(1f))
             if (streak >= 7) {
+                val shareText = stringResource(R.string.log_share_streak_text, streak)
                 SecondaryButton(
                     text = stringResource(R.string.log_share_streak),
                     modifier = Modifier,
                 ) {
-                    val shareText = stringResource(R.string.log_share_streak_text, streak)
                     val intent = Intent(Intent.ACTION_SEND).apply {
                         type = "text/plain"
                         putExtra(Intent.EXTRA_TEXT, shareText)

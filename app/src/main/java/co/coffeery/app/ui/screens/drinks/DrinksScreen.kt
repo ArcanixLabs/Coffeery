@@ -85,7 +85,6 @@ fun DrinksScreen(vm: AppViewModel) {
                 color = colors.textSecondary,
                 modifier = Modifier.fillMaxWidth(),
             )
-            )
         }
 
         var lastGroup: DrinkGroup? = null
