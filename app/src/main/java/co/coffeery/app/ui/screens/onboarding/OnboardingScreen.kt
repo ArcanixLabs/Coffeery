@@ -14,19 +14,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
 import co.coffeery.app.R
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.LineIcon
@@ -52,8 +52,8 @@ private val slides = listOf(
 @Composable
 fun OnboardingScreen(vm: AppViewModel) {
     val colors = CoffeeTheme.colors
-    val pagerState = rememberPagerState(pageCount = { slides.size })
-    val scope = rememberCoroutineScope()
+    var page by remember { mutableIntStateOf(0) }
+    val safePage = page.coerceIn(0, slides.lastIndex)
 
     Column(
         modifier = Modifier
@@ -63,80 +63,58 @@ fun OnboardingScreen(vm: AppViewModel) {
     ) {
         Spacer(Modifier.height(20.dp))
 
-        HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
-            val slide = slides.getOrNull(page) ?: return@HorizontalPager
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxSize().padding(horizontal = 32.dp),
-            ) {
-                Spacer(Modifier.weight(0.6f))
-                LineIcon(slide.glyph, colors.accent, Modifier.size(80.dp))
-                Spacer(Modifier.height(40.dp))
-                AppText(
-                    stringResource(slide.titleRes),
-                    style = CoffeeTheme.type.display,
-                    color = colors.textPrimary,
-                    align = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                Spacer(Modifier.height(20.dp))
-                AppText(
-                    stringResource(slide.bodyRes),
-                    style = CoffeeTheme.type.body,
-                    color = colors.textSecondary,
-                    align = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                Spacer(Modifier.weight(1f))
+        Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
+            key(safePage) {
+                val slide = slides[safePage]
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxSize().padding(horizontal = 32.dp),
+                ) {
+                    Spacer(Modifier.weight(0.6f))
+                    LineIcon(slide.glyph, colors.accent, Modifier.size(80.dp))
+                    Spacer(Modifier.height(40.dp))
+                    AppText(stringResource(slide.titleRes),
+                        style = CoffeeTheme.type.display, color = colors.textPrimary,
+                        align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                    Spacer(Modifier.height(20.dp))
+                    AppText(stringResource(slide.bodyRes),
+                        style = CoffeeTheme.type.body, color = colors.textSecondary,
+                        align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                    Spacer(Modifier.weight(1f))
+                }
             }
         }
 
         Spacer(Modifier.height(16.dp))
 
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 24.dp, vertical = 12.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            SecondaryButton(
-                text = stringResource(R.string.onboard_skip),
-                modifier = Modifier,
-            ) { vm.completeOnboarding() }
-
+            SecondaryButton(text = stringResource(R.string.onboard_skip)) { vm.completeOnboarding() }
             Spacer(Modifier.weight(1f))
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 repeat(slides.size) { i ->
                     val dotColor by animateColorAsState(
-                        targetValue = if (i == pagerState.currentPage) colors.accent else colors.outline,
-                        animationSpec = tween(300),
-                        label = "dotColor",
+                        targetValue = if (i == safePage) colors.accent else colors.outline,
+                        animationSpec = tween(300), label = "dotColor",
                     )
-                    Box(
-                        modifier = Modifier
-                            .size(if (i == pagerState.currentPage) 10.dp else 8.dp)
-                            .clip(CircleShape)
-                            .background(dotColor),
-                    )
+                    Box(modifier = Modifier
+                        .size(if (i == safePage) 10.dp else 8.dp)
+                        .clip(CircleShape).background(dotColor))
                 }
             }
 
             Spacer(Modifier.weight(1f))
 
-            val isLast = pagerState.currentPage == slides.lastIndex
+            val isLast = safePage == slides.lastIndex
             if (isLast) {
-                PrimaryButton(
-                    text = stringResource(R.string.onboarding_get_started),
-                    modifier = Modifier,
-                ) { vm.completeOnboarding() }
+                PrimaryButton(text = stringResource(R.string.onboarding_get_started)) { vm.completeOnboarding() }
             } else {
-                PrimaryButton(
-                    text = stringResource(R.string.onboard_next),
-                    modifier = Modifier,
-                ) {
-                    scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
+                PrimaryButton(text = stringResource(R.string.onboard_next)) {
+                    page = (safePage + 1).coerceAtMost(slides.lastIndex)
                 }
             }
         }
