@@ -36,6 +36,13 @@ Everything is local: no account, no network, no tracking.
 
 ## Screens
 
+<p align="center">
+  <img src="assets/screen-calculator.svg" width="180" alt="Calculator">
+  <img src="assets/screen-timer.svg" width="180" alt="Timer">
+  <img src="assets/screen-log.svg" width="180" alt="Brew Log">
+  <img src="assets/screen-learn.svg" width="180" alt="Learn">
+</p>
+
 | Brew Calculator | Timer | Brew Log | Learn | Settings |
 |---|---|---|---|---|
 | Category tabs, auto/manual ratio, strength slider, roast picker, dual-line segmented pills, one-tap save, YouTube links | 72sp hero countdown in 260dp progress ring, per-pour adjustment, merge-pours toggle, vibration + sound, background service, save-to-log dialog with bean picker | Calendar heatmap, streak banner, analytics card, best-recipe suggestion, bean inventory tab | 9-chapter step-map with locked/unlocked/completed states, 30 knowledge cards, extraction calculator, water minerals, taste diagnosis | Palette swatch preview cards, dark/light/system toggle, language switch, data export/import, backup/restore |
@@ -71,6 +78,7 @@ app/src/main/java/co/coffeery/app/
 | JDK (CI) | 17 Temurin |
 | CI/CD | GitHub Actions — debug + release APK on every push |
 | APK | ~6 MB (release, R8 minified + resource shrunk) |
+| Codebase | 6,231 lines Kotlin · 1,084 lines XML · 1,092 lines JSON |
 
 ## Build
 
