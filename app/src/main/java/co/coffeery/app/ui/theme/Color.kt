@@ -40,7 +40,7 @@ data class CoffeeColors(
 
 val LightCoffeeColors = CoffeeColors(
     background = Color(0xFFFBF7F0),
-    surface = Color(0xFFFFFFFF),
+    surface = Color(0xFFFDFAF5),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFE7DDCE),
     textPrimary = Color(0xFF201A14),
@@ -54,10 +54,10 @@ val LightCoffeeColors = CoffeeColors(
 )
 
 val DarkCoffeeColors = CoffeeColors(
-    background = Color(0xFF14100D),
-    surface = Color(0xFF1E1813),
-    surfaceElevated = Color(0xFF2A221B),
-    outline = Color(0xFF3A2F26),
+    background = Color(0xFF1A1510),
+    surface = Color(0xFF221C16),
+    surfaceElevated = Color(0xFF2C241D),
+    outline = Color(0xFF3F342A),
     textPrimary = Color(0xFFF5EDE3),
     textSecondary = Color(0xFFB8A895),
     accent = Color(0xFFE0785B),
@@ -83,7 +83,7 @@ fun paletteColors(palette: Palette, isDark: Boolean): CoffeeColors = when (palet
 
 val LightEspressoColors = CoffeeColors(
     background = Color(0xFFF5F0E8),
-    surface = Color(0xFFFFFFFF),
+    surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFE3D9CB),
     textPrimary = Color(0xFF1F1812),
@@ -97,9 +97,9 @@ val LightEspressoColors = CoffeeColors(
 )
 
 val DarkEspressoColors = CoffeeColors(
-    background = Color(0xFF0D0A08),
-    surface = Color(0xFF1A1410),
-    surfaceElevated = Color(0xFF241C17),
+    background = Color(0xFF1A1510),
+    surface = Color(0xFF221C16),
+    surfaceElevated = Color(0xFF2C241D),
     outline = Color(0xFF362D26),
     textPrimary = Color(0xFFF0E8DD),
     textSecondary = Color(0xFFB0A08C),
@@ -113,7 +113,7 @@ val DarkEspressoColors = CoffeeColors(
 
 val LightMatchaColors = CoffeeColors(
     background = Color(0xFFF4F7F0),
-    surface = Color(0xFFFFFFFF),
+    surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFDDE8D4),
     textPrimary = Color(0xFF181C16),
@@ -127,9 +127,9 @@ val LightMatchaColors = CoffeeColors(
 )
 
 val DarkMatchaColors = CoffeeColors(
-    background = Color(0xFF0D100C),
-    surface = Color(0xFF161A14),
-    surfaceElevated = Color(0xFF1E241B),
+    background = Color(0xFF161816),
+    surface = Color(0xFF1D201C),
+    surfaceElevated = Color(0xFF252823),
     outline = Color(0xFF2F362A),
     textPrimary = Color(0xFFEDF2E6),
     textSecondary = Color(0xFFA2AD94),
@@ -143,7 +143,7 @@ val DarkMatchaColors = CoffeeColors(
 
 val LightBerryColors = CoffeeColors(
     background = Color(0xFFF8F4F7),
-    surface = Color(0xFFFFFFFF),
+    surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFEBD8E2),
     textPrimary = Color(0xFF1C141A),
@@ -157,9 +157,9 @@ val LightBerryColors = CoffeeColors(
 )
 
 val DarkBerryColors = CoffeeColors(
-    background = Color(0xFF100C0F),
-    surface = Color(0xFF1A1418),
-    surfaceElevated = Color(0xFF241C20),
+    background = Color(0xFF1A1416),
+    surface = Color(0xFF211A1E),
+    surfaceElevated = Color(0xFF2A2226),
     outline = Color(0xFF362B30),
     textPrimary = Color(0xFFF2E9EE),
     textSecondary = Color(0xFFAF96A5),
@@ -174,7 +174,7 @@ val DarkBerryColors = CoffeeColors(
 // ---- Crema — golden cream, inspired by espresso crema ----
 val LightCremaColors = CoffeeColors(
     background = Color(0xFFFAF6EF),
-    surface = Color(0xFFFFFFFF),
+    surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFE5D9C3),
     textPrimary = Color(0xFF1E1710),
@@ -188,9 +188,9 @@ val LightCremaColors = CoffeeColors(
 )
 
 val DarkCremaColors = CoffeeColors(
-    background = Color(0xFF100D08),
-    surface = Color(0xFF1A1611),
-    surfaceElevated = Color(0xFF241F18),
+    background = Color(0xFF1A1610),
+    surface = Color(0xFF221D16),
+    surfaceElevated = Color(0xFF2C251C),
     outline = Color(0xFF362E24),
     textPrimary = Color(0xFFF2ECDE),
     textSecondary = Color(0xFFB0A080),
@@ -205,7 +205,7 @@ val DarkCremaColors = CoffeeColors(
 // ---- Mocha — rich dark chocolate with deep warm browns ----
 val LightMochaColors = CoffeeColors(
     background = Color(0xFFF3EFE8),
-    surface = Color(0xFFFFFFFF),
+    surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFDFD6C8),
     textPrimary = Color(0xFF1D1610),
@@ -219,9 +219,9 @@ val LightMochaColors = CoffeeColors(
 )
 
 val DarkMochaColors = CoffeeColors(
-    background = Color(0xFF0C0907),
-    surface = Color(0xFF181311),
-    surfaceElevated = Color(0xFF201A16),
+    background = Color(0xFF191510),
+    surface = Color(0xFF211C16),
+    surfaceElevated = Color(0xFF2A241C),
     outline = Color(0xFF332922),
     textPrimary = Color(0xFFEFE8DD),
     textSecondary = Color(0xFFAD9A85),
@@ -236,7 +236,7 @@ val DarkMochaColors = CoffeeColors(
 // ---- Caramel — warm amber caramel, sweet and golden ----
 val LightCaramelColors = CoffeeColors(
     background = Color(0xFFFBF5ED),
-    surface = Color(0xFFFFFFFF),
+    surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFE8D8BE),
     textPrimary = Color(0xFF1F1710),
@@ -250,9 +250,9 @@ val LightCaramelColors = CoffeeColors(
 )
 
 val DarkCaramelColors = CoffeeColors(
-    background = Color(0xFF0F0C07),
-    surface = Color(0xFF191410),
-    surfaceElevated = Color(0xFF221B15),
+    background = Color(0xFF1A1610),
+    surface = Color(0xFF221C16),
+    surfaceElevated = Color(0xFF2B241C),
     outline = Color(0xFF352B22),
     textPrimary = Color(0xFFF2EADD),
     textSecondary = Color(0xFFAFA080),
@@ -267,7 +267,7 @@ val DarkCaramelColors = CoffeeColors(
 // ---- Hazelnut — warm nutty brown, softer than espresso ----
 val LightHazelnutColors = CoffeeColors(
     background = Color(0xFFF6F2EB),
-    surface = Color(0xFFFFFFFF),
+    surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFE2D8C8),
     textPrimary = Color(0xFF1E1711),
@@ -281,9 +281,9 @@ val LightHazelnutColors = CoffeeColors(
 )
 
 val DarkHazelnutColors = CoffeeColors(
-    background = Color(0xFF0C0A07),
-    surface = Color(0xFF181411),
-    surfaceElevated = Color(0xFF201A16),
+    background = Color(0xFF191511),
+    surface = Color(0xFF211C17),
+    surfaceElevated = Color(0xFF2A241D),
     outline = Color(0xFF342A21),
     textPrimary = Color(0xFFEFE7DD),
     textSecondary = Color(0xFFAE9C85),
