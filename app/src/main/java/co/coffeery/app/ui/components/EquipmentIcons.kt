@@ -96,6 +96,14 @@ private fun DrawScope.drawEquipment(key: String, tint: Color, stroke: Stroke) {
             line(tint, w * 0.72f, h * 0.32f, w * 0.82f, h * 0.36f, sw) // right ear
             dot(w * 0.44f, h * 0.72f, w * 0.03f); dot(w * 0.56f, h * 0.72f, w * 0.03f)
         }
+        "cafec" -> { // flower dripper: wide cone with curved petal ribs + single hole
+            p { moveTo(w * 0.22f, h * 0.22f); lineTo(w * 0.78f, h * 0.22f); lineTo(w * 0.56f, h * 0.64f); lineTo(w * 0.44f, h * 0.64f); close() }
+            line(tint, w * 0.22f, h * 0.22f, w * 0.78f, h * 0.22f, sw * 1.2f) // reinforced rim
+            p { moveTo(w * 0.38f, h * 0.28f); cubicTo(w * 0.42f, h * 0.42f, w * 0.44f, h * 0.56f, w * 0.48f, h * 0.64f) } // left petal
+            p { moveTo(w * 0.62f, h * 0.28f); cubicTo(w * 0.58f, h * 0.42f, w * 0.56f, h * 0.56f, w * 0.52f, h * 0.64f) } // right petal
+            line(tint, w * 0.5f, h * 0.64f, w * 0.5f, h * 0.78f, sw * 0.7f) // drip
+            dot(w * 0.5f, h * 0.66f, w * 0.04f) // center hole
+        }
 
         // ---- Immersion family ----
         "frenchpress" -> { // glass cylinder, plunger rod + knob, side handle
@@ -152,6 +160,12 @@ private fun DrawScope.drawEquipment(key: String, tint: Color, stroke: Stroke) {
             p { moveTo(w * 0.34f, h * 0.34f); lineTo(w * 0.32f, h * 0.72f); cubicTo(w * 0.32f, h * 0.82f, w * 0.58f, h * 0.82f, w * 0.58f, h * 0.72f); lineTo(w * 0.56f, h * 0.34f) }
             p { moveTo(w * 0.34f, h * 0.34f); cubicTo(w * 0.4f, h * 0.28f, w * 0.5f, h * 0.28f, w * 0.56f, h * 0.34f) } // pouring lip
             line(tint, w * 0.58f, h * 0.4f, w * 0.86f, h * 0.32f, sw) // long handle
+        }
+        "ibrik" -> { // ibrik: wider-base pot with curved wood handle + prominent spout
+            p { moveTo(w * 0.28f, h * 0.3f); lineTo(w * 0.24f, h * 0.7f); cubicTo(w * 0.24f, h * 0.84f, w * 0.6f, h * 0.84f, w * 0.6f, h * 0.7f); lineTo(w * 0.56f, h * 0.3f) }
+            p { moveTo(w * 0.26f, h * 0.3f); lineTo(w * 0.5f, h * 0.24f); lineTo(w * 0.54f, h * 0.3f) } // triangular spout lip
+            p { moveTo(w * 0.58f, h * 0.46f); cubicTo(w * 0.74f, h * 0.4f, w * 0.82f, h * 0.54f, w * 0.76f, h * 0.58f); cubicTo(w * 0.7f, h * 0.62f, w * 0.66f, h * 0.56f, w * 0.6f, h * 0.54f) } // curved handle loop
+            line(tint, w * 0.64f, h * 0.28f, w * 0.74f, h * 0.32f, sw * 0.8f) // handle top hook
         }
         "phin" -> { // Vietnamese phin: chamber + domed press lid on a cup/saucer
             p { moveTo(w * 0.36f, h * 0.34f); lineTo(w * 0.36f, h * 0.58f); lineTo(w * 0.64f, h * 0.58f); lineTo(w * 0.64f, h * 0.34f) } // chamber
