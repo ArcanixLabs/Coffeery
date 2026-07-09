@@ -1,14 +1,10 @@
 package co.coffeery.app.ui.screens.root
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.Crossfade
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,6 +17,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -50,10 +47,6 @@ import co.coffeery.app.ui.theme.coffeeBackground
 import co.coffeery.app.ui.theme.CoffeeShapes
 import kotlinx.coroutines.delay
 
-private val routeTransition =
-    slideInHorizontally { it / 4 } + fadeIn() togetherWith
-        slideOutHorizontally { -it / 4 } + fadeOut()
-
 @Composable
 fun RootScreen(vm: AppViewModel) {
     val state by vm.state.collectAsStateWithLifecycle()
@@ -79,20 +72,13 @@ fun RootScreen(vm: AppViewModel) {
                     .statusBarsPadding(),
             ) {
                 Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
-                    AnimatedContent(
-                        targetState = state.route,
-                        transitionSpec = { routeTransition },
-                        label = "route",
-                        contentKey = { it::class },
-                    ) { route ->
-                        when (route) {
-                            is Route.Timer -> BrewTimerScreen(state, vm)
-                            is Route.AddEquipment -> AddEquipmentScreen(vm)
-                            is Route.LearnDetail -> LearnDetailScreen(route.cardIndex, vm)
-                            is Route.DrinkDetail -> DrinkDetailScreen(route.index, vm)
-                            is Route.Settings -> SettingsScreen(vm)
-                            is Route.Tabs -> TabContent(state, vm)
-                        }
+                    when (val route = state.route) {
+                        is Route.Timer -> BrewTimerScreen(state, vm)
+                        is Route.AddEquipment -> AddEquipmentScreen(vm)
+                        is Route.LearnDetail -> LearnDetailScreen(route.cardIndex, vm)
+                        is Route.DrinkDetail -> DrinkDetailScreen(route.index, vm)
+                        is Route.Settings -> SettingsScreen(vm)
+                        is Route.Tabs -> TabContent(state, vm)
                     }
                 }
                 if (state.route is Route.Tabs) {
@@ -132,11 +118,8 @@ fun RootScreen(vm: AppViewModel) {
 
 @Composable
 private fun TabContent(state: AppUiState, vm: AppViewModel) {
-    Crossfade(
-        targetState = state.tab,
-        label = "tab",
-    ) { tab ->
-        when (tab) {
+    key(state.tab) {
+        when (state.tab) {
             NavTab.BREW -> CalculatorScreen(state, vm)
             NavTab.GEAR -> EquipmentScreen(state, vm)
             NavTab.RECIPES -> RecipesScreen(state, vm)
