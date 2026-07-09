@@ -493,7 +493,6 @@ private fun CaffeineContent(brewLogs: List<BrewLogEntity>) {
                 Spacer(Modifier.height(8.dp))
                 AppText(stringResource(R.string.caffeine_limit), style = CoffeeTheme.type.caption, color = colors.textSecondary)
             }
-        }
 
         todayLogs.forEach { log ->
             val mg = estimateCaffeine(log.coffeeGrams, log.equipmentName)
