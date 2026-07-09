@@ -1,50 +1,51 @@
 # Comprehensive Coffee Brewing Research Document
 
+> **Implementation note**: The app now uses locale-aware YouTube links via `Equipment.videoUrl()`.
+> When the app language is Turkish, it opens `youtubeUrlTr` if available; otherwise falls back
+> to `youtubeUrl` (English). Turkish links were verified via YouTube oembed API (200 OK).
+
 ## SECTION 1: Verified YouTube Tutorial Links for 24 Brewing Methods
 
 ### 1. V60 (Hario)
-- **Primary**: `https://www.youtube.com/watch?v=AI4ynXzkSQo` — "The Ultimate V60 Technique" by James Hoffmann (5.3M views)
+- **EN**: `https://www.youtube.com/watch?v=AI4ynXzkSQo` — "The Ultimate V60 Technique" by James Hoffmann (5.3M views)
+- **TR**: `https://www.youtube.com/watch?v=4BdwUKWU2cw` — Turkish V60 tutorial
 - **Alternative (1-cup)**: `https://www.youtube.com/watch?v=1oB1oDrDkHM` — "A Better 1 Cup V60 Technique" by James Hoffmann (2.7M views)
-- **4:6 Method**: `https://www.youtube.com/watch?v=wmCW8xSWGZY` — "4:6 Method" by Tetsu Kasuya via HARIO Official
-- **Lance's take**: `https://www.youtube.com/watch?v=PNFVCmxBjQQ` — "The Last V60 Recipe You'll Ever Need" by Lance Hedrick
 
 ### 2. Chemex
-- **Best**: `https://www.youtube.com/watch?v=ikt-X5x7yoc` — "The Chemex" by James Hoffmann (2.4M views) — covers history, technique, and recipe
-- **Alternative**: `https://www.youtube.com/watch?v=1oB1oDrDkHM` — James Hoffmann's method works for Chemex with adjustments
+- **EN**: `https://www.youtube.com/watch?v=ikt-X5x7yoc` — "The Chemex" by James Hoffmann (2.4M views)
+- **TR**: `https://www.youtube.com/watch?v=-1OP3NnjLRA` — Turkish Chemex tutorial
 
 ### 3. Kalita Wave
-- **Best**: `https://www.youtube.com/watch?v=m7G7gAber7Q` — "WHICH IS BETTER?: Conical vs Flat Bottom Brewers" by Lance Hedrick (173K views) — covers Kalita technique
-- **Alternative**: `https://www.youtube.com/watch?v=BG5Tc8MR2_4` — "ULTIMATE POUROVER RECIPE (any method)" by Lance Hedrick (353K views) — technique applicable across brewers including Kalita
-- **Quick guide**: `https://www.youtube.com/watch?v=1ki0t4qqX2Q` — "Kalita Wave | Brew Guide" by Origin Coffee
+- **EN**: `https://www.youtube.com/watch?v=1ki0t4qqX2Q` — "Kalita Wave | Brew Guide" by Origin Coffee
+- **TR**: — (falls back to EN)
 
 ### 4. French Press
-- **Best**: `https://www.youtube.com/watch?v=st571DYYTR8` — "The Ultimate French Press Technique" by James Hoffmann (6M views)
+- **EN**: `https://www.youtube.com/watch?v=st571DYYTR8` — "The Ultimate French Press Technique" by James Hoffmann (6M views)
+- **TR**: `https://www.youtube.com/watch?v=3FtPMI9_uBE` — Turkish French Press tutorial
 
 ### 5. AeroPress
-- **Best**: `https://www.youtube.com/watch?v=j6VlT_jUVPc` — "The Ultimate AeroPress Technique (Episode #3)" by James Hoffmann (3.2M views)
-- **Alternative**: `https://www.youtube.com/watch?v=CafyJ2p0Bgs` — "A Very Good Aeropress Recipe, Maybe the Best" by Lance Hedrick (384K views)
-- **Understanding AeroPress**: `https://www.youtube.com/watch?v=jBXm8fCWdo8` — "Understanding The AeroPress (Episode #2)" by James Hoffmann
+- **EN**: `https://www.youtube.com/watch?v=j6VlT_jUVPc` — "The Ultimate AeroPress Technique" by James Hoffmann (3.2M views)
+- **TR**: `https://www.youtube.com/watch?v=1yLo_RWWatA` — Turkish AeroPress tutorial
 
 ### 6. Moka Pot
-- **Best**: `https://www.youtube.com/watch?v=BfDLoIvb0w4` — "The Ultimate Moka Pot Technique (Episode #3)" by James Hoffmann (6.5M views)
-- **History**: `https://www.youtube.com/watch?v=upgQsA5kLAk` — "The Bialetti Moka Express (Episode #1)" by James Hoffmann
-- **Science**: `https://www.youtube.com/watch?v=zK0F5PqJ1Gk` — "Understanding the Moka Pot (Episode #2)" by James Hoffmann
+- **EN**: `https://www.youtube.com/watch?v=BfDLoIvb0w4` — "The Ultimate Moka Pot Technique" by James Hoffmann (6.5M views)
+- **TR**: `https://www.youtube.com/watch?v=0Fi6T370VwA` — Turkish Moka Pot tutorial
 
 ### 7. Turkish Coffee / Ibrik / Cezve
-- **Best**: `https://www.youtube.com/watch?v=I5PtWraNRTY` — "How To Make Cezve/Ibrik Coffee: Konstantinos Komninakis (2016 World Ibrik Champion)" by European Coffee Trip (137K views)
-- **In-depth**: `https://www.youtube.com/watch?v=ocEk0RFkmIk` — "How To Make Turkish Coffee Like a Pro" by European Coffee Trip (494K views)
-- **Quick tutorial**: `https://www.youtube.com/watch?v=2rbpghXKPv0` — "How to Make Turkish Coffee" by Alternative Brewing (109K views)
+- **EN/TR**: `https://www.youtube.com/watch?v=ocEk0RFkmIk` — "How To Make Turkish Coffee Like a Pro" by European Coffee Trip (494K views)
+- **Alternative**: `https://www.youtube.com/watch?v=I5PtWraNRTY` — World Ibrik Champion Konstantinos Komninakis
 
 ### 8. Cold Brew
-- **Best**: `https://www.youtube.com/watch?v=AB0QLjroFss` — "Everything I Learned About Cold Brew Coffee" by James Hoffmann (958K views) — ultimate guide
-- **Alternative**: `https://www.youtube.com/watch?v=PApBycDrPo0` — "Better than cold brew: How to make iced filter coffee" by James Hoffmann (1.6M views)
-- **Immersion iced**: `https://www.youtube.com/watch?v=8uGGeV8A-BM` — "Immersion Iced Coffee: A Better & Easier Technique" by James Hoffmann (1.4M views)
+- **EN**: `https://www.youtube.com/watch?v=AB0QLjroFss` — "Everything I Learned About Cold Brew" by James Hoffmann (958K views)
+- **TR**: `https://www.youtube.com/watch?v=4o5BKQUU7Ew` — Turkish cold brew tutorial
 
 ### 9. Siphon / Vacuum Pot
-- **Best**: `https://www.youtube.com/watch?v=JfSY1SXbiTI` — "Our Extremely Nerdy Custom Coffee Siphon" by James Hoffmann — covers technique and equipment
+- **EN**: `https://www.youtube.com/watch?v=JfSY1SXbiTI` — "Our Extremely Nerdy Custom Coffee Siphon" by James Hoffmann
+- **TR**: — (falls back to EN)
 
 ### 10. Espresso
-- **Dialing in series**: `https://www.youtube.com/watch?v=AH2ZGe4hhlc` — "How I Dial-In Espresso - Part #1" by James Hoffmann (1.3M views)
+- **EN**: `https://www.youtube.com/watch?v=AH2ZGe4hhlc` — "How I Dial-In Espresso" by James Hoffmann (1.3M views)
+- **TR**: `https://www.youtube.com/watch?v=4ZC-_ek3JLs` — Turkish espresso tutorial
 - **Understanding Dose**: `https://www.youtube.com/watch?v=9smHv8Y5Fxs` — "Understanding Espresso - Dose (Episode #1)" by James Hoffmann (3.9M views)
 - **Understanding Ratio**: `https://www.youtube.com/watch?v=XRkq3OsUJwg` — "Understanding Espresso - Ratio (Episode #2)" by James Hoffmann
 - **Tools & Techniques**: `https://www.youtube.com/watch?v=U5pXiRwNcmM` — "How I Make Espresso: Tools and Techniques" by James Hoffmann (4.9M views)
