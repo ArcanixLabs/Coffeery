@@ -100,7 +100,7 @@ fun SettingsScreen(vm: AppViewModel) {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .weight(0.7f)
+                                .height(56.dp)
                                 .background(swatchColors.background),
                             contentAlignment = Alignment.Center,
                         ) {
@@ -142,7 +142,7 @@ fun SettingsScreen(vm: AppViewModel) {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .weight(0.3f)
+                                .height(24.dp)
                                 .background(swatchColors.background),
                             contentAlignment = Alignment.Center,
                         ) {
