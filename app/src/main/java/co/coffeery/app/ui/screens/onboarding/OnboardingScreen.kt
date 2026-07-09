@@ -96,7 +96,6 @@ fun OnboardingScreen(vm: AppViewModel) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 repeat(slides.size) { i ->
                     val dotColor = if (i == safePage) colors.accent else colors.outline
-                    )
                     Box(modifier = Modifier
                         .size(if (i == safePage) 10.dp else 8.dp)
                         .clip(CircleShape).background(dotColor))

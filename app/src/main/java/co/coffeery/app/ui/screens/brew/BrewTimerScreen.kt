@@ -391,7 +391,6 @@ private fun BrewComplete(
     var showSave by remember { mutableStateOf(false) }
     val equipmentName = eq.displayName()
     val pulse = 1f
-    )
 
     Column(
         modifier = Modifier.fillMaxWidth(),
