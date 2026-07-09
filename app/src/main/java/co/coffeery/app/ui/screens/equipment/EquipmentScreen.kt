@@ -76,7 +76,8 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
                         EquipmentIcon(eq, colors.accent, Modifier.size(32.dp))
                         Spacer(Modifier.height(4.dp))
                         AppText(eq.displayName(), style = CoffeeTheme.type.caption, maxLines = 1)
-                        if (eq.youtubeUrl != null) {
+                        val vUrl1 = eq.videoUrl()
+                        if (vUrl1 != null) {
                             Spacer(Modifier.height(2.dp))
                             AppText(
                                 stringResource(R.string.calc_watch_video),
@@ -85,7 +86,7 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
                                 modifier = Modifier
                                     .clip(CoffeeShapes.pill)
                                     .clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) {
-                                        ctx.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(eq.youtubeUrl!!)))
+                                        ctx.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(vUrl1)))
                                     }
                                     .padding(horizontal = 4.dp, vertical = 2.dp),
                             )
@@ -141,7 +142,8 @@ private fun GearTile(eq: Equipment, selected: Boolean, modifier: Modifier = Modi
         } else {
             AppText(stringResource(eq.category.labelRes), style = CoffeeTheme.type.caption, color = colors.textSecondary)
         }
-        if (eq.youtubeUrl != null) {
+        val vUrl2 = eq.videoUrl()
+        if (vUrl2 != null) {
             Spacer(Modifier.height(4.dp))
             AppText(
                 stringResource(R.string.equip_watch_video),
@@ -150,7 +152,7 @@ private fun GearTile(eq: Equipment, selected: Boolean, modifier: Modifier = Modi
                 modifier = Modifier
                     .clip(CoffeeShapes.pill)
                     .clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) {
-                        ctx.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(eq.youtubeUrl!!)))
+                        ctx.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(vUrl2)))
                     }
                     .padding(horizontal = 6.dp, vertical = 4.dp),
             )

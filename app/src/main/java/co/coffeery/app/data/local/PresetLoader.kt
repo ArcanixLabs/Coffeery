@@ -45,6 +45,7 @@ object PresetLoader {
             )
         }
         val youtubeUrl = o.optString("youtubeUrl", "").takeIf { it.isNotEmpty() }
+        val youtubeUrlTr = o.optString("youtubeUrlTr", "").takeIf { it.isNotEmpty() }
         return Equipment(
             id = o.getString("id"),
             nameRes = stringRes(o.getString("nameKey")),
@@ -63,6 +64,7 @@ object PresetLoader {
             steps = steps,
             isCustom = false,
             youtubeUrl = youtubeUrl,
+            youtubeUrlTr = youtubeUrlTr,
         )
     }
 

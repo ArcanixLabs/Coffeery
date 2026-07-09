@@ -135,7 +135,9 @@ data class Equipment(
     /** Non-null only for user-created gear; takes precedence over [nameRes]. */
     val customName: String? = null,
     val youtubeUrl: String? = null,
+    val youtubeUrlTr: String? = null,
 ) {
+    fun videoUrl(): String? = if (java.util.Locale.getDefault().language == "tr") youtubeUrlTr ?: youtubeUrl else youtubeUrl
     /** Position of [ratioDefault] on the 0..1 strength axis (1 = strongest). */
     val defaultStrength: Float
         get() {

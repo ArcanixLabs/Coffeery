@@ -183,7 +183,8 @@ private fun EquipmentDropdown(state: AppUiState, vm: AppViewModel, eq: Equipment
             }
         }
 
-        if (eq.youtubeUrl != null) {
+        val videoUrl = eq.videoUrl()
+        if (videoUrl != null) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                 AppText(
                     stringResource(R.string.calc_watch_video),
@@ -192,7 +193,7 @@ private fun EquipmentDropdown(state: AppUiState, vm: AppViewModel, eq: Equipment
                     modifier = Modifier
                         .clip(CoffeeShapes.pill)
                         .clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) {
-                            ctx.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(eq.youtubeUrl!!)))
+                            ctx.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl)))
                         }
                         .padding(horizontal = 8.dp, vertical = 4.dp),
                 )
