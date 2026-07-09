@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
@@ -36,6 +37,7 @@ fun <T> SegmentedControl(
     options: List<T>,
     selected: T,
     label: @Composable (T) -> String,
+    subtitle: (@Composable (T) -> String)? = null,
     onSelect: (T) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -60,15 +62,32 @@ fun <T> SegmentedControl(
                     .clip(CoffeeShapes.pill)
                     .background(bg)
                     .clickable(indication = null, interactionSource = remember0()) { onSelect(option) }
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = if (subtitle != null) 8.dp else 10.dp),
                 contentAlignment = Alignment.Center,
             ) {
-                AppText(
-                    text = label(option),
-                    style = CoffeeTheme.type.label,
-                    color = if (isSelected) colors.onAccent else colors.textSecondary,
-                    align = TextAlign.Center,
-                )
+                if (subtitle != null) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        AppText(
+                            text = label(option),
+                            style = CoffeeTheme.type.label,
+                            color = if (isSelected) colors.onAccent else colors.textSecondary,
+                            align = TextAlign.Center,
+                        )
+                        AppText(
+                            text = subtitle(option),
+                            style = CoffeeTheme.type.caption,
+                            color = if (isSelected) colors.onAccent.copy(alpha = 0.7f) else colors.textSecondary.copy(alpha = 0.7f),
+                            align = TextAlign.Center,
+                        )
+                    }
+                } else {
+                    AppText(
+                        text = label(option),
+                        style = CoffeeTheme.type.label,
+                        color = if (isSelected) colors.onAccent else colors.textSecondary,
+                        align = TextAlign.Center,
+                    )
+                }
             }
         }
     }

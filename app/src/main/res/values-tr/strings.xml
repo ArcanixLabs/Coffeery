@@ -442,6 +442,12 @@
     <string name="settings_timer_vibrate">Adım değişim titreşimi</string>
     <string name="settings_timer_show_next">Sonraki adımı göster</string>
     <string name="settings_timer_merge_weight">Ağırlık göstergesini birleştir</string>
+    <string name="notification_channel_name">Demleme Zamanlayıcı</string>
+    <string name="notification_brewing_title">%1$s demleniyor</string>
+    <string name="notification_step">Adım %1$d/%2$d</string>
+    <string name="notification_stop">Durdur</string>
+    <string name="notification_open">Aç</string>
+
     <string name="settings_notifications">Bildirimler</string>
     <string name="settings_notify_brew_complete">Demleme tamamlandı</string>
     <string name="settings_notify_step_change">Adım değişikliği</string>

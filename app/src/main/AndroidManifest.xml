@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:name=".CoffeeApp"
         android:allowBackup="true"
@@ -9,6 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Coffeery">
+
+        <service
+            android:name=".service.TimerService"
+            android:foregroundServiceType="specialUse"
+            android:exported="false" />
+
+        <receiver
+            android:name=".service.TimerStopReceiver"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"

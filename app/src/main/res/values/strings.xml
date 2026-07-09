@@ -442,6 +442,12 @@
     <string name="settings_timer_vibrate">Step change vibration</string>
     <string name="settings_timer_show_next">Show next step</string>
     <string name="settings_timer_merge_weight">Merge weight display</string>
+    <string name="notification_channel_name">Brew Timer</string>
+    <string name="notification_brewing_title">Brewing %1$s</string>
+    <string name="notification_step">Step %1$d/%2$d</string>
+    <string name="notification_stop">Stop</string>
+    <string name="notification_open">Open</string>
+
     <string name="settings_notifications">Notifications</string>
     <string name="settings_notify_brew_complete">Brew completed</string>
     <string name="settings_notify_step_change">Step change</string>

@@ -301,6 +301,7 @@ private fun AmountSection(state: AppUiState, vm: AppViewModel, eq: Equipment) {
                 options = listOf(true, false),
                 selected = state.byCups,
                 label = { byCups -> if (byCups) stringResource(R.string.calc_input_cups) else stringResource(R.string.calc_input_water) },
+                subtitle = { byCups -> if (byCups) "${state.cups} cups" else "${state.waterMl} ml" },
                 onSelect = { vm.setByCups(it) },
                 modifier = Modifier.fillMaxWidth(),
             )

@@ -2,12 +2,17 @@ package co.coffeery.app.ui.screens.brew
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.media.AudioManager
 import android.media.ToneGenerator
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.WindowManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import androidx.core.app.NotificationCompat
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.EaseInOutCubic
 import androidx.compose.animation.core.RepeatMode
@@ -58,8 +63,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import co.coffeery.app.R
+import co.coffeery.app.MainActivity
 import co.coffeery.app.data.local.BeanEntity
 import co.coffeery.app.data.local.BrewLogEntity
+import co.coffeery.app.service.TimerService
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.CoffeeDialog
@@ -93,6 +100,9 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     var finished by rememberSaveable { mutableStateOf(false) }
     var elapsedTotal by rememberSaveable { mutableIntStateOf(0) }
 
+    val equipmentName = eq.displayName()
+    val stepTitles = remember(steps) { steps.map { stringResource(it.titleRes) } }
+
     // Keep the screen awake for the whole brew session.
     val view = LocalView.current
     val context = LocalContext.current
@@ -100,6 +110,20 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         val window = (view.context as? Activity)?.window
         window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         onDispose { window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) }
+    }
+
+    LaunchedEffect(running, finished) {
+        if (running && state.settings.timerBackground && !finished) {
+            val intent = Intent(context, TimerService::class.java)
+            intent.putExtra("equipment", equipmentName)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(intent)
+            } else {
+                context.startService(intent)
+            }
+        } else {
+            context.stopService(Intent(context, TimerService::class.java))
+        }
     }
 
     LaunchedEffect(running) {
@@ -127,6 +151,11 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                         } catch (_: Exception) {
                         }
                     }
+                    if (state.settings.notificationsStepChange) {
+                        val currentStep = steps[stepIndex]
+                        val stepTitle = context.getString(currentStep.titleRes)
+                        sendNotification(context, "Next step", "Step ${stepIndex+1}/${steps.size}: $stepTitle")
+                    }
                 } else {
                     remaining = 0
                     running = false
@@ -135,10 +164,15 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
             } else {
                 remaining = next
             }
+            if (state.settings.timerBackground) {
+                if (!TimerService.isRunning) {
+                    running = false
+                } else {
+                    val title = stepTitles.getOrElse(stepIndex) { "" }
+                    TimerService.update(context, equipmentName, title, Format.clock(remaining), stepIndex, steps.size)
+                }
+            }
         }
-    }
-
-    LaunchedEffect(finished) {
         if (finished) {
             if (state.settings.timerVibrate) {
                 val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
@@ -155,6 +189,10 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                     tone.startTone(ToneGenerator.TONE_PROP_BEEP, 100)
                 } catch (_: Exception) {
                 }
+            }
+            if (state.settings.notificationsBrewComplete) {
+                val equipmentName = eq.displayName()
+                sendNotification(context, "Brew complete!", "Your $equipmentName is ready. Total time: ${Format.clock(elapsedTotal)}")
             }
         }
     }
@@ -547,5 +585,34 @@ private fun SaveBrewDialog(
                 }
             }
         }
+    }
+}
+
+private fun sendNotification(context: Context, title: String, body: String) {
+    try {
+        val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "coffeery_alerts", "Brew Alerts", NotificationManager.IMPORTANCE_DEFAULT
+            )
+            nm.createNotificationChannel(channel)
+        }
+        val intent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        val pendingIntent = PendingIntent.getActivity(
+            context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        val notification = NotificationCompat.Builder(context, "coffeery_alerts")
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+        nm.notify(System.currentTimeMillis().toInt(), notification)
+    } catch (e: Exception) {
+        android.util.Log.e("Coffeery", "Notification failed", e)
     }
 }

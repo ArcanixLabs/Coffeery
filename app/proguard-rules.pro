@@ -2,3 +2,24 @@
 # Room generates code at build time; no runtime reflection rules needed for the
 # entities used here. Keep model classes to be safe if minify is enabled later.
 -keep class co.coffeery.app.data.model.** { *; }
+
+# Room entities (data/local)
+-keep class co.coffeery.app.data.local.** { *; }
+
+# JSON parsing (org.json reflection)
+-keep class org.json.** { *; }
+-dontwarn org.json.**
+
+# Kotlin data classes used for StateFlow
+-keep class co.coffeery.app.ui.screens.root.AppUiState { *; }
+-keep class co.coffeery.app.util.BrewResult { *; }
+
+# Compose
+-keep class androidx.compose.** { *; }
+-dontwarn androidx.compose.**
+
+# General
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class kotlin.Metadata { *; }
+-dontwarn kotlin.**
