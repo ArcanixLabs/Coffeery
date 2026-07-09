@@ -226,9 +226,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
 
         val step = steps[stepIndex]
         val dur = step.durationSec.coerceAtLeast(1)
-        val progress = targetValue = ((dur - remaining).toFloat() / dur).coerceIn(0f,
-            label = "progress",
-        )
+        val progress = ((dur - remaining).toFloat() / dur).coerceIn(0f, 1f)
 
         AppText(
             stringResource(R.string.brew_step_counter, stepIndex + 1, steps.size),
@@ -392,14 +390,7 @@ private fun BrewComplete(
     val colors = CoffeeTheme.colors
     var showSave by remember { mutableStateOf(false) }
     val equipmentName = eq.displayName()
-
-        initialValue = 0.88f,
-        targetValue = 1.12f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(700, easing = EaseInOutCubic),
-            repeatMode = RepeatMode.Reverse,
-        ),
-        label = "pulse",
+    val pulse = 1f
     )
 
     Column(
