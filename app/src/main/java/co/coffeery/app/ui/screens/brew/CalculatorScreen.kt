@@ -85,6 +85,7 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
         BrewMath.compute(eq, state.strength, state.roast, state.byCups, state.cups, state.waterMl)
     }
     val ctx = LocalContext.current
+    val eqName = eq.displayName()
 
     Column(
         modifier = Modifier
@@ -126,7 +127,7 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
                 text = stringResource(R.string.action_save),
                 modifier = Modifier.weight(1f),
             ) {
-                val autoName = "${eq.displayName()} · ${SimpleDateFormat("MMM d", Locale.getDefault()).format(Date())}"
+                val autoName = "$eqName · ${SimpleDateFormat("MMM d", Locale.getDefault()).format(Date())}"
                 vm.saveRecipe(autoName)
                 Toast.makeText(ctx, R.string.recipe_saved, Toast.LENGTH_SHORT).show()
             }
