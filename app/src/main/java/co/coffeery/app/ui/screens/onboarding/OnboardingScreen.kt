@@ -1,7 +1,5 @@
 package co.coffeery.app.ui.screens.onboarding
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -97,9 +95,7 @@ fun OnboardingScreen(vm: AppViewModel) {
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 repeat(slides.size) { i ->
-                    val dotColor by animateColorAsState(
-                        targetValue = if (i == safePage) colors.accent else colors.outline,
-                        animationSpec = tween(300), label = "dotColor",
+                    val dotColor = if (i == safePage) colors.accent else colors.outline
                     )
                     Box(modifier = Modifier
                         .size(if (i == safePage) 10.dp else 8.dp)

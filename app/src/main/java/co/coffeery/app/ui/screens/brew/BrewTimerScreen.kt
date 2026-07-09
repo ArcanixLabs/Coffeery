@@ -13,13 +13,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import androidx.core.app.NotificationCompat
-import androidx.compose.animation.core.EaseInOutCubic
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -233,8 +226,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
 
         val step = steps[stepIndex]
         val dur = step.durationSec.coerceAtLeast(1)
-        val progress by animateFloatAsState(
-            targetValue = ((dur - remaining).toFloat() / dur).coerceIn(0f, 1f),
+        val progress = targetValue = ((dur - remaining).toFloat() / dur).coerceIn(0f,
             label = "progress",
         )
 
@@ -401,8 +393,6 @@ private fun BrewComplete(
     var showSave by remember { mutableStateOf(false) }
     val equipmentName = eq.displayName()
 
-    val infiniteTransition = rememberInfiniteTransition()
-    val pulse by infiniteTransition.animateFloat(
         initialValue = 0.88f,
         targetValue = 1.12f,
         animationSpec = infiniteRepeatable(
@@ -421,7 +411,7 @@ private fun BrewComplete(
             LineIcon(
                 co.coffeery.app.ui.components.Glyph.CUP,
                 colors.accent,
-                Modifier.scale(pulse).size(64.dp),
+                Modifier.size(64.dp),
             )
             Spacer(Modifier.height(20.dp))
             AppText(

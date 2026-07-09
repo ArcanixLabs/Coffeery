@@ -1,6 +1,5 @@
 package co.coffeery.app.ui.components
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -25,7 +24,7 @@ import co.coffeery.app.ui.theme.CoffeeTheme
 @Composable
 private fun pressScale(interaction: MutableInteractionSource): Float {
     val pressed by interaction.collectIsPressedAsState()
-    val scale by animateFloatAsState(if (pressed) 0.96f else 1f, label = "press")
+    val scale = if (pressed) 0.96f else 1f
     return scale
 }
 

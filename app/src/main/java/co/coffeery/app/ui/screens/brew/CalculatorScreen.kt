@@ -436,4 +436,3 @@ private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment
     }
 }
 
-

@@ -119,7 +119,7 @@ fun LearnScreen(vm: AppViewModel) {
                 val first = LearnContent.cards.indexOfFirst { it.chapterRes == ch }
                 val offsetDp = 600.dp + 170.dp * first
                 scope.launch {
-                    scrollState.animateScrollTo(with(density) { offsetDp.toPx() }.toInt())
+                    scrollState.scrollTo(with(density) { offsetDp.toPx() }.toInt())
                 }
             },
         )

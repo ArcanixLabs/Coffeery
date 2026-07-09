@@ -4,7 +4,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import android.content.Intent
 import android.net.Uri
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -312,10 +311,7 @@ private fun SettingsSection(labelRes: Int, content: @Composable () -> Unit) {
 @Composable
 private fun ToggleRow(labelRes: Int, checked: Boolean, onToggle: () -> Unit) {
     val colors = CoffeeTheme.colors
-    val trackColor by animateColorAsState(
-        if (checked) colors.accent else colors.outline,
-        label = "toggle-track",
-    )
+    val trackColor = if (checked) colors.accent else colors.outline
 
     Row(
         modifier = Modifier

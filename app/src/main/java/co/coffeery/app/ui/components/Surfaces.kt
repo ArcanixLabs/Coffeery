@@ -1,6 +1,5 @@
 package co.coffeery.app.ui.components
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -33,7 +32,7 @@ fun CoffeeCard(
     val colors = CoffeeTheme.colors
     val interaction = remember { MutableInteractionSource() }
     val pressed by interaction.collectIsPressedAsState()
-    val scale by animateFloatAsState(if (pressed && onClick != null) 0.985f else 1f, label = "card")
+    val scale = if (pressed && onClick != null) 0.985f else 1f
 
     var m = modifier
         .graphicsLayer { scaleX = scale; scaleY = scale }

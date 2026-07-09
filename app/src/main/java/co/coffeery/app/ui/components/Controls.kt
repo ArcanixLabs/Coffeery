@@ -1,6 +1,5 @@
 package co.coffeery.app.ui.components
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -52,10 +51,7 @@ fun <T> SegmentedControl(
     ) {
         options.forEach { option ->
             val isSelected = option == selected
-            val bg by animateColorAsState(
-                if (isSelected) colors.accent else colors.surface,
-                label = "seg-bg",
-            )
+            val bg = if (isSelected) colors.accent else colors.surface
             Box(
                 modifier = Modifier
                     .weight(1f)
