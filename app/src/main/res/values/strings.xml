@@ -425,6 +425,19 @@
     <string name="settings_restore_defaults">Reset to defaults</string>
     <string name="settings_restore_confirm">This will delete all your data — recipes, brew logs, beans, and custom gear. Settings will be reset. This cannot be undone.</string>
     <string name="settings_restored">All data cleared. Defaults restored.</string>
+
+    <!-- Onboarding -->
+    <string name="onboard_skip">Skip</string>
+    <string name="onboard_next">Next</string>
+    <string name="onboard_start">Start brewing</string>
+    <string name="onboard1_title">Dial in every cup</string>
+    <string name="onboard1_body">Pick your gear, set your strength, and Coffeery calculates the exact coffee, water, grind, and temperature — backed by SCA standards.</string>
+    <string name="onboard2_title">Guided brew timer</string>
+    <string name="onboard2_body">Step-by-step countdown with pour targets, step previews, and a visual progress ring. Screen stays awake so you can focus on the brew.</string>
+    <string name="onboard3_title">Learn as you brew</string>
+    <string name="onboard3_body">30+ lessons on extraction, grinding, water chemistry, and tasting. Interactive troubleshooting: tell it how your cup tasted and get specific fixes.</string>
+    <string name="onboard4_title">Your coffee diary</string>
+    <string name="onboard4_body">Log every brew with ratings and tasting notes. Track your beans, find your best recipe automatically, and reproduce it with one tap.</string>
     <string name="settings_about">About</string>
     <string name="settings_version">Version</string>
     <string name="settings_github">GitHub repository</string>

@@ -28,6 +28,7 @@ import co.coffeery.app.ui.screens.equipment.EquipmentScreen
 import co.coffeery.app.ui.screens.learn.LearnDetailScreen
 import co.coffeery.app.ui.screens.learn.LearnScreen
 import co.coffeery.app.ui.screens.log.BrewLogScreen
+import co.coffeery.app.ui.screens.onboarding.OnboardingScreen
 import co.coffeery.app.ui.screens.recipes.RecipesScreen
 import co.coffeery.app.ui.theme.CoffeeTheme
 
@@ -39,6 +40,10 @@ private val routeTransition =
 fun RootScreen(vm: AppViewModel) {
     val state by vm.state.collectAsStateWithLifecycle()
     BackHandler(enabled = state.route !is Route.Tabs) { vm.back() }
+    if (!state.hasCompletedOnboarding) {
+        OnboardingScreen(vm)
+        return@Composable
+    }
     CoffeeTheme(themeMode = state.themeMode, palette = state.palette) {
         val colors = CoffeeTheme.colors
         Box(

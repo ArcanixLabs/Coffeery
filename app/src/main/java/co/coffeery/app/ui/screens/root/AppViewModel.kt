@@ -47,6 +47,7 @@ data class AppUiState(
     val waterMl: Int = 500,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val palette: Palette = Palette.TERRACOTTA,
+    val hasCompletedOnboarding: Boolean = false,
     val settings: SettingsEntity = SettingsEntity(),
     val brewLogs: List<BrewLogEntity> = emptyList(),
     val beans: List<BeanEntity> = emptyList(),
@@ -92,7 +93,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(s.language))
                 }
                 _state.update {
-                    it.copy(themeMode = ThemeMode.fromKey(s.themeMode), palette = Palette.fromKey(s.paletteKey), settings = s)
+                    it.copy(themeMode = ThemeMode.fromKey(s.themeMode), palette = Palette.fromKey(s.paletteKey), hasCompletedOnboarding = s.hasCompletedOnboarding, settings = s)
                 }
             }
         }
@@ -228,6 +229,15 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         )) }
 
     fun archiveBean(id: Long) = viewModelScope.launch { repo.archiveBean(id) }
+
+    fun completeOnboarding() {
+        _state.update { it.copy(hasCompletedOnboarding = true) }
+        viewModelScope.launch {
+            val cur = (repo.settings.first() ?: SettingsEntity())
+                .copy(hasCompletedOnboarding = true)
+            repo.upsertSettings(cur)
+        }
+    }
 
     fun restoreDefaults(ctx: Context) {
         viewModelScope.launch {
