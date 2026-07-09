@@ -256,11 +256,79 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
                 item(key = "streak") { StreakBanner(streak) }
             }
             item(key = "heatmap") { BrewHeatmap(state.brewLogs) }
+            if (state.brewLogs.size >= 3) {
+                item(key = "analytics") { AnalyticsCard(state.brewLogs) }
+            }
             val best = bestRecipeFromLogs(state.brewLogs)
             if (best != null) {
                 item(key = "best_recipe") { BestRecipeBanner(best, vm) }
             }
             items(state.brewLogs, key = { it.id }) { log -> BrewLogCard(log, vm) }
+        }
+    }
+}
+
+@Composable
+private fun AnalyticsCard(brewLogs: List<BrewLogEntity>) {
+    val colors = CoffeeTheme.colors
+    val weekAgo = System.currentTimeMillis() - 7 * 24 * 60 * 60 * 1000L
+    val weeklyLogs = brewLogs.filter { it.timestamp >= weekAgo }
+    if (weeklyLogs.isEmpty()) return
+
+    val totalThisWeek = weeklyLogs.size
+
+    val favoriteMethod = weeklyLogs
+        .groupBy { it.equipmentName }
+        .maxByOrNull { it.value.size }?.key ?: ""
+
+    val ratedLogs = brewLogs.filter { it.rating > 0 }
+    val avgRating = if (ratedLogs.isNotEmpty()) {
+        String.format(Locale.US, "%.1f", ratedLogs.map { it.rating }.average())
+    } else null
+
+    val bestBean = brewLogs
+        .filter { it.beanName.isNotBlank() && it.rating > 0 }
+        .groupBy { it.beanName }
+        .mapValues { (_, logs) -> logs.map { it.rating }.average() }
+        .maxByOrNull { it.value }
+        ?.let { if (it.value > 0) it.key else null }
+
+    CoffeeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            AppText(stringResource(R.string.log_analytics_week), style = CoffeeTheme.type.label, color = colors.textSecondary)
+            AppText("$totalThisWeek", style = CoffeeTheme.type.display, color = colors.accent)
+        }
+        Spacer(Modifier.height(8.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Column {
+                AppText(stringResource(R.string.log_analytics_method), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                AppText(favoriteMethod, style = CoffeeTheme.type.headline, color = colors.textPrimary)
+            }
+            if (avgRating != null) {
+                Column(horizontalAlignment = Alignment.End) {
+                    AppText(stringResource(R.string.log_analytics_rating), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                    AppText("$avgRating★", style = CoffeeTheme.type.headline, color = colors.textPrimary)
+                }
+            }
+        }
+
+        if (bestBean != null) {
+            Spacer(Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                AppText(stringResource(R.string.log_analytics_bean), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                AppText(bestBean, style = CoffeeTheme.type.headline, color = colors.accent)
+            }
         }
     }
 }

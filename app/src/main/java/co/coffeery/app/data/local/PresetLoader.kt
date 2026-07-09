@@ -64,8 +64,6 @@ object PresetLoader {
     }
 
     private fun stringRes(context: Context, key: String): Int {
-        val id = context.resources.getIdentifier(key, "string", context.packageName)
-        require(id != 0) { "Missing string resource for key '$key'" }
-        return id
+        return context.resources.getIdentifier(key, "string", context.packageName)
     }
 }

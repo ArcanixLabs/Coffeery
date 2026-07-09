@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import co.coffeery.app.BuildConfig
 import co.coffeery.app.R
 import co.coffeery.app.data.model.Palette
 import co.coffeery.app.data.model.ThemeMode
@@ -229,7 +230,7 @@ fun SettingsScreen(vm: AppViewModel) {
         }
 
         SettingsSection(R.string.settings_about) {
-            AboutRow(R.string.settings_version, "2.1.0")
+            AboutRow(R.string.settings_version, BuildConfig.VERSION_NAME)
             ActionRow(stringResource(R.string.settings_github)) {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/omersusin/Coffeery"))
                 ctx.startActivity(intent)

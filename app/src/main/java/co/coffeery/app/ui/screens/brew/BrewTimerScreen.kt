@@ -1,6 +1,10 @@
 package co.coffeery.app.ui.screens.brew
 
 import android.app.Activity
+import android.content.Context
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.WindowManager
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.EaseInOutCubic
@@ -13,6 +17,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,6 +30,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -32,21 +38,25 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import co.coffeery.app.R
+import co.coffeery.app.data.local.BeanEntity
 import co.coffeery.app.data.local.BrewLogEntity
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.AppTextField
@@ -74,15 +84,16 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     val totalWater = result.waterMl
     val plannedTotal = steps.sumOf { it.durationSec }
 
-    var stepIndex by remember { mutableIntStateOf(0) }
-    var remaining by remember { mutableIntStateOf(steps[0].durationSec) }
-    var running by remember { mutableStateOf(false) }
-    var everStarted by remember { mutableStateOf(false) }
-    var finished by remember { mutableStateOf(false) }
-    var elapsedTotal by remember { mutableIntStateOf(0) }
+    var stepIndex by rememberSaveable { mutableIntStateOf(0) }
+    var remaining by rememberSaveable { mutableIntStateOf(steps[0].durationSec) }
+    var running by rememberSaveable { mutableStateOf(false) }
+    var everStarted by rememberSaveable { mutableStateOf(false) }
+    var finished by rememberSaveable { mutableStateOf(false) }
+    var elapsedTotal by rememberSaveable { mutableIntStateOf(0) }
 
     // Keep the screen awake for the whole brew session.
     val view = LocalView.current
+    val context = LocalContext.current
     DisposableEffect(Unit) {
         val window = (view.context as? Activity)?.window
         window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -98,6 +109,15 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                 if (stepIndex < steps.lastIndex) {
                     stepIndex++
                     remaining = steps[stepIndex].durationSec
+                    if (state.settings.timerVibrate) {
+                        val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            vibrator?.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+                        } else {
+                            @Suppress("DEPRECATION")
+                            vibrator?.vibrate(50)
+                        }
+                    }
                 } else {
                     remaining = 0
                     running = false
@@ -105,6 +125,18 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                 }
             } else {
                 remaining = next
+            }
+        }
+    }
+
+    LaunchedEffect(finished) {
+        if (finished && state.settings.timerVibrate) {
+            val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator?.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                @Suppress("DEPRECATION")
+                vibrator?.vibrate(50)
             }
         }
     }
@@ -343,13 +375,57 @@ private fun SaveBrewDialog(
     var rating by remember { mutableIntStateOf(0) }
     var notes by remember { mutableStateOf("") }
     var grindSize by remember { mutableStateOf("") }
+    var selectedBean by remember { mutableStateOf<BeanEntity?>(null) }
     val name = eq.displayName()
+    val activeBeans = state.beans.filter { !it.isArchived }
 
     CoffeeDialog(onDismiss = onDismiss) {
         Column(modifier = Modifier.fillMaxWidth()) {
             AppText(stringResource(R.string.save_brew_log), style = CoffeeTheme.type.title)
             Spacer(Modifier.height(8.dp))
             AppText(name + " · " + stringResource(R.string.calc_grams, Format.grams(result.coffeeGrams)) + " : " + result.waterMl + " ml", style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            Spacer(Modifier.height(14.dp))
+
+            AppText(stringResource(R.string.log_bean_label), style = CoffeeTheme.type.label, color = colors.textSecondary)
+            Spacer(Modifier.height(6.dp))
+            if (activeBeans.isNotEmpty()) {
+                val rows = activeBeans.chunked(3)
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(if (selectedBean == null) colors.accent else colors.accentSoft)
+                                .clickable { selectedBean = null }
+                                .padding(horizontal = 10.dp, vertical = 6.dp),
+                        ) {
+                            AppText(stringResource(R.string.log_bean_none), style = CoffeeTheme.type.caption, color = if (selectedBean == null) Color.White else colors.textPrimary)
+                        }
+                    }
+                    for (row in rows) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            for (bean in row) {
+                                val isSelected = selectedBean?.id == bean.id
+                                Box(
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(if (isSelected) colors.accent else colors.accentSoft)
+                                        .clickable { selectedBean = bean }
+                                        .padding(horizontal = 10.dp, vertical = 6.dp),
+                                ) {
+                                    AppText(
+                                        if (bean.name.length > 8) bean.name.take(8) + "…" else bean.name,
+                                        style = CoffeeTheme.type.caption,
+                                        color = if (isSelected) Color.White else colors.textPrimary,
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                AppText(stringResource(R.string.log_bean_empty), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            }
             Spacer(Modifier.height(14.dp))
 
             AppText(stringResource(R.string.log_rating), style = CoffeeTheme.type.label, color = colors.textSecondary)
@@ -404,6 +480,8 @@ private fun SaveBrewDialog(
                             totalDurationSec = elapsedTotal,
                             rating = rating,
                             tastingNotes = notes.trim(),
+                            beanId = selectedBean?.id,
+                            beanName = selectedBean?.name ?: "",
                         )
                     )
                 }

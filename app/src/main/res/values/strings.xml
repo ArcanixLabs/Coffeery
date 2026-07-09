@@ -366,6 +366,9 @@
     <string name="log_grind_hint">e.g. 25 on Comandante, 3.5 on K-Ultra</string>
     <string name="log_notes">Tasting notes</string>
     <string name="log_notes_hint">Astringent, bright, chocolate finish…</string>
+    <string name="log_bean_label">Bean</string>
+    <string name="log_bean_none">None</string>
+    <string name="log_bean_empty">No beans yet. Add one in the Beans tab.</string>
 
     <!-- Beans -->
     <string name="beans_title">Beans</string>
@@ -384,6 +387,12 @@
     <string name="log_streak_label_plural">day streak</string>
     <string name="log_streak_keep">Keep it going!</string>
     <string name="log_streak_start">Brew today to start a streak!</string>
+
+    <!-- Brew log analytics -->
+    <string name="log_analytics_week">This Week</string>
+    <string name="log_analytics_method">Method</string>
+    <string name="log_analytics_rating">Avg rating</string>
+    <string name="log_analytics_bean">Best bean</string>
 
     <!-- ===== Learn tools v2 ===== -->
     <string name="learn_extraction_calc_title">Extraction Yield Calculator</string>

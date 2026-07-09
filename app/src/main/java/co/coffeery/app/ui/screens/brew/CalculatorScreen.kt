@@ -1,5 +1,6 @@
 package co.coffeery.app.ui.screens.brew
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -27,12 +28,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import co.coffeery.app.R
 import co.coffeery.app.data.model.BrewCategory
 import co.coffeery.app.data.model.Equipment
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import co.coffeery.app.data.model.RoastLevel
 import co.coffeery.app.data.model.TempMode
 import co.coffeery.app.ui.components.AppText
@@ -79,7 +84,7 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
     } else {
         BrewMath.compute(eq, state.strength, state.roast, state.byCups, state.cups, state.waterMl)
     }
-    var showSave by remember { mutableStateOf(false) }
+    val ctx = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -120,7 +125,11 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
             SecondaryButton(
                 text = stringResource(R.string.action_save),
                 modifier = Modifier.weight(1f),
-            ) { showSave = true }
+            ) {
+                val autoName = "${eq.displayName()} · ${SimpleDateFormat("MMM d", Locale.getDefault()).format(Date())}"
+                vm.saveRecipe(autoName)
+                Toast.makeText(ctx, R.string.recipe_saved, Toast.LENGTH_SHORT).show()
+            }
             PrimaryButton(
                 text = stringResource(R.string.action_start),
                 modifier = Modifier.weight(1f),
@@ -128,12 +137,6 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
         }
     }
 
-    if (showSave) {
-        SaveRecipeDialog(
-            onDismiss = { showSave = false },
-            onSave = { name -> vm.saveRecipe(name); showSave = false },
-        )
-    }
 }
 
 @Composable
@@ -411,22 +414,4 @@ private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment
     }
 }
 
-@Composable
-private fun SaveRecipeDialog(onDismiss: () -> Unit, onSave: (String) -> Unit) {
-    var name by remember { mutableStateOf("") }
-    CoffeeDialog(onDismiss = onDismiss) {
-        AppText(stringResource(R.string.save_recipe_title), style = CoffeeTheme.type.title)
-        Spacer(Modifier.height(14.dp))
-        AppTextField(
-            value = name,
-            onValueChange = { name = it },
-            hint = stringResource(R.string.recipe_name_hint),
-            modifier = Modifier.fillMaxWidth(),
-        )
-        Spacer(Modifier.height(18.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-            SecondaryButton(stringResource(R.string.action_cancel), Modifier.weight(1f)) { onDismiss() }
-            PrimaryButton(stringResource(R.string.action_save), Modifier.weight(1f), enabled = name.isNotBlank()) { onSave(name) }
-        }
-    }
-}
+
