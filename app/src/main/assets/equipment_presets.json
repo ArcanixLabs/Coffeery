@@ -131,7 +131,8 @@
           "durationSec": 55,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=WzPMd9eh8SM"
     },
     {
       "id": "frenchpress",
@@ -400,7 +401,8 @@
           "durationSec": 40,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=xxXL5YKugrM"
     },
     {
       "id": "espresso",
@@ -475,7 +477,8 @@
           "durationSec": 5,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=R-jT33__MvY"
     },
     {
       "id": "switch",
@@ -530,7 +533,8 @@
           "durationSec": 45,
           "waterTargetPct": 1.0
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=MTN902iHqCI"
     },
     {
       "id": "origami",
@@ -573,7 +577,8 @@
           "durationSec": 45,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=zL_0DewLeg0"
     },
     {
       "id": "april",
@@ -665,7 +670,8 @@
           "durationSec": 65,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=0OODhpdQiOI"
     },
     {
       "id": "timemore",
@@ -708,7 +714,8 @@
           "durationSec": 35,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=HBwVC44UG40"
     },
     {
       "id": "beehouse",
@@ -800,7 +807,8 @@
           "durationSec": 10,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=kXnaPSe8kGM"
     },
     {
       "id": "colddrip",
@@ -843,7 +851,8 @@
           "durationSec": 15,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=LK5MQvalRZc"
     },
     {
       "id": "percolator",
@@ -959,7 +968,8 @@
           "durationSec": 10,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=IOcqPAq7ods"
     },
     {
       "id": "napoletana",
@@ -1008,7 +1018,8 @@
           "durationSec": 10,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=Feu2CCc33r4"
     },
     {
       "id": "cafec",
@@ -1045,7 +1056,8 @@
           "durationSec": 40,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=GEdW1j3_o-s"
     },
     {
       "id": "ibrik",
@@ -1111,7 +1123,7 @@
       "grind": "COARSE",
       "cupMl": 250,
       "timeLabel": "4-6 min",
-      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "youtubeUrl": "https://www.youtube.com/watch?v=tq7Si7cp2jM",
       "hasBloom": false,
       "steps": [
         {
@@ -1138,7 +1150,8 @@
           "durationSec": 30,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=xIgG9Sw9bBY"
     },
     {
       "id": "cupping",
@@ -1154,7 +1167,7 @@
       "grind": "COARSE",
       "cupMl": 200,
       "timeLabel": "8-10 min",
-      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "youtubeUrl": "https://www.youtube.com/watch?v=cSEgP4VNynQ",
       "hasBloom": false,
       "steps": [
         {
@@ -1187,7 +1200,8 @@
           "durationSec": 30,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=OgpWxbsL3o8"
     },
     {
       "id": "cloth",
@@ -1230,7 +1244,8 @@
           "durationSec": 30,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=uayaCeAg0Oo"
     },
     {
       "id": "sock",
@@ -1278,7 +1293,8 @@
           "durationSec": 20,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0"
     },
     {
       "id": "decoction",
@@ -1326,7 +1342,8 @@
           "durationSec": 30,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=H4TYtJaXGo0"
     },
     {
       "id": "papertowel",
@@ -1369,7 +1386,8 @@
           "durationSec": 20,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=_YYAaKUemb4"
     },
     {
       "id": "egg",
@@ -1412,7 +1430,8 @@
           "durationSec": 30,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=Om3YrU4VpGk"
     },
     {
       "id": "improvturk",
@@ -1454,6 +1473,72 @@
           "durationSec": 30,
           "waterTargetPct": -1
         }
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=I5PtWraNRTY"
+    },
+    {
+      "id": "kopitubruk",
+      "nameKey": "equip_kopitubruk_name",
+      "tagKey": "equip_kopitubruk_tag",
+      "category": "OTHER",
+      "ratioMin": 12.0, "ratioMax": 15.0, "ratioDefault": 13.5,
+      "tempMode": "RANGE", "tempMin": 95, "tempMax": 100,
+      "grind": "FINE", "cupMl": 200, "timeLabel": "3-4 min",
+      "hasBloom": false,
+      "steps": [
+        {"titleKey": "step_add_coffee", "kind": "STIR", "durationSec": 60, "waterTargetPct": 1.0},
+        {"titleKey": "step_wait", "kind": "WAIT", "durationSec": 180, "waterTargetPct": -1},
+        {"titleKey": "step_serve", "kind": "SERVE", "durationSec": 30, "waterTargetPct": -1}
+      ]
+    },
+    {
+      "id": "qahwa",
+      "nameKey": "equip_qahwa_name",
+      "tagKey": "equip_qahwa_tag",
+      "category": "OTHER",
+      "ratioMin": 14.0, "ratioMax": 16.0, "ratioDefault": 15.0,
+      "tempMode": "RANGE", "tempMin": 95, "tempMax": 100,
+      "grind": "COARSE", "cupMl": 100, "timeLabel": "10-15 min",
+      "hasBloom": false,
+      "steps": [
+        {"titleKey": "step_heat", "kind": "HEAT", "durationSec": 300, "waterTargetPct": -1},
+        {"titleKey": "step_add_coffee", "kind": "STIR", "durationSec": 30, "waterTargetPct": 1.0},
+        {"titleKey": "step_heat", "kind": "HEAT", "durationSec": 300, "waterTargetPct": -1},
+        {"titleKey": "step_wait", "kind": "WAIT", "durationSec": 120, "waterTargetPct": -1},
+        {"titleKey": "step_serve", "kind": "SERVE", "durationSec": 30, "waterTargetPct": -1}
+      ]
+    },
+    {
+      "id": "cafedeolla",
+      "nameKey": "equip_cafedeolla_name",
+      "tagKey": "equip_cafedeolla_tag",
+      "category": "OTHER",
+      "ratioMin": 10.0, "ratioMax": 14.0, "ratioDefault": 12.0,
+      "tempMode": "RANGE", "tempMin": 90, "tempMax": 96,
+      "grind": "COARSE", "cupMl": 250, "timeLabel": "10-12 min",
+      "hasBloom": false,
+      "steps": [
+        {"titleKey": "step_heat", "kind": "HEAT", "durationSec": 180, "waterTargetPct": -1},
+        {"titleKey": "step_add_coffee", "kind": "STIR", "durationSec": 30, "waterTargetPct": 1.0},
+        {"titleKey": "step_steep", "kind": "STEEP", "durationSec": 300, "waterTargetPct": -1},
+        {"titleKey": "step_drawdown", "kind": "DRAWDOWN", "durationSec": 60, "waterTargetPct": -1},
+        {"titleKey": "step_serve", "kind": "SERVE", "durationSec": 30, "waterTargetPct": -1}
+      ]
+    },
+    {
+      "id": "masonjar",
+      "nameKey": "equip_masonjar_name",
+      "tagKey": "equip_masonjar_tag",
+      "category": "OTHER",
+      "ratioMin": 6.0, "ratioMax": 10.0, "ratioDefault": 8.0,
+      "tempMode": "COLD", "tempMin": 4, "tempMax": 25,
+      "grind": "EXTRA_COARSE", "cupMl": 200, "timeLabel": "14-18 h",
+      "hasBloom": false,
+      "steps": [
+        {"titleKey": "step_add_coffee", "kind": "STIR", "durationSec": 60, "waterTargetPct": 1.0},
+        {"titleKey": "step_steep", "kind": "STEEP", "durationSec": 60000, "waterTargetPct": -1},
+        {"titleKey": "step_drawdown", "kind": "DRAWDOWN", "durationSec": 300, "waterTargetPct": -1},
+        {"titleKey": "step_serve", "kind": "SERVE", "durationSec": 30, "waterTargetPct": -1}
       ]
     }
   ]

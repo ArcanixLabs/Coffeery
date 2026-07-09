@@ -265,6 +265,38 @@ private fun DrawScope.drawEquipment(key: String, tint: Color, stroke: Stroke) {
             dot(w * 0.5f, h * 0.58f, w * 0.018f); dot(w * 0.46f, h * 0.7f, w * 0.018f)
             dot(w * 0.36f, h * 0.7f, w * 0.018f) // fine grounds
         }
+        "kopitubruk" -> { // drinking glass with mud layer at bottom and steam
+            p { moveTo(w * 0.3f, h * 0.28f); lineTo(w * 0.3f, h * 0.7f); cubicTo(w * 0.3f, h * 0.82f, w * 0.7f, h * 0.82f, w * 0.7f, h * 0.7f); lineTo(w * 0.7f, h * 0.28f) }
+            p { moveTo(w * 0.3f, h * 0.6f); cubicTo(w * 0.4f, h * 0.56f, w * 0.5f, h * 0.64f, w * 0.6f, h * 0.58f); cubicTo(w * 0.5f, h * 0.7f, w * 0.4f, h * 0.68f, w * 0.3f, h * 0.6f) }
+            line(tint, w * 0.3f, h * 0.56f, w * 0.7f, h * 0.56f, sw * 0.6f)
+            line(tint, w * 0.34f, h * 0.18f, w * 0.38f, h * 0.1f, sw * 0.7f)
+            line(tint, w * 0.5f, h * 0.14f, w * 0.5f, h * 0.04f, sw * 0.7f)
+            line(tint, w * 0.6f, h * 0.18f, w * 0.63f, h * 0.08f, sw * 0.7f)
+        }
+        "qahwa" -> { // Arabian dallah with long curved spout and handle
+            p { moveTo(w * 0.38f, h * 0.24f); cubicTo(w * 0.28f, h * 0.36f, w * 0.28f, h * 0.7f, w * 0.5f, h * 0.78f); cubicTo(w * 0.7f, h * 0.7f, w * 0.62f, h * 0.36f, w * 0.54f, h * 0.24f) }
+            p { moveTo(w * 0.5f, h * 0.24f); cubicTo(w * 0.54f, h * 0.14f, w * 0.76f, h * 0.06f, w * 0.8f, h * 0.16f); cubicTo(w * 0.84f, h * 0.26f, w * 0.7f, h * 0.3f, w * 0.6f, h * 0.28f) }
+            p { moveTo(w * 0.22f, h * 0.44f); cubicTo(w * 0.16f, h * 0.5f, w * 0.16f, h * 0.62f, w * 0.26f, h * 0.62f); cubicTo(w * 0.14f, h * 0.62f, w * 0.14f, h * 0.5f, w * 0.22f, h * 0.44f) }
+            dot(w * 0.38f, h * 0.18f, w * 0.03f)
+        }
+        "cafedeolla" -> { // clay pot with handles and cinnamon stick
+            p { moveTo(w * 0.34f, h * 0.34f); lineTo(w * 0.3f, h * 0.6f); cubicTo(w * 0.3f, h * 0.8f, w * 0.7f, h * 0.8f, w * 0.7f, h * 0.6f); lineTo(w * 0.66f, h * 0.34f) }
+            p { moveTo(w * 0.34f, h * 0.34f); cubicTo(w * 0.4f, h * 0.28f, w * 0.6f, h * 0.28f, w * 0.66f, h * 0.34f) }
+            p { moveTo(w * 0.3f, h * 0.46f); cubicTo(w * 0.18f, h * 0.42f, w * 0.2f, h * 0.56f, w * 0.3f, h * 0.54f) }
+            p { moveTo(w * 0.7f, h * 0.46f); cubicTo(w * 0.82f, h * 0.42f, w * 0.8f, h * 0.56f, w * 0.7f, h * 0.54f) }
+            line(tint, w * 0.5f, h * 0.34f, w * 0.62f, h * 0.14f, sw * 0.8f)
+            line(tint, w * 0.62f, h * 0.14f, w * 0.68f, h * 0.1f, sw * 0.6f)
+        }
+        "masonjar" -> { // mason jar with screw threads and grounds
+            p { moveTo(w * 0.32f, h * 0.3f); lineTo(w * 0.3f, h * 0.7f); cubicTo(w * 0.3f, h * 0.82f, w * 0.7f, h * 0.82f, w * 0.7f, h * 0.7f); lineTo(w * 0.68f, h * 0.3f) }
+            line(tint, w * 0.28f, h * 0.3f, w * 0.72f, h * 0.3f, sw)
+            line(tint, w * 0.31f, h * 0.34f, w * 0.69f, h * 0.34f, sw * 0.6f)
+            line(tint, w * 0.31f, h * 0.38f, w * 0.69f, h * 0.38f, sw * 0.6f)
+            line(tint, w * 0.31f, h * 0.42f, w * 0.69f, h * 0.42f, sw * 0.6f)
+            dot(w * 0.4f, h * 0.68f, w * 0.02f); dot(w * 0.55f, h * 0.72f, w * 0.02f)
+            dot(w * 0.5f, h * 0.64f, w * 0.02f); dot(w * 0.6f, h * 0.66f, w * 0.02f)
+            dot(w * 0.44f, h * 0.74f, w * 0.02f)
+        }
 
         // ---- Custom gear fallbacks (category-representative) ----
         "cat_POUR_OVER" -> {

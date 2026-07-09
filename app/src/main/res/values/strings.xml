@@ -500,6 +500,46 @@
     <string name="learn_l29_body">Coffee expresses terroir — the taste of its place. Understand how altitude (higher = denser beans, brighter acidity), soil composition (volcanic = complexity), and varietal genetics (Bourbon, Gesha, SL-28, Typica) combine for distinct profiles. Taste across the Bean Belt: floral Ethiopian Yirgacheffes, chocolatey Brazilian Santos, bright Kenyan AA.</string>
     <string name="learn_l30_title">Brewing for Groups</string>
     <string name="learn_l30_body">Scaling coffee beyond single cups requires strategy. Maintain 60g/L ratio, ensure flat coffee bed distribution in batch brewers, and hold 92-96°C. For manual methods: pre-weight individual doses, use large French presses (1L+), or scale up immersion brewing in a large vessel. Always grind fresh in batches — never pre-grind the night before.</string>
+    <string name="learn_l31_title">Coffee Roasting Science</string>
+    <string name="learn_l31_body">Roasting transforms green seeds through the Maillard reaction, developing complex flavor compounds. Light roasts preserve terroir and natural acidity, while dark roasts emphasize heavy body and caramelization.</string>
+    <string name="learn_l32_title">Grinder Burrs: Flat vs. Conical</string>
+    <string name="learn_l32_body">Conical burrs produce a bimodal grind distribution, resulting in a heavier body and blended flavors. Flat burrs yield a unimodal distribution, which highlights flavor clarity, bright acidity, and distinct tasting notes.</string>
+    <string name="learn_l33_title">Pour-Over Kettle Techniques</string>
+    <string name="learn_l33_body">Using a gooseneck kettle allows precise control over flow rate and agitation during the brew. Gentle, circular pouring maintains an even coffee bed, preventing channeling and localized over-extraction.</string>
+    <string name="learn_l34_title">Filter Paper Comparisons</string>
+    <string name="learn_l34_body">Filter paper density dictates flow rate and oil retention in the final cup. Thick, bleached papers produce a highly clean, tea-like body, whereas thinner or natural papers may allow more fines and a heavier texture.</string>
+    <string name="learn_l35_title">Health Benefits of Coffee</string>
+    <string name="learn_l35_body">Black coffee is rich in antioxidants like chlorogenic acid, which aids in metabolic regulation and reduces cellular inflammation. Moderate consumption is consistently linked to enhanced cognitive function and cardiovascular support.</string>
+    <string name="learn_l36_title">Sustainability and Fair Trade</string>
+    <string name="learn_l36_body">Specialty coffee relies on sustainable farming practices that protect biodiversity and soil health. Fair trade certifications ensure that farmers receive livable wages, securing the future of ethical coffee production.</string>
+    <string name="learn_l37_title">Seasonal Coffee Selection</string>
+    <string name="learn_l37_body">Coffee is a seasonal agricultural product with harvests rotating globally throughout the year. Purchasing beans from recent harvests ensures optimal freshness, vibrant acidity, and maximum aromatic complexity.</string>
+    <string name="learn_l38_title">Home Roasting Fundamentals</string>
+    <string name="learn_l38_body">Home roasting requires controlling heat application to reach the first crack, the moment moisture escapes the bean. Using a modified popcorn popper or dedicated home roaster allows enthusiasts to customize their roast profiles.</string>
+    <string name="learn_l39_title">Deep Dive into Varietals</string>
+    <string name="learn_l39_body">Just like wine grapes, coffee varietals like Bourbon, Typica, and Gesha contain unique genetic traits dictating flavor. Gesha is famed for its floral, tea-like delicacy, while Bourbon offers profound sweetness and dense chocolate notes.</string>
+    <string name="learn_l40_title">Brew Ratio Experimentation</string>
+    <string name="learn_l40_body">Adjusting the coffee-to-water ratio is the simplest way to alter beverage strength and extraction yield. A 1:15 ratio produces a concentrated, punchy cup, while a 1:17 ratio yields a lighter, more delicate flavor profile.</string>
+    <string name="learn_l41_title">Temperature Surfing</string>
+    <string name="learn_l41_body">Single-boiler espresso machines experience temperature fluctuations between brewing and steaming. Temperature surfing involves purging water to trigger the heating element, ensuring a stable, optimal temperature just before pulling a shot.</string>
+    <string name="learn_l42_title">Espresso Machine Maintenance</string>
+    <string name="learn_l42_body">Regular backflushing with espresso detergent removes rancid coffee oils from the group head and internal valves. Descaling the boiler prevents mineral buildup, extending the machines lifespan and ensuring clean-tasting shots.</string>
+    <string name="learn_l43_title">Japanese Flash Brew Method</string>
+    <string name="learn_l43_body">Flash brewing involves brewing hot, concentrated coffee directly over a precise weight of ice. This rapid cooling locks in volatile aromatic compounds that are typically lost during the slow cold brew process.</string>
+    <string name="learn_l44_title">The Cherry to Cup Journey</string>
+    <string name="learn_l44_body">Coffee begins as a red cherry grown at high altitudes, harvested by hand, and processed to remove the fruit. The remaining seed is dried, milled, exported, and roasted before it ever meets your grinder.</string>
+    <string name="learn_l45_title">Fermentation in Coffee Processing</string>
+    <string name="learn_l45_body">Controlled anaerobic fermentation introduces specific yeasts and bacteria to the coffee cherries before drying. This modern processing technique creates intensely wild, boozy, and tropical fruit flavor profiles.</string>
+    <string name="learn_l46_title">Pour-Over Flow Rate Optimization</string>
+    <string name="learn_l46_body">The speed at which water passes through the coffee bed drastically affects extraction. If the flow rate is too fast, grind finer or pour slower; if it chokes, grind coarser to prevent bitter over-extraction.</string>
+    <string name="learn_l47_title">The Decaffeination Process</string>
+    <string name="learn_l47_body">Modern decaffeination uses the Swiss Water Process, utilizing green coffee extract and carbon filters to gently remove caffeine. This chemical-free method preserves the beans original origin characteristics and cellular integrity.</string>
+    <string name="learn_l48_title">Espresso Puck Preparation</string>
+    <string name="learn_l48_body">Proper puck preparation prevents micro-channeling during high-pressure espresso extraction. Utilizing a WDT tool breaks up clumps, while a self-leveling tamper ensures perfectly even density across the entire portafilter basket.</string>
+    <string name="learn_l49_title">Bean Density and Altitude</string>
+    <string name="learn_l49_body">Coffee grown at higher altitudes matures slower due to cooler temperatures, creating a strictly hard, dense bean. Dense beans contain more complex sugars and require higher water temperatures to fully extract their flavors.</string>
+    <string name="learn_l50_title">Coffee Storage Myths</string>
+    <string name="learn_l50_body">Storing daily-use coffee in the refrigerator introduces damaging moisture and condensation to the beans. Coffee should be kept in an opaque, airtight container at room temperature, or vacuum-sealed and deep-frozen for long-term aging.</string>
 
     <!-- No-gear / emergency methods -->
     <string name="equip_cowboy_name">Cowboy Coffee</string>
@@ -518,4 +558,12 @@
     <string name="equip_egg_tag">Egg · crystal clear</string>
     <string name="equip_improvturk_name">Improvised Turkish</string>
     <string name="equip_improvturk_tag">No cezve · small pot</string>
+    <string name="equip_kopitubruk_name">Kopi Tubruk</string>
+    <string name="equip_kopitubruk_tag">Indonesian mud coffee · no filter</string>
+    <string name="equip_qahwa_name">Arabic Qahwa</string>
+    <string name="equip_qahwa_tag">Bedouin style · spiced</string>
+    <string name="equip_cafedeolla_name">Cafe de Olla</string>
+    <string name="equip_cafedeolla_tag">Mexican clay pot · cinnamon</string>
+    <string name="equip_masonjar_name">Mason Jar Cold Brew</string>
+    <string name="equip_masonjar_tag">No equipment · concentrate</string>
 </resources>

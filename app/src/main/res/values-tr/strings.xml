@@ -500,6 +500,46 @@
     <string name="learn_l29_body">Kahve teruarı ifade eder — yetiştiği yerin tadı. Rakımın (yüksek = yoğun çekirdekler, parlak asidite), toprak bileşiminin (volkanik = karmaşıklık) ve varyete genetiğinin (Bourbon, Gesha, SL-28, Typica) belirgin profiller için nasıl birleştiğini anlayın. Kahve Kuşağı boyunca tadın: çiçeksi Etiyopya Yirgacheffe\'ler, çikolatalı Brezilya Santos, parlak Kenya AA.</string>
     <string name="learn_l30_title">Gruplar İçin Demleme</string>
     <string name="learn_l30_body">Tek fincanın ötesine geçmek strateji gerektirir. 60g/L oranını koruyun, batch demleyicilerde düz kahve yatağı dağılımı sağlayın ve 92-96°C tutun. Manuel yöntemler için: bireysel dozları önceden tartın, büyük French press kullanın (1L+) veya büyük bir kapta daldırma demlemeyi ölçeklendirin. Her zaman taze öğütün — asla bir gece önceden öğütmeyin.</string>
+    <string name="learn_l31_title">Kahve Kavurma Bilimi</string>
+    <string name="learn_l31_body">Kavurma işlemi, yeşil çekirdekleri Maillard reaksiyonu aracılığıyla dönüştürerek karmaşık lezzet bileşiklerini ortaya çıkarır. Açık kavurmalar yöresel tatları ve asiditeyi korurken, koyu kavurmalar yoğun gövde ve karamelizasyonu vurgular.</string>
+    <string name="learn_l32_title">Değirmen Dişlileri: Düz ve Konik</string>
+    <string name="learn_l32_body">Konik dişliler bimodal (iki tepe noktalı) bir öğütüm dağılımı üreterek daha yoğun gövde ve harmanlanmış tatlar sağlar. Düz dişliler ise unimodal bir dağılım sunarak lezzet berraklığını ve parlak asiditeyi öne çıkarır.</string>
+    <string name="learn_l33_title">Pour-Over İbrik Teknikleri</string>
+    <string name="learn_l33_body">Kuğu boyunlu ibrik kullanmak, demleme sırasında akış hızı ve türbülans üzerinde hassas kontrol sağlar. Nazik ve dairesel su döküşü, kahve yatağının düz kalmasını sağlayarak kanallanmayı ve bölgesel aşırı çözünmeyi önler.</string>
+    <string name="learn_l34_title">Filtre Kağıdı Karşılaştırmaları</string>
+    <string name="learn_l34_body">Filtre kağıdı yoğunluğu, fincandaki akış hızını ve yağ tutulumunu belirler. Kalın ve beyazlatılmış kağıtlar temiz ve çayımsı bir gövde üretirken; ince veya doğal kağıtlar daha fazla tortuya ve yoğun bir dokuya izin verebilir.</string>
+    <string name="learn_l35_title">Kahvenin Sağlığa Faydaları</string>
+    <string name="learn_l35_body">Sade kahve, hücresel iltihaplanmayı azaltan klorojenik asit gibi antioksidanlar açısından zengindir. Dengeli tüketimi, gelişmiş bilişsel işlev ve kardiyovasküler destek ile tutarlı bir şekilde ilişkilendirilmektedir.</string>
+    <string name="learn_l36_title">Sürdürülebilirlik ve Adil Ticaret</string>
+    <string name="learn_l36_body">Nitelikli kahve, biyolojik çeşitliliği ve toprak sağlığını koruyan sürdürülebilir tarım uygulamalarına dayanır. Adil ticaret sertifikaları, çiftçilerin yaşanabilir ücretler almasını sağlayarak etik kahve üretiminin geleceğini güvence altına alır.</string>
+    <string name="learn_l37_title">Mevsimsel Kahve Seçimi</string>
+    <string name="learn_l37_body">Kahve, hasatları yıl boyunca küresel olarak değişen mevsimsel bir tarım ürünüdür. Yakın tarihli hasatlardan çekirdek satın almak; optimum tazelik, canlı asidite ve maksimum aromatik karmaşıklık sağlar.</string>
+    <string name="learn_l38_title">Evde Kahve Kavurma Temelleri</string>
+    <string name="learn_l38_body">Evde kavurma işlemi, nemin çekirdekten çıktığı an olan ilk çıtlama evresine ulaşmak için ısı uygulamasını kontrol etmeyi gerektirir. Modifiye edilmiş sistemler, meraklıların kavurma profillerini kişiselleştirmesine olanak tanır.</string>
+    <string name="learn_l39_title">Kahve Varyetelerine Derin Bakış</string>
+    <string name="learn_l39_body">Tıpkı şaraplık üzümler gibi; Bourbon, Typica ve Gesha gibi varyeteler lezzeti belirleyen benzersiz genetik özellikler içerir. Gesha çiçeksi zarafetiyle ünlenirken, Bourbon derin tatlılık ve yoğun çikolata notaları sunar.</string>
+    <string name="learn_l40_title">Demleme Oranı Deneyleri</string>
+    <string name="learn_l40_body">Kahve-su oranını ayarlamak, içecek sertliğini ve çözünme verimini değiştirmenin en basit yoludur. 1:15 oranı konsantre ve vurucu bir fincan üretirken, 1:17 oranı daha hafif ve narin bir lezzet profili sağlar.</string>
+    <string name="learn_l41_title">Sıcaklık Sörfü</string>
+    <string name="learn_l41_body">Tek kazanlı espresso makineleri, demleme ve buhar modları arasında sıcaklık dalgalanmaları yaşar. Sıcaklık sörfü, ısıtıcıyı tetiklemek için suyun boşaltılmasını ve shot almadan hemen önce ideal sıcaklığın sağlanmasını içerir.</string>
+    <string name="learn_l42_title">Espresso Makinesi Bakımı</string>
+    <string name="learn_l42_body">Espresso deterjanı ile düzenli ters yıkama (backflush) yapmak, acılaşmış yağları grup başlığından temizler. Kazanın kireçten arındırılması mineral birikimini önleyerek makinenin ömrünü uzatır ve temiz tatlar almanızı sağlar.</string>
+    <string name="learn_l43_title">Japon Usulü Ani Soğutma (Flash Brew)</string>
+    <string name="learn_l43_body">Bu yöntem, sıcak ve konsantre kahvenin doğrudan hassas ölçülmüş buzun üzerine demlenmesini içerir. Hızlı soğutma işlemi, yavaş soğuk demleme sürecinde genellikle kaybolan uçucu aromatik bileşikleri sıvıya hapseder.</string>
+    <string name="learn_l44_title">Kirazdan Fincana Yolculuk</string>
+    <string name="learn_l44_body">Kahve; yüksek rakımlarda yetişen kırmızı bir kiraz olarak başlar, elle hasat edilir ve meyvesinden ayrıştırılmak üzere işlenir. Kalan çekirdek değirmeninizle buluşmadan önce kurutulur, öğütülür, ihraç edilir ve kavrulur.</string>
+    <string name="learn_l45_title">Kahve İşlemede Fermantasyon</string>
+    <string name="learn_l45_body">Kontrollü anaerobik fermantasyon, kurumaya bırakılmadan önce kahve kirazlarına belirli maya ve bakterilerin eklenmesini içerir. Bu modern işleme tekniği; son derece vahşi, alkolümsü ve tropikal meyve profilleri yaratır.</string>
+    <string name="learn_l46_title">Pour-Over Akış Hızı Optimizasyonu</string>
+    <string name="learn_l46_body">Suyun kahve yatağından geçiş hızı çözünmeyi büyük ölçüde etkiler. Akış hızı çok hızlıysa daha ince öğütün veya daha yavaş dökün; tıkanıyorsa, acı aşırı çözünmeyi önlemek için daha kalın öğütün.</string>
+    <string name="learn_l47_title">Kafeinsizleştirme İşlemi</string>
+    <string name="learn_l47_body">Modern kafeinsizleştirme, kafeini nazikçe uzaklaştırmak için yeşil kahve özütü ve karbon filtrelerden faydalanan Swiss Water İşlemini kullanır. Bu kimyasal içermeyen yöntem, çekirdeğin orijinal özelliklerini korur.</string>
+    <string name="learn_l48_title">Espresso Disk (Puck) Hazırlığı</string>
+    <string name="learn_l48_body">Doğru disk hazırlığı, yüksek basınçlı çözünme sırasında mikro kanallanmayı önler. WDT aracı kullanmak topaklanmaları dağıtırken, kendini dengeleyen bir tamper, sepetin tamamında kusursuz bir yoğunluk sağlar.</string>
+    <string name="learn_l49_title">Çekirdek Yoğunluğu ve Rakım</string>
+    <string name="learn_l49_body">Yüksek rakımlarda yetişen kahve, serin sıcaklıklar nedeniyle daha yavaş olgunlaşarak son derece sert ve yoğun bir çekirdek oluşturur. Yoğun çekirdekler daha karmaşık şekerler içerir ve tatlarının tamamen çözünmesi için daha yüksek sıcaklığa ihtiyaç duyar.</string>
+    <string name="learn_l50_title">Kahve Saklama Efsaneleri</string>
+    <string name="learn_l50_body">Günlük kullanılan kahveyi buzdolabında saklamak, çekirdeklere zarar veren nem ve yoğuşmaya neden olur. Kahve oda sıcaklığında opak ve hava geçirmez bir kapta veya uzun süreli saklama için vakumlanarak derin dondurucuda tutulmalıdır.</string>
 
     <!-- Ekipmansız / acil durum yöntemleri -->
     <string name="equip_cowboy_name">Kovboy Kahvesi</string>
@@ -518,4 +558,12 @@
     <string name="equip_egg_tag">Yumurtalı · berrak</string>
     <string name="equip_improvturk_name">Derme Çatma Türk Kahvesi</string>
     <string name="equip_improvturk_tag">Cezvesiz · küçük tencere</string>
+    <string name="equip_kopitubruk_name">Kopi Tubruk</string>
+    <string name="equip_kopitubruk_tag">Endonezya çamur kahvesi · filtresiz</string>
+    <string name="equip_qahwa_name">Arap Kahvesi (Qahwa)</string>
+    <string name="equip_qahwa_tag">Bedevi usulü · baharatlı</string>
+    <string name="equip_cafedeolla_name">Cafe de Olla</string>
+    <string name="equip_cafedeolla_tag">Meksika kil çömlek · tarçınlı</string>
+    <string name="equip_masonjar_name">Kavanoz Soğuk Demleme</string>
+    <string name="equip_masonjar_tag">Ekipmansız · konsantre</string>
 </resources>
