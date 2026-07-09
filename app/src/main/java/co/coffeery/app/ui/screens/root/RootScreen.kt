@@ -7,6 +7,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -82,6 +83,7 @@ fun RootScreen(vm: AppViewModel) {
                         targetState = state.route,
                         transitionSpec = { routeTransition },
                         label = "route",
+                        contentKey = { it::class },
                     ) { route ->
                         when (route) {
                             is Route.Timer -> BrewTimerScreen(state, vm)
@@ -130,9 +132,8 @@ fun RootScreen(vm: AppViewModel) {
 
 @Composable
 private fun TabContent(state: AppUiState, vm: AppViewModel) {
-    AnimatedContent(
+    Crossfade(
         targetState = state.tab,
-        transitionSpec = { routeTransition },
         label = "tab",
     ) { tab ->
         when (tab) {
