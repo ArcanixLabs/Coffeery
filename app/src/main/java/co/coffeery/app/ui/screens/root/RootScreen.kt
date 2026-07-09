@@ -45,6 +45,7 @@ import co.coffeery.app.ui.screens.log.BrewLogScreen
 import co.coffeery.app.ui.screens.onboarding.OnboardingScreen
 import co.coffeery.app.ui.screens.recipes.RecipesScreen
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.coffeeBackground
 import co.coffeery.app.ui.theme.CoffeeShapes
 import kotlinx.coroutines.delay
 
@@ -69,7 +70,7 @@ fun RootScreen(vm: AppViewModel) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colors.background),
+                .coffeeBackground(colors),
         ) {
             Column(
                 modifier = Modifier

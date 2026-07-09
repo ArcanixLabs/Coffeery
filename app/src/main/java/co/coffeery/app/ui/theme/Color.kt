@@ -14,6 +14,7 @@ import co.coffeery.app.data.model.Palette
 @Immutable
 data class CoffeeColors(
     val background: Color,
+    val backgroundEnd: Color,   // slightly lighter/different for subtle gradient
     val surface: Color,
     val surfaceElevated: Color,
     val outline: Color,
@@ -22,8 +23,8 @@ data class CoffeeColors(
     val accent: Color,
     val accentSoft: Color,
     val onAccent: Color,
-    val cremaLight: Color,   // slider fill at min strength
-    val cremaDark: Color,    // slider fill at max strength
+    val cremaLight: Color,
+    val cremaDark: Color,
     val isDark: Boolean,
 ) {
     /** Coffee shade for the strength slider fill; darkens as strength rises. */
@@ -39,7 +40,8 @@ data class CoffeeColors(
 }
 
 val LightCoffeeColors = CoffeeColors(
-    background = Color(0xFFFBF7F0),
+    background = Color(0xFFF5F0E6),
+    backgroundEnd = Color(0xFFFBF7F0),
     surface = Color(0xFFFDFAF5),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFE7DDCE),
@@ -55,6 +57,7 @@ val LightCoffeeColors = CoffeeColors(
 
 val DarkCoffeeColors = CoffeeColors(
     background = Color(0xFF1A1510),
+    backgroundEnd = Color(0xFF1F1914),
     surface = Color(0xFF221C16),
     surfaceElevated = Color(0xFF2C241D),
     outline = Color(0xFF3F342A),
@@ -82,7 +85,8 @@ fun paletteColors(palette: Palette, isDark: Boolean): CoffeeColors = when (palet
 }
 
 val LightEspressoColors = CoffeeColors(
-    background = Color(0xFFF5F0E8),
+    background = Color(0xFFF0EBE2),
+    backgroundEnd = Color(0xFFF5F0E8),
     surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFE3D9CB),
@@ -98,6 +102,7 @@ val LightEspressoColors = CoffeeColors(
 
 val DarkEspressoColors = CoffeeColors(
     background = Color(0xFF1A1510),
+    backgroundEnd = Color(0xFF1F1914),
     surface = Color(0xFF221C16),
     surfaceElevated = Color(0xFF2C241D),
     outline = Color(0xFF362D26),
@@ -112,7 +117,8 @@ val DarkEspressoColors = CoffeeColors(
 )
 
 val LightMatchaColors = CoffeeColors(
-    background = Color(0xFFF4F7F0),
+    background = Color(0xFFEEF2E8),
+    backgroundEnd = Color(0xFFF4F7F0),
     surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFDDE8D4),
@@ -128,6 +134,7 @@ val LightMatchaColors = CoffeeColors(
 
 val DarkMatchaColors = CoffeeColors(
     background = Color(0xFF161816),
+    backgroundEnd = Color(0xFF1B1D1B),
     surface = Color(0xFF1D201C),
     surfaceElevated = Color(0xFF252823),
     outline = Color(0xFF2F362A),
@@ -142,7 +149,8 @@ val DarkMatchaColors = CoffeeColors(
 )
 
 val LightBerryColors = CoffeeColors(
-    background = Color(0xFFF8F4F7),
+    background = Color(0xFFF2EEF2),
+    backgroundEnd = Color(0xFFF8F4F7),
     surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFEBD8E2),
@@ -158,6 +166,7 @@ val LightBerryColors = CoffeeColors(
 
 val DarkBerryColors = CoffeeColors(
     background = Color(0xFF1A1416),
+    backgroundEnd = Color(0xFF1F191A),
     surface = Color(0xFF211A1E),
     surfaceElevated = Color(0xFF2A2226),
     outline = Color(0xFF362B30),
@@ -173,7 +182,8 @@ val DarkBerryColors = CoffeeColors(
 
 // ---- Crema — golden cream, inspired by espresso crema ----
 val LightCremaColors = CoffeeColors(
-    background = Color(0xFFFAF6EF),
+    background = Color(0xFFF4EFE6),
+    backgroundEnd = Color(0xFFFAF6EF),
     surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFE5D9C3),
@@ -189,6 +199,7 @@ val LightCremaColors = CoffeeColors(
 
 val DarkCremaColors = CoffeeColors(
     background = Color(0xFF1A1610),
+    backgroundEnd = Color(0xFF1F1A14),
     surface = Color(0xFF221D16),
     surfaceElevated = Color(0xFF2C251C),
     outline = Color(0xFF362E24),
@@ -204,7 +215,8 @@ val DarkCremaColors = CoffeeColors(
 
 // ---- Mocha — rich dark chocolate with deep warm browns ----
 val LightMochaColors = CoffeeColors(
-    background = Color(0xFFF3EFE8),
+    background = Color(0xFFEDE8DF),
+    backgroundEnd = Color(0xFFF3EFE8),
     surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFDFD6C8),
@@ -220,6 +232,7 @@ val LightMochaColors = CoffeeColors(
 
 val DarkMochaColors = CoffeeColors(
     background = Color(0xFF191510),
+    backgroundEnd = Color(0xFF1E1914),
     surface = Color(0xFF211C16),
     surfaceElevated = Color(0xFF2A241C),
     outline = Color(0xFF332922),
@@ -235,7 +248,8 @@ val DarkMochaColors = CoffeeColors(
 
 // ---- Caramel — warm amber caramel, sweet and golden ----
 val LightCaramelColors = CoffeeColors(
-    background = Color(0xFFFBF5ED),
+    background = Color(0xFFF5EFE4),
+    backgroundEnd = Color(0xFFFBF5ED),
     surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFE8D8BE),
@@ -251,6 +265,7 @@ val LightCaramelColors = CoffeeColors(
 
 val DarkCaramelColors = CoffeeColors(
     background = Color(0xFF1A1610),
+    backgroundEnd = Color(0xFF1F1A14),
     surface = Color(0xFF221C16),
     surfaceElevated = Color(0xFF2B241C),
     outline = Color(0xFF352B22),
@@ -266,7 +281,8 @@ val DarkCaramelColors = CoffeeColors(
 
 // ---- Hazelnut — warm nutty brown, softer than espresso ----
 val LightHazelnutColors = CoffeeColors(
-    background = Color(0xFFF6F2EB),
+    background = Color(0xFFF0EBE3),
+    backgroundEnd = Color(0xFFF6F2EB),
     surface = Color(0xFFFCFAF7),
     surfaceElevated = Color(0xFFFFFFFF),
     outline = Color(0xFFE2D8C8),
@@ -282,6 +298,7 @@ val LightHazelnutColors = CoffeeColors(
 
 val DarkHazelnutColors = CoffeeColors(
     background = Color(0xFF191511),
+    backgroundEnd = Color(0xFF1E1915),
     surface = Color(0xFF211C17),
     surfaceElevated = Color(0xFF2A241D),
     outline = Color(0xFF342A21),
