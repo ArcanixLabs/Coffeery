@@ -16,8 +16,8 @@ android {
         // java.time without desugaring.
         minSdk = 26
         targetSdk = 34
-        versionCode = 3
-        versionName = "2.1.0"
+        versionCode = 4
+        versionName = "2.2.0"
         vectorDrawables { useSupportLibrary = true }
     }
 
@@ -59,7 +59,7 @@ android {
 }
 
 dependencies {
-    val composeBom = platform("androidx.compose:compose-bom:2024.09.03")
+    val composeBom = platform("androidx.compose:compose-bom:2024.12.01")
     implementation(composeBom)
 
     implementation("androidx.core:core-ktx:1.13.1")

@@ -87,8 +87,9 @@ import kotlinx.coroutines.delay
 fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
     val eq = state.selectedEquipment ?: return
-    val steps = eq.steps
-    if (steps.isEmpty()) return
+    val rawSteps = eq.steps
+    if (rawSteps.isEmpty()) return
+    val steps = if (state.settings.timerMergeWeight) mergePours(rawSteps) else rawSteps
     val result = BrewMath.compute(eq, state.strength, state.roast, state.byCups, state.cups, state.waterMl)
     val totalWater = result.waterMl
     val plannedTotal = steps.sumOf { it.durationSec }
@@ -614,4 +615,21 @@ private fun sendNotification(context: Context, title: String, body: String) {
     } catch (e: Exception) {
         android.util.Log.e("Coffeery", "Notification failed", e)
     }
+}
+
+private fun mergePours(stepsInput: List<co.coffeery.app.data.model.BrewStepDef>): List<co.coffeery.app.data.model.BrewStepDef> {
+    val result = mutableListOf<co.coffeery.app.data.model.BrewStepDef>()
+    var i = 0
+    while (i < stepsInput.size) {
+        val current = stepsInput[i]
+        if (current.kind == co.coffeery.app.data.model.StepKind.POUR && i + 1 < stepsInput.size && stepsInput[i + 1].kind == co.coffeery.app.data.model.StepKind.POUR) {
+            val next = stepsInput[i + 1]
+            result.add(current.copy(durationSec = current.durationSec + next.durationSec, waterTargetPct = next.waterTargetPct))
+            i += 2
+        } else {
+            result.add(current)
+            i++
+        }
+    }
+    return result
 }

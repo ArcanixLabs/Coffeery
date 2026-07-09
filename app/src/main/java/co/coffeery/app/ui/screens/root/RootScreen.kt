@@ -31,6 +31,7 @@ import co.coffeery.app.ui.screens.log.BrewLogScreen
 import co.coffeery.app.ui.screens.onboarding.OnboardingScreen
 import co.coffeery.app.ui.screens.recipes.RecipesScreen
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.coffeeBackground
 
 private val routeTransition =
     slideInHorizontally { it / 4 } + fadeIn() togetherWith
@@ -48,7 +49,8 @@ fun RootScreen(vm: AppViewModel) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colors.background),
+                .background(colors.background)
+                .coffeeBackground(),
         ) {
             Column(
                 modifier = Modifier
