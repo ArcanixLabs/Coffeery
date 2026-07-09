@@ -46,6 +46,16 @@ object LearnContent {
         LearnCard(R.string.learn_l18_title, R.string.learn_l18_body, R.string.learn_ch_equipment),
         LearnCard(R.string.learn_l19_title, R.string.learn_l19_body, R.string.learn_ch_extraction),
         LearnCard(R.string.learn_l20_title, R.string.learn_l20_body, R.string.learn_ch_tasting),
+        LearnCard(R.string.learn_l21_title, R.string.learn_l21_body, R.string.learn_ch_extraction),
+        LearnCard(R.string.learn_l22_title, R.string.learn_l22_body, R.string.learn_ch_tasting),
+        LearnCard(R.string.learn_l23_title, R.string.learn_l23_body, R.string.learn_ch_methods),
+        LearnCard(R.string.learn_l24_title, R.string.learn_l24_body, R.string.learn_ch_basics),
+        LearnCard(R.string.learn_l25_title, R.string.learn_l25_body, R.string.learn_ch_water),
+        LearnCard(R.string.learn_l26_title, R.string.learn_l26_body, R.string.learn_ch_methods),
+        LearnCard(R.string.learn_l27_title, R.string.learn_l27_body, R.string.learn_ch_methods),
+        LearnCard(R.string.learn_l28_title, R.string.learn_l28_body, R.string.learn_ch_milk),
+        LearnCard(R.string.learn_l29_title, R.string.learn_l29_body, R.string.learn_ch_tasting),
+        LearnCard(R.string.learn_l30_title, R.string.learn_l30_body, R.string.learn_ch_equipment),
     )
 
     val chapterOrder: List<Int> = listOf(

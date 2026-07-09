@@ -205,6 +205,66 @@ private fun DrawScope.drawEquipment(key: String, tint: Color, stroke: Stroke) {
             p { moveTo(w * 0.42f, h * 0.46f); lineTo(w * 0.42f, h * 0.58f); cubicTo(w * 0.3f, h * 0.66f, w * 0.3f, h * 0.82f, w * 0.5f, h * 0.82f); cubicTo(w * 0.7f, h * 0.82f, w * 0.7f, h * 0.66f, w * 0.58f, h * 0.58f); lineTo(w * 0.58f, h * 0.46f) } // lower bulb
             line(tint, w * 0.5f, h * 0.46f, w * 0.5f, h * 0.5f, sw) // connector
         }
+        "cowboy" -> { // pot with handle, campfire beneath, steam rising
+            p { moveTo(w * 0.3f, h * 0.32f); lineTo(w * 0.26f, h * 0.62f); cubicTo(w * 0.26f, h * 0.72f, w * 0.54f, h * 0.72f, w * 0.54f, h * 0.62f); lineTo(w * 0.5f, h * 0.32f) }
+            p { moveTo(w * 0.3f, h * 0.32f); cubicTo(w * 0.35f, h * 0.26f, w * 0.45f, h * 0.26f, w * 0.5f, h * 0.32f) }
+            line(tint, w * 0.54f, h * 0.4f, w * 0.74f, h * 0.32f, sw) // handle
+            p { moveTo(w * 0.4f, h * 0.76f); lineTo(w * 0.5f, h * 0.94f); lineTo(w * 0.6f, h * 0.76f); close() } // campfire
+            line(tint, w * 0.38f, h * 0.2f, w * 0.36f, h * 0.14f, sw * 0.7f) // steam left
+            line(tint, w * 0.5f, h * 0.18f, w * 0.5f, h * 0.1f, sw * 0.7f) // steam middle
+            line(tint, w * 0.42f, h * 0.16f, w * 0.43f, h * 0.08f, sw * 0.7f) // steam right
+        }
+        "cupping" -> { // wide bowl with spoon
+            p { moveTo(w * 0.18f, h * 0.34f); lineTo(w * 0.2f, h * 0.7f); cubicTo(w * 0.2f, h * 0.8f, w * 0.8f, h * 0.8f, w * 0.8f, h * 0.7f); lineTo(w * 0.82f, h * 0.34f) }
+            line(tint, w * 0.82f, h * 0.44f, w * 0.96f, h * 0.26f, sw) // spoon handle
+            dot(w * 0.94f, h * 0.22f, w * 0.04f) // spoon bowl
+        }
+        "cloth" -> { // cloth draped over container
+            p { moveTo(w * 0.36f, h * 0.58f); lineTo(w * 0.64f, h * 0.58f); lineTo(w * 0.6f, h * 0.82f); lineTo(w * 0.4f, h * 0.82f); close() } // container
+            p { moveTo(w * 0.3f, h * 0.46f); lineTo(w * 0.7f, h * 0.46f); lineTo(w * 0.66f, h * 0.6f); lineTo(w * 0.34f, h * 0.6f); close() } // cloth top
+            line(tint, w * 0.36f, h * 0.5f, w * 0.64f, h * 0.54f, sw * 0.6f) // weave h1
+            line(tint, w * 0.34f, h * 0.54f, w * 0.66f, h * 0.58f, sw * 0.6f) // weave h2
+            line(tint, w * 0.38f, h * 0.48f, w * 0.42f, h * 0.6f, sw * 0.6f) // weave v1
+            line(tint, w * 0.5f, h * 0.47f, w * 0.5f, h * 0.59f, sw * 0.6f) // weave v2
+            line(tint, w * 0.6f, h * 0.48f, w * 0.58f, h * 0.6f, sw * 0.6f) // weave v3
+        }
+        "sock" -> { // sock-shaped filter bag on wire ring
+            p { moveTo(w * 0.34f, h * 0.28f); cubicTo(w * 0.22f, h * 0.3f, w * 0.2f, h * 0.38f, w * 0.26f, h * 0.4f); cubicTo(w * 0.3f, h * 0.42f, w * 0.28f, h * 0.48f, w * 0.24f, h * 0.56f); cubicTo(w * 0.2f, h * 0.64f, w * 0.22f, h * 0.76f, w * 0.3f, h * 0.82f); cubicTo(w * 0.38f, h * 0.88f, w * 0.48f, h * 0.88f, w * 0.56f, h * 0.84f); cubicTo(w * 0.64f, h * 0.8f, w * 0.7f, h * 0.72f, w * 0.68f, h * 0.6f); cubicTo(w * 0.66f, h * 0.5f, w * 0.6f, h * 0.44f, w * 0.54f, h * 0.38f); cubicTo(w * 0.48f, h * 0.32f, w * 0.38f, h * 0.28f, w * 0.34f, h * 0.28f) } // sock bag
+            line(tint, w * 0.2f, h * 0.24f, w * 0.7f, h * 0.24f, sw) // wire ring top
+            line(tint, w * 0.2f, h * 0.24f, w * 0.26f, h * 0.4f, sw * 0.7f) // left ring connection
+            line(tint, w * 0.7f, h * 0.24f, w * 0.62f, h * 0.4f, sw * 0.7f) // right ring connection
+            dot(w * 0.2f, h * 0.24f, w * 0.025f) // hook left
+        }
+        "decoction" -> { // pot with boiling bubbles and spoon
+            p { moveTo(w * 0.3f, h * 0.3f); lineTo(w * 0.26f, h * 0.66f); cubicTo(w * 0.26f, h * 0.78f, w * 0.56f, h * 0.78f, w * 0.56f, h * 0.66f); lineTo(w * 0.52f, h * 0.3f) }
+            p { moveTo(w * 0.3f, h * 0.3f); cubicTo(w * 0.36f, h * 0.24f, w * 0.46f, h * 0.24f, w * 0.52f, h * 0.3f) }
+            line(tint, w * 0.56f, h * 0.42f, w * 0.8f, h * 0.36f, sw) // spoon handle
+            dot(w * 0.82f, h * 0.34f, w * 0.04f) // spoon bowl
+            dot(w * 0.38f, h * 0.54f, w * 0.03f); dot(w * 0.48f, h * 0.6f, w * 0.035f); dot(w * 0.44f, h * 0.48f, w * 0.025f) // bubbles
+        }
+        "papertowel" -> { // funnel with cross-hatched paper texture
+            p { moveTo(w * 0.24f, h * 0.28f); lineTo(w * 0.76f, h * 0.28f); lineTo(w * 0.56f, h * 0.72f); lineTo(w * 0.44f, h * 0.72f); close() } // funnel
+            line(tint, w * 0.5f, h * 0.72f, w * 0.5f, h * 0.84f, sw) // drip
+            line(tint, w * 0.34f, h * 0.38f, w * 0.66f, h * 0.62f, sw * 0.5f) // hatch1
+            line(tint, w * 0.66f, h * 0.38f, w * 0.34f, h * 0.62f, sw * 0.5f) // hatch2
+            line(tint, w * 0.3f, h * 0.44f, w * 0.7f, h * 0.68f, sw * 0.5f) // hatch3
+            line(tint, w * 0.7f, h * 0.44f, w * 0.3f, h * 0.68f, sw * 0.5f) // hatch4
+        }
+        "egg" -> { // egg cracked into pot
+            p { moveTo(w * 0.32f, h * 0.4f); lineTo(w * 0.28f, h * 0.72f); cubicTo(w * 0.28f, h * 0.84f, w * 0.62f, h * 0.84f, w * 0.62f, h * 0.72f); lineTo(w * 0.58f, h * 0.4f) }
+            line(tint, w * 0.32f, h * 0.4f, w * 0.58f, h * 0.4f, sw) // pot rim
+            p { moveTo(w * 0.4f, h * 0.18f); cubicTo(w * 0.36f, h * 0.28f, w * 0.3f, h * 0.34f, w * 0.38f, h * 0.46f); cubicTo(w * 0.46f, h * 0.34f, w * 0.6f, h * 0.34f, w * 0.56f, h * 0.18f); cubicTo(w * 0.5f, h * 0.1f, w * 0.46f, h * 0.1f, w * 0.4f, h * 0.18f) } // egg white
+            dot(w * 0.47f, h * 0.28f, w * 0.035f) // yolk
+            dot(w * 0.4f, h * 0.58f, w * 0.02f); dot(w * 0.52f, h * 0.64f, w * 0.02f) // grounds
+        }
+        "improvturk" -> { // small saucepan with handle and fine grounds
+            p { moveTo(w * 0.32f, h * 0.34f); lineTo(w * 0.3f, h * 0.66f); cubicTo(w * 0.3f, h * 0.76f, w * 0.56f, h * 0.76f, w * 0.56f, h * 0.66f); lineTo(w * 0.56f, h * 0.34f) }
+            p { moveTo(w * 0.32f, h * 0.34f); cubicTo(w * 0.37f, h * 0.28f, w * 0.49f, h * 0.28f, w * 0.56f, h * 0.34f) }
+            line(tint, w * 0.56f, h * 0.44f, w * 0.8f, h * 0.36f, sw) // long handle
+            dot(w * 0.38f, h * 0.6f, w * 0.018f); dot(w * 0.44f, h * 0.66f, w * 0.018f)
+            dot(w * 0.5f, h * 0.58f, w * 0.018f); dot(w * 0.46f, h * 0.7f, w * 0.018f)
+            dot(w * 0.36f, h * 0.7f, w * 0.018f) // fine grounds
+        }
 
         // ---- Custom gear fallbacks (category-representative) ----
         "cat_POUR_OVER" -> {

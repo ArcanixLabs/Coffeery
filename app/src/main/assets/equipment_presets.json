@@ -1096,6 +1096,365 @@
         }
       ],
       "youtubeUrlTr": "https://www.youtube.com/watch?v=ocEk0RFkmIk"
+    },
+    {
+      "id": "cowboy",
+      "nameKey": "equip_cowboy_name",
+      "tagKey": "equip_cowboy_tag",
+      "category": "OTHER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.0,
+      "tempMode": "RANGE",
+      "tempMin": 93,
+      "tempMax": 98,
+      "grind": "COARSE",
+      "cupMl": 250,
+      "timeLabel": "4-6 min",
+      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_stir",
+          "kind": "STIR",
+          "durationSec": 30,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 240,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_wait",
+          "kind": "WAIT",
+          "durationSec": 120,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 30,
+          "waterTargetPct": -1
+        }
+      ]
+    },
+    {
+      "id": "cupping",
+      "nameKey": "equip_cupping_name",
+      "tagKey": "equip_cupping_tag",
+      "category": "OTHER",
+      "ratioMin": 17.0,
+      "ratioMax": 19.0,
+      "ratioDefault": 18.0,
+      "tempMode": "RANGE",
+      "tempMin": 93,
+      "tempMax": 95,
+      "grind": "COARSE",
+      "cupMl": 200,
+      "timeLabel": "8-10 min",
+      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 15,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 240,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_skim",
+          "kind": "SKIM",
+          "durationSec": 30,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_wait",
+          "kind": "WAIT",
+          "durationSec": 240,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 30,
+          "waterTargetPct": -1
+        }
+      ]
+    },
+    {
+      "id": "cloth",
+      "nameKey": "equip_cloth_name",
+      "tagKey": "equip_cloth_tag",
+      "category": "OTHER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.0,
+      "tempMode": "RANGE",
+      "tempMin": 93,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "7-8 min",
+      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_stir",
+          "kind": "STIR",
+          "durationSec": 30,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 270,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 180,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 30,
+          "waterTargetPct": -1
+        }
+      ]
+    },
+    {
+      "id": "sock",
+      "nameKey": "equip_sock_name",
+      "tagKey": "equip_sock_tag",
+      "category": "OTHER",
+      "ratioMin": 15.0,
+      "ratioMax": 18.0,
+      "ratioDefault": 16.0,
+      "tempMode": "RANGE",
+      "tempMin": 90,
+      "tempMax": 95,
+      "grind": "MED_FINE",
+      "cupMl": 250,
+      "timeLabel": "3-5 min",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_rinse",
+          "kind": "RINSE",
+          "durationSec": 20,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 30,
+          "waterTargetPct": 0.15
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 60,
+          "waterTargetPct": 0.5
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 60,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 20,
+          "waterTargetPct": -1
+        }
+      ]
+    },
+    {
+      "id": "decoction",
+      "nameKey": "equip_decoction_name",
+      "tagKey": "equip_decoction_tag",
+      "category": "OTHER",
+      "ratioMin": 10.0,
+      "ratioMax": 12.0,
+      "ratioDefault": 11.0,
+      "tempMode": "RANGE",
+      "tempMin": 95,
+      "tempMax": 100,
+      "grind": "FINE",
+      "cupMl": 100,
+      "timeLabel": "8-10 min",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_stir",
+          "kind": "STIR",
+          "durationSec": 30,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_heat",
+          "kind": "HEAT",
+          "durationSec": 300,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_wait",
+          "kind": "WAIT",
+          "durationSec": 60,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 60,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 30,
+          "waterTargetPct": -1
+        }
+      ]
+    },
+    {
+      "id": "papertowel",
+      "nameKey": "equip_papertowel_name",
+      "tagKey": "equip_papertowel_tag",
+      "category": "OTHER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.0,
+      "tempMode": "RANGE",
+      "tempMin": 93,
+      "tempMax": 96,
+      "grind": "COARSE",
+      "cupMl": 250,
+      "timeLabel": "8-10 min",
+      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_stir",
+          "kind": "STIR",
+          "durationSec": 30,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 270,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 300,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 20,
+          "waterTargetPct": -1
+        }
+      ]
+    },
+    {
+      "id": "egg",
+      "nameKey": "equip_egg_name",
+      "tagKey": "equip_egg_tag",
+      "category": "OTHER",
+      "ratioMin": 10.0,
+      "ratioMax": 12.0,
+      "ratioDefault": 11.0,
+      "tempMode": "RANGE",
+      "tempMin": 95,
+      "tempMax": 100,
+      "grind": "MED_COARSE",
+      "cupMl": 250,
+      "timeLabel": "8-10 min",
+      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_stir",
+          "kind": "STIR",
+          "durationSec": 60,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_heat",
+          "kind": "HEAT",
+          "durationSec": 300,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 60,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 30,
+          "waterTargetPct": -1
+        }
+      ]
+    },
+    {
+      "id": "improvturk",
+      "nameKey": "equip_improvturk_name",
+      "tagKey": "equip_improvturk_tag",
+      "category": "OTHER",
+      "ratioMin": 10.0,
+      "ratioMax": 12.0,
+      "ratioDefault": 11.0,
+      "tempMode": "SLOW",
+      "tempMin": 0,
+      "tempMax": 0,
+      "grind": "EXTRA_FINE",
+      "cupMl": 70,
+      "timeLabel": "3-5 min",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_stir",
+          "kind": "STIR",
+          "durationSec": 20,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_heat",
+          "kind": "HEAT",
+          "durationSec": 170,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_remove_heat",
+          "kind": "REMOVE_HEAT",
+          "durationSec": 20,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 30,
+          "waterTargetPct": -1
+        }
+      ]
     }
   ]
 }

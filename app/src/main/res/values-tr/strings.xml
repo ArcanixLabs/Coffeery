@@ -478,4 +478,44 @@
     <string name="onboard_next">İleri</string>
     <string name="onboard_skip">Atla</string>
     <string name="onboard_start">Başla</string>
+
+    <!-- ===== v3 öğren kartları l21-l30 ===== -->
+    <string name="learn_l21_title">Gelişmiş Ekstraksiyon Teorisi</string>
+    <string name="learn_l21_body">Ekstraksiyon verimi, TDS (Toplam Çözünmüş Katı) ve demleme oranı arasındaki ilişkiyi anlayın. Aşırı/az ekstraksiyonu teşhis etmek için Kahve Demleme Kontrol Tablosunu kullanmayı öğrenin. Öğütme boyutu, sıcaklık, ajitasyon ve temas süresinin ideal %18-22 ekstraksiyon verimi için nasıl etkileştiğini kapsar.</string>
+    <string name="learn_l22_title">Kupaj ve Tadım Protokolleri</string>
+    <string name="learn_l22_body">Dünya çapında kavurucular ve Q-grader\'lar tarafından kullanılan profesyonel SCA kupaj protokolünü öğrenin. Mekaniği keşfedin: 150ml kaseye 8.25g kahve, 4 dakikada kabuk kırma ve kahve soğudukça sıralı tadım. Damak kalibrasyonu yaparken gövde, asidite, tatlılık ve bitişi tanımlama pratiği yapın.</string>
+    <string name="learn_l23_title">Kahve İşleme Yöntemleri</string>
+    <string name="learn_l23_body">Kahve kirazlarının nasıl yeşil çekirdeğe dönüştüğünü ve işlemenin neden önemli olduğunu keşfedin. Yıkanmış/yaş işlenmiş kahveler berraklık ve asiditeyi vurgular. Doğal/kuru işlenmiş kahveler yoğun gövde ve meyvemsi notalar üretir. Bal/pulped-natural işleme arada kalır; beyaz/sarı/kırmızı/siyah bal artan müsilaç yoğunluğunu gösterir.</string>
+    <string name="learn_l24_title">Saklama ve Tazelik</string>
+    <string name="learn_l24_body">Kahve kavrumdan 5-30 gün sonra zirve lezzetindedir. Tazeliğin düşmanlarını öğrenin: oksijen, nem, ısı ve ışık. Hava geçirmez kaplarda, güneş ışığından uzakta, oda sıcaklığında saklayın. Günlük kullanılan çekirdekleri asla buzdolabına koymayın — yoğuşma onları bozar. Tek yönlü valf torbaları kısa süreli saklama için dostunuzdur.</string>
+    <string name="learn_l25_title">Su Kimyası Derinlemesine</string>
+    <string name="learn_l25_body">Kahvenin %98\'i sudur, ancak çoğu ev demleyicisi bunu görmezden gelir. Genel sertlik (GH), karbonat sertliği (KH) ve SCA\'nın neden 50-175 ppm toplam sertlik ile 40-75 ppm alkalinite önerdiğini öğrenin. Daha parlak, daha tatlı kahve için musluk suyunu dönüştürmek üzere Third Wave Water, ev yapımı mineral konsantreleri veya basit filtrelemeyi keşfedin.</string>
+    <string name="learn_l26_title">Ekipmansız Demleme</string>
+    <string name="learn_l26_body">Harika kahve yapmak için pahalı ekipmana ihtiyacınız yok. Sekiz sıfır-ekipman yönteminde ustalaşın: kovboy kahvesi (çökelt ve dök), kupaj yöntemi (kase + kaşık), tülbent süzme, Latin Amerika çorap kahvesi, dekoksiyon ve süzme, kağıt havlu acil demleme, İsveç yumurta kahvesi ve derme çatma Türk kahvesi — her biri için oranlar, süre ve beklenen tatlar.</string>
+    <string name="learn_l27_title">Espresso Diyalizleme</string>
+    <string name="learn_l27_body">Sistematik çerçeveyi öğrenin: önce dozu kilitle, sonra verim ve süre için öğütmeyi ayarla. 1:2 oranla başlayın (18g giriş, 36g çıkış) ve 25-32 saniye hedefleyin. Ekşi ve hızlı mı? Daha ince öğütün. Acı ve yavaş mı? Daha kalın öğütün. Diyalize edildikten sonra oranı ince ayarlayın — yoğunluk için ristretto (1:1.5), açık kavrumlarda berraklık için lungo (1:3).</string>
+    <string name="learn_l28_title">Latte Sanatı Temelleri</string>
+    <string name="learn_l28_body">Latte sanatı estetikten öte — doğru dokulu sütün işaretidir. Sütü %20-25 hacim artışına kadar esnetmeyi (hafif bir \'ç-ç\' öpücük sesi), sonra mikro köpüğü dahil etmek için girdap yapmayı öğrenin. İki temel döküşte ustalaşın: katı kalp (yakından, fincan ortasına dökerek) ve dalgalı rosetta (geri çekerken sallayarak).</string>
+    <string name="learn_l29_title">Kahve Kökenleri ve Teruar</string>
+    <string name="learn_l29_body">Kahve teruarı ifade eder — yetiştiği yerin tadı. Rakımın (yüksek = yoğun çekirdekler, parlak asidite), toprak bileşiminin (volkanik = karmaşıklık) ve varyete genetiğinin (Bourbon, Gesha, SL-28, Typica) belirgin profiller için nasıl birleştiğini anlayın. Kahve Kuşağı boyunca tadın: çiçeksi Etiyopya Yirgacheffe\'ler, çikolatalı Brezilya Santos, parlak Kenya AA.</string>
+    <string name="learn_l30_title">Gruplar İçin Demleme</string>
+    <string name="learn_l30_body">Tek fincanın ötesine geçmek strateji gerektirir. 60g/L oranını koruyun, batch demleyicilerde düz kahve yatağı dağılımı sağlayın ve 92-96°C tutun. Manuel yöntemler için: bireysel dozları önceden tartın, büyük French press kullanın (1L+) veya büyük bir kapta daldırma demlemeyi ölçeklendirin. Her zaman taze öğütün — asla bir gece önceden öğütmeyin.</string>
+
+    <!-- Ekipmansız / acil durum yöntemleri -->
+    <string name="equip_cowboy_name">Kovboy Kahvesi</string>
+    <string name="equip_cowboy_tag">Kamp ateşi · filtresiz</string>
+    <string name="equip_cupping_name">Kupaj Yöntemi</string>
+    <string name="equip_cupping_tag">Kase + kaşık</string>
+    <string name="equip_cloth_name">Bez Filtre</string>
+    <string name="equip_cloth_tag">Tülbent ile süzme</string>
+    <string name="equip_sock_name">Çorap Kahvesi</string>
+    <string name="equip_sock_tag">Latin Amerika · bez filtre</string>
+    <string name="equip_decoction_name">Dekoksiyon</string>
+    <string name="equip_decoction_tag">Kaynatma + süzme</string>
+    <string name="equip_papertowel_name">Kağıt Havlu</string>
+    <string name="equip_papertowel_tag">Acil durum yöntemi</string>
+    <string name="equip_egg_name">İsveç Yumurta Kahvesi</string>
+    <string name="equip_egg_tag">Yumurtalı · berrak</string>
+    <string name="equip_improvturk_name">Derme Çatma Türk Kahvesi</string>
+    <string name="equip_improvturk_tag">Cezvesiz · küçük tencere</string>
 </resources>

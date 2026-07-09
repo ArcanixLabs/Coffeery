@@ -478,4 +478,44 @@
     <string name="settings_version">Version</string>
     <string name="settings_github">GitHub repository</string>
     <string name="settings_whats_new">What\'s new</string>
+
+    <!-- ===== v3 learn cards l21-l30 ===== -->
+    <string name="learn_l21_title">Advanced Extraction Theory</string>
+    <string name="learn_l21_body">Understand the relationship between extraction yield, TDS (Total Dissolved Solids), and brew ratio. Learn to use the Coffee Brewing Control Chart to diagnose over/under-extraction. Covers how grind size, temperature, agitation, and contact time interact to move your brew toward the ideal 18-22% extraction yield sweet spot.</string>
+    <string name="learn_l22_title">Cupping &amp; Tasting Protocols</string>
+    <string name="learn_l22_body">Master the professional SCA cupping protocol used by roasters and Q-graders worldwide. Learn the mechanics: 8.25g coffee per 150ml bowl, crust break at 4 minutes, and sequential tasting as coffee cools. Practice identifying body, acidity, sweetness, and aftertaste while calibrating your palate.</string>
+    <string name="learn_l23_title">Coffee Processing Methods</string>
+    <string name="learn_l23_body">Discover how coffee cherries become green beans and why processing matters. Washed/wet-processed coffees emphasize clarity and acidity. Natural/dry-processed coffees produce heavier body and fruity notes. Honey/pulped-natural processing sits in between, with white/yellow/red/black honey denoting increasing mucilage intensity.</string>
+    <string name="learn_l24_title">Storage &amp; Freshness</string>
+    <string name="learn_l24_body">Coffee is at peak flavor 5-30 days after roast. Learn the enemies of freshness: oxygen, moisture, heat, and light. Store in airtight containers away from sunlight at room temperature. Never refrigerate daily-use beans — condensation ruins them. One-way valve bags are your friend for short-term storage.</string>
+    <string name="learn_l25_title">Water Chemistry Deep-Dive</string>
+    <string name="learn_l25_body">Coffee is 98% water, yet most home brewers ignore it. Learn about general hardness (GH), carbonate hardness (KH), and why the SCA recommends 50-175 ppm total hardness with 40-75 ppm alkalinity. Discover Third Wave Water, homemade mineral concentrates, or simple filtration to transform tap water for brighter, sweeter coffee.</string>
+    <string name="learn_l26_title">Equipment-Free Brewing</string>
+    <string name="learn_l26_body">You do not need expensive gear to make excellent coffee. Master eight zero-equipment methods: cowboy coffee (settle and pour), cupping method (bowl + spoon), cheesecloth filtration, Latin American sock coffee, decoction-and-strain, paper towel emergency brewing, Swedish egg coffee, and improvised Turkish coffee — each with ratios, timing, and what flavors to expect.</string>
+    <string name="learn_l27_title">Dialing In Espresso</string>
+    <string name="learn_l27_body">Learn the systematic framework: lock dose first, then adjust grind for yield and time. Start at 1:2 ratio (18g in, 36g out) targeting 25-32 seconds. Sour and fast? Grind finer. Bitter and slow? Grind coarser. Once dialed, fine-tune ratio — ristretto (1:1.5) for intensity, lungo (1:3) for clarity in lighter roasts.</string>
+    <string name="learn_l28_title">Latte Art Basics</string>
+    <string name="learn_l28_body">Latte art is more than aesthetics — it signals properly textured milk. Learn to stretch milk to 20-25% volume increase (a gentle \'ch-ch\' kiss sound), then vortex to incorporate microfoam. Master the two fundamental pours: the solid heart (pouring from close, center of cup), and the rippled rosetta (wiggling while pulling back).</string>
+    <string name="learn_l29_title">Coffee Origins &amp; Terroir</string>
+    <string name="learn_l29_body">Coffee expresses terroir — the taste of its place. Understand how altitude (higher = denser beans, brighter acidity), soil composition (volcanic = complexity), and varietal genetics (Bourbon, Gesha, SL-28, Typica) combine for distinct profiles. Taste across the Bean Belt: floral Ethiopian Yirgacheffes, chocolatey Brazilian Santos, bright Kenyan AA.</string>
+    <string name="learn_l30_title">Brewing for Groups</string>
+    <string name="learn_l30_body">Scaling coffee beyond single cups requires strategy. Maintain 60g/L ratio, ensure flat coffee bed distribution in batch brewers, and hold 92-96°C. For manual methods: pre-weight individual doses, use large French presses (1L+), or scale up immersion brewing in a large vessel. Always grind fresh in batches — never pre-grind the night before.</string>
+
+    <!-- No-gear / emergency methods -->
+    <string name="equip_cowboy_name">Cowboy Coffee</string>
+    <string name="equip_cowboy_tag">Campfire · no filter</string>
+    <string name="equip_cupping_name">Cupping Method</string>
+    <string name="equip_cupping_tag">Bowl + spoon</string>
+    <string name="equip_cloth_name">Cloth Filtration</string>
+    <string name="equip_cloth_tag">Cheesecloth strain</string>
+    <string name="equip_sock_name">Sock Coffee</string>
+    <string name="equip_sock_tag">Café de Media · cloth filter</string>
+    <string name="equip_decoction_name">Decoction</string>
+    <string name="equip_decoction_tag">Boil + strain</string>
+    <string name="equip_papertowel_name">Paper Towel</string>
+    <string name="equip_papertowel_tag">Emergency method</string>
+    <string name="equip_egg_name">Swedish Egg Coffee</string>
+    <string name="equip_egg_tag">Egg · crystal clear</string>
+    <string name="equip_improvturk_name">Improvised Turkish</string>
+    <string name="equip_improvturk_tag">No cezve · small pot</string>
 </resources>
