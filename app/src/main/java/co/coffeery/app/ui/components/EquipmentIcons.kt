@@ -31,7 +31,23 @@ fun EquipmentIcon(
     tint: Color,
     modifier: Modifier = Modifier.size(24.dp),
 ) {
-    val key = if (equipment.isCustom) "cat_${equipment.category.name}" else equipment.id
+    val key = if (equipment.isCustom) {
+        val iconMatch = Regex("custom_(icon_\\w+)_").find(equipment.id)
+        iconMatch?.groupValues?.get(1) ?: "cat_${equipment.category.name}"
+    } else equipment.id
+    Canvas(modifier = modifier) {
+        val sw = size.minDimension * 0.075f
+        val stroke = Stroke(width = sw, cap = StrokeCap.Round, join = StrokeJoin.Round)
+        drawEquipment(key, tint, stroke)
+    }
+}
+
+@Composable
+fun GenericEquipmentIcon(
+    key: String,
+    tint: Color,
+    modifier: Modifier = Modifier.size(24.dp),
+) {
     Canvas(modifier = modifier) {
         val sw = size.minDimension * 0.075f
         val stroke = Stroke(width = sw, cap = StrokeCap.Round, join = StrokeJoin.Round)
@@ -296,6 +312,140 @@ private fun DrawScope.drawEquipment(key: String, tint: Color, stroke: Stroke) {
             dot(w * 0.4f, h * 0.68f, w * 0.02f); dot(w * 0.55f, h * 0.72f, w * 0.02f)
             dot(w * 0.5f, h * 0.64f, w * 0.02f); dot(w * 0.6f, h * 0.66f, w * 0.02f)
             dot(w * 0.44f, h * 0.74f, w * 0.02f)
+        }
+
+        // ---- Generic equipment icons (for custom gear icon picker) ----
+        "icon_mug" -> {
+            p { moveTo(w * 0.28f, h * 0.24f); lineTo(w * 0.28f, h * 0.76f); lineTo(w * 0.6f, h * 0.76f); lineTo(w * 0.6f, h * 0.24f) }
+            p { moveTo(w * 0.6f, h * 0.36f); cubicTo(w * 0.76f, h * 0.38f, w * 0.76f, h * 0.66f, w * 0.6f, h * 0.64f) }
+        }
+        "icon_cup" -> {
+            p { moveTo(w * 0.35f, h * 0.28f); cubicTo(w * 0.37f, h * 0.6f, w * 0.63f, h * 0.6f, w * 0.65f, h * 0.28f) }
+            line(tint, w * 0.68f, h * 0.42f, w * 0.76f, h * 0.36f, sw * 0.8f)
+            p { moveTo(w * 0.18f, h * 0.62f); cubicTo(w * 0.3f, h * 0.7f, w * 0.7f, h * 0.7f, w * 0.82f, h * 0.62f); cubicTo(w * 0.7f, h * 0.68f, w * 0.3f, h * 0.68f, w * 0.18f, h * 0.62f) }
+        }
+        "icon_droplet" -> {
+            p { moveTo(w * 0.5f, h * 0.16f); cubicTo(w * 0.26f, h * 0.42f, w * 0.26f, h * 0.64f, w * 0.5f, h * 0.86f); cubicTo(w * 0.74f, h * 0.64f, w * 0.74f, h * 0.42f, w * 0.5f, h * 0.16f); close() }
+        }
+        "icon_bean" -> {
+            p { moveTo(w * 0.3f, h * 0.5f); cubicTo(w * 0.3f, h * 0.24f, w * 0.7f, h * 0.24f, w * 0.7f, h * 0.5f); cubicTo(w * 0.7f, h * 0.76f, w * 0.3f, h * 0.76f, w * 0.3f, h * 0.5f) }
+            line(tint, w * 0.38f, h * 0.5f, w * 0.62f, h * 0.5f, sw * 0.7f)
+            p { moveTo(w * 0.38f, h * 0.5f); cubicTo(w * 0.48f, h * 0.64f, w * 0.62f, h * 0.36f, w * 0.62f, h * 0.5f) }
+        }
+        "icon_flame" -> {
+            p { moveTo(w * 0.5f, h * 0.08f); cubicTo(w * 0.32f, h * 0.36f, w * 0.24f, h * 0.58f, w * 0.38f, h * 0.8f); cubicTo(w * 0.28f, h * 0.66f, w * 0.38f, h * 0.46f, w * 0.5f, h * 0.3f); cubicTo(w * 0.62f, h * 0.46f, w * 0.72f, h * 0.66f, w * 0.62f, h * 0.8f); cubicTo(w * 0.76f, h * 0.58f, w * 0.68f, h * 0.36f, w * 0.5f, h * 0.08f); close() }
+        }
+        "icon_clock" -> {
+            dot(w * 0.5f, h * 0.5f, w * 0.32f)
+            dot(w * 0.5f, h * 0.5f, w * 0.03f)
+            line(tint, w * 0.5f, h * 0.5f, w * 0.5f, h * 0.28f, sw)
+            line(tint, w * 0.5f, h * 0.5f, w * 0.68f, h * 0.44f, sw * 0.7f)
+        }
+        "icon_scale" -> {
+            line(tint, w * 0.2f, h * 0.54f, w * 0.8f, h * 0.54f, sw)
+            p { moveTo(w * 0.44f, h * 0.54f); lineTo(w * 0.4f, h * 0.76f); lineTo(w * 0.6f, h * 0.76f); lineTo(w * 0.56f, h * 0.54f) }
+            line(tint, w * 0.5f, h * 0.54f, w * 0.5f, h * 0.38f, sw)
+            dot(w * 0.5f, h * 0.31f, w * 0.11f)
+            line(tint, w * 0.5f, h * 0.24f, w * 0.6f, h * 0.38f, sw * 0.5f)
+        }
+        "icon_thermometer" -> {
+            dot(w * 0.5f, h * 0.8f, w * 0.06f)
+            p { moveTo(w * 0.46f, h * 0.78f); lineTo(w * 0.46f, h * 0.22f); lineTo(w * 0.54f, h * 0.22f); lineTo(w * 0.54f, h * 0.78f) }
+            line(tint, w * 0.42f, h * 0.5f, w * 0.58f, h * 0.5f, sw * 0.5f)
+            dot(w * 0.5f, h * 0.46f, w * 0.026f)
+        }
+        "icon_grinder" -> {
+            p { moveTo(w * 0.3f, h * 0.2f); lineTo(w * 0.36f, h * 0.4f); lineTo(w * 0.64f, h * 0.4f); lineTo(w * 0.7f, h * 0.2f); close() }
+            p { moveTo(w * 0.36f, h * 0.4f); lineTo(w * 0.36f, h * 0.68f); lineTo(w * 0.64f, h * 0.68f); lineTo(w * 0.64f, h * 0.4f) }
+            line(tint, w * 0.64f, h * 0.5f, w * 0.84f, h * 0.42f, sw)
+            dot(w * 0.84f, h * 0.42f, w * 0.03f)
+            line(tint, w * 0.4f, h * 0.68f, w * 0.6f, h * 0.78f, sw * 0.7f)
+        }
+        "icon_steam" -> {
+            p { moveTo(w * 0.3f, h * 0.26f); cubicTo(w * 0.28f, h * 0.6f, w * 0.28f, h * 0.78f, w * 0.5f, h * 0.78f); cubicTo(w * 0.72f, h * 0.78f, w * 0.72f, h * 0.6f, w * 0.7f, h * 0.26f) }
+            line(tint, w * 0.72f, h * 0.3f, w * 0.82f, h * 0.24f, sw)
+            p { moveTo(w * 0.28f, h * 0.42f); cubicTo(w * 0.18f, h * 0.4f, w * 0.2f, h * 0.54f, w * 0.28f, h * 0.52f) }
+        }
+        "icon_glass" -> {
+            p { moveTo(w * 0.32f, h * 0.14f); lineTo(w * 0.3f, h * 0.56f); cubicTo(w * 0.3f, h * 0.78f, w * 0.7f, h * 0.78f, w * 0.7f, h * 0.56f); lineTo(w * 0.68f, h * 0.14f) }
+            p { moveTo(w * 0.38f, h * 0.34f); lineTo(w * 0.52f, h * 0.34f); lineTo(w * 0.52f, h * 0.46f); lineTo(w * 0.38f, h * 0.46f); close() }
+            p { moveTo(w * 0.48f, h * 0.5f); lineTo(w * 0.62f, h * 0.5f); lineTo(w * 0.62f, h * 0.64f); lineTo(w * 0.48f, h * 0.64f); close() }
+        }
+        "icon_pot" -> {
+            p { moveTo(w * 0.32f, h * 0.32f); lineTo(w * 0.28f, h * 0.64f); cubicTo(w * 0.28f, h * 0.76f, w * 0.6f, h * 0.76f, w * 0.6f, h * 0.64f); lineTo(w * 0.56f, h * 0.32f) }
+            p { moveTo(w * 0.32f, h * 0.32f); cubicTo(w * 0.37f, h * 0.26f, w * 0.51f, h * 0.26f, w * 0.56f, h * 0.32f) }
+            line(tint, w * 0.34f, h * 0.32f, w * 0.54f, h * 0.32f, sw)
+            dot(w * 0.44f, h * 0.24f, w * 0.04f)
+            p { moveTo(w * 0.58f, h * 0.44f); cubicTo(w * 0.74f, h * 0.42f, w * 0.72f, h * 0.6f, w * 0.6f, h * 0.58f) }
+        }
+        "icon_bowl" -> {
+            p { moveTo(w * 0.16f, h * 0.26f); lineTo(w * 0.2f, h * 0.7f); cubicTo(w * 0.2f, h * 0.84f, w * 0.8f, h * 0.84f, w * 0.8f, h * 0.7f); lineTo(w * 0.84f, h * 0.26f) }
+            line(tint, w * 0.24f, h * 0.3f, w * 0.76f, h * 0.3f, sw * 0.8f)
+        }
+        "icon_spoon" -> {
+            p { moveTo(w * 0.78f, h * 0.3f); cubicTo(w * 0.74f, h * 0.22f, w * 0.64f, h * 0.2f, w * 0.58f, h * 0.26f); cubicTo(w * 0.52f, h * 0.34f, w * 0.48f, h * 0.42f, w * 0.44f, h * 0.5f); lineTo(w * 0.24f, h * 0.8f) }
+        }
+        "icon_funnel" -> {
+            p { moveTo(w * 0.18f, h * 0.2f); lineTo(w * 0.82f, h * 0.2f); lineTo(w * 0.54f, h * 0.7f); lineTo(w * 0.46f, h * 0.7f); close() }
+            line(tint, w * 0.5f, h * 0.7f, w * 0.5f, h * 0.84f, sw)
+        }
+        "icon_jug" -> {
+            p { moveTo(w * 0.3f, h * 0.26f); lineTo(w * 0.28f, h * 0.68f); cubicTo(w * 0.28f, h * 0.82f, w * 0.64f, h * 0.82f, w * 0.66f, h * 0.68f); lineTo(w * 0.7f, h * 0.26f) }
+            p { moveTo(w * 0.3f, h * 0.26f); cubicTo(w * 0.36f, h * 0.18f, w * 0.56f, h * 0.18f, w * 0.7f, h * 0.26f) }
+            line(tint, w * 0.7f, h * 0.22f, w * 0.9f, h * 0.16f, sw)
+            p { moveTo(w * 0.9f, h * 0.16f); lineTo(w * 0.88f, h * 0.1f); lineTo(w * 0.82f, h * 0.16f) }
+        }
+        "icon_carafe" -> {
+            p { moveTo(w * 0.32f, h * 0.18f); lineTo(w * 0.3f, h * 0.54f); cubicTo(w * 0.3f, h * 0.72f, w * 0.7f, h * 0.72f, w * 0.7f, h * 0.54f); lineTo(w * 0.68f, h * 0.18f) }
+            p { moveTo(w * 0.7f, h * 0.52f); cubicTo(w * 0.82f, h * 0.54f, w * 0.82f, h * 0.66f, w * 0.7f, h * 0.68f) }
+        }
+        "icon_filter" -> {
+            p { moveTo(w * 0.24f, h * 0.22f); lineTo(w * 0.76f, h * 0.22f); lineTo(w * 0.56f, h * 0.66f); lineTo(w * 0.44f, h * 0.66f); close() }
+            line(tint, w * 0.38f, h * 0.28f, w * 0.46f, h * 0.66f, sw * 0.5f)
+            line(tint, w * 0.5f, h * 0.24f, w * 0.5f, h * 0.66f, sw * 0.5f)
+            line(tint, w * 0.62f, h * 0.28f, w * 0.54f, h * 0.66f, sw * 0.5f)
+        }
+        "icon_star" -> {
+            p { moveTo(w * 0.5f, h * 0.06f); lineTo(w * 0.6f, h * 0.34f); lineTo(w * 0.92f, h * 0.36f); lineTo(w * 0.66f, h * 0.54f); lineTo(w * 0.76f, h * 0.84f); lineTo(w * 0.5f, h * 0.68f); lineTo(w * 0.24f, h * 0.84f); lineTo(w * 0.34f, h * 0.54f); lineTo(w * 0.08f, h * 0.36f); lineTo(w * 0.4f, h * 0.34f); close() }
+        }
+        "icon_heart" -> {
+            p { moveTo(w * 0.5f, h * 0.86f); cubicTo(w * 0.2f, h * 0.62f, w * 0.1f, h * 0.36f, w * 0.28f, h * 0.24f); cubicTo(w * 0.44f, h * 0.14f, w * 0.5f, h * 0.38f, w * 0.5f, h * 0.38f); cubicTo(w * 0.5f, h * 0.38f, w * 0.56f, h * 0.14f, w * 0.72f, h * 0.24f); cubicTo(w * 0.9f, h * 0.36f, w * 0.8f, h * 0.62f, w * 0.5f, h * 0.86f); close() }
+        }
+        "icon_leaf" -> {
+            p { moveTo(w * 0.5f, h * 0.9f); cubicTo(w * 0.34f, h * 0.64f, w * 0.2f, h * 0.34f, w * 0.44f, h * 0.12f); cubicTo(w * 0.5f, h * 0.24f, w * 0.5f, h * 0.44f, w * 0.5f, h * 0.9f); close() }
+            p { moveTo(w * 0.5f, h * 0.9f); cubicTo(w * 0.66f, h * 0.64f, w * 0.8f, h * 0.34f, w * 0.56f, h * 0.12f); cubicTo(w * 0.5f, h * 0.24f, w * 0.5f, h * 0.44f, w * 0.5f, h * 0.9f); close() }
+            line(tint, w * 0.5f, h * 0.14f, w * 0.5f, h * 0.88f, sw * 0.5f)
+        }
+        "icon_waves" -> {
+            p { moveTo(w * 0.14f, h * 0.3f); cubicTo(w * 0.26f, h * 0.2f, w * 0.38f, h * 0.4f, w * 0.5f, h * 0.3f); cubicTo(w * 0.62f, h * 0.2f, w * 0.74f, h * 0.4f, w * 0.86f, h * 0.3f) }
+            p { moveTo(w * 0.14f, h * 0.48f); cubicTo(w * 0.26f, h * 0.38f, w * 0.38f, h * 0.58f, w * 0.5f, h * 0.48f); cubicTo(w * 0.62f, h * 0.38f, w * 0.74f, h * 0.58f, w * 0.86f, h * 0.48f) }
+            p { moveTo(w * 0.14f, h * 0.66f); cubicTo(w * 0.26f, h * 0.56f, w * 0.38f, h * 0.76f, w * 0.5f, h * 0.66f); cubicTo(w * 0.62f, h * 0.56f, w * 0.74f, h * 0.76f, w * 0.86f, h * 0.66f) }
+        }
+        "icon_gear" -> {
+            dot(w * 0.5f, h * 0.5f, w * 0.08f)
+            dot(w * 0.5f, h * 0.5f, w * 0.3f)
+            line(tint, w * 0.5f, h * 0.2f, w * 0.5f, h * 0.38f, sw)
+            line(tint, w * 0.5f, h * 0.62f, w * 0.5f, h * 0.8f, sw)
+            line(tint, w * 0.2f, h * 0.5f, w * 0.38f, h * 0.5f, sw)
+            line(tint, w * 0.62f, h * 0.5f, w * 0.8f, h * 0.5f, sw)
+            line(tint, w * 0.3f, h * 0.28f, w * 0.4f, h * 0.4f, sw)
+            line(tint, w * 0.7f, h * 0.28f, w * 0.6f, h * 0.4f, sw)
+            line(tint, w * 0.3f, h * 0.72f, w * 0.4f, h * 0.6f, sw)
+            line(tint, w * 0.7f, h * 0.72f, w * 0.6f, h * 0.6f, sw)
+        }
+        "icon_sun" -> {
+            dot(w * 0.5f, h * 0.5f, w * 0.16f)
+            line(tint, w * 0.5f, h * 0.14f, w * 0.5f, h * 0.28f, sw)
+            line(tint, w * 0.5f, h * 0.72f, w * 0.5f, h * 0.86f, sw)
+            line(tint, w * 0.14f, h * 0.5f, w * 0.28f, h * 0.5f, sw)
+            line(tint, w * 0.72f, h * 0.5f, w * 0.86f, h * 0.5f, sw)
+            line(tint, w * 0.25f, h * 0.25f, w * 0.33f, h * 0.33f, sw)
+            line(tint, w * 0.67f, h * 0.67f, w * 0.75f, h * 0.75f, sw)
+            line(tint, w * 0.75f, h * 0.25f, w * 0.67f, h * 0.33f, sw)
+            line(tint, w * 0.33f, h * 0.67f, w * 0.25f, h * 0.75f, sw)
+        }
+        "icon_mountain" -> {
+            p { moveTo(w * 0.04f, h * 0.82f); lineTo(w * 0.36f, h * 0.22f); lineTo(w * 0.5f, h * 0.44f); lineTo(w * 0.7f, h * 0.16f); lineTo(w * 0.96f, h * 0.82f); close() }
         }
 
         // ---- Custom gear category icons (proper equipment, not stubs) ----

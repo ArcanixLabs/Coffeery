@@ -1,5 +1,6 @@
 package co.coffeery.app.ui.screens.log
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -27,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import co.coffeery.app.R
@@ -223,6 +225,7 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
 private fun StreakBanner(streak: Int) {
     if (streak < 1) return
     val colors = CoffeeTheme.colors
+    val context = LocalContext.current
     val label = if (streak == 1) stringResource(R.string.log_streak_label) else stringResource(R.string.log_streak_label_plural)
     CoffeeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
         Row(
@@ -236,7 +239,26 @@ private fun StreakBanner(streak: Int) {
             AppText("\uD83D\uDD25", style = CoffeeTheme.type.display)
         }
         Spacer(Modifier.height(4.dp))
-        AppText(stringResource(R.string.log_streak_keep), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            AppText(stringResource(R.string.log_streak_keep), style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.weight(1f))
+            if (streak >= 7) {
+                SecondaryButton(
+                    text = stringResource(R.string.log_share_streak),
+                    modifier = Modifier,
+                ) {
+                    val shareText = stringResource(R.string.log_share_streak_text, streak)
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, shareText)
+                    }
+                    context.startActivity(Intent.createChooser(intent, null))
+                }
+            }
+        }
     }
 }
 

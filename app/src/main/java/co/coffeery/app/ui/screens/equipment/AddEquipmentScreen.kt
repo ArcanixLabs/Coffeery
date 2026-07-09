@@ -1,7 +1,10 @@
 package co.coffeery.app.ui.screens.equipment
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +21,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import co.coffeery.app.R
@@ -26,6 +31,7 @@ import co.coffeery.app.data.repo.CoffeeRepository
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.CoffeeCard
+import co.coffeery.app.ui.components.GenericEquipmentIcon
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
 import co.coffeery.app.ui.components.ScreenHeader
@@ -40,6 +46,7 @@ fun AddEquipmentScreen(vm: AppViewModel) {
     val colors = CoffeeTheme.colors
     var name by remember { mutableStateOf("") }
     var category by remember { mutableStateOf(BrewCategory.POUR_OVER) }
+    var selectedIcon by remember { mutableStateOf("icon_mug") }
     val defaults = CoffeeRepository.defaultsFor(category)
 
     Column(
@@ -75,6 +82,29 @@ fun AddEquipmentScreen(vm: AppViewModel) {
             }
         }
 
+        AppText(stringResource(R.string.equip_choose_icon), style = CoffeeTheme.type.headline)
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            iconKeys.chunked(5).forEach { row ->
+                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    row.forEach { key ->
+                        val isSelected = key == selectedIcon
+                        val cellBg = if (isSelected) colors.accent else Color.Transparent
+                        val cellTint = if (isSelected) colors.onAccent else colors.textSecondary
+                        Box(
+                            modifier = Modifier
+                                .size(48.dp)
+                                .clip(CoffeeShapes.small)
+                                .background(cellBg)
+                                .clickable { selectedIcon = key },
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            GenericEquipmentIcon(key, cellTint, Modifier.size(26.dp))
+                        }
+                    }
+                }
+            }
+        }
+
         CoffeeCard(modifier = Modifier.fillMaxWidth()) {
             AppText(stringResource(R.string.add_equip_suggested), style = CoffeeTheme.type.caption, color = colors.textSecondary)
             Spacer(Modifier.height(8.dp))
@@ -93,7 +123,7 @@ fun AddEquipmentScreen(vm: AppViewModel) {
             text = stringResource(R.string.action_add),
             modifier = Modifier.fillMaxWidth(),
             enabled = name.isNotBlank(),
-        ) { vm.addCustomEquipment(name, category) }
+        ) { vm.addCustomEquipment(name, category, selectedIcon) }
     }
 }
 
@@ -106,3 +136,11 @@ private fun Suggestion(label: String, value: String, modifier: Modifier = Modifi
         AppText(value, style = CoffeeTheme.type.bodyStrong, color = colors.textPrimary, maxLines = 1)
     }
 }
+
+private val iconKeys = listOf(
+    "icon_mug", "icon_cup", "icon_droplet", "icon_bean", "icon_flame",
+    "icon_clock", "icon_scale", "icon_thermometer", "icon_grinder", "icon_steam",
+    "icon_glass", "icon_pot", "icon_bowl", "icon_spoon", "icon_funnel",
+    "icon_jug", "icon_carafe", "icon_filter", "icon_star", "icon_heart",
+    "icon_leaf", "icon_waves", "icon_gear", "icon_sun", "icon_mountain",
+)

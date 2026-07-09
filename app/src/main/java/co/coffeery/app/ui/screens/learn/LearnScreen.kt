@@ -41,6 +41,7 @@ import co.coffeery.app.R
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.Chip
 import co.coffeery.app.ui.components.CoffeeCard
+import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.ScreenHeader
 import co.coffeery.app.ui.screens.root.AppViewModel
 import co.coffeery.app.ui.screens.root.Route
@@ -53,8 +54,17 @@ fun LearnScreen(vm: AppViewModel) {
     val scope = rememberCoroutineScope()
     val density = LocalDensity.current
     var activeChapterRes by remember { mutableStateOf(LearnContent.chapterOrder[0]) }
+    var searchQuery by remember { mutableStateOf("") }
     val state by vm.state.collectAsState()
     val completedChapters = state.completedChapters
+
+    val cardTexts = remember { LearnContent.cards.map { card -> card to (stringResource(card.titleRes) + " " + stringResource(card.bodyRes)) } }
+    val filteredCards = if (searchQuery.isBlank()) {
+        LearnContent.cards
+    } else {
+        cardTexts.filter { (_, text) -> text.contains(searchQuery, true) }.map { it.first }
+    }
+    val searchActive = searchQuery.isNotBlank()
 
     LaunchedEffect(Unit) {
         scrollState.scrollTo(state.learnScrollOffset)
@@ -76,6 +86,28 @@ fun LearnScreen(vm: AppViewModel) {
             subtitle = stringResource(R.string.learn_intro),
         )
 
+        Box(modifier = Modifier.fillMaxWidth()) {
+            AppTextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                hint = stringResource(R.string.search_hint_learn),
+                modifier = Modifier.fillMaxWidth(),
+            )
+            if (searchQuery.isNotEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .padding(end = 12.dp)
+                        .clickable(
+                            indication = null,
+                            interactionSource = remember { MutableInteractionSource() },
+                        ) { searchQuery = "" },
+                ) {
+                    AppText("✕", style = CoffeeTheme.type.headline, color = colors.textSecondary)
+                }
+            }
+        }
+
         StepMap(
             activeChapterRes = activeChapterRes,
             completedChapters = completedChapters,
@@ -96,10 +128,20 @@ fun LearnScreen(vm: AppViewModel) {
 
         WaterMineralCard()
 
+        if (searchActive && filteredCards.isEmpty()) {
+            AppText(
+                stringResource(R.string.search_no_results),
+                style = CoffeeTheme.type.body,
+                color = colors.textSecondary,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+            )
+        }
+
         // Render a chapter header whenever the chapter changes, keeping the
         // card's global index stable for detail navigation.
         var lastChapter = 0
-        LearnContent.cards.forEachIndexed { index, card ->
+        filteredCards.forEachIndexed { index, card ->
             if (card.chapterRes != lastChapter) {
                 lastChapter = card.chapterRes
                 Spacer(Modifier.height(2.dp))

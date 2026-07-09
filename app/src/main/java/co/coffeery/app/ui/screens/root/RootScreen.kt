@@ -2,22 +2,34 @@ package co.coffeery.app.ui.screens.root
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import co.coffeery.app.R
+import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.BottomNav
 import co.coffeery.app.ui.screens.brew.BrewTimerScreen
 import co.coffeery.app.ui.screens.brew.CalculatorScreen
@@ -31,6 +43,8 @@ import co.coffeery.app.ui.screens.log.BrewLogScreen
 import co.coffeery.app.ui.screens.onboarding.OnboardingScreen
 import co.coffeery.app.ui.screens.recipes.RecipesScreen
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.CoffeeShapes
+import kotlinx.coroutines.delay
 
 private val routeTransition =
     slideInHorizontally { it / 4 } + fadeIn() togetherWith
@@ -45,6 +59,11 @@ fun RootScreen(vm: AppViewModel) {
         OnboardingScreen(vm)
     } else {
         val colors = CoffeeTheme.colors
+        var showTip by remember { mutableStateOf(true) }
+        LaunchedEffect(Unit) {
+            delay(3000)
+            showTip = false
+        }
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -78,6 +97,26 @@ fun RootScreen(vm: AppViewModel) {
                         labelFor = { stringResource(it.labelRes) },
                         glyphFor = { it.glyph },
                         onSelect = { vm.selectTab(it) },
+                    )
+                }
+            }
+            AnimatedVisibility(
+                visible = showTip,
+                enter = fadeIn() + slideInHorizontally { it / 2 },
+                exit = fadeOut(),
+                modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 80.dp),
+            ) {
+                Box(
+                    modifier = Modifier
+                        .clip(CoffeeShapes.pill)
+                        .background(colors.surfaceElevated)
+                        .padding(horizontal = 24.dp, vertical = 12.dp),
+                ) {
+                    AppText(
+                        stringResource(R.string.tap_brew_to_start),
+                        style = CoffeeTheme.type.headline,
+                        color = colors.accent,
+                        align = TextAlign.Center,
                     )
                 }
             }

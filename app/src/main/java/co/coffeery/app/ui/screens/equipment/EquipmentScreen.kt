@@ -24,6 +24,7 @@ import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.EquipmentIcon
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
+import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.ScreenHeader
 import co.coffeery.app.ui.components.displayName
 import co.coffeery.app.ui.components.displayTag
@@ -38,16 +39,32 @@ import android.net.Uri
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
     val ctx = LocalContext.current
+    var searchQuery by remember { mutableStateOf("") }
     val builtIns = state.equipment.filter { !it.isCustom }
     val custom = state.equipment.filter { it.isCustom }
+
+    val filteredEquipment = if (searchQuery.isBlank()) {
+        state.equipment
+    } else {
+        state.equipment.filter { eq ->
+            eq.customName?.contains(searchQuery, true) == true || eq.id.contains(searchQuery, true)
+        }
+    }
+    val filteredBuiltIns = filteredEquipment.filter { !it.isCustom }
+    val filteredCustom = filteredEquipment.filter { it.isCustom }
+    val searchActive = searchQuery.isNotBlank()
 
     Column(
         modifier = Modifier
@@ -59,8 +76,30 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
     ) {
         ScreenHeader(title = stringResource(R.string.equipment_title))
 
+        Box(modifier = Modifier.fillMaxWidth()) {
+            AppTextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                hint = stringResource(R.string.search_hint_equipment),
+                modifier = Modifier.fillMaxWidth(),
+            )
+            if (searchQuery.isNotEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .padding(end = 12.dp)
+                        .clickable(
+                            indication = null,
+                            interactionSource = remember { MutableInteractionSource() },
+                        ) { searchQuery = "" },
+                ) {
+                    AppText("✕", style = CoffeeTheme.type.headline, color = colors.textSecondary)
+                }
+            }
+        }
+
         val popularIds = listOf("v60", "chemex", "frenchpress", "aeropress", "espresso", "moka", "coldbrew", "turkish")
-        val quickItems = state.equipment.filter { it.id in popularIds }.sortedBy { popularIds.indexOf(it.id) }
+        val quickItems = filteredEquipment.filter { it.id in popularIds }.sortedBy { popularIds.indexOf(it.id) }
         if (quickItems.isNotEmpty()) {
             AppText(stringResource(R.string.equipment_quick_methods), style = CoffeeTheme.type.headline, color = colors.textSecondary)
             Row(
@@ -102,20 +141,30 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
         ) { vm.openRoute(Route.AddEquipment) }
 
         AppText(stringResource(R.string.equipment_builtin), style = CoffeeTheme.type.headline, color = colors.textSecondary)
-        builtIns.chunked(2).forEach { pair ->
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-                pair.forEach { eq ->
-                    GearTile(eq, selected = eq.id == state.selectedEquipmentId, modifier = Modifier.weight(1f)) {
-                        vm.selectEquipment(eq.id)
+        if (filteredBuiltIns.isEmpty() && searchActive) {
+            AppText(
+                stringResource(R.string.search_no_results),
+                style = CoffeeTheme.type.body,
+                color = colors.textSecondary,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+            )
+        } else {
+            filteredBuiltIns.chunked(2).forEach { pair ->
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+                    pair.forEach { eq ->
+                        GearTile(eq, selected = eq.id == state.selectedEquipmentId, modifier = Modifier.weight(1f)) {
+                            vm.selectEquipment(eq.id)
+                        }
                     }
+                    if (pair.size == 1) Spacer(Modifier.weight(1f))
                 }
-                if (pair.size == 1) Spacer(Modifier.weight(1f))
             }
         }
 
-        if (custom.isNotEmpty()) {
+        if (filteredCustom.isNotEmpty()) {
             AppText(stringResource(R.string.equipment_your), style = CoffeeTheme.type.headline, color = colors.textSecondary)
-            custom.forEach { eq ->
+            filteredCustom.forEach { eq ->
                 CustomGearRow(
                     eq = eq,
                     selected = eq.id == state.selectedEquipmentId,

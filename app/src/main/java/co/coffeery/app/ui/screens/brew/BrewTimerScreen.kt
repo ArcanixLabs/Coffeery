@@ -392,10 +392,10 @@ private fun BrewComplete(
 
     val infiniteTransition = rememberInfiniteTransition()
     val pulse by infiniteTransition.animateFloat(
-        initialValue = 1f,
-        targetValue = 1.06f,
+        initialValue = 0.88f,
+        targetValue = 1.12f,
         animationSpec = infiniteRepeatable(
-            animation = tween(800, easing = EaseInOutCubic),
+            animation = tween(700, easing = EaseInOutCubic),
             repeatMode = RepeatMode.Reverse,
         ),
         label = "pulse",

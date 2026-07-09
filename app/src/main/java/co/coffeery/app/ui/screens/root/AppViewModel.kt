@@ -248,9 +248,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     // --- Custom equipment ---
-    fun addCustomEquipment(name: String, category: BrewCategory) {
+    fun addCustomEquipment(name: String, category: BrewCategory, iconKey: String = "icon_mug") {
         val defaults = CoffeeRepository.defaultsFor(category)
-        val id = "custom_" + UUID.randomUUID().toString().take(8)
+        val id = "custom_${iconKey}_" + UUID.randomUUID().toString().take(8)
         viewModelScope.launch {
             repo.addCustomEquipment(
                 CustomEquipmentEntity(

@@ -183,6 +183,7 @@
     <string name="add_equip_pick_category">Hangi aileye ait?</string>
     <string name="add_equip_suggested">Önerilen başlangıç noktası</string>
     <string name="add_equip_saved">Özel ekipman eklendi</string>
+    <string name="equip_choose_icon">Simge seç</string>
 
     <!-- Öğren -->
     <string name="learn_title">Öğren</string>
@@ -394,6 +395,8 @@
     <string name="log_streak_label_plural">günlük seri</string>
     <string name="log_streak_keep">Devam et!</string>
     <string name="log_streak_start">Seri başlatmak için bugün demle!</string>
+    <string name="log_share_streak">Serini paylaş</string>
+    <string name="log_share_streak_text">Coffeery ile %d gündür kahve demliyorum! ☕</string>
 
     <!-- Brew log analytics -->
     <string name="log_analytics_week">Bu Hafta</string>
@@ -467,6 +470,16 @@
     <string name="settings_whats_new">Yenilikler</string>
 
     <!-- Onboarding -->
+    <string name="onboarding_welcome">Coffeery\'ye Hoş Geldiniz</string>
+    <string name="onboarding_welcome_desc">Kişisel kahve demleme arkadaşınız. 36 demleme yöntemi, adım adım zamanlayıcılar ve kapsamlı kahve eğitimi — tamamen çevrimdışı, tamamen ücretsiz.</string>
+    <string name="onboarding_brew">Hassas Demleme</string>
+    <string name="onboarding_brew_desc">Önceden ayarlanmış oranlarla 36 ekipman arasından seçim yapın. Sertliği, kavurma seviyesini ve su miktarını ayarlayın. Her döküş için su ayarlamalı, adım adım zamanlanmış rehberleri takip edin.</string>
+    <string name="onboarding_track">Yolculuğunu Takip Et</string>
+    <string name="onboarding_track_desc">Her demlemeyi puan ve tat notlarıyla kaydedin. Demleme serinizi, takvim ısı haritanızı görün ve en iyi tariflerinizi keşfedin. Kahve çekirdeklerinizi her demlemeye bağlayın.</string>
+    <string name="onboarding_learn">Öğren ve Ustalaş</string>
+    <string name="onboarding_learn_desc">10 bölümde 60\'tan fazla ders. Temel ekstraksiyon teorisinden ileri espresso tekniklerine kadar. Ekstraksiyon hesaplayıcı, su kimyası rehberi ve tat teşhis araçlarıyla tamamlanır.</string>
+    <string name="onboarding_get_started">Başla</string>
+    <string name="tap_brew_to_start">Başlamak için Demle\'ye dokun</string>
     <string name="onboard1_title">Kahveni Keşfet</string>
     <string name="onboard1_body">Filtre kahvedan espressoya, tüm demleme yöntemlerini keşfet. Favori ekipmanını seç ve mükemmel fincanı yakala.</string>
     <string name="onboard2_title">Hassas Demleme</string>
@@ -566,4 +579,10 @@
     <string name="equip_cafedeolla_tag">Meksika kil çömlek · tarçınlı</string>
     <string name="equip_masonjar_name">Kavanoz Soğuk Demleme</string>
     <string name="equip_masonjar_tag">Ekipmansız · konsantre</string>
+
+    <!-- Arama -->
+    <string name="search_hint_equipment">Ekipman ara…</string>
+    <string name="search_hint_learn">Ders ara…</string>
+    <string name="search_hint_drinks">İçecek ara…</string>
+    <string name="search_no_results">Sonuç bulunamadı</string>
 </resources>

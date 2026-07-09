@@ -183,6 +183,7 @@
     <string name="add_equip_pick_category">Which family does it belong to?</string>
     <string name="add_equip_suggested">Suggested starting point</string>
     <string name="add_equip_saved">Custom gear added</string>
+    <string name="equip_choose_icon">Choose icon</string>
 
     <!-- Learn -->
     <string name="learn_title">Learn</string>
@@ -394,6 +395,8 @@
     <string name="log_streak_label_plural">day streak</string>
     <string name="log_streak_keep">Keep it going!</string>
     <string name="log_streak_start">Brew today to start a streak!</string>
+    <string name="log_share_streak">Share your streak</string>
+    <string name="log_share_streak_text">I\'ve brewed coffee %d days in a row with Coffeery! ☕</string>
 
     <!-- Brew log analytics -->
     <string name="log_analytics_week">This Week</string>
@@ -466,14 +469,16 @@
     <string name="onboard_skip">Skip</string>
     <string name="onboard_next">Next</string>
     <string name="onboard_start">Start brewing</string>
-    <string name="onboard1_title">Dial in every cup</string>
-    <string name="onboard1_body">Pick your gear, set your strength, and Coffeery calculates the exact coffee, water, grind, and temperature — backed by SCA standards.</string>
-    <string name="onboard2_title">Guided brew timer</string>
-    <string name="onboard2_body">Step-by-step countdown with pour targets, step previews, and a visual progress ring. Screen stays awake so you can focus on the brew.</string>
-    <string name="onboard3_title">Learn as you brew</string>
-    <string name="onboard3_body">30+ lessons on extraction, grinding, water chemistry, and tasting. Interactive troubleshooting: tell it how your cup tasted and get specific fixes.</string>
-    <string name="onboard4_title">Your coffee diary</string>
-    <string name="onboard4_body">Log every brew with ratings and tasting notes. Track your beans, find your best recipe automatically, and reproduce it with one tap.</string>
+    <string name="onboarding_welcome">Welcome to Coffeery</string>
+    <string name="onboarding_welcome_desc">Your personal coffee brewing companion. 36 brewing methods, step-by-step timers, and deep coffee education — all offline, all free.</string>
+    <string name="onboarding_brew">Brew with Precision</string>
+    <string name="onboarding_brew_desc">Choose from 36 brewers with pre-calibrated ratios. Adjust strength, roast level, and water amount. Follow timed step-by-step guides with per-pour water adjustment.</string>
+    <string name="onboarding_track">Track Your Journey</string>
+    <string name="onboarding_track_desc">Log every brew with ratings and tasting notes. See your brewing streak, calendar heatmap, and discover your best recipes. Link your coffee beans to each brew.</string>
+    <string name="onboarding_learn">Learn &amp; Master</string>
+    <string name="onboarding_learn_desc">60+ lessons across 10 chapters. From basic extraction theory to advanced espresso techniques. Complete with extraction calculator, water chemistry guide, and taste diagnosis tools.</string>
+    <string name="onboarding_get_started">Get Started</string>
+    <string name="tap_brew_to_start">Tap Brew to start</string>
     <string name="settings_about">About</string>
     <string name="settings_version">Version</string>
     <string name="settings_github">GitHub repository</string>
@@ -566,4 +571,10 @@
     <string name="equip_cafedeolla_tag">Mexican clay pot · cinnamon</string>
     <string name="equip_masonjar_name">Mason Jar Cold Brew</string>
     <string name="equip_masonjar_tag">No equipment · concentrate</string>
+
+    <!-- Search -->
+    <string name="search_hint_equipment">Search brewers…</string>
+    <string name="search_hint_learn">Search lessons…</string>
+    <string name="search_hint_drinks">Search drinks…</string>
+    <string name="search_no_results">No results</string>
 </resources>
