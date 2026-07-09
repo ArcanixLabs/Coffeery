@@ -1,22 +1,31 @@
 package co.coffeery.app.ui.screens.log
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -35,6 +44,11 @@ import co.coffeery.app.util.Format
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.time.DayOfWeek
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.TextStyle
 
 data class BestRecipeSuggestion(
     val equipmentName: String,
@@ -88,6 +102,110 @@ fun BrewLogScreen(vm: AppViewModel) {
 }
 
 @Composable
+private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
+    val colors = CoffeeTheme.colors
+    val today = LocalDate.now()
+    val mondayOfThisWeek = today.with(DayOfWeek.MONDAY)
+
+    val countsByDate: Map<LocalDate, Int> = brewLogs
+        .groupBy {
+            Instant.ofEpochMilli(it.timestamp)
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate()
+        }
+        .mapValues { it.value.size }
+
+    Column(modifier = Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 8.dp)) {
+        Row(modifier = Modifier.padding(start = 28.dp)) {
+            for (col in 0 until 12) {
+                val weekDate = mondayOfThisWeek.minusWeeks((11 - col).toLong())
+                val show = col == 0 || weekDate.month != mondayOfThisWeek.minusWeeks((11 - (col - 1)).toLong()).month
+                Box(modifier = Modifier.width(14.dp)) {
+                    if (show) {
+                        AppText(
+                            weekDate.month.getDisplayName(TextStyle.SHORT, Locale.getDefault()).take(3),
+                            style = CoffeeTheme.type.caption,
+                            color = colors.textSecondary,
+                            maxLines = 1,
+                        )
+                    }
+                }
+            }
+        }
+
+        Row {
+            Column(modifier = Modifier.padding(end = 4.dp)) {
+                val dayLabels = listOf("M", "", "W", "", "F", "", "Su")
+                for (row in 0 until 7) {
+                    Box(modifier = Modifier.size(14.dp), contentAlignment = Alignment.Center) {
+                        if (dayLabels[row].isNotEmpty()) {
+                            AppText(dayLabels[row], style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                        }
+                    }
+                }
+            }
+
+            Column {
+                for (row in 0 until 7) {
+                    Row {
+                        for (col in 0 until 12) {
+                            val date = mondayOfThisWeek.minusWeeks((11 - col).toLong()).plusDays(row.toLong())
+                            val isFuture = date.isAfter(today)
+                            val count = countsByDate[date] ?: 0
+                            val cellColor = when {
+                                isFuture -> Color.Transparent
+                                count >= 3 -> colors.accent
+                                count == 2 -> colors.accentSoft
+                                count == 1 -> colors.accentSoft.copy(alpha = 0.4f)
+                                else -> Color.Transparent
+                            }
+                            Box(
+                                modifier = Modifier
+                                    .size(14.dp)
+                                    .padding(1.dp)
+                                    .clip(RoundedCornerShape(3.dp))
+                                    .background(cellColor)
+                                    .then(
+                                        if (!isFuture && count == 0)
+                                            Modifier.border(1.dp, colors.outline, RoundedCornerShape(3.dp))
+                                        else Modifier
+                                    ),
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        Spacer(Modifier.height(6.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            AppText(stringResource(R.string.log_brew_count), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            Spacer(Modifier.width(4.dp))
+            Box(modifier = Modifier.size(12.dp).clip(RoundedCornerShape(3.dp)).border(1.dp, colors.outline, RoundedCornerShape(3.dp)))
+            Spacer(Modifier.width(2.dp))
+            AppText("0", style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            Spacer(Modifier.width(4.dp))
+            Box(modifier = Modifier.size(12.dp).clip(RoundedCornerShape(3.dp)).background(colors.accentSoft.copy(alpha = 0.4f)))
+            Spacer(Modifier.width(2.dp))
+            AppText("1", style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            Spacer(Modifier.width(4.dp))
+            Box(modifier = Modifier.size(12.dp).clip(RoundedCornerShape(3.dp)).background(colors.accentSoft))
+            Spacer(Modifier.width(2.dp))
+            AppText("2", style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            Spacer(Modifier.width(4.dp))
+            Box(modifier = Modifier.size(12.dp).clip(RoundedCornerShape(3.dp)).background(colors.accent))
+            Spacer(Modifier.width(2.dp))
+            AppText("3+", style = CoffeeTheme.type.caption, color = colors.textSecondary)
+        }
+    }
+}
+
+@Composable
 private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
 
@@ -96,6 +214,7 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
         AppText(stringResource(R.string.log_empty), style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp))
     } else {
         LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
+            item(key = "heatmap") { BrewHeatmap(state.brewLogs) }
             val best = bestRecipeFromLogs(state.brewLogs)
             if (best != null) {
                 item(key = "best_recipe") { BestRecipeBanner(best, vm) }

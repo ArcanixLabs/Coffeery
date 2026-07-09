@@ -51,6 +51,7 @@ data class AppUiState(
     val settings: SettingsEntity = SettingsEntity(),
     val brewLogs: List<BrewLogEntity> = emptyList(),
     val beans: List<BeanEntity> = emptyList(),
+    val completedChapters: Set<Int> = emptySet(),
 ) {
     val selectedEquipment: Equipment?
         get() = equipment.firstOrNull { it.id == selectedEquipmentId }
@@ -229,6 +230,10 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         )) }
 
     fun archiveBean(id: Long) = viewModelScope.launch { repo.archiveBean(id) }
+
+    fun markLearnCardRead(chapterRes: Int) {
+        _state.update { it.copy(completedChapters = it.completedChapters + chapterRes) }
+    }
 
     fun completeOnboarding() {
         _state.update { it.copy(hasCompletedOnboarding = true) }

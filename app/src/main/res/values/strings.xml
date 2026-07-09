@@ -374,6 +374,7 @@
     <string name="log_reproduce">Reproduce</string>
     <string name="log_best_recipe_label">Your best %s</string>
     <string name="log_best_recipe_tap">Tap to load · based on your top brews</string>
+    <string name="log_brew_count">Brews</string>
 
     <!-- ===== Learn tools v2 ===== -->
     <string name="learn_extraction_calc_title">Extraction Yield Calculator</string>

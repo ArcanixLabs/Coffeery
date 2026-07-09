@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -20,6 +21,7 @@ import co.coffeery.app.ui.theme.CoffeeTheme
 @Composable
 fun LearnDetailScreen(cardIndex: Int, vm: AppViewModel) {
     val card = LearnContent.cards.getOrNull(cardIndex) ?: run { vm.back(); return }
+    LaunchedEffect(cardIndex) { vm.markLearnCardRead(card.chapterRes) }
     Column(
         modifier = Modifier
             .fillMaxWidth()

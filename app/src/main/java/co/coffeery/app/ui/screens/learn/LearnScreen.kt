@@ -20,6 +20,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,6 +51,7 @@ fun LearnScreen(vm: AppViewModel) {
     val scope = rememberCoroutineScope()
     val density = LocalDensity.current
     var activeChapterRes by remember { mutableStateOf(LearnContent.chapterOrder[0]) }
+    val completedChapters = vm.state.collectAsState().value.completedChapters
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -65,6 +67,7 @@ fun LearnScreen(vm: AppViewModel) {
 
         StepMap(
             activeChapterRes = activeChapterRes,
+            completedChapters = completedChapters,
             onChapterSelected = { idx ->
                 val ch = LearnContent.chapterOrder[idx]
                 activeChapterRes = ch
@@ -106,7 +109,18 @@ fun LearnScreen(vm: AppViewModel) {
                     overflow = TextOverflow.Ellipsis,
                 )
                 Spacer(Modifier.height(8.dp))
-                AppText(stringResource(R.string.learn_read_more), style = CoffeeTheme.type.label, color = colors.accent)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    AppText(stringResource(R.string.learn_read_more), style = CoffeeTheme.type.label, color = colors.accent)
+                    if (completedChapters.contains(card.chapterRes)) {
+                        Spacer(Modifier.width(8.dp))
+                        Box(
+                            modifier = Modifier
+                                .size(8.dp)
+                                .clip(CircleShape)
+                                .background(colors.accentSoft),
+                        )
+                    }
+                }
             }
         }
     }
@@ -115,6 +129,7 @@ fun LearnScreen(vm: AppViewModel) {
 @Composable
 private fun StepMap(
     activeChapterRes: Int,
+    completedChapters: Set<Int>,
     onChapterSelected: (Int) -> Unit,
 ) {
     val colors = CoffeeTheme.colors
@@ -125,22 +140,43 @@ private fun StepMap(
     ) {
         items(chapters.size) { index ->
             val chapterRes = chapters[index]
-            val isActive = chapterRes == activeChapterRes
+            val isCompleted = chapterRes in completedChapters
+            val isUnlocked = index == 0 || chapters[index - 1] in completedChapters
+            val isLocked = !isCompleted && !isUnlocked
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
                         .size(16.dp)
                         .clip(CircleShape)
-                        .background(if (isActive) colors.accent else Color.Transparent)
-                        .border(2.dp, if (isActive) colors.accent else colors.outline, CircleShape)
-                        .clickable { onChapterSelected(index) },
+                        .background(if (isCompleted) colors.accent else Color.Transparent)
+                        .border(
+                            2.dp,
+                            when {
+                                isCompleted -> colors.accent
+                                isLocked -> colors.outline
+                                else -> colors.accent
+                            },
+                            CircleShape,
+                        )
+                        .then(
+                            if (isLocked) Modifier
+                            else Modifier.clickable { onChapterSelected(index) },
+                        ),
                     contentAlignment = Alignment.Center,
                 ) {
-                    AppText(
-                        text = "${index + 1}",
-                        style = CoffeeTheme.type.caption,
-                        color = if (isActive) colors.onAccent else colors.textSecondary,
-                    )
+                    if (isCompleted) {
+                        AppText(
+                            text = "\u2713",
+                            style = CoffeeTheme.type.caption,
+                            color = colors.onAccent,
+                        )
+                    } else {
+                        AppText(
+                            text = "${index + 1}",
+                            style = CoffeeTheme.type.caption,
+                            color = if (isLocked) colors.textSecondary else colors.accent,
+                        )
+                    }
                 }
                 if (index < chapters.size - 1) {
                     Spacer(Modifier.width(4.dp))
@@ -148,7 +184,10 @@ private fun StepMap(
                         modifier = Modifier
                             .width(16.dp)
                             .height(2.dp)
-                            .background(colors.outline),
+                            .background(
+                                if (isCompleted || chapters.getOrNull(index + 1) in completedChapters) colors.accent
+                                else colors.outline,
+                            ),
                     )
                     Spacer(Modifier.width(4.dp))
                 }

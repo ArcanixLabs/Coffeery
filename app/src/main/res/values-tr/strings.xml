@@ -374,6 +374,7 @@
     <string name="log_reproduce">Tekrar yap</string>
     <string name="log_best_recipe_label">En iyi %s tarifin</string>
     <string name="log_best_recipe_tap">Yüklemek için dokun · en iyi demlemelerine göre</string>
+    <string name="log_brew_count">Demleme</string>
 
     <!-- ===== Learn tools v2 ===== -->
     <string name="learn_extraction_calc_title">Ekstraksiyon Verimi Hesaplayıcı</string>

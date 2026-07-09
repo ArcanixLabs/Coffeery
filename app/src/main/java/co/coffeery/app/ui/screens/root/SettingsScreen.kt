@@ -10,7 +10,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,19 +21,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.weight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import co.coffeery.app.R
@@ -87,32 +85,73 @@ fun SettingsScreen(vm: AppViewModel) {
             ) {
                 Palette.entries.forEach { palette ->
                     val isSelected = palette == state.palette
-                    val swatchAccent = paletteColors(palette, colors.isDark).accent
+                    val swatchColors = remember(colors.isDark, palette) { paletteColors(palette, colors.isDark) }
                     Column(
                         modifier = Modifier
-                            .width(72.dp)
+                            .width(120.dp)
+                            .height(80.dp)
                             .clip(CoffeeShapes.small)
                             .then(
                                 if (isSelected) Modifier.border(1.5.dp, colors.accent, CoffeeShapes.small)
                                 else Modifier
                             )
-                            .background(colors.surfaceElevated)
-                            .clickable { vm.setPalette(palette) }
-                            .padding(vertical = 12.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
+                            .clickable { vm.setPalette(palette) },
                     ) {
                         Box(
                             modifier = Modifier
-                                .size(36.dp)
-                                .clip(CircleShape)
-                                .background(swatchAccent),
-                        )
-                        Spacer(Modifier.height(8.dp))
-                        AppText(
-                            stringResource(palette.labelRes),
-                            style = CoffeeTheme.type.caption,
-                            color = colors.textPrimary,
-                        )
+                                .fillMaxWidth()
+                                .weight(0.7f)
+                                .background(swatchColors.background),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth(0.6f)
+                                    .height(40.dp)
+                                    .clip(RoundedCornerShape(4.dp))
+                                    .background(swatchColors.surfaceElevated),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.Center,
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .width(40.dp)
+                                            .height(2.dp)
+                                            .background(swatchColors.accent),
+                                    )
+                                    Spacer(Modifier.height(4.dp))
+                                    Box(
+                                        modifier = Modifier
+                                            .width(30.dp)
+                                            .height(1.5.dp)
+                                            .background(swatchColors.outline),
+                                    )
+                                    Spacer(Modifier.height(3.dp))
+                                    Box(
+                                        modifier = Modifier
+                                            .width(20.dp)
+                                            .height(1.5.dp)
+                                            .background(swatchColors.outline),
+                                    )
+                                }
+                            }
+                        }
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(0.3f)
+                                .background(swatchColors.background),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            AppText(
+                                stringResource(palette.labelRes),
+                                style = CoffeeTheme.type.caption,
+                                color = if (isSelected) colors.accent else colors.textPrimary,
+                            )
+                        }
                     }
                 }
             }
