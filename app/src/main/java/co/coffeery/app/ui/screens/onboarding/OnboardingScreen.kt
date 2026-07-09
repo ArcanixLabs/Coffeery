@@ -31,6 +31,7 @@ import co.coffeery.app.ui.components.PrimaryButton
 import co.coffeery.app.ui.components.SecondaryButton
 import co.coffeery.app.ui.screens.root.AppViewModel
 import co.coffeery.app.ui.theme.CoffeeTheme
+import androidx.compose.foundation.layout.statusBarsPadding
 
 data class OnboardingSlide(
     val glyph: Glyph,
@@ -129,7 +130,3 @@ fun OnboardingScreen(vm: AppViewModel) {
         }
     }
 }
-
-@Composable
-private fun Modifier.statusBarsPadding(): Modifier =
-    this.then(androidx.compose.foundation.layout.statusBarsPadding())

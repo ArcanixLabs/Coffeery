@@ -42,8 +42,7 @@ fun RootScreen(vm: AppViewModel) {
     BackHandler(enabled = state.route !is Route.Tabs) { vm.back() }
     if (!state.hasCompletedOnboarding) {
         OnboardingScreen(vm)
-        return@Composable
-    }
+    } else {
     CoffeeTheme(themeMode = state.themeMode, palette = state.palette) {
         Box(
             modifier = Modifier
@@ -82,6 +81,7 @@ fun RootScreen(vm: AppViewModel) {
                 }
             }
         }
+    }
     }
 }
 

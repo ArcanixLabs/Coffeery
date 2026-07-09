@@ -28,10 +28,11 @@ fun Modifier.coffeeBackground(): Modifier {
                 val alpha = random.nextFloat() * 0.02f
                 if (alpha > 0.002f) {
                     canvas.drawRect(
-                        Offset(x.toFloat(), y.toFloat()),
-                        Size(density.toFloat(), density.toFloat()),
-                        Paint().apply { color = Color.Black.copy(alpha = alpha) },
+                        color = Color.Black.copy(alpha = alpha),
+                        topLeft = Offset(x.toFloat(), y.toFloat()),
+                        size = Size(density.toFloat(), density.toFloat()),
                     )
+
                 }
                 x += density
             }
