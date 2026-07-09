@@ -578,6 +578,10 @@
     <string name="palette_espresso">Espresso</string>
     <string name="palette_matcha">Matcha</string>
     <string name="palette_berry">Berry</string>
+    <string name="palette_crema">Crema</string>
+    <string name="palette_mocha">Mocha</string>
+    <string name="palette_caramel">Karamel</string>
+    <string name="palette_hazelnut">Fındık</string>
     <string name="settings_language">Dil</string>
     <string name="settings_language_desc">Tam etki için değişiklik sonrası uygulamayı yeniden başlatın.</string>
     <string name="settings_timer">Zamanlayıcı</string>

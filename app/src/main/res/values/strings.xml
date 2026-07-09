@@ -578,6 +578,10 @@
     <string name="palette_espresso">Espresso</string>
     <string name="palette_matcha">Matcha</string>
     <string name="palette_berry">Berry</string>
+    <string name="palette_crema">Crema</string>
+    <string name="palette_mocha">Mocha</string>
+    <string name="palette_caramel">Caramel</string>
+    <string name="palette_hazelnut">Hazelnut</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_desc">Restart the app after changing for full effect.</string>
     <string name="settings_timer">Timer</string>

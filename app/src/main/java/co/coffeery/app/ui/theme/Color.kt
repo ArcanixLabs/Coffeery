@@ -75,6 +75,10 @@ fun paletteColors(palette: Palette, isDark: Boolean): CoffeeColors = when (palet
     Palette.ESPRESSO -> if (isDark) DarkEspressoColors else LightEspressoColors
     Palette.MATCHA -> if (isDark) DarkMatchaColors else LightMatchaColors
     Palette.BERRY -> if (isDark) DarkBerryColors else LightBerryColors
+    Palette.CREMA -> if (isDark) DarkCremaColors else LightCremaColors
+    Palette.MOCHA -> if (isDark) DarkMochaColors else LightMochaColors
+    Palette.CARAMEL -> if (isDark) DarkCaramelColors else LightCaramelColors
+    Palette.HAZELNUT -> if (isDark) DarkHazelnutColors else LightHazelnutColors
 }
 
 val LightEspressoColors = CoffeeColors(
@@ -164,5 +168,129 @@ val DarkBerryColors = CoffeeColors(
     onAccent = Color(0xFF0D080C),
     cremaLight = Color(0xFFB88CA0),
     cremaDark = Color(0xFF1C0E17),
+    isDark = true,
+)
+
+// ---- Crema — golden cream, inspired by espresso crema ----
+val LightCremaColors = CoffeeColors(
+    background = Color(0xFFFAF6EF),
+    surface = Color(0xFFFFFFFF),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE5D9C3),
+    textPrimary = Color(0xFF1E1710),
+    textSecondary = Color(0xFF6E5E48),
+    accent = Color(0xFFC4953C),
+    accentSoft = Color(0xFFF0DDB8),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFE8CC90),
+    cremaDark = Color(0xFF3D2810),
+    isDark = false,
+)
+
+val DarkCremaColors = CoffeeColors(
+    background = Color(0xFF100D08),
+    surface = Color(0xFF1A1611),
+    surfaceElevated = Color(0xFF241F18),
+    outline = Color(0xFF362E24),
+    textPrimary = Color(0xFFF2ECDE),
+    textSecondary = Color(0xFFB0A080),
+    accent = Color(0xFFD9B050),
+    accentSoft = Color(0xFF5A4028),
+    onAccent = Color(0xFF0D0803),
+    cremaLight = Color(0xFFB89560),
+    cremaDark = Color(0xFF1C0E05),
+    isDark = true,
+)
+
+// ---- Mocha — rich dark chocolate with deep warm browns ----
+val LightMochaColors = CoffeeColors(
+    background = Color(0xFFF3EFE8),
+    surface = Color(0xFFFFFFFF),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFDFD6C8),
+    textPrimary = Color(0xFF1D1610),
+    textSecondary = Color(0xFF685944),
+    accent = Color(0xFF8B5E3C),
+    accentSoft = Color(0xFFDCC6B0),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD4A878),
+    cremaDark = Color(0xFF382218),
+    isDark = false,
+)
+
+val DarkMochaColors = CoffeeColors(
+    background = Color(0xFF0C0907),
+    surface = Color(0xFF181311),
+    surfaceElevated = Color(0xFF201A16),
+    outline = Color(0xFF332922),
+    textPrimary = Color(0xFFEFE8DD),
+    textSecondary = Color(0xFFAD9A85),
+    accent = Color(0xFFB07A4E),
+    accentSoft = Color(0xFF543826),
+    onAccent = Color(0xFF0B0603),
+    cremaLight = Color(0xFFAB8460),
+    cremaDark = Color(0xFF190D06),
+    isDark = true,
+)
+
+// ---- Caramel — warm amber caramel, sweet and golden ----
+val LightCaramelColors = CoffeeColors(
+    background = Color(0xFFFBF5ED),
+    surface = Color(0xFFFFFFFF),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE8D8BE),
+    textPrimary = Color(0xFF1F1710),
+    textSecondary = Color(0xFF6F5D44),
+    accent = Color(0xFFC77D24),
+    accentSoft = Color(0xFFF0D3A5),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFE4BE80),
+    cremaDark = Color(0xFF3C2410),
+    isDark = false,
+)
+
+val DarkCaramelColors = CoffeeColors(
+    background = Color(0xFF0F0C07),
+    surface = Color(0xFF191410),
+    surfaceElevated = Color(0xFF221B15),
+    outline = Color(0xFF352B22),
+    textPrimary = Color(0xFFF2EADD),
+    textSecondary = Color(0xFFAFA080),
+    accent = Color(0xFFD4953C),
+    accentSoft = Color(0xFF5C4024),
+    onAccent = Color(0xFF0C0703),
+    cremaLight = Color(0xFFB89058),
+    cremaDark = Color(0xFF1C0D05),
+    isDark = true,
+)
+
+// ---- Hazelnut — warm nutty brown, softer than espresso ----
+val LightHazelnutColors = CoffeeColors(
+    background = Color(0xFFF6F2EB),
+    surface = Color(0xFFFFFFFF),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE2D8C8),
+    textPrimary = Color(0xFF1E1711),
+    textSecondary = Color(0xFF6B5C48),
+    accent = Color(0xFF9B7446),
+    accentSoft = Color(0xFFE2CFB4),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD0B080),
+    cremaDark = Color(0xFF392518),
+    isDark = false,
+)
+
+val DarkHazelnutColors = CoffeeColors(
+    background = Color(0xFF0C0A07),
+    surface = Color(0xFF181411),
+    surfaceElevated = Color(0xFF201A16),
+    outline = Color(0xFF342A21),
+    textPrimary = Color(0xFFEFE7DD),
+    textSecondary = Color(0xFFAE9C85),
+    accent = Color(0xFFBB8E5E),
+    accentSoft = Color(0xFF553A27),
+    onAccent = Color(0xFF0A0603),
+    cremaLight = Color(0xFFA88860),
+    cremaDark = Color(0xFF180D06),
     isDark = true,
 )
