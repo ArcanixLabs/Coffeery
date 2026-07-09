@@ -64,7 +64,7 @@ fun OnboardingScreen(vm: AppViewModel) {
         Spacer(Modifier.height(20.dp))
 
         HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
-            val slide = slides[page]
+            val slide = slides.getOrNull(page) ?: return@HorizontalPager
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
