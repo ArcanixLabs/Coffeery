@@ -48,6 +48,18 @@ object LearnContent {
         LearnCard(R.string.learn_l20_title, R.string.learn_l20_body, R.string.learn_ch_tasting),
     )
 
+    val chapterOrder: List<@StringRes Int> = listOf(
+        R.string.learn_ch_basics,
+        R.string.learn_ch_grinding,
+        R.string.learn_ch_water,
+        R.string.learn_ch_extraction,
+        R.string.learn_ch_methods,
+        R.string.learn_ch_milk,
+        R.string.learn_ch_tasting,
+        R.string.learn_ch_caffeine,
+        R.string.learn_ch_equipment,
+    )
+
     val tasteOptions: List<TasteOption> = listOf(
         TasteOption(R.string.taste_sour, R.string.taste_sour_advice),
         TasteOption(R.string.taste_bitter, R.string.taste_bitter_advice),

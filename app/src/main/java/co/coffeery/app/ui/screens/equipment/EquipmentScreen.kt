@@ -1,5 +1,6 @@
 package co.coffeery.app.ui.screens.equipment
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -53,6 +54,28 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         ScreenHeader(title = stringResource(R.string.equipment_title))
+
+        val popularIds = listOf("v60", "chemex", "frenchpress", "aeropress", "espresso", "moka", "coldbrew", "turkish")
+        val quickItems = state.equipment.filter { it.id in popularIds }.sortedBy { popularIds.indexOf(it.id) }
+        if (quickItems.isNotEmpty()) {
+            AppText(stringResource(R.string.equipment_quick_methods), style = CoffeeTheme.type.headline, color = colors.textSecondary)
+            Row(
+                modifier = Modifier.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                quickItems.forEach { eq ->
+                    val selected = eq.id == state.selectedEquipmentId
+                    CoffeeCard(
+                        onClick = { vm.selectEquipment(eq.id) },
+                        modifier = if (selected) Modifier.border(2.dp, colors.accent, CoffeeShapes.medium) else Modifier,
+                    ) {
+                        EquipmentIcon(eq, colors.accent, Modifier.size(32.dp))
+                        Spacer(Modifier.height(4.dp))
+                        AppText(eq.displayName(), style = CoffeeTheme.type.caption, maxLines = 1)
+                    }
+                }
+            }
+        }
 
         PrimaryButton(
             text = stringResource(R.string.equipment_add),

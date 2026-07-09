@@ -165,6 +165,7 @@
     <string name="equipment_title">Ekipmanların</string>
     <string name="equipment_add">Özel ekipman ekle</string>
     <string name="equipment_your">Özel</string>
+    <string name="equipment_quick_methods">Hızlı yöntemler</string>
     <string name="equipment_builtin">Yöntemler</string>
 
     <!-- Özel ekipman ekleme -->

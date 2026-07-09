@@ -165,6 +165,7 @@
     <string name="equipment_title">Your gear</string>
     <string name="equipment_add">Add custom gear</string>
     <string name="equipment_your">Custom</string>
+    <string name="equipment_quick_methods">Quick methods</string>
     <string name="equipment_builtin">Methods</string>
 
     <!-- Add custom equipment -->

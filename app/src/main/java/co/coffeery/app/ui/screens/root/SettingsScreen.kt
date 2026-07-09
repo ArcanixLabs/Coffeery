@@ -6,8 +6,11 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -47,6 +50,7 @@ import co.coffeery.app.ui.components.SecondaryButton
 import co.coffeery.app.ui.components.SegmentedControl
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.paletteColors
 
 @Composable
 fun SettingsScreen(vm: AppViewModel) {
@@ -77,13 +81,41 @@ fun SettingsScreen(vm: AppViewModel) {
             Spacer(Modifier.height(12.dp))
             AppText(stringResource(R.string.settings_palette), style = CoffeeTheme.type.body, color = colors.textPrimary)
             Spacer(Modifier.height(8.dp))
-            SegmentedControl(
-                options = Palette.entries.toList(),
-                selected = state.palette,
-                label = { stringResource(it.labelRes) },
-                onSelect = { vm.setPalette(it) },
-                modifier = Modifier.fillMaxWidth(),
-            )
+            Row(
+                modifier = Modifier.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Palette.entries.forEach { palette ->
+                    val isSelected = palette == state.palette
+                    val swatchAccent = paletteColors(palette, colors.isDark).accent
+                    Column(
+                        modifier = Modifier
+                            .width(72.dp)
+                            .clip(CoffeeShapes.small)
+                            .then(
+                                if (isSelected) Modifier.border(1.5.dp, colors.accent, CoffeeShapes.small)
+                                else Modifier
+                            )
+                            .background(colors.surfaceElevated)
+                            .clickable { vm.setPalette(palette) }
+                            .padding(vertical = 12.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(36.dp)
+                                .clip(CircleShape)
+                                .background(swatchAccent),
+                        )
+                        Spacer(Modifier.height(8.dp))
+                        AppText(
+                            stringResource(palette.labelRes),
+                            style = CoffeeTheme.type.caption,
+                            color = colors.textPrimary,
+                        )
+                    }
+                }
+            }
         }
 
         SettingsSection(R.string.settings_language) {
