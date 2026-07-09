@@ -124,6 +124,10 @@ fun LearnScreen(vm: AppViewModel) {
 
         TroubleshootCard()
 
+        ProTipsCard()
+
+        QuickRatioCard()
+
         ExtractionCalculatorCard()
 
         WaterMineralCard()
@@ -279,5 +283,49 @@ private fun TroubleshootCard() {
         if (sel != null) {
             AppText(stringResource(LearnContent.tasteOptions[sel].adviceRes), style = CoffeeTheme.type.body)
         }
+    }
+}
+
+@Composable
+private fun ProTipsCard() {
+    val colors = CoffeeTheme.colors
+    val tips = listOf(
+        R.string.pro_tip_1, R.string.pro_tip_2, R.string.pro_tip_3, R.string.pro_tip_4,
+        R.string.pro_tip_5, R.string.pro_tip_6, R.string.pro_tip_7, R.string.pro_tip_8,
+        R.string.pro_tip_9, R.string.pro_tip_10,
+    )
+    var current by remember { mutableStateOf(kotlin.random.Random.nextInt(tips.size)) }
+    CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+        AppText(stringResource(R.string.pro_tips_title), style = CoffeeTheme.type.title)
+        Spacer(Modifier.height(8.dp))
+        AppText(stringResource(tips[current]), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        Spacer(Modifier.height(10.dp))
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+            AppText(
+                stringResource(R.string.pro_tips_next),
+                style = CoffeeTheme.type.label,
+                color = colors.accent,
+                modifier = Modifier.clickable(
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() },
+                ) { current = (current + 1) % tips.size },
+            )
+        }
+    }
+}
+
+@Composable
+private fun QuickRatioCard() {
+    val colors = CoffeeTheme.colors
+    CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+        AppText(stringResource(R.string.ratio_ref_title), style = CoffeeTheme.type.title)
+        Spacer(Modifier.height(8.dp))
+        AppText(stringResource(R.string.ratio_1_15), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        Spacer(Modifier.height(4.dp))
+        AppText(stringResource(R.string.ratio_1_16), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        Spacer(Modifier.height(4.dp))
+        AppText(stringResource(R.string.ratio_1_17), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        Spacer(Modifier.height(4.dp))
+        AppText(stringResource(R.string.ratio_1_18), style = CoffeeTheme.type.body, color = colors.textSecondary)
     }
 }

@@ -424,6 +424,25 @@
     <string name="learn_water_range">Range</string>
     <string name="learn_water_target">Target</string>
 
+    <string name="pro_tips_title">☕ Pro Tips</string>
+    <string name="pro_tips_next">Next tip →</string>
+    <string name="pro_tip_1">For pour-over: pre-wet your filter with hot water before brewing. This removes paper taste and preheats the dripper.</string>
+    <string name="pro_tip_2">Store coffee beans in an airtight container away from light and heat. Never refrigerate — condensation ruins flavor.</string>
+    <string name="pro_tip_3">The bloom is critical: pour 2-3x the coffee weight in water first, wait 30-45 seconds for CO₂ to escape.</string>
+    <string name="pro_tip_4">Weigh everything! Coffee is inconsistent by volume. Use a $15 digital scale for repeatable results.</string>
+    <string name="pro_tip_5">Clean your grinder monthly. Old coffee oils go rancid and impart bitter, stale flavors to fresh beans.</string>
+    <string name="pro_tip_6">For French press: break the crust at 4 minutes, scoop off foam, THEN press gently. Cleaner cup!</string>
+    <string name="pro_tip_7">Water matters more than your grinder. Use filtered water with 50-175 ppm total hardness.</string>
+    <string name="pro_tip_8">For espresso: purge your steam wand before AND after use. Milk residue inside the wand breeds bacteria.</string>
+    <string name="pro_tip_9">Light roasts need hotter water (96°C) and finer grind. Dark roasts prefer cooler (88°C) and coarser.</string>
+    <string name="pro_tip_10">Taste coffee at different temperatures as it cools. Different flavors emerge at different heat levels.</string>
+
+    <string name="ratio_ref_title">Quick Ratio Reference</string>
+    <string name="ratio_1_15">☕ 1:15 — Strong, intense, punchy</string>
+    <string name="ratio_1_16">☕ 1:16 — Balanced, standard (SCA Golden Cup)</string>
+    <string name="ratio_1_17">☕ 1:17 — Lighter, more delicate</string>
+    <string name="ratio_1_18">☕ 1:18 — Light body, for cupping/evaluation</string>
+
     <!-- Settings -->
     <string name="settings_title">Settings</string>
     <string name="settings_appearance">Appearance</string>
@@ -577,4 +596,83 @@
     <string name="search_hint_learn">Search lessons…</string>
     <string name="search_hint_drinks">Search drinks…</string>
     <string name="search_no_results">No results</string>
+
+    <!-- New drinks -->
+    <string name="drink_doppio_name">Doppio</string>
+    <string name="drink_doppio_summary">Double shot of espresso, 60 ml of pure intensity</string>
+    <string name="drink_doppio_body">A double shot of espresso: twice the grounds, twice the strength.\n\nIngredients:\n• 14–20 g finely ground coffee\n• Yield: 50–60 ml\n• Contact time: 25–30 s\n\nSteps:\n1. Dose a double basket (14–20 g).\n2. Distribute and tamp evenly.\n3. Pull a double shot (50–60 ml in ~28 s).\n4. Serve immediately in a demitasse cup.</string>
+    <string name="drink_ristretto_name">Ristretto</string>
+    <string name="drink_ristretto_summary">Restricted short shot, 15–20 ml concentrated sweetness</string>
+    <string name="drink_ristretto_body">A shorter, more concentrated espresso pull that emphasises sweetness over bitterness.\n\nIngredients:\n• Same dose as a single espresso\n• Yield: 15–20 ml (1:1 ratio)\n• Contact time: ~15 s\n\nSteps:\n1. Dose a single basket (~7–10 g).\n2. Pull restricted — stop at 15–20 ml.\n3. Ristretto shines as the base of a Flat White.</string>
+    <string name="drink_lungo_name">Lungo</string>
+    <string name="drink_lungo_summary">Long espresso pull, 60–90 ml, more bitter than standard</string>
+    <string name="drink_lungo_body">A long-pull espresso that extracts more volume and a different flavour profile.\n\nIngredients:\n• Same dose as a single espresso\n• Yield: 60–90 ml (1:3 ratio)\n• Contact time: ~35 s\n\nSteps:\n1. Dose a single basket (~7–10 g).\n2. Extend the pull to 60–90 ml — more water passing through extracts deeper, more bitter compounds.\n3. A Lungo is NOT an Americano — the extra water runs through the puck, not added after.</string>
+    <string name="drink_cubano_name">Café Cubano</string>
+    <string name="drink_cubano_summary">Cuban espresso sweetened with sugar, thick crema</string>
+    <string name="drink_cubano_body">Cuban-style espresso where the first drips are whipped with sugar to form a thick, sweet crema (espuma).\n\nIngredients:\n• 1–2 shots espresso\n• 1–2 tsp demerara sugar\n\nSteps:\n1. Place sugar in a cup and collect the first few drops of espresso.\n2. Whip vigorously until a pale, thick pasty foam forms.\n3. Pull the rest of the shot over the foam and stir gently.\n4. Serve in a small cup — optionally topped with steamed milk for a Cortadito.</string>
+    <string name="drink_marocchino_name">Marocchino</string>
+    <string name="drink_marocchino_summary">Italian layered shot with cocoa and milk foam</string>
+    <string name="drink_marocchino_body">An Italian bar favourite: espresso, cocoa and milk foam layered in a small glass.\n\nIngredients:\n• 1 shot espresso\n• 1 tsp cocoa powder\n• 2–3 tbsp frothed milk\n• Total: 60–100 ml\n\nSteps:\n1. Dust a small glass with cocoa powder.\n2. Pull a single espresso into the glass.\n3. Spoon milk foam on top, creating a visible layered effect.</string>
+    <string name="drink_conmiel_name">Café con Miel</string>
+    <string name="drink_conmiel_summary">Spanish coffee with honey, steamed milk and cinnamon</string>
+    <string name="drink_conmiel_body">A sweet and warming Spanish drink combining espresso, honey and warm spices.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• 1–2 tsp honey\n• 1 part steamed milk\n• Ground cinnamon\n• Total: 150–200 ml\n\nSteps:\n1. Dissolve honey in the hot espresso.\n2. Add steamed milk.\n3. Dust with cinnamon on top.\n4. Serve warm — not piping hot — to preserve the honey\'s aromatic notes.</string>
+    <string name="drink_barraquito_name">Barraquito</string>
+    <string name="drink_barraquito_summary">Canarian layered coffee with condensed milk, Licor 43 and citrus</string>
+    <string name="drink_barraquito_body">A visually striking layered drink from Tenerife — sweet, aromatic and warming.\n\nIngredients:\n• 2 tbsp condensed milk\n• 1 shot espresso\n• 1 shot Licor 43 (or Tía María)\n• 1 piece of lemon peel\n• 1 cinnamon stick\n• Milk foam\n\nSteps:\n1. Pour condensed milk into a clear glass (bottom layer).\n2. Add Licor 43 as the second layer.\n3. Slowly pour hot espresso over the back of a spoon.\n4. Top with milk foam, garnish with cinnamon and lemon peel.</string>
+    <string name="drink_eiskaffee_name">Eiskaffee</string>
+    <string name="drink_eiskaffee_summary">German iced coffee with vanilla ice cream and whipped cream</string>
+    <string name="drink_eiskaffee_body">A German summer classic: cold coffee served with ice cream and whipped cream.\n\nIngredients:\n• 200 ml chilled, sweetened coffee\n• 1–2 scoops vanilla ice cream\n• Whipped cream\n• Optional: chocolate shavings, wafer roll\n\nSteps:\n1. Brew coffee and chill thoroughly.\n2. Place ice cream in a tall glass.\n3. Pour chilled coffee over the ice cream.\n4. Top generously with whipped cream and garnish.</string>
+    <string name="drink_touba_name">Café Touba</string>
+    <string name="drink_touba_summary">Senegalese spiced coffee with selim pepper (djar)</string>
+    <string name="drink_touba_body">A traditional Senegalese coffee brewed with grains of selim pepper (djar) for a warm, clove-like spiced character.\n\nIngredients:\n• 15–20 g coffee\n• 1–2 selim pepper pods, crushed\n• 300 ml water\n• Sugar to taste\n\nSteps:\n1. Grind coffee medium-fine with crushed selim pepper.\n2. Heat water to a boil, add coffee and pepper.\n3. Simmer gently for 3–5 minutes.\n4. Strain through a fine cloth or sieve and serve hot.\n5. Sweeten as desired — the djar gives a naturally warming, clove-like spiced note.</string>
+
+    <!-- Coffee varieties -->
+    <string name="variety_typica_name">Arabica Typica</string>
+    <string name="variety_typica_origin">Ethiopia / Yemen</string>
+    <string name="variety_typica_flavor">Clean, sweet, balanced</string>
+    <string name="variety_typica_brew">Pour-over</string>
+    <string name="variety_bourbon_name">Arabica Bourbon</string>
+    <string name="variety_bourbon_origin">Réunion Island</string>
+    <string name="variety_bourbon_flavor">Chocolate, nut, caramel sweetness</string>
+    <string name="variety_bourbon_brew">All methods</string>
+    <string name="variety_gesha_name">Arabica Gesha</string>
+    <string name="variety_gesha_origin">Ethiopia / Panama</string>
+    <string name="variety_gesha_flavor">Jasmine, bergamot, stone fruit</string>
+    <string name="variety_gesha_brew">Pour-over (delicate)</string>
+    <string name="variety_sl28_name">Arabica SL-28</string>
+    <string name="variety_sl28_origin">Kenya</string>
+    <string name="variety_sl28_flavor">Blackcurrant, tomato, wine acidity</string>
+    <string name="variety_sl28_brew">Pour-over, press</string>
+    <string name="variety_caturra_name">Arabica Caturra</string>
+    <string name="variety_caturra_origin">Brazil / Colombia</string>
+    <string name="variety_caturra_flavor">Bright citrus, light body</string>
+    <string name="variety_caturra_brew">Espresso, pour-over</string>
+    <string name="variety_pacamara_name">Arabica Pacamara</string>
+    <string name="variety_pacamara_origin">El Salvador</string>
+    <string name="variety_pacamara_flavor">Tropical fruit, intense sweetness</string>
+    <string name="variety_pacamara_brew">Pour-over</string>
+    <string name="variety_robusta_name">Robusta</string>
+    <string name="variety_robusta_origin">Vietnam / Indonesia</string>
+    <string name="variety_robusta_flavor">Earthy, woody, high caffeine</string>
+    <string name="variety_robusta_brew">Espresso blends</string>
+    <string name="variety_heirloom_name">Arabica Heirloom</string>
+    <string name="variety_heirloom_origin">Ethiopia</string>
+    <string name="variety_heirloom_flavor">Complex, floral, fruity wild</string>
+    <string name="variety_heirloom_brew">Pour-over</string>
+    <string name="variety_mundonovo_name">Arabica Mundo Novo</string>
+    <string name="variety_mundonovo_origin">Brazil</string>
+    <string name="variety_mundonovo_flavor">Chocolate, nut, low acid</string>
+    <string name="variety_mundonovo_brew">Espresso</string>
+    <string name="variety_catuai_name">Arabica Catuai</string>
+    <string name="variety_catuai_origin">Brazil / Costa Rica</string>
+    <string name="variety_catuai_flavor">Mild, nutty, balanced</string>
+    <string name="variety_catuai_brew">All methods</string>
+    <string name="variety_maragogipe_name">Arabica Maragogipe</string>
+    <string name="variety_maragogipe_origin">Brazil</string>
+    <string name="variety_maragogipe_flavor">Mild, low acid, delicate</string>
+    <string name="variety_maragogipe_brew">Pour-over</string>
+    <string name="variety_liberica_name">Liberica</string>
+    <string name="variety_liberica_origin">West Africa / SE Asia</string>
+    <string name="variety_liberica_flavor">Smoky, woody, full body</string>
+    <string name="variety_liberica_brew">Traditional methods</string>
 </resources>

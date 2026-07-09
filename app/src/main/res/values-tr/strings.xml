@@ -424,6 +424,25 @@
     <string name="learn_water_range">Aralık</string>
     <string name="learn_water_target">Hedef</string>
 
+    <string name="pro_tips_title">☕ Profesyonel İpuçları</string>
+    <string name="pro_tips_next">Sonraki ipucu →</string>
+    <string name="pro_tip_1">Pour-over için: demlemeden önce filtrenizi sıcak suyla ıslatın. Kağıt tadını giderir ve demleyiciyi önceden ısıtır.</string>
+    <string name="pro_tip_2">Kahve çekirdeklerini ışık ve ısıdan uzak, hava geçirmez bir kapta saklayın. Asla buzdolabına koymayın — yoğuşma lezzeti bozar.</string>
+    <string name="pro_tip_3">Bloom kritiktir: önce kahve ağırlığının 2-3 katı su dökün, CO₂\'nin kaçması için 30-45 saniye bekleyin.</string>
+    <string name="pro_tip_4">Her şeyi tartın! Hacimle ölçülen kahve tutarsızdır. Tekrarlanabilir sonuçlar için 15 dolarlık dijital tartı kullanın.</string>
+    <string name="pro_tip_5">Öğütücünüzü ayda bir temizleyin. Eski kahve yağları acılaşır ve taze çekirdeklere bayat tatlar verir.</string>
+    <string name="pro_tip_6">French press için: 4. dakikada kabuğu kırın, köpüğü alın, SONRA yavaşça bastırın. Daha temiz fincan!</string>
+    <string name="pro_tip_7">Su, öğütücünüzden daha önemlidir. 50-175 ppm toplam sertlikte filtrelenmiş su kullanın.</string>
+    <string name="pro_tip_8">Espresso için: buhar çubuğunu kullanımdan ÖNCE ve SONRA temizleyin. Çubuğun içindeki süt kalıntısı bakteri üretir.</string>
+    <string name="pro_tip_9">Açık kavrumlar daha sıcak su (96°C) ve ince öğütüm ister. Koyu kavrumlar daha soğuk (88°C) ve kalın tercih eder.</string>
+    <string name="pro_tip_10">Kahveyi soğurken farklı sıcaklıklarda tadın. Farklı ısı seviyelerinde farklı lezzetler ortaya çıkar.</string>
+
+    <string name="ratio_ref_title">Hızlı Oran Referansı</string>
+    <string name="ratio_1_15">☕ 1:15 — Güçlü, yoğun, vurucu</string>
+    <string name="ratio_1_16">☕ 1:16 — Dengeli, standart (SCA Altın Fincan)</string>
+    <string name="ratio_1_17">☕ 1:17 — Daha hafif, daha narin</string>
+    <string name="ratio_1_18">☕ 1:18 — Hafif gövde, kupaj/değerlendirme için</string>
+
     <!-- Settings -->
     <string name="settings_title">Ayarlar</string>
     <string name="settings_appearance">Görünüm</string>
@@ -577,4 +596,83 @@
     <string name="search_hint_learn">Ders ara…</string>
     <string name="search_hint_drinks">İçecek ara…</string>
     <string name="search_no_results">Sonuç bulunamadı</string>
+
+    <!-- Yeni içecekler -->
+    <string name="drink_doppio_name">Doppio</string>
+    <string name="drink_doppio_summary">Çift shot espresso, 60 ml saf yoğunluk</string>
+    <string name="drink_doppio_body">İki kat kahve, iki kat güç: çift shot espresso.\n\nMalzemeler:\n• 14–20 g ince öğütülmüş kahve\n• Verim: 50–60 ml\n• Temas süresi: 25–30 sn\n\nHazırlanışı:\n1. Çift sepete 14–20 g kahve dozlayın.\n2. Eşit dağıtıp düz tamp yapın.\n3. Çift shot çekin (50–60 ml, ~28 sn).\n4. Hemen demitasse fincanda servis edin.</string>
+    <string name="drink_ristretto_name">Ristretto</string>
+    <string name="drink_ristretto_summary">Kısıtlı kısa shot, 15–20 ml yoğun tatlılık</string>
+    <string name="drink_ristretto_body">Acılık yerine tatlılığı öne çıkaran daha kısa, yoğun espresso çekimi.\n\nMalzemeler:\n• Tek espresso dozu kadar kahve\n• Verim: 15–20 ml (1:1 oran)\n• Temas süresi: ~15 sn\n\nHazırlanışı:\n1. Tek sepete ~7–10 g dozlayın.\n2. Kısıtlı çekim yapın — 15–20 ml’de durdurun.\n3. Ristretto, Flat White bazı olarak parlar.</string>
+    <string name="drink_lungo_name">Lungo</string>
+    <string name="drink_lungo_summary">Uzun espresso çekimi, 60–90 ml, standarttan daha acı</string>
+    <string name="drink_lungo_body">Daha fazla hacim ve farklı bir lezzet profili çıkaran uzun espresso çekimi.\n\nMalzemeler:\n• Tek espresso dozu kadar kahve\n• Verim: 60–90 ml (1:3 oran)\n• Temas süresi: ~35 sn\n\nHazırlanışı:\n1. Tek sepete ~7–10 g dozlayın.\n2. Çekimi 60–90 ml’ye uzatın — daha fazla suyun geçmesi daha derin, acı bileşikleri çıkarır.\n3. Lungo bir Americano DEĞİLDİR — fazla su diskten geçer, sonradan eklenmez.</string>
+    <string name="drink_cubano_name">Café Cubano</string>
+    <string name="drink_cubano_summary">Şekerle çırpılmış Küba espressosu, yoğun krema</string>
+    <string name="drink_cubano_body">İlk damlaların şekerle çırpılarak kalın, tatlı bir krema (espuma) oluşturulduğu Küba usulü espresso.\n\nMalzemeler:\n• 1–2 shot espresso\n• 1–2 tk demerara şekeri\n\nHazırlanışı:\n1. Şekeri bir fincana koyun ve espressonun ilk birkaç damlasını üzerine toplayın.\n2. Soluk, kalın macun kıvamında bir köpük oluşana kadar kuvvetlice çırpın.\n3. Shot’ın kalanını köpüğün üzerine çekin ve yavaşça karıştırın.\n4. Küçük bir fincanda servis edin — isteğe bağlı olarak Cortadito için buharlanmış süt eklenir.</string>
+    <string name="drink_marocchino_name">Marocchino</string>
+    <string name="drink_marocchino_summary">Kakao ve süt köpüğüyle katmanlı İtalyan espresso</string>
+    <string name="drink_marocchino_body">Küçük bir bardakta espresso, kakao ve süt köpüğü ile servis edilen bir İtalyan bar klasiği.\n\nMalzemeler:\n• 1 shot espresso\n• 1 tk kakao tozu\n• 2–3 yk köpürtülmüş süt\n• Toplam: 60–100 ml\n\nHazırlanışı:\n1. Küçük bir bardağa kakao tozu serpin.\n2. Tek shot espresso çekin.\n3. Görünür katman efekti oluşturmak için süt köpüğünü üzerine kaşıkla ekleyin.</string>
+    <string name="drink_conmiel_name">Café con Miel</string>
+    <string name="drink_conmiel_summary">Ballı, buharlanmış sütlü ve tarçınlı İspanyol kahvesi</string>
+    <string name="drink_conmiel_body">Espresso, bal ve sıcak baharatları birleştiren tatlı ve ısıtıcı bir İspanyol içeceği.\n\nMalzemeler:\n• 1 shot espresso (~30 ml)\n• 1–2 tk bal\n• 1 parça buharlanmış süt\n• Toz tarçın\n• Toplam: 150–200 ml\n\nHazırlanışı:\n1. Balı sıcak espressoda eritin.\n2. Buharlanmış sütü ekleyin.\n3. Üzerine tarçın serpin.\n4. Balın aromatik notalarını korumak için ılık servis edin — çok sıcak olmasın.</string>
+    <string name="drink_barraquito_name">Barraquito</string>
+    <string name="drink_barraquito_summary">Yoğunlaştırılmış süt, Licor 43 ve narenciyeli Kanarya katmanlı kahvesi</string>
+    <string name="drink_barraquito_body">Tenerife’den görsel olarak çarpıcı katmanlı bir içecek — tatlı, aromatik ve ısıtıcı.\n\nMalzemeler:\n• 2 yk yoğunlaştırılmış süt\n• 1 shot espresso\n• 1 shot Licor 43 (veya Tía María)\n• 1 parça limon kabuğu\n• 1 çubuk tarçın\n• Süt köpüğü\n\nHazırlanışı:\n1. Şeffaf bir bardağa yoğunlaştırılmış sütü dökün (en alt katman).\n2. İkinci katman olarak Licor 43’ü ekleyin.\n3. Sıcak espressoyu kaşığın arkasından yavaşça dökün.\n4. Süt köpüğü ile taçlandırın, tarçın ve limon kabuğu ile süsleyin.</string>
+    <string name="drink_eiskaffee_name">Eiskaffee</string>
+    <string name="drink_eiskaffee_summary">Vanilyalı dondurma ve kremayla Alman buzlu kahvesi</string>
+    <string name="drink_eiskaffee_body">Bir Alman yaz klasiği: dondurma ve çırpılmış kremayla servis edilen soğuk kahve.\n\nMalzemeler:\n• 200 ml soğutulmuş, tatlandırılmış kahve\n• 1–2 top vanilyalı dondurma\n• Çırpılmış krema\n• İsteğe bağlı: çikolata rendesi, rulo gofret\n\nHazırlanışı:\n1. Kahveyi demleyip iyice soğutun.\n2. Uzun bir bardağa dondurmayı koyun.\n3. Soğuk kahveyi dondurmanın üzerine dökün.\n4. Bolca çırpılmış krema ile taçlandırıp süsleyin.</string>
+    <string name="drink_touba_name">Café Touba</string>
+    <string name="drink_touba_summary">Selim biberi (djar) ile Senegal baharatlı kahvesi</string>
+    <string name="drink_touba_body">Selim biberi (djar) taneleriyle demlenen, karanfil benzeri baharatlı karaktere sahip geleneksel Senegal kahvesi.\n\nMalzemeler:\n• 15–20 g kahve\n• 1–2 ezilmiş selim biberi kapsülü\n• 300 ml su\n• Damak zevkine göre şeker\n\nHazırlanışı:\n1. Kahveyi orta-ince öğütün ve ezilmiş selim biberiyle karıştırın.\n2. Suyu kaynatın, kahve ve biberi ekleyin.\n3. Kısık ateşte 3–5 dakika demleyin.\n4. İnce bir bez veya süzgeçten geçirip sıcak servis edin.\n5. Arzuya göre tatlandırın — djar doğal olarak ısıtıcı, karanfil benzeri baharatlı bir nota verir.</string>
+
+    <!-- Kahve varyeteleri -->
+    <string name="variety_typica_name">Arabica Typica</string>
+    <string name="variety_typica_origin">Etiyopya / Yemen</string>
+    <string name="variety_typica_flavor">Temiz, tatlı, dengeli</string>
+    <string name="variety_typica_brew">Pour-over</string>
+    <string name="variety_bourbon_name">Arabica Bourbon</string>
+    <string name="variety_bourbon_origin">Réunion Adası</string>
+    <string name="variety_bourbon_flavor">Çikolata, fındık, karamel tatlılığı</string>
+    <string name="variety_bourbon_brew">Tüm yöntemler</string>
+    <string name="variety_gesha_name">Arabica Gesha</string>
+    <string name="variety_gesha_origin">Etiyopya / Panama</string>
+    <string name="variety_gesha_flavor">Yasemin, bergamot, çekirdekli meyve</string>
+    <string name="variety_gesha_brew">Pour-over (narin)</string>
+    <string name="variety_sl28_name">Arabica SL-28</string>
+    <string name="variety_sl28_origin">Kenya</string>
+    <string name="variety_sl28_flavor">Frenk üzümü, domates, şarapsı asitlik</string>
+    <string name="variety_sl28_brew">Pour-over, press</string>
+    <string name="variety_caturra_name">Arabica Caturra</string>
+    <string name="variety_caturra_origin">Brezilya / Kolombiya</string>
+    <string name="variety_caturra_flavor">Parlak narenciye, hafif gövde</string>
+    <string name="variety_caturra_brew">Espresso, pour-over</string>
+    <string name="variety_pacamara_name">Arabica Pacamara</string>
+    <string name="variety_pacamara_origin">El Salvador</string>
+    <string name="variety_pacamara_flavor">Tropikal meyve, yoğun tatlılık</string>
+    <string name="variety_pacamara_brew">Pour-over</string>
+    <string name="variety_robusta_name">Robusta</string>
+    <string name="variety_robusta_origin">Vietnam / Endonezya</string>
+    <string name="variety_robusta_flavor">Topraksı, odunsu, yüksek kafein</string>
+    <string name="variety_robusta_brew">Espresso karışımları</string>
+    <string name="variety_heirloom_name">Arabica Heirloom</string>
+    <string name="variety_heirloom_origin">Etiyopya</string>
+    <string name="variety_heirloom_flavor">Karmaşık, çiçeksi, yabani meyvemsi</string>
+    <string name="variety_heirloom_brew">Pour-over</string>
+    <string name="variety_mundonovo_name">Arabica Mundo Novo</string>
+    <string name="variety_mundonovo_origin">Brezilya</string>
+    <string name="variety_mundonovo_flavor">Çikolata, fındık, düşük asit</string>
+    <string name="variety_mundonovo_brew">Espresso</string>
+    <string name="variety_catuai_name">Arabica Catuai</string>
+    <string name="variety_catuai_origin">Brezilya / Kosta Rika</string>
+    <string name="variety_catuai_flavor">Hafif, fındıksı, dengeli</string>
+    <string name="variety_catuai_brew">Tüm yöntemler</string>
+    <string name="variety_maragogipe_name">Arabica Maragogipe</string>
+    <string name="variety_maragogipe_origin">Brezilya</string>
+    <string name="variety_maragogipe_flavor">Hafif, düşük asit, narin</string>
+    <string name="variety_maragogipe_brew">Pour-over</string>
+    <string name="variety_liberica_name">Liberica</string>
+    <string name="variety_liberica_origin">Batı Afrika / Güneydoğu Asya</string>
+    <string name="variety_liberica_flavor">Dumanlı, odunsu, dolgun gövde</string>
+    <string name="variety_liberica_brew">Geleneksel yöntemler</string>
 </resources>
