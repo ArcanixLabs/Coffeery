@@ -88,9 +88,10 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
         val recipes = db.recipeDao().observeAll().first()
         val custom = db.customEquipmentDao().observeAll().first()
         val logs = db.brewLogDao().observeAll().first()
+        val beanList = db.beanDao().observeAll().first()
         val settings = db.settingsDao().observe().first()
         val json = JSONObject()
-        json.put("version", 2)
+        json.put("version", 3)
         val recipeArr = JSONArray()
         for (r in recipes) {
             val o = JSONObject()
@@ -113,10 +114,13 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
             customArr.put(o)
         }
         json.put("customEquipment", customArr)
-        if (settings != null) {
+            if (settings != null) {
             val o = JSONObject()
             o.put("themeMode", settings.themeMode); o.put("paletteKey", settings.paletteKey)
             o.put("language", settings.language)
+            o.put("completedChapters", settings.completedChapters)
+            o.put("ratioMode", settings.ratioMode)
+            o.put("manualRatio", settings.manualRatio)
             json.put("settings", o)
         }
         val logArr = JSONArray()
@@ -129,9 +133,20 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
             o.put("customGrindSize", l.customGrindSize); o.put("tempCelsius", l.tempCelsius)
             o.put("totalDurationSec", l.totalDurationSec); o.put("rating", l.rating)
             o.put("tastingNotes", l.tastingNotes); o.put("timestamp", l.timestamp)
+            o.put("beanId", l.beanId ?: -1L); o.put("beanName", l.beanName)
             logArr.put(o)
         }
         json.put("brewLogs", logArr)
+        val beanArr = JSONArray()
+        for (b in beanList) {
+            val o = JSONObject()
+            o.put("name", b.name); o.put("origin", b.origin); o.put("roaster", b.roaster)
+            o.put("roastDate", b.roastDate ?: -1L); o.put("roastLevel", b.roastLevel)
+            o.put("notes", b.notes); o.put("isArchived", b.isArchived)
+            o.put("createdAt", b.createdAt)
+            beanArr.put(o)
+        }
+        json.put("beans", beanArr)
         return json.toString(2)
     }
 
@@ -169,7 +184,50 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
                 themeMode = o.optString("themeMode", "system"),
                 paletteKey = o.optString("paletteKey", "TERRACOTTA"),
                 language = o.optString("language", "en"),
+                completedChapters = o.optString("completedChapters", ""),
+                ratioMode = o.optBoolean("ratioMode", false),
+                manualRatio = o.optDouble("manualRatio", 16.0),
             ))
+        }
+        if (json.has("brewLogs")) {
+            val arr = json.getJSONArray("brewLogs")
+            for (i in 0 until arr.length()) {
+                val o = arr.getJSONObject(i)
+                db.brewLogDao().insert(BrewLogEntity(
+                    timestamp = o.optLong("timestamp", System.currentTimeMillis()),
+                    equipmentId = o.getString("equipmentId"),
+                    equipmentName = o.getString("equipmentName"),
+                    strength = o.getDouble("strength").toFloat(),
+                    roast = o.getString("roast"),
+                    ratioDenominator = o.getDouble("ratioDenominator"),
+                    coffeeGrams = o.getDouble("coffeeGrams"),
+                    waterMl = o.getInt("waterMl"),
+                    grind = o.getString("grind"),
+                    customGrindSize = o.optString("customGrindSize", ""),
+                    tempCelsius = o.getInt("tempCelsius"),
+                    totalDurationSec = o.getInt("totalDurationSec"),
+                    rating = o.optInt("rating", 0),
+                    tastingNotes = o.optString("tastingNotes", ""),
+                    beanId = o.optLong("beanId", -1L).takeIf { it >= 0 },
+                    beanName = o.optString("beanName", ""),
+                ))
+            }
+        }
+        if (json.has("beans")) {
+            val arr = json.getJSONArray("beans")
+            for (i in 0 until arr.length()) {
+                val o = arr.getJSONObject(i)
+                db.beanDao().insert(BeanEntity(
+                    name = o.getString("name"),
+                    origin = o.optString("origin", ""),
+                    roaster = o.optString("roaster", ""),
+                    roastDate = o.optLong("roastDate", -1L).takeIf { it >= 0 },
+                    roastLevel = o.optString("roastLevel", "MEDIUM"),
+                    notes = o.optString("notes", ""),
+                    isArchived = o.optBoolean("isArchived", false),
+                    createdAt = o.optLong("createdAt", System.currentTimeMillis()),
+                ))
+            }
         }
     }
 

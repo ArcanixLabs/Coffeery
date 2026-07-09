@@ -99,7 +99,16 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(s.language))
                 }
                 _state.update {
-                    it.copy(themeMode = ThemeMode.fromKey(s.themeMode), palette = Palette.fromKey(s.paletteKey), hasCompletedOnboarding = s.hasCompletedOnboarding, settings = s)
+                    val chapters = s.completedChapters.split(",").filter { it.isNotBlank() }.mapNotNull { it.toIntOrNull() }.toSet()
+                    it.copy(
+                        themeMode = ThemeMode.fromKey(s.themeMode),
+                        palette = Palette.fromKey(s.paletteKey),
+                        hasCompletedOnboarding = s.hasCompletedOnboarding,
+                        settings = s,
+                        completedChapters = chapters,
+                        ratioMode = s.ratioMode,
+                        manualRatio = s.manualRatio.coerceAtLeast(1.0),
+                    )
                 }
             }
         }
@@ -174,10 +183,23 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     fun setCups(c: Int) = _state.update { it.copy(cups = c.coerceIn(1, 12)) }
     fun setWater(ml: Int) = _state.update { it.copy(waterMl = ml.coerceIn(0, 4000)) }
 
-    fun toggleRatioMode(mode: Boolean) = _state.update { it.copy(ratioMode = mode) }
+    fun toggleRatioMode(mode: Boolean) {
+        _state.update { it.copy(ratioMode = mode) }
+        viewModelScope.launch {
+            val cur = (repo.settings.first() ?: SettingsEntity())
+                .copy(ratioMode = mode)
+            repo.upsertSettings(cur)
+        }
+    }
 
     fun setManualRatio(ratio: Double) = _state.update {
-        it.copy(manualRatio = ratio, manualWaterMl = (it.coffeeGrams * ratio).roundToInt())
+        val updated = it.copy(manualRatio = ratio, manualWaterMl = (it.coffeeGrams * ratio).roundToInt())
+        viewModelScope.launch {
+            val cur = (repo.settings.first() ?: SettingsEntity())
+                .copy(manualRatio = ratio)
+            repo.upsertSettings(cur)
+        }
+        updated
     }
 
     fun setCoffeeGrams(grams: Double) = _state.update {
@@ -263,7 +285,13 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     fun archiveBean(id: Long) = viewModelScope.launch { repo.archiveBean(id) }
 
     fun markLearnCardRead(chapterRes: Int) {
-        _state.update { it.copy(completedChapters = it.completedChapters + chapterRes) }
+        val newSet = _state.value.completedChapters + chapterRes
+        _state.update { it.copy(completedChapters = newSet) }
+        viewModelScope.launch {
+            val cur = (repo.settings.first() ?: SettingsEntity())
+                .copy(completedChapters = newSet.joinToString(","))
+            repo.upsertSettings(cur)
+        }
     }
 
     fun completeOnboarding() {

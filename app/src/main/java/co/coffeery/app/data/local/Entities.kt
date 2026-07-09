@@ -33,6 +33,9 @@ data class SettingsEntity(
     val timerMergeWeight: Boolean = false,
     val notificationsBrewComplete: Boolean = true,
     val notificationsStepChange: Boolean = false,
+    val completedChapters: String = "",
+    val ratioMode: Boolean = false,
+    val manualRatio: Double = 16.0,
 )
 
 /** A completed brew session. Immutable after creation — history, not a preset. */
@@ -54,6 +57,7 @@ data class BrewLogEntity(
     val rating: Int = 0,
     val tastingNotes: String = "",
     val beanId: Long? = null,
+    val beanName: String = "",
 )
 
 /** A bag of coffee beans. Local-first, no account needed. */
