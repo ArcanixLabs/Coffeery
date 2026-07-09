@@ -1,21 +1,18 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.compose")
-    id("com.google.devtools.ksp")
+    id("com.android.application") version "8.13.2"
+    id("org.jetbrains.kotlin.android") version "2.4.0"
+    id("org.jetbrains.kotlin.plugin.compose") version "2.4.0"
+    id("com.google.devtools.ksp") version "2.4.0-1.0.29"
 }
 
 android {
     namespace = "co.coffeery.app"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "co.coffeery.app"
-        // minSdk 26 (Android 8.0): modern-enough baseline covering >95% of active
-        // devices while giving us full vector drawables, adaptive icons and
-        // java.time without desugaring.
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 4
         versionName = "2.2.0"
         vectorDrawables { useSupportLibrary = true }
@@ -59,40 +56,29 @@ android {
 }
 
 dependencies {
-    val composeBom = platform("androidx.compose:compose-bom:2024.12.01")
+    val composeBom = platform("androidx.compose:compose-bom:2026.06.01")
     implementation(composeBom)
 
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.activity:activity-compose:1.9.2")
+    implementation("androidx.core:core-ktx:1.19.0")
+    implementation("androidx.activity:activity-compose:1.13.0")
 
-    // SplashScreen API — branded launch screen showing the Coffeery icon
-    // and background colour during cold start. Works API 26+ (minSdk 26).
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.core:core-splashscreen:1.2.0")
 
-    // AppCompat — needed for runtime theme/language switching via
-    // AppCompatDelegate.setApplicationLocales.
-    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
 
-    // Compose — deliberately NO material3 / material. We build our own design
-    // system on top of foundation + ui to keep a unique visual identity.
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.animation:animation")
 
-    // Lifecycle + ViewModel (StateFlow driven MVVM)
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.6")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.11.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.11.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.11.0")
 
-    // Room (local-first persistence)
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
-
-    // NOTE: the bundled research-data asset is parsed with Android's built-in
-    // org.json (no extra dependency / compiler plugin required).
+    implementation("androidx.room:room-runtime:2.8.4")
+    implementation("androidx.room:room-ktx:2.8.4")
+    ksp("androidx.room:room-compiler:2.8.4")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
