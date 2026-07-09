@@ -58,6 +58,20 @@ data class BestRecipeSuggestion(
     val grind: String,
 )
 
+private fun currentStreak(logs: List<BrewLogEntity>): Int {
+    val days = logs.map {
+        Instant.ofEpochMilli(it.timestamp).atZone(ZoneId.systemDefault()).toLocalDate()
+    }.toSet()
+    var streak = 0
+    var date = LocalDate.now()
+    while (days.contains(date)) {
+        streak++
+        date = date.minusDays(1)
+    }
+    if (streak == 0 && !days.contains(LocalDate.now())) return 0
+    return streak
+}
+
 private fun bestRecipeFromLogs(logs: List<BrewLogEntity>): BestRecipeSuggestion? {
     val rated = logs.filter { it.rating > 0 }
     if (rated.size < 3) return null
@@ -206,14 +220,41 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
 }
 
 @Composable
+private fun StreakBanner(streak: Int) {
+    if (streak < 1) return
+    val colors = CoffeeTheme.colors
+    val label = if (streak == 1) stringResource(R.string.log_streak_label) else stringResource(R.string.log_streak_label_plural)
+    CoffeeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            AppText("$streak", style = CoffeeTheme.type.display, color = colors.accent)
+            Spacer(Modifier.width(10.dp))
+            AppText(label, style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.weight(1f))
+            AppText("\uD83D\uDD25", style = CoffeeTheme.type.display)
+        }
+        Spacer(Modifier.height(4.dp))
+        AppText(stringResource(R.string.log_streak_keep), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+    }
+}
+
+@Composable
 private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
 
     if (state.brewLogs.isEmpty()) {
         Spacer(Modifier.height(40.dp))
         AppText(stringResource(R.string.log_empty), style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp))
+        Spacer(Modifier.height(12.dp))
+        AppText(stringResource(R.string.log_streak_start), style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp))
     } else {
+        val streak = currentStreak(state.brewLogs)
         LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
+            if (streak >= 1) {
+                item(key = "streak") { StreakBanner(streak) }
+            }
             item(key = "heatmap") { BrewHeatmap(state.brewLogs) }
             val best = bestRecipeFromLogs(state.brewLogs)
             if (best != null) {

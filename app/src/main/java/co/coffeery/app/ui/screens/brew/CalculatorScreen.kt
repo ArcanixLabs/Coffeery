@@ -6,12 +6,15 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -28,6 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import co.coffeery.app.R
+import co.coffeery.app.data.model.BrewCategory
 import co.coffeery.app.data.model.Equipment
 import co.coffeery.app.data.model.RoastLevel
 import co.coffeery.app.data.model.TempMode
@@ -49,15 +53,32 @@ import co.coffeery.app.ui.components.displayName
 import co.coffeery.app.ui.components.glyph
 import co.coffeery.app.ui.screens.root.AppUiState
 import co.coffeery.app.ui.screens.root.AppViewModel
+import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
 import co.coffeery.app.util.BrewMath
+import co.coffeery.app.util.BrewResult
 import co.coffeery.app.util.Format
 
 @Composable
 fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
     val eq = state.selectedEquipment ?: return
-    val result = BrewMath.compute(eq, state.strength, state.roast, state.byCups, state.cups, state.waterMl)
+    val result = if (state.ratioMode) {
+        BrewResult(
+            ratioDenominator = state.manualRatio,
+            coffeeGrams = state.coffeeGrams,
+            waterMl = state.manualWaterMl,
+            grind = eq.grind.shifted(state.roast.grindShift),
+            tempMode = eq.tempMode,
+            tempCelsius = if (eq.tempMode == TempMode.RANGE) {
+                val mid = (eq.tempMin + eq.tempMax) / 2
+                (mid + state.roast.tempOffset).coerceIn(eq.tempMin - 2, eq.tempMax)
+            } else 0,
+            strengthBandRes = R.string.strength_balanced_label,
+        )
+    } else {
+        BrewMath.compute(eq, state.strength, state.roast, state.byCups, state.cups, state.waterMl)
+    }
     var showSave by remember { mutableStateOf(false) }
 
     Column(
@@ -81,11 +102,15 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
             },
         )
 
-        GearSelector(eq) { vm.selectTab(co.coffeery.app.ui.screens.root.NavTab.GEAR) }
+        CategoryChips(state, vm, eq)
+
+        EquipmentDropdown(state, vm, eq)
 
         AmountSection(state, vm, eq)
 
-        StrengthSection(state, vm, result)
+        if (!state.ratioMode) {
+            StrengthSection(state, vm, result)
+        }
 
         RoastSection(state, vm)
 
@@ -112,16 +137,89 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
 }
 
 @Composable
-private fun GearSelector(eq: Equipment, onClick: () -> Unit) {
+private fun CategoryChips(state: AppUiState, vm: AppViewModel, eq: Equipment) {
     val colors = CoffeeTheme.colors
-    CoffeeCard(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-            EquipmentIcon(eq, colors.accent, Modifier.size(34.dp))
-            Column(Modifier.weight(1f)) {
-                AppText(stringResource(R.string.calc_choose_gear), style = CoffeeTheme.type.caption, color = colors.textSecondary)
-                AppText(eq.displayName(), style = CoffeeTheme.type.title, color = colors.textPrimary)
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 2.dp),
+    ) {
+        items(BrewCategory.entries) { cat ->
+            val isSelected = cat == eq.category
+            val bg = if (isSelected) colors.accent else colors.accentSoft
+            val fg = if (isSelected) colors.onAccent else colors.accent
+            Box(
+                modifier = Modifier
+                    .clip(CoffeeShapes.pill)
+                    .background(bg)
+                    .clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) {
+                        vm.selectCategoryEquipment(cat)
+                    }
+                    .padding(horizontal = 14.dp, vertical = 8.dp),
+            ) {
+                AppText(stringResource(cat.labelRes), style = CoffeeTheme.type.label, color = fg)
             }
-            AppText(stringResource(R.string.calc_change), style = CoffeeTheme.type.label, color = colors.accent)
+        }
+    }
+}
+
+@Composable
+private fun EquipmentDropdown(state: AppUiState, vm: AppViewModel, eq: Equipment) {
+    val colors = CoffeeTheme.colors
+    val equipmentInCategory = state.equipment.filter { it.category == eq.category }
+    var showPicker by remember { mutableStateOf(false) }
+
+    CoffeeCard(onClick = { showPicker = true }, modifier = Modifier.fillMaxWidth()) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            EquipmentIcon(eq, colors.accent, Modifier.size(28.dp))
+            AppText(eq.displayName(), style = CoffeeTheme.type.title, modifier = Modifier.weight(1f))
+            AppText("▾", style = CoffeeTheme.type.title, color = colors.accent)
+        }
+    }
+
+    if (showPicker) {
+        EquipmentPickerDialog(
+            equipmentList = equipmentInCategory,
+            selectedId = eq.id,
+            onDismiss = { showPicker = false },
+            onSelect = { vm.selectEquipment(it); showPicker = false },
+        )
+    }
+}
+
+@Composable
+private fun EquipmentPickerDialog(
+    equipmentList: List<Equipment>,
+    selectedId: String,
+    onDismiss: () -> Unit,
+    onSelect: (String) -> Unit,
+) {
+    val colors = CoffeeTheme.colors
+    CoffeeDialog(onDismiss = onDismiss) {
+        Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            AppText(stringResource(R.string.calc_choose_gear), style = CoffeeTheme.type.headline)
+            Spacer(Modifier.height(6.dp))
+            equipmentList.forEach { item ->
+                val isSelected = item.id == selectedId
+                val bg = if (isSelected) colors.accentSoft else colors.surface
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(CoffeeShapes.small)
+                        .background(bg)
+                        .clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) {
+                            onSelect(item.id)
+                        }
+                        .padding(12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    EquipmentIcon(item, colors.accent, Modifier.size(24.dp))
+                    AppText(item.displayName(), style = CoffeeTheme.type.body, modifier = Modifier.weight(1f))
+                    if (isSelected) {
+                        AppText("✓", style = CoffeeTheme.type.label, color = colors.accent)
+                    }
+                }
+            }
         }
     }
 }
@@ -131,34 +229,81 @@ private fun AmountSection(state: AppUiState, vm: AppViewModel, eq: Equipment) {
     val colors = CoffeeTheme.colors
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         SegmentedControl(
-            options = listOf(true, false),
-            selected = state.byCups,
-            label = { byCups -> if (byCups) stringResource(R.string.calc_input_cups) else stringResource(R.string.calc_input_water) },
-            onSelect = { vm.setByCups(it) },
+            options = listOf(false, true),
+            selected = state.ratioMode,
+            label = { ratioMode -> if (ratioMode) stringResource(R.string.calc_mode_manual) else stringResource(R.string.calc_mode_auto) },
+            onSelect = { vm.toggleRatioMode(it) },
             modifier = Modifier.fillMaxWidth(),
         )
-        CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-            if (state.byCups) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Column(Modifier.weight(1f)) {
-                        AppText(stringResource(R.string.calc_input_cups), style = CoffeeTheme.type.caption, color = colors.textSecondary)
-                        AppText(
-                            stringResource(R.string.calc_cups_value, state.cups),
-                            style = CoffeeTheme.type.title,
-                        )
-                    }
-                    Stepper(value = state.cups, onChange = { vm.setCups(it) })
+        if (state.ratioMode) {
+            CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    AppText(stringResource(R.string.calc_input_coffee), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                    AppTextField(
+                        value = if (state.coffeeGrams == 0.0) "" else Format.grams(state.coffeeGrams),
+                        onValueChange = { txt ->
+                            val v = txt.filter { it.isDigit() || it == '.' }.toDoubleOrNull() ?: 0.0
+                            vm.setCoffeeGrams(v)
+                        },
+                        hint = "15.0",
+                        keyboardType = KeyboardType.Decimal,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    AppText(stringResource(R.string.calc_input_ratio), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                    AppTextField(
+                        value = if (state.manualRatio == 0.0) "" else Format.ratio(state.manualRatio),
+                        onValueChange = { txt ->
+                            val v = txt.filter { it.isDigit() || it == '.' }.toDoubleOrNull() ?: 16.0
+                            vm.setManualRatio(v)
+                        },
+                        hint = "16",
+                        keyboardType = KeyboardType.Decimal,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    AppText(stringResource(R.string.calc_input_water_ml), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                    AppTextField(
+                        value = if (state.manualWaterMl == 0) "" else state.manualWaterMl.toString(),
+                        onValueChange = { txt ->
+                            val v = txt.filter { it.isDigit() }.toIntOrNull() ?: 0
+                            vm.setManualWaterMl(v)
+                        },
+                        hint = "240",
+                        keyboardType = KeyboardType.Number,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
                 }
-            } else {
-                AppText(stringResource(R.string.calc_input_water), style = CoffeeTheme.type.caption, color = colors.textSecondary)
-                Spacer(Modifier.height(6.dp))
-                AppTextField(
-                    value = if (state.waterMl == 0) "" else state.waterMl.toString(),
-                    onValueChange = { txt -> vm.setWater(txt.filter { it.isDigit() }.toIntOrNull() ?: 0) },
-                    hint = "500",
-                    keyboardType = KeyboardType.Number,
-                    modifier = Modifier.fillMaxWidth(),
-                )
+            }
+        } else {
+            SegmentedControl(
+                options = listOf(true, false),
+                selected = state.byCups,
+                label = { byCups -> if (byCups) stringResource(R.string.calc_input_cups) else stringResource(R.string.calc_input_water) },
+                onSelect = { vm.setByCups(it) },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+                if (state.byCups) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Column(Modifier.weight(1f)) {
+                            AppText(stringResource(R.string.calc_input_cups), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                            AppText(
+                                stringResource(R.string.calc_cups_value, state.cups),
+                                style = CoffeeTheme.type.title,
+                            )
+                        }
+                        Stepper(value = state.cups, onChange = { vm.setCups(it) })
+                    }
+                } else {
+                    AppText(stringResource(R.string.calc_input_water), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                    Spacer(Modifier.height(6.dp))
+                    AppTextField(
+                        value = if (state.waterMl == 0) "" else state.waterMl.toString(),
+                        onValueChange = { txt -> vm.setWater(txt.filter { it.isDigit() }.toIntOrNull() ?: 0) },
+                        hint = "500",
+                        keyboardType = KeyboardType.Number,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
             }
         }
     }

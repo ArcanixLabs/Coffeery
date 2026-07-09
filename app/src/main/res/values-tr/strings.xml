@@ -109,6 +109,11 @@
     <string name="calc_temp_slow">Düşük ateş, kaynamaya yakın</string>
     <string name="calc_temp_cold">Oda sıcaklığı / buzdolabı</string>
     <string name="calc_time">Demleme süresi</string>
+    <string name="calc_mode_auto">Otomatik</string>
+    <string name="calc_mode_manual">Manuel</string>
+    <string name="calc_input_coffee">Kahve (g)</string>
+    <string name="calc_input_ratio">Oran (1:X)</string>
+    <string name="calc_input_water_ml">Su (ml)</string>
 
     <!-- Sertlik bandı etiketleri -->
     <string name="strength_light_label">hafif, günlük içim</string>
@@ -375,6 +380,10 @@
     <string name="log_best_recipe_label">En iyi %s tarifin</string>
     <string name="log_best_recipe_tap">Yüklemek için dokun · en iyi demlemelerine göre</string>
     <string name="log_brew_count">Demleme</string>
+    <string name="log_streak_label">günlük seri</string>
+    <string name="log_streak_label_plural">günlük seri</string>
+    <string name="log_streak_keep">Devam et!</string>
+    <string name="log_streak_start">Seri başlatmak için bugün demle!</string>
 
     <!-- ===== Learn tools v2 ===== -->
     <string name="learn_extraction_calc_title">Ekstraksiyon Verimi Hesaplayıcı</string>

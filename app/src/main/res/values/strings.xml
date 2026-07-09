@@ -109,6 +109,11 @@
     <string name="calc_temp_slow">Low heat, near boiling</string>
     <string name="calc_temp_cold">Room temp / fridge</string>
     <string name="calc_time">Brew time</string>
+    <string name="calc_mode_auto">Auto</string>
+    <string name="calc_mode_manual">Manual</string>
+    <string name="calc_input_coffee">Coffee (g)</string>
+    <string name="calc_input_ratio">Ratio (1:X)</string>
+    <string name="calc_input_water_ml">Water (ml)</string>
 
     <!-- Strength band labels -->
     <string name="strength_light_label">light, everyday drinking</string>
@@ -375,6 +380,10 @@
     <string name="log_best_recipe_label">Your best %s</string>
     <string name="log_best_recipe_tap">Tap to load · based on your top brews</string>
     <string name="log_brew_count">Brews</string>
+    <string name="log_streak_label">day streak</string>
+    <string name="log_streak_label_plural">day streak</string>
+    <string name="log_streak_keep">Keep it going!</string>
+    <string name="log_streak_start">Brew today to start a streak!</string>
 
     <!-- ===== Learn tools v2 ===== -->
     <string name="learn_extraction_calc_title">Extraction Yield Calculator</string>

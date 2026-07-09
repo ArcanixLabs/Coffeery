@@ -61,6 +61,9 @@ object BrewMath {
         )
     }
 
+    fun computeManual(coffeeGrams: Double, ratioDenominator: Double): Double =
+        coffeeGrams * ratioDenominator
+
     /** Water (g) that should be in the vessel by the end of a pour step. */
     fun stepWaterGrams(pct: Float, totalWater: Int): Int =
         (pct * totalWater).roundToInt()

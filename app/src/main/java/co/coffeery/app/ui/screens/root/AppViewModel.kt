@@ -31,6 +31,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 import java.util.UUID
 
 /** Immutable UI state for the whole app (unidirectional data flow). */
@@ -45,6 +46,10 @@ data class AppUiState(
     val byCups: Boolean = true,
     val cups: Int = 2,
     val waterMl: Int = 500,
+    val ratioMode: Boolean = false,
+    val manualRatio: Double = 16.0,
+    val coffeeGrams: Double = 0.0,
+    val manualWaterMl: Int = 0,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val palette: Palette = Palette.TERRACOTTA,
     val hasCompletedOnboarding: Boolean = false,
@@ -151,11 +156,37 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         )
     }
 
+    fun selectCategoryEquipment(category: BrewCategory) = _state.update { s ->
+        val eq = s.equipment.firstOrNull { it.category == category }
+        if (eq != null) {
+            s.copy(
+                selectedEquipmentId = eq.id,
+                strength = eq.defaultStrength,
+                tab = NavTab.BREW,
+                route = Route.Tabs,
+            )
+        } else s
+    }
+
     fun setStrength(v: Float) = _state.update { it.copy(strength = v) }
     fun setRoast(r: RoastLevel) = _state.update { it.copy(roast = r) }
     fun setByCups(byCups: Boolean) = _state.update { it.copy(byCups = byCups) }
     fun setCups(c: Int) = _state.update { it.copy(cups = c.coerceIn(1, 12)) }
     fun setWater(ml: Int) = _state.update { it.copy(waterMl = ml.coerceIn(0, 4000)) }
+
+    fun toggleRatioMode(mode: Boolean) = _state.update { it.copy(ratioMode = mode) }
+
+    fun setManualRatio(ratio: Double) = _state.update {
+        it.copy(manualRatio = ratio, manualWaterMl = (it.coffeeGrams * ratio).roundToInt())
+    }
+
+    fun setCoffeeGrams(grams: Double) = _state.update {
+        it.copy(coffeeGrams = grams, manualWaterMl = (grams * it.manualRatio).roundToInt())
+    }
+
+    fun setManualWaterMl(ml: Int) = _state.update {
+        it.copy(manualWaterMl = ml, coffeeGrams = if (it.manualRatio > 0) ml / it.manualRatio else 0.0)
+    }
 
     // --- Recipes ---
     fun saveRecipe(name: String) {
