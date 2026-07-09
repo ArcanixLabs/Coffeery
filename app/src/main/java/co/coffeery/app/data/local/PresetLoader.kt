@@ -117,6 +117,30 @@ object PresetLoader {
         "equip_cafec_tag" -> R.string.equip_cafec_tag
         "equip_ibrik_name" -> R.string.equip_ibrik_name
         "equip_ibrik_tag" -> R.string.equip_ibrik_tag
+        "equip_cowboy_name" -> R.string.equip_cowboy_name
+        "equip_cowboy_tag" -> R.string.equip_cowboy_tag
+        "equip_cupping_name" -> R.string.equip_cupping_name
+        "equip_cupping_tag" -> R.string.equip_cupping_tag
+        "equip_cloth_name" -> R.string.equip_cloth_name
+        "equip_cloth_tag" -> R.string.equip_cloth_tag
+        "equip_sock_name" -> R.string.equip_sock_name
+        "equip_sock_tag" -> R.string.equip_sock_tag
+        "equip_decoction_name" -> R.string.equip_decoction_name
+        "equip_decoction_tag" -> R.string.equip_decoction_tag
+        "equip_papertowel_name" -> R.string.equip_papertowel_name
+        "equip_papertowel_tag" -> R.string.equip_papertowel_tag
+        "equip_egg_name" -> R.string.equip_egg_name
+        "equip_egg_tag" -> R.string.equip_egg_tag
+        "equip_improvturk_name" -> R.string.equip_improvturk_name
+        "equip_improvturk_tag" -> R.string.equip_improvturk_tag
+        "equip_kopitubruk_name" -> R.string.equip_kopitubruk_name
+        "equip_kopitubruk_tag" -> R.string.equip_kopitubruk_tag
+        "equip_qahwa_name" -> R.string.equip_qahwa_name
+        "equip_qahwa_tag" -> R.string.equip_qahwa_tag
+        "equip_cafedeolla_name" -> R.string.equip_cafedeolla_name
+        "equip_cafedeolla_tag" -> R.string.equip_cafedeolla_tag
+        "equip_masonjar_name" -> R.string.equip_masonjar_name
+        "equip_masonjar_tag" -> R.string.equip_masonjar_tag
         "step_bloom" -> R.string.step_bloom
         "step_pour" -> R.string.step_pour
         "step_drawdown" -> R.string.step_drawdown
