@@ -1,47 +1,33 @@
 package co.coffeery.app.ui.theme
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.composed
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Canvas
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.Paint
 import kotlin.random.Random
 
-@Composable
-fun Modifier.coffeeBackground(): Modifier {
+fun Modifier.coffeeBackground(): Modifier = composed {
     val bg = CoffeeTheme.colors.background
-    return this.drawWithCache {
-        val random = Random(42)
-        val density = 4
-        val w = size.width.toInt().coerceAtLeast(1)
-        val h = size.height.toInt().coerceAtLeast(1)
-        val bitmap = ImageBitmap(w, h)
-        val canvas = Canvas(bitmap)
-        var y = 0
-        while (y < h) {
-            var x = 0
-            while (x < w) {
-                val alpha = random.nextFloat() * 0.02f
-                if (alpha > 0.002f) {
-                    canvas.drawRect(
-                        color = Color.Black.copy(alpha = alpha),
-                        topLeft = Offset(x.toFloat(), y.toFloat()),
-                        size = Size(density.toFloat(), density.toFloat()),
+    this.drawBehind {
+        drawRect(color = bg, size = size)
+        // subtle noise grid at ~2% opacity
+        val rng = Random(42)
+        val step = 4f
+        var y = 0f
+        while (y < size.height) {
+            var x = 0f
+            while (x < size.width) {
+                val a = rng.nextFloat() * 0.02f
+                if (a > 0.003f) {
+                    drawRect(
+                        color = bg.copy(alpha = 1f - a),
+                        topLeft = androidx.compose.ui.geometry.Offset(x, y),
+                        size = Size(step, step),
                     )
-
                 }
-                x += density
+                x += step
             }
-            y += density
-        }
-        onDrawWithContent {
-            drawRect(color = bg, size = size)
-            drawContent()
-            drawImage(bitmap)
+            y += step
         }
     }
 }
