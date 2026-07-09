@@ -615,7 +615,8 @@
           "durationSec": 50,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=6Lh85eeNb3c"
     },
     {
       "id": "stagg",
@@ -758,7 +759,8 @@
           "durationSec": 90,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=-cZecSXb3HQ"
     },
     {
       "id": "phin",
@@ -925,7 +927,8 @@
           "durationSec": 10,
           "waterTargetPct": -1
         }
-      ]
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=4ZC-_ek3JLs"
     },
     {
       "id": "batchbrew",
@@ -1294,7 +1297,8 @@
           "waterTargetPct": -1
         }
       ],
-      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0"
+      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=5WgAnh51QZU"
     },
     {
       "id": "decoction",
@@ -1343,7 +1347,8 @@
           "waterTargetPct": -1
         }
       ],
-      "youtubeUrl": "https://www.youtube.com/watch?v=H4TYtJaXGo0"
+      "youtubeUrl": "https://www.youtube.com/watch?v=H4TYtJaXGo0",
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=37bCARK1FSA"
     },
     {
       "id": "papertowel",
@@ -1474,7 +1479,8 @@
           "waterTargetPct": -1
         }
       ],
-      "youtubeUrl": "https://www.youtube.com/watch?v=I5PtWraNRTY"
+      "youtubeUrl": "https://www.youtube.com/watch?v=I5PtWraNRTY",
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=AYlhblcRtXg"
     },
     {
       "id": "kopitubruk",
@@ -1511,7 +1517,8 @@
           "waterTargetPct": -1
         }
       ],
-      "youtubeUrl": "https://www.youtube.com/watch?v=51uGudjARWI"
+      "youtubeUrl": "https://www.youtube.com/watch?v=51uGudjARWI",
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=RKkvnFGxFFM"
     },
     {
       "id": "qahwa",
@@ -1560,7 +1567,8 @@
           "waterTargetPct": -1
         }
       ],
-      "youtubeUrl": "https://www.youtube.com/watch?v=0H0pgUHSr5Y"
+      "youtubeUrl": "https://www.youtube.com/watch?v=0H0pgUHSr5Y",
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=8FsDaKjU1TQ"
     },
     {
       "id": "cafedeolla",
@@ -1609,7 +1617,8 @@
           "waterTargetPct": -1
         }
       ],
-      "youtubeUrl": "https://www.youtube.com/watch?v=GIuAUJ1yF6o"
+      "youtubeUrl": "https://www.youtube.com/watch?v=GIuAUJ1yF6o",
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=6zEutgpks5o"
     },
     {
       "id": "masonjar",
@@ -1652,7 +1661,8 @@
           "waterTargetPct": -1
         }
       ],
-      "youtubeUrl": "https://www.youtube.com/watch?v=323dNUeWhXY"
+      "youtubeUrl": "https://www.youtube.com/watch?v=323dNUeWhXY",
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=JqTNzDFEHMA"
     }
   ]
 }
