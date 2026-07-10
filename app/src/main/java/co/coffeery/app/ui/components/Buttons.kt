@@ -60,8 +60,6 @@ fun SecondaryButton(
         modifier = modifier
             .defaultMinSize(minWidth = 120.dp)
             .clip(CoffeeShapes.pill)
-            .graphicsLayer { scaleX = scale; scaleY = scale }
-            .clip(CoffeeShapes.pill)
             .background(colors.surface)
             .border(1.5.dp, colors.outline, CoffeeShapes.pill)
             .clickable(interaction, indication = null, enabled = enabled) { onClick() }
