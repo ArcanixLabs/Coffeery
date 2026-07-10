@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
@@ -22,13 +21,6 @@ import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
 
 @Composable
-private fun pressScale(interaction: MutableInteractionSource): Float {
-    val pressed by interaction.collectIsPressedAsState()
-    val scale = if (pressed) 0.96f else 1f
-    return scale
-}
-
-@Composable
 fun PrimaryButton(
     text: String,
     modifier: Modifier = Modifier,
@@ -38,11 +30,9 @@ fun PrimaryButton(
 ) {
     val colors = CoffeeTheme.colors
     val interaction = remember { MutableInteractionSource() }
-    val scale = pressScale(interaction)
     Box(
         modifier = modifier
             .defaultMinSize(minWidth = 120.dp)
-            .graphicsLayer { scaleX = scale; scaleY = scale }
             .clip(shape)
             .background(if (enabled) colors.accent else colors.outline)
             .clickable(interaction, indication = null, enabled = enabled) { onClick() }
@@ -66,10 +56,10 @@ fun SecondaryButton(
 ) {
     val colors = CoffeeTheme.colors
     val interaction = remember { MutableInteractionSource() }
-    val scale = pressScale(interaction)
     Box(
         modifier = modifier
             .defaultMinSize(minWidth = 120.dp)
+            .clip(CoffeeShapes.pill)
             .graphicsLayer { scaleX = scale; scaleY = scale }
             .clip(CoffeeShapes.pill)
             .background(colors.surface)
