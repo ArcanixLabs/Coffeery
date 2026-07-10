@@ -3,7 +3,6 @@ package co.coffeery.app.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -28,14 +27,13 @@ fun CoffeeCard(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = CoffeeTheme.colors
-    val interaction = remember { MutableInteractionSource() }
 
     var m = modifier
         .clip(shape)
         .background(colors.surfaceElevated)
         .border(1.dp, colors.outline, shape)
     if (onClick != null) {
-        m = m.clickable(interaction, indication = null) { onClick() }
+        m = m.clickable { onClick() }
     }
     Column(modifier = m.padding(contentPadding.dp), content = content)
 }
