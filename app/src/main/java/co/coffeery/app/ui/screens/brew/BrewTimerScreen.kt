@@ -186,7 +186,13 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
             }
             if (state.settings.timerBackground) {
                 if (!TimerService.isRunning) {
-                    running = false
+                    val intent = Intent(context, TimerService::class.java)
+                    intent.putExtra("equipment", equipmentName)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        context.startForegroundService(intent)
+                    } else {
+                        context.startService(intent)
+                    }
                 } else {
                     val title = stepTitles.getOrElse(stepIndex) { "" }
                     TimerService.update(context, equipmentName, title, Format.clock(remaining), stepIndex, steps.size)
