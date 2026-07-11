@@ -3,6 +3,7 @@ package co.coffeery.app.ui.screens.log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -111,6 +112,7 @@ private fun BeanCard(bean: BeanEntity, vm: AppViewModel) {
 }
 
 @Composable
+@OptIn(ExperimentalLayoutApi::class)
 private fun AddBeanDialog(
     onDismiss: () -> Unit,
     onAdd: (name: String, origin: String, roaster: String, roastDate: Long?, notes: String, processMethod: String, varietal: String, altitude: String, scaScore: Float?, purchaseDate: Long?) -> Unit,
