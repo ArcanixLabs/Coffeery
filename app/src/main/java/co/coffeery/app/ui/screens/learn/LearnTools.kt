@@ -28,7 +28,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.rememberTextMeasurer
-import androidx.compose.ui.text.drawText
 import androidx.compose.ui.unit.dp
 import co.coffeery.app.ui.theme.CoffeeColors
 import androidx.compose.ui.unit.sp
@@ -156,47 +155,47 @@ fun BrewControlChart(
     val idealTdsMin = 1.15f
     val idealTdsMax = 1.55f
 
-    Canvas(modifier = modifier.fillMaxWidth().height(240.dp)) {
-        val pad = 40f
-        val chartW = size.width - pad * 2f
-        val chartH = size.height - pad * 2f
-
-        fun x(ex: Float): Float = pad + ((ex - 14f) / 12f) * chartW
-        fun y(tdsVal: Float): Float = pad + chartH - ((tdsVal - 0.8f) / 1.0f) * chartH
-
-        drawLine(colors.outline, Offset(x(14f), pad), Offset(x(26f), pad))
-        drawLine(colors.outline, Offset(pad, y(0.8f)), Offset(pad, y(1.8f)))
-
-        drawRect(
-            color = colors.accentSoft.copy(alpha = 0.5f),
-            topLeft = Offset(x(idealExMin), y(idealTdsMax)),
-            size = Size(x(idealExMax) - x(idealExMin), y(idealTdsMin) - y(idealTdsMax)),
-        )
-
-        if (extractionYield > 0 && tds > 0) {
-            drawCircle(
-                color = colors.accent,
-                radius = 6f,
-                center = Offset(x(extractionYield), y(tds)),
-            )
-            drawCircle(
-                color = colors.onAccent,
-                radius = 3f,
-                center = Offset(x(extractionYield), y(tds)),
-            )
-        }
-
         val textMeasurer = rememberTextMeasurer()
-        drawText(
-            textMeasurer,
-            "Extraction %",
-            topLeft = Offset(size.width / 2 - textMeasurer.measure("Extraction %").size.width / 2, pad - 30f),
-        )
-        drawText(
-            textMeasurer,
-            "TDS %",
-            topLeft = Offset(pad - 38f, size.height / 2),
-        )
+        Canvas(modifier = modifier.fillMaxWidth().height(240.dp)) {
+            val pad = 40f
+            val chartW = size.width - pad * 2f
+            val chartH = size.height - pad * 2f
+
+            fun x(ex: Float): Float = pad + ((ex - 14f) / 12f) * chartW
+            fun y(tdsVal: Float): Float = pad + chartH - ((tdsVal - 0.8f) / 1.0f) * chartH
+
+            drawLine(colors.outline, Offset(x(14f), pad), Offset(x(26f), pad))
+            drawLine(colors.outline, Offset(pad, y(0.8f)), Offset(pad, y(1.8f)))
+
+            drawRect(
+                color = colors.accentSoft.copy(alpha = 0.5f),
+                topLeft = Offset(x(idealExMin), y(idealTdsMax)),
+                size = Size(x(idealExMax) - x(idealExMin), y(idealTdsMin) - y(idealTdsMax)),
+            )
+
+            if (extractionYield > 0 && tds > 0) {
+                drawCircle(
+                    color = colors.accent,
+                    radius = 6f,
+                    center = Offset(x(extractionYield), y(tds)),
+                )
+                drawCircle(
+                    color = colors.onAccent,
+                    radius = 3f,
+                    center = Offset(x(extractionYield), y(tds)),
+                )
+            }
+
+            drawText(
+                textMeasurer,
+                "Extraction %",
+                topLeft = Offset(size.width / 2 - textMeasurer.measure("Extraction %").size.width / 2, pad - 30f),
+            )
+            drawText(
+                textMeasurer,
+                "TDS %",
+                topLeft = Offset(pad - 38f, size.height / 2),
+            )
     }
 }
 
