@@ -18,11 +18,15 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import co.coffeery.app.R
 import co.coffeery.app.ui.components.BottomNav
+import co.coffeery.app.ui.components.SegmentedControl
 import co.coffeery.app.ui.screens.brew.BrewTimerScreen
 import co.coffeery.app.ui.screens.brew.CalculatorScreen
 import co.coffeery.app.ui.screens.equipment.AddEquipmentScreen
@@ -90,11 +94,10 @@ fun RootScreen(vm: AppViewModel) {
                         onSelect = { vm.selectTab(it) },
                     )
                 }
-            }
-        }
-    }
     }
 }
+
+private enum class RecipesSubTab { BREW_RECIPES, DRINKS }
 
 @Composable
 private fun TabContent(state: AppUiState, vm: AppViewModel) {
@@ -102,9 +105,25 @@ private fun TabContent(state: AppUiState, vm: AppViewModel) {
         when (state.tab) {
             NavTab.BREW -> CalculatorScreen(state, vm)
             NavTab.GEAR -> EquipmentScreen(state, vm)
-            NavTab.RECIPES -> RecipesScreen(state, vm)
+            NavTab.RECIPES -> {
+                var recipeSubTab by rememberSaveable { mutableStateOf(RecipesSubTab.BREW_RECIPES) }
+                Column(modifier = Modifier.fillMaxSize()) {
+                    SegmentedControl(
+                        options = RecipesSubTab.entries.toList(),
+                        selected = recipeSubTab,
+                        label = { stringResource(if (it == RecipesSubTab.BREW_RECIPES) R.string.nav_recipes else R.string.nav_drinks) },
+                        onSelect = { recipeSubTab = it },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp, vertical = 12.dp),
+                    )
+                    when (recipeSubTab) {
+                        RecipesSubTab.BREW_RECIPES -> RecipesScreen(state, vm)
+                        RecipesSubTab.DRINKS -> DrinksScreen(vm)
+                    }
+                }
+            }
             NavTab.LOG -> BrewLogScreen(vm)
-            NavTab.DRINKS -> DrinksScreen(vm)
             NavTab.LEARN -> LearnScreen(vm)
         }
     }
