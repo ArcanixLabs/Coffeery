@@ -1,5 +1,6 @@
 package co.coffeery.app.ui.screens.learn
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,6 +21,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -123,6 +126,70 @@ fun ExtractionCalculatorCard() {
             style = CoffeeTheme.type.body,
             color = eyColor,
         )
+        Spacer(Modifier.height(10.dp))
+        AppText(
+            stringResource(R.string.learn_extraction_chart),
+            style = CoffeeTheme.type.label,
+            color = colors.textSecondary,
+        )
+        Spacer(Modifier.height(4.dp))
+        BrewControlChart(
+            extractionYield = ey.toFloat(),
+            tds = tdsVal.toFloat(),
+            colors = colors,
+        )
+    }
+}
+
+@Composable
+fun BrewControlChart(
+    extractionYield: Float,
+    tds: Float,
+    colors: CoffeeColors,
+    modifier: Modifier = Modifier,
+) {
+    val idealExMin = 18f
+    val idealExMax = 22f
+    val idealTdsMin = 1.15f
+    val idealTdsMax = 1.55f
+
+    Canvas(modifier = modifier.fillMaxWidth().height(240.dp)) {
+        val pad = 40f
+        val chartW = size.width - pad * 2f
+        val chartH = size.height - pad * 2f
+
+        fun x(ex: Float): Float = pad + ((ex - 14f) / 12f) * chartW
+        fun y(tdsVal: Float): Float = pad + chartH - ((tdsVal - 0.8f) / 1.0f) * chartH
+
+        drawLine(colors.outline, Offset(x(14f), pad), Offset(x(26f), pad))
+        drawLine(colors.outline, Offset(pad, y(0.8f)), Offset(pad, y(1.8f)))
+
+        drawRect(
+            color = colors.accentSoft.copy(alpha = 0.5f),
+            topLeft = Offset(x(idealExMin), y(idealTdsMax)),
+            size = Size(x(idealExMax) - x(idealExMin), y(idealTdsMin) - y(idealTdsMax)),
+        )
+
+        if (extractionYield > 0 && tds > 0) {
+            drawCircle(
+                color = colors.accent,
+                radius = 6f,
+                center = Offset(x(extractionYield), y(tds)),
+            )
+            drawCircle(
+                color = colors.onAccent,
+                radius = 3f,
+                center = Offset(x(extractionYield), y(tds)),
+            )
+        }
+
+        val textPaint = android.graphics.Paint().apply {
+            color = android.graphics.Color.parseColor("#6E6152")
+            textSize = 20f
+            textAlign = android.graphics.Paint.Align.CENTER
+        }
+        drawContext.canvas.nativeCanvas.drawText("Extraction %", size.width / 2, pad - 8f, textPaint)
+        drawContext.canvas.nativeCanvas.drawText("TDS %", pad - 30f, size.height / 2, textPaint)
     }
 }
 

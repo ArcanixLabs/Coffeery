@@ -414,6 +414,7 @@
     <string name="learn_extraction_calc_title">Extraction Yield Calculator</string>
     <string name="learn_extraction_calc_desc">Enter dose, water amount and TDS to calculate your brew\'s extraction yield.</string>
     <string name="learn_extraction_dose_label">Coffee dose</string>
+    <string name="learn_extraction_chart">SCA Brewing Control Chart</string>
     <string name="learn_extraction_water_label">Water amount</string>
     <string name="learn_extraction_tds_label">TDS</string>
     <string name="learn_extraction_result">Extraction Yield</string>
@@ -814,4 +815,20 @@
     <string name="caffeine_total">mg from %d brews</string>
     <string name="caffeine_limit">FDA recommends max 400 mg/day</string>
     <string name="caffeine_none">No brews logged today</string>
+
+    <!-- Bean detail fields -->
+    <string name="bean_process">Process</string>
+    <string name="bean_varietal">Varietal</string>
+    <string name="bean_altitude">Altitude (e.g. 1800-2000m)</string>
+    <string name="bean_sca_score">SCA Score (0-100)</string>
+    <string name="bean_purchase_date">Purchase date (yyyy-MM-dd)</string>
+
+    <!-- Achievements -->
+    <string name="achievements_title">Achievements</string>
+    <string name="ach_first_brew">First Brew</string>
+    <string name="ach_7_day">7-Day Streak</string>
+    <string name="ach_gear_master">Gear Master</string>
+    <string name="ach_bean_explorer">Bean Explorer</string>
+    <string name="ach_critic">Taste Critic</string>
+    <string name="ach_perfect">Perfect Score</string>
 </resources>

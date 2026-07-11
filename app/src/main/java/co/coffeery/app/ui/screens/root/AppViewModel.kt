@@ -33,7 +33,44 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.UUID
+
+data class Achievement(val id: String, val title: String, val desc: String, val unlocked: Boolean)
+
+fun computeAchievements(brewLogs: List<BrewLogEntity>, beans: List<BeanEntity>): List<Achievement> {
+    val days = brewLogs.map {
+        Instant.ofEpochMilli(it.timestamp).atZone(ZoneId.systemDefault()).toLocalDate()
+    }.toSet()
+    var streak = 0
+    var date = LocalDate.now()
+    while (days.contains(date)) { streak++; date = date.minusDays(1) }
+    if (streak == 0 && !days.contains(LocalDate.now())) streak = 0
+
+    val equipmentUsed = brewLogs.map { it.equipmentId }.distinct()
+    val ratedLogs = brewLogs.filter { it.rating > 0 }
+
+    return listOf(
+        Achievement("first_brew", "First Brew", "Complete your first brew", brewLogs.isNotEmpty()),
+        Achievement("7_day", "7-Day Streak", "Brew for 7 consecutive days", streak >= 7),
+        Achievement("gear_master", "Gear Master", "Use 10+ different brewers", equipmentUsed.size >= 10),
+        Achievement("bean_explorer", "Bean Explorer", "Add 5+ coffee beans", beans.size >= 5),
+        Achievement("critic", "Taste Critic", "Rate 20+ brews", ratedLogs.size >= 20),
+        Achievement("perfect", "Perfect Score", "Rate a brew 5 stars", ratedLogs.any { it.rating == 5 }),
+    )
+}
+
+fun achievementTitle(id: String): Int = when (id) {
+    "first_brew" -> R.string.ach_first_brew
+    "7_day" -> R.string.ach_7_day
+    "gear_master" -> R.string.ach_gear_master
+    "bean_explorer" -> R.string.ach_bean_explorer
+    "critic" -> R.string.ach_critic
+    "perfect" -> R.string.ach_perfect
+    else -> R.string.ach_first_brew
+}
 
 /** Immutable UI state for the whole app (unidirectional data flow). */
 data class AppUiState(
@@ -60,6 +97,7 @@ data class AppUiState(
     val completedChapters: Set<Int> = emptySet(),
     val stepWaterOverrides: Map<Int, Float> = emptyMap(),
     val learnScrollOffset: Int = 0,
+    val achievements: List<Achievement> = emptyList(),
 ) {
     val selectedEquipment: Equipment?
         get() = equipment.firstOrNull { it.id == selectedEquipmentId }
@@ -90,10 +128,10 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             repo.recipes.collectSafely { list -> _state.update { it.copy(recipes = list) } }
         }
         viewModelScope.launch {
-            repo.brewLogs.collectSafely { list -> _state.update { it.copy(brewLogs = list) } }
+            repo.brewLogs.collectSafely { list -> _state.update { it.copy(brewLogs = list, achievements = computeAchievements(list, it.beans)) } }
         }
         viewModelScope.launch {
-            repo.beans.collectSafely { list -> _state.update { it.copy(beans = list) } }
+            repo.beans.collectSafely { list -> _state.update { it.copy(beans = list, achievements = computeAchievements(it.brewLogs, list)) } }
         }
         viewModelScope.launch {
             repo.settings.collectSafely { entity ->
@@ -286,10 +324,16 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     fun deleteBrewLog(id: Long) = viewModelScope.launch { repo.deleteBrewLog(id) }
 
-    fun addBean(name: String, origin: String, roaster: String, roastDate: Long?, notes: String) =
+    fun addBean(
+        name: String, origin: String, roaster: String, roastDate: Long?, notes: String,
+        processMethod: String = "", varietal: String = "", altitude: String = "",
+        scaScore: Float? = null, purchaseDate: Long? = null,
+    ) =
         viewModelScope.launch { repo.addBean(BeanEntity(
             name = name, origin = origin, roaster = roaster,
             roastDate = roastDate, notes = notes,
+            processMethod = processMethod, varietal = varietal,
+            altitude = altitude, scaScore = scaScore, purchaseDate = purchaseDate,
         )) }
 
     fun archiveBean(id: Long) = viewModelScope.launch { repo.archiveBean(id) }

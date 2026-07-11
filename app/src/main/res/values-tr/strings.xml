@@ -414,6 +414,7 @@
     <string name="learn_extraction_calc_title">Ekstraksiyon Verimi Hesaplayıcı</string>
     <string name="learn_extraction_calc_desc">Demlemenizin ekstraksiyon verimini hesaplamak için doz, su miktarı ve TDS değerini girin.</string>
     <string name="learn_extraction_dose_label">Kahve dozu</string>
+    <string name="learn_extraction_chart">SCA Demleme Kontrol Grafiği</string>
     <string name="learn_extraction_water_label">Su miktarı</string>
     <string name="learn_extraction_tds_label">TDS</string>
     <string name="learn_extraction_result">Ekstraksiyon Verimi</string>
@@ -814,4 +815,20 @@
     <string name="caffeine_total">mg, %d demlemeden</string>
     <string name="caffeine_limit">FDA günde en fazla 400 mg önerir</string>
     <string name="caffeine_none">Bugün demleme kaydedilmedi</string>
+
+    <!-- Çekirdek detay alanları -->
+    <string name="bean_process">İşleme</string>
+    <string name="bean_varietal">Varyete</string>
+    <string name="bean_altitude">Rakım (örn. 1800-2000m)</string>
+    <string name="bean_sca_score">SCA Puanı (0-100)</string>
+    <string name="bean_purchase_date">Alım tarihi (yyyy-AA-gg)</string>
+
+    <!-- Başarımlar -->
+    <string name="achievements_title">Başarımlar</string>
+    <string name="ach_first_brew">İlk Demleme</string>
+    <string name="ach_7_day">7 Günlük Seri</string>
+    <string name="ach_gear_master">Ekipman Ustası</string>
+    <string name="ach_bean_explorer">Çekirdek Kaşifi</string>
+    <string name="ach_critic">Tat Eleştirmeni</string>
+    <string name="ach_perfect">Mükemmel Puan</string>
 </resources>

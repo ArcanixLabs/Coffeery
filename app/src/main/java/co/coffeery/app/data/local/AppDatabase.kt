@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [RecipeEntity::class, CustomEquipmentEntity::class, SettingsEntity::class, BrewLogEntity::class, BeanEntity::class],
-    version = 7,
+    version = 8,
     exportSchema = false,
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -49,13 +49,26 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        private val MIGRATION_7_8 = object : Migration(7, 8) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE beans ADD COLUMN processMethod TEXT NOT NULL DEFAULT ''")
+                db.execSQL("ALTER TABLE beans ADD COLUMN varietal TEXT NOT NULL DEFAULT ''")
+                db.execSQL("ALTER TABLE beans ADD COLUMN altitude TEXT NOT NULL DEFAULT ''")
+                db.execSQL("ALTER TABLE beans ADD COLUMN flavorNotes TEXT NOT NULL DEFAULT ''")
+                db.execSQL("ALTER TABLE beans ADD COLUMN scaScore REAL")
+                db.execSQL("ALTER TABLE beans ADD COLUMN purchaseDate INTEGER")
+            }
+        }
+
         fun get(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
                     "coffeery.db",
-                ).addMigrations(MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7).build().also { INSTANCE = it }
+                ).addMigrations(
+                    MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8,
+                ).build().also { INSTANCE = it }
             }
     }
 }

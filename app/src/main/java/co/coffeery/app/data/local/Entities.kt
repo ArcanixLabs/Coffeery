@@ -79,6 +79,12 @@ data class BeanEntity(
     val notes: String = "",
     val isArchived: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
+    val processMethod: String = "",
+    val varietal: String = "",
+    val altitude: String = "",
+    val flavorNotes: String = "",
+    val scaScore: Float? = null,
+    val purchaseDate: Long? = null,
 )
 
 /**
