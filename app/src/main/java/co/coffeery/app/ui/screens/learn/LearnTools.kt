@@ -27,6 +27,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.drawText
 import androidx.compose.ui.unit.dp
 import co.coffeery.app.ui.theme.CoffeeColors
 import androidx.compose.ui.unit.sp
@@ -184,13 +186,17 @@ fun BrewControlChart(
             )
         }
 
-        val textPaint = android.graphics.Paint().apply {
-            color = android.graphics.Color.parseColor("#6E6152")
-            textSize = 20f
-            textAlign = android.graphics.Paint.Align.CENTER
-        }
-        drawContext.canvas.nativeCanvas.drawText("Extraction %", size.width / 2, pad - 8f, textPaint)
-        drawContext.canvas.nativeCanvas.drawText("TDS %", pad - 30f, size.height / 2, textPaint)
+        val textMeasurer = rememberTextMeasurer()
+        drawText(
+            textMeasurer,
+            "Extraction %",
+            topLeft = Offset(size.width / 2 - textMeasurer.measure("Extraction %").size.width / 2, pad - 30f),
+        )
+        drawText(
+            textMeasurer,
+            "TDS %",
+            topLeft = Offset(pad - 38f, size.height / 2),
+        )
     }
 }
 
