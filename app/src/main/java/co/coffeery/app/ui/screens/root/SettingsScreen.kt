@@ -156,6 +156,16 @@ fun SettingsScreen(vm: AppViewModel) {
                     }
                 }
             }
+            Spacer(Modifier.height(12.dp))
+            AppText(stringResource(R.string.settings_temperature), style = CoffeeTheme.type.body, color = colors.textPrimary)
+            Spacer(Modifier.height(8.dp))
+            SegmentedControl(
+                options = listOf("C" to "°C", "F" to "°F"),
+                selected = "C" to "°C",
+                label = { it.second },
+                onSelect = { vm.setTemperatureUnit(it.first) },
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
 
         SettingsSection(R.string.settings_language) {

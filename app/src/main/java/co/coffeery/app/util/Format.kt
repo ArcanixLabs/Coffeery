@@ -18,6 +18,8 @@ object Format {
 
     fun temp(celsius: Int): String = celsius.toString()
 
+    fun tempF(celsius: Int): String = "${(celsius * 9.0 / 5.0 + 32).roundToInt()}°F"
+
     /** Seconds -> "m:ss" (or "h:mm:ss" for long steeps like cold brew). */
     fun clock(totalSeconds: Int): String {
         val s = totalSeconds.coerceAtLeast(0)

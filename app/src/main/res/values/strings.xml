@@ -582,6 +582,7 @@
     <string name="palette_mocha">Mocha</string>
     <string name="palette_caramel">Caramel</string>
     <string name="palette_hazelnut">Hazelnut</string>
+    <string name="settings_temperature">Temperature unit</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_desc">Restart the app after changing for full effect.</string>
     <string name="settings_timer">Timer</string>

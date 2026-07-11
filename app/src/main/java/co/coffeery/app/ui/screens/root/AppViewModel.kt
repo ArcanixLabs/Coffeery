@@ -145,6 +145,13 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    fun setTemperatureUnit(unit: String) {
+        viewModelScope.launch {
+            val cur = repo.settings.first() ?: SettingsEntity()
+            repo.upsertSettings(cur.copy(temperatureUnit = unit))
+        }
+    }
+
     fun setTimerSetting(update: (SettingsEntity) -> SettingsEntity) {
         viewModelScope.launch {
             val cur = repo.settings.first() ?: SettingsEntity()

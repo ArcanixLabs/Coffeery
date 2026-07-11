@@ -411,7 +411,12 @@ private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment
         Spacer(Modifier.height(8.dp))
 
         val tempText = when (result.tempMode) {
-            TempMode.RANGE -> stringResource(R.string.calc_celsius, Format.temp(result.tempCelsius))
+            TempMode.RANGE -> {
+                if (state.settings.temperatureUnit == "F")
+                    Format.tempF(result.tempCelsius)
+                else
+                    stringResource(R.string.calc_celsius, Format.temp(result.tempCelsius))
+            }
             TempMode.SLOW -> stringResource(R.string.calc_temp_slow)
             TempMode.COLD -> stringResource(R.string.calc_temp_cold)
         }

@@ -42,6 +42,7 @@ data class SettingsEntity(
     val drawdownDurationSec: Int = 55,
     val timerAutoAdvance: Boolean = false,
     val timerDisplayMode: String = "countdown",
+    val temperatureUnit: String = "C",
 )
 
 /** A completed brew session. Immutable after creation — history, not a preset. */
