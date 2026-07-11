@@ -265,6 +265,7 @@
     <string name="equip_cafec_name">Cafec Flower Dripper</string>
     <string name="equip_cafec_tag">Konik, çiçek yivli, hızlı ve eşit akış</string>
     <string name="equip_ibrik_name">İbrik</string>
+    <string name="equip_ibrik_tag">Geleneksel cezve — filitresiz, çok ince</string>
     <string name="equip_cezve_mod_name">Cezve (Modern)</string>
     <string name="equip_cezve_mod_tag">Türk usulü — ısıt, köpürt, servis et</string>
     <string name="drinks_title">İçecekler</string>
