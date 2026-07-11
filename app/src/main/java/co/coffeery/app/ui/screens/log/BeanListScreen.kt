@@ -147,7 +147,7 @@ private fun AddBeanDialog(
                     val selected = processMethod == opt
                     PrimaryButton(
                         text = opt,
-                        modifier = Modifier.weight(1f).height(36.dp).padding(0.dp),
+                        modifier = Modifier.weight(1f),
                         enabled = selected,
                         shape = co.coffeery.app.ui.theme.CoffeeShapes.pill,
                     ) { processMethod = opt }
