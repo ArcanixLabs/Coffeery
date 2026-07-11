@@ -387,6 +387,7 @@
     <string name="log_grind_size">Öğütüm boyutu</string>
     <string name="log_grind_hint">örn. Comandante\'de 25, K-Ultra\'da 3.5</string>
     <string name="log_notes">Tadım notları</string>
+    <string name="brew_flavor_tags">Tat Notaları</string>
     <string name="log_notes_hint">Buruk, parlak, çikolata bitişli…</string>
     <string name="log_bean_label">Çekirdek</string>
     <string name="log_bean_none">Hiçbiri</string>
@@ -659,6 +660,11 @@
     <string name="flavor_wheel_title">Kahve Tat Çemberi</string>
     <string name="flavor_fruity">Meyvemsi</string>
     <string name="flavor_berry">Orman Meyvesi</string>
+    <string name="flavor_nutty">Fındıksı</string>
+    <string name="flavor_spicy">Baharatlı</string>
+    <string name="flavor_bright">Parlak</string>
+    <string name="flavor_smooth">Yumuşak</string>
+    <string name="flavor_bold">Yoğun</string>
     <string name="flavor_citrus">Turunçgil</string>
     <string name="flavor_stone_fruit">Çekirdekli Meyve</string>
     <string name="flavor_tropical">Tropikal</string>
@@ -1093,12 +1099,37 @@
 
     <!-- Başarımlar -->
     <string name="achievements_title">Başarımlar</string>
-    <string name="ach_first_brew">İlk Demleme</string>
-    <string name="ach_7_day">7 Günlük Seri</string>
-    <string name="ach_gear_master">Ekipman Ustası</string>
-    <string name="ach_bean_explorer">Çekirdek Kaşifi</string>
-    <string name="ach_critic">Tat Eleştirmeni</string>
-    <string name="ach_perfect">Mükemmel Puan</string>
+    <string name="ach_first_brew_title">İlk Demleme</string>
+    <string name="ach_first_brew_desc">İlk demlemeni kaydet</string>
+    <string name="ach_streak_7_title">7 Günlük Seri</string>
+    <string name="ach_streak_7_desc">7 gün üst üste demle</string>
+    <string name="ach_streak_30_title">30 Günlük Seri</string>
+    <string name="ach_streak_30_desc">30 gün üst üste demle</string>
+    <string name="ach_gear_master_title">Ekipman Ustası</string>
+    <string name="ach_gear_master_desc">10+ farklı demleyici kullan</string>
+    <string name="ach_bean_explorer_title">Çekirdek Kâşifi</string>
+    <string name="ach_bean_explorer_desc">5+ farklı çekirdek ekle</string>
+    <string name="ach_perfect_score_title">Mükemmel Puan</string>
+    <string name="ach_perfect_score_desc">Bir demlemeye 5 yıldız ver</string>
+    <string name="ach_roast_explorer_title">Kavrum Kâşifi</string>
+    <string name="ach_roast_explorer_desc">3+ farklı kavrum derecesi dene</string>
+    <string name="ach_early_bird_title">Erkenci Kuş</string>
+    <string name="ach_early_bird_desc">5 kez sabah 7\'den önce demle</string>
+    <string name="ach_learn_10_title">Bilgin</string>
+    <string name="ach_learn_10_desc">10 öğrenme kartı tamamla</string>
+
+    <!-- Demleme istatistikleri -->
+    <string name="stats_title">İstatistikler</string>
+    <string name="stats_total_brews">Toplam demleme</string>
+    <string name="stats_avg_rating">Ortalama puan</string>
+    <string name="stats_equipment_breakdown">Ekipman dağılımı</string>
+    <string name="stats_roast_preference">Kavurma tercihi</string>
+    <string name="stats_time_of_day">Demleme zamanı</string>
+    <string name="stats_favorite_ratio">Favori oran · %d demleme</string>
+    <string name="stats_morning">Sabah (06–12)</string>
+    <string name="stats_afternoon">Öğleden sonra (12–18)</string>
+    <string name="stats_evening">Akşam (18–24)</string>
+    <string name="stats_night">Gece (00–06)</string>
 
     <!-- Öğren: Su Kimyası -->
     <string name="learn_l51_title">Su Mineral Bilimi</string>

@@ -43,10 +43,8 @@ import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
 import co.coffeery.app.ui.components.SegmentedControl
 import co.coffeery.app.ui.components.SecondaryButton
-import co.coffeery.app.ui.screens.root.Achievement
 import co.coffeery.app.ui.screens.root.AppViewModel
 import co.coffeery.app.ui.screens.root.NavTab
-import co.coffeery.app.ui.screens.root.achievementTitle
 import co.coffeery.app.ui.theme.CoffeeTheme
 import co.coffeery.app.util.Format
 import java.text.SimpleDateFormat
@@ -109,12 +107,13 @@ fun BrewLogScreen(vm: AppViewModel) {
         stringResource(R.string.nav_log),
         stringResource(R.string.beans_title),
         stringResource(R.string.caffeine_title),
+        stringResource(R.string.stats_title),
         stringResource(R.string.achievements_title),
     )
 
     Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 96.dp)) {
         SegmentedControl(
-            options = listOf(0, 1, 2, 3),
+            options = listOf(0, 1, 2, 3, 4),
             selected = section,
             label = { sections[it] },
             onSelect = { section = it },
@@ -125,7 +124,8 @@ fun BrewLogScreen(vm: AppViewModel) {
             0 -> BrewLogContent(state, vm)
             1 -> BeanListScreen(vm)
             2 -> CaffeineContent(state.brewLogs)
-            3 -> AchievementsContent(state.achievements)
+            3 -> BrewStatsSection(state.brewLogs)
+            4 -> AchievementsContent(state.achievements)
         }
     }
 }
@@ -527,59 +527,6 @@ private fun CaffeineContent(brewLogs: List<BrewLogEntity>) {
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun AchievementsContent(achievements: List<Achievement>) {
-    val colors = CoffeeTheme.colors
-    if (achievements.isEmpty()) return
-
-    Column(
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-        modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
-    ) {
-        var row = mutableListOf<Achievement>()
-        achievements.forEachIndexed { i, ach ->
-            row.add(ach)
-            if (row.size == 2 || i == achievements.lastIndex) {
-                Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
-                    row.forEach { a ->
-                        AchievementCard(a, Modifier.weight(1f))
-                    }
-                    if (row.size == 1) {
-                        Spacer(Modifier.weight(1f))
-                    }
-                }
-                row = mutableListOf()
-            }
-        }
-    }
-}
-
-@Composable
-private fun AchievementCard(achievement: Achievement, modifier: Modifier = Modifier) {
-    val colors = CoffeeTheme.colors
-    val title = stringResource(achievementTitle(achievement.id))
-    val emoji = when (achievement.id) {
-        "first_brew" -> "\u2615"
-        "7_day" -> "\uD83D\uDD25"
-        "gear_master" -> "\u2699\uFE0F"
-        "bean_explorer" -> "\uD83C\uDF31"
-        "critic" -> "\u2B50"
-        "perfect" -> "\uD83C\uDFC6"
-        else -> "\u2B50"
-    }
-
-    CoffeeCard(modifier = modifier) {
-        AppText(
-            emoji,
-            style = CoffeeTheme.type.display,
-            modifier = Modifier.padding(bottom = 4.dp),
-        )
-        AppText(title, style = CoffeeTheme.type.headline, color = if (achievement.unlocked) colors.textPrimary else colors.textSecondary)
-        Spacer(Modifier.height(2.dp))
-        AppText(achievement.desc, style = CoffeeTheme.type.caption, color = if (achievement.unlocked) colors.textSecondary else colors.textSecondary.copy(alpha = 0.4f))
     }
 }
 

@@ -63,6 +63,7 @@ data class BrewLogEntity(
     val totalDurationSec: Int,
     val rating: Int = 0,
     val tastingNotes: String = "",
+    val flavorTags: String = "", // comma-separated flavor tags
     val beanId: Long? = null,
     val beanName: String = "",
 )
