@@ -71,7 +71,7 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp)
-            .padding(top = 12.dp, bottom = 28.dp),
+            .padding(top = 12.dp, bottom = 96.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         ScreenHeader(title = stringResource(R.string.equipment_title))

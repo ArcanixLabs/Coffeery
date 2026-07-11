@@ -42,7 +42,7 @@ fun BeanListScreen(vm: AppViewModel) {
     val colors = CoffeeTheme.colors
     var showAdd by remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 28.dp)) {
+    Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 96.dp)) {
         ScreenHeader(title = stringResource(R.string.beans_title))
 
         if (state.beans.isEmpty()) {

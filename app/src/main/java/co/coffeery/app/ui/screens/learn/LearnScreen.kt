@@ -85,7 +85,7 @@ fun LearnScreen(vm: AppViewModel) {
             .fillMaxWidth()
             .verticalScroll(scrollState)
             .padding(horizontal = 20.dp)
-            .padding(top = 12.dp, bottom = 28.dp),
+            .padding(top = 12.dp, bottom = 96.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         ScreenHeader(
