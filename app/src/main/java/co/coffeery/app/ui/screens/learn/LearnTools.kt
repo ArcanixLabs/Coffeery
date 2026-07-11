@@ -28,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.theme.CoffeeColors
 import androidx.compose.ui.unit.sp
 import co.coffeery.app.R
 import co.coffeery.app.ui.components.AppText
