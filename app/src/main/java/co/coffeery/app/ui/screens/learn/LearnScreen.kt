@@ -317,7 +317,11 @@ private fun ProTipsCard() {
     val tips = listOf(
         R.string.pro_tip_1, R.string.pro_tip_2, R.string.pro_tip_3, R.string.pro_tip_4,
         R.string.pro_tip_5, R.string.pro_tip_6, R.string.pro_tip_7, R.string.pro_tip_8,
-        R.string.pro_tip_9, R.string.pro_tip_10,
+        R.string.pro_tip_9, R.string.pro_tip_10, R.string.pro_tip_11, R.string.pro_tip_12,
+        R.string.pro_tip_13, R.string.pro_tip_14, R.string.pro_tip_15, R.string.pro_tip_16,
+        R.string.pro_tip_17, R.string.pro_tip_18, R.string.pro_tip_19, R.string.pro_tip_20,
+        R.string.pro_tip_21, R.string.pro_tip_22, R.string.pro_tip_23, R.string.pro_tip_24,
+        R.string.pro_tip_25,
     )
     var current by remember { mutableStateOf(kotlin.random.Random.nextInt(tips.size)) }
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
@@ -438,6 +442,14 @@ private fun BrewTroubleshooterCard() {
         R.string.brew_issue_bitter to R.string.brew_issue_bitter_advice,
         R.string.brew_issue_weak to R.string.brew_issue_weak_advice,
         R.string.brew_issue_dry to R.string.brew_issue_dry_advice,
+        R.string.brew_issue_stalling to R.string.brew_issue_stalling_advice,
+        R.string.brew_issue_channeling to R.string.brew_issue_channeling_advice,
+        R.string.brew_issue_muddy to R.string.brew_issue_muddy_advice,
+        R.string.brew_issue_flat to R.string.brew_issue_flat_advice,
+        R.string.brew_issue_burnt to R.string.brew_issue_burnt_advice,
+        R.string.brew_issue_metallic to R.string.brew_issue_metallic_advice,
+        R.string.brew_issue_grassy to R.string.brew_issue_grassy_advice,
+        R.string.brew_issue_salty to R.string.brew_issue_salty_advice,
     )
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -498,15 +510,30 @@ private val GlossaryTerms = listOf(
     GlossaryTerm(R.string.glossary_term_23, R.string.glossary_def_23),
     GlossaryTerm(R.string.glossary_term_24, R.string.glossary_def_24),
     GlossaryTerm(R.string.glossary_term_25, R.string.glossary_def_25),
+    GlossaryTerm(R.string.glossary_term_26, R.string.glossary_def_26),
+    GlossaryTerm(R.string.glossary_term_27, R.string.glossary_def_27),
+    GlossaryTerm(R.string.glossary_term_28, R.string.glossary_def_28),
+    GlossaryTerm(R.string.glossary_term_29, R.string.glossary_def_29),
+    GlossaryTerm(R.string.glossary_term_30, R.string.glossary_def_30),
+    GlossaryTerm(R.string.glossary_term_31, R.string.glossary_def_31),
+    GlossaryTerm(R.string.glossary_term_32, R.string.glossary_def_32),
+    GlossaryTerm(R.string.glossary_term_33, R.string.glossary_def_33),
+    GlossaryTerm(R.string.glossary_term_34, R.string.glossary_def_34),
+    GlossaryTerm(R.string.glossary_term_35, R.string.glossary_def_35),
+    GlossaryTerm(R.string.glossary_term_36, R.string.glossary_def_36),
+    GlossaryTerm(R.string.glossary_term_37, R.string.glossary_def_37),
+    GlossaryTerm(R.string.glossary_term_38, R.string.glossary_def_38),
+    GlossaryTerm(R.string.glossary_term_39, R.string.glossary_def_39),
+    GlossaryTerm(R.string.glossary_term_40, R.string.glossary_def_40),
 )
 
 private data class FlavorCategory(val labelRes: Int, val notes: List<Int>)
 
 private val FlavorWheelData = listOf(
-    FlavorCategory(R.string.flavor_fruity, listOf(R.string.flavor_berry, R.string.flavor_citrus, R.string.flavor_stone_fruit, R.string.flavor_tropical)),
+    FlavorCategory(R.string.flavor_fruity, listOf(R.string.flavor_berry, R.string.flavor_citrus, R.string.flavor_stone_fruit, R.string.flavor_tropical, R.string.flavor_tropical_fruit, R.string.flavor_red_berry)),
     FlavorCategory(R.string.flavor_floral, listOf(R.string.flavor_jasmine, R.string.flavor_rose, R.string.flavor_chamomile, R.string.flavor_lavender)),
-    FlavorCategory(R.string.flavor_sweet, listOf(R.string.flavor_chocolate, R.string.flavor_caramel, R.string.flavor_honey, R.string.flavor_brown_sugar)),
-    FlavorCategory(R.string.flavor_nutty_spice, listOf(R.string.flavor_almond, R.string.flavor_cinnamon, R.string.flavor_clove, R.string.flavor_nutmeg)),
+    FlavorCategory(R.string.flavor_sweet, listOf(R.string.flavor_chocolate, R.string.flavor_caramel, R.string.flavor_honey, R.string.flavor_brown_sugar, R.string.flavor_caramelized, R.string.flavor_maple)),
+    FlavorCategory(R.string.flavor_nutty_spice, listOf(R.string.flavor_almond, R.string.flavor_cinnamon, R.string.flavor_clove, R.string.flavor_nutmeg, R.string.flavor_hazelnut, R.string.flavor_milk_chocolate, R.string.flavor_dark_cocoa)),
     FlavorCategory(R.string.flavor_earthy, listOf(R.string.flavor_woody, R.string.flavor_tobacco, R.string.flavor_leather, R.string.flavor_mushroom)),
 )
 

@@ -76,6 +76,16 @@ object LearnContent {
         LearnCard(R.string.learn_l48_title, R.string.learn_l48_body, R.string.learn_ch_methods),
         LearnCard(R.string.learn_l49_title, R.string.learn_l49_body, R.string.learn_ch_basics),
         LearnCard(R.string.learn_l50_title, R.string.learn_l50_body, R.string.learn_ch_equipment),
+        LearnCard(R.string.learn_l51_title, R.string.learn_l51_body, R.string.learn_ch_water_deep),
+        LearnCard(R.string.learn_l52_title, R.string.learn_l52_body, R.string.learn_ch_water_deep),
+        LearnCard(R.string.learn_l53_title, R.string.learn_l53_body, R.string.learn_ch_water_deep),
+        LearnCard(R.string.learn_l54_title, R.string.learn_l54_body, R.string.learn_ch_water_deep),
+        LearnCard(R.string.learn_l55_title, R.string.learn_l55_body, R.string.learn_ch_water_deep),
+        LearnCard(R.string.learn_l56_title, R.string.learn_l56_body, R.string.learn_ch_sustainability),
+        LearnCard(R.string.learn_l57_title, R.string.learn_l57_body, R.string.learn_ch_sustainability),
+        LearnCard(R.string.learn_l58_title, R.string.learn_l58_body, R.string.learn_ch_sustainability),
+        LearnCard(R.string.learn_l59_title, R.string.learn_l59_body, R.string.learn_ch_sustainability),
+        LearnCard(R.string.learn_l60_title, R.string.learn_l60_body, R.string.learn_ch_sustainability),
     )
 
     val chapterOrder: List<Int> = listOf(
@@ -88,6 +98,8 @@ object LearnContent {
         R.string.learn_ch_tasting,
         R.string.learn_ch_caffeine,
         R.string.learn_ch_equipment,
+        R.string.learn_ch_water_deep,
+        R.string.learn_ch_sustainability,
     )
 
     val tasteOptions: List<TasteOption> = listOf(

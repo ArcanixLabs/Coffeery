@@ -265,7 +265,8 @@
     <string name="equip_cafec_name">Cafec Flower Dripper</string>
     <string name="equip_cafec_tag">Conical, flower ribs, fast even flow</string>
     <string name="equip_ibrik_name">Ibrik</string>
-    <string name="equip_ibrik_tag">Regional cezve — unfiltered, extra-fine</string>
+    <string name="equip_cezve_mod_name">Cezve (Modern)</string>
+    <string name="equip_cezve_mod_tag">Turkish style — heat, foam, serve</string>
     <string name="drinks_title">Drinks</string>
     <string name="drinks_intro">Milk-based classics and regional recipes — built, not brewed by ratio.</string>
     <string name="drink_read_more">View recipe</string>
@@ -280,6 +281,8 @@
     <string name="learn_ch_tasting">Tasting &amp; Sensory</string>
     <string name="learn_ch_caffeine">Caffeine</string>
     <string name="learn_ch_equipment">Equipment Deep-Dive</string>
+    <string name="learn_ch_water_deep">Water Chemistry</string>
+    <string name="learn_ch_sustainability">Sustainability &amp; Coffee</string>
     <string name="learn_l1_title">Growing regions &amp; terroir</string>
     <string name="learn_l1_body">Where coffee grows shapes how it tastes. Altitude, soil, climate and shade all leave a fingerprint. Higher-grown coffee (1,200–2,200 m) matures slowly, growing denser beans with more sugars and brighter, more complex acidity. Latin America tends toward chocolate and nuts, East Africa toward florals and berries, and Indonesia toward earthy, full-bodied cups.\n\nThe \'coffee belt\' between the Tropics of Cancer and Capricorn gives the tropical highlands, stable temperatures and rainfall coffee needs.</string>
     <string name="learn_l2_title">Particle size &amp; distribution</string>
@@ -443,6 +446,21 @@
     <string name="pro_tip_8">For espresso: purge your steam wand before AND after use. Milk residue inside the wand breeds bacteria.</string>
     <string name="pro_tip_9">Light roasts need hotter water (96°C) and finer grind. Dark roasts prefer cooler (88°C) and coarser.</string>
     <string name="pro_tip_10">Taste coffee at different temperatures as it cools. Different flavors emerge at different heat levels.</string>
+    <string name="pro_tip_11">Weigh everything. Volume measurements are inconsistent — coffee density varies by roast and origin. A $15 digital scale is the single biggest upgrade you can make.</string>
+    <string name="pro_tip_12">Rinse paper filters with hot water before brewing. This removes paper taste, preheats the dripper, and helps the filter stick to the walls for better flow.</string>
+    <string name="pro_tip_13">Bloom your coffee (30-45s with 2-3x coffee weight in water). This releases CO2 trapped during roasting, allowing even extraction. Fresh coffee blooms more vigorously.</string>
+    <string name="pro_tip_14">Clean your grinder monthly. Old oils go rancid and coat new beans with stale flavors. Run Grindz tablets or uncooked rice through it regularly.</string>
+    <string name="pro_tip_15">Buy smaller bags more often. Coffee peaks 5-14 days after roast and declines after 3-4 weeks. Freeze what you won\'t brew within 2 weeks.</string>
+    <string name="pro_tip_16">Use filtered water. Chlorine in tap water reacts with coffee compounds creating off-flavors. A simple pitcher filter makes a noticeable difference.</string>
+    <string name="pro_tip_17">Preheat your brewer and cup. Pouring hot water into a cold vessel drops temperature by 5-10°C — enough to fall out of the optimal extraction window.</string>
+    <string name="pro_tip_18">Store beans in an airtight container away from light, heat, and moisture. Not the fridge (condensation kills flavor). Not the original bag unless it has a one-way valve.</string>
+    <string name="pro_tip_19">The most common beginner mistake: grinding too coarse. Under-extracted coffee tastes sour and hollow. Grind finer until you hit bitterness, then back off one step.</string>
+    <string name="pro_tip_20">Stir your bloom and final pour. A gentle stir ensures all grounds are saturated — dry pockets create uneven extraction and muddled flavor.</string>
+    <string name="pro_tip_21">Water temperature drops during brewing. Start at the high end of your target range (94-96°C) and let the natural cooling through the brew hit the sweet spot mid-brew.</string>
+    <string name="pro_tip_22">Pour from a gooseneck kettle if brewing pour-over. The controlled stream lets you maintain a flat coffee bed, which extracts evenly. A regular kettle splashes and channels.</string>
+    <string name="pro_tip_23">Taste your coffee at different temperatures as it cools. Flavors reveal themselves — bright acidity at 60-70°C, sweetness at 50°C, body at 40°C. This is how pros evaluate.</string>
+    <string name="pro_tip_24">The rule of 15: coffee starts noticeably staling after 15 days from roast, ground coffee after 15 minutes, brewed coffee after 15 minutes of sitting. Respect these windows.</string>
+    <string name="pro_tip_25">Clean your equipment after every use. Coffee oils polymerize into a bitter residue that\'s nearly impossible to remove once baked on. Rinse immediately after brewing.</string>
 
     <!-- Coffee Glossary -->
     <string name="glossary_title">Coffee Glossary</string>
@@ -496,6 +514,36 @@
     <string name="glossary_def_24">Total Dissolved Solids. Measures brew strength. Ideal: 1.15–1.55% for filter coffee.</string>
     <string name="glossary_term_25">Under-extraction</string>
     <string name="glossary_def_25">When too few solubles dissolve, resulting in sour, salty, and thin coffee (below 18% yield).</string>
+    <string name="glossary_term_26">Agitation</string>
+    <string name="glossary_def_26">Any movement of the coffee bed during brewing — stirring, swirling, or pulse pouring — that increases extraction by exposing fresh particle surfaces to water.</string>
+    <string name="glossary_term_27">Bypass</string>
+    <string name="glossary_def_27">Adding plain water to brewed coffee to reduce strength without overextracting. Common in AeroPress recipes where you brew strong then dilute.</string>
+    <string name="glossary_term_28">Channeling</string>
+    <string name="glossary_def_28">When water finds a path of least resistance through the coffee bed, overextracting that channel while underextracting the rest. Causes: uneven distribution or tamping.</string>
+    <string name="glossary_term_29">Cupping</string>
+    <string name="glossary_def_29">The industry-standard method for evaluating coffee quality. 8.25g coffee to 150ml water at 93°C, steeped 4 minutes, then slurped from a spoon to aerate and assess.</string>
+    <string name="glossary_term_30">Degassing</string>
+    <string name="glossary_def_30">The release of CO2 from roasted coffee beans. Most intense in the first 48-72 hours after roast. Fresh beans bloom vigorously; very fresh beans (~1-3 days old) may need extended bloom times.</string>
+    <string name="glossary_term_31">Dialing In</string>
+    <string name="glossary_def_31">The iterative process of adjusting grind size, dose, ratio, and time to achieve optimal extraction for a specific coffee. Change one variable at a time.</string>
+    <string name="glossary_term_32">First Crack</string>
+    <string name="glossary_def_32">An audible popping sound during roasting when beans expand and release moisture. Marks the transition from light to medium roast. Occurs around 196°C (385°F).</string>
+    <string name="glossary_term_33">Maillard Reaction</string>
+    <string name="glossary_def_33">The chemical reaction between amino acids and sugars that creates browning and complex flavor compounds. Responsible for the toasty, nutty, chocolate notes in medium-roast coffee.</string>
+    <string name="glossary_term_34">Puck</string>
+    <string name="glossary_def_34">The compressed disc of spent coffee grounds left in an espresso portafilter after extraction. A dry, intact puck indicates good preparation.</string>
+    <string name="glossary_term_35">Quakers</string>
+    <string name="glossary_def_35">Under-ripe coffee beans that remain pale after roasting. They taste papery/peanutty and are a defect. Quality roasters remove them during sorting.</string>
+    <string name="glossary_term_36">Ratio</string>
+    <string name="glossary_def_36">The weight relationship between coffee and water. 1:16 means 1g coffee to 16g water. Stronger = lower denominator (1:14). Weaker = higher denominator (1:18).</string>
+    <string name="glossary_term_37">Shot</string>
+    <string name="glossary_def_37">A single serving of espresso, traditionally 7-9g of coffee yielding 25-35ml. Modern specialty espresso often uses larger doses (18-20g) and higher yields.</string>
+    <string name="glossary_term_38">Silverskin</string>
+    <string name="glossary_def_38">The thin, papery outer layer of the coffee bean that flakes off during roasting. Chaff. Some remains in the crease of roasted beans.</string>
+    <string name="glossary_term_39">Third Wave Coffee</string>
+    <string name="glossary_def_39">A movement treating coffee as an artisanal food product rather than a commodity. Emphasis on origin transparency, lighter roasts, and highlighting terroir characteristics.</string>
+    <string name="glossary_term_40">Yield</string>
+    <string name="glossary_def_40">The weight of espresso output. A 1:2 ratio with 18g dose yields 36g espresso. Higher yield = more extraction, thinner body. Lower yield = less extraction, thicker body.</string>
 
     <!-- Grind size visual reference -->
     <string name="grind_vis_title">Grind Size Reference</string>
@@ -532,6 +580,22 @@
     <string name="brew_issue_bitter_advice">Grind coarser | Lower temp | Shorten brew time | Less agitation</string>
     <string name="brew_issue_weak_advice">Use more coffee (stronger ratio) | Grind finer | Check water temp</string>
     <string name="brew_issue_dry_advice">Grind coarser | Lower temp | Check for channeling | Reduce fines</string>
+    <string name="brew_issue_stalling">Stalling / Slow drawdown</string>
+    <string name="brew_issue_channeling">Channeling / Uneven flow</string>
+    <string name="brew_issue_muddy">Muddy / Silty</string>
+    <string name="brew_issue_flat">Flat / Lifeless</string>
+    <string name="brew_issue_burnt">Burnt / Ashy</string>
+    <string name="brew_issue_metallic">Metallic / Rusty</string>
+    <string name="brew_issue_grassy">Grassy / Hay-like</string>
+    <string name="brew_issue_salty">Salty / Briny</string>
+    <string name="brew_issue_stalling_advice">Fines are clogging the filter — grind slightly coarser | Rinse filter thoroughly | Avoid aggressive swirling late in brew | Try a faster-flowing filter paper</string>
+    <string name="brew_issue_channeling_advice">Water finds paths of least resistance — pour more evenly in spirals | Stir the bloom to saturate all grounds | Use a gooseneck kettle for control | Tamp level for espresso</string>
+    <string name="brew_issue_muddy_advice">Too many fines or filter failure — grind coarser to reduce fines | Check paper filter isn\'t torn or collapsed | Press French press plunger slowly | Let silt settle before pouring</string>
+    <string name="brew_issue_flat_advice">Extraction is too low — grind finer | Raise water temp 2-3°C | Increase agitation during bloom and pours | Check beans are fresh (5-21 days post-roast)</string>
+    <string name="brew_issue_burnt_advice">Beans over-roasted or scorched — lower brew temp to 85-88°C | Grind coarser and shorten brew time | Try beans from a different roaster | Avoid water straight off a rolling boil</string>
+    <string name="brew_issue_metallic_advice">Iron or copper in your water — switch to filtered or bottled water | Old boiler scale leaching in espresso machines | Check your grinder burrs aren\'t rusting | Never descale with vinegar</string>
+    <string name="brew_issue_grassy_advice">Coffee is too fresh or under-developed — let beans rest 7-10 days post-roast | Under-roasted beans taste grassy regardless | Extend bloom time by 15-20s | Raise brew temperature</string>
+    <string name="brew_issue_salty_advice">Severe under-extraction — grind significantly finer | Raise water temperature 3-5°C | Increase agitation and extend brew time | Check your ratio (should be 1:15 to 1:17)</string>
 
     <!-- Flavor wheel -->
     <string name="flavor_wheel_title">Coffee Flavor Wheel</string>
@@ -560,6 +624,13 @@
     <string name="flavor_tobacco">Tobacco</string>
     <string name="flavor_leather">Leather</string>
     <string name="flavor_mushroom">Mushroom</string>
+    <string name="flavor_tropical_fruit">Tropical Fruit</string>
+    <string name="flavor_red_berry">Red Berry</string>
+    <string name="flavor_hazelnut">Hazelnut</string>
+    <string name="flavor_milk_chocolate">Milk Chocolate</string>
+    <string name="flavor_dark_cocoa">Dark Cocoa</string>
+    <string name="flavor_caramelized">Caramelized</string>
+    <string name="flavor_maple">Maple</string>
 
     <string name="ratio_ref_title">Quick Ratio Reference</string>
     <string name="ratio_1_15">1:15 — Strong, intense, punchy</string>
@@ -758,6 +829,60 @@
     <string name="drink_touba_name">Café Touba</string>
     <string name="drink_touba_summary">Senegalese spiced coffee with selim pepper (djar)</string>
     <string name="drink_touba_body">A traditional Senegalese coffee brewed with grains of selim pepper (djar) for a warm, clove-like spiced character.\n\nIngredients:\n• 15–20 g coffee\n• 1–2 selim pepper pods, crushed\n• 300 ml water\n• Sugar to taste\n\nSteps:\n1. Grind coffee medium-fine with crushed selim pepper.\n2. Heat water to a boil, add coffee and pepper.\n3. Simmer gently for 3–5 minutes.\n4. Strain through a fine cloth or sieve and serve hot.\n5. Sweeten as desired — the djar gives a naturally warming, clove-like spiced note.</string>
+    <string name="drink_caramacchiato_name">Caramel Macchiato</string>
+    <string name="drink_caramacchiato_summary">Latte macchiato with vanilla syrup and caramel drizzle</string>
+    <string name="drink_caramacchiato_body">A popular coffeehouse drink: steamed milk marked with espresso and finished with caramel. Originated in the US as a sweeter, more decadent take on the Italian macchiato tradition.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• Vanilla syrup (1–2 pumps)\n• Steamed milk w/ microfoam\n• Caramel sauce drizzle\n• Total: 350–450 ml\n\nSteps:\n1. Add vanilla syrup to the cup.\n2. Steam milk to glossy microfoam and pour into the cup.\n3. Slowly pour the espresso shot through the centre of the foam — it creates the distinctive "mark."\n4. Top with a crosshatch pattern of caramel sauce.\n5. Serve without stirring — drink through the layers.</string>
+    <string name="drink_espressino_name">Espressino</string>
+    <string name="drink_espressino_summary">Italian layered: cocoa, espresso, milk foam and more cocoa</string>
+    <string name="drink_espressino_body">A small, beautifully layered Italian coffee drink popular in Puglia and southern Italy. Built in a clear glass shot by shot: cocoa powder dusted on the bottom, a hot espresso shot pulled over it, frothed milk spooned on top, and a final dusting of cocoa to finish.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• Cocoa powder (for bottom and top)\n• 2–3 tbsp frothed milk\n• Total: 60–100 ml\n\nSteps:\n1. Dust the bottom of a small clear glass with cocoa powder.\n2. Pull a single espresso shot directly into the glass.\n3. Spoon warm frothed milk on top to form a white layer.\n4. Finish with a light dusting of cocoa powder on top.</string>
+    <string name="drink_lagrima_name">Lágrima</string>
+    <string name="drink_lagrima_summary">Argentine "teardrop" — warm milk with a drop of espresso</string>
+    <string name="drink_lagrima_body">From Argentina, this is the gentlest coffee drink: a cup of warm, frothed milk with just a "teardrop" (lágrima) of espresso added. The milk dominates completely — creamy, slightly sweet, barely coffee-flavoured. Popular at breakfast and perfect for those who find straight espresso too intense.\n\nIngredients:\n• 150–200 ml steamed milk\n• A few drops of espresso (~5 ml)\n• Total: 150–200 ml\n\nSteps:\n1. Steam milk to glossy microfoam and pour into a cup.\n2. Pull a normal espresso shot but only let a few drops fall into the milk — "a teardrop."\n3. Serve immediately. The drink should be mostly white with a small brown mark.</string>
+    <string name="drink_galao_name">Galão</string>
+    <string name="drink_galao_summary">Portuguese coffee — tall glass, 1:3 espresso to frothed milk</string>
+    <string name="drink_galao_body">A Portuguese staple: one part espresso to three parts frothed milk, served in a tall clear glass. Lighter and foamier than a latte, with an airy, creamy texture. The layered effect is part of its charm — espresso at the bottom graduating to white foam at the top.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• ~90 ml steamed milk with thick foam\n• Total: ~120 ml in a tall glass\n\nSteps:\n1. Pull a single espresso into a tall clear glass.\n2. Steam milk to create abundant thick foam — more airy than latte microfoam.\n3. Pour the milk slowly so it layers, with white foam rising to the top.\n4. Serve without stirring to preserve the visual gradient.</string>
+    <string name="drink_piccolo_name">Piccolo Latte</string>
+    <string name="drink_piccolo_summary">Australian ristretto topped with steamed milk in a small glass</string>
+    <string name="drink_piccolo_body">Born in Australia\'s specialty coffee scene, the piccolo is a miniature latte: a single ristretto shot topped with warm, silky steamed milk in a small (90–120 ml) glass. It packs the intensity of espresso with the smoothness of milk, making it the perfect mid-afternoon pick-me-up that finishes before it cools.\n\nIngredients:\n• 1 ristretto shot (~15–20 ml)\n• ~70–90 ml steamed milk with microfoam\n• Total: 90–120 ml in a small glass\n\nSteps:\n1. Pull a single ristretto into a small glass (~100 ml).\n2. Steam a small amount of milk to latte-quality microfoam.\n3. Pour the milk over the ristretto, leaving a thin foam cap.\n4. Optional: simple latte art heart on top.</string>
+    <string name="drink_breve_name">Breve</string>
+    <string name="drink_breve_summary">American espresso with steamed half-and-half — richer and sweeter</string>
+    <string name="drink_breve_body">An American invention: a latte made with steamed half-and-half (half milk, half cream) instead of whole milk. The higher fat content creates a richer, thicker, naturally sweeter drink with dense, velvety foam. Every coffee shop in the US knows this order — it\'s the indulgent cousin of the standard latte.\n\nIngredients:\n• 1–2 shots espresso (~30–60 ml)\n• Steamed half-and-half (~180 ml)\n• Total: ~240 ml\n\nSteps:\n1. Pull one or two espresso shots into a cup.\n2. Steam half-and-half — because it\'s higher fat, it froths more slowly; stop at 55–60°C.\n3. Pour over the espresso. The result should be noticeably richer and creamier than a standard latte.</string>
+    <string name="drink_bulletproof_name">Bulletproof Coffee</string>
+    <string name="drink_bulletproof_summary">Coffee blended with grass-fed butter and MCT/coconut oil</string>
+    <string name="drink_bulletproof_body">Popularised by the keto and paleo communities, Bulletproof Coffee is regular black coffee blended with unsalted grass-fed butter and MCT oil or coconut oil until emulsified and frothy. The resulting drink is creamy, slightly oily, and exceptionally satiating — many use it as a breakfast replacement, claiming it provides sustained mental energy without the crash of carbohydrates. Created by Dave Asprey in the early 2010s, inspired by yak-butter tea he tried in Tibet.\n\nIngredients:\n• 250 ml hot black coffee\n• 1–2 tbsp unsalted grass-fed butter\n• 1 tbsp MCT oil or coconut oil\n• Total: ~280 ml\n\nSteps:\n1. Brew a cup of high-quality black coffee.\n2. Add the coffee, butter, and MCT/coconut oil to a blender.\n3. Blend on high for 20–30 seconds until the mixture turns creamy and frothy (do NOT just stir — it won\'t emulsify).\n4. Pour into a mug and drink immediately while hot.</string>
+    <string name="drink_bicerin_name">Bicerin</string>
+    <string name="drink_bicerin_summary">Turin\'s layered drink: espresso, chocolate and cream</string>
+    <string name="drink_bicerin_body">A traditional hot drink from Turin\'s historic Caffè Al Bicerin, dating to the 18th century. Three distinct layers — rich hot chocolate at the base, a shot of espresso in the middle, and lightly whipped cream on top — are served in a small clear glass without stirring.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• 60 ml thick hot chocolate (cioccolata calda)\n• Lightly whipped cream\n• Total: ~150 ml\n\nSteps:\n1. Prepare thick hot chocolate and pour it into a small clear glass (bottom layer).\n2. Slowly pour the hot espresso over the back of a spoon to create the middle layer.\n3. Spoon lightly whipped cream on top — do not stir.\n4. Drink through the cream, letting the layers gradually mix.</string>
+    <string name="drink_espresso_romano_name">Espresso Romano</string>
+    <string name="drink_espresso_romano_summary">Espresso served with lemon peel, an Italian-American tradition</string>
+    <string name="drink_espresso_romano_body">A simple but distinctive serve: a standard espresso shot with a strip of lemon zest or peel on the side (or rubbed on the rim). Despite its name, it\'s more Italian-American than Roman — likely originating from Italian immigrants in the US who found early espresso harsh and used lemon to soften the bitterness. The citrus oil brightens the coffee\'s aroma.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• A strip of fresh lemon peel\n• Optional: sugar to taste\n\nSteps:\n1. Pull a standard single espresso shot.\n2. Rub the lemon peel around the rim of the cup to release its oils, then drop it in or place on the saucer.\n3. Some squeeze a drop of lemon juice; purists only use the peel for aroma.\n4. Serve immediately.</string>
+    <string name="drink_mazagran_name">Mazagran</string>
+    <string name="drink_mazagran_summary">Portuguese cold brew coffee with lemonade, served over ice</string>
+    <string name="drink_mazagran_body">A refreshing Portuguese iced coffee drink named after a fortress in Algeria, where French soldiers reportedly drank coffee syrup with cold water. The modern version combines strong cold brew or espresso with fresh lemonade and ice — the bright acidity of lemon cutting through the coffee\'s depth. Light, tangy and quenching, popular across Portugal during summer.\n\nIngredients:\n• 60 ml strong cold brew (or chilled espresso)\n• 60 ml fresh lemonade\n• Ice cubes\n• Optional: a splash of rum, mint sprig\n\nSteps:\n1. Fill a glass with ice cubes.\n2. Pour the cold brew coffee over the ice.\n3. Add fresh lemonade and stir gently.\n4. Garnish with a lemon slice and optional mint sprig.</string>
+    <string name="drink_carajas_name">Carajillo</string>
+    <string name="drink_carajas_summary">Mexican drink with espresso, Licor 43, ice and whipped cream</string>
+    <string name="drink_carajas_body">A Mexican cocktail-coffee hybrid: equal parts espresso and Licor 43 (a sweet Spanish vanilla-citrus liqueur), shaken over ice for a creamy, frothy texture, then topped with whipped cream. The name comes from the Spanish "coraje" (courage) — it\'s the drink soldiers ordered before battle. Served after meals or as a pick-me-up in the late afternoon.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• 1 shot Licor 43 (~30 ml)\n• Ice\n• Whipped cream\n• Optional: cinnamon or coffee beans for garnish\n\nSteps:\n1. Pull a fresh espresso shot and let it cool slightly.\n2. Fill a shaker with ice, add the espresso and Licor 43.\n3. Shake vigorously for 10–15 seconds until frothy.\n4. Strain into a rocks glass over fresh ice.\n5. Top with whipped cream and garnish with cinnamon or coffee beans.</string>
+    <string name="drink_asiatico_name">Asiático</string>
+    <string name="drink_asiatico_summary">Spanish coffee with condensed milk, brandy, Licor 43 and spices</string>
+    <string name="drink_asiatico_body">From Cartagena in southeastern Spain, this elaborate coffee cocktail layers condensed milk, brandy, Licor 43, hot espresso, and a twist of lemon peel, finished with cinnamon and sometimes a coffee bean on top. It\'s sweet, boozy, spicy and intensely aromatic — a full sensory experience served in a special thick-walled glass.\n\nIngredients:\n• 2 tbsp condensed milk\n• 1 shot brandy (~30 ml)\n• 1 shot Licor 43 (~30 ml)\n• 1 shot espresso (~30 ml)\n• Lemon peel\n• Cinnamon and 2 coffee beans for garnish\n\nSteps:\n1. Pour condensed milk into the bottom of the glass.\n2. Add brandy and Licor 43 as the next layers.\n3. Slowly pour hot espresso over the back of a spoon.\n4. Flambé if desired for caramelised top notes.\n5. Garnish with lemon peel, a cinnamon stick, and two coffee beans.</string>
+    <string name="drink_pharisaer_name">Pharisäer</string>
+    <string name="drink_pharisaer_summary">North German coffee with rum and whipped cream — do not stir!</string>
+    <string name="drink_pharisaer_body">A classic drink from North Frisia (northern Germany), the Pharisäer combines strong black coffee with a generous pour of dark rum, topped with a thick cap of whipped cream. According to legend, it was invented in the 19th century to hide the alcohol from a strict pastor — hence the name "Pharisee." The golden rule: never stir. You drink through the cream.\n\nIngredients:\n• 150 ml strong black coffee\n• 40 ml dark rum (traditionally 54% rum)\n• Whipped cream\n• Optional: rock sugar at the bottom\n\nSteps:\n1. Optionally place a piece of rock sugar at the bottom of a cup.\n2. Pour hot strong coffee over it and stir.\n3. Add the dark rum.\n4. Carefully float a thick layer of whipped cream on top using a spoon.\n5. Serve immediately — tradition says whoever stirs buys the next round.</string>
+    <string name="drink_kaffeost_name">Kaffeost</string>
+    <string name="drink_kaffeost_summary">Swedish coffee poured over cubed bread cheese (leipäjuusto)</string>
+    <string name="drink_kaffeost_body">A unique Scandinavian tradition (also Finnish: kaffejuusto): hot black coffee poured over cubes of leipäjuusto — a squeaky, mild bread cheese made from cow\'s, goat\'s, or reindeer milk. The heat softens the cheese, which absorbs the coffee while releasing its creamy dairy notes. The cheese cubes are eaten with a spoon after drinking — a rustic, satisfying combination that dates back to northern Sweden and Finnish Lapland.\n\nIngredients:\n• 200 ml hot black coffee\n• Several cubes of leipäjuusto (bread cheese)\n• Total: about one cup\n\nSteps:\n1. Cut leipäjuusto into small cubes (~2 cm) and place them in a cup or bowl.\n2. Pour very hot black coffee over the cheese cubes.\n3. Let it sit for 1–2 minutes so the cheese warms and absorbs coffee.\n4. Drink the coffee and eat the softened cheese cubes with a spoon.</string>
+    <string name="drink_flatred_name">Flat Red</string>
+    <string name="drink_flatred_summary">Ukrainian drink: espresso, beet syrup and steamed milk</string>
+    <string name="drink_flatred_body">A modern Ukrainian specialty drink that gives the Flat White a vibrant twist: earthy-sweet beet syrup is added to a double ristretto base, then topped with silky steamed milk. The result is a striking pinkish-red hue, subtly vegetal sweetness from the beet, and the familiar creamy intensity of a flat white. It emerged in Kyiv specialty cafes around 2020 as part of a wave of root-vegetable coffee experiments.\n\nIngredients:\n• 2 ristretto shots (~30–40 ml)\n• 10–15 ml beet syrup\n• ~100 ml steamed milk with microfoam\n• Total: ~160 ml\n\nSteps:\n1. Add beet syrup to the bottom of a glass.\n2. Pull two ristretto shots over the syrup and stir gently.\n3. Steam milk to glossy microfoam and pour over the espresso.\n4. The drink should have a distinct pink tint from the beet.</string>
+    <string name="drink_cascara_name">Cascara Coffee</string>
+    <string name="drink_cascara_summary">Brewed from dried coffee cherry husks — closer to tea</string>
+    <string name="drink_cascara_body">Cascara (Spanish for "husk") is brewed from the dried skins of coffee cherries — the fruit that surrounds the bean. Despite its name, it tastes nothing like coffee: it\'s closer to a fruity herbal tea with notes of rosehip, hibiscus, cherry and tamarind. Naturally sweet with noticeable caffeine (about 1/4 of coffee), cascara is a byproduct of coffee processing that farmers in Yemen, Ethiopia and Bolivia have drunk for centuries.\n\nIngredients:\n• 15–20 g dried cascara (coffee cherry husks)\n• 300 ml water at 93–96°C\n• Steep: 4–5 minutes\n\nSteps:\n1. Place cascara in a teapot or French press.\n2. Pour hot water (93–96°C) over the cascara.\n3. Steep for 4–5 minutes — longer for a deeper, more tannic brew.\n4. Strain and serve hot, or chill and serve over ice.\n5. Optional: add a slice of lemon or a touch of honey.</string>
+    <string name="drink_qishr_name">Qishr</string>
+    <string name="drink_qishr_summary">Yemeni drink made from dried coffee husks, ginger, cinnamon and sugar</string>
+    <string name="drink_qishr_body">Qishr is a traditional Yemeni hot drink brewed from dried coffee cherry husks (the same cascara material), spiced with fresh ginger and cinnamon, and sweetened with sugar. It predates the drinking of roasted coffee — Yemenis have enjoyed qishr for over 500 years as a warming, digestif-like beverage. The ginger adds heat, the cinnamon warmth, and the cascara provides a gently caffeinated, fruity base.\n\nIngredients:\n• 2 tbsp dried coffee husks (cascara)\n• 1 tsp grated fresh ginger\n• 1 cinnamon stick\n• 1–2 tsp sugar (or to taste)\n• 300 ml water\n\nSteps:\n1. Bring water to a boil with ginger and cinnamon stick.\n2. Add coffee husks, reduce heat, and simmer for 5–7 minutes.\n3. Add sugar and stir to dissolve.\n4. Strain into cups and serve hot.\n5. Some versions add a pinch of cardamom or a few cloves.</string>
+    <string name="drink_espresso_yen_name">Espresso Yen</string>
+    <string name="drink_espresso_yen_summary">Thai iced coffee with condensed milk, evaporated milk and espresso over ice</string>
+    <string name="drink_espresso_yen_body">A Thai specialty coffee shop creation that bridges traditional Thai iced coffee and Italian espresso culture: a shot of espresso poured over sweetened condensed milk and ice, then topped with a swirl of evaporated milk. The result is intensely sweet, creamy and refreshing — popular in Bangkok\'s growing third-wave café scene. Unlike traditional oliang, which uses a dark-roasted Robusta blend brewed in a cloth filter, Espresso Yen leans on the brightness and body of espresso.\n\nIngredients:\n• 1–2 shots espresso (~30–60 ml)\n• 2 tbsp sweetened condensed milk\n• Ice\n• 1–2 tbsp evaporated milk (for topping)\n• Total: ~250–300 ml\n\nSteps:\n1. Add condensed milk to the bottom of a tall glass.\n2. Fill the glass with ice.\n3. Pull espresso shot(s) and pour over the ice.\n4. Drizzle evaporated milk over the top (it will swirl into the coffee).\n5. Serve with a straw — stir well before drinking to mix the condensed milk throughout.</string>
 
     <!-- Coffee varieties -->
     <string name="variety_typica_name">Arabica Typica</string>
@@ -765,25 +890,25 @@
     <string name="variety_typica_flavor">Clean, sweet, balanced</string>
     <string name="variety_typica_brew">Pour-over</string>
     <string name="variety_bourbon_name">Arabica Bourbon</string>
-    <string name="variety_bourbon_origin">Réunion Island</string>
-    <string name="variety_bourbon_flavor">Chocolate, nut, caramel sweetness</string>
-    <string name="variety_bourbon_brew">All methods</string>
+    <string name="variety_bourbon_origin">Réunion Island / East Africa</string>
+    <string name="variety_bourbon_flavor">Sweet, caramel, red fruit, excellent clarity</string>
+    <string name="variety_bourbon_brew">Pour-over</string>
     <string name="variety_gesha_name">Arabica Gesha</string>
     <string name="variety_gesha_origin">Ethiopia / Panama</string>
     <string name="variety_gesha_flavor">Jasmine, bergamot, stone fruit</string>
     <string name="variety_gesha_brew">Pour-over (delicate)</string>
     <string name="variety_sl28_name">Arabica SL-28</string>
     <string name="variety_sl28_origin">Kenya</string>
-    <string name="variety_sl28_flavor">Blackcurrant, tomato, wine acidity</string>
-    <string name="variety_sl28_brew">Pour-over, press</string>
+    <string name="variety_sl28_flavor">Intense blackcurrant, citrus, tomato, complex acidity</string>
+    <string name="variety_sl28_brew">Pour-over</string>
     <string name="variety_caturra_name">Arabica Caturra</string>
     <string name="variety_caturra_origin">Brazil / Colombia</string>
     <string name="variety_caturra_flavor">Bright citrus, light body</string>
     <string name="variety_caturra_brew">Espresso, pour-over</string>
     <string name="variety_pacamara_name">Arabica Pacamara</string>
     <string name="variety_pacamara_origin">El Salvador</string>
-    <string name="variety_pacamara_flavor">Tropical fruit, intense sweetness</string>
-    <string name="variety_pacamara_brew">Pour-over</string>
+    <string name="variety_pacamara_flavor">Floral, stone fruit, chocolate, complex</string>
+    <string name="variety_pacamara_brew">Pour-over or French press</string>
     <string name="variety_robusta_name">Robusta</string>
     <string name="variety_robusta_origin">Vietnam / Indonesia</string>
     <string name="variety_robusta_flavor">Earthy, woody, high caffeine</string>
@@ -797,17 +922,57 @@
     <string name="variety_mundonovo_flavor">Chocolate, nut, low acid</string>
     <string name="variety_mundonovo_brew">Espresso</string>
     <string name="variety_catuai_name">Arabica Catuai</string>
-    <string name="variety_catuai_origin">Brazil / Costa Rica</string>
-    <string name="variety_catuai_flavor">Mild, nutty, balanced</string>
+    <string name="variety_catuai_origin">Brazil / Central America</string>
+    <string name="variety_catuai_flavor">Nutty, caramel, mild citrus, balanced</string>
     <string name="variety_catuai_brew">All methods</string>
     <string name="variety_maragogipe_name">Arabica Maragogipe</string>
-    <string name="variety_maragogipe_origin">Brazil</string>
-    <string name="variety_maragogipe_flavor">Mild, low acid, delicate</string>
-    <string name="variety_maragogipe_brew">Pour-over</string>
+    <string name="variety_maragogipe_origin">Brazil / Central America</string>
+    <string name="variety_maragogipe_flavor">Delicate, floral, tea-like, mild</string>
+    <string name="variety_maragogipe_brew">Gentle pour-over</string>
     <string name="variety_liberica_name">Liberica</string>
     <string name="variety_liberica_origin">West Africa / SE Asia</string>
     <string name="variety_liberica_flavor">Smoky, woody, full body</string>
     <string name="variety_liberica_brew">Traditional methods</string>
+    <string name="variety_sl34_name">Arabica SL-34</string>
+    <string name="variety_sl34_origin">Kenya</string>
+    <string name="variety_sl34_flavor">Lower acidity, darker fruit, heavier body than SL-28</string>
+    <string name="variety_sl34_brew">Immersion or pour-over</string>
+    <string name="variety_mundo_novo_name">Arabica Mundo Novo</string>
+    <string name="variety_mundo_novo_origin">Brazil</string>
+    <string name="variety_mundo_novo_flavor">Chocolate, nut, dark fruit, smooth body</string>
+    <string name="variety_mundo_novo_brew">French press or espresso</string>
+    <string name="variety_jamaica_blue_name">Arabica Jamaica Blue Mountain</string>
+    <string name="variety_jamaica_blue_origin">Jamaica</string>
+    <string name="variety_jamaica_blue_flavor">Perfectly balanced, mild, sweet, clean</string>
+    <string name="variety_jamaica_blue_brew">Pour-over at medium roast</string>
+    <string name="variety_kona_name">Arabica Kona</string>
+    <string name="variety_kona_origin">Hawaii</string>
+    <string name="variety_kona_flavor">Nutty, buttery, smooth, medium body</string>
+    <string name="variety_kona_brew">Pour-over or cold brew</string>
+    <string name="variety_mokka_name">Arabica Mokka</string>
+    <string name="variety_mokka_origin">Yemen / Ethiopia</string>
+    <string name="variety_mokka_flavor">Intense chocolate, spice, dark fruit, tiny beans</string>
+    <string name="variety_mokka_brew">Turkish or espresso</string>
+    <string name="variety_villa_sarchi_name">Arabica Villa Sarchi</string>
+    <string name="variety_villa_sarchi_origin">Costa Rica</string>
+    <string name="variety_villa_sarchi_flavor">Honey, caramel, citrus, bright sweetness</string>
+    <string name="variety_villa_sarchi_brew">All methods</string>
+    <string name="variety_ruiru_11_name">Arabica Ruiru 11</string>
+    <string name="variety_ruiru_11_origin">Kenya</string>
+    <string name="variety_ruiru_11_flavor">Full body, wine, cocoa, rich</string>
+    <string name="variety_ruiru_11_brew">Espresso or French press</string>
+    <string name="variety_s795_name">Arabica S795</string>
+    <string name="variety_s795_origin">India</string>
+    <string name="variety_s795_flavor">Spicy, woody, bold, strong body</string>
+    <string name="variety_s795_brew">South Indian filter or moka pot</string>
+    <string name="variety_catimor_name">Arabica Catimor</string>
+    <string name="variety_catimor_origin">Central America / SE Asia</string>
+    <string name="variety_catimor_flavor">Earthy, nutty, low acidity, robust</string>
+    <string name="variety_catimor_brew">Espresso blends</string>
+    <string name="variety_starmaya_name">Arabica Starmaya</string>
+    <string name="variety_starmaya_origin">Central America</string>
+    <string name="variety_starmaya_flavor">High quality potential, balanced cup</string>
+    <string name="variety_starmaya_brew">All methods</string>
 
     <!-- Caffeine tracking -->
     <string name="caffeine_title">Caffeine</string>
@@ -831,4 +996,28 @@
     <string name="ach_bean_explorer">Bean Explorer</string>
     <string name="ach_critic">Taste Critic</string>
     <string name="ach_perfect">Perfect Score</string>
+
+    <!-- Learn: Water Chemistry -->
+    <string name="learn_l51_title">Water Mineral Science</string>
+    <string name="learn_l51_body">Water hardness comes from dissolved calcium and magnesium ions, while alkalinity comes from bicarbonate. The SCA recommends 50–175 ppm hardness and 40–75 ppm alkalinity for optimal extraction. Calcium aids body and mouthfeel; magnesium promotes sharper, fruitier notes and is a more aggressive extractor. Too soft or distilled water produces flat, acidic, hollow cups because there are no minerals to bind flavor compounds. Too hard water creates chalky, muted, over-buffered coffee that obscures acidity and origin character.</string>
+    <string name="learn_l52_title">DIY Brewing Water</string>
+    <string name="learn_l52_body">Making your own brewing water is the cheapest way to eliminate water as a variable. Start with distilled or deionized water — zero TDS, clean slate. Add minerals: magnesium sulfate (Epsom salt) increases general hardness, sodium bicarbonate (baking soda) increases alkalinity as a buffer. Popular recipes include the Barista Hustle recipe (bright, tea-like), the Rao/Perger recipe (balanced, versatile), and the SCA standard recipe (classic body). The simplest starter recipe: 0.25g Epsom salt plus 0.5g baking soda per 1 liter of distilled water. Use a 0.01g precision scale for accuracy — mineral doses are tiny.</string>
+    <string name="learn_l53_title">Filter vs Espresso Water</string>
+    <string name="learn_l53_body">Different brew methods extract differently, so they need different water. Espresso uses high pressure and short contact time — it needs more buffer (alkalinity) to prevent harsh, aggressive acidity from overwhelming the shot. Filter coffee uses gravity and longer contact time — less buffer preserves clarity and lets delicate origin notes shine. There\'s a fundamental tension: hard water extracts better (more minerals = more flavor binding) but also scales up espresso machines faster. The compromise: use moderately hard water with balanced alkalinity, descale regularly, and never use distilled water in an espresso machine — it confuses water-level sensors and leaches metal from the boiler.</string>
+    <string name="learn_l54_title">Water and Flavor Perception</string>
+    <string name="learn_l54_body">Water composition directly shapes how your palate perceives coffee. Higher bicarbonate levels buffer acidity — the coffee tastes smoother, rounder, and less sharp, but too much mutes the bright notes that make Ethiopian and Kenyan coffees exciting. Higher general hardness increases perceived body and mouthfeel — more calcium and magnesium create a fuller, creamier texture. Soft water highlights acidity and clarity, making it ideal for delicate washed coffees where you want to taste every floral note. Test your home tap water with a TDS meter ($10) — if it reads above 250 ppm, you\'re probably tasting the water, not the coffee.</string>
+    <string name="learn_l55_title">Troubleshooting with Water</string>
+    <string name="learn_l55_body">Many common coffee defects trace back to water, not technique. Metallic, bloody, or rusty taste indicates iron in your water — try a carbon filter or bottled water and compare. Salty or unusually thick mouthfeel suggests high TDS (above 400 ppm), often from water softeners that replace calcium with sodium. Flat, empty, or hollow coffee points to very soft or distilled water with insufficient mineral content to carry flavor. Bitter, harsh, and drying coffee can come from high bicarbonate levels that over-buffer and mask sweetness. Chlorine or chloramine odors (pool water, band-aid) come straight from tap water — always filter, and always run cold water for 10 seconds before filling your kettle.</string>
+
+    <!-- Learn: Sustainability & Coffee -->
+    <string name="learn_l56_title">The Coffee Supply Chain</string>
+    <string name="learn_l56_body">Coffee passes through many hands: farmer, processor, exporter, importer, roaster, barista — and at each step, a cut is taken. The C-price (commodity coffee futures on the NY exchange) has hovered below the cost of production for years — the average farmer earns less than $2 per day. Specialty coffee exists outside this system: green buyers purchase based on cup quality, not commodity price, often paying 3–5x the C-price. Purchasing models: commodity (anonymous, price-driven), fair trade (minimum price floor, social premium), direct trade (roaster buys directly, no middlemen), and relationship coffee (multi-year commitments with transparency). The best proxy for ethical sourcing is a roaster that publishes their green buying prices — transparency is the real certification.</string>
+    <string name="learn_l57_title" formatted="false">Climate Change &amp; Coffee</string>
+    <string name="learn_l57_body" formatted="false">Coffee is a canary in the climate coal mine. Arabica thrives in a narrow temperature band of 18–22°C — rising global temperatures are shrinking the suitable growing belt. By 2050, up to 50% of current Arabica land may become unsuitable, forcing farmers to move higher up mountains or abandon coffee entirely. Shifting altitudes mean less land, steeper slopes, and more pressure on remaining forests. Robusta tolerates heat better but lacks Arabica\'s flavor complexity; Liberica is even more heat-tolerant but has a polarizing smoky profile. Heat-tolerant Arabica hybrids like Starmaya and Centroamericano (F1 hybrids) offer hope — they match Arabica cup quality with Robusta-level disease resistance. The race for climate-resilient varieties is the most urgent challenge in coffee agriculture.</string>
+    <string name="learn_l58_title" formatted="false">Processing &amp; Water Usage</string>
+    <string name="learn_l58_body" formatted="false">Coffee processing has a massive water footprint. The natural (dry) process uses almost no water — cherries dry whole in the sun for 2–4 weeks, making it the most eco-friendly method. The washed process is the thirstiest: 40–60 liters of water to process 1 kg of green coffee, with mucilage-polluted wastewater as a byproduct. Honey processing sits in the middle — some water is used to remove the skin, but mucilage stays on the bean. Modern eco-pulpers have reduced water usage by 90% compared to traditional pulpers, and closed-loop water recycling systems are becoming standard at progressive mills. In regions like Ethiopia and Kenya, coffee wastewater dumped into rivers has devastated aquatic ecosystems — proper treatment ponds and filtration are not optional extras, they are necessities for the industry\'s future.</string>
+    <string name="learn_l59_title">Certifications &amp; What They Mean</string>
+    <string name="learn_l59_body">Coffee certifications are tools, not guarantees. Organic ensures no synthetic pesticides or fertilizers — important because coffee is one of the most chemically sprayed crops. Fair Trade provides a minimum price floor ($1.40/lb) and a social premium for community projects — but the per-farmer payout is modest. Rainforest Alliance focuses on ecosystem conservation and worker welfare. Bird Friendly (Smithsonian) is the strictest shade-grown certification, requiring 40% canopy cover. UTZ and 4C are industry baseline standards — better than nothing but far from rigorous. The catch: certification costs $3,000–10,000 annually, which smallholder farmers with 1–2 hectares cannot afford. Direct trade and relationship models attempt to bypass this bureaucracy. When reading coffee bags, look for specific farm names, lot numbers, and price transparency — those tell you more than any stamp.</string>
+    <string name="learn_l60_title">Reducing Your Coffee Footprint</string>
+    <string name="learn_l60_body">Small changes at home compound into meaningful impact. Switch to reusable filters: cloth (cotton or hemp) lasts a year with proper care, and metal filters last indefinitely — both eliminate paper waste entirely. Compost your coffee grounds — they are nitrogen-rich, slightly acidic, and beloved by worms, making them one of the best compost inputs you can add. Buy coffee in larger bags (1–2 kg) to reduce packaging waste per gram, then portion and freeze what you won\'t use within 2 weeks. Support roasters who publish transparency reports, carbon-neutral shipping, and sustainable sourcing policies. The most impactful choice is also the simplest: drink less coffee, but make every cup count — one memorable Gesha is worth more than ten forgettable pods.</string>
 </resources>
