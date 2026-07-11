@@ -161,7 +161,7 @@ fun SettingsScreen(vm: AppViewModel) {
             Spacer(Modifier.height(8.dp))
             SegmentedControl(
                 options = listOf("C" to "°C", "F" to "°F"),
-                selected = "C" to "°C",
+                selected = if (state.settings.temperatureUnit == "F") "F" to "°F" else "C" to "°C",
                 label = { it.second },
                 onSelect = { vm.setTemperatureUnit(it.first) },
                 modifier = Modifier.fillMaxWidth(),

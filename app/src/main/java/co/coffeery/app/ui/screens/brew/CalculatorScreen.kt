@@ -121,7 +121,7 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
 
         RoastSection(state, vm)
 
-        OutputSection(result, eq)
+        OutputSection(result, eq, state)
 
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
             SecondaryButton(
@@ -383,7 +383,7 @@ private fun RoastSection(state: AppUiState, vm: AppViewModel) {
 }
 
 @Composable
-private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment) {
+private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment, state: AppUiState) {
     val colors = CoffeeTheme.colors
     val grindColor = lerp(colors.cremaLight, colors.cremaDark, result.grind.ordinal / 6f)
 

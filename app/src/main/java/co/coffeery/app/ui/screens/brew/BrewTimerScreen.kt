@@ -33,6 +33,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -73,6 +74,8 @@ import co.coffeery.app.data.model.Equipment
 import co.coffeery.app.data.model.StepKind
 import co.coffeery.app.util.BrewMath
 import co.coffeery.app.util.Format
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import kotlinx.coroutines.delay
 
 @Composable
@@ -101,6 +104,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     var everStarted by rememberSaveable { mutableStateOf(false) }
     var finished by rememberSaveable { mutableStateOf(false) }
     var elapsedTotal by rememberSaveable { mutableIntStateOf(0) }
+    var stepEndTime by rememberSaveable { mutableLongStateOf(0L) }
 
     val equipmentName = eq.displayName()
     val stepTitles = steps.map { stringResource(it.titleRes) }
@@ -128,46 +132,57 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         }
     }
 
-    LaunchedEffect(running) {
+    LaunchedEffect(stepIndex, running) {
+        if (running && stepEndTime == 0L) {
+            stepEndTime = System.currentTimeMillis() + remaining * 1000L
+        }
+    }
+
+    LaunchedEffect(running, stepIndex) {
+        if (running) {
+            stepEndTime = System.currentTimeMillis() + remaining * 1000L
+        }
         while (running && !finished) {
-            delay(1000)
-            elapsedTotal++
-            val next = remaining - 1
-            if (next <= 0) {
-                if (stepIndex < steps.lastIndex) {
-                    stepIndex++
-                    remaining = steps[stepIndex].durationSec
-                    if (!state.settings.timerAutoAdvance) {
-                        running = false
-                    }
-                    if (state.settings.timerVibrate) {
-                        val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            vibrator?.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
-                        } else {
-                            @Suppress("DEPRECATION")
-                            vibrator?.vibrate(50)
-                        }
-                    }
-                    if (state.settings.timerSound) {
-                        try {
-                            val tone = ToneGenerator(AudioManager.STREAM_NOTIFICATION, 50)
-                            tone.startTone(ToneGenerator.TONE_PROP_BEEP, 100)
-                        } catch (_: Exception) {
-                        }
-                    }
-                    if (state.settings.notificationsStepChange) {
-                        val currentStep = steps[stepIndex]
-                        val stepTitle = context.getString(currentStep.titleRes)
-                        sendNotification(context, "Next step", "Step ${stepIndex+1}/${steps.size}: $stepTitle")
-                    }
-                } else {
-                    remaining = 0
-                    running = false
-                    finished = true
+            val now = System.currentTimeMillis()
+            val newRemaining = ((stepEndTime - now + 999) / 1000).toInt().coerceAtLeast(0)
+            if (newRemaining != remaining) {
+                if (newRemaining < remaining) {
+                    elapsedTotal += remaining - newRemaining
                 }
-            } else {
-                remaining = next
+                remaining = newRemaining
+            }
+            if (remaining <= 0 && stepIndex < steps.lastIndex) {
+                stepIndex++
+                remaining = steps[stepIndex].durationSec
+                stepEndTime = System.currentTimeMillis() + remaining * 1000L
+                if (!state.settings.timerAutoAdvance) {
+                    running = false
+                }
+                if (state.settings.timerVibrate) {
+                    val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vibrator?.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+                    } else {
+                        @Suppress("DEPRECATION")
+                        vibrator?.vibrate(50)
+                    }
+                }
+                if (state.settings.timerSound) {
+                    try {
+                        val tone = ToneGenerator(AudioManager.STREAM_NOTIFICATION, 50)
+                        tone.startTone(ToneGenerator.TONE_PROP_BEEP, 100)
+                    } catch (_: Exception) {
+                    }
+                }
+                if (state.settings.notificationsStepChange) {
+                    val currentStep = steps[stepIndex]
+                    val stepTitle = context.getString(currentStep.titleRes)
+                    sendNotification(context, "Next step", "Step ${stepIndex+1}/${steps.size}: $stepTitle")
+                }
+            } else if (remaining <= 0) {
+                remaining = 0
+                running = false
+                finished = true
             }
             if (state.settings.timerBackground) {
                 if (!TimerService.isRunning) {
@@ -177,6 +192,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                     TimerService.update(context, equipmentName, title, Format.clock(remaining), stepIndex, steps.size)
                 }
             }
+            delay(((stepEndTime - now) % 1000L).coerceAtLeast(16L))
         }
         if (finished) {
             if (state.settings.timerVibrate) {
@@ -225,8 +241,16 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         }
 
         val step = steps[stepIndex]
-        val dur = step.durationSec.coerceAtLeast(1)
-        val progress = ((dur - remaining).toFloat() / dur).coerceIn(0f, 1f)
+        val stepDur = step.durationSec.coerceAtLeast(1)
+        val targetProgress = ((stepDur - remaining).toFloat() / stepDur).coerceIn(0f, 1f)
+        val animatedProgress by animateFloatAsState(
+            targetValue = targetProgress,
+            animationSpec = spring(
+                dampingRatio = 0.6f,
+                stiffness = 300f,
+            ),
+            label = "ringProgress",
+        )
 
         AppText(
             stringResource(R.string.brew_step_counter, stepIndex + 1, steps.size),
@@ -243,7 +267,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                 .weight(1f),
             contentAlignment = Alignment.Center,
         ) {
-            ProgressRing(progress = progress, color = colors.coffeeFor(progress))
+            ProgressRing(progress = animatedProgress, color = colors.coffeeFor(animatedProgress))
             AppText(
                 Format.clock(remaining),
                 style = CoffeeTheme.type.display.copy(
