@@ -431,7 +431,7 @@
     <string name="learn_water_range">Aralık</string>
     <string name="learn_water_target">Hedef</string>
 
-    <string name="pro_tips_title">☕ Profesyonel İpuçları</string>
+    <string name="pro_tips_title">Profesyonel İpuçları</string>
     <string name="pro_tips_next">Sonraki ipucu →</string>
     <string name="pro_tip_1">Pour-over için: demlemeden önce filtrenizi sıcak suyla ıslatın. Kağıt tadını giderir ve demleyiciyi önceden ısıtır.</string>
     <string name="pro_tip_2">Kahve çekirdeklerini ışık ve ısıdan uzak, hava geçirmez bir kapta saklayın. Asla buzdolabına koymayın — yoğuşma lezzeti bozar.</string>
@@ -445,7 +445,7 @@
     <string name="pro_tip_10">Kahveyi soğurken farklı sıcaklıklarda tadın. Farklı ısı seviyelerinde farklı lezzetler ortaya çıkar.</string>
 
     <!-- Kahve Sözlüğü -->
-    <string name="glossary_title">📖 Kahve Sözlüğü</string>
+    <string name="glossary_title">Kahve Sözlüğü</string>
     <string name="glossary_term_1">Asidite</string>
     <string name="glossary_def_1">Kahvede dilde algılanan parlak, canlı kalite. Ekşilik değildir; istenen asidite lezzete canlılık ve boyut katar.</string>
     <string name="glossary_term_2">Aroma</string>
@@ -522,7 +522,7 @@
     <string name="grind_vis_for_extra_fine">İçin: Türk kahvesi</string>
 
     <!-- Demleme sorun giderici -->
-    <string name="brew_troubleshoot_title">🔧 Demleme Sorun Giderici</string>
+    <string name="brew_troubleshoot_title">Demleme Sorun Giderici</string>
     <string name="brew_troubleshoot_question">Kahvenin tadı nasıl?</string>
     <string name="brew_issue_sour">Ekşi / Az ekstrakte</string>
     <string name="brew_issue_bitter">Acı / Aşırı ekstrakte</string>
@@ -534,7 +534,7 @@
     <string name="brew_issue_dry_advice">Daha kaba öğüt | Sıcaklığı düşür | Kanallaşmayı kontrol et | İnce tozu azalt</string>
 
     <!-- Tat çemberi -->
-    <string name="flavor_wheel_title">🎨 Kahve Tat Çemberi</string>
+    <string name="flavor_wheel_title">Kahve Tat Çemberi</string>
     <string name="flavor_fruity">Meyvemsi</string>
     <string name="flavor_berry">Orman Meyvesi</string>
     <string name="flavor_citrus">Turunçgil</string>
@@ -562,10 +562,10 @@
     <string name="flavor_mushroom">Mantar</string>
 
     <string name="ratio_ref_title">Hızlı Oran Referansı</string>
-    <string name="ratio_1_15">☕ 1:15 — Güçlü, yoğun, vurucu</string>
-    <string name="ratio_1_16">☕ 1:16 — Dengeli, standart (SCA Altın Fincan)</string>
-    <string name="ratio_1_17">☕ 1:17 — Daha hafif, daha narin</string>
-    <string name="ratio_1_18">☕ 1:18 — Hafif gövde, kupaj/değerlendirme için</string>
+    <string name="ratio_1_15">1:15 — Güçlü, yoğun, vurucu</string>
+    <string name="ratio_1_16">1:16 — Dengeli, standart (SCA Altın Fincan)</string>
+    <string name="ratio_1_17">1:17 — Daha hafif, daha narin</string>
+    <string name="ratio_1_18">1:18 — Hafif gövde, kupaj/değerlendirme için</string>
 
     <!-- Settings -->
     <string name="settings_title">Ayarlar</string>

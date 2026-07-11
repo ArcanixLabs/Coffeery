@@ -431,7 +431,7 @@
     <string name="learn_water_range">Range</string>
     <string name="learn_water_target">Target</string>
 
-    <string name="pro_tips_title">☕ Pro Tips</string>
+    <string name="pro_tips_title">Pro Tips</string>
     <string name="pro_tips_next">Next tip →</string>
     <string name="pro_tip_1">For pour-over: pre-wet your filter with hot water before brewing. This removes paper taste and preheats the dripper.</string>
     <string name="pro_tip_2">Store coffee beans in an airtight container away from light and heat. Never refrigerate — condensation ruins flavor.</string>
@@ -445,7 +445,7 @@
     <string name="pro_tip_10">Taste coffee at different temperatures as it cools. Different flavors emerge at different heat levels.</string>
 
     <!-- Coffee Glossary -->
-    <string name="glossary_title">📖 Coffee Glossary</string>
+    <string name="glossary_title">Coffee Glossary</string>
     <string name="glossary_term_1">Acidity</string>
     <string name="glossary_def_1">The bright, tangy quality in coffee perceived on the tongue. Not sourness; desirable acidity adds liveliness and dimension to flavor.</string>
     <string name="glossary_term_2">Aroma</string>
@@ -522,7 +522,7 @@
     <string name="grind_vis_for_extra_fine">For: Turkish coffee</string>
 
     <!-- Brew troubleshooter -->
-    <string name="brew_troubleshoot_title">🔧 Brew Troubleshooter</string>
+    <string name="brew_troubleshoot_title">Brew Troubleshooter</string>
     <string name="brew_troubleshoot_question">How does your coffee taste?</string>
     <string name="brew_issue_sour">Sour / Under-extracted</string>
     <string name="brew_issue_bitter">Bitter / Over-extracted</string>
@@ -534,7 +534,7 @@
     <string name="brew_issue_dry_advice">Grind coarser | Lower temp | Check for channeling | Reduce fines</string>
 
     <!-- Flavor wheel -->
-    <string name="flavor_wheel_title">🎨 Coffee Flavor Wheel</string>
+    <string name="flavor_wheel_title">Coffee Flavor Wheel</string>
     <string name="flavor_fruity">Fruity</string>
     <string name="flavor_berry">Berry</string>
     <string name="flavor_citrus">Citrus</string>
@@ -562,10 +562,10 @@
     <string name="flavor_mushroom">Mushroom</string>
 
     <string name="ratio_ref_title">Quick Ratio Reference</string>
-    <string name="ratio_1_15">☕ 1:15 — Strong, intense, punchy</string>
-    <string name="ratio_1_16">☕ 1:16 — Balanced, standard (SCA Golden Cup)</string>
-    <string name="ratio_1_17">☕ 1:17 — Lighter, more delicate</string>
-    <string name="ratio_1_18">☕ 1:18 — Light body, for cupping/evaluation</string>
+    <string name="ratio_1_15">1:15 — Strong, intense, punchy</string>
+    <string name="ratio_1_16">1:16 — Balanced, standard (SCA Golden Cup)</string>
+    <string name="ratio_1_17">1:17 — Lighter, more delicate</string>
+    <string name="ratio_1_18">1:18 — Light body, for cupping/evaluation</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>

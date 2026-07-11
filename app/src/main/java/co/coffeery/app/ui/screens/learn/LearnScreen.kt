@@ -1,5 +1,6 @@
 package co.coffeery.app.ui.screens.learn
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
@@ -43,6 +46,8 @@ import co.coffeery.app.ui.components.Chip
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.ScreenHeader
+import co.coffeery.app.ui.components.LineIcon
+import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.screens.root.AppViewModel
 import co.coffeery.app.ui.screens.root.Route
 import co.coffeery.app.ui.theme.CoffeeTheme
@@ -229,11 +234,22 @@ private fun StepMap(
                     contentAlignment = Alignment.Center,
                 ) {
                     if (isCompleted) {
-                        AppText(
-                            text = "\u2713",
-                            style = CoffeeTheme.type.caption,
-                            color = colors.onAccent,
-                        )
+                        Canvas(modifier = Modifier.fillMaxSize()) {
+                            val checkPath = Path().apply {
+                                moveTo(size.width * 0.22f, size.height * 0.52f)
+                                lineTo(size.width * 0.4f, size.height * 0.72f)
+                                lineTo(size.width * 0.78f, size.height * 0.28f)
+                            }
+                            drawPath(
+                                checkPath,
+                                colors.onAccent,
+                                style = androidx.compose.ui.graphics.drawscope.Stroke(
+                                    width = size.minDimension * 0.13f,
+                                    cap = androidx.compose.ui.graphics.StrokeCap.Round,
+                                    join = androidx.compose.ui.graphics.StrokeJoin.Round,
+                                ),
+                            )
+                        }
                     } else {
                         AppText(
                             text = "${index + 1}",
@@ -303,7 +319,11 @@ private fun ProTipsCard() {
     )
     var current by remember { mutableStateOf(kotlin.random.Random.nextInt(tips.size)) }
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-        AppText(stringResource(R.string.pro_tips_title), style = CoffeeTheme.type.title)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.CUP, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.pro_tips_title), style = CoffeeTheme.type.title)
+        }
         Spacer(Modifier.height(8.dp))
         AppText(stringResource(tips[current]), style = CoffeeTheme.type.body, color = colors.textSecondary)
         Spacer(Modifier.height(10.dp))
@@ -325,15 +345,29 @@ private fun ProTipsCard() {
 private fun QuickRatioCard() {
     val colors = CoffeeTheme.colors
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-        AppText(stringResource(R.string.ratio_ref_title), style = CoffeeTheme.type.title)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.CUP, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.ratio_ref_title), style = CoffeeTheme.type.title)
+        }
         Spacer(Modifier.height(8.dp))
-        AppText(stringResource(R.string.ratio_1_15), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        RatioRow(R.string.ratio_1_15)
         Spacer(Modifier.height(4.dp))
-        AppText(stringResource(R.string.ratio_1_16), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        RatioRow(R.string.ratio_1_16)
         Spacer(Modifier.height(4.dp))
-        AppText(stringResource(R.string.ratio_1_17), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        RatioRow(R.string.ratio_1_17)
         Spacer(Modifier.height(4.dp))
-        AppText(stringResource(R.string.ratio_1_18), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        RatioRow(R.string.ratio_1_18)
+    }
+}
+
+@Composable
+private fun RatioRow(textRes: Int) {
+    val colors = CoffeeTheme.colors
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        LineIcon(Glyph.CUP, colors.accent, Modifier.size(14.dp))
+        Spacer(Modifier.width(6.dp))
+        AppText(stringResource(textRes), style = CoffeeTheme.type.body, color = colors.textSecondary)
     }
 }
 
@@ -404,7 +438,11 @@ private fun BrewTroubleshooterCard() {
         R.string.brew_issue_dry to R.string.brew_issue_dry_advice,
     )
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-        AppText(stringResource(R.string.brew_troubleshoot_title), style = CoffeeTheme.type.title)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.GEAR, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.brew_troubleshoot_title), style = CoffeeTheme.type.title)
+        }
         Spacer(Modifier.height(4.dp))
         AppText(stringResource(R.string.brew_troubleshoot_question), style = CoffeeTheme.type.caption, color = colors.textSecondary)
         Spacer(Modifier.height(12.dp))
@@ -474,7 +512,11 @@ private val FlavorWheelData = listOf(
 private fun FlavorWheelCard() {
     val colors = CoffeeTheme.colors
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-        AppText(stringResource(R.string.flavor_wheel_title), style = CoffeeTheme.type.title)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.PALETTE, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.flavor_wheel_title), style = CoffeeTheme.type.title)
+        }
         Spacer(Modifier.height(8.dp))
         FlavorWheelData.forEach { category ->
             Spacer(Modifier.height(8.dp))
@@ -499,7 +541,11 @@ private fun FlavorWheelCard() {
 private fun GlossaryCard() {
     val colors = CoffeeTheme.colors
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-        AppText(stringResource(R.string.glossary_title), style = CoffeeTheme.type.title)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.BOOK, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.glossary_title), style = CoffeeTheme.type.title)
+        }
         Spacer(Modifier.height(8.dp))
         GlossaryTerms.forEach { term ->
             AppText(stringResource(term.termRes), style = CoffeeTheme.type.headline)
