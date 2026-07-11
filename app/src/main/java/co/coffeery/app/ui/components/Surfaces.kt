@@ -47,7 +47,7 @@ fun CoffeeCard(
         .background(colors.surfaceElevated)
         .border(1.dp, colors.outline, shape)
     if (onClick != null) {
-        m = m.coffeeClickable { onClick() }
+        m = m.clickable { onClick() }
     }
     Column(modifier = m.padding(contentPadding.dp), content = content)
 }
