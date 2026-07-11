@@ -396,7 +396,7 @@ private fun GrindSizeCard() {
 @Composable
 private fun BrewTroubleshooterCard() {
     val colors = CoffeeTheme.colors
-    var selected by remember { mutableStateOf(-1) }
+    var selected by remember { mutableStateOf<Int?>(null) }
     val issues = listOf(
         R.string.brew_issue_sour to R.string.brew_issue_sour_advice,
         R.string.brew_issue_bitter to R.string.brew_issue_bitter_advice,
@@ -419,13 +419,12 @@ private fun BrewTroubleshooterCard() {
                         modifier = Modifier.clickable(
                             indication = null,
                             interactionSource = remember { MutableInteractionSource() },
-                        ) { selected = if (isSel) -1 else index },
+                        ) { selected = if (isSel) null else index },
                     )
                 }
             }
         }
-        val sel = selected
-        if (sel != null) {
+        selected?.let { sel ->
             AppText(stringResource(issues[sel].second), style = CoffeeTheme.type.body)
         }
     }
