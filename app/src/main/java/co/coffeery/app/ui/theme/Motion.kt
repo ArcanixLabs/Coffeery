@@ -22,11 +22,6 @@ data class MotionTokens(
 
 val LocalMotionTokens = staticCompositionLocalOf { MotionTokens() }
 
-fun tweenOut(duration: Long = LocalMotionTokens.current.base) = tween(
-    durationMillis = duration.toInt(),
-    easing = LocalMotionTokens.current.easeOut,
-)
-
 object CoffeeMotion {
     val standard = CubicBezierEasing(0.45f, 0f, 0.15f, 1f)
     val emphasized = CubicBezierEasing(0.16f, 1f, 0.3f, 1f)
