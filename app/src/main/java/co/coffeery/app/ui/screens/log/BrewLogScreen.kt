@@ -114,14 +114,15 @@ private fun formatDuration(totalSeconds: Int): String {
 }
 
 private fun shareBrewAsText(context: Context, log: BrewLogEntity) {
+    val stars = if (log.rating > 0) "★".repeat(log.rating) else ""
     val text = buildString {
-        appendLine("\u2615 ${log.equipmentName}")
-        appendLine("${Format.grams(log.coffeeGrams)}g coffee \u00B7 ${log.waterMl}ml water \u00B7 1:${Format.ratio(log.ratioDenominator)}")
-        appendLine("Grind: ${log.grind} \u00B7 ${log.tempCelsius}\u00B0C \u00B7 ${formatDuration(log.totalDurationSec)}")
-        if (log.rating > 0) appendLine("Rating: ${\"\u2605\".repeat(log.rating)}")
+        appendLine("☕ ${log.equipmentName}")
+        appendLine("${log.coffeeGrams}g · ${log.waterMl}ml · 1:${log.ratioDenominator}")
+        appendLine("Grind: ${log.grind} · ${log.tempCelsius}°C · ${formatDuration(log.totalDurationSec)}")
+        if (stars.isNotEmpty()) appendLine("Rating: $stars")
         if (log.tastingNotes.isNotBlank()) appendLine("\"${log.tastingNotes}\"")
         appendLine()
-        appendLine("Brewed with Coffeery \u2615")
+        appendLine("Brewed with Coffeery ☕")
     }
     val intent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
