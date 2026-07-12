@@ -2,6 +2,7 @@ package co.coffeery.app.ui.screens.log
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -28,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -52,6 +54,7 @@ import co.coffeery.app.ui.screens.root.NavTab
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
 import co.coffeery.app.util.Format
+import coil.compose.AsyncImage
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -589,6 +592,18 @@ private fun BrewLogCard(log: BrewLogEntity, equipment: List<Equipment>, vm: AppV
         if (log.tastingNotes.isNotBlank()) {
             Spacer(Modifier.height(6.dp))
             AppText("\u201C${log.tastingNotes}\u201D", style = CoffeeTheme.type.body, color = colors.textPrimary, maxLines = 2)
+        }
+        if (!log.photoUri.isNullOrBlank()) {
+            Spacer(Modifier.height(6.dp))
+            AsyncImage(
+                model = Uri.parse(log.photoUri),
+                contentDescription = "Brew photo",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(120.dp)
+                    .clip(CoffeeShapes.medium),
+                contentScale = ContentScale.Crop,
+            )
         }
         Spacer(Modifier.height(6.dp))
         AppText(stringResource(R.string.log_reproduce), style = CoffeeTheme.type.caption, color = colors.accent)

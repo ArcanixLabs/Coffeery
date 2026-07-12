@@ -3,6 +3,10 @@ package co.coffeery.app.ui.screens.brew
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.core.content.FileProvider
 import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
@@ -488,6 +492,14 @@ private fun SaveBrewDialog(
     var notes by remember { mutableStateOf("") }
     var grindSize by remember { mutableStateOf("") }
     var selectedBean by remember { mutableStateOf<BeanEntity?>(null) }
+    var flavorTags by remember { mutableStateOf<Set<String>>(emptySet()) }
+    var photoUri by remember { mutableStateOf<Uri?>(null) }
+    val context = LocalContext.current
+    val cameraLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.TakePicture()
+    ) { success ->
+        if (!success) photoUri = null
+    }
     val name = eq.displayName()
     val activeBeans = state.beans.filter { !it.isArchived }
 
@@ -572,6 +584,70 @@ private fun SaveBrewDialog(
                 hint = stringResource(R.string.log_notes_hint),
                 modifier = Modifier.fillMaxWidth(),
             )
+            Spacer(Modifier.height(12.dp))
+
+            AppText(stringResource(R.string.brew_flavor_tags), style = CoffeeTheme.type.label, color = colors.textSecondary)
+            Spacer(Modifier.height(6.dp))
+            val flavorKeys = listOf(
+                "fruity" to R.string.flavor_fruity,
+                "berry" to R.string.flavor_berry,
+                "citrus" to R.string.flavor_citrus,
+                "stone_fruit" to R.string.flavor_stone_fruit,
+                "tropical" to R.string.flavor_tropical,
+                "floral" to R.string.flavor_floral,
+                "chocolate" to R.string.flavor_chocolate,
+                "caramel" to R.string.flavor_caramel,
+                "nutty" to R.string.flavor_nutty,
+                "almond" to R.string.flavor_almond,
+                "honey" to R.string.flavor_honey,
+                "brown_sugar" to R.string.flavor_brown_sugar,
+                "bright" to R.string.flavor_bright,
+                "smooth" to R.string.flavor_smooth,
+                "bold" to R.string.flavor_bold,
+                "earthy" to R.string.flavor_earthy,
+                "woody" to R.string.flavor_woody,
+                "spicy" to R.string.flavor_spicy,
+            )
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                flavorKeys.forEach { (key, labelRes) ->
+                    val selected = key in flavorTags
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(if (selected) colors.accent else colors.accentSoft)
+                            .clickable {
+                                flavorTags = if (selected) flavorTags - key else flavorTags + key
+                            }
+                            .padding(horizontal = 10.dp, vertical = 6.dp),
+                    ) {
+                        AppText(
+                            stringResource(labelRes),
+                            style = CoffeeTheme.type.caption,
+                            color = if (selected) Color.White else colors.textPrimary,
+                        )
+                    }
+                }
+            }
+
+            Spacer(Modifier.height(14.dp))
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                LineIcon(Glyph.BEAN, colors.accent, Modifier.size(18.dp))
+                Spacer(Modifier.width(8.dp))
+                if (photoUri == null) {
+                    SecondaryButton(stringResource(R.string.brew_add_photo), Modifier) {
+                        val file = createTempImageFile(context)
+                        val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
+                        photoUri = uri
+                        cameraLauncher.launch(uri)
+                    }
+                } else {
+                    AppText(stringResource(R.string.brew_photo_attached), style = CoffeeTheme.type.caption, color = colors.accent)
+                    Spacer(Modifier.width(8.dp))
+                    AppText(stringResource(R.string.brew_photo_remove), style = CoffeeTheme.type.label, color = colors.textSecondary, modifier = Modifier.clickable { photoUri = null })
+                }
+            }
+
             Spacer(Modifier.height(18.dp))
 
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
@@ -592,8 +668,10 @@ private fun SaveBrewDialog(
                             totalDurationSec = elapsedTotal,
                             rating = rating,
                             tastingNotes = notes.trim(),
+                            flavorTags = flavorTags.joinToString(","),
                             beanId = selectedBean?.id,
                             beanName = selectedBean?.name ?: "",
+                            photoUri = photoUri?.toString(),
                         )
                     )
                 }
@@ -706,4 +784,9 @@ private fun mergePours(stepsInput: List<co.coffeery.app.data.model.BrewStepDef>)
         }
     }
     return result
+}
+
+private fun createTempImageFile(context: Context): java.io.File {
+    val dir = context.externalCacheDir ?: context.cacheDir
+    return java.io.File(dir, "brew_photo_${System.currentTimeMillis()}.jpg").apply { createNewFile() }
 }

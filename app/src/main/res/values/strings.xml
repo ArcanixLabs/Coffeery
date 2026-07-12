@@ -383,6 +383,9 @@
     <string name="log_grind_hint">e.g. 25 on Comandante, 3.5 on K-Ultra</string>
     <string name="log_notes">Tasting notes</string>
     <string name="brew_flavor_tags">Flavor Notes</string>
+    <string name="brew_add_photo">Add photo</string>
+    <string name="brew_photo_attached">Photo attached</string>
+    <string name="brew_photo_remove">Remove</string>
     <string name="log_notes_hint">Astringent, bright, chocolate finish…</string>
     <string name="log_bean_label">Bean</string>
     <string name="log_bean_none">None</string>

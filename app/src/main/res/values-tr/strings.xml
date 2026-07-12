@@ -383,6 +383,9 @@
     <string name="log_grind_hint">örn. Comandante\'de 25, K-Ultra\'da 3.5</string>
     <string name="log_notes">Tadım notları</string>
     <string name="brew_flavor_tags">Tat Notaları</string>
+    <string name="brew_add_photo">Fotoğraf ekle</string>
+    <string name="brew_photo_attached">Fotoğraf eklendi</string>
+    <string name="brew_photo_remove">Kaldır</string>
     <string name="log_notes_hint">Buruk, parlak, çikolata bitişli…</string>
     <string name="log_bean_label">Çekirdek</string>
     <string name="log_bean_none">Hiçbiri</string>
