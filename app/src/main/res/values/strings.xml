@@ -128,6 +128,7 @@
     <string name="brew_next_up">Next: %1$s</string>
     <string name="brew_pour_to">Pour to %1$d g total</string>
     <string name="brew_complete">Enjoy your coffee ☕</string>
+    <string name="timer_hands_free">Hands-free</string>
     <string name="brew_complete_sub">Brewed with %1$s</string>
     <string name="brew_elapsed">Total elapsed</string>
     <string name="brew_adjust_pour">Adjust pour</string>
@@ -435,6 +436,8 @@
     <string name="log_compare_button">Compare</string>
     <string name="log_compare_select">Select two brews to compare</string>
     <string name="log_share">Share</string>
+    <string name="log_share_pdf">PDF</string>
+    <string name="log_share_pdf_chooser">Share brew report</string>
     <string name="log_shared_via">Brewed with Coffeery ☕</string>
 
     <!-- ===== Learn tools v2 ===== -->

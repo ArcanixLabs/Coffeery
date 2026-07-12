@@ -10,6 +10,10 @@ import androidx.core.content.FileProvider
 import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
@@ -115,6 +119,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     var running by rememberSaveable { mutableStateOf(false) }
     var everStarted by rememberSaveable { mutableStateOf(false) }
     var finished by rememberSaveable { mutableStateOf(false) }
+    var handsFree by remember { mutableStateOf(false) }
     var elapsedTotal by rememberSaveable { mutableIntStateOf(0) }
     var stepEndTime by rememberSaveable { mutableLongStateOf(0L) }
 
@@ -128,6 +133,32 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         val window = (view.context as? Activity)?.window
         window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         onDispose { window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) }
+    }
+
+    DisposableEffect(handsFree) {
+        if (!handsFree) return@DisposableEffect onDispose { }
+        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        val proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+        if (proximitySensor == null) return@DisposableEffect onDispose { }
+
+        val listener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent) {
+                val win = (context as? Activity)?.window ?: return
+                val attrs = win.attributes
+                if (event.values[0] < proximitySensor.maximumRange) {
+                    attrs.screenBrightness = 0.01f
+                } else {
+                    attrs.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+                }
+                win.attributes = attrs
+            }
+            override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
+        }
+        sensorManager.registerListener(listener, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL)
+        onDispose {
+            sensorManager.unregisterListener(listener)
+            (context as? Activity)?.window?.attributes?.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+        }
     }
 
     LaunchedEffect(running, finished) {
@@ -387,6 +418,35 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         }
 
         Spacer(Modifier.height(18.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            AppText(
+                stringResource(R.string.timer_hands_free),
+                style = CoffeeTheme.type.caption,
+                color = if (handsFree) colors.accent else colors.textSecondary,
+                modifier = Modifier.clickable { handsFree = !handsFree },
+            )
+            val boxColor = if (handsFree) colors.accent else colors.outline
+            Box(
+                modifier = Modifier
+                    .padding(start = 8.dp)
+                    .size(16.dp)
+                    .clip(CoffeeShapes.small)
+                    .background(boxColor)
+                    .clickable { handsFree = !handsFree },
+                contentAlignment = Alignment.Center,
+            ) {
+                if (handsFree) {
+                    AppText("\u2713", style = CoffeeTheme.type.caption.copy(fontSize = 10.sp), color = Color.White)
+                }
+            }
+        }
+
+        Spacer(Modifier.height(8.dp))
 
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
             if (everStarted) {
@@ -675,10 +735,10 @@ private fun SaveBrewDialog(
                 }
             }
 
-            Spacer(Modifier.height(18.dp))
+        Spacer(Modifier.height(18.dp))
 
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                SecondaryButton(stringResource(R.string.action_cancel), Modifier.weight(1f)) { onDismiss() }
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+            SecondaryButton(stringResource(R.string.action_cancel), Modifier.weight(1f)) { onDismiss() }
                 PrimaryButton(stringResource(R.string.action_save), Modifier.weight(1f)) {
                     onSave(
                         BrewLogEntity(

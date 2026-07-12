@@ -128,6 +128,7 @@
     <string name="brew_next_up">Sıradaki: %1$s</string>
     <string name="brew_pour_to">Toplam %1$d g\'a kadar dök</string>
     <string name="brew_complete">Kahvenin tadını çıkar ☕</string>
+    <string name="timer_hands_free">Eller serbest</string>
     <string name="brew_complete_sub">%1$s ile demlendi</string>
     <string name="brew_elapsed">Toplam süre</string>
     <string name="brew_adjust_pour">Dökümü ayarla</string>
@@ -435,6 +436,8 @@
     <string name="log_compare_button">Karşılaştır</string>
     <string name="log_compare_select">Karşılaştırmak için iki demleme seç</string>
     <string name="log_share">Paylaş</string>
+    <string name="log_share_pdf">PDF</string>
+    <string name="log_share_pdf_chooser">Demleme raporunu paylaş</string>
     <string name="log_shared_via">Coffeery ile demlendi ☕</string>
 
     <!-- ===== Learn tools v2 ===== -->

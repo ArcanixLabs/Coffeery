@@ -53,6 +53,7 @@ import co.coffeery.app.ui.screens.root.AppViewModel
 import co.coffeery.app.ui.screens.root.NavTab
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.util.BrewPdfExporter
 import co.coffeery.app.util.Format
 import coil.compose.AsyncImage
 import java.text.SimpleDateFormat
@@ -562,6 +563,10 @@ private fun BrewLogCard(log: BrewLogEntity, equipment: List<Equipment>, vm: AppV
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 AppText(stringResource(R.string.log_share), style = CoffeeTheme.type.caption, color = colors.accent, modifier = Modifier.clickable { shareBrewAsText(context, log) })
+                Spacer(Modifier.width(8.dp))
+                AppText(stringResource(R.string.log_share_pdf), style = CoffeeTheme.type.caption, color = colors.accent, modifier = Modifier.clickable {
+                    context.startActivity(Intent.createChooser(BrewPdfExporter.export(context, log), context.getString(R.string.log_share_pdf_chooser)))
+                })
                 Spacer(Modifier.width(12.dp))
                 AppText("\u2715", style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.padding(start = 0.dp).clickable { showDelete = true })
             }
