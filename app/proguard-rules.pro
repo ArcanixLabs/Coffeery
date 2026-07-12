@@ -33,3 +33,9 @@
 -dontwarn com.google.api.services.drive.**
 -keep class com.google.api.client.http.** { *; }
 -dontwarn com.google.api.client.http.**
+-keep class com.google.http.client.** { *; }
+-dontwarn com.google.http.client.**
+-keep class org.apache.http.** { *; }
+-dontwarn org.apache.http.**
+-dontwarn javax.naming.**
+-dontwarn com.google.api.client.http.**
