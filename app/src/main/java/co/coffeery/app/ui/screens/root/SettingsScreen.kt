@@ -2,7 +2,6 @@ package co.coffeery.app.ui.screens.root
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -70,12 +69,7 @@ fun SettingsScreen(vm: AppViewModel) {
         cloud.handleSignInResult(result.data) { success ->
             cloudSignedIn = success
             if (!success) {
-                val msg = if (cloud.getServerClientId().startsWith("YOUR_")) {
-                    ctx.getString(R.string.settings_cloud_setup_needed)
-                } else {
-                    ctx.getString(R.string.settings_cloud_error)
-                }
-                android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+                android.widget.Toast.makeText(ctx, ctx.getString(R.string.settings_cloud_error), android.widget.Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -327,22 +321,6 @@ fun SettingsScreen(vm: AppViewModel) {
                     SecondaryButton(stringResource(R.string.settings_cloud_signout), Modifier.weight(1f)) {
                         cloud.signOut(cloud.getSignInClient())
                         cloudSignedIn = false
-                    }
-                }
-                Spacer(Modifier.height(12.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                    SecondaryButton(stringResource(R.string.settings_cloud_backup), Modifier.weight(1f)) {
-                        val activity = ctx as? Activity ?: return@SecondaryButton
-                        val dbPath = ctx.getDatabasePath("coffeery.db")
-                        vm.backupToDrive(activity, dbPath)
-                    }
-                }
-                Spacer(Modifier.height(8.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                    SecondaryButton(stringResource(R.string.settings_cloud_restore), Modifier.weight(1f)) {
-                        val activity = ctx as? Activity ?: return@SecondaryButton
-                        val dbPath = ctx.getDatabasePath("coffeery.db")
-                        vm.restoreFromDrive(activity, dbPath)
                     }
                 }
             } else {

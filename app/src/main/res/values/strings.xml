@@ -1258,11 +1258,7 @@
     <string name="settings_cloud_signin">Sign in with Google</string>
     <string name="settings_cloud_signed_as">Signed in as %s</string>
     <string name="settings_cloud_signout">Sign out</string>
-    <string name="settings_cloud_backup">Backup to Drive</string>
-    <string name="settings_cloud_restore">Restore from Drive</string>
-    <string name="settings_cloud_backup_done">Backup saved</string>
-    <string name="settings_cloud_restore_done">Restored successfully</string>
-    <string name="settings_cloud_error">Cloud operation failed</string>
+    <string name="settings_cloud_error">Sign-in failed</string>
     <string name="bean_detail_title">Bean Details</string>
     <string name="bean_detail_roast_date">Roast date</string>
     <string name="bean_detail_process">Process</string>
@@ -1271,7 +1267,6 @@
     <string name="bean_detail_sca">SCA score</string>
     <string name="bean_detail_purchase">Purchase date</string>
     <string name="bean_detail_brewing">Brew this bean</string>
-    <string name="google_server_client_id">YOUR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
 
     <!-- Coffee & Food Pairing -->
     <string name="pairing_title">Coffee &amp; Food Pairing</string>
@@ -1325,5 +1320,4 @@
     <string name="drink_mirra_body">Southeastern Turkish strong bitter coffee brewed extremely dark with cardamom, served in tiny handleless cups. Unlike regular Turkish coffee, mirra is prepared by repeatedly pouring the brew through the grounds using a special pot with multiple chambers — each pass intensifies the extraction. Very bitter, intensely caffeinated, traditionally served at ceremonies and to honored guests as a mark of respect. Refusing a cup of mirra is unthinkable in Mardin and Şanlıurfa hospitality culture.\n\nIngredients:\n• 15–20 g fine ground dark roast coffee\n• 2–3 green cardamom pods, crushed\n• 150–200 ml water\n\nSteps:\n1. Grind coffee very fine with crushed cardamom pods.\n2. In a traditional mirra pot (or a small saucepan), add coffee-cardamom mix and water.\n3. Bring to a simmer but do not let it boil over.\n4. Pour the brew into another container, then pour it back through the grounds.\n5. Repeat this passing 2–3 times — each pass deepens extraction and bitterness.\n6. Serve in very small cups (30–40 ml) — mirra is sipped, not drunk quickly.\n7. Traditionally served unsweetened. The bitterness is the point — it signals strength and respect.</string>
 
     <string name="settings_about_footer">Made with love by a Turkish home barista. Open source, MIT licensed, no ads, no tracking.</string>
-    <string name="settings_cloud_setup_needed">Setup needed: Get a Web Client ID from Google Cloud Console → APIs &amp; Services → Credentials → Create OAuth 2.0 Client ID (Web application)</string>
 </resources>

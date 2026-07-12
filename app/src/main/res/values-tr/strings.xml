@@ -1258,11 +1258,7 @@
     <string name="settings_cloud_signin">Google ile giriş yap</string>
     <string name="settings_cloud_signed_as">%s olarak giriş yapıldı</string>
     <string name="settings_cloud_signout">Çıkış yap</string>
-    <string name="settings_cloud_backup">Drive\'a yedekle</string>
-    <string name="settings_cloud_restore">Drive\'dan geri yükle</string>
-    <string name="settings_cloud_backup_done">Yedek kaydedildi</string>
-    <string name="settings_cloud_restore_done">Geri yüklendi</string>
-    <string name="settings_cloud_error">Bulut işlemi başarısız</string>
+    <string name="settings_cloud_error">Giriş başarısız</string>
     <string name="bean_detail_title">Çekirdek Detayı</string>
     <string name="bean_detail_roast_date">Kavurma tarihi</string>
     <string name="bean_detail_process">İşleme</string>
@@ -1271,7 +1267,6 @@
     <string name="bean_detail_sca">SCA puanı</string>
     <string name="bean_detail_purchase">Alış tarihi</string>
     <string name="bean_detail_brewing">Bu çekirdeği demle</string>
-    <string name="google_server_client_id">YOUR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
 
     <!-- Kahve & Yemek Eşleştirme -->
     <string name="pairing_title">Kahve &amp; Yemek Eşleştirme</string>
@@ -1325,5 +1320,4 @@
     <string name="drink_mirra_body">Kakuleyle son derece koyu kavrulmuş, kulpsuz minik fincanlarda servis edilen Güneydoğu Anadolu\'nun sert acı kahvesi. Normal Türk kahvesinden farklı olarak mirra, özel çok hazneli bir kap kullanılarak demlemenin tekrar tekrar telve üzerinden geçirilmesiyle hazırlanır — her geçiş ekstraksiyonu yoğunlaştırır. Çok acı, son derece kafeinli, geleneksel olarak törenlerde ve onur konuklarına bir saygı göstergesi olarak sunulur. Mardin ve Şanlıurfa misafirperverlik kültüründe bir fincan mirrayı reddetmek düşünülemez.\n\nMalzemeler:\n• 15–20 g ince öğütülmüş koyu kavrulmuş kahve\n• 2–3 yeşil kakule kapsülü, ezilmiş\n• 150–200 ml su\n\nHazırlanışı:\n1. Kahveyi ezilmiş kakuleyle çok ince öğütün.\n2. Geleneksel mirra kabına (veya küçük bir tencereye) kahve-kakule karışımını ve suyu ekleyin.\n3. Kaynama noktasına getirin ama taşırmayın.\n4. Demlemeyi başka bir kaba dökün, sonra tekrar telve üzerinden geri dökün.\n5. Bu geçişi 2–3 kez tekrarlayın — her geçiş ekstraksiyonu ve acılığı derinleştirir.\n6. Çok küçük fincanlarda (30–40 ml) servis edin — mirra yudumlanır, hızlı içilmez.\n7. Geleneksel olarak şekersiz servis edilir. Acılık maksattır — güç ve saygıyı simgeler.</string>
 
     <string name="settings_about_footer">Bir Türk ev baristası tarafından sevgiyle yapıldı. Açık kaynak, MIT lisanslı, reklamsız, izlemesiz.</string>
-    <string name="settings_cloud_setup_needed">Kurulum gerekli: Google Cloud Console → API\'ler ve Hizmetler → Kimlik Bilgileri → OAuth 2.0 İstemci Kimliği oluştur (Web uygulaması)</string>
 </resources>

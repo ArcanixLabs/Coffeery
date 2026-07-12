@@ -1,6 +1,5 @@
 package co.coffeery.app.ui.screens.root
 
-import android.app.Activity
 import android.app.Application
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -26,7 +25,6 @@ import co.coffeery.app.data.model.Palette
 import co.coffeery.app.data.model.RoastLevel
 import co.coffeery.app.data.model.ThemeMode
 import co.coffeery.app.data.repo.CoffeeRepository
-import co.coffeery.app.util.CloudBackupManager
 import co.coffeery.app.ui.screens.log.Achievement
 import co.coffeery.app.ui.screens.log.checkAchievements
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -410,30 +408,6 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                 ctx.startActivity(Intent.createChooser(sendIntent, "Export brew logs"))
             } catch (e: Exception) {
                 Toast.makeText(ctx, "Export failed: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    fun getCloudBackupManager(): CloudBackupManager = CloudBackupManager(getApplication())
-
-    fun backupToDrive(activity: Activity, dbFile: java.io.File) {
-        viewModelScope.launch {
-            val result = getCloudBackupManager().backupToDrive(activity, dbFile)
-            result.onSuccess {
-                Toast.makeText(activity, activity.getString(R.string.settings_cloud_backup_done), Toast.LENGTH_SHORT).show()
-            }.onFailure {
-                Toast.makeText(activity, activity.getString(R.string.settings_cloud_error), Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    fun restoreFromDrive(activity: Activity, dbFile: java.io.File) {
-        viewModelScope.launch {
-            val result = getCloudBackupManager().restoreFromDrive(activity, dbFile)
-            result.onSuccess {
-                Toast.makeText(activity, activity.getString(R.string.settings_cloud_restore_done), Toast.LENGTH_SHORT).show()
-            }.onFailure {
-                Toast.makeText(activity, activity.getString(R.string.settings_cloud_error), Toast.LENGTH_SHORT).show()
             }
         }
     }
