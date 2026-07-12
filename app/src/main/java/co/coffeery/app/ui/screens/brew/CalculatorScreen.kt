@@ -23,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -113,6 +114,12 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
     }
     val ctx = LocalContext.current
     val eqName = eq.displayName()
+    val cloud = remember { CloudBackupManager(ctx) }
+
+    // Refresh Google session so photo loads
+    LaunchedEffect(Unit) {
+        cloud.silentSignIn()
+    }
 
     Column(
         modifier = Modifier
@@ -125,7 +132,6 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
         ScreenHeader(
             title = stringResource(R.string.calc_title),
             trailing = {
-                val cloud = remember { CloudBackupManager(ctx) }
                 if (cloud.isSignedIn()) {
                     val photoUrl = cloud.getProfilePhotoUrl()
                     Box(
