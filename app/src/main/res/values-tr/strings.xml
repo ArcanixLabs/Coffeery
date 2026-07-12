@@ -1263,6 +1263,10 @@
     <string name="settings_cloud_signed_as">%s olarak giriş yapıldı</string>
     <string name="settings_cloud_signout">Çıkış yap</string>
     <string name="settings_cloud_error">Giriş başarısız</string>
+    <string name="settings_cloud_backup">Drive\'a yedekle</string>
+    <string name="settings_cloud_restore">Drive\'dan geri yükle</string>
+    <string name="settings_cloud_backup_done">Yedek Drive\'a kaydedildi</string>
+    <string name="settings_cloud_restore_done">Veriler geri yüklendi. Uygulamayı yeniden başlatın.</string>
     <string name="bean_detail_title">Çekirdek Detayı</string>
     <string name="bean_detail_roast_date">Kavurma tarihi</string>
     <string name="bean_detail_process">İşleme</string>

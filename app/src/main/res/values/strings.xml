@@ -1263,6 +1263,10 @@
     <string name="settings_cloud_signed_as">Signed in as %s</string>
     <string name="settings_cloud_signout">Sign out</string>
     <string name="settings_cloud_error">Sign-in failed</string>
+    <string name="settings_cloud_backup">Backup to Drive</string>
+    <string name="settings_cloud_restore">Restore from Drive</string>
+    <string name="settings_cloud_backup_done">Backup saved to Drive</string>
+    <string name="settings_cloud_restore_done">Data restored. Restart the app.</string>
     <string name="bean_detail_title">Bean Details</string>
     <string name="bean_detail_roast_date">Roast date</string>
     <string name="bean_detail_process">Process</string>

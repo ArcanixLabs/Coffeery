@@ -97,6 +97,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.7.0")
 
     implementation("com.google.android.gms:play-services-auth:21.3.0")
+    implementation("com.google.android.gms:play-services-drive:17.0.0")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

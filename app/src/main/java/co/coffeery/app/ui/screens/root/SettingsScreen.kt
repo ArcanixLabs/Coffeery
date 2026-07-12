@@ -28,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -53,6 +54,7 @@ import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
 import co.coffeery.app.ui.theme.paletteColors
 import co.coffeery.app.util.CloudBackupManager
+import kotlinx.coroutines.launch
 
 @Composable
 fun SettingsScreen(vm: AppViewModel) {
@@ -78,8 +80,16 @@ fun SettingsScreen(vm: AppViewModel) {
     ) { result ->
         cloud.handleSignInResult(result.data) { success, msg ->
             cloudSignedIn = success
+            if (success) {
+                scope.launch {
+                    val json = vm.getExportJson()
+                    cloud.backupToDrive(ctx as android.app.Activity, json)
+                }
+            }
         }
     }
+
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -323,6 +333,31 @@ fun SettingsScreen(vm: AppViewModel) {
                     style = CoffeeTheme.type.caption,
                     color = colors.textSecondary,
                 )
+                Spacer(Modifier.height(12.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                    SecondaryButton(stringResource(R.string.settings_cloud_backup), Modifier.weight(1f)) {
+                        scope.launch {
+                            val json = vm.getExportJson()
+                            val result = cloud.backupToDrive(ctx as android.app.Activity, json)
+                            if (result.isSuccess) android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
+                            else android.widget.Toast.makeText(ctx, R.string.settings_cloud_error, android.widget.Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                Spacer(Modifier.height(8.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                    SecondaryButton(stringResource(R.string.settings_cloud_restore), Modifier.weight(1f)) {
+                        scope.launch {
+                            val result = cloud.restoreFromDrive(ctx)
+                            if (result.isSuccess) {
+                                vm.importFromJsonString(ctx, result.getOrDefault(""))
+                                android.widget.Toast.makeText(ctx, R.string.settings_cloud_restore_done, android.widget.Toast.LENGTH_SHORT).show()
+                            } else {
+                                android.widget.Toast.makeText(ctx, R.string.settings_cloud_error, android.widget.Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
                 Spacer(Modifier.height(12.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
                     SecondaryButton(stringResource(R.string.settings_cloud_signout), Modifier.weight(1f)) {

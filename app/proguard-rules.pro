@@ -27,3 +27,9 @@
 # Google Sign-In
 -keep class com.google.android.gms.auth.** { *; }
 -dontwarn com.google.android.gms.auth.**
+
+# Google Drive API
+-keep class com.google.api.services.drive.** { *; }
+-dontwarn com.google.api.services.drive.**
+-keep class com.google.api.client.http.** { *; }
+-dontwarn com.google.api.client.http.**

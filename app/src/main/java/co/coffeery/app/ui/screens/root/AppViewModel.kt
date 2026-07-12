@@ -352,6 +352,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     // --- Export / Import ---
+    suspend fun getExportJson(): String = repo.exportAllToJson()
+
     fun exportData(ctx: Context) {
         viewModelScope.launch {
             try {
