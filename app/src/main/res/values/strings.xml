@@ -477,6 +477,16 @@
     <string name="pro_tip_38">Label your coffee bags with roast date, not \'best by\' date. Coffee isn\'t milk — it doesn\'t suddenly go bad on a printed date. Instead, it gradually declines from its peak. Knowing the roast date lets you calculate optimal brewing windows.</string>
     <string name="pro_tip_39">Keep a brew journal — even a simple notebook entry with grind setting, ratio, and one-sentence taste note. After 20 brews with the same coffee, you\'ll see clear patterns. This is the fastest path from \'I like this\' to \'I know why I like this.\'</string>
     <string name="pro_tip_40">The 80/20 rule of coffee quality: 80% of your result comes from these four things — freshly roasted beans, a burr grinder, a scale, and filtered water. The remaining 20% is technique, equipment, and ritual. Master the 80% first.</string>
+    <string name="pro_tip_41">For iced pour-over, split your water: 60% hot for brewing, 40% as ice in the carafe. The ice flash-chills and dilutes to perfect strength. Use 1–2 clicks finer grind than your usual hot recipe.</string>
+    <string name="pro_tip_42">The \'Hoffmann French Press\' technique: use medium grind (not coarse), steep 4 min, break the crust, scoop foam, wait 5+ minutes for fines to settle, then plunge just to the surface. Clean cup with full body.</string>
+    <string name="pro_tip_43">Espresso grind size is set by your basket, not your preference. Under-dose a VST basket and you\'ll get a soggy puck. Fill to the basket\'s rated capacity (±1g) for best results.</string>
+    <string name="pro_tip_44">Your coffee\'s bloom tells you its age: no bloom = 3+ weeks old. Violent bloom with large bubbles = 2–5 days post-roast, still degassing heavily. Gentle, even bloom = optimal drinking window (5–14 days).</string>
+    <string name="pro_tip_45">Pre-wet espresso puck with a 2–3 second pre-infusion at low pressure before full extraction. This saturates the puck evenly and reduces channeling. Even machines without pre-infusion can do this manually by starting and stopping the pump briefly.</string>
+    <string name="pro_tip_46">Store multiple coffees? Freeze sealed portions you won\'t use in 2 weeks. Pull one portion out the night before, let it come to room temp in the sealed bag before opening. Never refreeze.</string>
+    <string name="pro_tip_47">The \'water first, coffee second\' technique for AeroPress (inverted): this prevents dry clumps at the plunger end. Add water, THEN coffee, stir immediately. More even extraction than coffee-first.</string>
+    <string name="pro_tip_48">If your V60 keeps clogging with Ethiopian beans, try pouring gentler and avoiding the final Rao Spin. Ethiopian coffees produce more fines. A gentler pour keeps fines distributed rather than migrating to the filter.</string>
+    <string name="pro_tip_49">Dose consistency beats dose precision. 18.0g vs 18.2g doesn\'t matter. But switching between 17g and 19g without adjusting grind will change extraction noticeably. Pick a dose, lock it, adjust grind instead.</string>
+    <string name="pro_tip_50">Clean your grinder burrs every 2–3 kg of coffee (roughly monthly for home users). Old coffee oils go rancid and coat fresh grounds. You\'ll taste the difference immediately — brighter, cleaner, more distinct flavors.</string>
 
     <!-- Coffee Glossary -->
     <string name="glossary_title">Coffee Glossary</string>
@@ -590,6 +600,26 @@
     <string name="glossary_def_54">A measurement of free (unbound) water in green coffee, critical for storage and roasting. Ideal Aw for green coffee: 0.53-0.59. Below 0.50, beans become brittle and lose cup quality; above 0.65, mold risk increases. Monitored throughout the supply chain.</string>
     <string name="glossary_term_55">Wet Aroma</string>
     <string name="glossary_def_55">The smell released when hot water first hits ground coffee, assessed during cupping. Different volatile compounds are released at different temperatures; the wet aroma reveals a different aromatic profile than dry fragrance. Often described alongside the \'crust\' that forms during cupping.</string>
+    <string name="glossary_term_56">Chaff</string>
+    <string name="glossary_def_56">The papery silver skin that flakes off coffee beans during roasting. Light roasts retain more chaff in the bean crease. Excessive chaff can clog grinders and add a papery taste if not removed.</string>
+    <string name="glossary_term_57">Peaberry</string>
+    <string name="glossary_def_57">A natural mutation where only one round bean develops inside the coffee cherry instead of the usual two flat-sided beans. About 5% of any harvest. Often separated and sold at premium for perceived superior flavor concentration.</string>
+    <string name="glossary_term_58">Monsooned</string>
+    <string name="glossary_def_58">Coffee exposed to monsoon winds and humidity for 12–16 weeks in open warehouses on India\'s Malabar coast. Beans swell, turn pale gold, and develop extremely low acidity with a unique musty, spicy profile.</string>
+    <string name="glossary_term_59">Cup of Excellence</string>
+    <string name="glossary_def_59">The most prestigious coffee competition and auction system. Coffees scoring 87+ points are awarded the COE designation. Winning lots can sell for $50–100+/lb, directly benefiting the producing farmer.</string>
+    <string name="glossary_term_60">Cupping Spoon</string>
+    <string name="glossary_def_60">A deep-bowled, silver-plated or stainless steel spoon used in professional coffee tasting. The bowl shape is designed for aggressive slurping (aspiration) which aerosolizes the coffee across the entire palate simultaneously.</string>
+    <string name="glossary_term_61">Microlot</string>
+    <string name="glossary_def_61">A small, separately processed batch of coffee from a specific section of a farm, often a few bags or less. Microlots allow roasters to showcase exceptional quality from a single plot or picking pass.</string>
+    <string name="glossary_term_62">Organic Acids</string>
+    <string name="glossary_def_62">Naturally occurring acids in coffee — citric (lemon), malic (apple), tartaric (grape), acetic (vinegar, in small amounts), and chlorogenic acids. These create coffee\'s perceived acidity and brightness. Roasting degrades them; light roasts retain more.</string>
+    <string name="glossary_term_63">Quakers</string>
+    <string name="glossary_def_63">Under-ripe coffee beans that remain pale and fail to darken during roasting. They taste papery, peanutty, or \'bready\' and are considered a defect. Quality-focused roasters remove quakers during post-roast sorting.</string>
+    <string name="glossary_term_64">Washed Process</string>
+    <string name="glossary_def_64">Coffee processing method where fruit skin and pulp are mechanically removed, beans ferment in water tanks to loosen remaining mucilage, then are washed and dried. Produces clean, bright cups emphasizing origin character.</string>
+    <string name="glossary_term_65">Natural Process</string>
+    <string name="glossary_def_65">The oldest processing method: whole coffee cherries are dried in the sun with fruit intact for 2–4 weeks before hulling. Long fruit contact creates intense fruit-forward, winey, and heavy-bodied flavor profiles.</string>
 
     <!-- Grind size visual reference -->
     <string name="grind_vis_title">Grind Size Reference</string>
@@ -650,6 +680,10 @@
     <string name="brew_issue_gusher_advice">How to fix espresso that runs through in under 15 seconds, producing thin, underextracted, sour shots — grind finer, increase dose, check distribution.</string>
     <string name="brew_issue_fines_mud_advice">What causes excessive sediment and mud at the bottom of your French press cup — why your grinder may be producing too many fines or your plunge was too aggressive.</string>
     <string name="brew_issue_clogged_filter_advice">Why your pour-over stalls and takes forever to drain — diagnosing and fixing filter clogging from fines migration, overly fine grinding, or filter type.</string>
+    <string name="brew_issue_temp_loss">Temperature Loss / Flat taste</string>
+    <string name="brew_issue_temp_loss_advice">Why your brewed coffee tastes flat despite correct ratio — diagnosing and fixing temperature loss from kettle to slurry. Pre-heat everything, brew at the high end of your target range, and account for 3–8°C drop from kettle to slurry.</string>
+    <string name="brew_issue_grind_inconsistent">Inconsistent results day to day</string>
+    <string name="brew_issue_grind_inconsistent_advice">Why the same recipe produces different results on different days — diagnosing grind inconsistency from dull burrs, ambient humidity affecting static, or grinder retention mixing yesterday\'s stale grounds with today\'s fresh dose.</string>
 
     <!-- Flavor wheel -->
     <string name="flavor_wheel_title">Coffee Flavor Wheel</string>

@@ -325,6 +325,9 @@ private fun ProTipsCard() {
         R.string.pro_tip_29, R.string.pro_tip_30, R.string.pro_tip_31, R.string.pro_tip_32,
         R.string.pro_tip_33, R.string.pro_tip_34, R.string.pro_tip_35, R.string.pro_tip_36,
         R.string.pro_tip_37, R.string.pro_tip_38, R.string.pro_tip_39, R.string.pro_tip_40,
+        R.string.pro_tip_41, R.string.pro_tip_42, R.string.pro_tip_43, R.string.pro_tip_44,
+        R.string.pro_tip_45, R.string.pro_tip_46, R.string.pro_tip_47, R.string.pro_tip_48,
+        R.string.pro_tip_49, R.string.pro_tip_50,
     )
     var current by remember { mutableStateOf(kotlin.random.Random.nextInt(tips.size)) }
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
@@ -457,6 +460,8 @@ private fun BrewTroubleshooterCard() {
         R.string.brew_issue_gusher to R.string.brew_issue_gusher_advice,
         R.string.brew_issue_fines_mud to R.string.brew_issue_fines_mud_advice,
         R.string.brew_issue_clogged_filter to R.string.brew_issue_clogged_filter_advice,
+        R.string.brew_issue_temp_loss to R.string.brew_issue_temp_loss_advice,
+        R.string.brew_issue_grind_inconsistent to R.string.brew_issue_grind_inconsistent_advice,
     )
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -547,6 +552,16 @@ private val GlossaryTerms = listOf(
     GlossaryTerm(R.string.glossary_term_53, R.string.glossary_def_53),
     GlossaryTerm(R.string.glossary_term_54, R.string.glossary_def_54),
     GlossaryTerm(R.string.glossary_term_55, R.string.glossary_def_55),
+    GlossaryTerm(R.string.glossary_term_56, R.string.glossary_def_56),
+    GlossaryTerm(R.string.glossary_term_57, R.string.glossary_def_57),
+    GlossaryTerm(R.string.glossary_term_58, R.string.glossary_def_58),
+    GlossaryTerm(R.string.glossary_term_59, R.string.glossary_def_59),
+    GlossaryTerm(R.string.glossary_term_60, R.string.glossary_def_60),
+    GlossaryTerm(R.string.glossary_term_61, R.string.glossary_def_61),
+    GlossaryTerm(R.string.glossary_term_62, R.string.glossary_def_62),
+    GlossaryTerm(R.string.glossary_term_63, R.string.glossary_def_63),
+    GlossaryTerm(R.string.glossary_term_64, R.string.glossary_def_64),
+    GlossaryTerm(R.string.glossary_term_65, R.string.glossary_def_65),
 )
 
 private data class FlavorCategory(val labelRes: Int, val notes: List<Int>)

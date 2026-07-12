@@ -477,6 +477,16 @@
     <string name="pro_tip_38">Kahve poşetlerinize \'son tüketim\' değil, kavurma tarihi yazın. Kahve süt değildir — basılı bir tarihte aniden bozulmaz. Bunun yerine, zirvesinden kademeli olarak düşüşe geçer. Kavurma tarihini bilmek, optimal demleme pencerelerini hesaplamanızı sağlar.</string>
     <string name="pro_tip_39">Bir demleme günlüğü tutun — öğütüm ayarı, oran ve tek cümlelik tat notu içeren basit bir defter bile yeter. Aynı kahveyle 20 demlemeden sonra net desenler göreceksiniz. \'Bunu beğendim\'den \'neden beğendiğimi biliyorum\'a giden en hızlı yol budur.</string>
     <string name="pro_tip_40">Kahve kalitesinde 80/20 kuralı: sonucunuzun %80\'i şu dört şeyden gelir — taze kavrulmuş çekirdek, burr öğütücü, tartı ve filtrelenmiş su. Kalan %20 teknik, ekipman ve ritüeldir. Önce %80\'de ustalaşın.</string>
+    <string name="pro_tip_41">Buzlu pour-over için suyunuzu bölün: %60\'ı sıcak demleme için, %40\'ı karafa buz olarak. Buz anında soğutur ve mükemmel sertliğe seyreltir. Normal sıcak tarifinize göre 1–2 klik daha ince öğütün.</string>
+    <string name="pro_tip_42">\'Hoffmann French Press\' tekniği: orta öğütüm kullanın (kaba değil), 4 dk demleyin, kabuğu kırın, köpüğü alın, ince tozların çökmesi için 5+ dakika bekleyin, sonra pistonu sadece yüzeye kadar indirin. Dolgun gövdeyle temiz fincan.</string>
+    <string name="pro_tip_43">Espresso öğütüm boyutunu tercihiniz değil, sepetiniz belirler. VST sepete eksik doz koyarsanız sulu bir disk elde edersiniz. En iyi sonuç için sepetin nominal kapasitesine (±1g) doldurun.</string>
+    <string name="pro_tip_44">Kahvenizin bloom\'u yaşını söyler: hiç bloom yok = 3+ haftalık. Büyük baloncuklu sert bloom = kavurma sonrası 2–5 gün, halen yoğun gaz çıkışı. Nazik, eşit bloom = optimal içim aralığı (5–14 gün).</string>
+    <string name="pro_tip_45">Tam ekstraksiyon öncesinde 2–3 saniye düşük basınçla ön ıslatma yapın. Bu diski eşit doyurur ve kanallanmayı azaltır. Ön ıslatması olmayan makineler bile pompayı kısa süre çalıştırıp durdurarak manuel yapabilir.</string>
+    <string name="pro_tip_46">Birden çok kahveniz mi var? 2 haftada tüketmeyeceğiniz porsiyonları kapalı şekilde dondurun. Bir porsiyonu geceden çıkarın, poşeti açmadan oda sıcaklığına gelmesini bekleyin. Asla tekrar dondurmayın.</string>
+    <string name="pro_tip_47">AeroPress için \'önce su, sonra kahve\' tekniği (ters çevirme): piston ucunda kuru topak oluşmasını engeller. Suyu, SONRA kahveyi ekleyin, hemen karıştırın. Önce kahve koymaktan daha eşit ekstraksiyon.</string>
+    <string name="pro_tip_48">V60\'ınız Etiyopya çekirdekleriyle sürekli tıkanıyorsa, daha nazik dökmeyi ve son Rao Döndürmesi\'ni atlamayı deneyin. Etiyopya kahveleri daha fazla ince toz üretir. Daha nazik döküş ince tozları filtreye göç ettirmek yerine dağıtır.</string>
+    <string name="pro_tip_49">Doz tutarlılığı, doz hassasiyetinden üstündür. 18.0g ile 18.2g fark etmez. Ama öğütümü değiştirmeden 17g ve 19g arasında geçiş yapmak ekstraksiyonu belirgin şekilde değiştirir. Bir doz seçin, kilitleyin, onun yerine öğütümü ayarlayın.</string>
+    <string name="pro_tip_50">Öğütücü dişlilerinizi her 2–3 kg kahvede bir temizleyin (ev kullanıcıları için yaklaşık aylık). Eski kahve yağları acılaşır ve taze çekilmiş kahveyi kaplar. Farkı hemen tadacaksınız — daha parlak, daha temiz, daha belirgin aromalar.</string>
 
     <!-- Kahve Sözlüğü -->
     <string name="glossary_title">Kahve Sözlüğü</string>
@@ -590,6 +600,26 @@
     <string name="glossary_def_54">Yeşil kahvede serbest (bağlı olmayan) su ölçümü, saklama ve kavurma için kritiktir. Yeşil kahve için ideal Aw: 0.53-0.59. 0.50\'nin altında çekirdekler kırılganlaşır ve fincan kalitesini kaybeder; 0.65\'in üzerinde küf riski artar. Tedarik zinciri boyunca izlenir.</string>
     <string name="glossary_term_55">Islak Aroma</string>
     <string name="glossary_def_55">Sıcak su öğütülmüş kahveye ilk değdiğinde salınan koku, kupaj sırasında değerlendirilir. Farklı sıcaklıklarda farklı uçucu bileşikler salınır; ıslak aroma, kuru kokudan farklı bir aromatik profil ortaya çıkarır. Genellikle kupaj sırasında oluşan \'kabuk\' ile birlikte tarif edilir.</string>
+    <string name="glossary_term_56">Kavruk Kabuğu (Chaff)</string>
+    <string name="glossary_def_56">Kavurma sırasında kahve çekirdeklerinden pul pul dökülen kağıtsı gümüş zar. Açık kavurmalar çekirdek kıvrımında daha fazla kavruk kabuğu barındırır. Fazla kavruk kabuğu öğütücüleri tıkayabilir ve temizlenmezse kağıtsı bir tat ekleyebilir.</string>
+    <string name="glossary_term_57">Peaberry</string>
+    <string name="glossary_def_57">Kahve kirazının içinde alışıldık iki düz yüzlü çekirdek yerine yalnızca bir yuvarlak çekirdeğin geliştiği doğal bir mutasyon. Her hasadın yaklaşık %5\'i. Algılanan üstün lezzet konsantrasyonu nedeniyle genellikle ayrılıp yüksek fiyata satılır.</string>
+    <string name="glossary_term_58">Musonlanmış</string>
+    <string name="glossary_def_58">Hindistan\'ın Malabar kıyısındaki açık depolarda 12–16 hafta muson rüzgarlarına ve nemine maruz bırakılan kahve. Çekirdekler şişer, soluk altın rengine döner ve benzersiz küflü, baharatlı profille son derece düşük asidite geliştirir.</string>
+    <string name="glossary_term_59">Cup of Excellence</string>
+    <string name="glossary_def_59">En prestijli kahve yarışması ve açık artırma sistemi. 87+ puan alan kahveler COE unvanı kazanır. Kazanan lotlar $50–100+/lb fiyata satılabilir ve doğrudan üretici çiftçiye fayda sağlar.</string>
+    <string name="glossary_term_60">Kupaj Kaşığı</string>
+    <string name="glossary_def_60">Profesyonel kahve tadımında kullanılan derin çanaklı, gümüş kaplamalı veya paslanmaz çelik kaşık. Çanak şekli, kahveyi tüm damağa aynı anda aerosolize eden agresif höpürdetme (aspirasyon) için tasarlanmıştır.</string>
+    <string name="glossary_term_61">Microlot</string>
+    <string name="glossary_def_61">Bir çiftliğin belirli bir bölümünden, genellikle birkaç çuval veya daha az olan, ayrı olarak işlenmiş küçük parti kahve. Microlot\'lar kavurucuların tek bir parsel veya toplama geçişinden olağanüstü kaliteyi sergilemesine olanak tanır.</string>
+    <string name="glossary_term_62">Organik Asitler</string>
+    <string name="glossary_def_62">Kahvede doğal olarak bulunan asitler — sitrik (limon), malik (elma), tartarik (üzüm), asetik (sirke, az miktarda) ve klorojenik asitler. Kahvenin algılanan asiditesini ve parlaklığını oluşturur. Kavurma onları azaltır; açık kavurmalar daha fazlasını korur.</string>
+    <string name="glossary_term_63">Quaker</string>
+    <string name="glossary_def_63">Kavurma sırasında soluk kalan ve kararmayan olgunlaşmamış kahve çekirdekleri. Kağıtsı, fıstıksı veya \'ekmekimsi\' tat verir ve kusur olarak kabul edilir. Kalite odaklı kavurmacılar kavurma sonrası ayıklamada quaker\'ları çıkarır.</string>
+    <string name="glossary_term_64">Yıkanmış İşleme</string>
+    <string name="glossary_def_64">Meyve kabuğu ve etinin mekanik olarak çıkarıldığı, çekirdeklerin kalan müsilajı gevşetmek için su tanklarında fermente edildiği, ardından yıkanıp kurutulduğu kahve işleme yöntemi. Köken karakterini öne çıkaran temiz, parlak fincanlar üretir.</string>
+    <string name="glossary_term_65">Doğal İşleme</string>
+    <string name="glossary_def_65">En eski işleme yöntemi: bütün kahve kirazları kabuk ayırmadan önce 2–4 hafta meyvesiyle birlikte güneşte kurutulur. Uzun meyve teması yoğun meyvemsi, şarapsı ve ağır gövdeli lezzet profilleri oluşturur.</string>
 
     <!-- Öğütüm görsel referansı -->
     <string name="grind_vis_title">Öğütüm Boyutu Referansı</string>
@@ -650,6 +680,10 @@
     <string name="brew_issue_gusher_advice">15 saniyenin altında akan, ince, az ekstrakte, ekşi shot veren espresso nasıl düzeltilir — daha ince öğütün, dozu artırın, dağılımı kontrol edin.</string>
     <string name="brew_issue_fines_mud_advice">French press fincanınızın dibindeki aşırı tortu ve çamur neden olur — öğütücünüz neden çok fazla ince toz üretiyor veya pistonu çok agresif bastırdınız.</string>
     <string name="brew_issue_clogged_filter_advice">Pour-over demlemeniz neden tıkanıyor ve süzülmesi sonsuza kadar sürüyor — ince toz göçü, aşırı ince öğütüm veya filtre türünden kaynaklanan tıkanma nasıl teşhis edilir ve düzeltilir.</string>
+    <string name="brew_issue_temp_loss">Sıcaklık Kaybı / Düz tat</string>
+    <string name="brew_issue_temp_loss_advice">Doğru orana rağmen demlediğiniz kahve neden düz tadıyor — kettle\'dan karışıma sıcaklık kaybını teşhis ve düzeltme. Her şeyi ön ısıtın, hedef aralığınızın üst sınırında demleyin ve kettle\'dan karışıma 3–8°C düşüşü hesaba katın.</string>
+    <string name="brew_issue_grind_inconsistent">Günden güne tutarsız sonuçlar</string>
+    <string name="brew_issue_grind_inconsistent_advice">Aynı tarif neden farklı günlerde farklı sonuç veriyor — körlenmiş dişliler, statik elektriği etkileyen ortam nemi veya dünkü bayat öğütülmüş kahveyi bugünkü taze dozla karıştıran öğütücü kalıntısından kaynaklanan öğütüm tutarsızlığını teşhis.</string>
 
     <!-- Tat çemberi -->
     <string name="flavor_wheel_title">Kahve Tat Çemberi</string>
