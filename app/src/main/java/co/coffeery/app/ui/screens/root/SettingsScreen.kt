@@ -90,8 +90,6 @@ fun SettingsScreen(vm: AppViewModel) {
         }
     }
 
-    val scope = rememberCoroutineScope()
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
