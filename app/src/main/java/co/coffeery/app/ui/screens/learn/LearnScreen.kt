@@ -27,6 +27,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -740,6 +741,48 @@ private val QuizQuestions = listOf(
         1,
         "Robusta beans contain roughly twice the caffeine of Arabica.",
     ),
+    QuizQuestion(
+        "What is the ideal water temperature for pour-over (SCA standard)?",
+        listOf("80-85°C", "90-96°C", "70-75°C", "100°C"),
+        1,
+        "SCA specifies 195-205°F (90-96°C). Below 90°C under-extracts; above 96°C risks bitterness.",
+    ),
+    QuizQuestion(
+        "Which coffee species has more caffeine?",
+        listOf("Arabica (~1.2%)", "Robusta (~2.2%)", "Liberica", "All equal"),
+        1,
+        "Robusta has nearly double the caffeine of Arabica, giving it a more bitter taste and stronger pest resistance.",
+    ),
+    QuizQuestion(
+        "What is 'crema'?",
+        listOf("Coffee foam from steamed milk", "The tan foam on top of espresso", "A type of bean", "A roasting level"),
+        1,
+        "Crema forms when CO2 and coffee oils emulsify under 9 bars of pressure. Fresh beans produce more crema.",
+    ),
+    QuizQuestion(
+        "Which grind for French Press?",
+        listOf("Extra fine", "Fine", "Coarse", "Medium"),
+        2,
+        "Coarse grind prevents sludge and over-extraction during the 4-minute immersion. Think breadcrumbs, not powder.",
+    ),
+    QuizQuestion(
+        "What does 'blooming' mean?",
+        listOf("Adding milk", "Pre-wetting grounds to release CO2", "Roasting beans", "Grinding coffee"),
+        1,
+        "Fresh coffee releases CO2 when hot water first hits it. Blooming for 30-45 seconds ensures even extraction.",
+    ),
+    QuizQuestion(
+        "What is a 'ristretto'?",
+        listOf("Espresso with more water", "Espresso with less water", "A type of bean", "A brewing device"),
+        1,
+        "Ristretto uses the same dose but half the water — more concentrated, sweeter, less bitter than regular espresso.",
+    ),
+    QuizQuestion(
+        "Which country is the birthplace of coffee?",
+        listOf("Brazil", "Colombia", "Ethiopia", "Vietnam"),
+        2,
+        "Coffee originated in Ethiopia's Kaffa region. Legend says a goatherd named Kaldi discovered it when his goats ate red berries and became energetic.",
+    ),
 )
 
 @Composable
@@ -747,6 +790,8 @@ private fun QuickQuizCard() {
     val colors = CoffeeTheme.colors
     var questionIndex by remember { mutableStateOf(kotlin.random.Random.nextInt(QuizQuestions.size)) }
     var selectedAnswer by remember { mutableStateOf(-1) }
+    var correctCount by remember { mutableIntStateOf(0) }
+    var counted by remember { mutableStateOf(false) }
     val q = QuizQuestions[questionIndex]
     val wrongColor = Color(0xFFE53935)
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
@@ -793,13 +838,23 @@ private fun QuickQuizCard() {
         if (selectedAnswer != -1) {
             Spacer(Modifier.height(4.dp))
             val isCorrect = selectedAnswer == q.correctIndex
+            if (isCorrect && !counted) {
+                correctCount++
+                counted = true
+            }
             AppText(
                 if (isCorrect) stringResource(R.string.learn_quiz_correct) else stringResource(R.string.learn_quiz_wrong),
                 style = CoffeeTheme.type.label,
                 color = if (isCorrect) colors.accent else wrongColor,
             )
             AppText(q.explanation, style = CoffeeTheme.type.caption, color = colors.textSecondary)
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(4.dp))
+            AppText(
+                stringResource(R.string.learn_quiz_score, correctCount),
+                style = CoffeeTheme.type.label,
+                color = colors.accent,
+            )
+            Spacer(Modifier.height(4.dp))
             AppText(
                 "Next question →",
                 style = CoffeeTheme.type.label,
@@ -810,6 +865,7 @@ private fun QuickQuizCard() {
                 ) {
                     questionIndex = kotlin.random.Random.nextInt(QuizQuestions.size)
                     selectedAnswer = -1
+                    counted = false
                 },
             )
         }
