@@ -33,3 +33,6 @@
 -dontwarn com.google.http.client.**
 -keep class com.google.android.gms.auth.** { *; }
 -dontwarn com.google.android.gms.auth.**
+-keep class org.apache.http.** { *; }
+-dontwarn org.apache.http.**
+-dontwarn javax.naming.**
