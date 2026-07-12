@@ -16,9 +16,12 @@ import androidx.core.app.NotificationCompat
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -186,7 +189,13 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
             }
             if (state.settings.timerBackground) {
                 if (!TimerService.isRunning) {
-                    running = false
+                    val intent = Intent(context, TimerService::class.java)
+                    intent.putExtra("equipment", equipmentName)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        context.startForegroundService(intent)
+                    } else {
+                        context.startService(intent)
+                    }
                 } else {
                     val title = stepTitles.getOrElse(stepIndex) { "" }
                     TimerService.update(context, equipmentName, title, Format.clock(remaining), stepIndex, steps.size)

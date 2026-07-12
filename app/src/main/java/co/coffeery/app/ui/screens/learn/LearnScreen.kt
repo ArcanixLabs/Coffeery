@@ -1,5 +1,6 @@
 package co.coffeery.app.ui.screens.learn
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -7,8 +8,11 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
@@ -43,6 +48,8 @@ import co.coffeery.app.ui.components.Chip
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.ScreenHeader
+import co.coffeery.app.ui.components.LineIcon
+import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.screens.root.AppViewModel
 import co.coffeery.app.ui.screens.root.Route
 import co.coffeery.app.ui.theme.CoffeeTheme
@@ -78,7 +85,7 @@ fun LearnScreen(vm: AppViewModel) {
             .fillMaxWidth()
             .verticalScroll(scrollState)
             .padding(horizontal = 20.dp)
-            .padding(top = 12.dp, bottom = 28.dp),
+            .padding(top = 12.dp, bottom = 96.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         ScreenHeader(
@@ -229,11 +236,22 @@ private fun StepMap(
                     contentAlignment = Alignment.Center,
                 ) {
                     if (isCompleted) {
-                        AppText(
-                            text = "\u2713",
-                            style = CoffeeTheme.type.caption,
-                            color = colors.onAccent,
-                        )
+                        Canvas(modifier = Modifier.fillMaxSize()) {
+                            val checkPath = Path().apply {
+                                moveTo(size.width * 0.22f, size.height * 0.52f)
+                                lineTo(size.width * 0.4f, size.height * 0.72f)
+                                lineTo(size.width * 0.78f, size.height * 0.28f)
+                            }
+                            drawPath(
+                                checkPath,
+                                colors.onAccent,
+                                style = androidx.compose.ui.graphics.drawscope.Stroke(
+                                    width = size.minDimension * 0.13f,
+                                    cap = androidx.compose.ui.graphics.StrokeCap.Round,
+                                    join = androidx.compose.ui.graphics.StrokeJoin.Round,
+                                ),
+                            )
+                        }
                     } else {
                         AppText(
                             text = "${index + 1}",
@@ -299,11 +317,22 @@ private fun ProTipsCard() {
     val tips = listOf(
         R.string.pro_tip_1, R.string.pro_tip_2, R.string.pro_tip_3, R.string.pro_tip_4,
         R.string.pro_tip_5, R.string.pro_tip_6, R.string.pro_tip_7, R.string.pro_tip_8,
-        R.string.pro_tip_9, R.string.pro_tip_10,
+        R.string.pro_tip_9, R.string.pro_tip_10, R.string.pro_tip_11, R.string.pro_tip_12,
+        R.string.pro_tip_13, R.string.pro_tip_14, R.string.pro_tip_15, R.string.pro_tip_16,
+        R.string.pro_tip_17, R.string.pro_tip_18, R.string.pro_tip_19, R.string.pro_tip_20,
+        R.string.pro_tip_21, R.string.pro_tip_22, R.string.pro_tip_23, R.string.pro_tip_24,
+        R.string.pro_tip_25, R.string.pro_tip_26, R.string.pro_tip_27, R.string.pro_tip_28,
+        R.string.pro_tip_29, R.string.pro_tip_30, R.string.pro_tip_31, R.string.pro_tip_32,
+        R.string.pro_tip_33, R.string.pro_tip_34, R.string.pro_tip_35, R.string.pro_tip_36,
+        R.string.pro_tip_37, R.string.pro_tip_38, R.string.pro_tip_39, R.string.pro_tip_40,
     )
     var current by remember { mutableStateOf(kotlin.random.Random.nextInt(tips.size)) }
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-        AppText(stringResource(R.string.pro_tips_title), style = CoffeeTheme.type.title)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.CUP, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.pro_tips_title), style = CoffeeTheme.type.title)
+        }
         Spacer(Modifier.height(8.dp))
         AppText(stringResource(tips[current]), style = CoffeeTheme.type.body, color = colors.textSecondary)
         Spacer(Modifier.height(10.dp))
@@ -325,15 +354,29 @@ private fun ProTipsCard() {
 private fun QuickRatioCard() {
     val colors = CoffeeTheme.colors
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-        AppText(stringResource(R.string.ratio_ref_title), style = CoffeeTheme.type.title)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.CUP, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.ratio_ref_title), style = CoffeeTheme.type.title)
+        }
         Spacer(Modifier.height(8.dp))
-        AppText(stringResource(R.string.ratio_1_15), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        RatioRow(R.string.ratio_1_15)
         Spacer(Modifier.height(4.dp))
-        AppText(stringResource(R.string.ratio_1_16), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        RatioRow(R.string.ratio_1_16)
         Spacer(Modifier.height(4.dp))
-        AppText(stringResource(R.string.ratio_1_17), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        RatioRow(R.string.ratio_1_17)
         Spacer(Modifier.height(4.dp))
-        AppText(stringResource(R.string.ratio_1_18), style = CoffeeTheme.type.body, color = colors.textSecondary)
+        RatioRow(R.string.ratio_1_18)
+    }
+}
+
+@Composable
+private fun RatioRow(textRes: Int) {
+    val colors = CoffeeTheme.colors
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        LineIcon(Glyph.CUP, colors.accent, Modifier.size(14.dp))
+        Spacer(Modifier.width(6.dp))
+        AppText(stringResource(textRes), style = CoffeeTheme.type.body, color = colors.textSecondary)
     }
 }
 
@@ -402,9 +445,25 @@ private fun BrewTroubleshooterCard() {
         R.string.brew_issue_bitter to R.string.brew_issue_bitter_advice,
         R.string.brew_issue_weak to R.string.brew_issue_weak_advice,
         R.string.brew_issue_dry to R.string.brew_issue_dry_advice,
+        R.string.brew_issue_stalling to R.string.brew_issue_stalling_advice,
+        R.string.brew_issue_channeling to R.string.brew_issue_channeling_advice,
+        R.string.brew_issue_muddy to R.string.brew_issue_muddy_advice,
+        R.string.brew_issue_flat to R.string.brew_issue_flat_advice,
+        R.string.brew_issue_burnt to R.string.brew_issue_burnt_advice,
+        R.string.brew_issue_metallic to R.string.brew_issue_metallic_advice,
+        R.string.brew_issue_grassy to R.string.brew_issue_grassy_advice,
+        R.string.brew_issue_salty to R.string.brew_issue_salty_advice,
+        R.string.brew_issue_no_crema to R.string.brew_issue_no_crema_advice,
+        R.string.brew_issue_gusher to R.string.brew_issue_gusher_advice,
+        R.string.brew_issue_fines_mud to R.string.brew_issue_fines_mud_advice,
+        R.string.brew_issue_clogged_filter to R.string.brew_issue_clogged_filter_advice,
     )
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-        AppText(stringResource(R.string.brew_troubleshoot_title), style = CoffeeTheme.type.title)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.GEAR, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.brew_troubleshoot_title), style = CoffeeTheme.type.title)
+        }
         Spacer(Modifier.height(4.dp))
         AppText(stringResource(R.string.brew_troubleshoot_question), style = CoffeeTheme.type.caption, color = colors.textSecondary)
         Spacer(Modifier.height(12.dp))
@@ -458,30 +517,65 @@ private val GlossaryTerms = listOf(
     GlossaryTerm(R.string.glossary_term_23, R.string.glossary_def_23),
     GlossaryTerm(R.string.glossary_term_24, R.string.glossary_def_24),
     GlossaryTerm(R.string.glossary_term_25, R.string.glossary_def_25),
+    GlossaryTerm(R.string.glossary_term_26, R.string.glossary_def_26),
+    GlossaryTerm(R.string.glossary_term_27, R.string.glossary_def_27),
+    GlossaryTerm(R.string.glossary_term_28, R.string.glossary_def_28),
+    GlossaryTerm(R.string.glossary_term_29, R.string.glossary_def_29),
+    GlossaryTerm(R.string.glossary_term_30, R.string.glossary_def_30),
+    GlossaryTerm(R.string.glossary_term_31, R.string.glossary_def_31),
+    GlossaryTerm(R.string.glossary_term_32, R.string.glossary_def_32),
+    GlossaryTerm(R.string.glossary_term_33, R.string.glossary_def_33),
+    GlossaryTerm(R.string.glossary_term_34, R.string.glossary_def_34),
+    GlossaryTerm(R.string.glossary_term_35, R.string.glossary_def_35),
+    GlossaryTerm(R.string.glossary_term_36, R.string.glossary_def_36),
+    GlossaryTerm(R.string.glossary_term_37, R.string.glossary_def_37),
+    GlossaryTerm(R.string.glossary_term_38, R.string.glossary_def_38),
+    GlossaryTerm(R.string.glossary_term_39, R.string.glossary_def_39),
+    GlossaryTerm(R.string.glossary_term_40, R.string.glossary_def_40),
+    GlossaryTerm(R.string.glossary_term_41, R.string.glossary_def_41),
+    GlossaryTerm(R.string.glossary_term_42, R.string.glossary_def_42),
+    GlossaryTerm(R.string.glossary_term_43, R.string.glossary_def_43),
+    GlossaryTerm(R.string.glossary_term_44, R.string.glossary_def_44),
+    GlossaryTerm(R.string.glossary_term_45, R.string.glossary_def_45),
+    GlossaryTerm(R.string.glossary_term_46, R.string.glossary_def_46),
+    GlossaryTerm(R.string.glossary_term_47, R.string.glossary_def_47),
+    GlossaryTerm(R.string.glossary_term_48, R.string.glossary_def_48),
+    GlossaryTerm(R.string.glossary_term_49, R.string.glossary_def_49),
+    GlossaryTerm(R.string.glossary_term_50, R.string.glossary_def_50),
+    GlossaryTerm(R.string.glossary_term_51, R.string.glossary_def_51),
+    GlossaryTerm(R.string.glossary_term_52, R.string.glossary_def_52),
+    GlossaryTerm(R.string.glossary_term_53, R.string.glossary_def_53),
+    GlossaryTerm(R.string.glossary_term_54, R.string.glossary_def_54),
+    GlossaryTerm(R.string.glossary_term_55, R.string.glossary_def_55),
 )
 
 private data class FlavorCategory(val labelRes: Int, val notes: List<Int>)
 
 private val FlavorWheelData = listOf(
-    FlavorCategory(R.string.flavor_fruity, listOf(R.string.flavor_berry, R.string.flavor_citrus, R.string.flavor_stone_fruit, R.string.flavor_tropical)),
+    FlavorCategory(R.string.flavor_fruity, listOf(R.string.flavor_berry, R.string.flavor_citrus, R.string.flavor_stone_fruit, R.string.flavor_tropical, R.string.flavor_tropical_fruit, R.string.flavor_red_berry)),
     FlavorCategory(R.string.flavor_floral, listOf(R.string.flavor_jasmine, R.string.flavor_rose, R.string.flavor_chamomile, R.string.flavor_lavender)),
-    FlavorCategory(R.string.flavor_sweet, listOf(R.string.flavor_chocolate, R.string.flavor_caramel, R.string.flavor_honey, R.string.flavor_brown_sugar)),
-    FlavorCategory(R.string.flavor_nutty_spice, listOf(R.string.flavor_almond, R.string.flavor_cinnamon, R.string.flavor_clove, R.string.flavor_nutmeg)),
+    FlavorCategory(R.string.flavor_sweet, listOf(R.string.flavor_chocolate, R.string.flavor_caramel, R.string.flavor_honey, R.string.flavor_brown_sugar, R.string.flavor_caramelized, R.string.flavor_maple)),
+    FlavorCategory(R.string.flavor_nutty_spice, listOf(R.string.flavor_almond, R.string.flavor_cinnamon, R.string.flavor_clove, R.string.flavor_nutmeg, R.string.flavor_hazelnut, R.string.flavor_milk_chocolate, R.string.flavor_dark_cocoa)),
     FlavorCategory(R.string.flavor_earthy, listOf(R.string.flavor_woody, R.string.flavor_tobacco, R.string.flavor_leather, R.string.flavor_mushroom)),
 )
 
 @Composable
+@OptIn(ExperimentalLayoutApi::class)
 private fun FlavorWheelCard() {
     val colors = CoffeeTheme.colors
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-        AppText(stringResource(R.string.flavor_wheel_title), style = CoffeeTheme.type.title)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.PALETTE, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.flavor_wheel_title), style = CoffeeTheme.type.title)
+        }
         Spacer(Modifier.height(8.dp))
         FlavorWheelData.forEach { category ->
             Spacer(Modifier.height(8.dp))
             AppText(stringResource(category.labelRes), style = CoffeeTheme.type.headline, color = colors.accent)
             Spacer(Modifier.height(4.dp))
             category.notes.chunked(4).forEach { rowItems ->
-                Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(bottom = 6.dp)) {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(bottom = 6.dp)) {
                     rowItems.forEach { noteRes ->
                         Chip(
                             text = stringResource(noteRes),
@@ -499,7 +593,11 @@ private fun FlavorWheelCard() {
 private fun GlossaryCard() {
     val colors = CoffeeTheme.colors
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-        AppText(stringResource(R.string.glossary_title), style = CoffeeTheme.type.title)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.BOOK, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.glossary_title), style = CoffeeTheme.type.title)
+        }
         Spacer(Modifier.height(8.dp))
         GlossaryTerms.forEach { term ->
             AppText(stringResource(term.termRes), style = CoffeeTheme.type.headline)

@@ -2,6 +2,7 @@ package co.coffeery.app.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
@@ -32,7 +33,7 @@ fun PrimaryButton(
             .defaultMinSize(minWidth = 120.dp)
             .clip(shape)
             .background(if (enabled) colors.accent else colors.outline)
-            .coffeeClickable(enabled = enabled) { onClick() }
+            .clickable(enabled = enabled) { onClick() }
             .padding(horizontal = 24.dp, vertical = 15.dp),
         contentAlignment = Alignment.Center,
     ) {
@@ -58,7 +59,7 @@ fun SecondaryButton(
             .clip(CoffeeShapes.pill)
             .background(colors.surface)
             .border(1.5.dp, colors.outline, CoffeeShapes.pill)
-            .coffeeClickable(enabled = enabled) { onClick() }
+            .clickable(enabled = enabled) { onClick() }
             .padding(horizontal = 24.dp, vertical = 15.dp),
         contentAlignment = Alignment.Center,
     ) {

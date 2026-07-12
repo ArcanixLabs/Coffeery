@@ -56,7 +56,7 @@ fun RecipesScreen(state: AppUiState, vm: AppViewModel) {
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp)
-            .padding(top = 12.dp, bottom = 28.dp),
+            .padding(top = 12.dp, bottom = 96.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         ScreenHeader(title = stringResource(R.string.recipes_title))

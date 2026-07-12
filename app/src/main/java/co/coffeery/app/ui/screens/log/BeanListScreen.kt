@@ -2,6 +2,8 @@ package co.coffeery.app.ui.screens.log
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,7 +42,7 @@ fun BeanListScreen(vm: AppViewModel) {
     val colors = CoffeeTheme.colors
     var showAdd by remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 28.dp)) {
+    Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 96.dp)) {
         ScreenHeader(title = stringResource(R.string.beans_title))
 
         if (state.beans.isEmpty()) {
@@ -110,6 +112,7 @@ private fun BeanCard(bean: BeanEntity, vm: AppViewModel) {
 }
 
 @Composable
+@OptIn(ExperimentalLayoutApi::class)
 private fun AddBeanDialog(
     onDismiss: () -> Unit,
     onAdd: (name: String, origin: String, roaster: String, roastDate: Long?, notes: String, processMethod: String, varietal: String, altitude: String, scaScore: Float?, purchaseDate: Long?) -> Unit,
@@ -142,12 +145,11 @@ private fun AddBeanDialog(
 
             AppText(stringResource(R.string.bean_process), style = CoffeeTheme.type.label, color = colors.textSecondary)
             Spacer(Modifier.height(4.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth()) {
                 processOptions.forEach { opt ->
                     val selected = processMethod == opt
                     PrimaryButton(
                         text = opt,
-                        modifier = Modifier.weight(1f).height(36.dp).padding(0.dp),
                         enabled = selected,
                         shape = co.coffeery.app.ui.theme.CoffeeShapes.pill,
                     ) { processMethod = opt }

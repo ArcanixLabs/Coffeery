@@ -2,6 +2,7 @@ package co.coffeery.app.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -49,7 +50,7 @@ fun <T> SegmentedControl(
                     .weight(1f)
                     .clip(CoffeeShapes.pill)
                     .background(bg)
-                    .coffeeClickable { onSelect(option) }
+                    .clickable { onSelect(option) }
                     .padding(vertical = if (subtitle != null) 8.dp else 10.dp),
                 contentAlignment = Alignment.Center,
             ) {
@@ -114,7 +115,7 @@ private fun RowScope.StepButton(symbol: String, enabled: Boolean, onClick: () ->
             .size(40.dp)
             .clip(CoffeeShapes.pill)
             .border(1.5.dp, if (enabled) colors.accent else colors.outline, CoffeeShapes.pill)
-            .coffeeClickable(enabled = enabled) { onClick() },
+            .clickable(enabled = enabled) { onClick() },
         contentAlignment = Alignment.Center,
     ) {
         AppText(
