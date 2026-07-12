@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
@@ -63,14 +64,20 @@ fun SettingsScreen(vm: AppViewModel) {
     var cloudSignedIn by remember { mutableStateOf(cloud.isSignedIn()) }
     val cloudEmail = remember(cloudSignedIn) { cloud.getAccountEmail() ?: "" }
 
+    // Try silent sign-in on open
+    LaunchedEffect(Unit) {
+        if (!cloud.isPlayServicesAvailable()) {
+            android.widget.Toast.makeText(ctx, "Google Play Services not available", android.widget.Toast.LENGTH_LONG).show()
+        } else if (!cloud.isSignedIn()) {
+            cloud.silentSignIn()
+        }
+    }
+
     val signInLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        cloud.handleSignInResult(result.data) { success ->
+        cloud.handleSignInResult(result.data) { success, msg ->
             cloudSignedIn = success
-            if (!success) {
-                android.widget.Toast.makeText(ctx, ctx.getString(R.string.settings_cloud_error), android.widget.Toast.LENGTH_SHORT).show()
-            }
         }
     }
 
