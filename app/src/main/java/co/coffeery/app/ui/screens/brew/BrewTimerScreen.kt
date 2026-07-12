@@ -3,9 +3,12 @@ package co.coffeery.app.ui.screens.brew
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.media.AudioFormat
 import android.media.AudioManager
-import android.media.ToneGenerator
+import android.media.AudioTrack
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.WindowManager
@@ -164,18 +167,14 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                 if (state.settings.timerVibrate) {
                     val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vibrator?.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+                        vibrator?.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 30, 50, 30), -1))
                     } else {
                         @Suppress("DEPRECATION")
-                        vibrator?.vibrate(50)
+                        vibrator?.vibrate(longArrayOf(0, 30, 50, 30), -1)
                     }
                 }
                 if (state.settings.timerSound) {
-                    try {
-                        val tone = ToneGenerator(AudioManager.STREAM_NOTIFICATION, 50)
-                        tone.startTone(ToneGenerator.TONE_PROP_BEEP, 100)
-                    } catch (_: Exception) {
-                    }
+                    playChime(0)
                 }
                 if (state.settings.notificationsStepChange) {
                     val currentStep = steps[stepIndex]
@@ -207,18 +206,14 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
             if (state.settings.timerVibrate) {
                 val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    vibrator?.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+                    vibrator?.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 50, 100, 50, 200, 100), -1))
                 } else {
                     @Suppress("DEPRECATION")
-                    vibrator?.vibrate(50)
+                    vibrator?.vibrate(longArrayOf(0, 50, 100, 50, 200, 100), -1)
                 }
             }
             if (state.settings.timerSound) {
-                try {
-                    val tone = ToneGenerator(AudioManager.STREAM_NOTIFICATION, 50)
-                    tone.startTone(ToneGenerator.TONE_PROP_BEEP, 100)
-                } catch (_: Exception) {
-                }
+                playChime(2)
             }
             if (state.settings.notificationsBrewComplete) {
                 sendNotification(context, "Brew complete!", "Your $equipmentName is ready. Total time: ${Format.clock(elapsedTotal)}")
@@ -633,6 +628,66 @@ private fun sendNotification(context: Context, title: String, body: String) {
         nm.notify(System.currentTimeMillis().toInt(), notification)
     } catch (e: Exception) {
         android.util.Log.e("Coffeery", "Notification failed", e)
+    }
+}
+
+private fun playChime(type: Int) {
+    try {
+        val sampleRate = 44100
+        val duration = when (type) {
+            0 -> 0.12f
+            1 -> 0.08f
+            else -> 0.30f
+        }
+        val numSamples = (sampleRate * duration).toInt()
+        val samples = ShortArray(numSamples)
+
+        when (type) {
+            0 -> {
+                val freq1 = 523.25
+                val freq2 = 659.25
+                for (i in 0 until numSamples) {
+                    val t = i.toFloat() / sampleRate
+                    val envelope = 1f - (t / duration)
+                    samples[i] = ((envelope * 0.3 * (kotlin.math.sin(2.0 * Math.PI * freq1 * t) + kotlin.math.sin(2.0 * Math.PI * freq2 * t)).toFloat()) * Short.MAX_VALUE).toInt().toShort()
+                }
+            }
+            2 -> {
+                val notes = floatArrayOf(523.25f, 659.25f, 783.99f)
+                val noteLen = numSamples / 3
+                for (i in 0 until numSamples) {
+                    val t = i.toFloat() / sampleRate
+                    val noteIdx = (i / noteLen).coerceAtMost(2)
+                    val localT = t - (noteIdx * noteLen.toFloat() / sampleRate)
+                    val envelope = (1f - localT / (noteLen.toFloat() / sampleRate)).coerceAtLeast(0f)
+                    val freq = notes[noteIdx]
+                    samples[i] = ((envelope * 0.4 * kotlin.math.sin(2.0 * Math.PI * freq * localT)).toFloat() * Short.MAX_VALUE).toInt().toShort()
+                }
+            }
+            else -> {
+                val freq = 783.99f
+                for (i in 0 until numSamples) {
+                    val t = i.toFloat() / sampleRate
+                    val envelope = 1f - (t / duration)
+                    samples[i] = ((envelope * 0.3 * kotlin.math.sin(2.0 * Math.PI * freq * t)).toFloat() * Short.MAX_VALUE).toInt().toShort()
+                }
+            }
+        }
+
+        val audioTrack = android.media.AudioTrack(
+            android.media.AudioManager.STREAM_NOTIFICATION,
+            sampleRate,
+            android.media.AudioFormat.CHANNEL_OUT_MONO,
+            android.media.AudioFormat.ENCODING_PCM_16BIT,
+            numSamples * 2,
+            android.media.AudioTrack.MODE_STATIC
+        )
+        audioTrack.write(samples, 0, numSamples)
+        audioTrack.play()
+        android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+            audioTrack.release()
+        }, (duration * 1000 + 100).toLong())
+    } catch (_: Exception) {
     }
 }
 
