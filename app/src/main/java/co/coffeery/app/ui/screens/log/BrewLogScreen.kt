@@ -114,7 +114,7 @@ fun BrewLogScreen(vm: AppViewModel) {
         stringResource(R.string.achievements_title),
     )
 
-    Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 96.dp)) {
+    Column(modifier = Modifier.padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 24.dp)) {
         SegmentedControl(
             options = listOf(0, 1, 2, 3, 4),
             selected = section,
