@@ -419,6 +419,13 @@
     <string name="log_analytics_rating">Ort. puan</string>
     <string name="log_analytics_bean">En iyi çekirdek</string>
 
+    <string name="log_empty_title">Henüz demleme yok</string>
+    <string name="log_empty_sub">Kahve yolculuğunu takip etmek için demlemeye başla</string>
+    <string name="log_start_brewing">Demlemeye başla</string>
+    <string name="log_rating_out">%1$d/5</string>
+    <string name="log_date_today">Bugün</string>
+    <string name="log_date_yesterday">Dün</string>
+
     <!-- ===== Learn tools v2 ===== -->
     <string name="learn_extraction_calc_title">Ekstraksiyon Verimi Hesaplayıcı</string>
     <string name="learn_extraction_calc_desc">Demlemenizin ekstraksiyon verimini hesaplamak için doz, su miktarı ve TDS değerini girin.</string>
@@ -757,19 +764,19 @@
     <string name="settings_export_csv">Demleme günlüğünü CSV dışa aktar</string>
 
     <!-- Onboarding -->
-    <string name="onboarding_welcome">Coffeery\'ye Hoş Geldiniz</string>
-    <string name="onboarding_welcome_desc">Kişisel kahve demleme arkadaşınız. 36 demleme yöntemi, adım adım zamanlayıcılar ve kapsamlı kahve eğitimi — tamamen çevrimdışı, tamamen ücretsiz.</string>
-    <string name="onboarding_brew">Hassas Demleme</string>
-    <string name="onboarding_brew_desc">Önceden ayarlanmış oranlarla 36 ekipman arasından seçim yapın. Sertliği, kavurma seviyesini ve su miktarını ayarlayın. Her döküş için su ayarlamalı, adım adım zamanlanmış rehberleri takip edin.</string>
-    <string name="onboarding_track">Yolculuğunu Takip Et</string>
-    <string name="onboarding_track_desc">Her demlemeyi puan ve tat notlarıyla kaydedin. Demleme serinizi, takvim ısı haritanızı görün ve en iyi tariflerinizi keşfedin. Kahve çekirdeklerinizi her demlemeye bağlayın.</string>
-    <string name="onboarding_learn">Öğren ve Ustalaş</string>
-    <string name="onboarding_learn_desc">10 bölümde 60\'tan fazla ders. Temel ekstraksiyon teorisinden ileri espresso tekniklerine kadar. Ekstraksiyon hesaplayıcı, su kimyası rehberi ve tat teşhis araçlarıyla tamamlanır.</string>
-    <string name="onboarding_get_started">Başla</string>
+    <string name="onb_welcome_title">Coffeery\'ye Hoş Geldin</string>
+    <string name="onb_welcome_body">Kahve demlemeyi öğren, takip et, mükemmelleştir</string>
+    <string name="onb_inside_title">Neler Var?</string>
+    <string name="onb_ready_title">Hazırsın!</string>
+    <string name="onb_ready_body">İlk demlemeni yap ve kahve yolculuğuna başla</string>
+    <string name="onb_next">İleri</string>
+    <string name="onb_skip">Atla</string>
+    <string name="onb_start">Başla</string>
+    <string name="onb_methods">Demleme Yöntemleri</string>
+    <string name="onb_learn">Öğren</string>
+    <string name="onb_journal">Demleme Günlüğü</string>
+    <string name="onb_beans">Çekirdek Takibi</string>
     <string name="tap_brew_to_start">Başlamak için Demle\'ye dokun</string>
-    <string name="onboard_next">İleri</string>
-    <string name="onboard_skip">Atla</string>
-    <string name="onboard_start">Başla</string>
 
     <!-- ===== v3 öğren kartları l21-l30 ===== -->
     <string name="learn_l21_title">Gelişmiş Ekstraksiyon Teorisi</string>

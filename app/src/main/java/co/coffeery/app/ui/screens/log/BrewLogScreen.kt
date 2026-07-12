@@ -34,8 +34,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import co.coffeery.app.R
 import co.coffeery.app.data.local.BrewLogEntity
+import co.coffeery.app.data.model.Equipment
 import co.coffeery.app.ui.components.AccentStripeCard
 import co.coffeery.app.ui.components.AppText
+import co.coffeery.app.ui.components.Chip
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.CoffeeDialog
 import co.coffeery.app.ui.components.Glyph
@@ -43,6 +45,7 @@ import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
 import co.coffeery.app.ui.components.SegmentedControl
 import co.coffeery.app.ui.components.SecondaryButton
+import co.coffeery.app.ui.components.glyph
 import co.coffeery.app.ui.screens.root.AppViewModel
 import co.coffeery.app.ui.screens.root.NavTab
 import co.coffeery.app.ui.theme.CoffeeTheme
@@ -287,21 +290,25 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
         ) {
             LineIcon(Glyph.CUP, colors.accent, Modifier.size(48.dp))
             Spacer(Modifier.height(16.dp))
-            AppText(stringResource(R.string.empty_brews_title),
+            AppText(stringResource(R.string.log_empty_title),
                 style = CoffeeTheme.type.title, align = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth())
             Spacer(Modifier.height(8.dp))
-            AppText(stringResource(R.string.empty_brews_desc),
+            AppText(stringResource(R.string.log_empty_sub),
                 style = CoffeeTheme.type.body, color = colors.textSecondary,
                 align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
             Spacer(Modifier.height(16.dp))
             PrimaryButton(
-                text = stringResource(R.string.empty_brews_action),
+                text = stringResource(R.string.log_start_brewing),
                 onClick = { vm.selectTab(NavTab.BREW) },
             )
         }
     } else {
         val streak = currentStreak(state.brewLogs)
+        val grouped = state.brewLogs
+            .groupBy { Instant.ofEpochMilli(it.timestamp).atZone(ZoneId.systemDefault()).toLocalDate() }
+            .toList()
+            .sortedByDescending { it.first }
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
@@ -317,8 +324,22 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
             if (best != null) {
                 BestRecipeBanner(best, vm)
             }
-            state.brewLogs.forEach { log ->
-                BrewLogCard(log, vm)
+            grouped.forEach { (date, logs) ->
+                val dateLabel = when {
+                    date == LocalDate.now() -> stringResource(R.string.log_date_today)
+                    date == LocalDate.now().minusDays(1) -> stringResource(R.string.log_date_yesterday)
+                    else -> date.format(java.time.format.DateTimeFormatter.ofPattern("d MMMM", Locale.getDefault()))
+                }
+                Spacer(Modifier.height(4.dp))
+                AppText(
+                    dateLabel,
+                    style = CoffeeTheme.type.label,
+                    color = colors.textSecondary,
+                    modifier = Modifier.padding(start = 2.dp),
+                )
+                logs.forEach { log ->
+                    BrewLogCard(log, state.equipment, vm)
+                }
             }
         }
     }
@@ -404,33 +425,49 @@ private fun BestRecipeBanner(best: BestRecipeSuggestion, vm: AppViewModel) {
 }
 
 @Composable
-private fun BrewLogCard(log: BrewLogEntity, vm: AppViewModel) {
+private fun BrewLogCard(log: BrewLogEntity, equipment: List<Equipment>, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
     var showDelete by remember { mutableStateOf(false) }
+    val glyph = equipment.firstOrNull { it.id == log.equipmentId }?.category?.glyph() ?: Glyph.CUP
     CoffeeCard(onClick = { vm.applyBrewLog(log) }, modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Column(Modifier.weight(1f)) {
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
+                LineIcon(glyph, colors.accent, Modifier.size(20.dp))
+                Spacer(Modifier.width(8.dp))
                 AppText(log.equipmentName, style = CoffeeTheme.type.headline, color = colors.textPrimary)
-                Spacer(Modifier.height(2.dp))
-                AppText(logDate(log.timestamp) + " · " + stringResource(R.string.calc_grams, Format.grams(log.coffeeGrams)) + " : " + log.waterMl + " ml", style = CoffeeTheme.type.caption, color = colors.textSecondary)
-                Spacer(Modifier.height(4.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    AppText("1:${Format.ratio(log.ratioDenominator)}", style = CoffeeTheme.type.caption, color = colors.accent)
-                    if (log.rating > 0) AppText("\u2605".repeat(log.rating), style = CoffeeTheme.type.caption, color = colors.accent)
-                }
-                if (log.customGrindSize.isNotBlank()) {
-                    Spacer(Modifier.height(2.dp))
-                    AppText(log.customGrindSize, style = CoffeeTheme.type.caption, color = colors.textSecondary)
-                }
-                if (log.tastingNotes.isNotBlank()) {
-                    Spacer(Modifier.height(4.dp))
-                    AppText(log.tastingNotes, style = CoffeeTheme.type.body, color = colors.textPrimary, maxLines = 2)
-                }
-                Spacer(Modifier.height(6.dp))
-                AppText(stringResource(R.string.log_reproduce), style = CoffeeTheme.type.caption, color = colors.accent)
             }
             AppText("\u2715", style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.padding(start = 8.dp).clickable { showDelete = true })
         }
+        Spacer(Modifier.height(4.dp))
+        AppText(logDate(log.timestamp), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+        Spacer(Modifier.height(4.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+            AppText(stringResource(R.string.calc_grams, Format.grams(log.coffeeGrams)) + " : " + log.waterMl + " ml", style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            AppText("1:${Format.ratio(log.ratioDenominator)}", style = CoffeeTheme.type.caption, color = colors.accent)
+            if (log.rating > 0) AppText(stringResource(R.string.log_rating_out, log.rating), style = CoffeeTheme.type.caption, color = colors.accent)
+        }
+        if (log.customGrindSize.isNotBlank()) {
+            Spacer(Modifier.height(2.dp))
+            AppText(log.customGrindSize, style = CoffeeTheme.type.caption, color = colors.textSecondary)
+        }
+        if (log.flavorTags.isNotBlank()) {
+            Spacer(Modifier.height(6.dp))
+            val tags = log.flavorTags.split(",").map { it.trim() }.filter { it.isNotBlank() }
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                tags.take(4).forEach { tag ->
+                    Chip(tag, background = colors.accentSoft, textColor = colors.accent)
+                }
+                if (tags.size > 4) {
+                    AppText("+${tags.size - 4}", style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.align(Alignment.CenterVertically))
+                }
+            }
+        }
+        if (log.tastingNotes.isNotBlank()) {
+            Spacer(Modifier.height(6.dp))
+            AppText("\u201C${log.tastingNotes}\u201D", style = CoffeeTheme.type.body, color = colors.textPrimary, maxLines = 2)
+        }
+        Spacer(Modifier.height(6.dp))
+        AppText(stringResource(R.string.log_reproduce), style = CoffeeTheme.type.caption, color = colors.accent)
     }
     if (showDelete) {
         CoffeeDialog(onDismiss = { showDelete = false }) {

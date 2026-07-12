@@ -419,6 +419,13 @@
     <string name="log_analytics_rating">Avg rating</string>
     <string name="log_analytics_bean">Best bean</string>
 
+    <string name="log_empty_title">No brews yet</string>
+    <string name="log_empty_sub">Start brewing to track your coffee journey</string>
+    <string name="log_start_brewing">Start brewing</string>
+    <string name="log_rating_out">%1$d/5</string>
+    <string name="log_date_today">Today</string>
+    <string name="log_date_yesterday">Yesterday</string>
+
     <!-- ===== Learn tools v2 ===== -->
     <string name="learn_extraction_calc_title">Extraction Yield Calculator</string>
     <string name="learn_extraction_calc_desc">Enter dose, water amount and TDS to calculate your brew\'s extraction yield.</string>
@@ -749,18 +756,18 @@
     <string name="settings_restored">All data cleared. Defaults restored.</string>
 
     <!-- Onboarding -->
-    <string name="onboard_skip">Skip</string>
-    <string name="onboard_next">Next</string>
-    <string name="onboard_start">Start brewing</string>
-    <string name="onboarding_welcome">Welcome to Coffeery</string>
-    <string name="onboarding_welcome_desc">Your personal coffee brewing companion. 36 brewing methods, step-by-step timers, and deep coffee education — all offline, all free.</string>
-    <string name="onboarding_brew">Brew with Precision</string>
-    <string name="onboarding_brew_desc">Choose from 36 brewers with pre-calibrated ratios. Adjust strength, roast level, and water amount. Follow timed step-by-step guides with per-pour water adjustment.</string>
-    <string name="onboarding_track">Track Your Journey</string>
-    <string name="onboarding_track_desc">Log every brew with ratings and tasting notes. See your brewing streak, calendar heatmap, and discover your best recipes. Link your coffee beans to each brew.</string>
-    <string name="onboarding_learn">Learn &amp; Master</string>
-    <string name="onboarding_learn_desc">60+ lessons across 10 chapters. From basic extraction theory to advanced espresso techniques. Complete with extraction calculator, water chemistry guide, and taste diagnosis tools.</string>
-    <string name="onboarding_get_started">Get Started</string>
+    <string name="onb_welcome_title">Welcome to Coffeery</string>
+    <string name="onb_welcome_body">Learn, track, and perfect your coffee brewing</string>
+    <string name="onb_inside_title">What\'s Inside?</string>
+    <string name="onb_ready_title">You\'re Ready!</string>
+    <string name="onb_ready_body">Make your first brew and start your coffee journey</string>
+    <string name="onb_next">Next</string>
+    <string name="onb_skip">Skip</string>
+    <string name="onb_start">Get Started</string>
+    <string name="onb_methods">Brew Methods</string>
+    <string name="onb_learn">Learn</string>
+    <string name="onb_journal">Brew Journal</string>
+    <string name="onb_beans">Bean Tracker</string>
     <string name="tap_brew_to_start">Tap Brew to start</string>
     <string name="settings_about">About</string>
     <string name="settings_version">Version</string>
