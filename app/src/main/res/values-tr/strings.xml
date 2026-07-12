@@ -1229,4 +1229,15 @@
     <string name="equip_phin_tag">Güçlü tek fincan damla</string>
     <string name="equip_colddrip_name">Cold Drip Kulesi</string>
     <string name="equip_colddrip_tag">Yavaş soğuk su damlaması</string>
+
+    <!-- Cloud settings -->
+    <string name="settings_cloud_title">Bulut</string>
+    <string name="settings_cloud_signin">Google ile giriş yap</string>
+    <string name="settings_cloud_signed_as">%s olarak giriş yapıldı</string>
+    <string name="settings_cloud_signout">Çıkış yap</string>
+    <string name="settings_cloud_backup">Drive\'a yedekle</string>
+    <string name="settings_cloud_restore">Drive\'dan geri yükle</string>
+    <string name="settings_cloud_backup_done">Yedek kaydedildi</string>
+    <string name="settings_cloud_restore_done">Geri yüklendi</string>
+    <string name="settings_cloud_error">Bulut işlemi başarısız</string>
 </resources>

@@ -23,3 +23,13 @@
 -keepattributes *Annotation*
 -keep class kotlin.Metadata { *; }
 -dontwarn kotlin.**
+
+# Google API Client — keep model classes for serialization
+-keep class com.google.api.client.** { *; }
+-dontwarn com.google.api.client.**
+-keep class com.google.api.services.drive.** { *; }
+-dontwarn com.google.api.services.drive.**
+-keep class com.google.http.client.** { *; }
+-dontwarn com.google.http.client.**
+-keep class com.google.android.gms.auth.** { *; }
+-dontwarn com.google.android.gms.auth.**

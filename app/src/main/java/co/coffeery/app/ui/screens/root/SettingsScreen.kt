@@ -2,8 +2,11 @@ package co.coffeery.app.ui.screens.root
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -49,6 +52,7 @@ import co.coffeery.app.ui.components.SegmentedControl
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
 import co.coffeery.app.ui.theme.paletteColors
+import co.coffeery.app.util.CloudBackupManager
 
 @Composable
 fun SettingsScreen(vm: AppViewModel) {
@@ -56,6 +60,17 @@ fun SettingsScreen(vm: AppViewModel) {
     val ctx = LocalContext.current
     val colors = CoffeeTheme.colors
     var showImportDialog by remember { mutableStateOf(false) }
+    val cloud = remember { CloudBackupManager(ctx) }
+    var cloudSignedIn by remember { mutableStateOf(cloud.isSignedIn()) }
+    val cloudEmail = remember(cloudSignedIn) { cloud.getAccountEmail() ?: "" }
+
+    val signInLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        cloud.handleSignInResult(result.data) { success ->
+            cloudSignedIn = success
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -288,6 +303,47 @@ fun SettingsScreen(vm: AppViewModel) {
                             showConfirm = false
                         }
                     }
+                }
+            }
+        }
+
+        SettingsSection(R.string.settings_cloud_title) {
+            if (cloudSignedIn) {
+                AppText(
+                    stringResource(R.string.settings_cloud_signed_as, cloudEmail),
+                    style = CoffeeTheme.type.caption,
+                    color = colors.textSecondary,
+                )
+                Spacer(Modifier.height(12.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                    SecondaryButton(stringResource(R.string.settings_cloud_signout), Modifier.weight(1f)) {
+                        cloud.signOut(cloud.getSignInClient())
+                        cloudSignedIn = false
+                    }
+                }
+                Spacer(Modifier.height(12.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                    SecondaryButton(stringResource(R.string.settings_cloud_backup), Modifier.weight(1f)) {
+                        val activity = ctx as? Activity ?: return@SecondaryButton
+                        val dbPath = ctx.getDatabasePath("coffeery.db")
+                        vm.backupToDrive(activity, dbPath)
+                    }
+                }
+                Spacer(Modifier.height(8.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                    SecondaryButton(stringResource(R.string.settings_cloud_restore), Modifier.weight(1f)) {
+                        val activity = ctx as? Activity ?: return@SecondaryButton
+                        val dbPath = ctx.getDatabasePath("coffeery.db")
+                        vm.restoreFromDrive(activity, dbPath)
+                    }
+                }
+            } else {
+                PrimaryButton(
+                    stringResource(R.string.settings_cloud_signin),
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    val client = cloud.getSignInClient()
+                    signInLauncher.launch(cloud.getSignInIntent(client))
                 }
             }
         }

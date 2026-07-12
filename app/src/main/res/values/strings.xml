@@ -1229,4 +1229,15 @@
     <string name="equip_phin_tag">Strong single-cup drip</string>
     <string name="equip_colddrip_name">Cold Drip Tower</string>
     <string name="equip_colddrip_tag">Slow cold-water drip</string>
+
+    <!-- Cloud settings -->
+    <string name="settings_cloud_title">Cloud</string>
+    <string name="settings_cloud_signin">Sign in with Google</string>
+    <string name="settings_cloud_signed_as">Signed in as %s</string>
+    <string name="settings_cloud_signout">Sign out</string>
+    <string name="settings_cloud_backup">Backup to Drive</string>
+    <string name="settings_cloud_restore">Restore from Drive</string>
+    <string name="settings_cloud_backup_done">Backup saved</string>
+    <string name="settings_cloud_restore_done">Restored successfully</string>
+    <string name="settings_cloud_error">Cloud operation failed</string>
 </resources>
