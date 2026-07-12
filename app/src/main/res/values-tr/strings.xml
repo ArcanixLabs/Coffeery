@@ -168,6 +168,9 @@
     <string name="empty_recipes_action">Demlemeye Başla</string>
     <string name="recipes_summary">%1$s · %2$s g : %3$s ml</string>
     <string name="recipes_delete_confirm">Bu tarif silinsin mi?</string>
+    <string name="recipe_load">Tarifi görüntüle</string>
+    <string name="recipe_recent">Son tarif</string>
+    <string name="recipe_view_brew">Görüntüle ve demle</string>
 
     <!-- Ekipman ekranı -->
     <string name="equipment_title">Ekipmanların</string>
@@ -1259,4 +1262,5 @@
     <string name="bean_detail_sca">SCA puanı</string>
     <string name="bean_detail_purchase">Alış tarihi</string>
     <string name="bean_detail_brewing">Bu çekirdeği demle</string>
+    <string name="google_server_client_id">YOUR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
 </resources>

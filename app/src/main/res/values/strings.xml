@@ -168,6 +168,9 @@
     <string name="empty_recipes_action">Start Brewing</string>
     <string name="recipes_summary">%1$s · %2$s g : %3$s ml</string>
     <string name="recipes_delete_confirm">Delete this recipe?</string>
+    <string name="recipe_load">View recipe</string>
+    <string name="recipe_recent">Recent recipe</string>
+    <string name="recipe_view_brew">View &amp; brew</string>
 
     <!-- Equipment screen -->
     <string name="equipment_title">Your gear</string>
@@ -1259,4 +1262,5 @@
     <string name="bean_detail_sca">SCA score</string>
     <string name="bean_detail_purchase">Purchase date</string>
     <string name="bean_detail_brewing">Brew this bean</string>
+    <string name="google_server_client_id">YOUR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
 </resources>

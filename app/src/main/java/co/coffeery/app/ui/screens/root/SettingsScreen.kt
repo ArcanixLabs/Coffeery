@@ -69,6 +69,9 @@ fun SettingsScreen(vm: AppViewModel) {
     ) { result ->
         cloud.handleSignInResult(result.data) { success ->
             cloudSignedIn = success
+            if (!success) {
+                android.widget.Toast.makeText(ctx, R.string.settings_cloud_error, android.widget.Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

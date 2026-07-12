@@ -246,6 +246,17 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     fun deleteRecipe(id: Long) = viewModelScope.launch { repo.deleteRecipe(id) }
 
+    fun loadRecipe(recipe: RecipeEntity) = _state.update {
+        it.copy(
+            selectedEquipmentId = recipe.equipmentId,
+            strength = recipe.strength,
+            roast = RoastLevel.entries.find { r -> r.name == recipe.roast } ?: RoastLevel.MEDIUM,
+            byCups = recipe.inputByCups,
+            cups = recipe.cups,
+            waterMl = recipe.waterMl,
+        )
+    }
+
     fun applyRecipe(r: RecipeEntity) = _state.update {
         it.copy(
             selectedEquipmentId = r.equipmentId,
