@@ -65,6 +65,7 @@ fun SettingsScreen(vm: AppViewModel) {
     val cloud = remember { CloudBackupManager(ctx) }
     var cloudSignedIn by remember { mutableStateOf(cloud.isSignedIn()) }
     val cloudEmail = remember(cloudSignedIn) { cloud.getAccountEmail() ?: "" }
+    val scope = rememberCoroutineScope()
 
     // Try silent sign-in on open
     LaunchedEffect(Unit) {
