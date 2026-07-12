@@ -239,20 +239,22 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
 
 @Composable
 private fun StreakBanner(streak: Int) {
-    if (streak < 1) return
     val colors = CoffeeTheme.colors
     val context = LocalContext.current
-    val label = if (streak == 1) stringResource(R.string.log_streak_label) else stringResource(R.string.log_streak_label_plural)
+    val label = stringResource(R.string.streak_label)
+    val subText = if (streak > 0) stringResource(R.string.streak_keep_going) else stringResource(R.string.streak_start)
     AccentStripeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            AppText("$streak", style = CoffeeTheme.type.display, color = colors.accent)
-            Spacer(Modifier.width(10.dp))
-            AppText(label, style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.weight(1f))
-            AppText("\uD83D\uDD25", style = CoffeeTheme.type.display)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                AppText("$streak", style = CoffeeTheme.type.number, color = colors.accent)
+                Spacer(Modifier.width(8.dp))
+                AppText(label, style = CoffeeTheme.type.body, color = colors.textSecondary)
+            }
+            LineIcon(Glyph.FLAME, colors.accent, Modifier.size(28.dp))
         }
         Spacer(Modifier.height(4.dp))
         Row(
@@ -260,7 +262,7 @@ private fun StreakBanner(streak: Int) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            AppText(stringResource(R.string.log_streak_keep), style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.weight(1f))
+            AppText(subText, style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.weight(1f))
             if (streak >= 7) {
                 val shareText = stringResource(R.string.log_share_streak_text, streak)
                 SecondaryButton(
@@ -313,9 +315,7 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
             verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
         ) {
-            if (streak >= 1) {
-                StreakBanner(streak)
-            }
+            StreakBanner(streak)
             BrewHeatmap(state.brewLogs)
             if (state.brewLogs.size >= 3) {
                 AnalyticsCard(state.brewLogs)

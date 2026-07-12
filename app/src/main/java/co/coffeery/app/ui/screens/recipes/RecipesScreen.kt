@@ -64,14 +64,14 @@ fun RecipesScreen(state: AppUiState, vm: AppViewModel) {
         if (state.recipes.isEmpty()) {
             Spacer(Modifier.height(40.dp))
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                LineIcon(Glyph.BOOKMARK, colors.accent, Modifier.size(48.dp))
+                LineIcon(Glyph.BOOKMARK, colors.textSecondary.copy(alpha = 0.4f), Modifier.size(64.dp))
                 Spacer(Modifier.height(16.dp))
-                AppText(stringResource(R.string.empty_recipes_title), style = CoffeeTheme.type.title)
-                Spacer(Modifier.height(4.dp))
-                AppText(stringResource(R.string.empty_recipes_desc), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                AppText(stringResource(R.string.empty_recipes_title), style = CoffeeTheme.type.title, align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                Spacer(Modifier.height(8.dp))
+                AppText(stringResource(R.string.empty_recipes_sub), style = CoffeeTheme.type.body, color = colors.textSecondary, align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
                 Spacer(Modifier.height(16.dp))
                 PrimaryButton(
                     text = stringResource(R.string.empty_recipes_action),

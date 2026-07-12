@@ -163,9 +163,9 @@
     <!-- Recipes screen -->
     <string name="recipes_title">Saved recipes</string>
     <string name="recipes_empty">No saved recipes yet.\nDial in a brew and tap Save.</string>
-    <string name="empty_recipes_title">No saved recipes</string>
-    <string name="empty_recipes_desc">Save your favorite brewing ratios for quick access</string>
-    <string name="empty_recipes_action">Go to Brew</string>
+    <string name="empty_recipes_title">No saved recipes yet</string>
+    <string name="empty_recipes_sub">Save your brew calculator settings as a recipe to reuse them later</string>
+    <string name="empty_recipes_action">Start Brewing</string>
     <string name="recipes_summary">%1$s · %2$s g : %3$s ml</string>
     <string name="recipes_delete_confirm">Delete this recipe?</string>
 
@@ -190,6 +190,10 @@
     <string name="learn_read_more">Read</string>
     <string name="learn_troubleshoot_title">How was your cup?</string>
     <string name="learn_troubleshoot_intro">Tell me how it tasted and I\'ll suggest a tweak for next time.</string>
+    <string name="learn_today">Today\'s Lesson</string>
+    <string name="learn_quiz_title">Quick Quiz</string>
+    <string name="learn_quiz_correct">Correct!</string>
+    <string name="learn_quiz_wrong">Not quite</string>
     <string name="taste_sour">Sour</string>
     <string name="taste_bitter">Bitter</string>
     <string name="taste_astringent">Astringent</string>
@@ -384,6 +388,9 @@
     <!-- Beans -->
     <string name="beans_title">Beans</string>
     <string name="beans_empty">No beans added yet. Track your coffee bags here — origin, roaster, roast date.</string>
+    <string name="empty_beans_title">No beans yet</string>
+    <string name="empty_beans_sub">Add your first coffee bean to start tracking your collection</string>
+    <string name="empty_beans_action">Add Bean</string>
     <string name="beans_add">Add beans</string>
     <string name="beans_name_hint">Bean name (e.g. Ethiopia Yirgacheffe)</string>
     <string name="beans_origin_hint">Origin / farm</string>
@@ -398,6 +405,10 @@
     <string name="log_streak_label_plural">day streak</string>
     <string name="log_streak_keep">Keep it going!</string>
     <string name="log_streak_start">Brew today to start a streak!</string>
+    <string name="streak_label">day streak!</string>
+    <string name="streak_keep_going">Keep brewing!</string>
+    <string name="streak_start">Start your streak!</string>
+    <string name="brew_reminder_streak">🔥 %1$d day streak — keep it going!</string>
     <string name="log_share_streak">Share your streak</string>
     <string name="log_share_streak_text">I\'ve brewed coffee %d days in a row with Coffeery! ☕</string>
 
@@ -1240,4 +1251,12 @@
     <string name="settings_cloud_backup_done">Backup saved</string>
     <string name="settings_cloud_restore_done">Restored successfully</string>
     <string name="settings_cloud_error">Cloud operation failed</string>
+    <string name="bean_detail_title">Bean Details</string>
+    <string name="bean_detail_roast_date">Roast date</string>
+    <string name="bean_detail_process">Process</string>
+    <string name="bean_detail_varietal">Varietal</string>
+    <string name="bean_detail_altitude">Altitude</string>
+    <string name="bean_detail_sca">SCA score</string>
+    <string name="bean_detail_purchase">Purchase date</string>
+    <string name="bean_detail_brewing">Brew this bean</string>
 </resources>

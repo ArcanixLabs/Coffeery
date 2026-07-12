@@ -305,6 +305,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     fun archiveBean(id: Long) = viewModelScope.launch { repo.archiveBean(id) }
 
+    fun getBean(beanId: Long): BeanEntity? = _state.value.beans.firstOrNull { it.id == beanId }
+
     fun setLearnScrollOffset(offset: Int) {
         _state.update { it.copy(learnScrollOffset = offset) }
     }

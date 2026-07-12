@@ -93,6 +93,10 @@ fun LearnScreen(vm: AppViewModel) {
             subtitle = stringResource(R.string.learn_intro),
         )
 
+        TodaysLessonCard(vm)
+
+        QuickQuizCard()
+
         Box(modifier = Modifier.fillMaxWidth()) {
             AppTextField(
                 value = searchQuery,
@@ -623,6 +627,138 @@ private fun GlossaryCard() {
                 color = colors.textSecondary,
             )
             Spacer(Modifier.height(10.dp))
+        }
+    }
+}
+
+@Composable
+fun TodaysLessonCard(vm: AppViewModel) {
+    val colors = CoffeeTheme.colors
+    val daySeed = java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_YEAR)
+    val card = LearnContent.cards[daySeed % LearnContent.cards.size]
+    CoffeeCard(modifier = Modifier.fillMaxWidth().clickable { vm.openRoute(Route.LearnDetail(LearnContent.cards.indexOf(card))) }) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.BOOK, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.learn_today), style = CoffeeTheme.type.label, color = colors.accent)
+        }
+        Spacer(Modifier.height(6.dp))
+        AppText(stringResource(card.titleRes), style = CoffeeTheme.type.headline)
+        Spacer(Modifier.height(2.dp))
+        AppText(stringResource(card.bodyRes), style = CoffeeTheme.type.caption, color = colors.textSecondary, maxLines = 2, overflow = TextOverflow.Ellipsis)
+    }
+}
+
+private data class QuizQuestion(
+    val question: String,
+    val answers: List<String>,
+    val correctIndex: Int,
+    val explanation: String,
+)
+
+private val QuizQuestions = listOf(
+    QuizQuestion(
+        "What grind size for French Press?",
+        listOf("Fine", "Medium", "Coarse", "Extra Fine"),
+        2,
+        "French press uses a coarse grind to prevent sludge and bitterness.",
+    ),
+    QuizQuestion(
+        "What water temp for pour-over (SCA standard)?",
+        listOf("80-85°C", "90-96°C", "70-75°C", "100°C"),
+        1,
+        "SCA recommends 90-96°C for optimal pour-over extraction.",
+    ),
+    QuizQuestion(
+        "What causes sour coffee?",
+        listOf("Over-extraction", "Under-extraction", "Old beans", "Hard water"),
+        1,
+        "Sour coffee is a classic sign of under-extraction.",
+    ),
+    QuizQuestion(
+        "Bloom time for fresh coffee?",
+        listOf("5-10 sec", "30-45 sec", "60-90 sec", "No bloom needed"),
+        1,
+        "Bloom for 30-45 seconds to allow CO₂ to escape for even extraction.",
+    ),
+    QuizQuestion(
+        "Which has more caffeine?",
+        listOf("Arabica", "Robusta", "Both equal", "Decaf"),
+        1,
+        "Robusta beans contain roughly twice the caffeine of Arabica.",
+    ),
+)
+
+@Composable
+private fun QuickQuizCard() {
+    val colors = CoffeeTheme.colors
+    var questionIndex by remember { mutableStateOf(kotlin.random.Random.nextInt(QuizQuestions.size)) }
+    var selectedAnswer by remember { mutableStateOf(-1) }
+    val q = QuizQuestions[questionIndex]
+    val wrongColor = Color(0xFFE53935)
+    CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.CHECK, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.learn_quiz_title), style = CoffeeTheme.type.title)
+        }
+        Spacer(Modifier.height(8.dp))
+        AppText(q.question, style = CoffeeTheme.type.headline)
+        Spacer(Modifier.height(8.dp))
+        q.answers.forEachIndexed { index, answer ->
+            val isSelected = selectedAnswer == index
+            val isCorrect = index == q.correctIndex
+            val background = when {
+                selectedAnswer != -1 && isCorrect -> colors.accent
+                selectedAnswer != -1 && isSelected && !isCorrect -> wrongColor
+                else -> colors.accentSoft
+            }
+            val textColor = when {
+                selectedAnswer != -1 && (isCorrect || (isSelected && !isCorrect)) -> colors.onAccent
+                else -> colors.textPrimary
+            }
+            val prefix = when {
+                selectedAnswer != -1 && isCorrect -> "✓  "
+                selectedAnswer != -1 && isSelected && !isCorrect -> "✕  "
+                else -> ""
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(background)
+                    .clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() },
+                    ) { if (selectedAnswer == -1) selectedAnswer = index }
+                    .padding(10.dp),
+            ) {
+                AppText("$prefix$answer", style = CoffeeTheme.type.body, color = textColor)
+            }
+            Spacer(Modifier.height(6.dp))
+        }
+        if (selectedAnswer != -1) {
+            Spacer(Modifier.height(4.dp))
+            val isCorrect = selectedAnswer == q.correctIndex
+            AppText(
+                if (isCorrect) stringResource(R.string.learn_quiz_correct) else stringResource(R.string.learn_quiz_wrong),
+                style = CoffeeTheme.type.label,
+                color = if (isCorrect) colors.accent else wrongColor,
+            )
+            AppText(q.explanation, style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            Spacer(Modifier.height(8.dp))
+            AppText(
+                "Next question →",
+                style = CoffeeTheme.type.label,
+                color = colors.accent,
+                modifier = Modifier.clickable(
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() },
+                ) {
+                    questionIndex = kotlin.random.Random.nextInt(QuizQuestions.size)
+                    selectedAnswer = -1
+                },
+            )
         }
     }
 }

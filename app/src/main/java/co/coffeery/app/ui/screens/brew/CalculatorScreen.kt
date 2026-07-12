@@ -39,13 +39,18 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.ui.unit.dp
 import co.coffeery.app.R
+import co.coffeery.app.data.local.BrewLogEntity
 import co.coffeery.app.data.model.BrewCategory
 import co.coffeery.app.data.model.Equipment
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 import co.coffeery.app.data.model.RoastLevel
 import co.coffeery.app.data.model.TempMode
+import co.coffeery.app.ui.components.AccentStripeCard
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.Chip
@@ -71,6 +76,20 @@ import coil.compose.AsyncImage
 import co.coffeery.app.util.BrewMath
 import co.coffeery.app.util.BrewResult
 import co.coffeery.app.util.Format
+
+private fun currentStreak(logs: List<BrewLogEntity>): Int {
+    val days = logs.map {
+        Instant.ofEpochMilli(it.timestamp).atZone(ZoneId.systemDefault()).toLocalDate()
+    }.toSet()
+    var streak = 0
+    var date = LocalDate.now()
+    while (days.contains(date)) {
+        streak++
+        date = date.minusDays(1)
+    }
+    if (streak == 0 && !days.contains(LocalDate.now())) return 0
+    return streak
+}
 
 @Composable
 fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
@@ -149,6 +168,20 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
                 }
             },
         )
+
+        val streak = remember(state.brewLogs) { currentStreak(state.brewLogs) }
+        if (streak >= 2) {
+            AccentStripeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 12) {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    LineIcon(Glyph.FLAME, colors.accent, Modifier.size(22.dp))
+                    AppText(
+                        stringResource(R.string.brew_reminder_streak, streak),
+                        style = CoffeeTheme.type.body,
+                        color = colors.textPrimary,
+                    )
+                }
+            }
+        }
 
         CategoryChips(state, vm, eq)
 
