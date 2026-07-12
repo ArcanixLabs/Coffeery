@@ -45,9 +45,7 @@
     <string name="equip_moka_name">Moka Pot</string>
     <string name="equip_turkish_name">Turkish (Cezve)</string>
     <string name="equip_coldbrew_name">Cold Brew</string>
-    <string name="equip_siphon_name">Siphon</string>
     <string name="equip_espresso_name">Espresso</string>
-    <string name="equip_clever_name">Clever Dripper</string>
 
     <!-- Equipment taglines -->
     <string name="equip_v60_tag">Clean, bright, precise</string>
@@ -58,9 +56,7 @@
     <string name="equip_moka_tag">Bold stovetop</string>
     <string name="equip_turkish_tag">Intense, unfiltered</string>
     <string name="equip_coldbrew_tag">Smooth, low-acid</string>
-    <string name="equip_siphon_tag">Theatrical &amp; aromatic</string>
     <string name="equip_espresso_tag">Concentrated shot</string>
-    <string name="equip_clever_tag">Easiest great cup</string>
 
     <!-- Roast levels -->
     <string name="roast_light">Light</string>
@@ -239,8 +235,6 @@
 
     <!-- v2 expanded equipment -->
     <string name="step_flip">Flip the pot</string>
-    <string name="equip_switch_name">Hario Switch</string>
-    <string name="equip_switch_tag">Immersion + pour-over hybrid</string>
     <string name="equip_origami_name">Origami Dripper</string>
     <string name="equip_origami_tag">Versatile conical dripper</string>
     <string name="equip_april_name">April Brewer</string>
@@ -251,10 +245,6 @@
     <string name="equip_timemore_tag">Glass conical dripper</string>
     <string name="equip_beehouse_name">Beehouse Dripper</string>
     <string name="equip_beehouse_tag">Twin-hole, forgiving flow</string>
-    <string name="equip_phin_name">Vietnamese Phin</string>
-    <string name="equip_phin_tag">Strong single-cup drip</string>
-    <string name="equip_colddrip_name">Cold Drip Tower</string>
-    <string name="equip_colddrip_tag">Slow cold-water drip</string>
     <string name="equip_percolator_name">Percolator</string>
     <string name="equip_percolator_tag">Recirculating stovetop brew</string>
     <string name="equip_batchbrew_name">Batch Brew</string>
@@ -270,8 +260,6 @@
     <string name="equip_cafec_tag">Conical, flower ribs, fast even flow</string>
     <string name="equip_ibrik_name">Ibrik</string>
     <string name="equip_ibrik_tag">Regional cezve — unfiltered, extra-fine</string>
-    <string name="equip_cezve_mod_name">Cezve (Modern)</string>
-    <string name="equip_cezve_mod_tag">Turkish style — heat, foam, serve</string>
     <string name="drinks_title">Drinks</string>
     <string name="drinks_intro">Milk-based classics and regional recipes — built, not brewed by ratio.</string>
     <string name="drink_read_more">View recipe</string>

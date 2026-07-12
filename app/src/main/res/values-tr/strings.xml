@@ -45,9 +45,7 @@
     <string name="equip_moka_name">Moka Pot</string>
     <string name="equip_turkish_name">Türk Kahvesi (Cezve)</string>
     <string name="equip_coldbrew_name">Cold Brew</string>
-    <string name="equip_siphon_name">Siphon</string>
     <string name="equip_espresso_name">Espresso</string>
-    <string name="equip_clever_name">Clever Dripper</string>
 
     <!-- Ekipman sloganları -->
     <string name="equip_v60_tag">Temiz, parlak, hassas</string>
@@ -58,9 +56,7 @@
     <string name="equip_moka_tag">Ocakta güçlü kahve</string>
     <string name="equip_turkish_tag">Yoğun, filtresiz</string>
     <string name="equip_coldbrew_tag">Yumuşak, düşük asit</string>
-    <string name="equip_siphon_tag">Gösterişli ve aromatik</string>
     <string name="equip_espresso_tag">Konsantre shot</string>
-    <string name="equip_clever_tag">En kolay mükemmel kahve</string>
 
     <!-- Kavrum dereceleri -->
     <string name="roast_light">Açık</string>
@@ -239,8 +235,6 @@
 
     <!-- v2 genişletilmiş ekipman -->
     <string name="step_flip">Cezveyi ters çevir</string>
-    <string name="equip_switch_name">Hario Switch</string>
-    <string name="equip_switch_tag">Daldırma + süzme hibrit</string>
     <string name="equip_origami_name">Origami Dripper</string>
     <string name="equip_origami_tag">Çok yönlü konik dripper</string>
     <string name="equip_april_name">April Brewer</string>
@@ -251,10 +245,6 @@
     <string name="equip_timemore_tag">Cam konik dripper</string>
     <string name="equip_beehouse_name">Beehouse Dripper</string>
     <string name="equip_beehouse_tag">Çift delikli, bağışlayıcı akış</string>
-    <string name="equip_phin_name">Vietnam Phin</string>
-    <string name="equip_phin_tag">Güçlü tek fincan damla</string>
-    <string name="equip_colddrip_name">Cold Drip Kulesi</string>
-    <string name="equip_colddrip_tag">Yavaş soğuk su damlaması</string>
     <string name="equip_percolator_name">Perkolatör</string>
     <string name="equip_percolator_tag">Döngüsel ocak demleme</string>
     <string name="equip_batchbrew_name">Batch Brew</string>
@@ -270,8 +260,6 @@
     <string name="equip_cafec_tag">Konik, çiçek yivli, hızlı ve eşit akış</string>
     <string name="equip_ibrik_name">İbrik</string>
     <string name="equip_ibrik_tag">Geleneksel cezve — filitresiz, çok ince</string>
-    <string name="equip_cezve_mod_name">Cezve (Modern)</string>
-    <string name="equip_cezve_mod_tag">Türk usulü — ısıt, köpürt, servis et</string>
     <string name="drinks_title">İçecekler</string>
     <string name="drinks_intro">Süt bazlı klasikler ve bölgesel tarifler — oranla değil, hazırlanarak.</string>
     <string name="drink_read_more">Tarifi gör</string>
