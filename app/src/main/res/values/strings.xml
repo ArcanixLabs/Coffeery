@@ -198,7 +198,9 @@
     <string name="learn_quiz_title">Quick Quiz</string>
     <string name="learn_quiz_correct">Correct!</string>
     <string name="learn_quiz_wrong">Not quite</string>
-    <string name="learn_quiz_score">Score: %1$d/50 correct today</string>
+    <string name="learn_quiz_score">Score: %1$d/150 correct today</string>
+    <string name="learn_quiz_streak">Streak: %1$d in a row! 🔥</string>
+    <string name="learn_quiz_random">Random Question</string>
     <string name="taste_sour">Sour</string>
     <string name="taste_bitter">Bitter</string>
     <string name="taste_astringent">Astringent</string>

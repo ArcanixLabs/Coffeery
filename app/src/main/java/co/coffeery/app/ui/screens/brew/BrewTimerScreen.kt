@@ -92,6 +92,10 @@ import co.coffeery.app.util.BrewMath
 import co.coffeery.app.util.Format
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.RepeatMode
 import kotlinx.coroutines.delay
 
 @Composable
@@ -326,6 +330,16 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         }
         Spacer(Modifier.height(12.dp))
 
+        val pulseScale by rememberInfiniteTransition(label = "timerPulse").animateFloat(
+            initialValue = 1f,
+            targetValue = 1.05f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(250),
+                repeatMode = RepeatMode.Reverse,
+            ),
+            label = "pulseScale",
+        )
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -340,6 +354,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                     lineHeight = 76.sp,
                 ),
                 color = colors.textPrimary,
+                modifier = Modifier.scale(if (running && remaining in 1..10) pulseScale else 1f),
             )
         }
 

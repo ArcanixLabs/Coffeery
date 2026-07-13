@@ -198,7 +198,9 @@
     <string name="learn_quiz_title">Hızlı Test</string>
     <string name="learn_quiz_correct">Doğru!</string>
     <string name="learn_quiz_wrong">Tam değil</string>
-    <string name="learn_quiz_score">Skor: %1$d/50 bugün doğru</string>
+    <string name="learn_quiz_score">Skor: %1$d/150 bugün doğru</string>
+    <string name="learn_quiz_streak">Seri: %1$d art arda! 🔥</string>
+    <string name="learn_quiz_random">Rastgele Soru</string>
     <string name="taste_sour">Ekşi</string>
     <string name="taste_bitter">Acı</string>
     <string name="taste_astringent">Buruk</string>

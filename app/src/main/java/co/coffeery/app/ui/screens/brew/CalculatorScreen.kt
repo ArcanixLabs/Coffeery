@@ -203,6 +203,22 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
 
         OutputSection(result, eq, state)
 
+        CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                LineIcon(Glyph.CUP, colors.accent, Modifier.size(18.dp))
+                Spacer(Modifier.width(8.dp))
+                AppText(stringResource(R.string.ratio_ref_title), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            }
+            Spacer(Modifier.height(6.dp))
+            AppText(stringResource(R.string.ratio_1_15), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            Spacer(Modifier.height(2.dp))
+            AppText(stringResource(R.string.ratio_1_16), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            Spacer(Modifier.height(2.dp))
+            AppText(stringResource(R.string.ratio_1_17), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+            Spacer(Modifier.height(2.dp))
+            AppText(stringResource(R.string.ratio_1_18), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+        }
+
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
             SecondaryButton(
                 text = stringResource(R.string.action_save),
