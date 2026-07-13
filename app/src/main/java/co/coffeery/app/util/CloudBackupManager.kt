@@ -52,7 +52,6 @@ class CloudBackupManager(private val context: Context) {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .requestProfile()
-            .requestScopes(Scope("https://www.googleapis.com/auth/drive.appdata"))
             .requestIdToken(context.getString(R.string.google_server_client_id))
             .build()
         return GoogleSignIn.getClient(context, gso)
