@@ -985,6 +985,7 @@
     <string name="equip_clever_xl_tag">Large immersion, 350 ml</string>
     <string name="equip_other_name">Other Brewer</string>
     <string name="equip_other_tag">Custom method</string>
+    <string name="equip_deleted">Deleted brewer</string>
     <string name="equip_hoop_name">Ceado Hoop</string>
     <string name="equip_hoop_tag">Zero-bypass ring brew</string>
     <string name="equip_paragon_name">Nucleus Paragon</string>

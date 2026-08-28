@@ -127,7 +127,7 @@ fun RecipesScreen(state: AppUiState, vm: AppViewModel) {
 private fun FeaturedRecipeCard(recipe: RecipeEntity, state: AppUiState, onViewBrew: () -> Unit) {
     val colors = CoffeeTheme.colors
     val eq = state.equipment.firstOrNull { it.id == recipe.equipmentId }
-    val eqName = eq?.displayName() ?: "—"
+    val eqName = eq?.displayName() ?: stringResource(R.string.equip_deleted)
     val roast = runCatching { RoastLevel.valueOf(recipe.roast) }.getOrDefault(RoastLevel.MEDIUM)
     val result = if (eq != null) {
         BrewMath.compute(eq, recipe.strength, roast, recipe.inputByCups, recipe.cups, recipe.waterMl)
@@ -161,7 +161,7 @@ private fun FeaturedRecipeCard(recipe: RecipeEntity, state: AppUiState, onViewBr
 private fun RecipeRow(recipe: RecipeEntity, state: AppUiState, onClick: () -> Unit, onDelete: () -> Unit) {
     val colors = CoffeeTheme.colors
     val eq = state.equipment.firstOrNull { it.id == recipe.equipmentId }
-    val eqName = eq?.displayName() ?: "—"
+    val eqName = eq?.displayName() ?: stringResource(R.string.equip_deleted)
     val roast = runCatching { RoastLevel.valueOf(recipe.roast) }.getOrDefault(RoastLevel.MEDIUM)
     val result = if (eq != null) {
         BrewMath.compute(eq, recipe.strength, roast, recipe.inputByCups, recipe.cups, recipe.waterMl)
