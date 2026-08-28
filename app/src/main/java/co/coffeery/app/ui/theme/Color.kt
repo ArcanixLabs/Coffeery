@@ -81,10 +81,11 @@ fun paletteColors(palette: Palette, isDark: Boolean): CoffeeColors = when (palet
     Palette.ESPRESSO -> if (isDark) DarkEspressoColors else LightEspressoColors
     Palette.MATCHA -> if (isDark) DarkMatchaColors else LightMatchaColors
     Palette.BERRY -> if (isDark) DarkBerryColors else LightBerryColors
-    Palette.CREMA -> if (isDark) DarkCremaColors else LightCremaColors
+    Palette.CREMA -> if (isDark) DarkCopperColors else LightCopperColors
     Palette.MOCHA -> if (isDark) DarkMochaColors else LightMochaColors
-    Palette.CARAMEL -> if (isDark) DarkCaramelColors else LightCaramelColors
+    Palette.CARAMEL -> if (isDark) DarkCopperColors else LightCopperColors
     Palette.HAZELNUT -> if (isDark) DarkHazelnutColors else LightHazelnutColors
+    Palette.COPPER -> if (isDark) DarkCopperColors else LightCopperColors
 }
 
 val LightEspressoColors = CoffeeColors(
@@ -102,6 +103,40 @@ val LightEspressoColors = CoffeeColors(
     cremaLight = Color(0xFFC9A07A),
     cremaDark = Color(0xFF3A2317),
     isDark = false,
+)
+
+val LightCopperColors = CoffeeColors(
+    background = Color(0xFFEDE3D0),
+    backgroundEnd = Color(0xFFF3E8CC),
+    surface = Color(0xFFFDF9F0),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE6D9C2),
+    textPrimary = Color(0xFF271E12),
+    textSecondary = Color(0xFF7A6A52),
+    accent = Color(0xFFC47A3A),
+    accentVintage = Color(0xFFB06A30),
+    accentSoft = Color(0xFFF0D9B8),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD9B98C),
+    cremaDark = Color(0xFF3B241A),
+    isDark = false,
+)
+
+val DarkCopperColors = CoffeeColors(
+    background = Color(0xFF1B1713),
+    backgroundEnd = Color(0xFF211D18),
+    surface = Color(0xFF251F1A),
+    surfaceElevated = Color(0xFF2E261E),
+    outline = Color(0xFF3A3228),
+    textPrimary = Color(0xFFF0E6D2),
+    textSecondary = Color(0xFFB8A890),
+    accent = Color(0xFFD48A4A),
+    accentVintage = Color(0xFFBC7A42),
+    accentSoft = Color(0xFF5A3A1E),
+    onAccent = Color(0xFF1A0F08),
+    cremaLight = Color(0xFFC9A57A),
+    cremaDark = Color(0xFF1C0F09),
+    isDark = true,
 )
 
 val DarkEspressoColors = CoffeeColors(

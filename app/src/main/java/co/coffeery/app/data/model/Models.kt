@@ -73,11 +73,20 @@ enum class Palette(@StringRes val labelRes: Int) {
     CREMA(R.string.palette_crema),
     MOCHA(R.string.palette_mocha),
     CARAMEL(R.string.palette_caramel),
-    HAZELNUT(R.string.palette_hazelnut);
+    HAZELNUT(R.string.palette_hazelnut),
+    COPPER(R.string.palette_terracotta);
 
     companion object {
-        fun fromKey(key: String?): Palette =
-            entries.firstOrNull { it.name == key } ?: TERRACOTTA
+        fun fromKey(key: String?): Palette {
+            val legacyMap = mapOf(
+                "CREMA" to COPPER,
+                "MOCHA" to ESPRESSO,
+                "CARAMEL" to COPPER,
+                "HAZELNUT" to TERRACOTTA,
+            )
+            if (key != null && legacyMap.containsKey(key)) return legacyMap[key]!!
+            return entries.firstOrNull { it.name == key } ?: TERRACOTTA
+        }
     }
 }
 

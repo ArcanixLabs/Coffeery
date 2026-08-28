@@ -51,7 +51,7 @@ fun <T> SegmentedControl(
                     .clip(CoffeeShapes.pill)
                     .background(bg)
                     .clickable { onSelect(option) }
-                    .padding(vertical = if (subtitle != null) 8.dp else 10.dp),
+                    .padding(vertical = if (subtitle != null) 10.dp else 12.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 if (subtitle != null) {

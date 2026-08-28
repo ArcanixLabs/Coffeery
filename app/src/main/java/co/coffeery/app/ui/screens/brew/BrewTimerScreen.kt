@@ -300,9 +300,18 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         val step = steps[stepIndex]
         val stepDur = step.durationSec.coerceAtLeast(1)
         val targetProgress = ((stepDur - remaining).toFloat() / stepDur).coerceIn(0f, 1f)
+        val prefersReducedMotion = remember {
+            try {
+                android.provider.Settings.Global.getFloat(
+                    context.contentResolver,
+                    android.provider.Settings.Global.ANIMATOR_DURATION_SCALE,
+                    1f,
+                ) == 0f
+            } catch (_: Exception) { false }
+        }
         val animatedProgress by animateFloatAsState(
             targetValue = targetProgress,
-            animationSpec = spring(
+            animationSpec = if (prefersReducedMotion) tween(0) else spring(
                 dampingRatio = 0.6f,
                 stiffness = 300f,
             ),
@@ -342,16 +351,14 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         }
         Spacer(Modifier.height(12.dp))
 
+        val isPulsing = !prefersReducedMotion && running && remaining in 1..10
         val pulseScale by rememberInfiniteTransition(label = "timerPulse").animateFloat(
             initialValue = 1f,
-            targetValue = if (running && remaining in 1..10) 1.05f else 1f,
-            animationSpec = infiniteRepeatable(
-                animation = tween(250),
-                repeatMode = RepeatMode.Reverse,
-            ),
+            targetValue = if (isPulsing) 1.05f else 1f,
+            animationSpec = if (isPulsing) infiniteRepeatable(tween(250), RepeatMode.Reverse) else infiniteRepeatable(tween(1000), RepeatMode.Restart),
             label = "pulseScale",
         )
-        val displayScale = if (running && remaining in 1..10) pulseScale else 1f
+        val displayScale = if (isPulsing) pulseScale else 1f
 
         Box(
             modifier = Modifier
@@ -367,7 +374,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                     lineHeight = 76.sp,
                 ),
                 color = colors.textPrimary,
-                modifier = Modifier.scale(displayScale),
+                modifier = Modifier.graphicsLayer(scaleX = displayScale, scaleY = displayScale),
             )
         }
 
@@ -537,27 +544,38 @@ private fun BrewComplete(
     val colors = CoffeeTheme.colors
     var showSave by remember { mutableStateOf(false) }
     val equipmentName = eq.displayName()
-    val pulse = 1f
+    val glowScale by androidx.compose.animation.core.animateFloatAsState(
+        targetValue = 1.06f,
+        animationSpec = androidx.compose.animation.core.spring(dampingRatio = 0.5f, stiffness = 120f),
+        label = "glowScale",
+    )
 
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(Modifier.height(40.dp))
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Spacer(Modifier.height(32.dp))
+        Box(contentAlignment = Alignment.Center) {
+            Box(
+                modifier = Modifier
+                    .size(96.dp)
+                    .clip(CoffeeShapes.pill)
+                    .background(colors.accentSoft.copy(alpha = 0.6f))
+                    .graphicsLayer(scaleX = glowScale, scaleY = glowScale),
+            )
             LineIcon(
                 co.coffeery.app.ui.components.Glyph.CUP,
                 colors.accent,
                 Modifier.size(64.dp),
             )
-            Spacer(Modifier.height(20.dp))
-            AppText(
-                stringResource(R.string.brew_complete),
-                style = CoffeeTheme.type.display,
-                align = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
-                )
-            }
+        }
+        Spacer(Modifier.height(20.dp))
+        AppText(
+            stringResource(R.string.brew_complete),
+            style = CoffeeTheme.type.display,
+            align = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth(),
+        )
         Spacer(Modifier.height(8.dp))
         AppText(
             stringResource(R.string.brew_complete_sub, equipmentName),
@@ -567,11 +585,27 @@ private fun BrewComplete(
             modifier = Modifier.fillMaxWidth(),
         )
         Spacer(Modifier.height(6.dp))
+        AppText(
+            "${co.coffeery.app.util.Format.grams(result.coffeeGrams)} g • ${result.waterMl} ml • ${result.tempCelsius}°C".takeIf { result.tempCelsius > 0 } ?: "${co.coffeery.app.util.Format.grams(result.coffeeGrams)} g • ${result.waterMl} ml",
+            style = CoffeeTheme.type.label,
+            color = colors.accent,
+            align = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Spacer(Modifier.height(4.dp))
         Row {
             AppText(stringResource(R.string.brew_elapsed) + ": ", style = CoffeeTheme.type.caption, color = colors.textSecondary)
             AppText(Format.clock(elapsedTotal), style = CoffeeTheme.type.caption, color = colors.textPrimary)
         }
-        Spacer(Modifier.height(24.dp))
+        Spacer(Modifier.height(20.dp))
+        CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                AppText("✓", style = CoffeeTheme.type.title, color = colors.accent)
+                Spacer(Modifier.width(8.dp))
+                AppText(stringResource(R.string.brew_complete_nudge), style = CoffeeTheme.type.body, color = colors.textPrimary)
+            }
+        }
+        Spacer(Modifier.height(20.dp))
         PrimaryButton(stringResource(R.string.save_brew_log), Modifier.fillMaxWidth()) { showSave = true }
         Spacer(Modifier.height(10.dp))
         SecondaryButton(stringResource(R.string.action_done), Modifier.fillMaxWidth()) { vm.back() }

@@ -19,12 +19,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -97,142 +99,174 @@ private fun currentStreak(logs: List<BrewLogEntity>): Int {
 fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
     val eq = state.selectedEquipment ?: return
-    val result = if (state.ratioMode) {
-        BrewResult(
-            ratioDenominator = state.manualRatio,
-            coffeeGrams = state.coffeeGrams,
-            waterMl = state.manualWaterMl,
-            grind = eq.grind.shifted(state.roast.grindShift),
-            tempMode = eq.tempMode,
-            tempCelsius = if (eq.tempMode == TempMode.RANGE) {
-                val mid = (eq.tempMin + eq.tempMax) / 2
-                (mid + state.roast.tempOffset).coerceIn(eq.tempMin - 2, eq.tempMax)
-            } else 0,
-            strengthBandRes = R.string.strength_balanced_label,
-        )
-    } else {
-        BrewMath.compute(eq, state.strength, state.roast, state.byCups, state.cups, state.waterMl)
+    val result by remember(
+        eq, state.strength, state.roast, state.byCups, state.cups, state.waterMl,
+        state.ratioMode, state.manualRatio, state.coffeeGrams, state.manualWaterMl
+    ) {
+        derivedStateOf {
+            if (state.ratioMode) {
+                BrewResult(
+                    ratioDenominator = state.manualRatio,
+                    coffeeGrams = state.coffeeGrams,
+                    waterMl = state.manualWaterMl,
+                    grind = eq.grind.shifted(state.roast.grindShift),
+                    tempMode = eq.tempMode,
+                    tempCelsius = if (eq.tempMode == TempMode.RANGE) {
+                        val mid = (eq.tempMin + eq.tempMax) / 2
+                        (mid + state.roast.tempOffset).coerceIn(eq.tempMin - 2, eq.tempMax)
+                    } else 0,
+                    strengthBandRes = R.string.strength_balanced_label,
+                )
+            } else {
+                BrewMath.compute(eq, state.strength, state.roast, state.byCups, state.cups, state.waterMl)
+            }
+        }
     }
     val ctx = LocalContext.current
     val eqName = eq.displayName()
     val cloud = remember { CloudBackupManager(ctx) }
 
-    // Refresh Google session so photo loads
     LaunchedEffect(Unit) {
         cloud.silentSignIn()
     }
 
-    Column(
+    val streak by remember(state.brewLogs) {
+        derivedStateOf { currentStreak(state.brewLogs) }
+    }
+
+    LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 20.dp)
-            .padding(top = 12.dp, bottom = 96.dp),
+            .padding(horizontal = 20.dp),
+        contentPadding = PaddingValues(top = 12.dp, bottom = 96.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
-        ScreenHeader(
-            title = stringResource(R.string.calc_title),
-            trailing = {
-                if (cloud.isSignedIn()) {
-                    val photoUrl = cloud.getProfilePhotoUrl()
-                    Box(
-                        modifier = Modifier
-                            .size(28.dp)
-                            .clip(CircleShape)
-                            .clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) {
-                                vm.openRoute(co.coffeery.app.ui.screens.root.Route.Settings)
-                            },
-                        contentAlignment = Alignment.Center
-                    ) {
-                        if (photoUrl != null) {
-                            AsyncImage(
-                                model = photoUrl,
-                                contentDescription = "Profile",
-                                modifier = Modifier.fillMaxSize(),
-                                contentScale = ContentScale.Crop
-                            )
-                        } else {
-                            val email = cloud.getAccountEmail() ?: "?"
-                            Box(
-                                Modifier.fillMaxSize().background(CoffeeTheme.colors.accent),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                AppText(
-                                    email.first().uppercase(),
-                                    color = CoffeeTheme.colors.onAccent
+        item(contentType = "header") {
+            ScreenHeader(
+                title = stringResource(R.string.calc_title),
+                trailing = {
+                    if (cloud.isSignedIn()) {
+                        val photoUrl = cloud.getProfilePhotoUrl()
+                        Box(
+                            modifier = Modifier
+                                .size(28.dp)
+                                .clip(CircleShape)
+                                .clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) {
+                                    vm.openRoute(co.coffeery.app.ui.screens.root.Route.Settings)
+                                },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            if (photoUrl != null) {
+                                AsyncImage(
+                                    model = photoUrl,
+                                    contentDescription = "Profile",
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentScale = ContentScale.Crop
                                 )
+                            } else {
+                                val email = cloud.getAccountEmail() ?: "?"
+                                Box(
+                                    Modifier.fillMaxSize().background(CoffeeTheme.colors.accent),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    AppText(
+                                        email.first().uppercase(),
+                                        color = CoffeeTheme.colors.onAccent
+                                    )
+                                }
                             }
                         }
+                    } else {
+                        LineIcon(
+                            Glyph.GEAR,
+                            CoffeeTheme.colors.textSecondary,
+                            Modifier.size(22.dp).clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) {
+                                vm.openRoute(co.coffeery.app.ui.screens.root.Route.Settings)
+                            },
+                        )
                     }
-                } else {
-                    LineIcon(
-                        Glyph.GEAR,
-                        CoffeeTheme.colors.textSecondary,
-                        Modifier.size(22.dp).clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) {
-                            vm.openRoute(co.coffeery.app.ui.screens.root.Route.Settings)
-                        },
-                    )
-                }
-            },
-        )
+                },
+            )
+        }
 
-        val streak = remember(state.brewLogs) { currentStreak(state.brewLogs) }
         if (streak >= 2) {
-            AccentStripeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 12) {
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    LineIcon(Glyph.FLAME, colors.accent, Modifier.size(22.dp))
-                    AppText(
-                        stringResource(R.string.brew_reminder_streak, streak),
-                        style = CoffeeTheme.type.body,
-                        color = colors.textPrimary,
-                    )
+            item(contentType = "streak") {
+                AccentStripeCard(modifier = Modifier.fillMaxWidth().graphicsLayer {}, contentPadding = 12) {
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        LineIcon(Glyph.FLAME, colors.accent, Modifier.size(22.dp))
+                        AppText(
+                            stringResource(R.string.brew_reminder_streak, streak),
+                            style = CoffeeTheme.type.body,
+                            color = colors.textPrimary,
+                        )
+                    }
                 }
             }
         }
 
-        CategoryChips(state, vm, eq)
+        item(contentType = "bloom") {
+            BloomHero(equipment = eq, result = result)
+        }
 
-        EquipmentDropdown(state, vm, eq)
+        item(contentType = "categoryChips") {
+            CategoryChips(state, vm, eq)
+        }
 
-        AmountSection(state, vm, eq)
+        item(contentType = "equipment") {
+            EquipmentDropdown(state, vm, eq)
+        }
+
+        item(contentType = "amount") {
+            AmountSection(state, vm, eq)
+        }
 
         if (!state.ratioMode) {
-            StrengthSection(state, vm, result)
+            item(contentType = "strength") {
+                StrengthSection(state, vm, result)
+            }
         }
 
-        RoastSection(state, vm)
-
-        OutputSection(result, eq, state)
-
-        CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                LineIcon(Glyph.CUP, colors.accent, Modifier.size(18.dp))
-                Spacer(Modifier.width(8.dp))
-                AppText(stringResource(R.string.ratio_ref_title), style = CoffeeTheme.type.caption, color = colors.textSecondary)
-            }
-            Spacer(Modifier.height(6.dp))
-            AppText(stringResource(R.string.ratio_1_15), style = CoffeeTheme.type.caption, color = colors.textSecondary)
-            Spacer(Modifier.height(2.dp))
-            AppText(stringResource(R.string.ratio_1_16), style = CoffeeTheme.type.caption, color = colors.textSecondary)
-            Spacer(Modifier.height(2.dp))
-            AppText(stringResource(R.string.ratio_1_17), style = CoffeeTheme.type.caption, color = colors.textSecondary)
-            Spacer(Modifier.height(2.dp))
-            AppText(stringResource(R.string.ratio_1_18), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+        item(contentType = "roast") {
+            RoastSection(state, vm)
         }
 
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-            SecondaryButton(
-                text = stringResource(R.string.action_save),
-                modifier = Modifier.weight(1f),
-            ) {
-                val autoName = "$eqName · ${SimpleDateFormat("MMM d", Locale.getDefault()).format(Date())}"
-                vm.saveRecipe(autoName)
-                Toast.makeText(ctx, R.string.recipe_saved, Toast.LENGTH_SHORT).show()
+        item(contentType = "output") {
+            OutputSection(result, eq, state.settings.temperatureUnit)
+        }
+
+        item(contentType = "ratioRef") {
+            CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    LineIcon(Glyph.CUP, colors.accent, Modifier.size(18.dp))
+                    Spacer(Modifier.width(8.dp))
+                    AppText(stringResource(R.string.ratio_ref_title), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                }
+                Spacer(Modifier.height(6.dp))
+                AppText(stringResource(R.string.ratio_1_15), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                Spacer(Modifier.height(2.dp))
+                AppText(stringResource(R.string.ratio_1_16), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                Spacer(Modifier.height(2.dp))
+                AppText(stringResource(R.string.ratio_1_17), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                Spacer(Modifier.height(2.dp))
+                AppText(stringResource(R.string.ratio_1_18), style = CoffeeTheme.type.caption, color = colors.textSecondary)
             }
-            PrimaryButton(
-                text = stringResource(R.string.action_start),
-                modifier = Modifier.weight(1f),
-            ) { vm.openRoute(co.coffeery.app.ui.screens.root.Route.Timer) }
+        }
+
+        item(contentType = "actions") {
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
+                SecondaryButton(
+                    text = stringResource(R.string.action_save),
+                    modifier = Modifier.weight(1f),
+                ) {
+                    val autoName = "$eqName · ${SimpleDateFormat("MMM d", Locale.getDefault()).format(Date())}"
+                    vm.saveRecipe(autoName)
+                    Toast.makeText(ctx, R.string.recipe_saved, Toast.LENGTH_SHORT).show()
+                }
+                PrimaryButton(
+                    text = stringResource(R.string.action_start),
+                    modifier = Modifier.weight(1f),
+                ) { vm.openRoute(co.coffeery.app.ui.screens.root.Route.Timer) }
+            }
         }
     }
 
@@ -473,14 +507,15 @@ private fun RoastSection(state: AppUiState, vm: AppViewModel) {
                 .fillMaxWidth()
                 .height(4.dp)
                 .clip(RoundedCornerShape(2.dp))
-                .background(colors.coffeeFor(roastFraction)),
+                .background(colors.coffeeFor(roastFraction))
+                .graphicsLayer {},
         )
         AppText(stringResource(state.roast.descRes), style = CoffeeTheme.type.caption, color = colors.textSecondary)
     }
 }
 
 @Composable
-private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment, state: AppUiState) {
+private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment, temperatureUnit: String) {
     val colors = CoffeeTheme.colors
     val grindColor = lerp(colors.cremaLight, colors.cremaDark, result.grind.ordinal / 6f)
     val animatedCoffee by animateFloatAsState(
@@ -495,7 +530,7 @@ private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment
     )
 
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().graphicsLayer {},
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
@@ -504,6 +539,7 @@ private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment
             stringResource(R.string.calc_grams, Format.grams(animatedCoffee.toDouble())),
             style = CoffeeTheme.type.number,
             color = colors.textPrimary,
+            modifier = Modifier.graphicsLayer {}
         )
 
         Spacer(Modifier.height(8.dp))
@@ -513,13 +549,14 @@ private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment
             stringResource(R.string.calc_ml, animatedWater.toInt().toString()),
             style = CoffeeTheme.type.number,
             color = colors.textPrimary,
+            modifier = Modifier.graphicsLayer {}
         )
 
         Spacer(Modifier.height(8.dp))
 
         val tempText = when (result.tempMode) {
             TempMode.RANGE -> {
-                if (state.settings.temperatureUnit == "F")
+                if (temperatureUnit == "F")
                     Format.tempF(result.tempCelsius)
                 else
                     stringResource(R.string.calc_celsius, Format.temp(result.tempCelsius))
@@ -546,4 +583,3 @@ private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment
         }
     }
 }
-

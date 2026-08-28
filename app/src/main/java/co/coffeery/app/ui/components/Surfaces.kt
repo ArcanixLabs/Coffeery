@@ -26,10 +26,10 @@ import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
 
 fun Modifier.coffeeElevation(shape: Shape, colors: CoffeeColors): Modifier = this.shadow(
-    elevation = 14.dp,
+    elevation = 8.dp,
     shape = shape,
-    ambientColor = colors.accent.copy(alpha = 0.16f),
-    spotColor = colors.cremaDark.copy(alpha = 0.24f),
+    ambientColor = colors.accent.copy(alpha = 0.08f),
+    spotColor = colors.cremaDark.copy(alpha = 0.18f),
     clip = false,
 )
 
@@ -39,14 +39,12 @@ fun CoffeeCard(
     shape: RoundedCornerShape = CoffeeShapes.medium,
     onClick: (() -> Unit)? = null,
     contentPadding: Int = 16,
+    elevated: Boolean = false,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = CoffeeTheme.colors
-
-    var m = modifier
-        .clip(shape)
-        .background(colors.surfaceElevated)
-        .border(1.dp, colors.outline, shape)
+    var m = modifier.clip(shape).background(colors.surfaceElevated)
+    if (elevated) m = m.coffeeElevation(shape, colors) else m = m.border(1.dp, colors.outline, shape)
     if (onClick != null) {
         m = m.clickable { onClick() }
     }
@@ -93,7 +91,7 @@ fun Chip(
         modifier = modifier
             .clip(CoffeeShapes.pill)
             .background(background)
-            .padding(horizontal = 10.dp, vertical = 5.dp),
+            .padding(horizontal = 12.dp, vertical = 6.dp),
     ) {
         AppText(text = text, style = CoffeeTheme.type.label, color = textColor)
     }

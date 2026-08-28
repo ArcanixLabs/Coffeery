@@ -12,16 +12,17 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -40,7 +41,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.lerp
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -61,9 +61,8 @@ import co.coffeery.app.ui.theme.CoffeeTheme
 @Composable
 fun LearnScreen(vm: AppViewModel) {
     val colors = CoffeeTheme.colors
-    val scrollState = rememberScrollState()
+    val lazyState = rememberLazyListState()
     val scope = rememberCoroutineScope()
-    val density = LocalDensity.current
     var activeChapterRes by remember { mutableStateOf(LearnContent.chapterOrder[0]) }
     var searchQuery by remember { mutableStateOf("") }
     val state by vm.state.collectAsStateWithLifecycle()
@@ -84,131 +83,174 @@ fun LearnScreen(vm: AppViewModel) {
     }
 
     LaunchedEffect(Unit) {
-        scrollState.scrollTo(state.learnScrollOffset)
+        val saved = state.learnScrollOffset
+        if (saved >= 100000) {
+            val idx = saved / 100000
+            val off = saved % 100000
+            lazyState.scrollToItem(idx.coerceAtLeast(0).coerceAtMost(200), off)
+        } else {
+            lazyState.scrollToItem(saved.coerceAtLeast(0).coerceAtMost(200))
+        }
     }
 
     DisposableEffect(Unit) {
-        onDispose { vm.setLearnScrollOffset(scrollState.value) }
+        onDispose {
+            val idx = lazyState.firstVisibleItemIndex
+            val off = lazyState.firstVisibleItemScrollOffset
+            vm.setLearnScrollOffset(idx * 100000 + off)
+        }
     }
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .verticalScroll(scrollState)
-            .padding(horizontal = 20.dp)
-            .padding(top = 12.dp, bottom = 96.dp),
-        verticalArrangement = Arrangement.spacedBy(14.dp),
+    LazyColumn(
+        state = lazyState,
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        ScreenHeader(
-            title = stringResource(R.string.learn_title),
-            subtitle = stringResource(R.string.learn_intro),
-        )
-
-        TodaysLessonCard(vm)
-
-        QuickQuizCard()
-
-        Box(modifier = Modifier.fillMaxWidth()) {
-            AppTextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
-                hint = stringResource(R.string.search_hint_learn),
-                modifier = Modifier.fillMaxWidth(),
-            )
-            if (searchQuery.isNotEmpty()) {
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .padding(end = 12.dp)
-                        .clickable(
-                            indication = null,
-                            interactionSource = remember { MutableInteractionSource() },
-                        ) { searchQuery = "" },
-                ) {
-                    AppText("✕", style = CoffeeTheme.type.headline, color = colors.textSecondary)
-                }
-            }
-        }
-
-        StepMap(
-            activeChapterRes = activeChapterRes,
-            completedChapters = completedChapters,
-            onChapterSelected = { idx ->
-                val ch = LearnContent.chapterOrder[idx]
-                activeChapterRes = ch
-                val first = LearnContent.cards.indexOfFirst { it.chapterRes == ch }
-                val offsetDp = 600.dp + 170.dp * first
-                scope.launch {
-                    scrollState.scrollTo(with(density) { offsetDp.toPx() }.toInt())
-                }
-            },
-        )
-
-        TroubleshootCard()
-
-        ProTipsCard()
-
-        QuickRatioCard()
-
-        GrindSizeCard()
-
-        BrewTroubleshooterCard()
-
-        FlavorWheelCard()
-
-        ExtractionCalculatorCard()
-
-        WaterMineralCard()
-
-        GlossaryCard()
-
-        FoodPairingCard()
-
-        CultureFactsCard()
-
-        if (searchActive && filteredCards.isEmpty()) {
-            AppText(
-                stringResource(R.string.search_no_results),
-                style = CoffeeTheme.type.body,
-                color = colors.textSecondary,
-                modifier = Modifier.fillMaxWidth(),
-                align = androidx.compose.ui.text.style.TextAlign.Center,
+        item(key = "header", contentType = "header") {
+            ScreenHeader(
+                title = stringResource(R.string.learn_title),
+                subtitle = stringResource(R.string.learn_intro),
             )
         }
-
-        // Render a chapter header whenever the chapter changes, keeping the
-        // card's global index stable for detail navigation.
-        var lastChapter = 0
-        filteredCards.forEachIndexed { index, card ->
-            if (card.chapterRes != lastChapter) {
-                lastChapter = card.chapterRes
-                Spacer(Modifier.height(2.dp))
-                AppText(
-                    stringResource(card.chapterRes),
-                    style = CoffeeTheme.type.label,
-                    color = colors.accent,
+        item(key = "todays", contentType = "tool") {
+            TodaysLessonCard(vm)
+        }
+        item(key = "quiz", contentType = "tool") {
+            QuickQuizCard()
+        }
+        item(key = "search", contentType = "tool") {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                AppTextField(
+                    value = searchQuery,
+                    onValueChange = { searchQuery = it },
+                    hint = stringResource(R.string.search_hint_learn),
+                    modifier = Modifier.fillMaxWidth(),
                 )
+                if (searchQuery.isNotEmpty()) {
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.CenterEnd)
+                            .padding(end = 12.dp)
+                            .clickable(
+                                indication = null,
+                                interactionSource = remember { MutableInteractionSource() },
+                            ) { searchQuery = "" },
+                    ) {
+                        AppText("✕", style = CoffeeTheme.type.headline, color = colors.textSecondary)
+                    }
+                }
             }
-            CoffeeCard(onClick = { vm.openRoute(Route.LearnDetail(index)) }, modifier = Modifier.fillMaxWidth()) {
-                AppText(stringResource(card.titleRes), style = CoffeeTheme.type.headline)
-                Spacer(Modifier.height(6.dp))
+        }
+        item(key = "stepMap", contentType = "tool") {
+            StepMap(
+                activeChapterRes = activeChapterRes,
+                completedChapters = completedChapters,
+                onChapterSelected = { idx ->
+                    val ch = LearnContent.chapterOrder[idx]
+                    activeChapterRes = ch
+                    val filteredIdx = filteredCards.indexOfFirst { it.chapterRes == ch }
+                    if (filteredIdx != -1) {
+                        val headersBefore = filteredCards.take(filteredIdx).map { it.chapterRes }.distinct().size
+                        val staticCount = 16
+                        val target = staticCount + filteredIdx + headersBefore + 1
+                        scope.launch {
+                            lazyState.animateScrollToItem(target.coerceAtLeast(0))
+                        }
+                    } else {
+                        scope.launch {
+                            lazyState.animateScrollToItem(0)
+                        }
+                    }
+                },
+            )
+        }
+        item(key = "troubleshoot", contentType = "tool") {
+            TroubleshootCard()
+        }
+        item(key = "protips", contentType = "tool") {
+            ProTipsCard()
+        }
+        item(key = "quickRatio", contentType = "tool") {
+            QuickRatioCard()
+        }
+        item(key = "grindSize", contentType = "tool") {
+            GrindSizeCard()
+        }
+        item(key = "brewTroubleshooter", contentType = "tool") {
+            BrewTroubleshooterCard()
+        }
+        item(key = "flavorWheel", contentType = "tool") {
+            FlavorWheelCard()
+        }
+        item(key = "extractionCalc", contentType = "tool") {
+            ExtractionCalculatorCard()
+        }
+        item(key = "waterMineral", contentType = "tool") {
+            WaterMineralCard()
+        }
+        item(key = "glossary", contentType = "glossary") {
+            GlossaryCard()
+        }
+        item(key = "foodPairing", contentType = "glossary") {
+            FoodPairingCard()
+        }
+        item(key = "cultureFacts", contentType = "glossary") {
+            CultureFactsCard()
+        }
+        if (searchActive && filteredCards.isEmpty()) {
+            item(key = "no_results", contentType = "header") {
                 AppText(
-                    stringResource(card.bodyRes),
+                    stringResource(R.string.search_no_results),
                     style = CoffeeTheme.type.body,
                     color = colors.textSecondary,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.fillMaxWidth(),
+                    align = androidx.compose.ui.text.style.TextAlign.Center,
                 )
-                Spacer(Modifier.height(8.dp))
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    AppText(stringResource(R.string.learn_read_more), style = CoffeeTheme.type.label, color = colors.accent)
-                    if (completedChapters.contains(card.chapterRes)) {
-                        Spacer(Modifier.width(8.dp))
-                        Box(
-                            modifier = Modifier
-                                .size(8.dp)
-                                .clip(CircleShape)
-                                .background(colors.accentSoft),
+            }
+        }
+        val distinctChapters = filteredCards.map { it.chapterRes }.distinct()
+        distinctChapters.forEach { chapterRes ->
+            stickyHeader(key = "chapter_$chapterRes", contentType = "header") {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(CoffeeTheme.colors.surface)
+                        .padding(vertical = 4.dp),
+                ) {
+                    AppText(
+                        stringResource(chapterRes),
+                        style = CoffeeTheme.type.label,
+                        color = colors.accent,
+                    )
+                }
+            }
+            val cardsInChapter = filteredCards.filter { it.chapterRes == chapterRes }
+            cardsInChapter.forEach { card ->
+                val globalIndex = LearnContent.cards.indexOf(card)
+                item(key = "card_${card.titleRes}", contentType = "card") {
+                    CoffeeCard(onClick = { vm.openRoute(Route.LearnDetail(globalIndex)) }, modifier = Modifier.fillMaxWidth()) {
+                        AppText(stringResource(card.titleRes), style = CoffeeTheme.type.headline)
+                        Spacer(Modifier.height(6.dp))
+                        AppText(
+                            stringResource(card.bodyRes),
+                            style = CoffeeTheme.type.body,
+                            color = colors.textSecondary,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis,
                         )
+                        Spacer(Modifier.height(8.dp))
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            AppText(stringResource(R.string.learn_read_more), style = CoffeeTheme.type.label, color = colors.accent)
+                            if (completedChapters.contains(card.chapterRes)) {
+                                Spacer(Modifier.width(8.dp))
+                                Box(
+                                    modifier = Modifier
+                                        .size(8.dp)
+                                        .clip(CircleShape)
+                                        .background(colors.accentSoft),
+                                )
+                            }
+                        }
                     }
                 }
             }

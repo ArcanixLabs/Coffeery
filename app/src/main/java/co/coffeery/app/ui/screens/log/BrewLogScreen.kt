@@ -3,23 +3,30 @@ package co.coffeery.app.ui.screens.log
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -144,21 +151,34 @@ fun BrewLogScreen(vm: AppViewModel) {
         stringResource(R.string.achievements_title),
     )
 
-    Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 24.dp)) {
-        SegmentedControl(
-            options = listOf(0, 1, 2, 3, 4),
-            selected = section,
-            label = { sections[it] },
-            onSelect = { section = it },
-            modifier = Modifier.fillMaxWidth(),
-        )
-        Spacer(Modifier.height(14.dp))
-        when (section) {
-            0 -> BrewLogContent(state, vm)
-            1 -> BeanListScreen(vm)
-            2 -> CaffeineContent(state.brewLogs)
-            3 -> BrewStatsSection(state.brewLogs)
-            4 -> AchievementsContent(state.achievements)
+    if (section == 0) {
+        Column(modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 24.dp)) {
+            SegmentedControl(
+                options = listOf(0, 1, 2, 3, 4),
+                selected = section,
+                label = { sections[it] },
+                onSelect = { section = it },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Spacer(Modifier.height(14.dp))
+            BrewLogContent(state, vm, modifier = Modifier.weight(1f).fillMaxWidth())
+        }
+    } else {
+        Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 24.dp)) {
+            SegmentedControl(
+                options = listOf(0, 1, 2, 3, 4),
+                selected = section,
+                label = { sections[it] },
+                onSelect = { section = it },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Spacer(Modifier.height(14.dp))
+            when (section) {
+                1 -> BeanListScreen(vm)
+                2 -> CaffeineContent(state.brewLogs)
+                3 -> BrewStatsSection(state.brewLogs)
+                4 -> AchievementsContent(state.achievements)
+            }
         }
     }
 }
@@ -169,13 +189,15 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
     val today = LocalDate.now()
     val mondayOfThisWeek = today.with(DayOfWeek.MONDAY)
 
-    val countsByDate: Map<LocalDate, Int> = brewLogs
-        .groupBy {
-            Instant.ofEpochMilli(it.timestamp)
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate()
+    val countsByDate by remember(brewLogs) {
+        derivedStateOf {
+            brewLogs.groupBy {
+                Instant.ofEpochMilli(it.timestamp)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+            }.mapValues { it.value.size }
         }
-        .mapValues { it.value.size }
+    }
 
     Column(modifier = Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 8.dp)) {
         Row(modifier = Modifier.padding(start = 28.dp)) {
@@ -310,17 +332,18 @@ private fun StreakBanner(streak: Int) {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm: AppViewModel) {
+private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm: AppViewModel, modifier: Modifier = Modifier) {
     val colors = CoffeeTheme.colors
     var showCompare by remember { mutableStateOf(false) }
 
     if (state.brewLogs.isEmpty()) {
-        Spacer(Modifier.height(40.dp))
         Column(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp),
+            modifier = modifier.fillMaxWidth().padding(horizontal = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            Spacer(Modifier.height(40.dp))
             LineIcon(Glyph.CUP, colors.accent, Modifier.size(48.dp))
             Spacer(Modifier.height(16.dp))
             AppText(stringResource(R.string.log_empty_title),
@@ -337,35 +360,42 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
             )
         }
     } else {
-        val streak = currentStreak(state.brewLogs)
-        val grouped = state.brewLogs
-            .groupBy { Instant.ofEpochMilli(it.timestamp).atZone(ZoneId.systemDefault()).toLocalDate() }
-            .toList()
-            .sortedByDescending { it.first }
-        Column(
+        val streak by remember(state.brewLogs) { derivedStateOf { currentStreak(state.brewLogs) } }
+        val grouped by remember(state.brewLogs) {
+            derivedStateOf {
+                state.brewLogs.groupBy { Instant.ofEpochMilli(it.timestamp).atZone(ZoneId.systemDefault()).toLocalDate() }
+                    .toList().sortedByDescending { it.first }
+            }
+        }
+        val best by remember(state.brewLogs) { derivedStateOf { bestRecipeFromLogs(state.brewLogs) } }
+        val listState = rememberLazyListState()
+        LazyColumn(
+            state = listState,
+            modifier = modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(10.dp),
-            modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(bottom = 24.dp),
         ) {
-            StreakBanner(streak)
-            BrewHeatmap(state.brewLogs)
+            item(key = "streak", contentType = "streak") { StreakBanner(streak) }
+            item(key = "heatmap", contentType = "heatmap") { BrewHeatmap(state.brewLogs) }
             if (state.brewLogs.size >= 2) {
-                CoffeeCard(modifier = Modifier.fillMaxWidth().clickable { showCompare = true }, contentPadding = 14) {
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                        Column(modifier = Modifier.weight(1f)) {
-                            AppText(stringResource(R.string.log_compare_title), style = CoffeeTheme.type.headline, color = colors.textPrimary)
-                            Spacer(Modifier.height(2.dp))
-                            AppText(stringResource(R.string.log_compare_sub), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                item(key = "compare", contentType = "compare") {
+                    CoffeeCard(modifier = Modifier.fillMaxWidth().clickable { showCompare = true }, contentPadding = 14) {
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                AppText(stringResource(R.string.log_compare_title), style = CoffeeTheme.type.headline, color = colors.textPrimary)
+                                Spacer(Modifier.height(2.dp))
+                                AppText(stringResource(R.string.log_compare_sub), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                            }
+                            PrimaryButton(text = stringResource(R.string.log_compare_button), modifier = Modifier) { showCompare = true }
                         }
-                        PrimaryButton(text = stringResource(R.string.log_compare_button), modifier = Modifier) { showCompare = true }
                     }
                 }
             }
             if (state.brewLogs.size >= 3) {
-                AnalyticsCard(state.brewLogs)
+                item(key = "analytics", contentType = "analytics") { AnalyticsCard(state.brewLogs) }
             }
-            val best = bestRecipeFromLogs(state.brewLogs)
             if (best != null) {
-                BestRecipeBanner(best, vm)
+                item(key = "best", contentType = "best") { BestRecipeBanner(best!!, vm) }
             }
             grouped.forEach { (date, logs) ->
                 val dateLabel = when {
@@ -373,14 +403,12 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
                     date == LocalDate.now().minusDays(1) -> stringResource(R.string.log_date_yesterday)
                     else -> date.format(java.time.format.DateTimeFormatter.ofPattern("d MMMM", Locale.getDefault()))
                 }
-                Spacer(Modifier.height(4.dp))
-                AppText(
-                    dateLabel,
-                    style = CoffeeTheme.type.label,
-                    color = colors.textSecondary,
-                    modifier = Modifier.padding(start = 2.dp),
-                )
-                logs.forEach { log ->
+                stickyHeader(key = date.toString(), contentType = "header") {
+                    Box(modifier = Modifier.fillMaxWidth().background(CoffeeTheme.colors.background).padding(start = 2.dp, top = 4.dp, bottom = 4.dp)) {
+                        AppText(dateLabel, style = CoffeeTheme.type.label, color = colors.textSecondary)
+                    }
+                }
+                items(items = logs, key = { it.id }, contentType = { "logCard" }) { log ->
                     BrewLogCard(log, state.equipment, vm)
                 }
             }
