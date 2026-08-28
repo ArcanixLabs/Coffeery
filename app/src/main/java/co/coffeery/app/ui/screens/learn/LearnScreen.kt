@@ -32,6 +32,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -64,16 +66,22 @@ fun LearnScreen(vm: AppViewModel) {
     val density = LocalDensity.current
     var activeChapterRes by remember { mutableStateOf(LearnContent.chapterOrder[0]) }
     var searchQuery by remember { mutableStateOf("") }
-    val state by vm.state.collectAsState()
+    val state by vm.state.collectAsStateWithLifecycle()
     val completedChapters = state.completedChapters
 
-    val cardTexts = LearnContent.cards.map { card -> card to (stringResource(card.titleRes) + " " + stringResource(card.bodyRes)) }
-    val filteredCards = if (searchQuery.isBlank()) {
-        LearnContent.cards
-    } else {
-        cardTexts.filter { (_, text) -> text.contains(searchQuery, true) }.map { it.first }
-    }
     val searchActive = searchQuery.isNotBlank()
+    val context = LocalContext.current
+    val filteredCards = remember(searchQuery) {
+        if (searchQuery.isBlank()) LearnContent.cards
+        else {
+            val q = searchQuery.lowercase()
+            LearnContent.cards.filter { card ->
+                val title = context.getString(card.titleRes)
+                val body = context.getString(card.bodyRes)
+                (title + " " + body).lowercase().contains(q)
+            }
+        }
+    }
 
     LaunchedEffect(Unit) {
         scrollState.scrollTo(state.learnScrollOffset)
@@ -1689,14 +1697,21 @@ private fun QuickQuizCard() {
             }
             Spacer(Modifier.height(6.dp))
         }
+        androidx.compose.runtime.LaunchedEffect(selectedAnswer) {
+            if (selectedAnswer != -1 && !counted) {
+                val isCorrect = selectedAnswer == q.correctIndex
+                if (isCorrect) {
+                    correctCount++
+                    streak++
+                } else {
+                    streak = 0
+                }
+                counted = true
+            }
+        }
         if (selectedAnswer != -1) {
             Spacer(Modifier.height(4.dp))
             val isCorrect = selectedAnswer == q.correctIndex
-            if (isCorrect && !counted) {
-                correctCount++
-                streak++
-                counted = true
-            }
             AppText(
                 if (isCorrect) stringResource(R.string.learn_quiz_correct) else stringResource(R.string.learn_quiz_wrong),
                 style = CoffeeTheme.type.label,
@@ -1709,9 +1724,6 @@ private fun QuickQuizCard() {
                 style = CoffeeTheme.type.label,
                 color = colors.accent,
             )
-            if (!isCorrect) {
-                streak = 0
-            }
             if (isCorrect && streak >= 3) {
                 Spacer(Modifier.height(2.dp))
                 AppText(

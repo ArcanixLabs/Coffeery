@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,11 +32,9 @@ import java.util.Locale
 
 @Composable
 fun BrewStatsSection(brewLogs: List<BrewLogEntity>) {
-    val scrollState = rememberScrollState()
-
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp),
-        modifier = Modifier.fillMaxWidth().verticalScroll(scrollState),
+        modifier = Modifier.fillMaxWidth(),
     ) {
         TotalBrewsCard(brewLogs)
         EquipmentBreakdownCard(brewLogs)
@@ -239,14 +235,18 @@ private fun BarCanvas(
     color: androidx.compose.ui.graphics.Color,
     modifier: Modifier = Modifier,
 ) {
+    val barH = 16.dp
+    val barTop = 4.dp
+    val corner = 8.dp
     Canvas(modifier = modifier) {
         val w = size.width
         val safeRatio = ratio.coerceIn(0f, 1f)
+        val bh = barH.toPx()
         drawRoundRect(
             color = color,
-            topLeft = Offset(0f, 4.dp.toPx()),
-            size = Size(w * safeRatio, 16.dp.toPx()),
-            cornerRadius = CornerRadius(8.dp.toPx(), 8.dp.toPx()),
+            topLeft = Offset(0f, barTop.toPx()),
+            size = Size(w * safeRatio, bh),
+            cornerRadius = CornerRadius(corner.toPx(), corner.toPx()),
         )
     }
 }

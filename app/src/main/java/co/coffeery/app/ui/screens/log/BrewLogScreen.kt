@@ -602,7 +602,11 @@ private fun BrewLogCard(log: BrewLogEntity, equipment: List<Equipment>, vm: AppV
         if (!log.photoUri.isNullOrBlank()) {
             Spacer(Modifier.height(6.dp))
             AsyncImage(
-                model = Uri.parse(log.photoUri),
+                model = coil.request.ImageRequest.Builder(LocalContext.current)
+                    .data(Uri.parse(log.photoUri))
+                    .size(480)
+                    .crossfade(true)
+                    .build(),
                 contentDescription = "Brew photo",
                 modifier = Modifier
                     .fillMaxWidth()

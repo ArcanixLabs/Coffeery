@@ -14,9 +14,8 @@
 -keep class co.coffeery.app.ui.screens.root.AppUiState { *; }
 -keep class co.coffeery.app.util.BrewResult { *; }
 
-# Compose
--keep class androidx.compose.** { *; }
--dontwarn androidx.compose.**
+# Compose — fine-grained (remove broad keep that disabled R8)
+-keep class androidx.compose.runtime.** { *; }
 
 # General
 -keepattributes Signature

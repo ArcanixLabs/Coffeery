@@ -74,7 +74,8 @@ abstract class AppDatabase : RoomDatabase() {
                     "coffeery.db",
                 ).addMigrations(
                     MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7, MIGRATION_7_8, MIGRATION_8_9,
-                ).build().also { INSTANCE = it }
+                ).fallbackToDestructiveMigrationOnDowngrade(true)
+                    .fallbackToDestructiveMigration().build().also { INSTANCE = it }
             }
     }
 }

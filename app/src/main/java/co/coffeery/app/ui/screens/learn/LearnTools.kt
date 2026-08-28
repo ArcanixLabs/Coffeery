@@ -63,6 +63,8 @@ fun ExtractionCalculatorCard() {
     val tdsVal = tds.toDoubleOrNull()?.takeIf { it in 0.5..3.0 } ?: 1.3
 
     val ey = if (doseVal > 0) (tdsVal * waterVal / doseVal) else 0.0
+    val successGreen = colors.accent
+    val errorRed = colors.accent
     val eyColor = when {
         ey in 18.0..22.0 -> Color(0xFF5A8F3C)
         ey in 16.0..18.0 || ey in 22.0..24.0 -> colors.accent

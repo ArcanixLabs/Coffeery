@@ -24,12 +24,16 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
 
@@ -63,17 +67,17 @@ fun <T> BottomNav(
                 val isSelected = item == selected
                 val animatedColor by animateColorAsState(
                     targetValue = if (isSelected) colors.accent else colors.textSecondary,
-                    animationSpec = tween(220),
+                    animationSpec = tween(CoffeeMotion.normal),
                     label = "navColor",
                 )
                 val animatedBgColor by animateColorAsState(
                     targetValue = if (isSelected) colors.accentSoft else colors.surface,
-                    animationSpec = tween(220),
+                    animationSpec = tween(CoffeeMotion.normal),
                     label = "navBg",
                 )
                 val animatedScale by animateFloatAsState(
                     targetValue = if (isSelected) 1.1f else 1.0f,
-                    animationSpec = tween(220),
+                    animationSpec = tween(CoffeeMotion.normal),
                     label = "navScale",
                 )
                 Column(
@@ -132,7 +136,11 @@ fun ScreenHeader(
             BackButton(onBack)
             Spacer(Modifier.width(12.dp))
         }
-        Column(Modifier.weight(1f)) {
+        Column(
+            Modifier
+                .weight(1f)
+                .semantics { heading() },
+        ) {
             AppText(text = title, style = CoffeeTheme.type.display, color = colors.textPrimary)
             if (subtitle != null) {
                 AppText(text = subtitle, style = CoffeeTheme.type.body, color = colors.textSecondary)
@@ -147,7 +155,8 @@ fun BackButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     val colors = CoffeeTheme.colors
     androidx.compose.foundation.layout.Box(
         modifier = modifier
-            .size(42.dp)
+            .sizeIn(minWidth = 48.dp, minHeight = 48.dp)
+            .size(48.dp)
             .clip(CoffeeShapes.pill)
             .background(colors.surfaceElevated)
             .clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) { onClick() },

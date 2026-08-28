@@ -112,7 +112,7 @@ private fun RowScope.StepButton(symbol: String, enabled: Boolean, onClick: () ->
     val colors = CoffeeTheme.colors
     Box(
         modifier = Modifier
-            .size(40.dp)
+            .size(48.dp)
             .clip(CoffeeShapes.pill)
             .border(1.5.dp, if (enabled) colors.accent else colors.outline, CoffeeShapes.pill)
             .clickable(enabled = enabled) { onClick() },

@@ -129,54 +129,63 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     var stepEndTime by rememberSaveable { mutableLongStateOf(0L) }
 
     val equipmentName = eq.displayName()
-    val stepTitles = steps.map { stringResource(it.titleRes) }
+    val stepTitles = remember(steps) { steps.map { it.titleRes } }
 
-    // Keep the screen awake for the whole brew session.
     val view = LocalView.current
     val context = LocalContext.current
-    DisposableEffect(Unit) {
+    DisposableEffect(view) {
         val window = (view.context as? Activity)?.window
         window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         onDispose { window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) }
     }
 
-    DisposableEffect(handsFree) {
+    DisposableEffect(handsFree, context) {
         if (!handsFree) return@DisposableEffect onDispose { }
-        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        val proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as? SensorManager
+        val proximitySensor = sensorManager?.getDefaultSensor(Sensor.TYPE_PROXIMITY)
         if (proximitySensor == null) return@DisposableEffect onDispose { }
-
+        val mainHandler = Handler(Looper.getMainLooper())
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent) {
-                val win = (context as? Activity)?.window ?: return
-                val attrs = win.attributes
-                if (event.values[0] < proximitySensor.maximumRange) {
-                    attrs.screenBrightness = 0.01f
-                } else {
-                    attrs.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+                mainHandler.post {
+                    val win = (context as? Activity)?.window ?: return@post
+                    val attrs = win.attributes
+                    if (event.values[0] < proximitySensor.maximumRange) {
+                        attrs.screenBrightness = 0.01f
+                    } else {
+                        attrs.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+                    }
+                    win.attributes = attrs
                 }
-                win.attributes = attrs
             }
             override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
         }
-        sensorManager.registerListener(listener, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager.registerListener(listener, proximitySensor, SensorManager.SENSOR_DELAY_UI)
         onDispose {
             sensorManager.unregisterListener(listener)
-            (context as? Activity)?.window?.attributes?.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+            mainHandler.post {
+                (context as? Activity)?.window?.let {
+                    it.attributes = it.attributes.apply { screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE }
+                }
+            }
         }
     }
 
     LaunchedEffect(running, finished) {
         if (running && state.settings.timerBackground && !finished) {
-            val intent = Intent(context, TimerService::class.java)
-            intent.putExtra("equipment", equipmentName)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                context.startForegroundService(intent)
-            } else {
-                context.startService(intent)
+            if (!TimerService.isRunning) {
+                val intent = Intent(context, TimerService::class.java)
+                intent.putExtra("equipment", equipmentName)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    context.startForegroundService(intent)
+                } else {
+                    context.startService(intent)
+                }
             }
         } else {
-            context.stopService(Intent(context, TimerService::class.java))
+            if (TimerService.isRunning) {
+                context.stopService(Intent(context, TimerService::class.java))
+            }
         }
     }
 
@@ -238,7 +247,8 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                         context.startService(intent)
                     }
                 } else {
-                    val title = stepTitles.getOrElse(stepIndex) { "" }
+                    val titleRes = stepTitles.getOrElse(stepIndex) { R.string.brew_title }
+                    val title = context.getString(titleRes)
                     TimerService.update(context, equipmentName, title, Format.clock(remaining), stepIndex, steps.size)
                 }
             }
@@ -333,13 +343,14 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
 
         val pulseScale by rememberInfiniteTransition(label = "timerPulse").animateFloat(
             initialValue = 1f,
-            targetValue = 1.05f,
+            targetValue = if (running && remaining in 1..10) 1.05f else 1f,
             animationSpec = infiniteRepeatable(
                 animation = tween(250),
                 repeatMode = RepeatMode.Reverse,
             ),
             label = "pulseScale",
         )
+        val displayScale = if (running && remaining in 1..10) pulseScale else 1f
 
         Box(
             modifier = Modifier
@@ -355,7 +366,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                     lineHeight = 76.sp,
                 ),
                 color = colors.textPrimary,
-                modifier = Modifier.scale(if (running && remaining in 1..10) pulseScale else 1f),
+                modifier = Modifier.scale(displayScale),
             )
         }
 
@@ -450,14 +461,15 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
             Box(
                 modifier = Modifier
                     .padding(start = 8.dp)
-                    .size(16.dp)
+                    .sizeIn(minWidth = 48.dp, minHeight = 48.dp)
+                    .size(24.dp)
                     .clip(CoffeeShapes.small)
                     .background(boxColor)
                     .clickable { handsFree = !handsFree },
                 contentAlignment = Alignment.Center,
             ) {
                 if (handsFree) {
-                    AppText("\u2713", style = CoffeeTheme.type.caption.copy(fontSize = 10.sp), color = Color.White)
+                    AppText("\u2713", style = CoffeeTheme.type.caption.copy(fontSize = 10.sp), color = colors.onAccent)
                 }
             }
         }
@@ -621,12 +633,12 @@ private fun SaveBrewDialog(
                     Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         Box(
                             modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
+                                .clip(CoffeeShapes.small)
                                 .background(if (selectedBean == null) colors.accent else colors.accentSoft)
                                 .clickable { selectedBean = null }
                                 .padding(horizontal = 10.dp, vertical = 6.dp),
                         ) {
-                            AppText(stringResource(R.string.log_bean_none), style = CoffeeTheme.type.caption, color = if (selectedBean == null) Color.White else colors.textPrimary)
+                            AppText(stringResource(R.string.log_bean_none), style = CoffeeTheme.type.caption, color = if (selectedBean == null) colors.onAccent else colors.textPrimary)
                         }
                     }
                     for (row in rows) {
@@ -635,7 +647,7 @@ private fun SaveBrewDialog(
                                 val isSelected = selectedBean?.id == bean.id
                                 Box(
                                     modifier = Modifier
-                                        .clip(RoundedCornerShape(8.dp))
+                                        .clip(CoffeeShapes.small)
                                         .background(if (isSelected) colors.accent else colors.accentSoft)
                                         .clickable { selectedBean = bean }
                                         .padding(horizontal = 10.dp, vertical = 6.dp),
@@ -643,7 +655,7 @@ private fun SaveBrewDialog(
                                     AppText(
                                         if (bean.name.length > 8) bean.name.take(8) + "…" else bean.name,
                                         style = CoffeeTheme.type.caption,
-                                        color = if (isSelected) Color.White else colors.textPrimary,
+                                        color = if (isSelected) colors.onAccent else colors.textPrimary,
                                     )
                                 }
                             }
@@ -716,7 +728,7 @@ private fun SaveBrewDialog(
                     val selected = key in flavorTags
                     Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(8.dp))
+                            .clip(CoffeeShapes.small)
                             .background(if (selected) colors.accent else colors.accentSoft)
                             .clickable {
                                 flavorTags = if (selected) flavorTags - key else flavorTags + key
@@ -726,7 +738,7 @@ private fun SaveBrewDialog(
                         AppText(
                             stringResource(labelRes),
                             style = CoffeeTheme.type.caption,
-                            color = if (selected) Color.White else colors.textPrimary,
+                            color = if (selected) colors.onAccent else colors.textPrimary,
                         )
                     }
                 }
@@ -821,53 +833,55 @@ private fun playChime(type: Int) {
             else -> 0.30f
         }
         val numSamples = (sampleRate * duration).toInt()
-        val samples = ShortArray(numSamples)
-
-        when (type) {
-            0 -> {
-                val freq1 = 523.25
-                val freq2 = 659.25
-                for (i in 0 until numSamples) {
-                    val t = i.toFloat() / sampleRate
-                    val envelope = 1f - (t / duration)
-                    samples[i] = ((envelope * 0.3 * (kotlin.math.sin(2.0 * Math.PI * freq1 * t) + kotlin.math.sin(2.0 * Math.PI * freq2 * t)).toFloat()) * Short.MAX_VALUE).toInt().toShort()
+        Thread {
+            try {
+                val samples = ShortArray(numSamples)
+                when (type) {
+                    0 -> {
+                        val freq1 = 523.25
+                        val freq2 = 659.25
+                        for (i in 0 until numSamples) {
+                            val t = i.toFloat() / sampleRate
+                            val envelope = 1f - (t / duration)
+                            samples[i] = ((envelope * 0.3 * (kotlin.math.sin(2.0 * Math.PI * freq1 * t) + kotlin.math.sin(2.0 * Math.PI * freq2 * t)).toFloat()) * Short.MAX_VALUE).toInt().toShort()
+                        }
+                    }
+                    2 -> {
+                        val notes = floatArrayOf(523.25f, 659.25f, 783.99f)
+                        val noteLen = numSamples / 3
+                        for (i in 0 until numSamples) {
+                            val t = i.toFloat() / sampleRate
+                            val noteIdx = (i / noteLen).coerceAtMost(2)
+                            val localT = t - (noteIdx * noteLen.toFloat() / sampleRate)
+                            val envelope = (1f - localT / (noteLen.toFloat() / sampleRate)).coerceAtLeast(0f)
+                            val freq = notes[noteIdx]
+                            samples[i] = ((envelope * 0.4 * kotlin.math.sin(2.0 * Math.PI * freq * localT)).toFloat() * Short.MAX_VALUE).toInt().toShort()
+                        }
+                    }
+                    else -> {
+                        val freq = 783.99f
+                        for (i in 0 until numSamples) {
+                            val t = i.toFloat() / sampleRate
+                            val envelope = 1f - (t / duration)
+                            samples[i] = ((envelope * 0.3 * kotlin.math.sin(2.0 * Math.PI * freq * t)).toFloat() * Short.MAX_VALUE).toInt().toShort()
+                        }
+                    }
                 }
-            }
-            2 -> {
-                val notes = floatArrayOf(523.25f, 659.25f, 783.99f)
-                val noteLen = numSamples / 3
-                for (i in 0 until numSamples) {
-                    val t = i.toFloat() / sampleRate
-                    val noteIdx = (i / noteLen).coerceAtMost(2)
-                    val localT = t - (noteIdx * noteLen.toFloat() / sampleRate)
-                    val envelope = (1f - localT / (noteLen.toFloat() / sampleRate)).coerceAtLeast(0f)
-                    val freq = notes[noteIdx]
-                    samples[i] = ((envelope * 0.4 * kotlin.math.sin(2.0 * Math.PI * freq * localT)).toFloat() * Short.MAX_VALUE).toInt().toShort()
-                }
-            }
-            else -> {
-                val freq = 783.99f
-                for (i in 0 until numSamples) {
-                    val t = i.toFloat() / sampleRate
-                    val envelope = 1f - (t / duration)
-                    samples[i] = ((envelope * 0.3 * kotlin.math.sin(2.0 * Math.PI * freq * t)).toFloat() * Short.MAX_VALUE).toInt().toShort()
-                }
-            }
-        }
-
-        val audioTrack = android.media.AudioTrack(
-            android.media.AudioManager.STREAM_NOTIFICATION,
-            sampleRate,
-            android.media.AudioFormat.CHANNEL_OUT_MONO,
-            android.media.AudioFormat.ENCODING_PCM_16BIT,
-            numSamples * 2,
-            android.media.AudioTrack.MODE_STATIC
-        )
-        audioTrack.write(samples, 0, numSamples)
-        audioTrack.play()
-        android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-            audioTrack.release()
-        }, (duration * 1000 + 100).toLong())
+                val audioTrack = AudioTrack(
+                    AudioManager.STREAM_NOTIFICATION,
+                    sampleRate,
+                    AudioFormat.CHANNEL_OUT_MONO,
+                    AudioFormat.ENCODING_PCM_16BIT,
+                    numSamples * 2,
+                    AudioTrack.MODE_STATIC
+                )
+                audioTrack.write(samples, 0, numSamples)
+                audioTrack.play()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    try { audioTrack.release() } catch (_: Exception) {}
+                }, (duration * 1000 + 100).toLong())
+            } catch (_: Exception) {}
+        }.start()
     } catch (_: Exception) {
     }
 }
@@ -890,6 +904,6 @@ private fun mergePours(stepsInput: List<co.coffeery.app.data.model.BrewStepDef>)
 }
 
 private fun createTempImageFile(context: Context): java.io.File {
-    val dir = context.externalCacheDir ?: context.cacheDir
+    val dir = context.cacheDir
     return java.io.File(dir, "brew_photo_${System.currentTimeMillis()}.jpg").apply { createNewFile() }
 }
