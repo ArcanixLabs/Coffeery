@@ -398,12 +398,12 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
                 item(key = "best", contentType = "best") { BestRecipeBanner(best!!, vm) }
             }
             grouped.forEach { (date, logs) ->
-                val dateLabel = when {
-                    date == LocalDate.now() -> stringResource(R.string.log_date_today)
-                    date == LocalDate.now().minusDays(1) -> stringResource(R.string.log_date_yesterday)
-                    else -> date.format(java.time.format.DateTimeFormatter.ofPattern("d MMMM", Locale.getDefault()))
-                }
                 stickyHeader(key = date.toString(), contentType = "header") {
+                    val dateLabel = when {
+                        date == LocalDate.now() -> stringResource(R.string.log_date_today)
+                        date == LocalDate.now().minusDays(1) -> stringResource(R.string.log_date_yesterday)
+                        else -> date.format(java.time.format.DateTimeFormatter.ofPattern("d MMMM", Locale.getDefault()))
+                    }
                     Box(modifier = Modifier.fillMaxWidth().background(CoffeeTheme.colors.background).padding(start = 2.dp, top = 4.dp, bottom = 4.dp)) {
                         AppText(dateLabel, style = CoffeeTheme.type.label, color = colors.textSecondary)
                     }

@@ -163,17 +163,17 @@ fun BloomHero(
         Spacer(Modifier.height(8.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Chip(
-                label = "${result.coffeeGrams.let { co.coffeery.app.util.Format.grams(it) }} g",
+                text = "${result.coffeeGrams.let { co.coffeery.app.util.Format.grams(it) }} g",
                 background = colors.accentSoft,
                 textColor = colors.accent,
             )
             Chip(
-                label = "${result.waterMl} ml",
+                text = "${result.waterMl} ml",
                 background = colors.accentSoft,
                 textColor = colors.accent,
             )
             Chip(
-                label = if (result.tempCelsius > 0) "${result.tempCelsius}°C" else result.grind.name.lowercase(),
+                text = if (result.tempCelsius > 0) "${result.tempCelsius}°C" else result.grind.name.lowercase(),
                 background = colors.surface,
                 textColor = colors.textSecondary,
             )

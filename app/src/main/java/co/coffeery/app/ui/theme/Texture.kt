@@ -6,6 +6,7 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import java.util.Random
 
 fun Modifier.coffeeBackground(colors: CoffeeColors): Modifier = this

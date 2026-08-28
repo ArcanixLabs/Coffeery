@@ -61,6 +61,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -75,6 +76,7 @@ import co.coffeery.app.data.local.BrewLogEntity
 import co.coffeery.app.service.TimerService
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.AppTextField
+import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.CoffeeDialog
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.Glyph
