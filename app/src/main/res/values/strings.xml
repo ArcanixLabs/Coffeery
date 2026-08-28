@@ -1453,7 +1453,7 @@
     <!-- ===== v5 new drinks ===== -->
     <string name="drink_shakerato_name">Shakerato</string>
     <string name="drink_shakerato_summary">Italian iced shaken espresso — frothy, sweet, cocktail-shaken</string>
-    <string name="drink_shakerato_body">Italy's summer cocktail without alcohol: a double espresso shaken hard over ice with sugar, strained into a chilled coupe glass. The shake emulsifies sugars and crema into a dense, pale, frothy cap that looks like a shaken daiquiri. Served without ice in the glass, sipped like a dessert.
+    <string name="drink_shakerato_body">Italy\'s summer cocktail without alcohol: a double espresso shaken hard over ice with sugar, strained into a chilled coupe glass. The shake emulsifies sugars and crema into a dense, pale, frothy cap that looks like a shaken daiquiri. Served without ice in the glass, sipped like a dessert.
 
 Ingredients:
 • Double espresso (~50–60 ml)
@@ -1467,7 +1467,7 @@ Steps:
 4. Strain into the chilled glass — no ice in the final serve.</string>
     <string name="drink_tonic_name">Espresso Tonic</string>
     <string name="drink_tonic_summary">Scandinavian espresso over tonic water — bitter, fizzy, refreshing</string>
-    <string name="drink_tonic_body">Born in Scandinavia's third-wave cafes: cold tonic water topped with a floating shot of espresso. The tonic's quinine bitterness amplifies espresso's fruit, and the carbonation lifts aromatics. Serve in a highball over large ice, never stirred — the cascading layers are the theatre.
+    <string name="drink_tonic_body">Born in Scandinavia\'s third-wave cafes: cold tonic water topped with a floating shot of espresso. The tonic\'s quinine bitterness amplifies espresso\'s fruit, and the carbonation lifts aromatics. Serve in a highball over large ice, never stirred — the cascading layers are the theatre.
 
 Ingredients:
 • 150 ml quality tonic water
@@ -1480,7 +1480,7 @@ Steps:
 3. Garnish with citrus twist. Stir only before sipping.</string>
     <string name="drink_kaapi_name">South Indian Kaapi</string>
     <string name="drink_kaapi_summary">South Indian filter kaapi — decoction with jaggery and frothed milk</string>
-    <string name="drink_kaapi_body">South India's daily ritual: strong decoction from a stainless-steel filter, cut with jaggery and hot frothed milk, then poured between two tumblers (dhavara) to aerate into foam. Earthy, sweet, and deeply comforting.
+    <string name="drink_kaapi_body">South India\'s daily ritual: strong decoction from a stainless-steel filter, cut with jaggery and hot frothed milk, then poured between two tumblers (dhavara) to aerate into foam. Earthy, sweet, and deeply comforting.
 
 Ingredients:
 • 15–20 g South Indian filter coffee (chicory blend optional)
@@ -1495,7 +1495,7 @@ Steps:
 4. Pour between dhavara and tumbler from height to create foam. Serve hot.</string>
     <string name="drink_oliang_name">Oliang</string>
     <string name="drink_oliang_summary">Thai traditional coffee — dark roast with corn, soy, sesame, brewed in a cloth bag</string>
-    <string name="drink_oliang_body">Thailand's street coffee since the 1950s: dark robusta roasted with corn, soybeans and sesame, brewed through a long muslin “sock” (thung tong) and sweetened with condensed milk. Served hot or over ice as oliang yok lor.
+    <string name="drink_oliang_body">Thailand\'s street coffee since the 1950s: dark robusta roasted with corn, soybeans and sesame, brewed through a long muslin “sock” (thung tong) and sweetened with condensed milk. Served hot or over ice as oliang yok lor.
 
 Ingredients:
 • 15–20 g oliang blend (dark robusta + corn/soy mix)
@@ -1534,7 +1534,7 @@ Steps:
 3. Strain and serve in finjan cups with dates. No sugar in the pot — guests add if wanted.</string>
     <string name="drink_gibraltar_name">Gibraltar</string>
     <string name="drink_gibraltar_summary">Blue Bottle Gibraltar — double ristretto with ~85 ml microfoam in a 4.5 oz glass</string>
-    <string name="drink_gibraltar_body">Blue Bottle's San Francisco creation named after the 4.5 oz Libbey Gibraltar glass it's served in: a double ristretto cut with velvety steamed milk, stronger and smaller than a cortado with a Gibraltar tumbler's thick walls trapping heat.
+    <string name="drink_gibraltar_body">Blue Bottle\'s San Francisco creation named after the 4.5 oz Libbey Gibraltar glass it\'s served in: a double ristretto cut with velvety steamed milk, stronger and smaller than a cortado with a Gibraltar tumbler\'s thick walls trapping heat.
 
 Ingredients:
 • Double ristretto (~30 ml)
@@ -1546,7 +1546,7 @@ Steps:
 2. Steam milk to latte microfoam, pour to integrate. Serve immediately.</string>
     <string name="drink_raf_name">Raf Coffee</string>
     <string name="drink_raf_summary">Russian Raf — espresso with vanilla sugar and cream steamed together</string>
-    <string name="drink_raf_body">Moscow's late-90s café hit: espresso, vanilla sugar and light cream steamed together until silky and sweet — thicker than a latte, lighter than a breve, with a soufflé-like vanilla aroma.
+    <string name="drink_raf_body">Moscow\'s late-90s café hit: espresso, vanilla sugar and light cream steamed together until silky and sweet — thicker than a latte, lighter than a breve, with a soufflé-like vanilla aroma.
 
 Ingredients:
 • 1 shot espresso (~30 ml)
@@ -1559,7 +1559,7 @@ Steps:
 3. Pour into a cup — should be uniformly creamy with no separate foam cap.</string>
     <string name="drink_melange_name">Wiener Melange</string>
     <string name="drink_melange_summary">Viennese Melange — mild coffee topped with hot frothed milk, like a local cappuccino</string>
-    <string name="drink_melange_body">Vienna's answer to the cappuccino: mild, light-roast coffee topped with hot frothed milk and sometimes whipped cream, traditionally served on a silver tray with a glass of water.
+    <string name="drink_melange_body">Vienna\'s answer to the cappuccino: mild, light-roast coffee topped with hot frothed milk and sometimes whipped cream, traditionally served on a silver tray with a glass of water.
 
 Ingredients:
 • 60 ml mild brewed coffee or lungo

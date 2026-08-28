@@ -1417,17 +1417,17 @@
 
     <!-- ===== v5 god-tier depth l86-l100 ===== -->
     <string name="learn_l86_title">Anaerobik Genişletilmiş: pH, Basınç ve LAB Kontrolü</string>
-    <string name="learn_l86_body">Kapalı anaerobik tanklar laktik asit bakterilerinin oksijensiz baskın olmasını sağlar: ilk 48 saatte pH'ı 3.9 üzerinde tutun ki sirkemsi aşırı asiditeyi önleyin, sonra tropikal meyve esterleri için 3.5–3.7'ye salın. 1–2 bar CO2 ile hafif basınçlayın ve sıcaklığı 18–22°C'de tutun; her +5°C mikrobiyal aktiviteyi yaklaşık iki katına çıkarır ve boozemsi kusur riski doğar. Her 12 saatte bir tadın — ananas/mango zirveyi gösterir; oje veya soğan aşımı gösterir.</string>
+    <string name="learn_l86_body">Kapalı anaerobik tanklar laktik asit bakterilerinin oksijensiz baskın olmasını sağlar: ilk 48 saatte pH\'ı 3.9 üzerinde tutun ki sirkemsi aşırı asiditeyi önleyin, sonra tropikal meyve esterleri için 3.5–3.7\'ye salın. 1–2 bar CO2 ile hafif basınçlayın ve sıcaklığı 18–22°C\'de tutun; her +5°C mikrobiyal aktiviteyi yaklaşık iki katına çıkarır ve boozemsi kusur riski doğar. Her 12 saatte bir tadın — ananas/mango zirveyi gösterir; oje veya soğan aşımı gösterir.</string>
     <string name="learn_l87_title">Terazi Kalibrasyonu: 0.1 g Tekrarlanabilirlik</string>
-    <string name="learn_l87_body">15 dolarlık terazi eğim, ısınma veya zayıf pille 0.3–0.5 g sapabilir — 15 g dozu %3 kaydırmaya ve ekstraksiyonu ~%0.4 oynatmaya yeter. Aylık 100 g veya 500 g ağırlıkla kalibre edin, demleyiciyi tavaya koyup daralayın ve asla sıcak terazide demlemeyin. Pour-over'da suyu dökerken tartın; akış hesapları kümülatif kütleye dayanır.</string>
+    <string name="learn_l87_body">15 dolarlık terazi eğim, ısınma veya zayıf pille 0.3–0.5 g sapabilir — 15 g dozu %3 kaydırmaya ve ekstraksiyonu ~%0.4 oynatmaya yeter. Aylık 100 g veya 500 g ağırlıkla kalibre edin, demleyiciyi tavaya koyup daralayın ve asla sıcak terazide demlemeyin. Pour-over\'da suyu dökerken tartın; akış hesapları kümülatif kütleye dayanır.</string>
     <string name="learn_l88_title">Su Kimyası: Mg ve Ca</string>
-    <string name="learn_l88_body">Magnezyum (Mg2+) lezzet bileşiklerini kalsiyumdan (Ca2+) daha agresif bağlar, parlaklık ve meyve netliğini artırır ama toplam sertlik 120 ppm'i geçerse burukluğu da artırır. Kalsiyum kremsi gövde ekler ve asiditeyi yumuşatır, çikolatalı Brezilyalarda idealdir ama yıkanmış Etiyopyalarda donuklaştırır. Filtre netliği için 2:1 Mg:Ca deneyin.</string>
+    <string name="learn_l88_body">Magnezyum (Mg2+) lezzet bileşiklerini kalsiyumdan (Ca2+) daha agresif bağlar, parlaklık ve meyve netliğini artırır ama toplam sertlik 120 ppm\'i geçerse burukluğu da artırır. Kalsiyum kremsi gövde ekler ve asiditeyi yumuşatır, çikolatalı Brezilyalarda idealdir ama yıkanmış Etiyopyalarda donuklaştırır. Filtre netliği için 2:1 Mg:Ca deneyin.</string>
     <string name="learn_l89_title">SCA Kupaj Protokolü, Adım Adım</string>
-    <string name="learn_l89_body">SCA 2024 CVA kupajı: 150 ml'ye 8.25 g, 92–94°C, öğütümden 15 dk sonra koku, tam 4:00'te kabuğu kırıp içine çekin, sıyırın, sonra 8. dakikada ve 35°C'ye soğurken tadın. Koku, aroma, lezzet, bitiş, asidite, gövde, tekdüzelik, temiz fincan, tatlılık ve geneli puanlayın. Karşılaştırma anlamlı olsun diye öğütüm, su ve kavrum aynı olmalı.</string>
+    <string name="learn_l89_body">SCA 2024 CVA kupajı: 150 ml\'ye 8.25 g, 92–94°C, öğütümden 15 dk sonra koku, tam 4:00\'te kabuğu kırıp içine çekin, sıyırın, sonra 8. dakikada ve 35°C\'ye soğurken tadın. Koku, aroma, lezzet, bitiş, asidite, gövde, tekdüzelik, temiz fincan, tatlılık ve geneli puanlayın. Karşılaştırma anlamlı olsun diye öğütüm, su ve kavrum aynı olmalı.</string>
     <string name="learn_l90_title">Kusur Tatları: Fenol, Patates, Fermante, Çuval</string>
     <string name="learn_l90_body">Fenolik (eczamsı, iyot) Rio/aşırı fermantasyon veya kirli sudan; patates kusuru antestia böceği bakterisinden Ruandalarda çiğ patates kokusudur — tek kusurlu çekirdek bir demliği mahveder. Fermante/sirke olgun hasatın tatlı-ekşi bozası; çuval/çuha tadı %12 üstü nem veya Aw 0.65 üstü past-crop saklamadan gelir.</string>
     <string name="learn_l91_title">Espresso Basınç Profillemesi</string>
-    <string name="learn_l91_body">Sabit 9 bar'ın ötesinde profilleme ekstraksiyon aşamalarını şekillendirir: doyurma için 2–3 bar ön infüzyon 8–12 sn, akış için 9 bar'a rampa, sonra kuyruk acılığını önlemek için sararma başlayınca 6 bar'a düşüş. Daha düşük zirve (6–7 bar) tatlılığı vurgular ve açık kavrumlarda kanallanmayı azaltır. Akış kontrol kitleri 1.5–2.0 ml/sn sabitletir — profillerken verimi kütleyle ölçün.</string>
+    <string name="learn_l91_body">Sabit 9 bar\'ın ötesinde profilleme ekstraksiyon aşamalarını şekillendirir: doyurma için 2–3 bar ön infüzyon 8–12 sn, akış için 9 bar\'a rampa, sonra kuyruk acılığını önlemek için sararma başlayınca 6 bar\'a düşüş. Daha düşük zirve (6–7 bar) tatlılığı vurgular ve açık kavrumlarda kanallanmayı azaltır. Akış kontrol kitleri 1.5–2.0 ml/sn sabitletir — profillerken verimi kütleyle ölçün.</string>
     <string name="learn_l92_title">Öğütücü Hizalama ve Alıştırma</string>
     <string name="learn_l92_body">Hizasız dişliler kör dişli gibi bimodal kuyruk üretir: düz dişlileri marker testiyle kontrol edin ve %95+ temas için şimleyin. Yeni dişliler 3–8 kg alıştırma ister — ilk kilolar metalik tadar ve fazla ince toz üretir; dişli alışana kadar 1–2 klik kalınlaştırın.</string>
     <string name="learn_l93_title">Yeşil Saklama: Su Aktivitesi</string>
@@ -1435,21 +1435,21 @@
     <string name="learn_l94_title">Kavurma Gelişimi: ROR ve DTR</string>
     <string name="learn_l94_body">Artış Hızı (ROR, °C/dk) kurutma, Maillard ve gelişim boyunca düzgün azalmalı; birinci çatlaktaki çöküş veya fırlama profili fırınlar veya yakar. Gelişim Süresi Oranı (DTR) = gelişim süresi / toplam süre: yıkanmış Etiyopyalar için %18–22, ballı/naturaller için %22–26 idealdir.</string>
     <string name="learn_l95_title">Süt Kimyası ve Köpük Fiziği</string>
-    <string name="learn_l95_body">Köpük stabilitesi hava kabarcıklarını saran denatüre whey proteinlerinden gelir: sütü sadece 37°C altındayken gerin (hava enjekte), sonra parlatmak için döndürün. Yağ köpüğü bozar — tam yağlı süt daha ipeksi ama kısa ömürlüdür. Asla 65°C'yi aşmayın; 70°C üstünde proteinler sıkılaşır ve köpük sabunsu olur.</string>
+    <string name="learn_l95_body">Köpük stabilitesi hava kabarcıklarını saran denatüre whey proteinlerinden gelir: sütü sadece 37°C altındayken gerin (hava enjekte), sonra parlatmak için döndürün. Yağ köpüğü bozar — tam yağlı süt daha ipeksi ama kısa ömürlüdür. Asla 65°C\'yi aşmayın; 70°C üstünde proteinler sıkılaşır ve köpük sabunsu olur.</string>
     <string name="learn_l96_title">Duyusal Kalibrasyon: Triangülasyon</string>
-    <string name="learn_l96_body">Profesyonel damaklar kalibre edilir: üçgen testleri (iki aynı, bir farklı) kör yapın; 9'da 7 doğru istatistiksel olarak anlamlıdır. Sitrik, malik, asetik asit ve sakaroz referans kitleri kurun ve haftalık tadın.</string>
+    <string name="learn_l96_body">Profesyonel damaklar kalibre edilir: üçgen testleri (iki aynı, bir farklı) kör yapın; 9\'da 7 doğru istatistiksel olarak anlamlıdır. Sitrik, malik, asetik asit ve sakaroz referans kitleri kurun ve haftalık tadın.</string>
     <string name="learn_l97_title">Kafein Farmakokinetiği</string>
     <string name="learn_l97_body">Kafein yarılanma ömrü ortalama 5–6 saat ama CYP1A2 geni hızlı ve yavaş metabolize edenleri ayırır: AA taşıyıcılar ~3 saatte, AC/CC 6–8 saatte temizler. Tolerans adenozin reseptör artışıyla oluşur — 7 günlük arınma hassasiyeti sıfırlar. Güvenli üst limit günde 400 mg.</string>
     <string name="learn_l98_title">Refraktometri: Ölçerek Ustalaş</string>
-    <string name="learn_l98_body">300 dolarlık refraktometre tahmini veriye dönüştürür: TDS ölçün, sonra Ekstraksiyon Verimi = TDS × içecek kütlesi / doz hesaplayın. Filtre 1.15–1.55% TDS ve %18–22 verim; espresso 8–12% TDS ve %18–22 verim hedefleyin. Numuneleri 25°C'ye soğutun ve her shot'ı SCA tablosuna işleyin.</string>
+    <string name="learn_l98_body">300 dolarlık refraktometre tahmini veriye dönüştürür: TDS ölçün, sonra Ekstraksiyon Verimi = TDS × içecek kütlesi / doz hesaplayın. Filtre 1.15–1.55% TDS ve %18–22 verim; espresso 8–12% TDS ve %18–22 verim hedefleyin. Numuneleri 25°C\'ye soğutun ve her shot\'ı SCA tablosuna işleyin.</string>
     <string name="learn_l99_title">Laktik ve Yıkanmış Uzatılmış Fermantasyon</string>
-    <string name="learn_l99_body">Laktik inokülasyon Lactobacillus ekerek 36–72 saatte kremsi, yoğurt benzeri asidite üretir — spontan anaerobik funk'tan daha temizdir. Yıkanmış uzatılmış (anaerobik yıkanmış) kirazı CO2 altında 48–96 saat suda fermente eder, natural ağırlığı olmadan katmanlı meyve ekler.</string>
+    <string name="learn_l99_body">Laktik inokülasyon Lactobacillus ekerek 36–72 saatte kremsi, yoğurt benzeri asidite üretir — spontan anaerobik funk\'tan daha temizdir. Yıkanmış uzatılmış (anaerobik yıkanmış) kirazı CO2 altında 48–96 saat suda fermente eder, natural ağırlığı olmadan katmanlı meyve ekler.</string>
     <string name="learn_l100_title">Yarışma Kahvesi: WBC İmza İçeceği</string>
     <string name="learn_l100_body">Dünya Barista Şampiyonası 15 dakikada 4 espresso, 4 sütlü içecek ve 4 imza içeceği ister — imza alkolsüz ve espresso bazlı olmalı. Şampiyonlar Berg Wu ve Diego Campos çiçeksi maksimum için karbonik Gesha ve hassas 1:2.15 verim kullandı.</string>
 
     <string name="drink_shakerato_name">Shakerato</string>
     <string name="drink_shakerato_summary">İtalyan buzlu çalkalanmış espresso — köpüklü, tatlı, kokteyl gibi</string>
-    <string name="drink_shakerato_body">İtalya'nın alkolsüz yaz kokteyli: buz ve şekerle sertçe çalkalanmış double espresso, soğutulmuş coupe bardağa süzülür. Çalkalama şeker ve kremayı yoğun, soluk, köpüklü bir kaba emülsifiye eder.
+    <string name="drink_shakerato_body">İtalya\'nın alkolsüz yaz kokteyli: buz ve şekerle sertçe çalkalanmış double espresso, soğutulmuş coupe bardağa süzülür. Çalkalama şeker ve kremayı yoğun, soluk, köpüklü bir kaba emülsifiye eder.
 
 Malzemeler:
 • Double espresso (~50–60 ml)
@@ -1458,11 +1458,11 @@ Malzemeler:
 
 Hazırlanışı:
 1. Coupe bardağı soğutun.
-2. Double espresso, buz ve şekeri shaker'da 15–20 sn çalkalayın.
+2. Double espresso, buz ve şekeri shaker\'da 15–20 sn çalkalayın.
 3. Soğutulmuş bardağa süzün — finalde buz olmaz.</string>
     <string name="drink_tonic_name">Espresso Tonic</string>
     <string name="drink_tonic_summary">İskandinav espresso tonik — acı, gazlı, ferahlatıcı</string>
-    <string name="drink_tonic_body">İskandinav üçüncü dalga kafelerinden: soğuk tonik üzerine yüzen espresso shot'ı. Toniğin kinin acılığı meyveyi güçlendirir, gaz aromaları taşır.
+    <string name="drink_tonic_body">İskandinav üçüncü dalga kafelerinden: soğuk tonik üzerine yüzen espresso shot\'ı. Toniğin kinin acılığı meyveyi güçlendirir, gaz aromaları taşır.
 
 Malzemeler:
 • 150 ml tonik
@@ -1475,7 +1475,7 @@ Hazırlanışı:
 3. Narenciye ile süsleyin.</string>
     <string name="drink_kaapi_name">Güney Hindistan Kaapi</string>
     <string name="drink_kaapi_summary">Güney Hindistan filtre kaapisi — jaggery ve köpürtülmüş sütlü konsantre</string>
-    <string name="drink_kaapi_body">Güney Hindistan'ın günlük ritüeli: çelik filtreden güçlü konsantre, jaggery ve sıcak köpürtülmüş sütle kesilir, sonra köpük için iki bardak arasında dökülür.
+    <string name="drink_kaapi_body">Güney Hindistan\'ın günlük ritüeli: çelik filtreden güçlü konsantre, jaggery ve sıcak köpürtülmüş sütle kesilir, sonra köpük için iki bardak arasında dökülür.
 
 Malzemeler:
 • 15–20 g Güney Hindistan filtre kahvesi
@@ -1489,7 +1489,7 @@ Hazırlanışı:
 4. Köpük için yüksekten iki kap arasında dökün.</string>
     <string name="drink_oliang_name">Oliang</string>
     <string name="drink_oliang_summary">Tay usulü geleneksel kahve — mısır, soya, susamla koyu kavrum, bez torbada</string>
-    <string name="drink_oliang_body">1950'lerden beri Tay sokak kahvesi: mısır, soya ve susamla kavrulmuş koyu robusta, uzun muslin torbadan süzülür ve yoğunlaştırılmış sütle tatlandırılır.
+    <string name="drink_oliang_body">1950\'lerden beri Tay sokak kahvesi: mısır, soya ve susamla kavrulmuş koyu robusta, uzun muslin torbadan süzülür ve yoğunlaştırılmış sütle tatlandırılır.
 
 Malzemeler:
 • 15–20 g oliang harmanı
@@ -1528,7 +1528,7 @@ Hazırlanışı:
 3. Süzüp fincanda hurmayla servis edin.</string>
     <string name="drink_gibraltar_name">Gibraltar</string>
     <string name="drink_gibraltar_summary">Blue Bottle Gibraltar — 4.5 oz bardakta double ristretto ve ~85 ml mikro köpük</string>
-    <string name="drink_gibraltar_body">Blue Bottle'ın San Francisco icadı: 4.5 oz Gibraltar bardağında double ristretto ve kadifemsi süt, cortadodan daha güçlüdür.
+    <string name="drink_gibraltar_body">Blue Bottle\'ın San Francisco icadı: 4.5 oz Gibraltar bardağında double ristretto ve kadifemsi süt, cortadodan daha güçlüdür.
 
 Malzemeler:
 • Double ristretto (~30 ml)
@@ -1539,19 +1539,19 @@ Hazırlanışı:
 2. Sütü latte mikro köpüğü kıvamında buharlayıp üzerine dökün.</string>
     <string name="drink_raf_name">Raf Kahve</string>
     <string name="drink_raf_summary">Rus Raf — vanilya şekeri ve kremanın birlikte buharlandığı espresso</string>
-    <string name="drink_raf_body">Moskova'nın 90'lar kafe hiti: espresso, vanilya şekeri ve krema birlikte 60–65°C'ye buharlanır.
+    <string name="drink_raf_body">Moskova\'nın 90\'lar kafe hiti: espresso, vanilya şekeri ve krema birlikte 60–65°C\'ye buharlanır.
 
 Malzemeler:
 • 1 shot espresso (~30 ml)
 • 150 ml krema (%10–15 yağ), 1 tk vanilya şekeri
 
 Hazırlanışı:
-1. Espresso, vanilya şekeri ve kremayı aynı pitcher'a koyun.
-2. 60–65°C'ye birlikte buharlayın.
+1. Espresso, vanilya şekeri ve kremayı aynı pitcher\'a koyun.
+2. 60–65°C\'ye birlikte buharlayın.
 3. Fincana dökün — tek tip kremsi olmalı.</string>
     <string name="drink_melange_name">Wiener Melange</string>
     <string name="drink_melange_summary">Viyana Melange — sıcak köpürtülmüş sütlü hafif kahve</string>
-    <string name="drink_melange_body">Viyana'nın cappuccino cevabı: hafif kahve üzerine sıcak köpürtülmüş süt, bazen krem şanti.
+    <string name="drink_melange_body">Viyana\'nın cappuccino cevabı: hafif kahve üzerine sıcak köpürtülmüş süt, bazen krem şanti.
 
 Malzemeler:
 • 60 ml hafif kahve veya lungo
@@ -1577,13 +1577,13 @@ Hazırlanışı:
     <string name="glossary_term_81">Ristretto vs Lungo</string>
     <string name="glossary_def_81">Ristretto 1:1–1:1.5 ile tatlılık için kısıtlar; lungo 1:3+ ile berraklık için uzatır. Aynı doz, ekstraksiyonun zıt uçları.</string>
     <string name="glossary_term_82">Ön Infüzyon</string>
-    <string name="glossary_def_82">Tam 9 bar öncesi 2–4 bar'da 5–12 sn düşük basınç ıslatma. Diski eşit doyurur, kanallanmayı azaltır.</string>
+    <string name="glossary_def_82">Tam 9 bar öncesi 2–4 bar\'da 5–12 sn düşük basınç ıslatma. Diski eşit doyurur, kanallanmayı azaltır.</string>
     <string name="glossary_term_83">Basınç Profillemesi</string>
-    <string name="glossary_def_83">Espresso shot'ı boyunca değişken basınç — düşük ön infüzyon, 9 bar'a rampa, sonra 6 bar'a düşüş. Tatlılığı veya gövdeyi şekillendirir.</string>
+    <string name="glossary_def_83">Espresso shot\'ı boyunca değişken basınç — düşük ön infüzyon, 9 bar\'a rampa, sonra 6 bar\'a düşüş. Tatlılığı veya gövdeyi şekillendirir.</string>
     <string name="glossary_term_84">Su Aktivitesi (Aw) Derin</string>
     <string name="glossary_def_84">Yeşil kahvede serbest su; küf veya odunsulaşmayı önlemek için hermetik torbada Aw 0.53–0.59, 15–22°C koruyun.</string>
     <string name="glossary_term_85">Gelişim Süresi Oranı (DTR)</string>
-    <string name="glossary_def_85">Birinci çatlaktan sonraki sürenin toplam süreye oranı. Yıkanmış Etiyopyalar %18–22 DTR'da çiçeksi; naturaller %22–26'da daha gövdeli.</string>
+    <string name="glossary_def_85">Birinci çatlaktan sonraki sürenin toplam süreye oranı. Yıkanmış Etiyopyalar %18–22 DTR\'da çiçeksi; naturaller %22–26\'da daha gövdeli.</string>
     <string name="glossary_term_86">Artış Hızı (ROR)</string>
     <string name="glossary_def_86">Kavurma sırasında dakika başına çekirdek sıcaklık artışı. Düzgün azalan ROR temiz fincanı öngörür.</string>
     <string name="glossary_term_87">Microlot ve Nanolot</string>
@@ -1591,28 +1591,28 @@ Hazırlanışı:
     <string name="glossary_term_88">CYP1A2</string>
     <string name="glossary_def_88">Kafein metabolizma hızını belirleyen karaciğer enzimi geni. AA hızlı, AC/CC yavaş — aynı doza farklı uyku hassasiyeti.</string>
     <string name="glossary_term_89">Triangülasyon</string>
-    <string name="glossary_def_89">İki aynı, bir farklı üçgen testiyle kör kalibrasyon. 9'da 7 doğru anlamlıdır ve ayrımı hızla eğitir.</string>
+    <string name="glossary_def_89">İki aynı, bir farklı üçgen testiyle kör kalibrasyon. 9\'da 7 doğru anlamlıdır ve ayrımı hızla eğitir.</string>
     <string name="glossary_term_90">Dara Sapması</string>
     <string name="glossary_def_90">Isı, eğim veya zayıf pilden 0.3–0.5 g sapma. Aylık 100–500 g ile kalibre edin, doz öncesi kapat-aç yapın.</string>
     <string name="glossary_term_91">GrainPro</string>
     <string name="glossary_def_91">Yeşil kahveyi 9–12 ay stabil Aw ve nemde tutan hermetik bariyer torba. Nemli kökenlerde şarttır.</string>
     <string name="glossary_term_92">SCA CVA</string>
-    <string name="glossary_def_92">Coffee Value Assessment, SCA'nın 100 puanlık formun 2023 halefi. Betimleyici ile hedonik puanlamayı ayırır.</string>
+    <string name="glossary_def_92">Coffee Value Assessment, SCA\'nın 100 puanlık formun 2023 halefi. Betimleyici ile hedonik puanlamayı ayırır.</string>
     <string name="glossary_term_93">Q-Grader Genişletilmiş</string>
     <string name="glossary_def_93">22 SCA sınavını geçen sertifikalı tadımcı. Artık fenol, patates ve fermante kusurlarını kör tespit eder.</string>
     <string name="glossary_term_94">Refraktometre</string>
     <string name="glossary_def_94">Işık kırılmasıyla TDS ölçen optik cihaz. Ekstraksiyon Verimi = TDS × içecek kütlesi / doz ile kullanılır.</string>
     <string name="glossary_term_95">Bypass Demleme</string>
     <string name="glossary_def_95">Kontrollü bypass güçlü konsantreyi seyreltir; kontrolsüz bypass filtre kenarından zayıflatır.</string>
-    <string name="pro_tip_51">Shakerato püf noktası: önce shaker'ı buzla soğutup suyu dökün, sonra taze buz ve sıcak espresso ekleyin.</string>
+    <string name="pro_tip_51">Shakerato püf noktası: önce shaker\'ı buzla soğutup suyu dökün, sonra taze buz ve sıcak espresso ekleyin.</string>
     <string name="pro_tip_52">Espresso tonik için gerçek kininli ve az şekerli kaliteli tonik kullanın. Fever-Tree meyveyi öne çıkarır.</string>
     <string name="pro_tip_53">Kaapi konsantresi Güney Hindistan filtresinde tam 10 dakika süzülürse güzelleşir. Acele ekşi ve ince verir.</string>
     <string name="pro_tip_54">Oliang bez torba: ilk demlemeden önce 30 sn kaynar suda bekletin. Kuru bez ısı çalar.</string>
     <string name="pro_tip_55">Anaerobik naturalları ayarlarken yıkanmış tarifinizden 2°C soğuk başlayın. Fermante kahveler daha hızlı çözünür.</string>
-    <string name="pro_tip_56">Refraktometre hijyeni: prizmayı saf suyla durulayıp kurutun, sonra sıfırlayın. Yağ TDS'yi %0.05 kaydırır.</string>
+    <string name="pro_tip_56">Refraktometre hijyeni: prizmayı saf suyla durulayıp kurutun, sonra sıfırlayın. Yağ TDS\'yi %0.05 kaydırır.</string>
     <string name="pro_tip_57">Raf kahve kremayı ayrı buharlarsanız olmaz. Sihir hepsini birlikte buharlamaktır.</string>
     <string name="pro_tip_58">Gibraltar ve cortado farkı bardak kalınlığıdır. Kalın Gibraltar ısıyı tutar, shot 30 sn tatlı kalır.</string>
-    <string name="pro_tip_59">Körfez kahvesi asla kaynatılmaz. 85–92°C'de kapağı aralık 15 dk demleyin — kaynama kakuleyi uçurur.</string>
+    <string name="pro_tip_59">Körfez kahvesi asla kaynatılmaz. 85–92°C\'de kapağı aralık 15 dk demleyin — kaynama kakuleyi uçurur.</string>
     <string name="pro_tip_60">Kyoto cold drip: önce buz olmadan saniyede 1 damlayı ayarlayın, sonra buzu ekleyin.</string>
 
 </resources>
