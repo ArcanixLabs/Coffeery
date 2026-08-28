@@ -23,5 +23,5 @@ data class CoffeeSpacing(
     val xxl: Dp = 32.dp,
 )
 
-private val DefaultSpacing = CoffeeSpacing()
+val DefaultSpacing = CoffeeSpacing()
 val LocalCoffeeSpacing = staticCompositionLocalOf { DefaultSpacing }
