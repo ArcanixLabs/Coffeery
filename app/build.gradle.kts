@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application") version "8.13.2"
     id("org.jetbrains.kotlin.android") version "2.3.0"
@@ -16,6 +19,15 @@ android {
         versionCode = 6
         versionName = "3.0.1"
         vectorDrawables { useSupportLibrary = true }
+        val props = Properties()
+        val localPropsFile = rootProject.file("local.properties")
+        if (localPropsFile.exists()) {
+            FileInputStream(localPropsFile).use { props.load(it) }
+        }
+        val googleId = props.getProperty("google_server_client_id")
+            ?: System.getenv("GOOGLE_SERVER_CLIENT_ID")
+            ?: "196980582414-fv03bbj1dba2g82t8jo37132gf3u9fbj.apps.googleusercontent.com"
+        buildConfigField("String", "GOOGLE_SERVER_CLIENT_ID", "\"$googleId\"")
     }
 
     signingConfigs {
@@ -85,6 +97,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.animation:animation")
+    implementation("androidx.compose.material3:material3")
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
@@ -97,7 +110,6 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.7.0")
 
     implementation("com.google.android.gms:play-services-auth:21.3.0")
-    implementation("com.google.android.gms:play-services-drive:17.0.0")
     implementation("com.google.api-client:google-api-client-android:2.7.2")
     implementation("com.google.apis:google-api-services-drive:v3-rev20240521-2.0.0")
     implementation("com.google.http-client:google-http-client-gson:1.45.3")

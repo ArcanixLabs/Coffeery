@@ -1,8 +1,6 @@
 package co.coffeery.app.ui.screens.log
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
@@ -177,8 +175,8 @@ private fun AchievementCard(achievement: Achievement, modifier: Modifier = Modif
     var showConfetti by remember { mutableStateOf(false) }
     LaunchedEffect(unlocked) {
         if (unlocked && !reduced) {
-            scale.animateTo(1.1f, animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow))
-            scale.animateTo(1f, animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow))
+            scale.animateTo(1.1f, animationSpec = CoffeeMotion.cardExpand)
+            scale.animateTo(1f, animationSpec = CoffeeMotion.cardExpand)
             showConfetti = true
         } else if (unlocked) {
             scale.snapTo(1f)

@@ -13,9 +13,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,8 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -34,6 +34,7 @@ import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 
 @Composable
 fun <T> SegmentedControl(
@@ -46,7 +47,7 @@ fun <T> SegmentedControl(
 ) {
     val colors = CoffeeTheme.colors
     val haptics = rememberAppHaptics()
-    val hapticFeedback = LocalHapticFeedback.current
+    val reduced = LocalPrefersReducedMotion.current
     Row(
         modifier = modifier
             .clip(CoffeeShapes.pill)
@@ -57,17 +58,21 @@ fun <T> SegmentedControl(
     ) {
         options.forEach { option ->
             val isSelected = option == selected
-            val animatedBg by animateColorAsState(targetValue = if (isSelected) colors.accent else colors.surface, animationSpec = tween(CoffeeMotion.normal), label = "segBg")
-            val animatedTextColor by animateColorAsState(targetValue = if (isSelected) colors.onAccent else colors.textSecondary, animationSpec = tween(CoffeeMotion.normal), label = "segText")
-            val animatedCaptionColor by animateColorAsState(targetValue = if (isSelected) colors.onAccent.copy(alpha = 0.7f) else colors.textSecondary.copy(alpha = 0.7f), animationSpec = tween(CoffeeMotion.normal), label = "segCaption")
+            val animatedBg by animateColorAsState(targetValue = if (isSelected) colors.accent else colors.surface, animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal), label = "segBg")
+            val animatedTextColor by animateColorAsState(targetValue = if (isSelected) colors.onAccent else colors.textSecondary, animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal), label = "segText")
+            val animatedCaptionColor by animateColorAsState(targetValue = if (isSelected) colors.onAccent.copy(alpha = 0.7f) else colors.textSecondary.copy(alpha = 0.7f), animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal), label = "segCaption")
+            val interactionSource = remember { MutableInteractionSource() }
+            val isPressed by interactionSource.collectIsPressedAsState()
+            val pressSx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
+            val pressSy by animateFloatAsState(targetValue = if (isPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "pressY")
             Box(
                 modifier = Modifier
                     .weight(1f)
+                    .graphicsLayer(scaleX = pressSx, scaleY = pressSy)
                     .clip(CoffeeShapes.pill)
                     .background(animatedBg)
-                    .clickable {
+                    .clickable(interactionSource = interactionSource, indication = null) {
                         haptics.segment()
-                        hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         onSelect(option)
                     }
                     .padding(vertical = if (subtitle != null) 10.dp else 12.dp),
@@ -112,7 +117,6 @@ fun Stepper(
 ) {
     val colors = CoffeeTheme.colors
     val haptics = rememberAppHaptics()
-    val hapticFeedback = LocalHapticFeedback.current
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
@@ -121,10 +125,8 @@ fun Stepper(
         StepButton("–", enabled = value > min) {
             if (value <= min) {
                 haptics.reject()
-                hapticFeedback.performHapticFeedback(HapticFeedbackType.Reject)
             } else {
                 haptics.tick()
-                hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 onChange((value - 1).coerceAtLeast(min))
             }
         }
@@ -136,10 +138,8 @@ fun Stepper(
         StepButton("+", enabled = value < max) {
             if (value >= max) {
                 haptics.reject()
-                hapticFeedback.performHapticFeedback(HapticFeedbackType.Reject)
             } else {
                 haptics.tick()
-                hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 onChange((value + 1).coerceAtMost(max))
             }
         }
@@ -181,18 +181,24 @@ fun AppTextField(
     singleLine: Boolean = true,
 ) {
     val colors = CoffeeTheme.colors
+    val reduced = LocalPrefersReducedMotion.current
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused by interactionSource.collectIsFocusedAsState()
+    val borderColor by animateColorAsState(targetValue = if (isFocused) colors.accent else colors.outline, animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal), label = "borderColor")
+    val borderWidth by animateDpAsState(targetValue = if (isFocused) 1.5.dp else 1.dp, animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal), label = "borderWidth")
     BasicTextField(
         value = value,
         onValueChange = onValueChange,
         modifier = modifier
             .clip(CoffeeShapes.small)
             .background(colors.surface)
-            .border(1.dp, colors.outline, CoffeeShapes.small)
+            .border(borderWidth, borderColor, CoffeeShapes.small)
             .padding(horizontal = 14.dp, vertical = 14.dp),
         singleLine = singleLine,
         textStyle = CoffeeTheme.type.body.merge(androidx.compose.ui.text.TextStyle(color = colors.textPrimary)),
         cursorBrush = SolidColor(colors.accent),
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+        interactionSource = interactionSource,
         decorationBox = { inner ->
             if (value.isEmpty()) {
                 AppText(text = hint, style = CoffeeTheme.type.body, color = colors.textSecondary)

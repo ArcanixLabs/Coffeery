@@ -26,8 +26,6 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.animation.animateColorAsState
@@ -41,6 +39,7 @@ import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 
 /** Custom bottom navigation. */
 @Composable
@@ -54,7 +53,7 @@ fun <T> BottomNav(
 ) {
     val colors = CoffeeTheme.colors
     val haptics = rememberAppHaptics()
-    val hapticFeedback = LocalHapticFeedback.current
+    val reduced = LocalPrefersReducedMotion.current
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -74,17 +73,17 @@ fun <T> BottomNav(
                 val isSelected = item == selected
                 val animatedColor by animateColorAsState(
                     targetValue = if (isSelected) colors.accent else colors.textSecondary,
-                    animationSpec = tween(CoffeeMotion.normal),
+                    animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal),
                     label = "navColor",
                 )
                 val animatedBgColor by animateColorAsState(
                     targetValue = if (isSelected) colors.accentSoft else colors.surface,
-                    animationSpec = tween(CoffeeMotion.normal),
+                    animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal),
                     label = "navBg",
                 )
                 val animatedScale by animateFloatAsState(
                     targetValue = if (isSelected) 1.1f else 1.0f,
-                    animationSpec = tween(CoffeeMotion.normal),
+                    animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal),
                     label = "navScale",
                 )
                 val interactionSource = remember { MutableInteractionSource() }
@@ -100,7 +99,6 @@ fun <T> BottomNav(
                             interactionSource = interactionSource,
                         ) {
                             haptics.segment()
-                            hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             onSelect(item)
                         },
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -169,13 +167,22 @@ fun ScreenHeader(
 @Composable
 fun BackButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     val colors = CoffeeTheme.colors
+    val haptics = rememberAppHaptics()
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val pressSx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
+    val pressSy by animateFloatAsState(targetValue = if (isPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "pressY")
     androidx.compose.foundation.layout.Box(
         modifier = modifier
             .sizeIn(minWidth = 48.dp, minHeight = 48.dp)
             .size(48.dp)
+            .graphicsLayer(scaleX = pressSx, scaleY = pressSy)
             .clip(CoffeeShapes.pill)
             .background(colors.surfaceElevated)
-            .clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) { onClick() },
+            .clickable(interactionSource = interactionSource, indication = null) {
+                haptics.tap()
+                onClick()
+            },
         contentAlignment = Alignment.Center,
     ) {
         Canvas(Modifier.size(20.dp)) {

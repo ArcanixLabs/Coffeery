@@ -1,10 +1,10 @@
 package co.coffeery.app.util
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import co.coffeery.app.BuildConfig
 import co.coffeery.app.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Tasks
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException
 import com.google.api.client.googleapis.json.GoogleJsonResponseException
+import com.google.api.client.http.HttpRequestInitializer
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.gson.GsonFactory
 import com.google.api.services.drive.Drive
@@ -29,12 +30,22 @@ import java.io.IOException
 
 @Suppress("DEPRECATION")
 class CloudBackupManager(private val context: Context) {
+
+    private val appContext: Context = context.applicationContext
+
     companion object {
-        private val httpTransport: NetHttpTransport by lazy { NetHttpTransport() }
+        private val httpTransport by lazy {
+            try {
+                @Suppress("DEPRECATION") // AndroidHttp.newCompatibleTransport uses deprecated Apache on old devices
+                com.google.api.client.extensions.android.http.AndroidHttp.newCompatibleTransport()
+            } catch (_: Exception) {
+                NetHttpTransport()
+            }
+        }
         private val jsonFactory by lazy { GsonFactory.getDefaultInstance() }
     }
 
-    private val prefs = context.getSharedPreferences("cloud", Context.MODE_PRIVATE)
+    private val prefs = appContext.getSharedPreferences("cloud", Context.MODE_PRIVATE)
 
     private var pendingRecoverableIntent: Intent? = null
 
@@ -46,18 +57,31 @@ class CloudBackupManager(private val context: Context) {
         pendingRecoverableIntent = null
     }
 
+    private fun clearSignInPrefs() {
+        prefs.edit().putBoolean("signed_in", false).remove("account_email").apply()
+    }
+
     class RecoverableAuthException(val intent: Intent, cause: Throwable) : IOException("Authorization required — please grant Drive permission", cause)
 
-    fun isSignedIn(): Boolean = prefs.getBoolean("signed_in", false) && GoogleSignIn.getLastSignedInAccount(context) != null
+    fun isSignedIn(): Boolean {
+        val flagged = prefs.getBoolean("signed_in", false)
+        val account = GoogleSignIn.getLastSignedInAccount(appContext)
+        if (flagged && account == null) {
+            clearSignInPrefs()
+            return false
+        }
+        return flagged && account != null
+    }
+
     fun getAccountEmail(): String? = prefs.getString("account_email", null)
 
     fun getProfilePhotoUrl(): android.net.Uri? {
-        val account = GoogleSignIn.getLastSignedInAccount(context)
+        val account = GoogleSignIn.getLastSignedInAccount(appContext)
         return account?.photoUrl
     }
 
     fun isPlayServicesAvailable(): Boolean {
-        val result = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context)
+        val result = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(appContext)
         return result == ConnectionResult.SUCCESS
     }
 
@@ -72,23 +96,43 @@ class CloudBackupManager(private val context: Context) {
                     .apply()
                 Result.success(account)
             } else {
-                Result.failure(Exception("Silent sign-in returned null"))
+                clearSignInPrefs()
+                Result.failure(Exception(appContext.getString(R.string.settings_cloud_error)))
             }
         } catch (e: ApiException) {
+            clearSignInPrefs()
             Result.failure(e)
         } catch (e: Exception) {
+            clearSignInPrefs()
             Result.failure(e)
         }
     }
 
     fun getSignInClient(): GoogleSignInClient {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        val resToken = try {
+            appContext.getString(R.string.google_server_client_id)
+        } catch (_: Exception) {
+            ""
+        }
+        val cfgToken = try {
+            BuildConfig.GOOGLE_SERVER_CLIENT_ID
+        } catch (_: Exception) {
+            ""
+        }
+        val token = when {
+            cfgToken.isNotBlank() && cfgToken != resToken -> cfgToken
+            resToken.isNotBlank() -> resToken
+            else -> cfgToken
+        }
+        val gsoBuilder = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .requestProfile()
-            .requestIdToken(context.getString(R.string.google_server_client_id))
             .requestScopes(Scope(DriveScopes.DRIVE_APPDATA))
-            .build()
-        return GoogleSignIn.getClient(context, gso)
+        if (token.isNotBlank()) {
+            gsoBuilder.requestIdToken(token)
+        }
+        val gso = gsoBuilder.build()
+        return GoogleSignIn.getClient(appContext, gso)
     }
 
     fun getSignInIntent(client: GoogleSignInClient): Intent = client.signInIntent
@@ -105,34 +149,44 @@ class CloudBackupManager(private val context: Context) {
                 Log.d("Coffeery", "Google Sign-In SUCCESS: ${account.email}")
                 onResult(true, account.email ?: "")
             } else {
-                onResult(false, "Account was null")
+                clearSignInPrefs()
+                onResult(false, appContext.getString(R.string.settings_cloud_error))
             }
         } catch (e: ApiException) {
+            clearSignInPrefs()
             val code = e.statusCode
             val msg = when (code) {
-                12500 -> "Error 12500: Check Support Email in GCC OAuth consent screen, and SHA-1 matches"
-                12501 -> "Error 12501: Sign-in cancelled or Web Client ID mismatch"
-                10 -> "Error 10: SHA-1 fingerprint mismatch. Run ./gradlew signingReport"
-                8 -> "Error 8: Network error. Check internet connection."
-                13 -> "Error 13: Play Services outdated. Update Google Play Services."
-                15 -> "Error 15: Wrong package name or SHA-1 in GCC"
-                else -> "Error $code: ${e.localizedMessage ?: "Unknown"}"
+                12500 -> appContext.getString(R.string.cloud_error_12500)
+                12501 -> appContext.getString(R.string.cloud_error_12501)
+                10 -> appContext.getString(R.string.cloud_error_10)
+                8 -> appContext.getString(R.string.cloud_error_8)
+                13 -> appContext.getString(R.string.cloud_error_13)
+                15 -> appContext.getString(R.string.cloud_error_15)
+                else -> appContext.getString(R.string.cloud_error_generic, code, e.localizedMessage ?: appContext.getString(R.string.cloud_error_unknown))
             }
             Log.e("Coffeery", "Google Sign-In FAILED: $msg", e)
-            Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+            Toast.makeText(appContext, msg, Toast.LENGTH_LONG).show()
             onResult(false, msg)
         } catch (e: Exception) {
-            val msg = "Error: ${e.javaClass.simpleName} — ${e.localizedMessage ?: "Unknown"}"
+            clearSignInPrefs()
+            val msg = appContext.getString(R.string.cloud_error_exception, e.javaClass.simpleName, e.localizedMessage ?: appContext.getString(R.string.cloud_error_unknown))
             Log.e("Coffeery", "Google Sign-In CRASH: $msg", e)
-            Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+            Toast.makeText(appContext, msg, Toast.LENGTH_LONG).show()
             onResult(false, msg)
         }
     }
 
     private fun buildDrive(account: GoogleSignInAccount, ctx: Context): Drive {
-        val credential = GoogleAccountCredential.usingOAuth2(ctx, listOf(DriveScopes.DRIVE_APPDATA))
+        @Suppress("DEPRECATION") // GoogleAccountCredential is deprecated but still required for DriveScopes.DRIVE_APPDATA
+        val credential = GoogleAccountCredential.usingOAuth2(appContext, listOf(DriveScopes.DRIVE_APPDATA))
         credential.selectedAccount = account.account
-        return Drive.Builder(httpTransport, jsonFactory, credential)
+        val wrapped: HttpRequestInitializer = HttpRequestInitializer { request ->
+            @Suppress("DEPRECATION") // credential.initialize is deprecated
+            credential.initialize(request)
+            request.connectTimeout = 15_000
+            request.readTimeout = 15_000
+        }
+        return Drive.Builder(httpTransport, jsonFactory, wrapped)
             .setApplicationName("Coffeery")
             .build()
     }
@@ -151,14 +205,14 @@ class CloudBackupManager(private val context: Context) {
         return name.contains("UserRecoverableAuthIOException") || name.contains("UserRecoverableAuthException")
     }
 
-    suspend fun backupToDrive(activity: Activity, jsonData: String): Result<String> = withContext(Dispatchers.IO) {
+    suspend fun backupToDrive(jsonData: String): Result<String> = withContext(Dispatchers.IO) {
         try {
-            val account = GoogleSignIn.getLastSignedInAccount(context)
+            val account = GoogleSignIn.getLastSignedInAccount(appContext)
             if (account == null) {
                 Log.e("Coffeery", "backupToDrive failed: Not signed in")
-                return@withContext Result.failure(Exception("Not signed in — please sign in with Google first"))
+                return@withContext Result.failure(Exception(appContext.getString(R.string.cloud_error_not_signed_in)))
             }
-            val drive = buildDrive(account, context)
+            val drive = buildDrive(account, appContext)
             val content = com.google.api.client.http.ByteArrayContent.fromString("application/json", jsonData)
             val existing = drive.files().list()
                 .setSpaces("appDataFolder")
@@ -190,8 +244,10 @@ class CloudBackupManager(private val context: Context) {
         } catch (e: GoogleJsonResponseException) {
             Log.e("Coffeery", "backupToDrive Drive API error ${e.statusCode}: ${e.details?.message ?: e.message}", e)
             val msg = when (e.statusCode) {
-                401, 403 -> "Authorization failed (${e.statusCode}) — please sign in again"
-                else -> "Drive error ${e.statusCode}: ${e.details?.message ?: e.message}"
+                401, 403 -> appContext.getString(R.string.cloud_error_auth_failed, e.statusCode)
+                404 -> appContext.getString(R.string.cloud_error_404)
+                429 -> appContext.getString(R.string.cloud_error_429)
+                else -> appContext.getString(R.string.cloud_error_drive, e.statusCode, e.details?.message ?: e.message ?: "")
             }
             Result.failure(Exception(msg, e))
         } catch (e: IOException) {
@@ -204,7 +260,7 @@ class CloudBackupManager(private val context: Context) {
                 }
             }
             Log.e("Coffeery", "backupToDrive network/IO error", e)
-            Result.failure(Exception("Network error — check internet connection: ${e.message}", e))
+            Result.failure(Exception(appContext.getString(R.string.cloud_error_network, e.message ?: ""), e))
         } catch (e: Exception) {
             if (isUserRecoverable(e)) {
                 val intent = extractRecoverableIntent(e)
@@ -219,14 +275,27 @@ class CloudBackupManager(private val context: Context) {
         }
     }
 
+    @Suppress("DEPRECATION") // keep compatibility for callers passing Activity; uses applicationContext internally
+    suspend fun backupToDrive(activity: android.app.Activity, jsonData: String): Result<String> {
+        return backupToDrive(jsonData)
+    }
+
+    suspend fun restoreFromDrive(): Result<String> = withContext(Dispatchers.IO) {
+        restoreInternal(appContext)
+    }
+
     suspend fun restoreFromDrive(context: Context): Result<String> = withContext(Dispatchers.IO) {
+        restoreInternal(context.applicationContext)
+    }
+
+    private suspend fun restoreInternal(ctx: Context): Result<String> = withContext(Dispatchers.IO) {
         try {
-            val account = GoogleSignIn.getLastSignedInAccount(context)
+            val account = GoogleSignIn.getLastSignedInAccount(appContext)
             if (account == null) {
                 Log.e("Coffeery", "restoreFromDrive failed: Not signed in")
-                return@withContext Result.failure(Exception("Not signed in — please sign in with Google first"))
+                return@withContext Result.failure(Exception(appContext.getString(R.string.cloud_error_not_signed_in)))
             }
-            val drive = buildDrive(account, context)
+            val drive = buildDrive(account, ctx)
             val files = drive.files().list()
                 .setSpaces("appDataFolder")
                 .setQ("name='coffeery_backup.json' and trashed=false")
@@ -237,7 +306,7 @@ class CloudBackupManager(private val context: Context) {
                 .files
             if (files.isNullOrEmpty()) {
                 Log.w("Coffeery", "restoreFromDrive: No backup found")
-                return@withContext Result.failure(Exception("No backup found in Drive"))
+                return@withContext Result.failure(Exception(appContext.getString(R.string.cloud_error_no_backup)))
             }
             val latestFile = files.first()
             val outputStream = java.io.ByteArrayOutputStream()
@@ -251,9 +320,10 @@ class CloudBackupManager(private val context: Context) {
         } catch (e: GoogleJsonResponseException) {
             Log.e("Coffeery", "restoreFromDrive Drive API error ${e.statusCode}: ${e.details?.message ?: e.message}", e)
             val msg = when (e.statusCode) {
-                401, 403 -> "Authorization failed (${e.statusCode}) — please sign in again"
-                404 -> "Backup not found (404)"
-                else -> "Drive error ${e.statusCode}: ${e.details?.message ?: e.message}"
+                401, 403 -> appContext.getString(R.string.cloud_error_auth_failed, e.statusCode)
+                404 -> appContext.getString(R.string.cloud_error_404)
+                429 -> appContext.getString(R.string.cloud_error_429)
+                else -> appContext.getString(R.string.cloud_error_drive, e.statusCode, e.details?.message ?: e.message ?: "")
             }
             Result.failure(Exception(msg, e))
         } catch (e: IOException) {
@@ -266,7 +336,7 @@ class CloudBackupManager(private val context: Context) {
                 }
             }
             Log.e("Coffeery", "restoreFromDrive network/IO error", e)
-            Result.failure(Exception("Network error — check internet connection: ${e.message}", e))
+            Result.failure(Exception(appContext.getString(R.string.cloud_error_network, e.message ?: ""), e))
         } catch (e: Exception) {
             if (isUserRecoverable(e)) {
                 val intent = extractRecoverableIntent(e)
@@ -283,7 +353,7 @@ class CloudBackupManager(private val context: Context) {
 
     fun signOut(client: GoogleSignInClient) {
         pendingRecoverableIntent = null
-        prefs.edit().putBoolean("signed_in", false).remove("account_email").apply()
+        clearSignInPrefs()
         client.signOut().addOnCompleteListener {
             client.revokeAccess().addOnCompleteListener {
                 Log.d("Coffeery", "Google Sign-Out complete")

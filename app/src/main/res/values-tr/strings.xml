@@ -974,6 +974,28 @@
     <string name="equip_phin_large_tag">Büyük tek fincan demleme</string>
     <string name="equip_clever_xl_name">Clever XL</string>
     <string name="equip_clever_xl_tag">Büyük daldırma, 350 ml</string>
+    <string name="equip_other_name">Diğer Demleyici</string>
+    <string name="equip_other_tag">Özel yöntem</string>
+    <string name="equip_hoop_name">Ceado Hoop</string>
+    <string name="equip_hoop_tag">Sıfır bypass halka demleme</string>
+    <string name="equip_paragon_name">Nucleus Paragon</string>
+    <string name="equip_paragon_tag">Soğutulmuş kaya espresso</string>
+    <string name="equip_melodrip_name">Melodrip</string>
+    <string name="equip_melodrip_tag">Nazik kaldırma döküşü</string>
+    <string name="equip_december_name">December Dripper</string>
+    <string name="equip_december_tag">Düz tabanlı, 1 Aralık</string>
+    <string name="equip_hario_switch_name">Hario Switch</string>
+    <string name="equip_hario_switch_tag">Hibrit daldırma anahtarı</string>
+    <string name="equip_aeropress_xl_name">AeroPress XL</string>
+    <string name="equip_aeropress_xl_tag">Çift kapasiteli pres</string>
+    <string name="equip_flair58_name">Flair 58</string>
+    <string name="equip_flair58_tag">Manuel 58 mm kol</string>
+    <string name="equip_nanopresso_name">Wacaco Nanopresso</string>
+    <string name="equip_nanopresso_tag">El tipi pompalı espresso</string>
+    <string name="equip_phoenix70_name">Phoenix 70</string>
+    <string name="equip_phoenix70_tag">70 mm düz taban</string>
+    <string name="equip_lunar_name">NextLevel Lunar</string>
+    <string name="equip_lunar_tag">Yerçekimi beslemeli lunar</string>
 
     <!-- Arama -->
     <string name="search_hint_equipment">Ekipman ara…</string>
@@ -1347,6 +1369,24 @@
     <string name="settings_cloud_restore">Drive\'dan geri yükle</string>
     <string name="settings_cloud_backup_done">Yedek Drive\'a kaydedildi</string>
     <string name="settings_cloud_restore_done">Veriler geri yüklendi. Uygulamayı yeniden başlatın.</string>
+    <string name="settings_cloud_working">İşleniyor…</string>
+    <string name="settings_cloud_retry_hint">İzin verildi — yeniden deneniyor</string>
+    <string name="cloud_error_12500">Hata 12500: OAuth onay ekranında Destek E-postasını ve SHA-1 eşleşmesini kontrol edin</string>
+    <string name="cloud_error_12501">Hata 12501: Giriş iptal edildi veya Web İstemci Kimliği uyuşmuyor</string>
+    <string name="cloud_error_10">Hata 10: SHA-1 parmak izi uyuşmuyor. ./gradlew signingReport çalıştırın</string>
+    <string name="cloud_error_8">Hata 8: Ağ hatası. İnternet bağlantınızı kontrol edin.</string>
+    <string name="cloud_error_13">Hata 13: Play Hizmetleri güncel değil. Google Play Hizmetlerini güncelleyin.</string>
+    <string name="cloud_error_15">Hata 15: Yanlış paket adı veya SHA-1</string>
+    <string name="cloud_error_generic">Hata %1$d: %2$s</string>
+    <string name="cloud_error_unknown">Bilinmiyor</string>
+    <string name="cloud_error_exception">Hata: %1$s — %2$s</string>
+    <string name="cloud_error_not_signed_in">Giriş yapılmadı — lütfen önce Google ile giriş yapın</string>
+    <string name="cloud_error_auth_failed">Yetkilendirme başarısız (%1$d) — lütfen tekrar giriş yapın</string>
+    <string name="cloud_error_404">Yedek bulunamadı (404)</string>
+    <string name="cloud_error_429">Çok fazla istek (429) — lütfen kısa süre sonra tekrar deneyin</string>
+    <string name="cloud_error_drive">Drive hatası %1$d: %2$s</string>
+    <string name="cloud_error_network">Ağ hatası — internet bağlantınızı kontrol edin: %1$s</string>
+    <string name="cloud_error_no_backup">Drive\'da yedek bulunamadı</string>
     <string name="bean_detail_title">Çekirdek Detayı</string>
     <string name="bean_detail_roast_date">Kavurma tarihi</string>
     <string name="bean_detail_process">İşleme</string>
@@ -1614,5 +1654,108 @@ Hazırlanışı:
     <string name="pro_tip_58">Gibraltar ve cortado farkı bardak kalınlığıdır. Kalın Gibraltar ısıyı tutar, shot 30 sn tatlı kalır.</string>
     <string name="pro_tip_59">Körfez kahvesi asla kaynatılmaz. 85–92°C\'de kapağı aralık 15 dk demleyin — kaynama kakuleyi uçurur.</string>
     <string name="pro_tip_60">Kyoto cold drip: önce buz olmadan saniyede 1 damlayı ayarlayın, sonra buzu ekleyin.</string>
+
+    <string name="learn_l111_title">Terazi kalibrasyonu ve dara kayması</string>
+    <string name="learn_l111_body" formatted="false">0,1 g hassasiyetli teraziniz sıcaklık, eğim, pil voltajı ve tozla kayan bir hassas cihazdır. Fincandan gelen ısı yük hücresini bozar ve 0,3–0,5 g dara kayması yaratır, 3,2 V altı pil sapması %1–2 hata ekler ve eğimli zemin kosinüs kadar ölçümü saptırır. Ayda bir sertifikalı 100 g, 200 g veya 500 g ağırlıkla kalibre edin: kapatıp açın, daralayın, ağırlığı ortaya koyun, ±0,1 g doğrulayın. Kurallar: dozlamadan önce kapatıp açın, döküm sırasında asla daralamayın, teraziyi kettle buharından uzak tutun, piller %20 kalınca değiştirin. Kalibre terazi oranı tahminden çıkarır — 18,0 g ile 18,5 g tam %3 sertlik farkıdır.</string>
+    <string name="learn_l112_title">Mg ve Ca: sertlik ayrımı</string>
+    <string name="learn_l112_body">Genel sertlik (GH) tek sayı değildir — kalsiyum artı magnezyumdur ve farklı çözerler. Mg²⁺ aroma bileşiklerine daha agresif bağlanır, asidite, meyve ve parlaklığı yükseltir; Ca²⁺ daha çok gövde, ağız hissi ve krema stabilitesine katkı verir ama ışıltıyı bastırır. 50–175 ppm GH ve 40–75 ppm alkalinite (KH) SCA kestirmesidir ama Ca:Mg oranı işi belirler: magnezyum ağırlıklı su yıkanmış Etiyopyaları canlandırır, kalsiyum ağırlıklı su çikolatalı Brezilyaları yuvarlar. Mg için Epsom tuzu (MgSO₄), Ca için kalsiyum klorür veya alçı (CaSO₄), tampon için karbonat (NaHCO₃) kullanın. Sert su daha çok çözer ama kombiyi kireçler; yumuşak su asiditeyi gösterir ama içi boş kalabilir. Suyunuzu kahveye göre ayarlayın, sadece makineye göre değil.</string>
+    <string name="learn_l113_title">SCA Cupping 2024 ve CVA</string>
+    <string name="learn_l113_body">2024\'te SCA, 2004\'ten beri kullanılan 100 puanlık kupaj formunu emekli edip Coffee Value Assessment (CVA) adlı çift kanallı sisteme geçti — betimleyici değerlendirme ve hedonik puanlama ayrıldı. Eski form kalite, işleme inovasyonu ve sürdürülebilirliği tek sayıya sıkıştırıyordu; CVA ayırır: Betimleyici Değerlendirme koku, aroma, tat, bitiş, asidite, tatlılık, gövde ve dengeyi puansız kaydederken Duygusal Değerlendirme genel izlenimi 0–100 puanlar. Co-ferment, anaerobik ve termal şok partiler artık işleme bağlamıyla, dışsal değer (çiftlik bilgisi, sürdürülebilirlik) ayrı puanlanır. Ev kupajcısı için pratik ders: önce betimleyin — ne tattığınızı yazın — sonra sevip sevmediğinize karar verin, ikisini tek izlenime indirmeyin.</string>
+    <string name="learn_l114_title">Kusur tatları: fenol, fermente ve patates</string>
+    <string name="learn_l114_body">Ekşi/acı/zayıf ötesinde bazı kötü notlar gerçek kusur taint\'idir ve kör olarak adlandırmayı öğrenmelisiniz. Fenolik (ilaçsı, yara bandı, iyot) kirli avlularda kurutmada mikrobiyal bulaşma veya aşırı fermente sonucu; patates kusuru (çiğ patates, topraksı-bakteriyel) Doğu Afrika naturallerinde Antestia böceği bakterisinden — özellikle Ruanda partilerinde ünlü; fermente (sirke, olgun meyve, alkolümsü) kurutmadan önce kontrolsüz anaerobik aktivite; çuval/saman (jüt çuvalı, saman, karton) eski mahsul yaşlanması veya Aw\'nin 0,65 üstüne çıkıp nemi emmesi. Şiddet önemli: temiz, kusursuz 84+ fincanlarda hiçbiri yoktur; hafif fermente taint CVA\'da 2–4 puan, güçlü fenol 4–6 puan götürür ve parti ticari sınıfa düşer. Torbanız iyot veya çiğ patates tadıyorsa sorun demlemeniz değil — yeşil çekirdektir.</string>
+    <string name="learn_l115_title">Basınç profilleme espresso</string>
+    <string name="learn_l115_body">Klasik sabit 9 bar espresso tek profildir. Modern profilleme makineleri (Decent, Synesso, La Marzocco Strada) ve kollu gruplar shot boyunca basıncı değiştirerek hangi bileşiklerin ne zaman çözündüğünü yönetir. Tipik profiller: diski doyurup mikro çatlakları onarmak için 2–3 bar\'da 2–3 s ön demleme, ana ekstraksiyon için 8–9 bar\'a rampa, sonra acı kuru kuyruk çözünürlerini sürüklememek için son üçte birde 5–6 bar\'a düşüş. Düşük basınç bloom profilleri (6 bar sabit) açık kavrumlarda kanallanmayı azaltır; yüksek basınç sıçramaları geleneksel İtalyan harmanlarında gövdeyi artırır. Debi profilleme tersidir: debiyi 1–2 ml/sn sabitler, basınç serbest dalgalanır. Sonuç sihir değildir — profilleme problemli kahvede tolerans kazandırır — ama Azalan profil aynı dozun düz 9 bar shot\'ından tutarlı şekilde daha tatlı ve daha az buruk tattırır.</string>
+    <string name="learn_l116_title">Dişli hizalaması ve sıfır noktası</string>
+    <string name="learn_l116_body">Burr hassasiyeti dişliler paralel değilse anlamsızdır. 0,02 mm kaçık bir düz dişli yarımay parçacık dağılımı ve kanal üretir. Belirtiler: aynı dozda shot süreleri 4–6 s oynar, imkânsız derecede ince ayara ihtiyaç duyarsınız ve ekstraksiyon sonrası yatak çukurludur. Sıfırı bulmak için: öğütücü kapalıyken ve dişliler temizken aralığı yavaşça kapatıp elle çevirin, ilk cırlamayı duyduğunuz nokta diş öpüşmesidir — mutlak sıfır. Kadran/işareti not edin, sonra demleme ayarına geri açın (filtre tipik sıfırdan 8–12 kademe, espresso 3–5). Düz dişlilerde marker testi: birini kuru kalemle boyayın, öpüştürün, silinme desenine bakın — eşit silinme hizalı demektir. Folyo şimlemek birçok ticari öğütücüyü düzeltir.</string>
+    <string name="learn_l117_title">Su aktivitesi (Aw) ve saklama</string>
+    <string name="learn_l117_body" formatted="false">Su aktivitesi (Aw) nem oranı değildir — mikropların kullanabildiği serbest, bağlı olmayan sudur, 0–1 arası ölçülür. %10–12 nemli yeşil kahve Aw 0,60–0,65 üzerindeyse halen kararsızdır: küf, okratoksin ve çuval tadı çekirdek nemli hissedilmeden gelişir. İthalatçılar uzun saklama için Aw 0,55–0,59 hedefler; 0,65 üstünde çimlenme ve küf riski fırlar, 0,50 altında çekirdek kırılganlaşır, solar ve aroma kaybeder. GrainPro hermetik astarlar Aw\'yi 9–12 ay sabit tutar; tek başına jüt yetmez. Evde kavrulmuş kahve higroskopiktir — hava geçirmez, opak, serin kaplarda saklayın; asla haznede bırakmayın; donduracaksanız sadece tek doz mühürlü dondurup mühürlü çözün.</string>
+    <string name="learn_l118_title">Kavurmada Artış Hızı (ROR)</string>
+    <string name="learn_l118_body">Artış Hızı, kavurma boyunca çekirdek sıcaklığının dakikada ne kadar arttığıdır — kavurmacının hız göstergesi. Ders kitabı kavurması ROR\'un kurutmadan sonra ~12°C/dk\'dan düşüşte 4–6°C/dk\'ya indiğini gösterir; sonlarda yükseliş flick, keskin düşüş crash\'tir. Birinci çatlama yakınında yükselen ROR yüzeyi yakarken çekirdeği az geliştirir, aynı anda hem yanık-acı hem çimensi tat üretir. Çöken ROR karamelizasyonu durdurur ve kahveyi fırınlanmış yassı yapar. Kavurmacılar gaz/hava akımıyla kontrol eder: birinci çatlamadan önce ısıyı kısar, dumanı atmak için hava akımını artırır ve yumuşak azalan eğri hedefler. Demleyici için pürüzsüz ROR tatlılık ve berraklık öngörür; flick külümsü bitiş öngörür.</string>
+    <string name="learn_l119_title">Süt protein kimyası</string>
+    <string name="learn_l119_body" formatted="false">Süt dokusu protein mühendisliğidir. Peynir altı suyu proteinleri (beta-laktoglobülin, alfa-laktalbümin) ~72°C\'de denatüre olur, katlanıp açılarak hava kabarcıklarını sarar ve stabil mikro köpük oluşturur; kazein miselleri gövde katar ama zayıf dağılır. Yağ engeller — tam yağlı süt (%3,5 yağ) yağsızdan daha yavaş havalanır ama laktoz yoğunlaştığı için daha tatlı tattırır. 55–65°C idealdir: 50°C altında protein az denatüredir köpük çöker, 70°C üstünde fazla denatüre olup suyu sıkar ve haşlanmış süt yavan ve sabunumsu tattırır. Yulaf barista sütleri kanola yağı ve dipotasyum fosfat ekleyerek taklit eder. Sır: buharlanmış sütü 20 s dinlendirin, büyük baloncukları vurun, yaş boya parlaklığına çevirin — o polimerize protein, hava değil.</string>
+    <string name="learn_l120_title">Ekstraksiyon verimi ve refraktometri</string>
+    <string name="learn_l120_body" formatted="false">Ekstraksiyon verimi duygu değil kütle denklemidir. 18 g dozu 300 g içecekte %1,35 TDS: verim = TDS × içecek kütlesi / doz = 0,0135 × 300 / 18 = %22,5 — ideal %18–22 penceresinin üstünde. %18 altı ekşi, tuzlu ve boş; %22 üstü acı, kuru ve küllü. VST veya Atago refraktometre TDS\'yi ışık kırılmasıyla ölçer; demleme sıcaklığında damıtık suyla sıfırlayın, örneği 0,45 µm şırınga filtresinden geçirin, 20°C\'ye soğutun, okuyun. Prizmayı her seferinde temizleyin — kalan yağlar 0,05% TDS kaydırır, tam %1 verim hatasına eşittir. Oran, TDS ve verimi SCA Demleme Kontrol Tablosunda birlikte takip edin.</string>
+    <string name="learn_l121_title">Öğütücüde kalıntı ve tek doz</string>
+    <string name="learn_l121_body">Öğütücüde kalıntı dünkü kahvenizden öğütücü içinde kalan ve bugünkü doza karışan gramdır — tek doz sıfır kalıntılı öğütücülerde 0,1 g, hazneli ticarilerde 5–12 g. Kalıntı bayatlar: okside ince toz bir sonraki shot\'a göç eder, yavan odunsu çuval notaları ekler, suç yeni çekirdekte sanılır. Tek doz (18 g tart, körükle öğüt, süpür) çözer ama takas getirir: en son geçen çekirdek en az öğütülendir — çekirdek veya ayar değiştirirken 0,5 g tavlama süpürmesi ekleyin. Körüklü hazne veya Eureka körüğüyle üfleyin, dozlamadan sonra hazneyi temizlemek için öğütücüyü 1 sn çalıştırın. En temiz shot her zaman süpürmeden sonraki ikincidir.</string>
+    <string name="learn_l122_title">Triangülasyon ve duyusal kalibrasyon</string>
+    <string name="learn_l122_body">Triangülasyon damağınızı kalibre etmenin en hızlı yoludur: üç fincan sunun — ikisi aynı, biri farklı — tadımcıdan kör olarak farklı olanı bulmasını isteyin. 9\'da 7 doğru istatistiksel olarak anlamlıdır (p&lt;0,05). Öğütüm değişimi (kalın vs ince), su (musluk vs filtre), kavrum seviyesi veya demleme sıcaklığını test edin. Prosedür: üçünü aynı oranda demleyin, fincan altlarına A/B/C yazın, rastgele dizin, 55°C\'de tadın. Q-grader\'lar dokuz triangülasyon setini farklı asit, maya ve tuz standartlarıyla geçer. Evde her pazar üç kupa tadın — ayrımı aylar yerine haftalarda öğrenirsiniz ve tarif notlarınız \'daha iyi\' yerine \'daha sitrik asidite, daha az gövde\' demeye başlar.</string>
+    <string name="learn_l123_title">Refraktometre hijyeni ve sıcaklığı</string>
+    <string name="learn_l123_body" formatted="false">Refraktometre disiplini kadar iyidir. Akış: 2 ml\'yi kağıt veya 0,45 µm şırınga filtresinden geçirerek yağ ve ince tozu ayırın, 18–22°C\'ye soğutun (kırılma sıcaklığa duyarlı; sıcak kahve %0,10–0,15 yüksek okur), 4–5 damlayı kuru prizmaya koyun, kapağı kapatın, 10 s bekleyin, okuyun. Her örnekten sonra damıtık suyla durulayın, tamamen kurutun, sıfır kontrolü yapın: damıtık su 0,00% ±0,02% okumalı, değilse yeniden kalibre edin. Çizik prizma ışığı saçar ve düşük okur; yağ taban çizgisini yükseltir. Her demlemede doz, içecek kütlesi, TDS ve hesaplanan verim = TDS × kütle / doz loglayın — on eşleştirilmiş okumada öğütücünüzün gerçek ekstraksiyon tavanını bilirsiniz.</string>
+    <string name="learn_l124_title">Bypass demleme bilimi</string>
+    <string name="learn_l124_body">Bypass kasıtlı seyreltmedir: konsantre bulamaç demleyip sonra su ekleyerek acılığa kaçmadan sertliği kontrol edersiniz. AeroPress\'i 1:10 demleyip 1:16\'ya seyreltmek aynı kahvenin düz 1:16 pour-over\'ından daha tatlı tattırır çünkü düşük su/kahve oranı ekstraksiyonu sınırlar. Kasıtlı bypass (Hoffmann AeroPress, bypass Bloom varyantları) araçtır; kasıtsız bypass (V60 filtre kenarı etrafından akan su, filtre ile dripper duvarı arası boşluk veya katlı filtre kıvrımı) seyreltmeden zayıflatan kusurdur — fincan bir anda hem ince hem az çözünmüş tattırır. Sıfır bypass dripper\'lar (Tricolate, Ceado Hoop) farkı kanıtlamak için kenarı mühürler.</string>
+    <string name="learn_l125_title">Q-Grader genişletilmiş kalibrasyonu</string>
+    <string name="learn_l125_body">Q-Grader kahve sommelier\'si değil — kalibre bir cihazdır. Klasik Q kursu 22 sınav geçmeyi gerektirir: koku sızıntı testleri, dört asit kiti, tuz/tatlı eşikleri, 8 üçgen testi ve grup ortalamasına karşı üç 6 örnek kupaj kalibrasyonu. 2024 CVA sonrası geniş kapsam 2× eşikte fenol, patates ve fermente taint tanıma artı betimleyici vs hedonik skorlamayı ekler. Her üç yılda bir yeniden kalibrasyon hizayı korur; ±1,5 puan bireysel damak kayması normaldir ve paneller bu yüzden birey yerine toplu kupaj yapar. Meraklılar için ders: başkalarıyla kupaj yapın ve ortalayın — asidite veya gövdeye kişisel eğiliminiz tek başına puanlamayı sandığınızdan çok saptırır.</string>
+
+    <string name="drink_carajillo_name">Carajillo</string>
+    <string name="drink_carajillo_summary">İspanyol yemek sonrası kokteyli — brendi, rom veya Licor 43 ile espresso</string>
+    <string name="drink_carajillo_body">İspanyol yemek sonrası kahve kokteyli — brendi, rom veya Licor 43 ile espresso, buz üzerinde veya sıcak servis edilir. Efsaneye göre Küba\'daki İspanyol askerler cesaret (\'coraje\') için bunu içerdi. Modern versiyonunda genellikle bir narenciye kabuğu kıvrımı bulunur.\n\nMalzemeler:\n• 1 shot espresso (~30 ml)\n• 1 shot Licor 43, brendi veya rom (~30 ml)\n• Buz (buzlu versiyon için)\n• İsteğe bağlı: narenciye kabuğu kıvrımı\n\nHazırlanışı:\n1. Taze bir espresso shot çekin.\n2. Sıcak versiyon: alkolü doğrudan espressoya ekleyip karıştırın.\n3. Buzlu versiyon: espresso ve alkolü buzla 10–15 saniye çalkalayıp taze buz üzerine süzün.\n4. Narenciye kabuğu kıvrımıyla süsleyin.\n5. Hemen servis edin — adı İspanyolca \'cesaret\' anlamına gelir.</string>
+    <string name="drink_nitro_cold_brew_name">Nitro Cold Brew</string>
+    <string name="drink_nitro_cold_brew_summary">Azotla şarj edilmiş ipeksi cold brew</string>
+    <string name="drink_nitro_cold_brew_body">Nitro cold brew, cold brew\'ün fıçıya alınıp stout musluğundan saf azot (N₂) ile şarj edilmesiyle yapılan, Guinness benzeri kademeli döküm ve süt ürünü olmadan kremsi, kadifemsi köpük veren bir içecektir. Azot kabarcıkları CO₂\'den küçüktür, asiditeyi yumuşatır, kahveyi daha tatlı, yuvarlak ve dolgun gösterir.\n\nMalzemeler:\n• 1 L soğuk suya 100 g kalın kahve, 16–18 saat demle, süz\n• Gıda sınıfı azot (N₂) 30–40 psi\n• Stout/nitro musluğu veya N₂O krem şarjörü\n\nHazırlanışı:\n1. Güçlü cold brew konsantresi (1:10) yap, içim sertliğine seyrelt.\n2. Fıçıla, 2–4°C soğut, N₂ ile şarj et ve çözdürmek için çalkala.\n3. Stout musluğundan sert dök — N₂ çözeltiden çıkarken kademelenme oluşur.\n4. Hemen servis et — buz yok, karıştırma yok.</string>
+    <string name="drink_flat_white_xl_name">Flat White XL</string>
+    <string name="drink_flat_white_xl_summary">Büyük fincanda çift güçte flat white</string>
+    <string name="drink_flat_white_xl_body">Daha fazla flat white dokusu ama küçük fincan sınırı olmadan isteyenler için: çift ristretto tabanı, orantılı daha çok buharlanmış süt, 240 ml fincanda ama flat white\'ı tanımlayan 1:3 kahve-süt oranını korur.\n\nMalzemeler:\n• 2 çift ristretto shot (~60 ml)\n• ~180 ml mikro köpüklü buharlanmış süt\n• Toplam: ~240 ml\n\nHazırlanışı:\n1. Büyük fincana iki çift ristretto çek.\n2. Sütü parlak mikro köpüğe buharla (standart flat white\'tan daha fazla hacim, aynı teknik).\n3. Bütünleştirmek için dök — fazla shot büyük süt hacmine rağmen yoğunluğu korur.</string>
+    <string name="drink_kopi_gu_you_name">Kopi Gu You</string>
+    <string name="drink_kopi_gu_you_summary">Malezya tereyağı kahvesi — tereyağı ve şekerle kavrulmuş</string>
+    <string name="drink_kopi_gu_you_body">Kopi Gu You, Malezya kopitiam klasiğidir: Robusta çekirdekleri tereyağı/margarin ve şekerle parlak ve karamelize olana kadar kavrulur, sonra bez çoraptan demlenip yoğunlaştırılmış sütle tatlandırılır. Tereyağı, Malezya kahvecisini tanımlayan zengin kurabiyemsi tatlılık katar.\n\nMalzemeler:\n• 20 g Kopi Gu You kavrumu (tereyağlı Robusta), orta-kalın\n• 180 ml su, 96°C\n• 1–2 yk yoğunlaştırılmış süt\n• Bez çorap filtre\n\nHazırlanışı:\n1. Kahveyi bez çoraptan demle — dök, 3–4 dk beklet, çorabı çek.\n2. Yoğunlaştırılmış sütle karıştır.\n3. Sıcak servis et; isteğe bağlı buzla Kopi Gu You Peng.</string>
+    <string name="drink_cold_brew_tonic_name">Cold Brew Tonik</string>
+    <string name="drink_cold_brew_tonic_summary">Tonik üzerinde parlak cold brew ve narenciye</string>
+    <string name="drink_cold_brew_tonic_body">Cold brew tonik, kahve ile kokteyl arası ferah yaz içeceğidir: buz üzerinde tonik üzerine katmanlanan soğuk cold brew ve narenciye kıvrımı, kinin acılığının kahve meyvesiyle şarkı söylediği içecek.\n\nMalzemeler:\n• 80 ml cold brew konsantresi\n• 120 ml kaliteli tonik (Fever-Tree)\n• Buz\n• Portakal veya limon kabuğu\n\nHazırlanışı:\n1. Bardağı buzla doldur.\n2. Önce toniği buz üzerine dök.\n3. Cold brew\'ü kaşığın arkasından nazikçe katmanla.\n4. Narenciye kabuğunu sık ve süsle.</string>
+    <string name="drink_honey_raf_name">Ballı Raf</string>
+    <string name="drink_honey_raf_summary">Rus ballı-kremalı latte — krema ve bal ile birlikte buharlanmış espresso</string>
+    <string name="drink_honey_raf_body">Raf kahve 1990\'ların sonunda Moskova Coffee Bean\'de Rafael adlı müşteri için doğdu: espresso, krema, vanilya ve bal ayrı değil birlikte buharlanır — bal şekerleri buhar sırasında süt yağıyla emülsifiye olarak sufle benzeri tatlılık yaratır.\n\nMalzemeler:\n• 1 shot espresso (~30 ml)\n• 120 ml hafif krema (%10–15 yağ) veya half-and-half\n• 1 yk bal\n• Bir tutam vanilya\n\nHazırlanışı:\n1. Espresso, krema, bal ve vanilyayı birlikte sürahiye ekle.\n2. 60–65°C\'ye birlikte buharla — ortak buharlama balı köpüğe emülsifiye eder.\n3. Fincana dök — köpük parlak ve marshmallow yumuşaklığında olmalı.</string>
+    <string name="drink_cafezinho_aviacao_name">Cafezinho Aviação</string>
+    <string name="drink_cafezinho_aviacao_summary">Brezilya cafezinho\'su — sert, tatlı, hızlı, her yerde</string>
+    <string name="drink_cafezinho_aviacao_body">Cafezinho, Brezilya\'nın her yerde bulunan küçük tatlı kahvesidir: çok sert, koyu kavrulmuş damla veya bez filtre demlemesi sıcakken tatlandırılır ve 50 ml\'lik minik fincanda servis edilir. Havacılık (aviação) stili bir miktar cachaça veya rom ekler — pilot cafezinhosu.\n\nMalzemeler:\n• 15 g koyu kavrum, ince\n• 150 ml su 96°C\n• Damak tadına şeker (1–2 çk)\n• Bir miktar cachaça (aviação varyantı)\n\nHazırlanışı:\n1. Bez filtreden (coador) veya ince kağıttan sert kahve demle.\n2. Sıcakken şekeri erit — tatlı olmalı.\n3. Aviação ise cachaça ekle.\n4. 50–80 ml demitasse\'te hemen servis et.</string>
+    <string name="drink_sig_mazagran_name">Shakerato Mazagran</string>
+    <string name="drink_sig_mazagran_summary">Buzlu mazagran — Portekiz-Brezilya limonlu cold brew</string>
+    <string name="drink_sig_mazagran_body">Mazagran mirasının shaker varyantı: buz, limon ve biraz şekerle sert çalkalanmış güçlü cold brew veya espresso — orijinal 19. yüzyıl Fransız-Cezayir kahveli limonatasının nitelikli kahveyle güncellemesi.\n\nMalzemeler:\n• 60 ml güçlü cold brew\n• 60 ml taze limonata (veya limon + şeker)\n• Çalkalama + servis için buz\n\nHazırlanışı:\n1. Cold brew, limonata ve buzu shaker\'a ekle.\n2. 10–15 sn sert çalkala.\n3. Taze buz üzerine süz.\n4. Limon dilimiyle süsle.</string>
+    <string name="drink_berber_brew_name">Berberi Demlemesi</string>
+    <string name="drink_berber_brew_summary">Kuzey Afrika baharatlı kahvesi — kakule, tarçın, karanfil</string>
+    <string name="drink_berber_brew_body">Berberi baharatlı kahvesi Atlas Dağları\'nın sıcak baharatlarını kullanır: kakule, tarçın, karanfil ve bazen karabiberle demlenen hafif kavrulmuş kahve, göçebe Berberi kafe geleneğini temsil eder.\n\nMalzemeler:\n• 15 g açık kavrum, orta öğütüm\n• 300 ml su\n• 2 kakule, 1 çubuk tarçın, 2 karanfil\n• Damak tadına şeker\n\nHazırlanışı:\n1. Su, baharat ve şekeri kaynat.\n2. Kahveyi ekle, ateşi kıs, 3–4 dk kaynat.\n3. Süz ve sıcak servis et; baharatlar bastırmamalı, kokulandırmalı.</string>
+    <string name="drink_cortado_iced_name">Buzlu Cortado</string>
+    <string name="drink_cortado_iced_summary">Buz üzerinde soğuk cortado — soğuk süt üzerinde espresso</string>
+    <string name="drink_cortado_iced_body">Buzlu cortado 1:1 espresso-süt oranını korur ama soğuk: soğuk çalkalanmış espresso, buz üzerinde soğuk süt üstüne dökülür ve cortado dengesini ısı olmadan korur.\n\nMalzemeler:\n• 1 shot espresso (~30 ml)\n• 30 ml soğuk tam yağlı süt\n• Buz\n\nHazırlanışı:\n1. Espressoyu buzla shaker\'da soğut veya cold brew konsantresi kullan.\n2. Küçük bardağı buzla doldur, soğuk süt ekle.\n3. Espressoyu üzerine dök — kısa katman sonra karıştır.\n4. Hemen servis et.</string>
+
+    <string name="pro_tip_61">Bloom teşhisi: 30. saniyede canlı eşit kubbe 5–14 günlük kahvedir; yassı lekeli bloom bayattır. Buna göre bloom süresini ayarlayın.</string>
+    <string name="pro_tip_62">Kireci sirkeyle değil sülfamik veya sitrik asitle çözün — asetik asit bakır, pirinç ve silikon contalara zarar verirken kireci bırakır.</string>
+    <string name="pro_tip_63">Yeşili GrainPro\'da Aw 0,55–0,59\'da dondurun: hermetik bariyer juteden 9 ay stabildir. Evde kavrulmuşu tek doz vakumda dondurup mühürlü çözün.</string>
+    <string name="pro_tip_64">ROR çöküşü? Gazı birinci çatlamadan önce kısın, sonra değil — öngörülü ısı yönetimi tatlılığı fırınlayan durmayı önler.</string>
+    <string name="pro_tip_65" formatted="false">Alternatif süt ipucu: yulaf süte göre %15 daha az hava ister — eklenen yağ daha hızlı köpürür; tam yağlı süte göre 2 sn erken bırakın.</string>
+    <string name="pro_tip_66">Dişlileri cırlama-sıfır eksi 10 filtré, eksi 4 espresso\'da tutun ve fabrika işaretinden değil sıfırdan tıklama sayın.</string>
+    <string name="pro_tip_67">Evde CVA tadımı: önce betimleyicileri not edin (meyvemsi, tatlı, temiz), sonra ayrı beğeni puanlayın — asla tek sayıya indirmeyin.</string>
+    <string name="pro_tip_68">Kusur kontrolü: 93°C ve yine 55°C\'de tadın — fenol ve patates soğudukça daha yüksek ses verir; sıcak gizler.</string>
+    <string name="pro_tip_69">Açık kavrumlarda 2 bar\'da 8 sn ön demleme yapın; nazik ıslatma tam basınçtan önce yoğunluğu eşitler.</string>
+    <string name="pro_tip_70" formatted="false">Her seansta refraktometreyi 20°C damıtık suyla sıfırlayın; %0,02 sapma %1 verim hatasıdır — hayali düzeltme peşinde koşturur.</string>
+    <string name="pro_tip_71">Her öğütüm değişiminden sonra 0,5 g süpürün — kalan ince toz ilk dozu dünkü partikül boyutuyla kirletir.</string>
+    <string name="pro_tip_72">Ayda bir triangülasyon: bir arkadaş çağırın, A/B/C fincanları rastgele dizin, kör puanlayın. Damak yalnız yudumdan hızlı öğrenir.</string>
+    <string name="pro_tip_73">Dara kayması: kettle tezgahı buharladıktan sonra teraziyi kapatıp açın — ısı ve nem görünmez hata kaynaklarıdır.</string>
+    <string name="pro_tip_74">Bypass demleyiciler: 1:10 konsantre demleyip seyreltin — tatlılık, düz 1:16\'nın kuruluğa kaçıracağı yerde kalır.</string>
+    <string name="pro_tip_75">Q-Grader kayması gerçektir — üçlü panellerde kupaj yapıp ortalayın; tek skorlar sertifikalılarda bile ±1,5 oynar.</string>
+    <string name="glossary_term_96">Doz Tutarlılığı</string>
+    <string name="glossary_def_96">Dozu sabitleyip verimi öğütümle değiştirin. Dozda ±1 g oynamak oranı kaydırır ve teşhisi karıştırır — dozu kilitleyin, öğütümü hareket ettirin.</string>
+    <string name="glossary_term_97">Ön Demleme</string>
+    <string name="glossary_def_97">Tam basınç öncesi düşük basınçta ıslatma (2–3 bar, 5–8 s). Çatlakları onarır, doygunluğu eşitler ve yoğun açık kavrumlarda kanallanmayı azaltır.</string>
+    <string name="glossary_term_98">Fenol Kusuru</string>
+    <string name="glossary_def_98">Kurutma avlularında mikrobiyal bulaşma veya kirli sudan gelen ilaçsı yara bandı / iyot benzeri kötü koku. Güçlü fenol = ticari sınıf.</string>
+    <string name="glossary_term_99">Patates Kusuru</string>
+    <string name="glossary_def_99">Antestia böceği bakterisinden gelen çiğ patates / topraksı-bakteriyel kusur, Ruanda naturallerinde klasik. Eser miktarda bile temiz fincanı bozar.</string>
+    <string name="glossary_term_100">Hermetik Saklama</string>
+    <string name="glossary_def_100">Yeşili ortam nemine karşı Aw 0,55–0,59\'da tutan kapalı bariyer (GrainPro, Ecotact). Jutte 3–4 aya karşı 9–12 ay korur.</string>
+
+    <string name="drink_affogato_iced_name">Buzlu Affogato</string>
+    <string name="drink_affogato_iced_summary">Modern dokunuş — buz üzerinde cold brew shot ile affogato</string>
+    <string name="drink_affogato_iced_body">Klasik affogato\'nun modern buzlu yorumu: buz üzerinde servis edilen vanilyalı gelato üzerine soğutulmuş espresso dökülür, sıcak orijinalinden daha hafif ve ferahlatıcıdır.
+
+Malzemeler:
+• Çift espresso, soğutulmuş (~50 ml)
+• 1 büyük top vanilyalı gelato
+• 3–4 buz küpü
+
+Hazırlanışı:
+1. Gelato ve buzu soğutulmuş bardağa koyun.
+2. Espressoyu çekip kısa soğutun veya cold brew konsantresi kullanın.
+3. Soğuk espressoyu gelato ve buz üzerine dökün.
+4. Kaşık ve pipetle servis edin — yudumlamadan önce hafifçe karıştırın.</string>
 
 </resources>

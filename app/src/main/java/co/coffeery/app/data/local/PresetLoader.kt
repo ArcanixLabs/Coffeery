@@ -167,6 +167,28 @@ object PresetLoader {
         "equip_phin_large_tag" -> R.string.equip_phin_large_tag
         "equip_clever_xl_name" -> R.string.equip_clever_xl_name
         "equip_clever_xl_tag" -> R.string.equip_clever_xl_tag
+        "equip_hoop_name" -> R.string.equip_hoop_name
+        "equip_hoop_tag" -> R.string.equip_hoop_tag
+        "equip_paragon_name" -> R.string.equip_paragon_name
+        "equip_paragon_tag" -> R.string.equip_paragon_tag
+        "equip_melodrip_name" -> R.string.equip_melodrip_name
+        "equip_melodrip_tag" -> R.string.equip_melodrip_tag
+        "equip_december_name" -> R.string.equip_december_name
+        "equip_december_tag" -> R.string.equip_december_tag
+        "equip_hario_switch_name" -> R.string.equip_hario_switch_name
+        "equip_hario_switch_tag" -> R.string.equip_hario_switch_tag
+        "equip_aeropress_xl_name" -> R.string.equip_aeropress_xl_name
+        "equip_aeropress_xl_tag" -> R.string.equip_aeropress_xl_tag
+        "equip_flair58_name" -> R.string.equip_flair58_name
+        "equip_flair58_tag" -> R.string.equip_flair58_tag
+        "equip_nanopresso_name" -> R.string.equip_nanopresso_name
+        "equip_nanopresso_tag" -> R.string.equip_nanopresso_tag
+        "equip_phoenix70_name" -> R.string.equip_phoenix70_name
+        "equip_phoenix70_tag" -> R.string.equip_phoenix70_tag
+        "equip_lunar_name" -> R.string.equip_lunar_name
+        "equip_lunar_tag" -> R.string.equip_lunar_tag
+        "equip_other_name" -> R.string.equip_other_name
+        "equip_other_tag" -> R.string.equip_other_tag
         "step_bloom" -> R.string.step_bloom
         "step_pour" -> R.string.step_pour
         "step_drawdown" -> R.string.step_drawdown
@@ -183,6 +205,6 @@ object PresetLoader {
         "step_rinse" -> R.string.step_rinse
         "step_open_valve" -> R.string.step_open_valve
         "step_flip" -> R.string.step_flip
-        else -> 0
+        else -> if (key.endsWith("_tag")) R.string.equip_other_tag else R.string.equip_other_name
     }
 }

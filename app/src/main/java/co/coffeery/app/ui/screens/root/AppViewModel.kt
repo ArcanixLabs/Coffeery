@@ -27,20 +27,27 @@ import co.coffeery.app.data.model.ThemeMode
 import co.coffeery.app.data.repo.CoffeeRepository
 import co.coffeery.app.ui.screens.log.Achievement
 import co.coffeery.app.ui.screens.log.checkAchievements
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 import java.util.UUID
+import androidx.lifecycle.SavedStateHandle
 
 /** Immutable UI state for the whole app (unidirectional data flow). */
 data class AppUiState(
     val tab: NavTab = NavTab.BREW,
     val route: Route = Route.Tabs,
+    val backStack: List<Route> = emptyList(),
     val equipment: List<Equipment> = emptyList(),
     val recipes: List<RecipeEntity> = emptyList(),
     val selectedEquipmentId: String? = null,
@@ -69,12 +76,38 @@ data class AppUiState(
             ?: equipment.firstOrNull()
 }
 
-class AppViewModel(app: Application) : AndroidViewModel(app) {
+class AppViewModel(app: Application, private val savedStateHandle: SavedStateHandle = SavedStateHandle()) : AndroidViewModel(app) {
 
     private val repo = CoffeeRepository(app, AppDatabase.get(app))
 
-    private val _state = MutableStateFlow(AppUiState())
+    private val _state = MutableStateFlow(
+        run {
+            val restored = savedStateHandle.get<String>("nav_route")?.let { parseRoute(it) }
+            val stack = (savedStateHandle.get<ArrayList<String>>("nav_backstack") ?: savedStateHandle.get<List<String>>("nav_backstack"))?.mapNotNull { parseRoute(it) } ?: emptyList()
+            val tabKey = savedStateHandle.get<String>("nav_tab")
+            val tab = tabKey?.let { runCatching { NavTab.valueOf(it) }.getOrNull() }
+            var s = AppUiState()
+            if (tab != null) s = s.copy(tab = tab)
+            if (restored != null) s = s.copy(route = restored, backStack = stack)
+            else if (stack.isNotEmpty()) s = s.copy(backStack = stack)
+            s
+        }
+    )
     val state: StateFlow<AppUiState> = _state.asStateFlow()
+
+    private val _navEvents = MutableSharedFlow<Route>(extraBufferCapacity = 1)
+    val navEvents: SharedFlow<Route> = _navEvents.asSharedFlow()
+
+    val tabFlow: Flow<NavTab> = state.map { it.tab }.distinctUntilChanged()
+    val routeFlow: Flow<Route> = state.map { it.route }.distinctUntilChanged()
+    val equipmentFlow: Flow<List<Equipment>> = state.map { it.equipment }.distinctUntilChanged()
+    val brewLogsFlow: Flow<List<BrewLogEntity>> = state.map { it.brewLogs }.distinctUntilChanged()
+
+    private fun persistNav(s: AppUiState) {
+        savedStateHandle["nav_route"] = routeToKey(s.route)
+        savedStateHandle["nav_backstack"] = ArrayList(s.backStack.map { routeToKey(it) })
+        savedStateHandle["nav_tab"] = s.tab.name
+    }
 
     init {
         viewModelScope.launch {
@@ -163,31 +196,49 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     // --- Navigation ---
-    fun selectTab(tab: NavTab) = _state.update { it.copy(tab = tab, route = Route.Tabs) }
-    fun openRoute(route: Route) = _state.update { it.copy(route = route) }
-    fun back() = _state.update { it.copy(route = Route.Tabs) }
-
-    // --- Brew parameters ---
-    fun selectEquipment(id: String) = _state.update { s ->
-        val eq = s.equipment.firstOrNull { it.id == id }
-        s.copy(
-            selectedEquipmentId = id,
-            strength = eq?.defaultStrength ?: s.strength,
-            tab = NavTab.BREW,
-            route = Route.Tabs,
-        )
+    fun selectTab(tab: NavTab) {
+        _state.update { s -> s.copy(tab = tab, route = Route.Tabs, backStack = emptyList()).also { persistNav(it) } }
+    }
+    fun openRoute(route: Route) {
+        _state.update { s ->
+            if (s.route == route) s else s.copy(backStack = s.backStack + s.route, route = route).also { persistNav(it) }
+        }
+        _navEvents.tryEmit(route)
+    }
+    fun back() {
+        _state.update { s ->
+            if (s.backStack.isNotEmpty()) s.copy(route = s.backStack.last(), backStack = s.backStack.dropLast(1)).also { persistNav(it) }
+            else s.copy(route = Route.Tabs, backStack = emptyList()).also { persistNav(it) }
+        }
+    }
+    fun canGoBack(): Boolean = _state.value.backStack.isNotEmpty() || _state.value.route !is Route.Tabs
+    fun handleDeepLink(routeKey: String?) {
+        val r = routeKey?.let { parseRoute(it) } ?: return
+        openRoute(r)
+    }
+    fun handleIntent(intent: Intent?) {
+        val key = intent?.getStringExtra("route") ?: intent?.getStringExtra("deeplink_route") ?: return
+        handleDeepLink(key)
     }
 
-    fun selectCategoryEquipment(category: BrewCategory) = _state.update { s ->
+    // --- Brew parameters (explicit navigation) ---
+    fun selectEquipmentOnly(id: String) = _state.update { s ->
+        val eq = s.equipment.firstOrNull { it.id == id }
+        s.copy(selectedEquipmentId = id, strength = eq?.defaultStrength ?: s.strength)
+    }
+    fun navigateToBrew() = _state.update { s -> s.copy(tab = NavTab.BREW, route = Route.Tabs, backStack = emptyList()).also { persistNav(it) } }
+    fun selectEquipment(id: String) {
+        selectEquipmentOnly(id)
+        navigateToBrew()
+    }
+    fun selectEquipmentAndNavigateToBrew(id: String) = selectEquipment(id)
+    fun selectCategoryEquipmentOnly(category: BrewCategory) = _state.update { s ->
         val eq = s.equipment.firstOrNull { it.category == category }
-        if (eq != null) {
-            s.copy(
-                selectedEquipmentId = eq.id,
-                strength = eq.defaultStrength,
-                tab = NavTab.BREW,
-                route = Route.Tabs,
-            )
-        } else s
+        if (eq != null) s.copy(selectedEquipmentId = eq.id, strength = eq.defaultStrength) else s
+    }
+    fun selectCategoryEquipment(category: BrewCategory) {
+        selectCategoryEquipmentOnly(category)
+        navigateToBrew()
     }
 
     fun setStrength(v: Float) = _state.update { it.copy(strength = v) }
@@ -265,7 +316,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             waterMl = r.waterMl,
             tab = NavTab.BREW,
             route = Route.Tabs,
-        )
+            backStack = emptyList(),
+        ).also { persistNav(it) }
     }
 
     // --- Custom equipment ---
@@ -289,7 +341,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     hasBloom = defaults.hasBloom,
                 )
             )
-            _state.update { it.copy(route = Route.Tabs, tab = NavTab.GEAR) }
+            _state.update { it.copy(route = Route.Tabs, tab = NavTab.GEAR, backStack = emptyList()).also { persistNav(it) } }
         }
     }
 
@@ -432,7 +484,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             waterMl = log.waterMl,
             tab = NavTab.BREW,
             route = Route.Tabs,
-        )
+            backStack = emptyList(),
+        ).also { persistNav(it) }
     }
 
     companion object {
@@ -440,9 +493,30 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T =
-                    AppViewModel(app) as T
+                    AppViewModel(app, SavedStateHandle()) as T
             }
     }
+}
+
+private fun routeToKey(route: Route): String = when (route) {
+    is Route.Tabs -> "Tabs"
+    is Route.AddEquipment -> "AddEquipment"
+    is Route.Timer -> "Timer"
+    is Route.Settings -> "Settings"
+    is Route.LearnDetail -> "LearnDetail/${route.cardIndex}"
+    is Route.DrinkDetail -> "DrinkDetail/${route.index}"
+    is Route.BeanDetail -> "BeanDetail/${route.beanId}"
+}
+
+private fun parseRoute(key: String): Route? = when {
+    key == "Tabs" -> Route.Tabs
+    key == "AddEquipment" -> Route.AddEquipment
+    key == "Timer" -> Route.Timer
+    key == "Settings" -> Route.Settings
+    key.startsWith("LearnDetail/") -> key.substringAfter("/").toIntOrNull()?.let { Route.LearnDetail(it) }
+    key.startsWith("DrinkDetail/") -> key.substringAfter("/").toIntOrNull()?.let { Route.DrinkDetail(it) }
+    key.startsWith("BeanDetail/") -> key.substringAfter("/").toLongOrNull()?.let { Route.BeanDetail(it) }
+    else -> null
 }
 
 private suspend fun <T> Flow<T>.collectSafely(action: suspend (T) -> Unit) {

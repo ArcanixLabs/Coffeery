@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 
 @Composable
 fun CremaMascot(mood: String = "happy", modifier: Modifier = Modifier.size(64.dp)) {
@@ -33,11 +34,16 @@ fun CremaMascot(mood: String = "happy", modifier: Modifier = Modifier.size(64.dp
         "excited" -> 700
         else -> 900
     }
+    val reduced = LocalPrefersReducedMotion.current
     val t = rememberInfiniteTransition(label = "crema")
-    val bob by t.animateFloat(initialValue = -2f, targetValue = 2f, animationSpec = infiniteRepeatable(tween(bobDuration, easing = androidx.compose.animation.core.FastOutSlowInEasing), RepeatMode.Reverse), label = "bob")
-    val sway by t.animateFloat(initialValue = -3f, targetValue = 3f, animationSpec = infiniteRepeatable(tween(1100), RepeatMode.Reverse), label = "sway")
-    val blink by t.animateFloat(initialValue = 1f, targetValue = 1f, animationSpec = infiniteRepeatable(keyframes { durationMillis = 3200; 1f at 0; 1f at 2600; 0.08f at 2700; 1f at 2800 }, RepeatMode.Restart), label = "blink")
-    val steamPhase by t.animateFloat(initialValue = 0f, targetValue = 1f, animationSpec = infiniteRepeatable(tween(steamDuration), RepeatMode.Restart), label = "steam")
+    val bobRaw by t.animateFloat(initialValue = -2f, targetValue = 2f, animationSpec = infiniteRepeatable(tween(bobDuration, easing = androidx.compose.animation.core.FastOutSlowInEasing), RepeatMode.Reverse), label = "bob")
+    val swayRaw by t.animateFloat(initialValue = -3f, targetValue = 3f, animationSpec = infiniteRepeatable(tween(1100), RepeatMode.Reverse), label = "sway")
+    val blinkRaw by t.animateFloat(initialValue = 1f, targetValue = 1f, animationSpec = infiniteRepeatable(keyframes { durationMillis = 3200; 1f at 0; 1f at 2600; 0.08f at 2700; 1f at 2800 }, RepeatMode.Restart), label = "blink")
+    val steamRaw by t.animateFloat(initialValue = 0f, targetValue = 1f, animationSpec = infiniteRepeatable(tween(steamDuration), RepeatMode.Restart), label = "steam")
+    val bob = if (reduced) 0f else bobRaw
+    val sway = if (reduced) 0f else swayRaw
+    val blink = if (reduced) 1f else blinkRaw
+    val steamPhase = if (reduced) 0f else steamRaw
     val eyeScale = if (mood == "sleepy") 1f else blink
     Canvas(modifier = modifier.graphicsLayer { translationY = bob; rotationZ = sway }.size(64.dp)) {
         val w = size.width

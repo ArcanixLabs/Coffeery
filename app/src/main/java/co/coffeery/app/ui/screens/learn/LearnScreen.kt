@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -85,20 +86,28 @@ fun LearnScreen(vm: AppViewModel) {
 
     LaunchedEffect(Unit) {
         val saved = state.learnScrollOffset
-        if (saved >= 100000) {
-            val idx = saved / 100000
-            val off = saved % 100000
-            lazyState.scrollToItem(idx.coerceAtLeast(0).coerceAtMost(200), off)
+        val idx: Int
+        val off: Int
+        if (saved >= 1_000_000) {
+            idx = saved / 1_000_000
+            off = saved % 1_000_000
+        } else if (saved >= 100000) {
+            idx = saved / 100000
+            off = saved % 100000
         } else {
-            lazyState.scrollToItem(saved.coerceAtLeast(0).coerceAtMost(200))
+            idx = saved
+            off = 0
         }
+        val safeIdx = idx.coerceAtLeast(0).coerceAtMost(500)
+        val safeOff = off.coerceAtLeast(0).coerceAtMost(1_000_000)
+        lazyState.scrollToItem(safeIdx, safeOff)
     }
 
     DisposableEffect(Unit) {
         onDispose {
             val idx = lazyState.firstVisibleItemIndex
-            val off = lazyState.firstVisibleItemScrollOffset
-            vm.setLearnScrollOffset(idx * 100000 + off)
+            val off = lazyState.firstVisibleItemScrollOffset.coerceAtMost(999_999)
+            vm.setLearnScrollOffset(idx * 1_000_000 + off)
         }
     }
     LazyColumn(
@@ -152,7 +161,7 @@ fun LearnScreen(vm: AppViewModel) {
                     val filteredIdx = filteredCards.indexOfFirst { it.chapterRes == ch }
                     if (filteredIdx != -1) {
                         val headersBefore = filteredCards.take(filteredIdx).map { it.chapterRes }.distinct().size
-                        val staticCount = 16
+                        val staticCount = listOf("header", "todays", "quiz", "search", "stepMap", "troubleshoot", "protips", "quickRatio", "grindSize", "brewTroubleshooter", "flavorWheel", "extractionCalc", "waterMineral", "glossary", "foodPairing", "cultureFacts").size
                         val target = staticCount + filteredIdx + headersBefore + 1
                         scope.launch {
                             lazyState.animateScrollToItem(target.coerceAtLeast(0))
@@ -189,8 +198,15 @@ fun LearnScreen(vm: AppViewModel) {
         item(key = "waterMineral", contentType = "tool") {
             WaterMineralCard()
         }
-        item(key = "glossary", contentType = "glossary") {
-            GlossaryCard()
+        item(key = "glossary_header", contentType = "glossary") {
+            GlossaryHeaderCard()
+        }
+        items(
+            count = GlossaryTerms.size,
+            key = { idx -> "glossary_${GlossaryTerms[idx].termRes}" },
+            contentType = { "glossaryTerm" }
+        ) { idx ->
+            GlossaryTermItem(term = GlossaryTerms[idx])
         }
         item(key = "foodPairing", contentType = "glossary") {
             FoodPairingCard()
@@ -390,6 +406,10 @@ private fun ProTipsCard() {
         R.string.pro_tip_51, R.string.pro_tip_52, R.string.pro_tip_53, R.string.pro_tip_54,
         R.string.pro_tip_55, R.string.pro_tip_56, R.string.pro_tip_57, R.string.pro_tip_58,
         R.string.pro_tip_59, R.string.pro_tip_60,
+        R.string.pro_tip_61, R.string.pro_tip_62, R.string.pro_tip_63, R.string.pro_tip_64,
+        R.string.pro_tip_65, R.string.pro_tip_66, R.string.pro_tip_67, R.string.pro_tip_68,
+        R.string.pro_tip_69, R.string.pro_tip_70, R.string.pro_tip_71, R.string.pro_tip_72,
+        R.string.pro_tip_73, R.string.pro_tip_74, R.string.pro_tip_75,
     )
     var current by remember { mutableStateOf(kotlin.random.Random.nextInt(tips.size)) }
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
@@ -654,6 +674,11 @@ private val GlossaryTerms = listOf(
     GlossaryTerm(R.string.glossary_term_93, R.string.glossary_def_93),
     GlossaryTerm(R.string.glossary_term_94, R.string.glossary_def_94),
     GlossaryTerm(R.string.glossary_term_95, R.string.glossary_def_95),
+    GlossaryTerm(R.string.glossary_term_96, R.string.glossary_def_96),
+    GlossaryTerm(R.string.glossary_term_97, R.string.glossary_def_97),
+    GlossaryTerm(R.string.glossary_term_98, R.string.glossary_def_98),
+    GlossaryTerm(R.string.glossary_term_99, R.string.glossary_def_99),
+    GlossaryTerm(R.string.glossary_term_100, R.string.glossary_def_100),
 )
 
 private data class FlavorCategory(val labelRes: Int, val notes: List<Int>)
@@ -693,6 +718,30 @@ private fun FlavorWheelCard() {
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun GlossaryHeaderCard() {
+    val colors = CoffeeTheme.colors
+    CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.BOOK, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText(stringResource(R.string.glossary_title), style = CoffeeTheme.type.title)
+        }
+        Spacer(Modifier.height(4.dp))
+        AppText(stringResource(R.string.learn_intro), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+    }
+}
+
+@Composable
+private fun GlossaryTermItem(term: GlossaryTerm) {
+    val colors = CoffeeTheme.colors
+    CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+        AppText(stringResource(term.termRes), style = CoffeeTheme.type.headline)
+        Spacer(Modifier.height(2.dp))
+        AppText(stringResource(term.defRes), style = CoffeeTheme.type.caption, color = colors.textSecondary)
     }
 }
 

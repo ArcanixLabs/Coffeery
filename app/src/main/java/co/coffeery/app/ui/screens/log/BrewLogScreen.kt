@@ -25,9 +25,15 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -40,12 +46,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.components.CoffeeDialog
 import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
+import kotlinx.coroutines.delay
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import co.coffeery.app.R
 import co.coffeery.app.data.local.BrewLogEntity
@@ -194,6 +202,8 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
     val colors = CoffeeTheme.colors
     val today = LocalDate.now()
     val mondayOfThisWeek = today.with(DayOfWeek.MONDAY)
+    var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
+    var selectedCount by remember { mutableIntStateOf(0) }
 
     val countsByDate by remember(brewLogs) {
         derivedStateOf {
@@ -251,11 +261,11 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
                             }
                             val idx = col * 7 + row
                             val reduced = LocalPrefersReducedMotion.current
-                            val cellAlpha by animateFloatAsState(
-                                targetValue = 1f,
-                                animationSpec = if (reduced) tween(0) else tween(durationMillis = CoffeeMotion.normal, delayMillis = idx * 20, easing = CoffeeMotion.emphasized),
-                                label = "heatmap$idx",
-                            )
+                            val anim = remember(idx) { Animatable(if (reduced) 1f else 0f) }
+                            LaunchedEffect(reduced) {
+                                if (reduced) anim.snapTo(1f) else { delay(idx * 18L); anim.animateTo(1f, tween(CoffeeMotion.normal, easing = CoffeeMotion.emphasized)) }
+                            }
+                            val cellAlpha = anim.value
                             Box(
                                 modifier = Modifier
                                     .size(14.dp)
@@ -267,7 +277,8 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
                                         if (!isFuture && count == 0)
                                             Modifier.border(1.dp, colors.outline, RoundedCornerShape(3.dp))
                                         else Modifier
-                                    ),
+                                    )
+                                    .clickable(enabled = !isFuture) { selectedDate = date; selectedCount = count },
                             )
                         }
                     }
@@ -300,6 +311,14 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
             Spacer(Modifier.width(2.dp))
             AppText("3+", style = CoffeeTheme.type.caption, color = colors.textSecondary)
         }
+        if (selectedDate != null) {
+            CoffeeDialog(onDismiss = { selectedDate = null }) {
+                val fmt = java.time.format.DateTimeFormatter.ofPattern("d MMM yyyy", Locale.getDefault())
+                AppText(selectedDate!!.format(fmt), style = CoffeeTheme.type.label, color = colors.textPrimary)
+                Spacer(Modifier.height(4.dp))
+                AppText(if (selectedCount == 0) stringResource(R.string.log_brew_count) + " 0" else "$selectedCount brew" + if (selectedCount > 1) "s" else "", style = CoffeeTheme.type.body, color = colors.textSecondary)
+            }
+        }
     }
 }
 
@@ -315,6 +334,7 @@ private fun StreakBanner(streak: Int) {
         animationSpec = if (reduced) tween(0) else CoffeeMotion.counter,
         label = "streakCount",
     )
+    val pulse by rememberInfiniteTransition(label = "streakPulse").animateFloat(initialValue = 1f, targetValue = if (reduced || streak == 0) 1f else 1.08f, animationSpec = if (reduced || streak == 0) infiniteRepeatable(tween(1000), RepeatMode.Restart) else infiniteRepeatable(tween(CoffeeMotion.slow), RepeatMode.Reverse), label = "pulse")
     AccentStripeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -322,11 +342,11 @@ private fun StreakBanner(streak: Int) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                AppText("${animatedStreak.toInt()}", style = CoffeeTheme.type.number, color = colors.accent, modifier = Modifier.graphicsLayer(scaleX = 1f, scaleY = 1f))
+                AppText("${animatedStreak.toInt()}", style = CoffeeTheme.type.number, color = colors.accent, modifier = Modifier.graphicsLayer(scaleX = pulse, scaleY = pulse))
                 Spacer(Modifier.width(8.dp))
                 AppText(label, style = CoffeeTheme.type.body, color = colors.textSecondary)
             }
-            LineIcon(Glyph.FLAME, colors.accent, Modifier.size(28.dp))
+            LineIcon(Glyph.FLAME, colors.accent, Modifier.size(28.dp).graphicsLayer(scaleX = pulse, scaleY = pulse))
         }
         Spacer(Modifier.height(4.dp))
         Row(
@@ -704,13 +724,26 @@ private fun CaffeineContent(brewLogs: List<BrewLogEntity>) {
     }
 
     if (todayLogs.isEmpty()) {
-        Spacer(Modifier.height(40.dp))
-        AppText(
-            stringResource(R.string.caffeine_none),
-            style = CoffeeTheme.type.body,
-            color = colors.textSecondary,
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp),
-        )
+        Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            Spacer(Modifier.height(24.dp))
+            CremaMascot(mood = "sleepy", modifier = Modifier.size(96.dp))
+            Spacer(Modifier.height(12.dp))
+            AppText(
+                stringResource(R.string.caffeine_none),
+                style = CoffeeTheme.type.body,
+                color = colors.textSecondary,
+                modifier = Modifier.fillMaxWidth(),
+                align = TextAlign.Center,
+            )
+            Spacer(Modifier.height(8.dp))
+            AppText(
+                stringResource(R.string.log_empty_sub),
+                style = CoffeeTheme.type.caption,
+                color = colors.textSecondary,
+                modifier = Modifier.fillMaxWidth(),
+                align = TextAlign.Center,
+            )
+        }
         return
     }
 

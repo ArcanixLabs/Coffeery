@@ -2,22 +2,33 @@ package co.coffeery.app.ui.screens.root
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.Crossfade
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +44,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.semantics.Role
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -46,6 +58,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.material3.CircularProgressIndicator
 import co.coffeery.app.BuildConfig
 import co.coffeery.app.R
 import co.coffeery.app.data.model.Palette
@@ -60,21 +73,28 @@ import co.coffeery.app.ui.components.PrimaryButton
 import co.coffeery.app.ui.components.ScreenHeader
 import co.coffeery.app.ui.components.SecondaryButton
 import co.coffeery.app.ui.components.SegmentedControl
+import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 import co.coffeery.app.ui.theme.coffeeBackground
 import co.coffeery.app.ui.theme.paletteColors
 import co.coffeery.app.util.CloudBackupManager
 import kotlinx.coroutines.launch
 
+private enum class PendingCloudAction { BACKUP, RESTORE }
+
 @Composable
 fun SettingsScreen(vm: AppViewModel) {
     val state by vm.state.collectAsStateWithLifecycle()
     val ctx = LocalContext.current
+    val appCtx = ctx.applicationContext
     val colors = CoffeeTheme.colors
     var showImportDialog by remember { mutableStateOf(false) }
-    val cloud = remember { CloudBackupManager(ctx) }
+    val cloud = remember(appCtx) { CloudBackupManager(appCtx) }
     var cloudSignedIn by remember { mutableStateOf(cloud.isSignedIn()) }
+    var cloudBusy by remember { mutableStateOf(false) }
+    var pendingAction by remember { mutableStateOf<PendingCloudAction?>(null) }
     val cloudEmail = remember(cloudSignedIn) { cloud.getAccountEmail() ?: "" }
     val scope = rememberCoroutineScope()
 
@@ -87,15 +107,40 @@ fun SettingsScreen(vm: AppViewModel) {
         }
     }
 
+    fun handleCloudResult(result: Result<String>, onSuccess: () -> Unit, rl: androidx.activity.result.ActivityResultLauncher<Intent>) {
+        if (result.isSuccess) {
+            onSuccess()
+        } else {
+            val ex = result.exceptionOrNull()
+            val recoverIntent = cloud.consumeRecoverableIntent() ?: (ex as? CloudBackupManager.RecoverableAuthException)?.intent
+            if (recoverIntent != null) {
+                try {
+                    rl.launch(recoverIntent)
+                } catch (e: Exception) {
+                    android.widget.Toast.makeText(ctx, ctx.getString(R.string.cloud_error_exception, e.javaClass.simpleName, e.message ?: ctx.getString(R.string.cloud_error_unknown)), android.widget.Toast.LENGTH_LONG).show()
+                }
+            } else {
+                val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
+                android.util.Log.e("Coffeery", "Cloud operation failed: $msg", ex)
+                android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
     val signInLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        cloud.handleSignInResult(result.data) { success, msg ->
+        cloud.handleSignInResult(result.data) { success, _ ->
             cloudSignedIn = success
             if (success) {
                 scope.launch {
+                    cloudBusy = true
                     val json = vm.getExportJson()
-                    cloud.backupToDrive(ctx as android.app.Activity, json)
+                    val backupResult = cloud.backupToDrive(json)
+                    handleCloudResult(backupResult, {
+                        android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
+                    }, recoverLauncher)
+                    cloudBusy = false
                 }
             }
         }
@@ -103,9 +148,73 @@ fun SettingsScreen(vm: AppViewModel) {
 
     val recoverLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
-    ) { _ ->
-        cloud.clearRecoverableIntent()
-        android.widget.Toast.makeText(ctx, "Permission granted — please retry backup", android.widget.Toast.LENGTH_SHORT).show()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            cloud.consumeRecoverableIntent()
+            android.widget.Toast.makeText(ctx, ctx.getString(R.string.settings_cloud_retry_hint), android.widget.Toast.LENGTH_SHORT).show()
+            scope.launch {
+                cloudBusy = true
+                when (pendingAction) {
+                    PendingCloudAction.BACKUP -> {
+                        val json = vm.getExportJson()
+                        val r = cloud.backupToDrive(json)
+                        if (r.isSuccess) android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
+                        else {
+                            val ex = r.exceptionOrNull()
+                            val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
+                            android.util.Log.e("Coffeery", "Retry backup failed: $msg", ex)
+                            android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    PendingCloudAction.RESTORE -> {
+                        val r = cloud.restoreFromDrive()
+                        if (r.isSuccess) {
+                            vm.importFromJsonString(ctx, r.getOrDefault(""))
+                            android.widget.Toast.makeText(ctx, R.string.settings_cloud_restore_done, android.widget.Toast.LENGTH_SHORT).show()
+                        } else {
+                            val ex = r.exceptionOrNull()
+                            val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
+                            android.util.Log.e("Coffeery", "Retry restore failed: $msg", ex)
+                            android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    null -> {
+                        val json = vm.getExportJson()
+                        val r = cloud.backupToDrive(json)
+                        if (r.isSuccess) android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
+                        else {
+                            val ex = r.exceptionOrNull()
+                            val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
+                            android.util.Log.e("Coffeery", "Retry backup failed: $msg", ex)
+                            android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+                cloudBusy = false
+            }
+        } else {
+            cloud.clearRecoverableIntent()
+            android.widget.Toast.makeText(ctx, ctx.getString(R.string.settings_cloud_error), android.widget.Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    val signInLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        cloud.handleSignInResult(result.data) { success, _ ->
+            cloudSignedIn = success
+            if (success) {
+                scope.launch {
+                    cloudBusy = true
+                    val json = vm.getExportJson()
+                    val backupResult = cloud.backupToDrive(json)
+                    handleCloudResult(backupResult, {
+                        android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
+                    }, recoverLauncher)
+                    cloudBusy = false
+                }
+            }
+        }
     }
 
     Column(
@@ -129,45 +238,58 @@ fun SettingsScreen(vm: AppViewModel) {
                 modifier = Modifier.fillMaxWidth(),
             )
             Spacer(Modifier.height(12.dp))
+            val spacing = CoffeeTheme.spacing
+            val prefersReducedMotion = LocalPrefersReducedMotion.current
+            val systemDark = isSystemInDarkTheme()
+            val darkTheme = when (state.themeMode) {
+                ThemeMode.SYSTEM -> systemDark
+                ThemeMode.LIGHT -> false
+                ThemeMode.DARK -> true
+            }
             AppText(stringResource(R.string.settings_palette), style = CoffeeTheme.type.body, color = colors.textPrimary)
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(spacing.s))
             LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(end = 4.dp),
+                horizontalArrangement = Arrangement.spacedBy(spacing.m),
+                contentPadding = PaddingValues(horizontal = spacing.l, vertical = spacing.m),
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 items(Palette.entries) { palette ->
                     val isSelected = palette == state.palette
-                    val swatchColors = remember(palette) { paletteColors(palette, false) }
+                    val swatchColors = remember(palette, darkTheme) { paletteColors(palette, darkTheme) }
                     val borderWidth by animateDpAsState(
-                        targetValue = if (isSelected) 2.dp else 0.dp,
-                        animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
+                        targetValue = if (isSelected) 2.5.dp else 1.dp,
+                        animationSpec = if (prefersReducedMotion) tween(0) else CoffeeMotion.cardExpand,
                         label = "borderWidth",
                     )
                     val borderColor by animateColorAsState(
-                        targetValue = if (isSelected) swatchColors.accent else androidx.compose.ui.graphics.Color.Transparent,
-                        animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
+                        targetValue = if (isSelected) swatchColors.accent else swatchColors.outline,
+                        animationSpec = if (prefersReducedMotion) tween(0) else CoffeeMotion.cardExpand,
                         label = "borderColor",
                     )
                     val scale by animateFloatAsState(
-                        targetValue = if (isSelected) 0.97f else 1f,
-                        animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
+                        targetValue = if (isSelected) 1.02f else 1f,
+                        animationSpec = if (prefersReducedMotion) tween(durationMillis = 0) else CoffeeMotion.cardExpand,
                         label = "scale",
                     )
                     Box(
                         modifier = Modifier
-                            .width(148.dp)
-                            .height(108.dp)
+                            .width(160.dp)
+                            .height(110.dp)
                             .graphicsLayer { scaleX = scale; scaleY = scale }
                             .clip(CoffeeShapes.small)
                             .border(borderWidth, borderColor, CoffeeShapes.small)
                             .coffeeBackground(swatchColors)
-                            .clickable { vm.setPalette(palette) },
+                            .selectable(
+                                selected = isSelected,
+                                role = Role.RadioButton,
+                                onClick = { vm.setPalette(palette) },
+                            ),
                         contentAlignment = Alignment.Center,
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center,
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp),
+                            modifier = Modifier.padding(horizontal = spacing.s, vertical = spacing.s),
                         ) {
                             Box(
                                 modifier = Modifier
@@ -176,12 +298,12 @@ fun SettingsScreen(vm: AppViewModel) {
                                     .clip(RoundedCornerShape(10.dp))
                                     .background(swatchColors.surfaceElevated)
                                     .border(1.dp, swatchColors.outline, RoundedCornerShape(10.dp))
-                                    .padding(7.dp),
+                                    .padding(spacing.s),
                                 contentAlignment = Alignment.Center,
                             ) {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                                    verticalArrangement = Arrangement.spacedBy(spacing.xs),
                                     modifier = Modifier.align(Alignment.Center),
                                 ) {
                                     Box(
@@ -199,7 +321,7 @@ fun SettingsScreen(vm: AppViewModel) {
                                             .background(swatchColors.accentSoft),
                                     )
                                     Row(
-                                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                        horizontalArrangement = Arrangement.spacedBy(spacing.xs),
                                         verticalAlignment = Alignment.CenterVertically,
                                     ) {
                                         Box(
@@ -233,8 +355,8 @@ fun SettingsScreen(vm: AppViewModel) {
                                     )
                                 }
                             }
-                            Spacer(Modifier.height(8.dp))
-                            Crossfade(targetState = isSelected, label = "paletteLabel") { selected ->
+                            Spacer(Modifier.height(spacing.s))
+                            AnimatedContent(targetState = isSelected, label = "paletteLabel") { selected ->
                                 AppText(
                                     stringResource(palette.labelRes),
                                     style = CoffeeTheme.type.caption,
@@ -242,30 +364,33 @@ fun SettingsScreen(vm: AppViewModel) {
                                 )
                             }
                         }
-                        if (isSelected) {
-                            Crossfade(targetState = isSelected, label = "check") { _ ->
+                        AnimatedVisibility(
+                            visible = isSelected,
+                            enter = if (prefersReducedMotion) EnterTransition.None else fadeIn(tween(150)) + scaleIn(tween(150), initialScale = 0.8f),
+                            exit = if (prefersReducedMotion) ExitTransition.None else fadeOut(tween(150)) + scaleOut(tween(150)),
+                            modifier = Modifier.align(Alignment.TopEnd),
+                            label = "check",
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .padding(spacing.s)
+                                    .size(18.dp)
+                                    .clip(CircleShape)
+                                    .background(swatchColors.accent),
+                                contentAlignment = Alignment.Center,
+                            ) {
                                 Box(
                                     modifier = Modifier
-                                        .align(Alignment.TopEnd)
-                                        .padding(6.dp)
-                                        .size(18.dp)
+                                        .size(6.dp)
                                         .clip(CircleShape)
-                                        .background(swatchColors.accent),
-                                    contentAlignment = Alignment.Center,
-                                ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .size(7.dp)
-                                            .clip(CircleShape)
-                                            .background(swatchColors.onAccent),
-                                    )
-                                }
+                                        .background(swatchColors.onAccent),
+                                )
                             }
                         }
                     }
                 }
             }
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(spacing.m))
             AppText(stringResource(R.string.settings_temperature), style = CoffeeTheme.type.body, color = colors.textPrimary)
             Spacer(Modifier.height(8.dp))
             SegmentedControl(
@@ -402,6 +527,13 @@ fun SettingsScreen(vm: AppViewModel) {
         }
 
         SettingsSection(R.string.settings_cloud_title) {
+            if (cloudBusy) {
+                Row(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 2.dp, color = colors.accent)
+                    Spacer(Modifier.width(12.dp))
+                    AppText(stringResource(R.string.settings_cloud_working), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                }
+            }
             if (cloudSignedIn) {
                 AppText(
                     stringResource(R.string.settings_cloud_signed_as, cloudEmail),
@@ -410,50 +542,39 @@ fun SettingsScreen(vm: AppViewModel) {
                 )
                 Spacer(Modifier.height(12.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                    SecondaryButton(stringResource(R.string.settings_cloud_backup), Modifier.weight(1f)) {
+                    SecondaryButton(stringResource(R.string.settings_cloud_backup), Modifier.weight(1f), enabled = !cloudBusy) {
+                        val act = ctx as? Activity ?: return@SecondaryButton
+                        pendingAction = PendingCloudAction.BACKUP
                         scope.launch {
+                            cloudBusy = true
                             val json = vm.getExportJson()
-                            val result = cloud.backupToDrive(ctx as android.app.Activity, json)
-                            if (result.isSuccess) android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
-                            else {
-                                val ex = result.exceptionOrNull()
-                                val recoverIntent = cloud.consumeRecoverableIntent() ?: (ex as? CloudBackupManager.RecoverableAuthException)?.intent
-                                if (recoverIntent != null) {
-                                    try { recoverLauncher.launch(recoverIntent) } catch (e: Exception) { android.widget.Toast.makeText(ctx, "Authorization required: ${e.message}", android.widget.Toast.LENGTH_LONG).show() }
-                                } else {
-                                    val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
-                                    android.util.Log.e("Coffeery", "Backup failed: $msg", ex)
-                                    android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
-                                }
-                            }
+                            val result = cloud.backupToDrive(json)
+                            handleCloudResult(result, {
+                                android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
+                            }, recoverLauncher)
+                            cloudBusy = false
                         }
                     }
                 }
                 Spacer(Modifier.height(8.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                    SecondaryButton(stringResource(R.string.settings_cloud_restore), Modifier.weight(1f)) {
+                    SecondaryButton(stringResource(R.string.settings_cloud_restore), Modifier.weight(1f), enabled = !cloudBusy) {
+                        pendingAction = PendingCloudAction.RESTORE
                         scope.launch {
-                            val result = cloud.restoreFromDrive(ctx)
-                            if (result.isSuccess) {
-                                vm.importFromJsonString(ctx, result.getOrDefault(""))
+                            cloudBusy = true
+                            val result = cloud.restoreFromDrive()
+                            handleCloudResult(result, {
+                                val data = result.getOrDefault("")
+                                vm.importFromJsonString(ctx, data)
                                 android.widget.Toast.makeText(ctx, R.string.settings_cloud_restore_done, android.widget.Toast.LENGTH_SHORT).show()
-                            } else {
-                                val ex = result.exceptionOrNull()
-                                val recoverIntent = cloud.consumeRecoverableIntent() ?: (ex as? CloudBackupManager.RecoverableAuthException)?.intent
-                                if (recoverIntent != null) {
-                                    try { recoverLauncher.launch(recoverIntent) } catch (e: Exception) { android.widget.Toast.makeText(ctx, "Authorization required: ${e.message}", android.widget.Toast.LENGTH_LONG).show() }
-                                } else {
-                                    val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
-                                    android.util.Log.e("Coffeery", "Restore failed: $msg", ex)
-                                    android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
-                                }
-                            }
+                            }, recoverLauncher)
+                            cloudBusy = false
                         }
                     }
                 }
                 Spacer(Modifier.height(12.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                    SecondaryButton(stringResource(R.string.settings_cloud_signout), Modifier.weight(1f)) {
+                    SecondaryButton(stringResource(R.string.settings_cloud_signout), Modifier.weight(1f), enabled = !cloudBusy) {
                         cloud.signOut(cloud.getSignInClient())
                         cloudSignedIn = false
                     }
@@ -462,6 +583,7 @@ fun SettingsScreen(vm: AppViewModel) {
                 PrimaryButton(
                     stringResource(R.string.settings_cloud_signin),
                     modifier = Modifier.fillMaxWidth(),
+                    enabled = !cloudBusy,
                 ) {
                     val client = cloud.getSignInClient()
                     signInLauncher.launch(cloud.getSignInIntent(client))

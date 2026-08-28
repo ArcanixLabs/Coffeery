@@ -70,6 +70,8 @@ private fun buildNotification(context: Context): Notification {
 
     val openIntent = Intent(context, MainActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        putExtra("route", "Timer")
+        putExtra("deeplink_route", "Timer")
     }
     val openPending = PendingIntent.getActivity(
         context, 1, openIntent,

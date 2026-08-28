@@ -96,7 +96,7 @@ CI builds both debug and release APKs on every push and uploads them as artifact
 ./gradlew assembleRelease    # release APK (R8 minified)
 ```
 
-Keystore: `app/debug.keystore` is checked in for consistent Google Sign-In SHA-1 in CI. Replace `default_web_client_id` in `strings.xml` with your OAuth Web Client ID for real sign-in.
+Keystore: `app/debug.keystore` is checked in for consistent Google Sign-In SHA-1 in CI. Set `google_server_client_id` in `local.properties` (or `GOOGLE_SERVER_CLIENT_ID` env) — also available as `BuildConfig.GOOGLE_SERVER_CLIENT_ID`; the `google_server_client_id` string resource remains as fallback for real sign-in.
 
 ## License
 

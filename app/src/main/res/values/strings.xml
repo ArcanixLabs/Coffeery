@@ -974,6 +974,28 @@
     <string name="equip_phin_large_tag">Large single-cup drip</string>
     <string name="equip_clever_xl_name">Clever XL</string>
     <string name="equip_clever_xl_tag">Large immersion, 350 ml</string>
+    <string name="equip_other_name">Other Brewer</string>
+    <string name="equip_other_tag">Custom method</string>
+    <string name="equip_hoop_name">Ceado Hoop</string>
+    <string name="equip_hoop_tag">Zero-bypass ring brew</string>
+    <string name="equip_paragon_name">Nucleus Paragon</string>
+    <string name="equip_paragon_tag">Chilled-rock espresso</string>
+    <string name="equip_melodrip_name">Melodrip</string>
+    <string name="equip_melodrip_tag">Gentle lift pour</string>
+    <string name="equip_december_name">December Dripper</string>
+    <string name="equip_december_tag">Flat-bottom, Dec 1</string>
+    <string name="equip_hario_switch_name">Hario Switch</string>
+    <string name="equip_hario_switch_tag">Hybrid immersion switch</string>
+    <string name="equip_aeropress_xl_name">AeroPress XL</string>
+    <string name="equip_aeropress_xl_tag">Double capacity press</string>
+    <string name="equip_flair58_name">Flair 58</string>
+    <string name="equip_flair58_tag">Manual 58 mm lever</string>
+    <string name="equip_nanopresso_name">Wacaco Nanopresso</string>
+    <string name="equip_nanopresso_tag">Handheld pump espresso</string>
+    <string name="equip_phoenix70_name">Phoenix 70</string>
+    <string name="equip_phoenix70_tag">70 mm flat-bed</string>
+    <string name="equip_lunar_name">NextLevel Lunar</string>
+    <string name="equip_lunar_tag">Gravity-fed lunar</string>
 
     <!-- Search -->
     <string name="search_hint_equipment">Search brewers…</string>
@@ -1111,6 +1133,37 @@
     <string name="drink_affogato_iced_name">Iced Affogato</string>
     <string name="drink_affogato_iced_summary">Modern twist — affogato over ice with cold brew shot</string>
     <string name="drink_affogato_iced_body">A modern iced twist on the classic affogato: vanilla gelato served over ice with a chilled espresso shot poured tableside, lighter and more refreshing than the hot original.\n\nIngredients:\n• Double espresso, chilled (~50 ml)\n• 1 large scoop vanilla gelato\n• 3–4 ice cubes\n\nSteps:\n1. Place gelato and ice in a chilled glass.\n2. Pull espresso and chill briefly or use cold brew concentrate.\n3. Pour the cold espresso over the gelato and ice.\n4. Serve with a spoon and straw — stir lightly before sipping.</string>
+
+        <string name="learn_l111_title">Scale calibration &amp; tare drift</string>
+    <string name="learn_l111_body" formatted="false">Your 0.1 g scale is a precision instrument that drifts with temperature, tilt, battery voltage and dust. Heat from a cup warps the load cell causing tare drift of 0.3–0.5 g, battery sag under 3.2 V adds 1–2% error, and an unlevel surface skews readings by the cosine of the tilt angle. Calibrate monthly with a certified 100 g, 200 g or 500 g weight: power-cycle, tare to zero, place weight centrally, verify ±0.1 g. Rules: power-cycle before dosing, never tare mid-pour, keep the scale away from the kettle\'s steam, and replace batteries at 20% remaining. A calibrated scale turns ratio from guesswork into repeatability — 18.0 g vs 18.5 g is a full 3% strength shift.</string>
+    <string name="learn_l112_title">Mg vs Ca: the hardness split</string>
+    <string name="learn_l112_body">General hardness (GH) is not one number — it is calcium plus magnesium, and they extract differently. Mg²⁺ binds flavour compounds more aggressively, boosting perceived acidity, fruit and brightness; Ca²⁺ contributes more to body, mouthfeel and crema stability but mutes sparkle. The ideal GH 50–175 ppm at 40–75 ppm alkalinity (KH) is SCA shorthand, but the Ca:Mg ratio matters: a magnesium-heavy water brightens washed Ethiopians, a calcium-heavy water rounds chocolatey Brazils. Use Epsom salt (MgSO₄) to add Mg, calcium chloride or gypsum (CaSO₄) to add Ca, and baking soda (NaHCO₃) to set KH buffer. Hard water extracts more but scales boilers; soft water highlights acidity but risks hollow cups. Tailor your Mg:Ca to the coffee, not just the machine.</string>
+    <string name="learn_l113_title">SCA Cupping 2024 &amp; the CVA</string>
+    <string name="learn_l113_body">In 2024 the SCA retired the 2004 100-point cupping form and launched the Coffee Value Assessment (CVA) — a double-track system separating descriptive assessment from hedonic scoring. The old form compressed quality, processing innovation and sustainability into a single number; the CVA splits them: the Descriptive Assessment captures fragrance, aroma, flavour, aftertaste, acidity, sweetness, mouthfeel and balance without a score, while the Affective Assessment scores overall impression 0–100. Crucially, co-ferments, anaerobics and thermal-shock lots are now evaluated with processing context, and extrinsic value (farm information, sustainability) is scored separately. For home cuppers the practical takeaway is to taste descriptively first — note what you taste — then decide whether you like it, rather than collapsing both into one impression.</string>
+    <string name="learn_l114_title">Defect taints: phenol, ferment &amp; rubber</string>
+    <string name="learn_l114_body">Beyond sour/bitter/weak, some off-notes are true defect taints you should learn to name blind. Phenolic (medicinal,Band-Aid, iodine) comes from microbial contamination during drying on polluted patios or over-fermentation; potato defect (raw potato, earthy-bacterial) is caused by Antestia-bug bacteria in East African naturals, famously in Rwandan lots; ferment (vinegar, overripe fruit, boozy) indicates uncontrolled anaerobic activity before drying; baggy/hay (jute sack, straw, cardboard) signals past-crop aging or moisture abuse raising Aw above 0.65. Severity matters: clean defect-free 84+ cups have none; a faint ferment taint costs 2–4 points on the CVA scale, a strong phenol costs 4–6 and the lot is commercial grade. If your bag tastes like iodine or raw potato, it is not your brew — it is the green.</string>
+    <string name="learn_l115_title">Pressure profiling espresso</string>
+    <string name="learn_l115_body">Classic 9 bar constant-pressure espresso is only one profile. Modern profiling machines (Decent, Synesso, La Marzocco Strada) and lever groups vary pressure across the shot to manipulate which compounds extract when. Typical profiles: 2–3 s pre-infusion at 2–3 bar to saturate the puck and heal micro-cracks, ramp to 8–9 bar for the core extraction, then decline to 5–6 bar in the final third to avoid dragging bitter, dry tail-end solubles. Low-pressure bloom profiles (6 bar flat) reduce channeling on light roasts; high-pressure spikes boost body on traditional Italian blends. Flow profiling is the inverse: fix flow at 1–2 ml/s and let pressure float. The result is not magic — profiling buys forgiveness on problematic coffee — but a Declining profile consistently tastes sweeter and less astringent than a flat 9 bar shot of the same dose.</string>
+    <string name="learn_l116_title">Burr alignment &amp; zero point</string>
+    <string name="learn_l116_body">Bur accuracy means little if the burrs are not parallel. A misaligned flat burr set by 0.02 mm produces half-moon particle distribution and channeling even at the right grind setting. Symptoms: shot times swing 4–6 s between identical doses, you need impossibly fine settings, and the bed looks pockmarked after extraction. To find zero: with the grinder off and burrs clean, slowly close the gap while spinning by hand until you hear the first chirp — that is burr kiss, your absolute zero. Note the dial/mark, then back off to your brew setting (filter typically 8–12 notches from zero, espresso 3–5). For flat burrs, marker-test the burrs: coat one with dry-erase, kiss, and inspect the wipe pattern — even wipe means aligned. Shimming with foil fixes many commercial grinders.</string>
+    <string name="learn_l117_title">Water activity (Aw) &amp; storage</string>
+    <string name="learn_l117_body" formatted="false">Water activity (Aw) is not moisture content — it is the free, unbound water available to microbes, measured 0–1. Green coffee at 10–12% moisture can still be unstable if Aw is above 0.60–0.65: mould, ochratoxin and baggy flavour develop long before the beans feel damp. Importers target Aw 0.55–0.59 for long storage; above 0.65 germination and fungal risk spike, below 0.50 beans turn brittle, pale and lose aromatics. GrainPro hermetic liners hold Aw stable for 9–12 months by sealing out humid ambient air; jute alone cannot. At home, roasted coffee is hygroscopic — store in airtight, opaque, cool containers; never in the hopper; freeze only in sealed single doses and thaw sealed to avoid condensation re-hydrating the beans.</string>
+    <string name="learn_l118_title">Rate of Rise (ROR) in roasting</string>
+    <string name="learn_l118_body">Rate of Rise is the per-minute rise of bean temperature during roasting, the roaster\'s speedometer. A textbook roast shows ROR steadily declining from ~12°C/min after drying to 4–6°C/min at drop; any rise late in the roast is a flick, any sharp crash is a crash. A rising ROR near first crack scorches the surface while underdeveloping the core, producing roasty-bitter and grassy flavours simultaneously. A crashing ROR stalls caramelisation and bakes the coffee flat and bready. Roasters control ROR with gas/airflow: reduce heat before first crack, increase airflow to carry smoke away, and aim for a gently declining curve. For brewers, a smooth ROR predicts sweetness and clarity; a flick predicts ashy aftertaste you cannot brew away.</string>
+    <string name="learn_l119_title">Milk protein chemistry</string>
+    <string name="learn_l119_body" formatted="false">Milk texture is protein engineering. Whey proteins (beta-lactoglobulin, alpha-lactalbumin) denature at ~72°C, unfolding and wrapping air bubbles to create stable microfoam; casein micelles add body but scatter poorly. Fat interferes — whole milk (3.5% fat) needs slower aeration than skim, but tastes sweeter because lactose concentrates. Temperature window 55–65°C is ideal: below 50°C proteins are under-denatured and foam collapses, above 70°C whey over-denatures, squeezes water out, and the scalded milk tastes flat and soapy. Oat barista milks mimic dairy by adding rapeseed oil and dipotassium phosphate to stabilise foam. Secret: let steamed milk rest 20 s, tap out large bubbles, swirl to a wet-paint sheen — that is polymerised protein, not air.</string>
+    <string name="learn_l120_title">Extraction yield &amp; refractometry</string>
+    <string name="learn_l120_body" formatted="false">Extraction yield is mass balance, not taste opinion. Dissolve 18 g dose into 300 g beverage at 1.35% TDS: yield = TDS × beverage mass / dose = 0.0135 × 300 / 18 = 22.5% — at the top of the ideal 18–22% window. Below 18% tastes sour, salty and hollow; above 22% bitter, dry and ashy. A VST or Atago refractometer measures TDS via light refraction; zero it with distilled water at brew temperature, filter the sample through a 0.45 µm syringe filter, cool to 20°C, and read. Clean the prism every time — residual oils drift readings by 0.05% TDS, equal to a full 1% yield error. Track ratio, TDS and yield together on the SCA Brewing Control Chart instead of changing grind blindly.</string>
+    <string name="learn_l121_title">Grind retention &amp; single dosing</string>
+    <string name="learn_l121_body">Grind retention is the grams of yesterday\'s coffee still inside your grinder, mixing into today\'s dose — from 0.1 g in single-dose zero-retention grinders to 5–12 g in hopper-fed commercial grinders. Retention stales: oxidised fines migrate into the next shot, adding flat, woody baggy notes you cannot diagnose because you blame the new beans. Single dosing (weigh 18 g, grind with blower or bellows, purge) solves it but introduces exchange: the last bean through is the least ground — add 0.5 g seasoning purge when switching beans or settings. Blow out with a bellows hopper or Eureka bellows, and run the grinder for 1 s after dosing to clear the chute. The cleanest shot is always the second after a purge.</string>
+    <string name="learn_l122_title">Triangulation &amp; sensory calibration</string>
+    <string name="learn_l122_body">Triangulation is the fastest way to calibrate your palate: present three cups — two identical, one different — and ask the taster to pick the odd one out blind. 7 correct out of 9 is statistically significant (p&lt;0.05). Use it to test grind changes (coarse vs fines), water (tap vs filtered), roast level, or brew temperature. Procedure: brew all three at the same ratio and TDL, label A/B/C under cups, randomise, sip at 55°C. Q-graders pass nine triangulation sets of different acids, leaven and salt standards. At home, cup three mugs every Sunday — you will learn discrimination in weeks instead of months, and your recipe notes stop saying \'better\' and start saying \'more citric acidity, less body\'.</string>
+    <string name="learn_l123_title">Refractometer hygiene &amp; temperature</string>
+    <string name="learn_l123_body" formatted="false">A refractometer is only as good as its discipline. Workflow: filter 2 ml through a paper or 0.45 µm syringe filter to remove oils and fines, cool to 18–22°C (refraction is temperature-sensitive; hot coffee reads 0.10–0.15% high), place 4–5 drops on a dry prism, close the cover, wait 10 s, read. After each sample, rinse with distilled water, wipe fully dry, and zero-check: distilled water must read 0.00% ±0.02%, otherwise recalibrate. Prism scratches scatter light and bias low; oils raise baseline. Log dose, beverage mass, TDS and computed yield = TDS × mass / dose for every brew — within ten paired readings you will know your grinder\'s true extraction ceiling.</string>
+    <string name="learn_l124_title">Bypass brewing science</string>
+    <string name="learn_l124_body">Bypass is deliberate dilution: brew a concentrated slurry then add water after, controlling strength without dragging extraction into bitterness. AeroPress recipes brewed at 1:10 then diluted to 1:16 taste sweeter than a straight 1:16 pour-over of the same coffee because the lower water-to-coffee ratio limits extraction. Intentional bypass (Hoffmann AeroPress, bypass Bloom variants) is a tool; unintentional bypass (water streaming around the V60 filter edge, gap between filter and dripper wall, or a folded filter pleat) is a defect that weakens without increasing yield — your cup tastes thin and under-developed simultaneously. Zero-bypass drippers (Tricolate, Ceado Hoop) seal the edge to prove the difference.</string>
+    <string name="learn_l125_title">Q-Grader expanded calibration</string>
+    <string name="learn_l125_body">A Q-Grader is not a coffee sommelier — it is a calibrated instrument. The classic Q-course requires passing 22 exams: olfactory leeks tests, four acid kits, salt/sweet thresholds, 8 triangle tests, and three 6-sample cupping calibrations against the group mean. Since the 2024 CVA, expanded scope adds phenol, potato and ferment taint identification at 2× threshold, plus descriptive vs affective scoring. Re-calibration every three years keeps graders aligned; individual palate drift of ±1.5 points is normal and why panels cup, not individuals. For enthusiasts, the lesson is to cup with others and average — your personal bias toward acidity or body skews solo scoring more than you think.</string>
 
     <!-- Coffee varieties -->
     <string name="variety_typica_name">Arabica Typica</string>
@@ -1350,6 +1403,24 @@
     <string name="settings_cloud_restore">Restore from Drive</string>
     <string name="settings_cloud_backup_done">Backup saved to Drive</string>
     <string name="settings_cloud_restore_done">Data restored. Restart the app.</string>
+    <string name="settings_cloud_working">Working…</string>
+    <string name="settings_cloud_retry_hint">Permission granted — retrying</string>
+    <string name="cloud_error_12500">Error 12500: Check Support Email in OAuth consent screen, and SHA-1 matches</string>
+    <string name="cloud_error_12501">Error 12501: Sign-in cancelled or Web Client ID mismatch</string>
+    <string name="cloud_error_10">Error 10: SHA-1 fingerprint mismatch. Run ./gradlew signingReport</string>
+    <string name="cloud_error_8">Error 8: Network error. Check internet connection.</string>
+    <string name="cloud_error_13">Error 13: Play Services outdated. Update Google Play Services.</string>
+    <string name="cloud_error_15">Error 15: Wrong package name or SHA-1</string>
+    <string name="cloud_error_generic">Error %1$d: %2$s</string>
+    <string name="cloud_error_unknown">Unknown</string>
+    <string name="cloud_error_exception">Error: %1$s — %2$s</string>
+    <string name="cloud_error_not_signed_in">Not signed in — please sign in with Google first</string>
+    <string name="cloud_error_auth_failed">Authorization failed (%1$d) — please sign in again</string>
+    <string name="cloud_error_404">Backup not found (404)</string>
+    <string name="cloud_error_429">Too many requests (429) — please retry shortly</string>
+    <string name="cloud_error_drive">Drive error %1$d: %2$s</string>
+    <string name="cloud_error_network">Network error — check internet connection: %1$s</string>
+    <string name="cloud_error_no_backup">No backup found in Drive</string>
     <string name="bean_detail_title">Bean Details</string>
     <string name="bean_detail_roast_date">Roast date</string>
     <string name="bean_detail_process">Process</string>
@@ -1624,5 +1695,62 @@ Steps:
     <string name="pro_tip_58">Gibraltar vs cortado: the difference is the glass wall thickness. Thin cortado glasses lose heat fast; the thick Libbey Gibraltar holds temperature, so shots stay sweet 30 seconds longer.</string>
     <string name="pro_tip_59">Gulf qahwa should never boil. Keep it at 85–92°C for 15 minutes with the lid cracked — boiling strips cardamom aromatics and turns the pale gold murky.</string>
     <string name="pro_tip_60">Kyoto cold drip: fix the drip rate before adding ice. Set 1 drop/sec with water only, then load ice — ice melt shifts rate, so re-check after 10 minutes and adjust.</string>
+
+    <string name="drink_carajillo_name">Carajillo</string>
+    <string name="drink_carajillo_summary">Spanish after-dinner cocktail — espresso with brandy, rum, or Licor 43</string>
+    <string name="drink_carajillo_body">Spanish after-dinner coffee cocktail — espresso with brandy, rum, or Licor 43, served over ice or hot. Legend says Spanish soldiers in Cuba drank this for courage (\'coraje\'). Modern version often includes a citrus peel twist.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• 1 shot Licor 43, brandy, or rum (~30 ml)\n• Ice (for iced version)\n• Optional: citrus peel twist\n\nSteps:\n1. Pull a fresh espresso shot.\n2. Hot version: add the spirit directly to the espresso and stir.\n3. Iced version: shake espresso and spirit with ice for 10–15 seconds, strain over fresh ice.\n4. Garnish with a citrus peel twist.\n5. Serve immediately — the name means \'courage\' in Spanish.</string>
+    <string name="drink_nitro_cold_brew_name">Nitro Cold Brew</string>
+    <string name="drink_nitro_cold_brew_summary">Silky cascade cold brew charged with nitrogen</string>
+    <string name="drink_nitro_cold_brew_body">Nitro cold brew is cold brew kegged and infused with pure nitrogen through a stout faucet, creating a cascading, Guinness-like pour with a creamy, velvety head without any dairy. The nitrogen bubbles are smaller than CO₂ and mute acidity, making the coffee taste sweeter, rounder and noticeably more mouth-filling than still cold brew.\n\nIngredients:\n• 100 g coarse coffee to 1 L cold water, steeped 16–18 h, filtered\n• Food-grade nitrogen (N₂) at 30–40 psi\n• Stout / nitro faucet or whipped-cream charger (N₂O as substitute)\n\nSteps:\n1. Make strong cold brew concentrate (1:10) and dilute to drinking strength.\n2. Keg it, chill to 2–4°C, charge with N₂ and shake to dissolve.\n3. Pour hard through a stout faucet — the cascade forms as N₂ comes out of solution.\n4. Serve immediately — no ice, no stirring; the foam is the drink.</string>
+    <string name="drink_flat_white_xl_name">Flat White XL</string>
+    <string name="drink_flat_white_xl_summary">Double-strength flat white in a larger cup — Melbourne meets Seattle</string>
+    <string name="drink_flat_white_xl_body">A larger, bolder flat white for those who want flat-white texture without the small cup constraint: double ristretto base with proportionally more steamed milk, served in a 240 ml cup but keeping the tight 1:3 coffee-to-milk ratio that defines a flat white.\n\nIngredients:\n• 2 double ristretto shots (~60 ml)\n• ~180 ml steamed milk with microfoam\n• Total: ~240 ml\n\nSteps:\n1. Pull two double ristrettos into a large cup.\n2. Steam milk to glossy microfoam (more volume than a standard flat white, same technique).\n3. Pour to integrate — the extra shot keeps intensity despite the larger milk volume.</string>
+    <string name="drink_kopi_gu_you_name">Kopi Gu You</string>
+    <string name="drink_kopi_gu_you_summary">Malaysian butter coffee — coffee roasted with butter and sugar</string>
+    <string name="drink_kopi_gu_you_body">Kopi Gu You (butter coffee) is Malaysia\'s kopitiam classic: Robusta beans roasted with butter/margarine and sugar until glossy and caramelised, then brewed through a cloth sock and sweetened with condensed milk. The butter adds a rich, almost buttery cookie sweetness that defines the Malaysian coffee shop.\n\nIngredients:\n• 20 g Kopi Gu You roast (butter-roasted Robusta), medium-coarse\n• 180 ml water, 96°C\n• 1–2 tbsp condensed milk\n• Cloth sock filter\n\nSteps:\n1. Brew coffee through the cloth sock — pour, steep 3–4 min, pull sock.\n2. Stir in condensed milk.\n3. Serve hot; optionally over ice as Kopi Gu You Peng.</string>
+    <string name="drink_cold_brew_tonic_name">Cold Brew Tonic</string>
+    <string name="drink_cold_brew_tonic_summary">Bright cold brew over tonic water with citrus</string>
+    <string name="drink_cold_brew_tonic_body">Cold brew tonic is the refreshing summer bridge between coffee and cocktail: chilled cold brew layered over tonic water with ice and a citrus twist, where quinine bitterness sings with coffee\'s fruit.\n\nIngredients:\n• 80 ml cold brew concentrate\n• 120 ml quality tonic water (Fever-Tree)\n• Ice\n• Orange or lemon peel\n\nSteps:\n1. Fill a glass with ice.\n2. Pour tonic water over ice first.\n3. Gently pour cold brew over the back of a spoon to layer.\n4. Express citrus peel over the drink and garnish.</string>
+    <string name="drink_honey_raf_name">Honey Raf</string>
+    <string name="drink_honey_raf_summary">Russian honey-cream latte — espresso steamed together with cream and honey</string>
+    <string name="drink_honey_raf_body">Raf coffee was born in Moscow\'s Coffee Bean in the late 1990s for a customer named Rafael: espresso, cream, vanilla and honey steamed together — not separately — creating a soufflé-like sweetness where honey sugars emulsify with milk fat mid-steam.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• 120 ml light cream (10–15% fat) or half-and-half\n• 1 tbsp honey\n• Pinch vanilla\n\nSteps:\n1. Add espresso, cream, honey and vanilla to the pitcher together.\n2. Steam together to 60–65°C — the joint steaming emulsifies honey into the foam.\n3. Pour into a cup — the foam should be glossy and marshmallow-soft.</string>
+    <string name="drink_cafezinho_aviacao_name">Cafezinho Aviacão</string>
+    <string name="drink_cafezinho_aviacao_summary">Brazilian cafezinho — strong, sweet, quick, served everywhere</string>
+    <string name="drink_cafezinho_aviacao_body">Cafezinho is Brazil\'s ubiquitous small sweet coffee: a very strong, dark-roast drip or cloth-filter brew sweetened while hot and served in a tiny 50 ml cup. The aviacao (aviation) style adds a splash of cachaça or rum — pilot\'s cafezinho.\n\nIngredients:\n• 15 g dark roast, fine\n• 150 ml water at 96°C\n• Sugar to taste (1–2 tsp)\n• Splash cachaça (aviacao variant)\n\nSteps:\n1. Brew strong coffee through a cloth filter (coador) or fine paper.\n2. Dissolve sugar while hot — it must be sweet.\n3. Add splash cachaça if aviacao.\n4. Serve in a 50–80 ml demitasse immediately.</string>
+    <string name="drink_sig_mazagran_name">Shakerato Mazagran</string>
+    <string name="drink_sig_mazagran_summary">Iced mazagran — Portuguese-Brazilian lemon cold brew</string>
+    <string name="drink_sig_mazagran_body">A shaker variant of mazagran heritage: strong cold brew or espresso shaken hard with ice, lemon and a touch of sugar — the original 19th-century French-Algerian coffee lemonade updated with specialty coffee.\n\nIngredients:\n• 60 ml strong cold brew\n• 60 ml fresh lemonade (or lemon + sugar)\n• Ice for shaking + serving\n\nSteps:\n1. Add cold brew, lemonade and ice to a shaker.\n2. Shake 10–15 s hard.\n3. Strain over fresh ice.\n4. Garnish lemon wheel.</string>
+    <string name="drink_berber_brew_name">Berber Brew</string>
+    <string name="drink_berber_brew_summary">North African spiced coffee — cardamom, cinnamon, cloves</string>
+    <string name="drink_berber_brew_body">Berber spiced coffee uses the warm spices of the Atlas Mountains: lightly roasted coffee brewed with cardamom, cinnamon, cloves and sometimes black pepper, representing the nomadic Berber café tradition.\n\nIngredients:\n• 15 g light roast, medium grind\n• 300 ml water\n• 2 cardamom pods, 1 cinnamon stick, 2 cloves\n• Sugar to taste\n\nSteps:\n1. Bring water, spices and sugar to a boil.\n2. Add coffee, reduce heat, simmer 3–4 min.\n3. Strain and serve hot; the spices should scent, not overpower.</string>
+    <string name="drink_cortado_iced_name">Iced Cortado</string>
+    <string name="drink_cortado_iced_summary">Chilled cortado — espresso over cold milk on ice</string>
+    <string name="drink_cortado_iced_body">An iced cortado keeps the 1:1 espresso-to-milk ratio but chilled: espresso shaken cold poured over cold milk and ice, preserving the cortado\'s balance without heat.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• 30 ml cold whole milk\n• Ice\n\nSteps:\n1. Chill espresso via shaker with ice or use cold brew concentrate.\n2. Fill small glass with ice, add cold milk.\n3. Pour espresso over — layer briefly then stir.\n4. Serve immediately.</string>
+
+    <string name="pro_tip_61">Bloom diagnosis: a vigorous, even dome at 30 s signals 5–14-day-old coffee; flat, patchy bloom says stale. Use it to set bloom time, not just to admire.</string>
+    <string name="pro_tip_62">Descale with sulfamic or citric acid, not vinegar — acetic acid attacks copper, brass and silicone gaskets while leaving scale behind.</string>
+    <string name="pro_tip_63">Freeze green in GrainPro at Aw 0.55–0.59: hermetic barrier beats jute for 9-month stability. At home, freeze roasted in single-dose vac bags, thaw sealed.</string>
+    <string name="pro_tip_64">ROR crash? Cut gas before first crack, not after — anticipatory heat management prevents the stall that bakes sweetness flat.</string>
+    <string name="pro_tip_65" formatted="false">Milk alternative tip: oat needs 15% less air than dairy — its added oil foams faster; stop stretching 2 s earlier than you would with whole milk.</string>
+    <string name="pro_tip_66">Keep your burrs at chirp-zero minus 10 for filter, minus 4 for espresso, and log clicks from zero — not from factory marks.</string>
+    <string name="pro_tip_67">CVA tasting at home: first note descriptors (fruity, sweet, clean), then separately score liking — never collapse both into one number.</string>
+    <string name="pro_tip_68">Taint check: cup at 93°C and again at 55°C — phenol and potato appear louder as coffee cools; hot hides them.</string>
+    <string name="pro_tip_69">Pre-infuse at 2 bar for 8 s on light roasts; the gentle soak evens density before full pressure hits.</string>
+    <string name="pro_tip_70" formatted="false">Refractometer zero every session with distilled water at 20°C; 0.02% drift equals 1% yield error — enough to chase a phantom fix.</string>
+    <string name="pro_tip_71">Purge 0.5 g after every grind change — retained fines pollute the first dose with yesterday\'s particle size.</string>
+    <string name="pro_tip_72">Triangulate monthly: invite a friend, randomise A/B/C cups, score blind. Your palate learns faster than solo sipping.</string>
+    <string name="pro_tip_73">Tare drift: power-cycle the scale after the kettle steams the counter — heat and humidity are invisible error sources.</string>
+    <string name="pro_tip_74">Bypass brewers: brew 1:10 concentrate then dilute — sweetness survives that straight 1:16 would over-extract into dryness.</string>
+    <string name="pro_tip_75">Q-Grader drift is real — cup in panels of three and average; solo scores wander ±1.5 even for certified graders.</string>
+    <string name="glossary_term_96">Dose Consistency</string>
+    <string name="glossary_def_96">Fix dose and adjust grind to change yield. Varying dose ±1 g shifts ratio and confuses diagnosis — lock dose, move grind.</string>
+    <string name="glossary_term_97">Pre-infusion</string>
+    <string name="glossary_def_97">Low-pressure soak (2–3 bar, 5–8 s) before full pressure. Heals cracks, evens saturation and reduces channeling on dense light roasts.</string>
+    <string name="glossary_term_98">Phenol Taint</string>
+    <string name="glossary_def_98">Medicinal Band-Aid / iodine off-note from microbial contamination on drying patios or polluted water. Strong phenol = commercial grade.</string>
+    <string name="glossary_term_99">Potato Defect</string>
+    <string name="glossary_def_99">Raw-potato / earthy-bacterial taint from Antestia-bug bacteria, classic in Rwandan naturals. Even at trace levels it ruins clean cup.</string>
+    <string name="glossary_term_100">Hermetic Storage</string>
+    <string name="glossary_def_100">Sealed barrier (GrainPro, Ecotact) holding Aw 0.55–0.59 against ambient humidity. Preserves green 9–12 months vs 3–4 in jute.</string>
 
 </resources>

@@ -98,11 +98,13 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 import kotlinx.coroutines.delay
@@ -110,9 +112,28 @@ import kotlinx.coroutines.delay
 @Composable
 fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
-    val eq = state.selectedEquipment ?: return
+    val eq = state.selectedEquipment
+    if (eq == null) {
+        BrewTimerEmpty(
+            title = stringResource(R.string.brew_title, stringResource(R.string.nav_brew)),
+            message = stringResource(R.string.log_empty_title),
+            cta = stringResource(R.string.equipment_add),
+            onCta = { vm.selectTab(co.coffeery.app.ui.screens.root.NavTab.GEAR) },
+            onBack = { vm.back() }
+        )
+        return
+    }
     val rawSteps = eq.steps
-    if (rawSteps.isEmpty()) return
+    if (rawSteps.isEmpty()) {
+        BrewTimerEmpty(
+            title = stringResource(R.string.brew_title, eq.displayName()),
+            message = stringResource(R.string.learn_troubleshoot_intro),
+            cta = stringResource(R.string.equipment_add),
+            onCta = { vm.selectTab(co.coffeery.app.ui.screens.root.NavTab.GEAR) },
+            onBack = { vm.back() }
+        )
+        return
+    }
     val steps = (if (state.settings.timerMergeWeight) mergePours(rawSteps) else rawSteps).map { step ->
         val override = when (step.kind) {
             StepKind.BLOOM -> state.settings.bloomDurationSec.takeIf { it > 0 }
@@ -238,7 +259,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                 if (state.settings.notificationsStepChange) {
                     val currentStep = steps[stepIndex]
                     val stepTitle = context.getString(currentStep.titleRes)
-                    sendNotification(context, "Next step", "Step ${stepIndex+1}/${steps.size}: $stepTitle")
+                    sendNotification(context, "Next step", "Step ${stepIndex+1}/${steps.size}: $stepTitle", "Timer")
                 }
             } else if (remaining <= 0) {
                 remaining = 0
@@ -276,7 +297,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                 playChime(2)
             }
             if (state.settings.notificationsBrewComplete) {
-                sendNotification(context, "Brew complete!", "Your $equipmentName is ready. Total time: ${Format.clock(elapsedTotal)}")
+                sendNotification(context, "Brew complete!", "Your $equipmentName is ready. Total time: ${Format.clock(elapsedTotal)}", "Timer")
             }
         }
     }
@@ -310,10 +331,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         val prefersReducedMotion = LocalPrefersReducedMotion.current
         val animatedProgress by animateFloatAsState(
             targetValue = targetProgress,
-            animationSpec = if (prefersReducedMotion) tween(0) else spring(
-                dampingRatio = 0.6f,
-                stiffness = 300f,
-            ),
+            animationSpec = if (prefersReducedMotion) tween(0) else CoffeeMotion.page,
             label = "ringProgress",
         )
 
@@ -341,7 +359,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                 val targetWidth = if (isCurrent) 32.dp else 8.dp
                 val animatedWidth by animateDpAsState(
                     targetValue = targetWidth,
-                    animationSpec = if (LocalPrefersReducedMotion.current) tween(0) else spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
+                    animationSpec = if (LocalPrefersReducedMotion.current) tween(0) else CoffeeMotion.cardExpand,
                     label = "dot$index",
                 )
                 Box(
@@ -464,11 +482,19 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            val hapticsHandsFree = rememberAppHaptics()
+            val hfInteraction = remember { MutableInteractionSource() }
+            val hfIsPressed by hfInteraction.collectIsPressedAsState()
+            val hfSx by animateFloatAsState(targetValue = if (hfIsPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "hfSx")
+            val hfSy by animateFloatAsState(targetValue = if (hfIsPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "hfSy")
             AppText(
                 stringResource(R.string.timer_hands_free),
                 style = CoffeeTheme.type.caption,
                 color = if (handsFree) colors.accent else colors.textSecondary,
-                modifier = Modifier.clickable { handsFree = !handsFree },
+                modifier = Modifier.clickable {
+                    hapticsHandsFree.tap()
+                    handsFree = !handsFree
+                },
             )
             val boxColor = if (handsFree) colors.accent else colors.outline
             Box(
@@ -476,9 +502,13 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                     .padding(start = 8.dp)
                     .sizeIn(minWidth = 48.dp, minHeight = 48.dp)
                     .size(24.dp)
+                    .graphicsLayer(scaleX = hfSx, scaleY = hfSy)
                     .clip(CoffeeShapes.small)
                     .background(boxColor)
-                    .clickable { handsFree = !handsFree },
+                    .clickable(interactionSource = hfInteraction, indication = null) {
+                        hapticsHandsFree.tap()
+                        handsFree = !handsFree
+                    },
                 contentAlignment = Alignment.Center,
             ) {
                 if (handsFree) {
@@ -549,22 +579,23 @@ private fun BrewComplete(
     val colors = CoffeeTheme.colors
     var showSave by remember { mutableStateOf(false) }
     val equipmentName = eq.displayName()
-    val glowScale by androidx.compose.animation.core.animateFloatAsState(
-        targetValue = 1.06f,
-        animationSpec = androidx.compose.animation.core.spring(dampingRatio = 0.5f, stiffness = 120f),
+    val reducedComplete = LocalPrefersReducedMotion.current
+    val glowScale by animateFloatAsState(
+        targetValue = if (reducedComplete) 1f else 1.06f,
+        animationSpec = if (reducedComplete) tween(0) else CoffeeMotion.cardExpand,
         label = "glowScale",
     )
     var showRain by remember { mutableStateOf(true) }
     val rainProgress by animateFloatAsState(
         targetValue = 1f,
-        animationSpec = tween(1800),
+        animationSpec = if (reducedComplete) tween(0) else tween(CoffeeMotion.slow * 4),
         label = "beanRain",
     )
-    LaunchedEffect(Unit) { delay(1800); showRain = false }
+    LaunchedEffect(Unit) { if (!reducedComplete) delay(1800); showRain = false }
     val beanSeeds = remember { List(18) { i -> Triple((i * 37 % 100) / 100f, (i * 61 % 80) / 100f, if (i % 2 == 0) 0 else 1) } }
 
     Box(modifier = Modifier.fillMaxWidth()) {
-        if (showRain) {
+        if (showRain && !reducedComplete) {
             Canvas(modifier = Modifier.fillMaxWidth().height(320.dp).align(Alignment.TopCenter)) {
                 val w = size.width
                 val h = size.height
@@ -742,14 +773,14 @@ private fun SaveBrewDialog(
                         } else if (i <= rating) {
                             if (i == rating) {
                                 starScale.snapTo(0.9f)
-                                starScale.animateTo(1.4f, animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMedium))
-                                starScale.animateTo(1f, animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMedium))
+                                starScale.animateTo(1.4f, animationSpec = CoffeeMotion.cardExpand)
+                                starScale.animateTo(1f, animationSpec = CoffeeMotion.press)
                             } else {
-                                starScale.animateTo(1f, animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow))
+                                starScale.animateTo(1f, animationSpec = CoffeeMotion.cardExpand)
                             }
                         } else {
-                            starScale.animateTo(0.95f, animationSpec = tween(120))
-                            starScale.animateTo(1f, animationSpec = tween(80))
+                            starScale.animateTo(0.95f, animationSpec = tween(CoffeeMotion.quick))
+                            starScale.animateTo(1f, animationSpec = tween(CoffeeMotion.quick))
                         }
                     }
                     AppText(
@@ -876,7 +907,27 @@ private fun SaveBrewDialog(
     }
 }
 
-private fun sendNotification(context: Context, title: String, body: String) {
+@Composable
+private fun BrewTimerEmpty(title: String, message: String, cta: String, onCta: () -> Unit, onBack: () -> Unit) {
+    Column(
+        modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        ScreenHeader(title = title, onBack = onBack)
+        Spacer(Modifier.height(40.dp))
+        co.coffeery.app.ui.components.CremaMascot(mood = "sleepy", modifier = Modifier.size(120.dp))
+        Spacer(Modifier.height(16.dp))
+        AppText(message, style = CoffeeTheme.type.title, color = CoffeeTheme.colors.textPrimary, align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+        Spacer(Modifier.height(8.dp))
+        AppText(stringResource(R.string.learn_troubleshoot_intro), style = CoffeeTheme.type.body, color = CoffeeTheme.colors.textSecondary, align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+        Spacer(Modifier.height(20.dp))
+        PrimaryButton(text = cta, modifier = Modifier.fillMaxWidth()) { onCta() }
+        Spacer(Modifier.height(10.dp))
+        SecondaryButton(text = stringResource(R.string.action_done), modifier = Modifier.fillMaxWidth()) { onBack() }
+    }
+}
+
+private fun sendNotification(context: Context, title: String, body: String, routeKey: String? = null) {
     try {
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -887,6 +938,8 @@ private fun sendNotification(context: Context, title: String, body: String) {
         }
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            if (routeKey != null) putExtra("route", routeKey)
+            putExtra("deeplink_route", routeKey ?: "Timer")
         }
         val pendingIntent = PendingIntent.getActivity(
             context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE

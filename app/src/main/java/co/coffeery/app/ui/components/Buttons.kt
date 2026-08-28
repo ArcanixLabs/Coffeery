@@ -18,8 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
 import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.ui.theme.CoffeeMotion
@@ -36,7 +34,6 @@ fun PrimaryButton(
 ) {
     val colors = CoffeeTheme.colors
     val haptics = rememberAppHaptics()
-    val hapticFeedback = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val sx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
@@ -49,7 +46,6 @@ fun PrimaryButton(
             .background(if (enabled) colors.accent else colors.outline)
             .clickable(enabled = enabled, interactionSource = interactionSource, indication = null) {
                 haptics.tap()
-                hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 onClick()
             }
             .padding(horizontal = 24.dp, vertical = 15.dp),
@@ -72,7 +68,6 @@ fun SecondaryButton(
 ) {
     val colors = CoffeeTheme.colors
     val haptics = rememberAppHaptics()
-    val hapticFeedback = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val sx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
@@ -86,7 +81,6 @@ fun SecondaryButton(
             .border(1.5.dp, colors.outline, CoffeeShapes.pill)
             .clickable(enabled = enabled, interactionSource = interactionSource, indication = null) {
                 haptics.tap()
-                hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 onClick()
             }
             .padding(horizontal = 24.dp, vertical = 15.dp),

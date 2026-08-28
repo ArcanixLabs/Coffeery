@@ -49,7 +49,7 @@ import co.coffeery.app.ui.theme.coffeeBackground
 @Composable
 fun RootScreen(vm: AppViewModel) {
     val state by vm.state.collectAsStateWithLifecycle()
-    BackHandler(enabled = state.route !is Route.Tabs) { vm.back() }
+    BackHandler(enabled = state.route !is Route.Tabs || state.backStack.isNotEmpty()) { vm.back() }
     CoffeeTheme(themeMode = state.themeMode, palette = state.palette) {
     if (!state.hasCompletedOnboarding) {
         OnboardingScreen(vm)

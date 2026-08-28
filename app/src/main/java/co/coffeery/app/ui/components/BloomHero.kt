@@ -10,7 +10,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,11 +35,13 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import co.coffeery.app.R
 import co.coffeery.app.data.model.Equipment
+import co.coffeery.app.ui.haptic.rememberAppHaptics
+import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
 import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
@@ -52,14 +55,16 @@ fun BloomHero(
     modifier: Modifier = Modifier,
 ) {
     val colors = CoffeeTheme.colors
+    val haptics = rememberAppHaptics()
     var phase by remember { mutableIntStateOf(0) }
+    val reducedPref = LocalPrefersReducedMotion.current
     val progress by animateFloatAsState(
         targetValue = when (phase) {
             0 -> 0.25f
             1 -> 0.6f
             else -> 1f
         },
-        animationSpec = tween(420, easing = co.coffeery.app.ui.theme.CoffeeMotion.emphasized),
+        animationSpec = if (reducedPref) tween(0) else tween(CoffeeMotion.slow, easing = CoffeeMotion.emphasized),
         label = "bloomProgress",
     )
     val phaseLabel = when (phase) {
@@ -67,7 +72,6 @@ fun BloomHero(
         1 -> stringResource(R.string.bloom_phase_bloom)
         else -> stringResource(R.string.bloom_phase_pour)
     }
-    val reduced = LocalPrefersReducedMotion.current
     val infinite = rememberInfiniteTransition(label = "bubbleDrift")
     val driftAnim by infinite.animateFloat(
         initialValue = 0f,
@@ -75,7 +79,11 @@ fun BloomHero(
         animationSpec = infiniteRepeatable(tween(1800, easing = LinearEasing), RepeatMode.Restart),
         label = "drift",
     )
-    val drift = if (reduced || phase != 1) 0f else driftAnim
+    val drift = if (reducedPref || phase != 1) 0f else driftAnim
+    val bloomInteraction = remember { MutableInteractionSource() }
+    val isBloomPressed by bloomInteraction.collectIsPressedAsState()
+    val bloomSx by animateFloatAsState(targetValue = if (isBloomPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "bloomPressX")
+    val bloomSy by animateFloatAsState(targetValue = if (isBloomPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "bloomPressY")
     CoffeeCard(modifier = modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             AppText(phaseLabel, style = CoffeeTheme.type.label, color = colors.accent)
@@ -87,10 +95,12 @@ fun BloomHero(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(112.dp)
+                .graphicsLayer(scaleX = bloomSx, scaleY = bloomSy)
                 .clip(CoffeeShapes.medium)
                 .background(colors.surface)
-                .pointerInput(Unit) {
-                    detectTapGestures { phase = (phase + 1) % 3 }
+                .clickable(interactionSource = bloomInteraction, indication = androidx.compose.foundation.LocalIndication.current) {
+                    haptics.tap()
+                    phase = (phase + 1) % 3
                 },
             contentAlignment = Alignment.Center,
         ) {
