@@ -499,7 +499,8 @@ class AppViewModel(app: Application, private val savedStateHandle: SavedStateHan
 
     fun applyBestRecipe(best: co.coffeery.app.ui.screens.log.BestRecipeSuggestion) {
         val eq = _state.value.equipment.firstOrNull { it.id == best.equipmentId }
-            ?: _state.value.equipment.firstOrNull { it.displayName() == best.equipmentName }
+            ?: _state.value.equipment.firstOrNull { it.id.equals(best.equipmentName, ignoreCase = true) }
+            ?: _state.value.equipment.firstOrNull { it.customName.equals(best.equipmentName, ignoreCase = true) }
             ?: return
         _state.update { s ->
             s.copy(
