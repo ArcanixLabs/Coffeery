@@ -20,11 +20,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.animateItem
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.Canvas
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -32,6 +34,9 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import co.coffeery.app.ui.haptic.rememberAppHaptics
+import co.coffeery.app.ui.theme.CoffeeMotion
+import kotlin.random.Random
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -200,6 +205,7 @@ fun BrewLogScreen(vm: AppViewModel) {
 @Composable
 private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
     val colors = CoffeeTheme.colors
+    val haptics = rememberAppHaptics()
     val today = LocalDate.now()
     val mondayOfThisWeek = today.with(DayOfWeek.MONDAY)
     var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
@@ -264,19 +270,25 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
                                 if (reduced) anim.snapTo(1f) else { delay(idx * 18L); anim.animateTo(1f, tween(CoffeeMotion.normal, easing = CoffeeMotion.emphasized)) }
                             }
                             val cellAlpha = anim.value
+                            val reducedHeat = LocalPrefersReducedMotion.current
+                            val beat by rememberInfiniteTransition(label = "beat$idx").animateFloat(initialValue = 1f, targetValue = if (reducedHeat || count < 3) 1f else 1.12f, animationSpec = if (count >= 3 && !reducedHeat) infiniteRepeatable(tween(420), RepeatMode.Reverse) else infiniteRepeatable(tween(1000), RepeatMode.Restart), label = "beat")
                             Box(
                                 modifier = Modifier
                                     .size(14.dp)
                                     .padding(1.dp)
                                     .clip(RoundedCornerShape(3.dp))
-                                    .graphicsLayer(alpha = cellAlpha, scaleX = 0.7f + cellAlpha * 0.3f, scaleY = 0.7f + cellAlpha * 0.3f)
+                                    .graphicsLayer(alpha = cellAlpha, scaleX = (0.7f + cellAlpha * 0.3f) * beat, scaleY = (0.7f + cellAlpha * 0.3f) * beat)
                                     .background(cellColor)
                                     .then(
                                         if (!isFuture && count == 0)
                                             Modifier.border(1.dp, colors.outline, RoundedCornerShape(3.dp))
                                         else Modifier
                                     )
-                                    .clickable(enabled = !isFuture) { selectedDate = date; selectedCount = count },
+                                    .clickable(enabled = !isFuture) {
+                                        if (count >= 3) haptics.tick()
+                                        else if (count > 0) haptics.tap()
+                                        selectedDate = date; selectedCount = count
+                                    },
                             )
                         }
                     }
@@ -324,6 +336,7 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
 private fun StreakBanner(streak: Int) {
     val colors = CoffeeTheme.colors
     val context = LocalContext.current
+    val haptics = rememberAppHaptics()
     val label = stringResource(R.string.streak_label)
     val subText = if (streak > 0) stringResource(R.string.streak_keep_going) else stringResource(R.string.streak_start)
     val reduced = LocalPrefersReducedMotion.current
@@ -333,39 +346,79 @@ private fun StreakBanner(streak: Int) {
         label = "streakCount",
     )
     val pulse by rememberInfiniteTransition(label = "streakPulse").animateFloat(initialValue = 1f, targetValue = if (reduced || streak == 0) 1f else 1.08f, animationSpec = if (reduced || streak == 0) infiniteRepeatable(tween(1000), RepeatMode.Restart) else infiniteRepeatable(tween(CoffeeMotion.slow), RepeatMode.Reverse), label = "pulse")
-    AccentStripeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                AppText("${animatedStreak.toInt()}", style = CoffeeTheme.type.number, color = colors.accent, modifier = Modifier.graphicsLayer(scaleX = pulse, scaleY = pulse))
-                Spacer(Modifier.width(8.dp))
-                AppText(label, style = CoffeeTheme.type.body, color = colors.textSecondary)
-            }
-            LineIcon(Glyph.FLAME, colors.accent, Modifier.size(28.dp).graphicsLayer(scaleX = pulse, scaleY = pulse))
+    var showConfetti by remember { mutableStateOf(false) }
+    LaunchedEffect(streak) {
+        if (streak >= 7 && !reduced) {
+            haptics.confirm()
+            showConfetti = true
+            delay(1800)
+            showConfetti = false
+        } else if (streak >= 7) {
+            haptics.confirm()
         }
-        Spacer(Modifier.height(4.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            AppText(subText, style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.weight(1f))
-            if (streak >= 7) {
-                val shareText = stringResource(R.string.log_share_streak_text, streak)
-                SecondaryButton(
-                    text = stringResource(R.string.log_share_streak),
-                    modifier = Modifier,
-                ) {
-                    val intent = Intent(Intent.ACTION_SEND).apply {
-                        type = "text/plain"
-                        putExtra(Intent.EXTRA_TEXT, shareText)
+    }
+    Box(modifier = Modifier.fillMaxWidth()) {
+        AccentStripeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    AppText("${animatedStreak.toInt()}", style = CoffeeTheme.type.number, color = colors.accent, modifier = Modifier.graphicsLayer(scaleX = pulse, scaleY = pulse))
+                    Spacer(Modifier.width(8.dp))
+                    AppText(label, style = CoffeeTheme.type.body, color = colors.textSecondary)
+                }
+                LineIcon(Glyph.FLAME, colors.accent, Modifier.size(28.dp).graphicsLayer(scaleX = pulse, scaleY = pulse))
+            }
+            Spacer(Modifier.height(4.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                AppText(subText, style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.weight(1f))
+                if (streak >= 7) {
+                    val shareText = stringResource(R.string.log_share_streak_text, streak)
+                    SecondaryButton(
+                        text = stringResource(R.string.log_share_streak),
+                        modifier = Modifier,
+                    ) {
+                        val intent = Intent(Intent.ACTION_SEND).apply {
+                            type = "text/plain"
+                            putExtra(Intent.EXTRA_TEXT, shareText)
+                        }
+                        context.startActivity(Intent.createChooser(intent, null))
                     }
-                    context.startActivity(Intent.createChooser(intent, null))
                 }
             }
+        }
+        if (showConfetti) {
+            StreakConfettiOverlay(modifier = Modifier.matchParentSize())
+        }
+    }
+}
+
+@Composable
+private fun StreakConfettiOverlay(modifier: Modifier = Modifier) {
+    val colors = CoffeeTheme.colors
+    data class Particle(val angle: Float, val dist: Float, val r: Float, val colIndex: Int, val shape: Int)
+    val particles = remember { List(14) { Particle(Random.nextFloat() * 360f, 18f + Random.nextFloat() * 42f, if (it % 2 == 0) 4.5f else 2.8f, it % 3, it % 2) } }
+    val anim = remember { Animatable(0f) }
+    LaunchedEffect(Unit) { anim.animateTo(1f, animationSpec = tween(durationMillis = 950, easing = CoffeeMotion.emphasized)) }
+    Canvas(modifier = modifier.fillMaxSize()) {
+        val cx = size.width / 2f
+        val cy = size.height / 2f
+        val p = anim.value
+        val alpha = (1f - p).coerceIn(0f, 1f)
+        particles.forEach { pt ->
+            val rad = Math.toRadians(pt.angle.toDouble()).toFloat()
+            val gravity = p * p * 28f
+            val x = cx + kotlin.math.cos(rad) * pt.dist * p * 1.6f
+            val y = cy + kotlin.math.sin(rad) * pt.dist * p * 1.2f + gravity
+            val col = when (pt.colIndex) { 0 -> colors.accent; 1 -> colors.cremaDark; else -> colors.accentSoft }
+            if (pt.shape == 0) drawCircle(col.copy(alpha = alpha * 0.95f), radius = pt.r, center = Offset(x, y))
+            else drawCircle(col.copy(alpha = alpha * 0.85f), radius = pt.r * 0.6f, center = Offset(x, y))
         }
     }
 }
@@ -447,7 +500,7 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
                     }
                 }
                 items(items = logs, key = { it.id }, contentType = { "logCard" }) { log ->
-                    BrewLogCard(log, state.equipment, vm)
+                    Box(modifier = Modifier.animateItem()) { BrewLogCard(log, state.equipment, vm) }
                 }
             }
         }

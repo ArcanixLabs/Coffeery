@@ -818,6 +818,10 @@
     <string name="palette_french_roast">French Roast</string>
     <string name="palette_vanilla_latte">Vanilla Latte</string>
     <string name="palette_pumpkin_spice">Balkabağı Baharatı</string>
+    <string name="palette_nordic_light">Nordic Light</string>
+    <string name="palette_kinetic">Kinetic</string>
+    <string name="palette_midnight_bloom">Midnight Bloom</string>
+    <string name="palette_aurora">Aurora</string>
     <string name="settings_temperature">Sıcaklık birimi</string>
     <string name="settings_language">Dil</string>
     <string name="settings_language_desc">Tam etki için değişiklik sonrası uygulamayı yeniden başlatın.</string>
@@ -1822,6 +1826,25 @@ Hazırlanışı:
     <string name="glossary_def_109">WDT iğneyle topak kırar; RDT öğütmeden önce su püskürterek statiği öldürür; Stockfleth parmakla düzler. Sıra: RDT → WDT → tamp.</string>
     <string name="glossary_term_110">Kör Üçgen</string>
     <string name="glossary_def_110">İkisi aynı bir farklı kör test. 9\'da 7 doğru anlamlıdır. Yıkanmış ve ballı işlemeyi önyargısız tatmak için kullanılır.</string>
+    <string name="glossary_term_111">Dondurulmuş Çekirdek Bilimi / –20 °C</string>
+    <string name="glossary_def_111" formatted="false">Çekirdeği tek porsiyon vakumlu poşette –20 °C\'de dondurmak bayatlamayı ~16× yavaşlatır ve öğütüm dağılımını %10–15 sıkılaştırır. Poşet kapalıyken oda sıcaklığına gelene kadar çözdür; asla tekrar dondurma; donmuş öğütmek homojenliği artırır.</string>
+    <string name="glossary_term_112">ROR / Gelişim Süresi Oranı</string>
+    <string name="glossary_def_112" formatted="false">ROR kavurma sırasında °C/dk artıştır — düzgün düşüş temizdir; çöküş veya sıçrama kusurdur. Gelişim süresi çatlak sonrası toplam sürenin %\'si: yıkanmış çiçeksi için %18–22, natural gövde için %22–26.</string>
+    <string name="glossary_term_113">Koji / Co-ferment Etiği</string>
+    <string name="glossary_def_113">Koji (Aspergillus oryzae) nişastayı şekere çevirip şeftali/sake notası katar; co-ferment meyveyle Fermantasyonda bütünleşir, infüzyon kavrum sonrası aroma ekler. Etik sınır etiket şeffaflığıdır.</string>
+    <string name="glossary_term_114">Kafe Dial-In</string>
+    <string name="glossary_def_114">Açılış akışı: kalıntıyı boşalt, 18 g / 36 g baz shot çek, sadece öğütümü ayarla, sonra oran (açık için 1:2.15, dengeli 1:2), kaydet ve her 30–45 dk\'da kontrol et.</string>
+    <string name="learn_l139_title">–20 °C\'de Dondurulmuş Çekirdek: Kriyojenik Saklama Bilimi</string>
+    <string name="learn_l139_body" formatted="false">–20 °C\'de dondurmak uçucu kaybını ve oksidasyonu durdurarak bayatlamayı oda sıcaklığına göre ~16× yavaşlatır. Christopher Hendon donmuş çekirdeklerin daha homojen kırıldığını, partikül dağılımını %10–15 sıkılaştırıp ekstraksiyonu eşitlediğini gösteriyor; Chahan Yeretzian çözülürken oluşan yoğuşmanın bunu yok ettiği uyarısını yapıyor. Protokol: çekirdekleri kavrumdan 7–14 gün sonra dinlendir, tek porsiyon hava geçirmez vakum poşetlere doldur, hemen dondur, oda sıcaklığına tamamen gelene (kapalı halde 2–3 saat) asla açma, asla tekrar dondurma, en iyi homojenlik için donmuş öğüt. Harika kahveyi toplu alıp 3 haftalık düşüş olmadan saklamak için ideal.</string>
+    <string name="learn_l140_title">Kavurma Eğrisi: ROR ve Gelişim Süresi Oranı</string>
+    <string name="learn_l140_body" formatted="false">Kavurma eğrisi çekirdek sıcaklığını zamana karşı çizer; Artış Hızı (ROR) °C/dk artıştır. Düzgün azalan bir ROR tatlılık ve berraklık öngörür; çöküş (ilk çatlama yakınında ROR\'un %40+ düşmesi) kahveyi fırınlanmış gibi yassılaştırır, sıçrama (çatlamadan sonra ROR\'un tekrar yükselmesi) kavuksu acılık ekler. Gelişim Süresi Oranı (DTR) çatlama sonrası sürenin toplam süreye oranıdır: yıkanmış Etiyopyalar yasemin ve narenciye için %18–22 DTR\'de parlar, ballı/natural\'ler yanmış şeker olmadan gövde için %22–26 ister. Hafif filtre kavrumları genelde toplam 9–11 dk ve ~%20 DTR\'de biter; espresso gelişimi 12–14 dk ve ~%23 DTR. Ev dersi: çökmüş ROR\'u demlemeyle düzeltemezsin — eğri yayınlayan veya fırınlanmışa karşı temiz fincan için kupaj yapan kavuruculardan al.</string>
+    <string name="learn_l141_title">Koji ve Co-ferment: Etik ve Lezzet</string>
+    <string name="learn_l141_body">Koji (Aspergillus oryzae) aşılaması sake\'den ödünç alınır, kahve kirazındaki nişastayı enzimatik olarak glikoza çevirerek şeftali, sake ve esmer şeker tatlılığı ile umami katar. Co-ferment kahveyi meyve, maya veya koji ile birlikte fermente eder, lezzet mikrobiyal metabolizmayla bütünleşir; infüzyon kavurma sonrası aroma ekler. SCA ve birçok yarışma artık co-fermentasyonu işleme inovasyonu, kavurma sonrası infüzyonu ise aromatizasyon olarak ayırır. Etik notlar: etiket şeffaflığı önemlidir — içici şeftalinin koji metabolizmasından mı şurupla mı geldiğini bilmeli, çiftçi prim payını almalı, jüriler maya aşılı lotları kusur diye cezalandırmamalı. Co-fermentleri 1:16 ve 2 °C daha serin tadın — daha hızlı çözünürler — ve yoğunluğun tercihinize uyup uymadığına karar verin.</string>
+    <string name="learn_l142_title">Kafe Dial-In Akışı: Açılıştan Servise</string>
+    <string name="learn_l142_body" formatted="false">Kafe ilk müşteride değil, kapı açılmadan önce dial-in yapar. Akış: 1) Gece kalan 2–3 g\'ı boşalt. 2) Kilitli 18 g / 36 g / 27 sn baz shot çek, tat ve verimi tart. 3) Sadece öğütümü ayarla — ekşi/hızlıysa 1 klik ince, acı/yavaşsa 1 klik kalın — tekrar çek. 4) Öğütümü kilitle, sonra oranı ince ayarla: çiçeksi açık için 1:2.15, dengeli için 1:2, çikolata ağırlıklı konfor için 1:1.7. 5) Süt dokusu ve sıcaklığını kontrol et (inek 60–65 °C, yulaf 55–60 °C) ve tarifi bara kaydet. Nem öğütümü kaydırdığı için her 30–45 dk\'da tekrar kontrol et. Ev çıkarımı: aynı tek değişken disipliniyle dial-in yap — doz kilitli, önce öğütüm, sonra oran — ve 3 shot kaydet; tek mükemmel shot\'ı kovalamaktan tutarlılık daha iyidir.</string>
+    <string name="drink_wac_aeropress_name">WAC Şampiyon AeroPress</string>
+    <string name="drink_wac_aeropress_summary">Dünya AeroPress Şampiyonası kazanan tarifi — ters, ince, 1:14, sert pres</string>
+    <string name="drink_wac_aeropress_body">Dünya AeroPress Şampiyonası (WAC) kazanan stili: ters AeroPress, ince öğütüm, kısa sıcak bloom, kağıttan sert presle şuruplu berraklık — 2023 şampiyonu 18 g ile 250 ml\'yi 85 °C\'de ters şekilde 1:45 bekletip çevirerek sert presledi.\n\nMalzemeler:\n• 18 g kahve, ince (filtre inceliği, ~400 µm)\n• 250 ml su, 82–86 °C\n• Kağıt filtreli AeroPress, ters\n\nHazırlanışı:\n1. Kağıdı durula, ters kur, 18 g ekle, darayı al.\n2. 50 ml dök, 5× karıştır, 30 sn bloom.\n3. 250 ml\'ye tamamla, 3× karıştır, 1:45\'e kadar demle.\n4. Bardağa çevir, 20–30 sn sert presle tıslamaya kadar.\n5. Sade servis et — bypass yok. Buzlu için 150 ml\'ye demleyip 100 g buz üzerine şokla.</string>
 
     <string name="drink_affogato_iced_name">Buzlu Affogato</string>
     <string name="drink_affogato_iced_summary">Modern dokunuş — buz üzerinde cold brew shot ile affogato</string>

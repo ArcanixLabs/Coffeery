@@ -27,6 +27,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -71,7 +75,8 @@ fun <T> SegmentedControl(
                     .graphicsLayer(scaleX = pressSx, scaleY = pressSy)
                     .clip(CoffeeShapes.pill)
                     .background(animatedBg)
-                    .clickable(interactionSource = interactionSource, indication = null) {
+                    .semantics { role = Role.RadioButton; selected = isSelected }
+                    .clickable(role = Role.RadioButton, interactionSource = interactionSource, indication = null) {
                         haptics.segment()
                         onSelect(option)
                     }

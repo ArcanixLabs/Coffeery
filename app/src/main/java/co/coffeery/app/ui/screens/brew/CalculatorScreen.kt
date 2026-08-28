@@ -40,10 +40,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.components.CremaMascot
 import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
@@ -259,11 +261,13 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
         }
 
         item(contentType = "actions") {
+            val hapticsSave = rememberAppHaptics()
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
                 SecondaryButton(
                     text = stringResource(R.string.action_save),
                     modifier = Modifier.weight(1f),
                 ) {
+                    hapticsSave.confirm()
                     val autoName = "$eqName · ${SimpleDateFormat("MMM d", Locale.getDefault()).format(Date())}"
                     vm.saveRecipe(autoName)
                     Toast.makeText(ctx, R.string.recipe_saved, Toast.LENGTH_SHORT).show()
@@ -495,8 +499,20 @@ private fun StrengthSection(state: AppUiState, vm: AppViewModel, result: co.coff
 private fun RoastSection(state: AppUiState, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
     val roastFraction = state.roast.ordinal / (RoastLevel.entries.size - 1).toFloat()
+    val reduced = LocalPrefersReducedMotion.current
+    val animatedFraction by animateFloatAsState(targetValue = roastFraction, animationSpec = if (reduced) tween(0) else tween(durationMillis = CoffeeMotion.slow, easing = CoffeeMotion.emphasized), label = "roastBar")
+    val sniffScale = remember { Animatable(1f) }
+    LaunchedEffect(state.roast) {
+        if (!reduced) {
+            sniffScale.animateTo(1.18f, animationSpec = tween(160, easing = CoffeeMotion.emphasized))
+            sniffScale.animateTo(1f, animationSpec = tween(220, easing = CoffeeMotion.emphasized))
+        }
+    }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        AppText(stringResource(R.string.calc_roast), style = CoffeeTheme.type.headline)
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            AppText(stringResource(R.string.calc_roast), style = CoffeeTheme.type.headline, modifier = Modifier.weight(1f))
+            CremaMascot(mood = "curious", modifier = Modifier.size(28.dp).graphicsLayer(scaleX = sniffScale.value, scaleY = sniffScale.value))
+        }
         SegmentedControl(
             options = RoastLevel.entries.toList(),
             selected = state.roast,
@@ -504,14 +520,9 @@ private fun RoastSection(state: AppUiState, vm: AppViewModel) {
             onSelect = { vm.setRoast(it) },
             modifier = Modifier.fillMaxWidth(),
         )
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(4.dp)
-                .clip(RoundedCornerShape(2.dp))
-                .background(colors.coffeeFor(roastFraction))
-                .graphicsLayer {},
-        )
+        Box(modifier = Modifier.fillMaxWidth().height(4.dp).clip(RoundedCornerShape(2.dp)).background(colors.outline.copy(alpha = 0.24f))) {
+            Box(modifier = Modifier.fillMaxWidth(animatedFraction.coerceIn(0.08f, 1f)).height(4.dp).clip(RoundedCornerShape(2.dp)).background(colors.coffeeFor(animatedFraction)))
+        }
         AppText(stringResource(state.roast.descRes), style = CoffeeTheme.type.caption, color = colors.textSecondary)
     }
 }

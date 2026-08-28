@@ -818,6 +818,10 @@
     <string name="palette_french_roast">French Roast</string>
     <string name="palette_vanilla_latte">Vanilla Latte</string>
     <string name="palette_pumpkin_spice">Pumpkin Spice</string>
+    <string name="palette_nordic_light">Nordic Light</string>
+    <string name="palette_kinetic">Kinetic</string>
+    <string name="palette_midnight_bloom">Midnight Bloom</string>
+    <string name="palette_aurora">Aurora</string>
     <string name="settings_temperature">Temperature unit</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_desc">Restart the app after changing for full effect.</string>
@@ -1832,5 +1836,28 @@ Steps:
     <string name="glossary_def_109">WDT stirs grounds with needles to break clumps; RDT spritzes water pre-grind to kill static; Stockfleth levels by finger sweep. Use RDT → WDT → tamp.</string>
     <string name="glossary_term_110">Blind Triangle</string>
     <string name="glossary_def_110">Sensory test with two identical and one odd cup blind. 7/9 correct is significant. Used to taste washed vs honey processing without bias.</string>
+
+    <!-- ===== l139-l142 learn cards ===== -->
+    <string name="learn_l139_title">Frozen Beans at –20 °C: Cryogenic Storage Science</string>
+    <string name="learn_l139_body" formatted="false">Freezing at –20 °C slows staling ~16× versus room temperature by halting volatile loss and oxidation. Christopher Hendon shows frozen beans fracture more uniformly, tightening particle distribution by 10–15% and boosting extraction evenness; Chahan Yeretzian warns condensation on thaw destroys it. Protocol: rest beans 7–14 days post-roast, dose into single-serve airtight vac-bags with one-way valve, freeze immediately, never open until fully thawed to room temp (2–3 h sealed), never re-freeze, grind frozen for best uniformity. Ideal for buying great coffee in bulk without the 3-week decline.</string>
+    <string name="learn_l140_title">Roast Curve: ROR and Development Time Ratio</string>
+    <string name="learn_l140_body" formatted="false">A roast curve plots bean temperature vs time; Rate of Rise (ROR) is °C/min increase. A smoothly declining ROR predicts sweetness and clarity; a crash (ROR dropping 40%+ near first crack) bakes the coffee flat, a flick (ROR rising again after crack) adds roasty bitterness. Development Time Ratio (DTR) is post-crack time as % of total roast: washed Ethiopians shine at 18–22% DTR for jasmine and citrus, honey/naturals need 22–26% for body without burnt sugar. Light filter roasts often land at 9–11 min total with DTR ~20%; espresso development runs 12–14 min with DTR ~23%. Home lesson: you cannot fix a crashed ROR with brewing — buy from roasters who publish curves or cup for baked vs clean finish.</string>
+    <string name="learn_l141_title">Koji &amp; Co-ferment: Ethics and Flavour</string>
+    <string name="learn_l141_body">Koji (Aspergillus oryzae) inoculation, borrowed from sake, enzymatically converts coffee cherry starch into glucose, adding peach, sake and brown-sugar sweetness with enhanced umami. Co-ferment ferments coffee together with fruit, yeast or koji so flavour integrates via microbial metabolism; infusion adds flavour after roasting. SCA and many competitions now distinguish co-fermentation as processing innovation while post-roast infusion is flavouring. Ethical notes: label transparency matters — drinkers deserve to know if peach came from koji metabolism or added syrup, farmers deserve premium sharing, and judges must not penalise yeast-inoculated lots as defects. Taste co-ferments at 1:16 and 2 °C cooler — they dissolve faster — and decide if the intensity is your preference.</string>
+    <string name="learn_l142_title">Cafe Dial-In Workflow: Opening to Service</string>
+    <string name="learn_l142_body" formatted="false">A cafe dials in before doors open, not on the first customer. Workflow: 1) Purge 2–3 g after overnight retention. 2) Pull baseline shot at locked 18 g / 36 g / 27 s and taste + weigh yield. 3) Adjust grind only — 1 click finer if sour/fast, 1 click coarser if bitter/slow — re-pull. 4) Lock grind, then fine-tune ratio: 1:2.15 for light florals, 1:2 for balance, 1:1.7 for chocolate-heavy comfort. 5) Check milk texture and temp (60–65 °C dairy, 55–60 °C oat) and log the recipe on the bar. Re-check every 30–45 min as humidity shifts grind. Home takeaway: dial in by the same single-variable discipline — dose locked, grind first, ratio second — and log 3 shots; consistency beats chasing a perfect single.</string>
+
+    <string name="drink_wac_aeropress_name">WAC Champion AeroPress</string>
+    <string name="drink_wac_aeropress_summary">World AeroPress Championship winning recipe — inverted, fine, 1:14, hard press</string>
+    <string name="drink_wac_aeropress_body">The World AeroPress Championship (WAC) winning style: inverted AeroPress, fine grind, short hot bloom, hard press through paper for syrupy clarity — the 2023 champion used 18 g to 250 ml at 85 °C inverted for 1:45 before flipping and pressing hard.\n\nIngredients:\n• 18 g coffee, fine (filter-fine, ~400 µm)\n• 250 ml water at 82–86 °C\n• AeroPress with paper filter, inverted\n\nSteps:\n1. Rinse paper, set inverted, add 18 g, tare.\n2. Pour 50 ml, stir 5×, bloom 30 s.\n3. Pour to 250 ml, stir 3×, steep to 1:45.\n4. Flip onto cup, press hard 20–30 s through hiss.\n5. Serve black — no bypass. For iced, brew to 150 ml and flash over 100 g ice.</string>
+
+    <string name="glossary_term_111">Frozen Bean Science / –20 °C</string>
+    <string name="glossary_def_111" formatted="false">Freezing single-dosed vac-bags at –20 °C slows aging ~16× and tightens grind distribution 10–15%. Thaw sealed to room temp; never re-freeze; grinding frozen improves uniformity.</string>
+    <string name="glossary_term_112">ROR / Development Time Ratio</string>
+    <string name="glossary_def_112" formatted="false">ROR is bean °C/min during roasting — declining is clean; crash or flick is defect. DTR is post-crack % of total time: 18–22% for washed florals, 22–26% for natural body.</string>
+    <string name="glossary_term_113">Koji / Co-ferment Ethics</string>
+    <string name="glossary_def_113">Koji (Aspergillus oryzae) converts starch to sugar for peach/sake notes; co-ferment integrates fruit via fermentation, infusion adds flavour post-roast. Label transparency is the ethical line.</string>
+    <string name="glossary_term_114">Cafe Dial-In</string>
+    <string name="glossary_def_114">Opening workflow: purge retention, pull baseline 18 g / 36 g, adjust grind only, then ratio (1:2.15 light, 1:2 balanced), log and re-check every 30–45 min.</string>
 
 </resources>

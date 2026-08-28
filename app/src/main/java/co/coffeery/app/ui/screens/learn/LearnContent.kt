@@ -39,6 +39,7 @@ object LearnContent {
         LearnCard(R.string.learn_l116_title, R.string.learn_l116_body, R.string.learn_ch_grinding),
         LearnCard(R.string.learn_l121_title, R.string.learn_l121_body, R.string.learn_ch_grinding),
         LearnCard(R.string.learn_l128_title, R.string.learn_l128_body, R.string.learn_ch_grinding),
+        LearnCard(R.string.learn_l139_title, R.string.learn_l139_body, R.string.learn_ch_grinding),
         // water
         LearnCard(R.string.learn_c3_title, R.string.learn_c3_body, R.string.learn_ch_water),
         LearnCard(R.string.learn_c4_title, R.string.learn_c4_body, R.string.learn_ch_water),
@@ -144,6 +145,7 @@ object LearnContent {
         LearnCard(R.string.learn_l115_title, R.string.learn_l115_body, R.string.learn_ch_espresso),
         LearnCard(R.string.learn_l129_title, R.string.learn_l129_body, R.string.learn_ch_espresso),
         LearnCard(R.string.learn_l134_title, R.string.learn_l134_body, R.string.learn_ch_espresso),
+        LearnCard(R.string.learn_l142_title, R.string.learn_l142_body, R.string.learn_ch_espresso),
         // processing
         LearnCard(R.string.learn_l66_title, R.string.learn_l66_body, R.string.learn_ch_processing),
         LearnCard(R.string.learn_l67_title, R.string.learn_l67_body, R.string.learn_ch_processing),
@@ -158,6 +160,8 @@ object LearnContent {
         LearnCard(R.string.learn_l86_title, R.string.learn_l86_body, R.string.learn_ch_processing),
         LearnCard(R.string.learn_l99_title, R.string.learn_l99_body, R.string.learn_ch_processing),
         LearnCard(R.string.learn_l135_title, R.string.learn_l135_body, R.string.learn_ch_processing),
+        LearnCard(R.string.learn_l140_title, R.string.learn_l140_body, R.string.learn_ch_processing),
+        LearnCard(R.string.learn_l141_title, R.string.learn_l141_body, R.string.learn_ch_processing),
         LearnCard(R.string.learn_l118_title, R.string.learn_l118_body, R.string.learn_ch_processing),
         // origins
         LearnCard(R.string.learn_l71_title, R.string.learn_l71_body, R.string.learn_ch_origins),

@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.animateItem
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -220,7 +221,7 @@ fun LearnScreen(vm: AppViewModel) {
             key = { idx -> "glossary_${filteredGlossary[idx].termRes}" },
             contentType = { "glossaryTerm" }
         ) { idx ->
-            GlossaryTermItem(term = filteredGlossary[idx])
+            Box(modifier = Modifier.animateItem()) { GlossaryTermItem(term = filteredGlossary[idx]) }
         }
         item(key = "foodPairing", contentType = "glossary") {
             FoodPairingCard()
@@ -257,7 +258,7 @@ fun LearnScreen(vm: AppViewModel) {
             cardsInChapter.forEach { card ->
                 val globalIndex = LearnContent.cards.indexOf(card)
                 item(key = "card_${card.titleRes}", contentType = "card") {
-                    CoffeeCard(onClick = { vm.openRoute(Route.LearnDetail(globalIndex)) }, modifier = Modifier.fillMaxWidth()) {
+                    CoffeeCard(onClick = { vm.openRoute(Route.LearnDetail(globalIndex)) }, modifier = Modifier.fillMaxWidth().animateItem()) {
                         AppText(stringResource(card.titleRes), style = CoffeeTheme.type.headline)
                         Spacer(Modifier.height(6.dp))
                         AppText(
@@ -367,6 +368,7 @@ private fun StepMap(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun TroubleshootCard() {
     val colors = CoffeeTheme.colors
@@ -376,21 +378,22 @@ private fun TroubleshootCard() {
         Spacer(Modifier.height(4.dp))
         AppText(stringResource(R.string.learn_troubleshoot_intro), style = CoffeeTheme.type.caption, color = colors.textSecondary)
         Spacer(Modifier.height(12.dp))
-        // Simple wrapping rows of chips (4 per row).
-        LearnContent.tasteOptions.withIndex().chunked(4).forEach { rowItems ->
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(bottom = 8.dp)) {
-                rowItems.forEach { (index, option) ->
-                    val isSel = selected == index
-                    Chip(
-                        text = stringResource(option.labelRes),
-                        background = if (isSel) colors.accent else colors.accentSoft,
-                        textColor = if (isSel) colors.onAccent else colors.accent,
-                        modifier = Modifier.clickable(
-                            indication = null,
-                            interactionSource = remember { MutableInteractionSource() },
-                        ) { selected = if (isSel) null else index },
-                    )
-                }
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            LearnContent.tasteOptions.forEachIndexed { index, option ->
+                val isSel = selected == index
+                Chip(
+                    text = stringResource(option.labelRes),
+                    background = if (isSel) colors.accent else colors.accentSoft,
+                    textColor = if (isSel) colors.onAccent else colors.accent,
+                    modifier = Modifier.clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() },
+                    ) { selected = if (isSel) null else index },
+                )
             }
         }
         val sel = selected
@@ -535,6 +538,7 @@ private fun GrindSizeCard() {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun BrewTroubleshooterCard() {
     val colors = CoffeeTheme.colors
@@ -568,20 +572,22 @@ private fun BrewTroubleshooterCard() {
         Spacer(Modifier.height(4.dp))
         AppText(stringResource(R.string.brew_troubleshoot_question), style = CoffeeTheme.type.caption, color = colors.textSecondary)
         Spacer(Modifier.height(12.dp))
-        issues.withIndex().chunked(2).forEach { rowItems ->
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(bottom = 8.dp)) {
-                rowItems.forEach { (index, issue) ->
-                    val isSel = selected == index
-                    Chip(
-                        text = stringResource(issue.first),
-                        background = if (isSel) colors.accent else colors.accentSoft,
-                        textColor = if (isSel) colors.onAccent else colors.accent,
-                        modifier = Modifier.clickable(
-                            indication = null,
-                            interactionSource = remember { MutableInteractionSource() },
-                        ) { selected = if (isSel) null else index },
-                    )
-                }
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            issues.forEachIndexed { index, issue ->
+                val isSel = selected == index
+                Chip(
+                    text = stringResource(issue.first),
+                    background = if (isSel) colors.accent else colors.accentSoft,
+                    textColor = if (isSel) colors.onAccent else colors.accent,
+                    modifier = Modifier.clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() },
+                    ) { selected = if (isSel) null else index },
+                )
             }
         }
         selected?.let { sel ->

@@ -110,6 +110,7 @@ object DrinkContent {
         DrinkItem("coconut_viet", R.string.drink_coconut_viet_name, R.string.drink_coconut_viet_summary, R.string.drink_coconut_viet_body, DrinkGroup.REGIONAL),
         DrinkItem("mazagran_portuguese", R.string.drink_mazagran_portuguese_name, R.string.drink_mazagran_portuguese_summary, R.string.drink_mazagran_portuguese_body, DrinkGroup.REGIONAL),
         DrinkItem("nitro_flash", R.string.drink_nitro_flash_name, R.string.drink_nitro_flash_summary, R.string.drink_nitro_flash_body, DrinkGroup.REGIONAL),
+        DrinkItem("wac_aeropress", R.string.drink_wac_aeropress_name, R.string.drink_wac_aeropress_summary, R.string.drink_wac_aeropress_body, DrinkGroup.REGIONAL),
     )
 }
 

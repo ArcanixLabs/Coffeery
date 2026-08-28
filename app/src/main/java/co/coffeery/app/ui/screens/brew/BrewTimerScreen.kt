@@ -703,6 +703,7 @@ private fun SaveBrewDialog(
     var selectedBean by remember { mutableStateOf<BeanEntity?>(null) }
     var flavorTags by remember { mutableStateOf<Set<String>>(emptySet()) }
     var photoUri by remember { mutableStateOf<Uri?>(null) }
+    val haptics = rememberAppHaptics()
     val context = LocalContext.current
     val cameraLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicture()
@@ -880,6 +881,7 @@ private fun SaveBrewDialog(
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
             SecondaryButton(stringResource(R.string.action_cancel), Modifier.weight(1f)) { onDismiss() }
                 PrimaryButton(stringResource(R.string.action_save), Modifier.weight(1f)) {
+                    haptics.confirm()
                     onSave(
                         BrewLogEntity(
                             equipmentId = eq.id,

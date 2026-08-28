@@ -26,7 +26,10 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -94,7 +97,9 @@ fun <T> BottomNav(
                     modifier = Modifier
                         .weight(1f)
                         .graphicsLayer(scaleX = pressSx, scaleY = pressSy)
+                        .semantics { role = Role.Tab; selected = isSelected }
                         .clickable(
+                            role = Role.Tab,
                             indication = null,
                             interactionSource = interactionSource,
                         ) {
