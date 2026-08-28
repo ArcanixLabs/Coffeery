@@ -26,7 +26,7 @@ Local-first Android brewing companion — pick your gear, dial in strength and r
 - **Search** — real-time text filter on Equipment, Learn, and Drinks screens
 - **Full i18n** — 1,229 strings each in English (default) + Turkish
 - **Cloud backup (optional)** — Google Sign-In (profile photo in header, silent sign-in) with Google Drive backup/restore: auto-backup on sign-in + manual backup/restore from Settings; fixed debug keystore for consistent SHA-1
-- **Zero Material Design** — custom `CoffeeColors` / `CoffeeTypography` / `CoffeeShapes` design system, 18 selectable palettes (Terracotta / Espresso / Matcha / Berry / Crema / Mocha / Caramel / Hazelnut / Copper / Cinnamon / Chestnut / French Roast / Vanilla Latte / Pumpkin Spice / Nordic Light / Kinetic / Midnight Bloom / Aurora) with light + dark warm gradient backgrounds, grain texture, vintage accent, spring/motion tokens, 69 hand-drawn Canvas line-art equipment icons, and Fraunces + Manrope serif display typography
+- **Zero Material Design** — custom `CoffeeColors` / `CoffeeTypography` / `CoffeeShapes` design system, 25 selectable palettes (Terracotta / Espresso / Matcha / Berry / Crema / Mocha / Caramel / Hazelnut / Copper / Cinnamon / Chestnut / French Roast / Vanilla Latte / Pumpkin Spice / Nordic Light / Kinetic / Midnight Bloom / Aurora / Steam / Honey / Velvet / Crema Rose / Smoke / Ember / Miuix) with light + dark warm gradient backgrounds, grain texture, vintage accent, spring/motion tokens, 69 hand-drawn Canvas line-art equipment icons, and Fraunces + Manrope serif display typography
 
 ## Screens
 
@@ -39,7 +39,7 @@ Local-first Android brewing companion — pick your gear, dial in strength and r
 
 | Brew Calculator | Timer | Brew Log | Learn | Settings |
 |---|---|---|---|---|
-| Category tabs, auto/manual ratio, strength slider, roast picker, dual-line segmented pills, ratio card, one-tap save, YouTube links | 72sp hero countdown in 260dp progress ring + pulse, per-pour adjustment, merge-pours, customizable durations, step indicator, auto-advance, haptics + chimes, proximity hands-free, background service, save-to-log dialog with bean picker + photo | Calendar heatmap, streak banner, analytics card, caffeine tracker, best-recipe suggestion (tap to apply), comparison tool, share card, PDF export, bean inventory, CSV export/import, achievements & stats tabs | 14-chapter step-map, 140 lessons, 30+ quizzes (score + streak + random), Today's Lesson, extraction calculator, water chemistry, 114-term searchable glossary, pro tips, grind visual, troubleshooter, flavor wheel, food pairing & culture, varietal wheel | 18 palette 2-col grid (112dp split light/dark preview), warm gradient backgrounds, dark/light/system toggle, language switch, brew customization, Google Sign-In + Drive backup/restore (auto-retry), data export/import |
+| Category tabs, auto/manual ratio, strength slider, roast picker, dual-line segmented pills, ratio card, one-tap save, YouTube links | 72sp hero countdown in 260dp progress ring + pulse, per-pour adjustment, merge-pours, customizable durations, step indicator, auto-advance, haptics + chimes, proximity hands-free, background service, save-to-log dialog with bean picker + photo | Calendar heatmap, streak banner, analytics card, caffeine tracker, best-recipe suggestion (tap to apply), comparison tool, share card, PDF export, bean inventory, CSV export/import, achievements & stats tabs | 14-chapter step-map, 140 lessons, 30+ quizzes (score + streak + random), Today's Lesson, extraction calculator, water chemistry, 114-term searchable glossary, pro tips, grind visual, troubleshooter, flavor wheel, food pairing & culture, varietal wheel | 25 palette 2-col grid (112dp split light/dark preview), warm gradient backgrounds, dark/light/system toggle, language switch, brew customization, Google Sign-In + Drive backup/restore (auto-retry), data export/import |
 
 ## Architecture
 
@@ -53,7 +53,7 @@ app/src/main/java/co/coffeery/app/
 │   └── repo/     CoffeeRepository (built-ins + custom gear, export/import/CSV)
 ├── service/      TimerService (foreground), TimerStopReceiver
 ├── ui/
-│   ├── theme/    Color (18 palettes × 2 = 36 profiles), Type (Fraunces/Manrope 32/18/12), Shape, Texture (gradient + grain linen), Motion (press/cardExpand/page/counter/chipSelect)
+│   ├── theme/    Color (25 palettes × 2 = 50 profiles), Type (Fraunces/Manrope 32/18/12), Shape, Texture (gradient + grain linen), Motion (press/cardExpand/page/counter/chipSelect)
 │   ├── components/ 69 icons, buttons, cards, sliders, segmented controls
 │   └── screens/  brew (calculator + timer), equipment, recipes, log (timeline + stats + achievements + bean detail), learn (content + tools + quizzes), drinks, onboarding, root (nav + settings)
 └── util/         BrewMath (recipe engine), BrewPdfExporter, CloudBackupManager, Format, AppHaptics

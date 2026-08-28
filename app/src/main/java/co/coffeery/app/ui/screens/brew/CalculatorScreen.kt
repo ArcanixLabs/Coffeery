@@ -39,6 +39,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
@@ -297,8 +299,8 @@ private fun CategoryChips(state: AppUiState, vm: AppViewModel, eq: Equipment) {
             val isPressed by interactionSource.collectIsPressedAsState()
             val pressScale by animateFloatAsState(targetValue = if (isPressed) 0.94f else 1f, animationSpec = CoffeeMotion.press, label = "catPress")
             val selectScale by animateFloatAsState(targetValue = if (isSelected) 1.06f else 1f, animationSpec = if (reduced) tween(0) else CoffeeMotion.chipSelect, label = "catSelect")
-            Box(modifier = Modifier.graphicsLayer(scaleX = pressScale * selectScale, scaleY = pressScale * selectScale).clip(CoffeeShapes.pill).background(animatedBg).clickable(indication = null, interactionSource = interactionSource) { haptics.segment(); vm.selectCategoryEquipment(cat) }.padding(horizontal = 14.dp, vertical = 8.dp)) {
-                AppText(stringResource(cat.labelRes), style = CoffeeTheme.type.label, color = fg)
+            Box(modifier = Modifier.graphicsLayer(scaleX = pressScale * selectScale, scaleY = pressScale * selectScale).clip(CoffeeShapes.pill).background(animatedBg).clickable(indication = null, interactionSource = interactionSource) { haptics.segment(); vm.selectCategoryEquipment(cat) }.padding(horizontal = 14.dp, vertical = 8.dp), contentAlignment = Alignment.Center) {
+                AppText(stringResource(cat.labelRes), style = CoffeeTheme.type.label, color = fg, maxLines = 1, overflow = TextOverflow.Ellipsis, align = TextAlign.Center)
             }
         }
     }

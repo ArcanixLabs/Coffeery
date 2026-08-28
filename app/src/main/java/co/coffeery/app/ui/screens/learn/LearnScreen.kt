@@ -56,20 +56,25 @@ import co.coffeery.app.ui.components.ScreenHeader
 import co.coffeery.app.ui.components.CremaMascot
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.Glyph
+import co.coffeery.app.ui.components.SegmentedControl
+import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.ui.screens.root.AppViewModel
 import co.coffeery.app.ui.screens.root.Route
 import co.coffeery.app.ui.theme.CoffeeTheme
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material3.LinearProgressIndicator
 
 @Composable
 fun LearnScreen(vm: AppViewModel) {
     val colors = CoffeeTheme.colors
     val lazyState = rememberLazyListState()
-    val scope = rememberCoroutineScope()
-    var activeChapterRes by remember { mutableStateOf(LearnContent.chapterOrder[0]) }
+    var learnTab by remember { mutableIntStateOf(0) }
+    var activeChapterRes by remember { mutableStateOf<Int?>(null) }
     var searchQuery by remember { mutableStateOf("") }
     val state by vm.state.collectAsStateWithLifecycle()
     val completedChapters = state.completedChapters
-
+    val haptics = rememberAppHaptics()
     val searchActive = searchQuery.isNotBlank()
     val context = LocalContext.current
     val filteredCards = remember(searchQuery) {
@@ -94,7 +99,9 @@ fun LearnScreen(vm: AppViewModel) {
             }
         }
     }
-
+    val filteredCardsByChapter = remember(filteredCards, activeChapterRes) {
+        if (activeChapterRes == null) filteredCards else filteredCards.filter { it.chapterRes == activeChapterRes }
+    }
     LaunchedEffect(Unit) {
         val saved = state.learnScrollOffset
         val idx: Int
@@ -113,7 +120,6 @@ fun LearnScreen(vm: AppViewModel) {
         val safeOff = off.coerceAtLeast(0).coerceAtMost(1_000_000)
         lazyState.scrollToItem(safeIdx, safeOff)
     }
-
     DisposableEffect(Unit) {
         onDispose {
             val idx = lazyState.firstVisibleItemIndex
@@ -133,13 +139,7 @@ fun LearnScreen(vm: AppViewModel) {
                 subtitle = stringResource(R.string.learn_intro),
             )
         }
-        item(key = "todays", contentType = "tool") {
-            TodaysLessonCard(vm)
-        }
-        item(key = "quiz", contentType = "tool") {
-            QuickQuizCard()
-        }
-        item(key = "search", contentType = "tool") {
+        item(key = "search", contentType = "search") {
             Box(modifier = Modifier.fillMaxWidth()) {
                 AppTextField(
                     value = searchQuery,
@@ -162,126 +162,138 @@ fun LearnScreen(vm: AppViewModel) {
                 }
             }
         }
-        item(key = "stepMap", contentType = "tool") {
-            StepMap(
-                activeChapterRes = activeChapterRes,
-                completedChapters = completedChapters,
-                onChapterSelected = { idx ->
-                    val ch = LearnContent.chapterOrder[idx]
-                    activeChapterRes = ch
-                    val filteredIdx = filteredCards.indexOfFirst { it.chapterRes == ch }
-                    if (filteredIdx != -1) {
-                        val headersBefore = filteredCards.take(filteredIdx).map { it.chapterRes }.distinct().size
-                        val staticCount = listOf("header", "todays", "quiz", "search", "stepMap", "troubleshoot", "protips", "quickRatio", "grindSize", "brewTroubleshooter", "flavorWheel", "varieties", "extractionCalc", "waterMineral", "glossary", "foodPairing", "cultureFacts").size
-                        val target = staticCount + filteredIdx + headersBefore + 1
-                        scope.launch {
-                            lazyState.animateScrollToItem(target.coerceAtLeast(0))
-                        }
-                    } else {
-                        scope.launch {
-                            lazyState.animateScrollToItem(0)
-                        }
-                    }
-                },
+        item(key = "tabs", contentType = "tabs") {
+            SegmentedControl(
+                options = listOf(0, 1, 2, 3),
+                selected = learnTab,
+                label = { listOf("Chapters", "Tools", "Glossary", "Quiz")[it] },
+                onSelect = { haptics.segment(); learnTab = it },
+                modifier = Modifier.fillMaxWidth(),
             )
         }
-        item(key = "troubleshoot", contentType = "tool") {
-            TroubleshootCard()
-        }
-        item(key = "protips", contentType = "tool") {
-            ProTipsCard()
-        }
-        item(key = "quickRatio", contentType = "tool") {
-            QuickRatioCard()
-        }
-        item(key = "grindSize", contentType = "tool") {
-            GrindSizeCard()
-        }
-        item(key = "brewTroubleshooter", contentType = "tool") {
-            BrewTroubleshooterCard()
-        }
-        item(key = "flavorWheel", contentType = "tool") {
-            FlavorWheelCard()
-        }
-        item(key = "varieties", contentType = "tool") {
-            VarietyCard()
-        }
-        item(key = "extractionCalc", contentType = "tool") {
-            ExtractionCalculatorCard()
-        }
-        item(key = "waterMineral", contentType = "tool") {
-            WaterMineralCard()
-        }
-        item(key = "glossary_header", contentType = "glossary") {
-            GlossaryHeaderCard()
-        }
-        items(
-            count = filteredGlossary.size,
-            key = { idx -> "glossary_${filteredGlossary[idx].termRes}" },
-            contentType = { "glossaryTerm" }
-        ) { idx ->
-            Box(modifier = Modifier) { GlossaryTermItem(term = filteredGlossary[idx]) }
-        }
-        item(key = "foodPairing", contentType = "glossary") {
-            FoodPairingCard()
-        }
-        item(key = "cultureFacts", contentType = "glossary") {
-            CultureFactsCard()
-        }
-        if (searchActive && filteredCards.isEmpty() && filteredGlossary.isEmpty()) {
-            item(key = "no_results", contentType = "header") {
-                Column(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                    CremaMascot(mood = "curious", modifier = Modifier.size(96.dp))
-                    Spacer(Modifier.height(12.dp))
-                    AppText(stringResource(R.string.search_no_results), style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.fillMaxWidth(), align = TextAlign.Center)
-                }
-            }
-        }
-        val distinctChapters = filteredCards.map { it.chapterRes }.distinct()
-        distinctChapters.forEach { chapterRes ->
-            stickyHeader(key = "chapter_$chapterRes", contentType = "header") {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(CoffeeTheme.colors.surface)
-                        .padding(vertical = 4.dp),
-                ) {
-                    AppText(
-                        stringResource(chapterRes),
-                        style = CoffeeTheme.type.label,
-                        color = colors.accent,
-                    )
-                }
-            }
-            val cardsInChapter = filteredCards.filter { it.chapterRes == chapterRes }
-            cardsInChapter.forEach { card ->
-                val globalIndex = LearnContent.cards.indexOf(card)
-                item(key = "card_${card.titleRes}", contentType = "card") {
-                    CoffeeCard(onClick = { vm.openRoute(Route.LearnDetail(globalIndex)) }, modifier = Modifier.fillMaxWidth()) {
-                        AppText(stringResource(card.titleRes), style = CoffeeTheme.type.headline)
+        when (learnTab) {
+            0 -> {
+                item(key = "chapters_progress", contentType = "progress") {
+                    val totalChapters = LearnContent.chapterOrder.size
+                    val completed = completedChapters.size
+                    val progress = if (totalChapters > 0) completed.toFloat() / totalChapters else 0f
+                    val totalCards = LearnContent.cards.size
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            AppText("$completed / $totalChapters chapters", style = CoffeeTheme.type.label, color = colors.textSecondary)
+                            AppText("$totalCards lessons", style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                        }
                         Spacer(Modifier.height(6.dp))
-                        AppText(
-                            stringResource(card.bodyRes),
-                            style = CoffeeTheme.type.body,
-                            color = colors.textSecondary,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis,
+                        LinearProgressIndicator(
+                            progress = { progress.coerceIn(0f, 1f) },
+                            modifier = Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
+                            color = colors.accent,
+                            trackColor = colors.outline.copy(alpha = 0.3f),
                         )
-                        Spacer(Modifier.height(8.dp))
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            AppText(stringResource(R.string.learn_read_more), style = CoffeeTheme.type.label, color = colors.accent)
-                            if (completedChapters.contains(card.chapterRes)) {
-                                Spacer(Modifier.width(8.dp))
-                                Box(
-                                    modifier = Modifier
-                                        .size(8.dp)
-                                        .clip(CircleShape)
-                                        .background(colors.accentSoft),
+                    }
+                }
+                item(key = "chapter_chips", contentType = "chips") {
+                    Row(
+                        modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        Chip(
+                            text = "All",
+                            background = if (activeChapterRes == null) colors.accent else colors.accentSoft,
+                            textColor = if (activeChapterRes == null) colors.onAccent else colors.accent,
+                            modifier = Modifier.clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) { haptics.tap(); activeChapterRes = null },
+                        )
+                        LearnContent.chapterOrder.forEach { ch ->
+                            val selected = activeChapterRes == ch
+                            Chip(
+                                text = stringResource(ch),
+                                background = if (selected) colors.accent else colors.accentSoft,
+                                textColor = if (selected) colors.onAccent else colors.accent,
+                                modifier = Modifier.clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) { haptics.tap(); activeChapterRes = ch },
+                            )
+                        }
+                    }
+                }
+                if (searchActive && filteredCardsByChapter.isEmpty()) {
+                    item(key = "no_results_chapters", contentType = "header") {
+                        Column(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                            CremaMascot(mood = "curious", modifier = Modifier.size(96.dp))
+                            Spacer(Modifier.height(12.dp))
+                            AppText(stringResource(R.string.search_no_results), style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.fillMaxWidth(), align = TextAlign.Center)
+                        }
+                    }
+                }
+                val distinctChapters = filteredCardsByChapter.map { it.chapterRes }.distinct()
+                distinctChapters.forEach { chapterRes ->
+                    stickyHeader(key = "chapter_$chapterRes", contentType = "header") {
+                        Box(
+                            modifier = Modifier.fillMaxWidth().background(CoffeeTheme.colors.surface).padding(vertical = 4.dp),
+                        ) {
+                            AppText(stringResource(chapterRes), style = CoffeeTheme.type.label, color = colors.accent)
+                        }
+                    }
+                    val cardsInChapter = filteredCardsByChapter.filter { it.chapterRes == chapterRes }
+                    cardsInChapter.forEach { card ->
+                        val globalIndex = LearnContent.cards.indexOf(card)
+                        item(key = "card_${card.titleRes}", contentType = "card") {
+                            CoffeeCard(onClick = { vm.openRoute(Route.LearnDetail(globalIndex)) }, modifier = Modifier.fillMaxWidth()) {
+                                AppText(stringResource(card.titleRes), style = CoffeeTheme.type.headline)
+                                Spacer(Modifier.height(6.dp))
+                                AppText(
+                                    stringResource(card.bodyRes),
+                                    style = CoffeeTheme.type.body,
+                                    color = colors.textSecondary,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis,
                                 )
+                                Spacer(Modifier.height(8.dp))
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    AppText(stringResource(R.string.learn_read_more), style = CoffeeTheme.type.label, color = colors.accent)
+                                    if (completedChapters.contains(card.chapterRes)) {
+                                        Spacer(Modifier.width(8.dp))
+                                        Box(modifier = Modifier.size(8.dp).clip(CircleShape).background(colors.accentSoft))
+                                    }
+                                }
                             }
                         }
                     }
                 }
+            }
+            1 -> {
+                item(key = "tool_troubleshoot", contentType = "tool") { TroubleshootCard() }
+                item(key = "tool_brewTroubleshooter", contentType = "tool") { BrewTroubleshooterCard() }
+                item(key = "tool_grindSize", contentType = "tool") { GrindSizeCard() }
+                item(key = "tool_quickRatio", contentType = "tool") { QuickRatioCard() }
+                item(key = "tool_extractionCalc", contentType = "tool") { ExtractionCalculatorCard() }
+                item(key = "tool_waterMineral", contentType = "tool") { WaterMineralCard() }
+            }
+            2 -> {
+                item(key = "glossary_header", contentType = "glossary") { GlossaryHeaderCard() }
+                items(count = filteredGlossary.size, key = { idx -> "glossary_${filteredGlossary[idx].termRes}" }, contentType = { "glossaryTerm" }) { idx ->
+                    Box(modifier = Modifier) { GlossaryTermItem(term = filteredGlossary[idx]) }
+                }
+                if (searchActive && filteredGlossary.isEmpty()) {
+                    item(key = "no_results_glossary", contentType = "header") {
+                        Column(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                            CremaMascot(mood = "curious", modifier = Modifier.size(96.dp))
+                            Spacer(Modifier.height(12.dp))
+                            AppText(stringResource(R.string.search_no_results), style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.fillMaxWidth(), align = TextAlign.Center)
+                        }
+                    }
+                }
+                item(key = "foodPairing", contentType = "glossary") { FoodPairingCard() }
+                item(key = "cultureFacts", contentType = "glossary") { CultureFactsCard() }
+                item(key = "flavorWheel", contentType = "glossary") { FlavorWheelCard() }
+                item(key = "varieties", contentType = "glossary") { VarietyCard() }
+            }
+            3 -> {
+                item(key = "todays", contentType = "tool") { TodaysLessonCard(vm) }
+                item(key = "quiz", contentType = "tool") { QuickQuizCard() }
+                item(key = "protips", contentType = "tool") { ProTipsCard() }
             }
         }
     }

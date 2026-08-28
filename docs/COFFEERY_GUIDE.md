@@ -12,7 +12,7 @@ Coffeery has been massively enhanced from its v3.0.1 baseline across a series of
 
 | Feature | Before (v3.0.1) | After |
 |---|---|---|
-| Design System | Basic CoffeeTheme | Full system: 18 palettes × light/dark = 36 profiles (Terracotta..Aurora), vintage accents, linen+grain, 5 spring tokens (press/cardExpand/page/counter/chipSelect) |
+| Design System | Basic CoffeeTheme | Full system: 25 palettes × light/dark = 50 profiles (Terracotta..Miuix), vintage accents, linen+grain, 5 spring tokens (press/cardExpand/page/counter/chipSelect) |
 | Equipment | 36 brewers | 69 brewers (Mugen/Graycano/Kinto Slow/Fellow Aiden/Kalita102/Espro Bloom/Bripe/Cupping Set/Modbar/Timemore B75 + Pulsar/Tricolate/Delter/Flair/Go/Picopresso/Moccamaster/Nel/Gina/SiphonModern/PhinLarge/CleverXL/Hoop/Paragon/Melodrip/December/Switch etc) |
 | Learn Content | 9 chapters, 60 cards | 14 chapters, 140 cards (contiguous) + searchable 114-term glossary + varietal wheel |
 | Drinks | 25 | 90 (31 milk + 59 regional) |
@@ -80,7 +80,7 @@ app/src/main/java/co/coffeery/app/
 │   └── TimerStopReceiver.kt   Broadcast receiver for timer stop action
 ├── ui/
 │   ├── theme/
-│   │   ├── Color.kt           18 palettes × 2 modes = 36 CoffeeColors profiles (Nordic Light/Kinetic/Midnight Bloom/Aurora added)
+│   │   ├── Color.kt           25 palettes × 2 modes = 50 CoffeeColors profiles (Steam/Honey/Velvet/Crema Rose/Smoke/Ember/Miuix added)
 │   │   ├── Type.kt             Fraunces 32sp/-0.5 + Manrope 18/14/12 type scale
 │   │   ├── Shape.kt           CoffeeShapes (10/18/26/pill) + CoffeeSpacing (4/8/12/16/24/32)
 │   │   ├── Texture.kt         Linen 18dp + seeded grain (Random 42) 30-90 dots
@@ -161,9 +161,9 @@ app/src/main/java/co/coffeery/app/
 
 Coffeery uses a fully custom design system — no Material Design, no third-party component library. Every color, shape, motion value, and texture is defined in `ui/theme/`.
 
-### CoffeeColors — 18 Palettes × 2 Modes (36 profiles)
+### CoffeeColors — 25 Palettes × 2 Modes (50 profiles)
 
-Each palette defines 15 semantic color slots including background gradient stop, surface elevation, outline, text primary/secondary, accent/soft/vintage, crema light/dark for the strength slider, and an `isDark` flag. Eighteen palettes: Terracotta, Espresso, Matcha, Berry, Crema, Mocha, Caramel, Hazelnut, Copper, **Cinnamon** (#C07A2E star-rib), **Chestnut** (#8B5A2B), **French Roast** (#4A2C1D near-black), **Vanilla Latte** (#C9A86A cream), **Pumpkin Spice** (#D86C27), **Nordic Light** (#9AA89E pale Nordic), **Kinetic** (#7B6B8A processing lavender), **Midnight Bloom** (#6B5A7A gesha floral), **Aurora** (#D9B8A0 dawn).
+Each palette defines 15 semantic color slots including background gradient stop, surface elevation, outline, text primary/secondary, accent/soft/vintage, crema light/dark for the strength slider, and an `isDark` flag. Twenty-five palettes: Terracotta, Espresso, Matcha, Berry, Crema, Mocha, Caramel, Hazelnut, Copper, **Cinnamon** (#C07A2E star-rib), **Chestnut** (#8B5A2B), **French Roast** (#4A2C1D near-black), **Vanilla Latte** (#C9A86A cream), **Pumpkin Spice** (#D86C27), **Nordic Light** (#9AA89E pale Nordic), **Kinetic** (#7B6B8A processing lavender), **Midnight Bloom** (#6B5A7A gesha floral), **Aurora** (#D9B8A0 dawn), **Steam** (#6B8A8A mist), **Honey** (#C9A05E honey), **Velvet** (#8A4A3A velvet), **Crema Rose** (#C28A7A rose), **Smoke** (#6B5A52 smoke), **Ember** (#A64A2E ember), **Miuix** (#007AFF iOS blue).
 
 | Palette | Character |
 |---|---|
@@ -185,8 +185,15 @@ Each palette defines 15 semantic color slots including background gradient stop,
 | **Kinetic** | Lavender processing hype |
 | **Midnight Bloom** | Midnight gesha floral |
 | **Aurora** | Dawn Aurora cream |
+| **Steam** | Pale mist gray-blue — airy steam over brew |
+| **Honey** | Golden honey amber on warm cream |
+| **Velvet** | Deep velvet red-brown |
+| **Crema Rose** | Soft rosy crema blush |
+| **Smoke** | Muted smoky taupe gray |
+| **Ember** | Glowing ember orange-red |
+| **Miuix** | iOS blue on clean neutrals |
 
-Each is defined for both light and dark modes, yielding 36 distinct `CoffeeColors` instances. All colors are **warm-tinted** — backgrounds use cream/paper tones instead of pure white, and dark backgrounds use deep warm charcoal instead of pure black. Preview gallery is **2-col grid 112dp** with selectable RadioButton and split light/dark half-preview (light on left, dark on right).
+Each is defined for both light and dark modes, yielding 50 distinct `CoffeeColors` instances. All colors are **warm-tinted** — backgrounds use cream/paper tones instead of pure white, and dark backgrounds use deep warm charcoal instead of pure black. Preview gallery is **2-col grid 112dp** with selectable RadioButton and split light/dark half-preview (light on left, dark on right).
 
 Helper methods:
 - `coffeeFor(strength: Float)` — lerps between `cremaLight` and `cremaDark` to color the strength slider fill as strength increases
@@ -365,7 +372,7 @@ The educational hub of the app, structured as a curriculum:
 
 Organised into logical sections:
 
-- **Appearance:** 18 palette 2-col grid (112dp, selectable RadioButton, split light/dark half-preview, accent border) ; Dark/Light/System toggle
+- **Appearance:** 25 palette 2-col grid (112dp, selectable RadioButton, split light/dark half-preview, accent border) ; Dark/Light/System toggle
 - **Language:** English / Turkish switch (applied immediately)
 - **Timer Settings:**
   - Custom step durations: bloom (default 40s), pour (45s), steep (240s), drawdown (55s)
@@ -462,7 +469,7 @@ While Coffeery is privacy-first and fully functional offline, optional Google in
 | Culture facts | 4 |
 | Achievements | 9 |
 | Stats chart types | 6 |
-| Colour palettes | 18 (× 2 modes = 36 profiles) |
+| Colour palettes | 25 (× 2 modes = 50 profiles) |
 | Fonts | 2 (Fraunces, Manrope) |
 | Spring animation specs | 5 |
 | APK (debug) | ~13 MB |

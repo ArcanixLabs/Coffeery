@@ -822,6 +822,13 @@
     <string name="palette_kinetic">Kinetic</string>
     <string name="palette_midnight_bloom">Midnight Bloom</string>
     <string name="palette_aurora">Aurora</string>
+    <string name="palette_steam">Steam</string>
+    <string name="palette_honey">Honey</string>
+    <string name="palette_velvet">Velvet</string>
+    <string name="palette_crema_rose">Crema Rose</string>
+    <string name="palette_smoke">Smoke</string>
+    <string name="palette_ember">Ember</string>
+    <string name="palette_miuix">Miuix</string>
     <string name="settings_temperature">Temperature unit</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_desc">Restart the app after changing for full effect.</string>

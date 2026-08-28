@@ -83,7 +83,14 @@ enum class Palette(@param:StringRes val labelRes: Int) {
     NORDIC_LIGHT(R.string.palette_nordic_light),
     KINETIC(R.string.palette_kinetic),
     MIDNIGHT_BLOOM(R.string.palette_midnight_bloom),
-    AURORA(R.string.palette_aurora);
+    AURORA(R.string.palette_aurora),
+    STEAM(R.string.palette_steam),
+    HONEY(R.string.palette_honey),
+    VELVET(R.string.palette_velvet),
+    CREMA_ROSE(R.string.palette_crema_rose),
+    SMOKE(R.string.palette_smoke),
+    EMBER(R.string.palette_ember),
+    MIUIX(R.string.palette_miuix);
 
     companion object {
         fun fromKey(key: String?): Palette =
