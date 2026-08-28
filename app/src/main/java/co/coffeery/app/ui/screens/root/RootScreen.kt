@@ -2,6 +2,7 @@ package co.coffeery.app.ui.screens.root
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -54,49 +55,55 @@ fun RootScreen(vm: AppViewModel) {
         OnboardingScreen(vm)
     } else {
         val colors = CoffeeTheme.colors
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .coffeeBackground(colors),
-        ) {
-            Column(
+        Crossfade(
+            targetState = colors,
+            animationSpec = tween(420, easing = CoffeeMotion.emphasized),
+            label = "themeCrossfade",
+        ) { targetColors ->
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .statusBarsPadding(),
+                    .coffeeBackground(targetColors),
             ) {
-                AnimatedContent(
-                    modifier = Modifier.weight(1f).fillMaxWidth(),
-                    targetState = state.route,
-                    transitionSpec = {
-                        val forward = targetState !is Route.Tabs
-                        if (forward) {
-                            (slideInHorizontally(tween(CoffeeMotion.normal, easing = CoffeeMotion.standard)) { it / 4 } + fadeIn(tween(CoffeeMotion.normal)))
-                                .togetherWith(fadeOut(tween(CoffeeMotion.quick)))
-                        } else {
-                            fadeIn(tween(CoffeeMotion.normal))
-                                .togetherWith(slideOutHorizontally(tween(CoffeeMotion.normal, easing = CoffeeMotion.standard)) { -it / 4 } + fadeOut(tween(CoffeeMotion.quick)))
-                        }.using(SizeTransform(clip = false))
-                    },
-                    label = "routeTransition",
-                ) { route ->
-                    when (route) {
-                        is Route.Timer -> BrewTimerScreen(state, vm)
-                        is Route.AddEquipment -> AddEquipmentScreen(vm)
-                        is Route.LearnDetail -> LearnDetailScreen(route.cardIndex, vm)
-                        is Route.DrinkDetail -> DrinkDetailScreen(route.index, vm)
-                        is Route.BeanDetail -> BeanDetailScreen(route.beanId, vm)
-                        is Route.Settings -> SettingsScreen(vm)
-                        is Route.Tabs -> TabContent(state, vm)
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .statusBarsPadding(),
+                ) {
+                    AnimatedContent(
+                        modifier = Modifier.weight(1f).fillMaxWidth(),
+                        targetState = state.route,
+                        transitionSpec = {
+                            val forward = targetState !is Route.Tabs
+                            if (forward) {
+                                (slideInHorizontally(tween(CoffeeMotion.normal, easing = CoffeeMotion.standard)) { it / 4 } + fadeIn(tween(CoffeeMotion.normal)))
+                                    .togetherWith(fadeOut(tween(CoffeeMotion.quick)))
+                            } else {
+                                fadeIn(tween(CoffeeMotion.normal))
+                                    .togetherWith(slideOutHorizontally(tween(CoffeeMotion.normal, easing = CoffeeMotion.standard)) { -it / 4 } + fadeOut(tween(CoffeeMotion.quick)))
+                            }.using(SizeTransform(clip = false))
+                        },
+                        label = "routeTransition",
+                    ) { route ->
+                        when (route) {
+                            is Route.Timer -> BrewTimerScreen(state, vm)
+                            is Route.AddEquipment -> AddEquipmentScreen(vm)
+                            is Route.LearnDetail -> LearnDetailScreen(route.cardIndex, vm)
+                            is Route.DrinkDetail -> DrinkDetailScreen(route.index, vm)
+                            is Route.BeanDetail -> BeanDetailScreen(route.beanId, vm)
+                            is Route.Settings -> SettingsScreen(vm)
+                            is Route.Tabs -> TabContent(state, vm)
+                        }
                     }
-                }
-                if (state.route is Route.Tabs) {
-                    BottomNav(
-                        items = NavTab.entries.toList(),
-                        selected = state.tab,
-                        labelFor = { stringResource(it.labelRes) },
-                        glyphFor = { it.glyph },
-                        onSelect = { vm.selectTab(it) },
-                    )
+                    if (state.route is Route.Tabs) {
+                        BottomNav(
+                            items = NavTab.entries.toList(),
+                            selected = state.tab,
+                            labelFor = { stringResource(it.labelRes) },
+                            glyphFor = { it.glyph },
+                            onSelect = { vm.selectTab(it) },
+                        )
+                    }
                 }
             }
         }

@@ -39,10 +39,11 @@ fun PrimaryButton(
     val hapticFeedback = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val scale by animateFloatAsState(targetValue = if (isPressed) 0.97f else 1f, animationSpec = CoffeeMotion.press, label = "press")
+    val sx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
+    val sy by animateFloatAsState(targetValue = if (isPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "pressY")
     Box(
         modifier = modifier
-            .graphicsLayer(scaleX = scale, scaleY = scale)
+            .graphicsLayer(scaleX = sx, scaleY = sy)
             .defaultMinSize(minWidth = 120.dp)
             .clip(shape)
             .background(if (enabled) colors.accent else colors.outline)
@@ -74,10 +75,11 @@ fun SecondaryButton(
     val hapticFeedback = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val scale by animateFloatAsState(targetValue = if (isPressed) 0.97f else 1f, animationSpec = CoffeeMotion.press, label = "press")
+    val sx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
+    val sy by animateFloatAsState(targetValue = if (isPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "pressY")
     Box(
         modifier = modifier
-            .graphicsLayer(scaleX = scale, scaleY = scale)
+            .graphicsLayer(scaleX = sx, scaleY = sy)
             .defaultMinSize(minWidth = 120.dp)
             .clip(CoffeeShapes.pill)
             .background(colors.surface)

@@ -1,6 +1,11 @@
 package co.coffeery.app.ui.components
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -36,6 +41,7 @@ import co.coffeery.app.R
 import co.coffeery.app.data.model.Equipment
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 import co.coffeery.app.util.BrewResult
 import kotlin.random.Random
 
@@ -61,6 +67,15 @@ fun BloomHero(
         1 -> stringResource(R.string.bloom_phase_bloom)
         else -> stringResource(R.string.bloom_phase_pour)
     }
+    val reduced = LocalPrefersReducedMotion.current
+    val infinite = rememberInfiniteTransition(label = "bubbleDrift")
+    val driftAnim by infinite.animateFloat(
+        initialValue = 0f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(tween(1800, easing = LinearEasing), RepeatMode.Restart),
+        label = "drift",
+    )
+    val drift = if (reduced || phase != 1) 0f else driftAnim
     CoffeeCard(modifier = modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             AppText(phaseLabel, style = CoffeeTheme.type.label, color = colors.accent)
@@ -125,20 +140,25 @@ fun BloomHero(
                     style = Stroke(width = 2f),
                 )
                 if (phase == 1) {
-                    val rng = Random(42 + progress.hashCode())
+                    val rng = Random(42)
                     for (i in 0 until 7) {
-                        val bx = cx + (rng.nextFloat() - 0.5f) * hwTop * 1.2f
-                        val by = fillTop + rng.nextFloat() * fillH * 0.6f
+                        val baseX = cx + (rng.nextFloat() - 0.5f) * hwTop * 1.2f
+                        val baseY = fillTop + rng.nextFloat() * fillH * 0.6f
                         val r = 1.5f + rng.nextFloat() * 2.5f
+                        val sway = kotlin.math.sin((drift * 6.28 + i).toDouble()).toFloat() * 3f
+                        val dy = (drift * fillH * 0.3f) % (fillH * 0.6f).coerceAtLeast(1f)
+                        val bx = baseX + sway
+                        val by = (baseY - dy).coerceIn(fillTop, fillTop + fillH)
+                        val r2 = r * (1f + drift * 0.1f)
                         drawCircle(
                             color = colors.accent.copy(alpha = 0.55f),
-                            radius = r,
+                            radius = r2,
                             center = Offset(bx, by),
                         )
                         drawCircle(
                             color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.7f),
-                            radius = r * 0.45f,
-                            center = Offset(bx - r * 0.3f, by - r * 0.3f),
+                            radius = r2 * 0.45f,
+                            center = Offset(bx - r2 * 0.3f, by - r2 * 0.3f),
                         )
                     }
                 }

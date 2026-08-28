@@ -33,6 +33,7 @@ import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.CoffeeDialog
+import co.coffeery.app.ui.components.CremaMascot
 import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
@@ -60,9 +61,7 @@ fun BeanListScreen(vm: AppViewModel) {
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Box(modifier = Modifier.size(104.dp).clip(co.coffeery.app.ui.theme.CoffeeShapes.pill).background(colors.accentSoft.copy(alpha = 0.25f)), contentAlignment = Alignment.Center) {
-                    LineIcon(Glyph.BEAN, colors.accent.copy(alpha = 0.7f), Modifier.size(64.dp))
-                }
+                CremaMascot(mood = "sleepy", modifier = Modifier.size(104.dp))
                 Spacer(Modifier.height(16.dp))
                 AppText(stringResource(R.string.empty_beans_title), style = CoffeeTheme.type.title, align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
                 Spacer(Modifier.height(8.dp))

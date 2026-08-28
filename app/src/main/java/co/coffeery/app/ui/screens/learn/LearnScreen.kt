@@ -52,6 +52,7 @@ import co.coffeery.app.ui.components.Chip
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.ScreenHeader
+import co.coffeery.app.ui.components.CremaMascot
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.screens.root.AppViewModel
@@ -199,13 +200,11 @@ fun LearnScreen(vm: AppViewModel) {
         }
         if (searchActive && filteredCards.isEmpty()) {
             item(key = "no_results", contentType = "header") {
-                AppText(
-                    stringResource(R.string.search_no_results),
-                    style = CoffeeTheme.type.body,
-                    color = colors.textSecondary,
-                    modifier = Modifier.fillMaxWidth(),
-                    align = androidx.compose.ui.text.style.TextAlign.Center,
-                )
+                Column(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                    CremaMascot(mood = "curious", modifier = Modifier.size(96.dp))
+                    Spacer(Modifier.height(12.dp))
+                    AppText(stringResource(R.string.search_no_results), style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.fillMaxWidth(), align = TextAlign.Center)
+                }
             }
         }
         val distinctChapters = filteredCards.map { it.chapterRes }.distinct()
@@ -388,6 +387,9 @@ private fun ProTipsCard() {
         R.string.pro_tip_41, R.string.pro_tip_42, R.string.pro_tip_43, R.string.pro_tip_44,
         R.string.pro_tip_45, R.string.pro_tip_46, R.string.pro_tip_47, R.string.pro_tip_48,
         R.string.pro_tip_49, R.string.pro_tip_50,
+        R.string.pro_tip_51, R.string.pro_tip_52, R.string.pro_tip_53, R.string.pro_tip_54,
+        R.string.pro_tip_55, R.string.pro_tip_56, R.string.pro_tip_57, R.string.pro_tip_58,
+        R.string.pro_tip_59, R.string.pro_tip_60,
     )
     var current by remember { mutableStateOf(kotlin.random.Random.nextInt(tips.size)) }
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
@@ -622,6 +624,36 @@ private val GlossaryTerms = listOf(
     GlossaryTerm(R.string.glossary_term_63, R.string.glossary_def_63),
     GlossaryTerm(R.string.glossary_term_64, R.string.glossary_def_64),
     GlossaryTerm(R.string.glossary_term_65, R.string.glossary_def_65),
+    GlossaryTerm(R.string.glossary_term_66, R.string.glossary_def_66),
+    GlossaryTerm(R.string.glossary_term_67, R.string.glossary_def_67),
+    GlossaryTerm(R.string.glossary_term_68, R.string.glossary_def_68),
+    GlossaryTerm(R.string.glossary_term_69, R.string.glossary_def_69),
+    GlossaryTerm(R.string.glossary_term_70, R.string.glossary_def_70),
+    GlossaryTerm(R.string.glossary_term_71, R.string.glossary_def_71),
+    GlossaryTerm(R.string.glossary_term_72, R.string.glossary_def_72),
+    GlossaryTerm(R.string.glossary_term_73, R.string.glossary_def_73),
+    GlossaryTerm(R.string.glossary_term_74, R.string.glossary_def_74),
+    GlossaryTerm(R.string.glossary_term_75, R.string.glossary_def_75),
+    GlossaryTerm(R.string.glossary_term_76, R.string.glossary_def_76),
+    GlossaryTerm(R.string.glossary_term_77, R.string.glossary_def_77),
+    GlossaryTerm(R.string.glossary_term_78, R.string.glossary_def_78),
+    GlossaryTerm(R.string.glossary_term_79, R.string.glossary_def_79),
+    GlossaryTerm(R.string.glossary_term_80, R.string.glossary_def_80),
+    GlossaryTerm(R.string.glossary_term_81, R.string.glossary_def_81),
+    GlossaryTerm(R.string.glossary_term_82, R.string.glossary_def_82),
+    GlossaryTerm(R.string.glossary_term_83, R.string.glossary_def_83),
+    GlossaryTerm(R.string.glossary_term_84, R.string.glossary_def_84),
+    GlossaryTerm(R.string.glossary_term_85, R.string.glossary_def_85),
+    GlossaryTerm(R.string.glossary_term_86, R.string.glossary_def_86),
+    GlossaryTerm(R.string.glossary_term_87, R.string.glossary_def_87),
+    GlossaryTerm(R.string.glossary_term_88, R.string.glossary_def_88),
+    GlossaryTerm(R.string.glossary_term_89, R.string.glossary_def_89),
+    GlossaryTerm(R.string.glossary_term_90, R.string.glossary_def_90),
+    GlossaryTerm(R.string.glossary_term_91, R.string.glossary_def_91),
+    GlossaryTerm(R.string.glossary_term_92, R.string.glossary_def_92),
+    GlossaryTerm(R.string.glossary_term_93, R.string.glossary_def_93),
+    GlossaryTerm(R.string.glossary_term_94, R.string.glossary_def_94),
+    GlossaryTerm(R.string.glossary_term_95, R.string.glossary_def_95),
 )
 
 private data class FlavorCategory(val labelRes: Int, val notes: List<Int>)
@@ -1049,6 +1081,55 @@ private val QuizQuestions = listOf(
         listOf("One bean type", "Coffee from one specific region/farm", "One roast level", "One cup"),
         1,
         "Single origin means traceable to a specific farm, cooperative, or region — showcasing terroir rather than blending for consistency.",
+    ),
+
+    QuizQuestion(
+        "What pH should you stop anaerobic fermentation at?",
+        listOf("pH 4.5", "pH 3.6–3.8", "pH 2.5", "pH 5.0"),
+        1,
+        "Stop around pH 3.6–3.8; below 3.5 turns vinegary and above 4.0 risks boozy over-fermentation.",
+    ),
+    QuizQuestion(
+        "Mg vs Ca — which ion lifts fruit clarity more?",
+        listOf("Calcium", "Magnesium", "Sodium", "Potassium"),
+        1,
+        "Magnesium extracts fruit and brightness more aggressively; calcium adds creamy body but mutes acidity.",
+    ),
+    QuizQuestion(
+        "Ideal pre-infusion pressure and time?",
+        listOf("9 bar 30s", "2–3 bar for 8–12s", "6 bar 2s", "No pre-infusion needed"),
+        1,
+        "Low-pressure wetting at 2–3 bar for 8–12s saturates the puck and prevents channeling.",
+    ),
+    QuizQuestion(
+        "What is Rate of Rise (ROR) telling you?",
+        listOf("Color only", "Bean temp increase per minute; declining ROR = clean roast", "Moisture %", "Caffeine %"),
+        1,
+        "ROR is °C/min increase; a smooth decline predicts sweetness, a crash or flick predicts baked defects.",
+    ),
+    QuizQuestion(
+        "CYP1A2 AA vs CC — which clears caffeine faster?",
+        listOf("CC slow", "AA fast (~3h)", "Both equal", "AA slow"),
+        1,
+        "AA genotype is fast metabolizer (~3h half-life); AC/CC are slow (6–8h), explaining sleep sensitivity.",
+    ),
+    QuizQuestion(
+        "What does a refractometer compute?",
+        listOf("pH only", "TDS and Extraction Yield = TDS × beverage / dose", "Roast color", "Water hardness"),
+        1,
+        "It measures TDS optically; yield = TDS × beverage mass / dose, targeting 18–22% for both filter and espresso.",
+    ),
+    QuizQuestion(
+        "What Aw keeps green coffee safe?",
+        listOf("0.80", "0.53–0.59", "0.30", "0.95"),
+        1,
+        "Water activity 0.53–0.59 in hermetic bags prevents mold and preserves cup quality for 9–12 months.",
+    ),
+    QuizQuestion(
+        "Which taint smells like raw potato?",
+        listOf("Baggy", "Potato defect from antestia bug", "Phenol", "Ferment"),
+        1,
+        "Antestia-bug bacteria in Rwandans creates unmistakable raw-potato stench; one bean ruins the pot.",
     ),
     QuizQuestion(
         "What year was the espresso machine invented?",

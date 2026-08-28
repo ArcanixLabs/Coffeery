@@ -26,6 +26,7 @@ import co.coffeery.app.R
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.CoffeeCard
+import co.coffeery.app.ui.components.CremaMascot
 import co.coffeery.app.ui.components.ScreenHeader
 import co.coffeery.app.ui.screens.root.AppViewModel
 import co.coffeery.app.ui.screens.root.Route
@@ -79,16 +80,15 @@ fun DrinksScreen(vm: AppViewModel) {
         }
 
         if (searchActive && filteredDrinks.isEmpty()) {
-            AppText(
-                stringResource(R.string.search_no_results),
-                style = CoffeeTheme.type.body,
-                color = colors.textSecondary,
-                modifier = Modifier.fillMaxWidth(),
-            )
+            Column(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                CremaMascot(mood = "curious", modifier = Modifier.size(96.dp))
+                Spacer(Modifier.height(12.dp))
+                AppText(stringResource(R.string.search_no_results), style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.fillMaxWidth(), align = TextAlign.Center)
+            }
         }
 
         var lastGroup: DrinkGroup? = null
-        filteredDrinks.forEachIndexed { index, drink ->
+        filteredDrinks.forEach { drink ->
             if (drink.group != lastGroup) {
                 lastGroup = drink.group
                 Spacer(Modifier.height(2.dp))
@@ -98,7 +98,8 @@ fun DrinksScreen(vm: AppViewModel) {
                     color = colors.accent,
                 )
             }
-            CoffeeCard(onClick = { vm.openRoute(Route.DrinkDetail(index)) }, modifier = Modifier.fillMaxWidth()) {
+            val globalIndex = DrinkContent.drinks.indexOf(drink)
+            CoffeeCard(onClick = { vm.openRoute(Route.DrinkDetail(globalIndex)) }, modifier = Modifier.fillMaxWidth()) {
                 AppText(stringResource(drink.nameRes), style = CoffeeTheme.type.headline)
                 Spacer(Modifier.height(6.dp))
                 AppText(

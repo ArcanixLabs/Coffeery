@@ -93,6 +93,9 @@ import co.coffeery.app.data.model.Equipment
 import co.coffeery.app.data.model.StepKind
 import co.coffeery.app.util.BrewMath
 import co.coffeery.app.util.Format
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.spring
@@ -100,6 +103,8 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.RepeatMode
+import co.coffeery.app.ui.theme.CoffeeMotion
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 import kotlinx.coroutines.delay
 
 @Composable
@@ -302,15 +307,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         val step = steps[stepIndex]
         val stepDur = step.durationSec.coerceAtLeast(1)
         val targetProgress = ((stepDur - remaining).toFloat() / stepDur).coerceIn(0f, 1f)
-        val prefersReducedMotion = remember {
-            try {
-                android.provider.Settings.Global.getFloat(
-                    context.contentResolver,
-                    android.provider.Settings.Global.ANIMATOR_DURATION_SCALE,
-                    1f,
-                ) == 0f
-            } catch (_: Exception) { false }
-        }
+        val prefersReducedMotion = LocalPrefersReducedMotion.current
         val animatedProgress by animateFloatAsState(
             targetValue = targetProgress,
             animationSpec = if (prefersReducedMotion) tween(0) else spring(
@@ -341,10 +338,16 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                     isCurrent -> CoffeeTheme.colors.accent
                     else -> CoffeeTheme.colors.outline
                 }
+                val targetWidth = if (isCurrent) 32.dp else 8.dp
+                val animatedWidth by animateDpAsState(
+                    targetValue = targetWidth,
+                    animationSpec = if (LocalPrefersReducedMotion.current) tween(0) else spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
+                    label = "dot$index",
+                )
                 Box(
                     modifier = Modifier
                         .padding(horizontal = 3.dp)
-                        .width(if (isCurrent) 32.dp else 8.dp)
+                        .width(animatedWidth)
                         .height(4.dp)
                         .clip(CoffeeShapes.pill)
                         .background(color)
@@ -731,11 +734,29 @@ private fun SaveBrewDialog(
             Spacer(Modifier.height(6.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 for (i in 1..5) {
+                    val reducedStar = LocalPrefersReducedMotion.current
+                    val starScale = remember { Animatable(1f) }
+                    LaunchedEffect(rating) {
+                        if (reducedStar) {
+                            starScale.snapTo(1f)
+                        } else if (i <= rating) {
+                            if (i == rating) {
+                                starScale.snapTo(0.9f)
+                                starScale.animateTo(1.4f, animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMedium))
+                                starScale.animateTo(1f, animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMedium))
+                            } else {
+                                starScale.animateTo(1f, animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow))
+                            }
+                        } else {
+                            starScale.animateTo(0.95f, animationSpec = tween(120))
+                            starScale.animateTo(1f, animationSpec = tween(80))
+                        }
+                    }
                     AppText(
                         if (i <= rating) "★" else "☆",
                         style = CoffeeTheme.type.title,
                         color = if (i <= rating) colors.accent else colors.outline,
-                        modifier = Modifier.clickable { rating = i },
+                        modifier = Modifier.graphicsLayer(scaleX = starScale.value, scaleY = starScale.value).clickable { rating = i },
                     )
                 }
             }

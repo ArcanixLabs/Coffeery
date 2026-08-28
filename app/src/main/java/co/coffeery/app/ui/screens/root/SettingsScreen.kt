@@ -6,15 +6,24 @@ import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,6 +43,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import co.coffeery.app.BuildConfig
@@ -52,6 +62,7 @@ import co.coffeery.app.ui.components.SecondaryButton
 import co.coffeery.app.ui.components.SegmentedControl
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.coffeeBackground
 import co.coffeery.app.ui.theme.paletteColors
 import co.coffeery.app.util.CloudBackupManager
 import kotlinx.coroutines.launch
@@ -90,6 +101,13 @@ fun SettingsScreen(vm: AppViewModel) {
         }
     }
 
+    val recoverLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { _ ->
+        cloud.clearRecoverableIntent()
+        android.widget.Toast.makeText(ctx, "Permission granted — please retry backup", android.widget.Toast.LENGTH_SHORT).show()
+    }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -113,78 +131,136 @@ fun SettingsScreen(vm: AppViewModel) {
             Spacer(Modifier.height(12.dp))
             AppText(stringResource(R.string.settings_palette), style = CoffeeTheme.type.body, color = colors.textPrimary)
             Spacer(Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.horizontalScroll(rememberScrollState()),
+            LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
+                contentPadding = PaddingValues(end = 4.dp),
             ) {
-                Palette.entries.forEach { palette ->
+                items(Palette.entries) { palette ->
                     val isSelected = palette == state.palette
-                    val swatchColors = remember(colors.isDark, palette) { paletteColors(palette, colors.isDark) }
-                    Column(
+                    val swatchColors = remember(palette) { paletteColors(palette, false) }
+                    val borderWidth by animateDpAsState(
+                        targetValue = if (isSelected) 2.dp else 0.dp,
+                        animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
+                        label = "borderWidth",
+                    )
+                    val borderColor by animateColorAsState(
+                        targetValue = if (isSelected) swatchColors.accent else androidx.compose.ui.graphics.Color.Transparent,
+                        animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
+                        label = "borderColor",
+                    )
+                    val scale by animateFloatAsState(
+                        targetValue = if (isSelected) 0.97f else 1f,
+                        animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
+                        label = "scale",
+                    )
+                    Box(
                         modifier = Modifier
-                            .width(120.dp)
-                            .height(80.dp)
+                            .width(148.dp)
+                            .height(108.dp)
+                            .graphicsLayer { scaleX = scale; scaleY = scale }
                             .clip(CoffeeShapes.small)
-                            .then(
-                                if (isSelected) Modifier.border(1.5.dp, colors.accent, CoffeeShapes.small)
-                                else Modifier
-                            )
+                            .border(borderWidth, borderColor, CoffeeShapes.small)
+                            .coffeeBackground(swatchColors)
                             .clickable { vm.setPalette(palette) },
+                        contentAlignment = Alignment.Center,
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(56.dp)
-                                .background(swatchColors.background),
-                            contentAlignment = Alignment.Center,
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp),
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .fillMaxWidth(0.6f)
-                                    .height(40.dp)
-                                    .clip(RoundedCornerShape(4.dp))
-                                    .background(swatchColors.surfaceElevated),
+                                    .width(92.dp)
+                                    .height(54.dp)
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .background(swatchColors.surfaceElevated)
+                                    .border(1.dp, swatchColors.outline, RoundedCornerShape(10.dp))
+                                    .padding(7.dp),
                                 contentAlignment = Alignment.Center,
                             ) {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.Center,
+                                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                                    modifier = Modifier.align(Alignment.Center),
                                 ) {
                                     Box(
                                         modifier = Modifier
-                                            .width(40.dp)
-                                            .height(2.dp)
+                                            .width(36.dp)
+                                            .height(4.dp)
+                                            .clip(RoundedCornerShape(2.dp))
                                             .background(swatchColors.accent),
                                     )
-                                    Spacer(Modifier.height(4.dp))
                                     Box(
                                         modifier = Modifier
-                                            .width(30.dp)
-                                            .height(1.5.dp)
-                                            .background(swatchColors.outline),
+                                            .width(52.dp)
+                                            .height(6.dp)
+                                            .clip(RoundedCornerShape(3.dp))
+                                            .background(swatchColors.accentSoft),
                                     )
-                                    Spacer(Modifier.height(3.dp))
+                                    Row(
+                                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                    ) {
+                                        Box(
+                                            modifier = Modifier
+                                                .width(24.dp)
+                                                .height(2.dp)
+                                                .clip(RoundedCornerShape(1.dp))
+                                                .background(swatchColors.outline),
+                                        )
+                                        Box(
+                                            modifier = Modifier
+                                                .size(14.dp)
+                                                .clip(CircleShape)
+                                                .background(swatchColors.accent),
+                                            contentAlignment = Alignment.Center,
+                                        ) {
+                                            Box(
+                                                modifier = Modifier
+                                                    .size(6.dp)
+                                                    .clip(CircleShape)
+                                                    .background(swatchColors.onAccent),
+                                            )
+                                        }
+                                    }
                                     Box(
                                         modifier = Modifier
-                                            .width(20.dp)
-                                            .height(1.5.dp)
-                                            .background(swatchColors.outline),
+                                            .width(44.dp)
+                                            .height(2.dp)
+                                            .clip(RoundedCornerShape(1.dp))
+                                            .background(swatchColors.textPrimary.copy(alpha = 0.14f)),
                                     )
                                 }
                             }
+                            Spacer(Modifier.height(8.dp))
+                            Crossfade(targetState = isSelected, label = "paletteLabel") { selected ->
+                                AppText(
+                                    stringResource(palette.labelRes),
+                                    style = CoffeeTheme.type.caption,
+                                    color = if (selected) swatchColors.accent else swatchColors.textPrimary,
+                                )
+                            }
                         }
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(24.dp)
-                                .background(swatchColors.background),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            AppText(
-                                stringResource(palette.labelRes),
-                                style = CoffeeTheme.type.caption,
-                                color = if (isSelected) colors.accent else colors.textPrimary,
-                            )
+                        if (isSelected) {
+                            Crossfade(targetState = isSelected, label = "check") { _ ->
+                                Box(
+                                    modifier = Modifier
+                                        .align(Alignment.TopEnd)
+                                        .padding(6.dp)
+                                        .size(18.dp)
+                                        .clip(CircleShape)
+                                        .background(swatchColors.accent),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(7.dp)
+                                            .clip(CircleShape)
+                                            .background(swatchColors.onAccent),
+                                    )
+                                }
+                            }
                         }
                     }
                 }
@@ -339,7 +415,17 @@ fun SettingsScreen(vm: AppViewModel) {
                             val json = vm.getExportJson()
                             val result = cloud.backupToDrive(ctx as android.app.Activity, json)
                             if (result.isSuccess) android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
-                            else android.widget.Toast.makeText(ctx, R.string.settings_cloud_error, android.widget.Toast.LENGTH_SHORT).show()
+                            else {
+                                val ex = result.exceptionOrNull()
+                                val recoverIntent = cloud.consumeRecoverableIntent() ?: (ex as? CloudBackupManager.RecoverableAuthException)?.intent
+                                if (recoverIntent != null) {
+                                    try { recoverLauncher.launch(recoverIntent) } catch (e: Exception) { android.widget.Toast.makeText(ctx, "Authorization required: ${e.message}", android.widget.Toast.LENGTH_LONG).show() }
+                                } else {
+                                    val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
+                                    android.util.Log.e("Coffeery", "Backup failed: $msg", ex)
+                                    android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+                                }
+                            }
                         }
                     }
                 }
@@ -352,7 +438,15 @@ fun SettingsScreen(vm: AppViewModel) {
                                 vm.importFromJsonString(ctx, result.getOrDefault(""))
                                 android.widget.Toast.makeText(ctx, R.string.settings_cloud_restore_done, android.widget.Toast.LENGTH_SHORT).show()
                             } else {
-                                android.widget.Toast.makeText(ctx, R.string.settings_cloud_error, android.widget.Toast.LENGTH_SHORT).show()
+                                val ex = result.exceptionOrNull()
+                                val recoverIntent = cloud.consumeRecoverableIntent() ?: (ex as? CloudBackupManager.RecoverableAuthException)?.intent
+                                if (recoverIntent != null) {
+                                    try { recoverLauncher.launch(recoverIntent) } catch (e: Exception) { android.widget.Toast.makeText(ctx, "Authorization required: ${e.message}", android.widget.Toast.LENGTH_LONG).show() }
+                                } else {
+                                    val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
+                                    android.util.Log.e("Coffeery", "Restore failed: $msg", ex)
+                                    android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+                                }
                             }
                         }
                     }

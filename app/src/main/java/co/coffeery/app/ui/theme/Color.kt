@@ -81,9 +81,9 @@ fun paletteColors(palette: Palette, isDark: Boolean): CoffeeColors = when (palet
     Palette.ESPRESSO -> if (isDark) DarkEspressoColors else LightEspressoColors
     Palette.MATCHA -> if (isDark) DarkMatchaColors else LightMatchaColors
     Palette.BERRY -> if (isDark) DarkBerryColors else LightBerryColors
-    Palette.CREMA -> if (isDark) DarkCopperColors else LightCopperColors
+    Palette.CREMA -> if (isDark) DarkCremaColors else LightCremaColors
     Palette.MOCHA -> if (isDark) DarkMochaColors else LightMochaColors
-    Palette.CARAMEL -> if (isDark) DarkCopperColors else LightCopperColors
+    Palette.CARAMEL -> if (isDark) DarkCaramelColors else LightCaramelColors
     Palette.HAZELNUT -> if (isDark) DarkHazelnutColors else LightHazelnutColors
     Palette.COPPER -> if (isDark) DarkCopperColors else LightCopperColors
 }

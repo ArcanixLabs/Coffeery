@@ -123,6 +123,35 @@ object LearnContent {
         // Sustainability & Science (sustainability)
         LearnCard(R.string.learn_l82_title, R.string.learn_l82_body, R.string.learn_ch_sustainability),
         LearnCard(R.string.learn_l85_title, R.string.learn_l85_body, R.string.learn_ch_sustainability),
+
+        // God-tier depth: processing
+        LearnCard(R.string.learn_l86_title, R.string.learn_l86_body, R.string.learn_ch_processing),
+        LearnCard(R.string.learn_l99_title, R.string.learn_l99_body, R.string.learn_ch_processing),
+
+        // Equipment & grinding precision
+        LearnCard(R.string.learn_l87_title, R.string.learn_l87_body, R.string.learn_ch_equipment),
+        LearnCard(R.string.learn_l92_title, R.string.learn_l92_body, R.string.learn_ch_grinding),
+        LearnCard(R.string.learn_l94_title, R.string.learn_l94_body, R.string.learn_ch_equipment),
+
+        // Water deep
+        LearnCard(R.string.learn_l88_title, R.string.learn_l88_body, R.string.learn_ch_water_deep),
+
+        // Tasting & sensory
+        LearnCard(R.string.learn_l89_title, R.string.learn_l89_body, R.string.learn_ch_tasting),
+        LearnCard(R.string.learn_l90_title, R.string.learn_l90_body, R.string.learn_ch_tasting),
+        LearnCard(R.string.learn_l96_title, R.string.learn_l96_body, R.string.learn_ch_tasting),
+
+        // Espresso
+        LearnCard(R.string.learn_l91_title, R.string.learn_l91_body, R.string.learn_ch_espresso),
+        LearnCard(R.string.learn_l100_title, R.string.learn_l100_body, R.string.learn_ch_espresso),
+
+        // Milk
+        LearnCard(R.string.learn_l95_title, R.string.learn_l95_body, R.string.learn_ch_milk),
+
+        // Caffeine & extraction science
+        LearnCard(R.string.learn_l97_title, R.string.learn_l97_body, R.string.learn_ch_caffeine),
+        LearnCard(R.string.learn_l98_title, R.string.learn_l98_body, R.string.learn_ch_extraction),
+        LearnCard(R.string.learn_l93_title, R.string.learn_l93_body, R.string.learn_ch_basics),
     )
 
     val chapterOrder: List<Int> = listOf(

@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import co.coffeery.app.R
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.CoffeeCard
+import co.coffeery.app.ui.components.CremaMascot
 import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
@@ -143,7 +144,7 @@ private fun WelcomeStep() {
         modifier = Modifier.fillMaxSize().padding(horizontal = 32.dp),
     ) {
         Spacer(Modifier.weight(0.6f))
-        LineIcon(Glyph.CUP, colors.accent, Modifier.size(64.dp))
+        CremaMascot(mood = "excited", modifier = Modifier.size(96.dp))
         Spacer(Modifier.height(40.dp))
         AppText(
             stringResource(R.string.onb_welcome_title),
@@ -227,7 +228,7 @@ private fun ReadyStep() {
         modifier = Modifier.fillMaxSize().padding(horizontal = 32.dp),
     ) {
         Spacer(Modifier.weight(0.6f))
-        LineIcon(Glyph.CUP, colors.accent, Modifier.size(64.dp))
+        CremaMascot(mood = "happy", modifier = Modifier.size(96.dp))
         Spacer(Modifier.height(40.dp))
         AppText(
             stringResource(R.string.onb_ready_title),

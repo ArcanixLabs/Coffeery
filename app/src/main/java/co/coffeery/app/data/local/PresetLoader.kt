@@ -141,6 +141,32 @@ object PresetLoader {
         "equip_cafedeolla_tag" -> R.string.equip_cafedeolla_tag
         "equip_masonjar_name" -> R.string.equip_masonjar_name
         "equip_masonjar_tag" -> R.string.equip_masonjar_tag
+        "equip_orea_name" -> R.string.equip_orea_name
+        "equip_orea_tag" -> R.string.equip_orea_tag
+        "equip_pulsar_name" -> R.string.equip_pulsar_name
+        "equip_pulsar_tag" -> R.string.equip_pulsar_tag
+        "equip_tricolate_name" -> R.string.equip_tricolate_name
+        "equip_tricolate_tag" -> R.string.equip_tricolate_tag
+        "equip_delter_name" -> R.string.equip_delter_name
+        "equip_delter_tag" -> R.string.equip_delter_tag
+        "equip_flair_name" -> R.string.equip_flair_name
+        "equip_flair_tag" -> R.string.equip_flair_tag
+        "equip_aeropress_go_name" -> R.string.equip_aeropress_go_name
+        "equip_aeropress_go_tag" -> R.string.equip_aeropress_go_tag
+        "equip_picopresso_name" -> R.string.equip_picopresso_name
+        "equip_picopresso_tag" -> R.string.equip_picopresso_tag
+        "equip_moccamaster_name" -> R.string.equip_moccamaster_name
+        "equip_moccamaster_tag" -> R.string.equip_moccamaster_tag
+        "equip_nel_name" -> R.string.equip_nel_name
+        "equip_nel_tag" -> R.string.equip_nel_tag
+        "equip_gina_name" -> R.string.equip_gina_name
+        "equip_gina_tag" -> R.string.equip_gina_tag
+        "equip_siphon_modern_name" -> R.string.equip_siphon_modern_name
+        "equip_siphon_modern_tag" -> R.string.equip_siphon_modern_tag
+        "equip_phin_large_name" -> R.string.equip_phin_large_name
+        "equip_phin_large_tag" -> R.string.equip_phin_large_tag
+        "equip_clever_xl_name" -> R.string.equip_clever_xl_name
+        "equip_clever_xl_tag" -> R.string.equip_clever_xl_tag
         "step_bloom" -> R.string.step_bloom
         "step_pour" -> R.string.step_pour
         "step_drawdown" -> R.string.step_drawdown

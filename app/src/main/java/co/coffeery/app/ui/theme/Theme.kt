@@ -24,11 +24,13 @@ fun CoffeeTheme(
         ThemeMode.DARK -> true
     }
     val colors = remember(palette, darkTheme) { paletteColors(palette, darkTheme) }
+    val reducedMotion = rememberPrefersReducedMotion()
     CompositionLocalProvider(
         LocalCoffeeColors provides colors,
         LocalCoffeeTypography provides DefaultCoffeeTypography,
         LocalCoffeeSpacing provides DefaultSpacing,
         LocalMotionTokens provides MotionTokens(),
+        LocalPrefersReducedMotion provides reducedMotion,
         content = content,
     )
 }

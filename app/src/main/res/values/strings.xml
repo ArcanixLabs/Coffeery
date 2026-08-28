@@ -812,6 +812,7 @@
     <string name="palette_mocha">Mocha</string>
     <string name="palette_caramel">Caramel</string>
     <string name="palette_hazelnut">Hazelnut</string>
+    <string name="palette_copper">Copper</string>
     <string name="settings_temperature">Temperature unit</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_desc">Restart the app after changing for full effect.</string>
@@ -953,6 +954,26 @@
     <string name="equip_cafedeolla_tag">Mexican clay pot · cinnamon</string>
     <string name="equip_masonjar_name">Mason Jar Cold Brew</string>
     <string name="equip_masonjar_tag">No equipment · concentrate</string>
+    <string name="equip_delter_name">Delter Press</string>
+    <string name="equip_delter_tag">Press + pour, jet-seal</string>
+    <string name="equip_flair_name">Flair Espresso</string>
+    <string name="equip_flair_tag">Manual lever, café shot</string>
+    <string name="equip_aeropress_go_name">AeroPress Go</string>
+    <string name="equip_aeropress_go_tag">Travel AeroPress, compact</string>
+    <string name="equip_picopresso_name">Wacaco Picopresso</string>
+    <string name="equip_picopresso_tag">Palm espresso, 18 bar</string>
+    <string name="equip_moccamaster_name">Moccamaster</string>
+    <string name="equip_moccamaster_tag">SCA certified brewer</string>
+    <string name="equip_nel_name">Nel Drip</string>
+    <string name="equip_nel_tag">Flannel filter, silky body</string>
+    <string name="equip_gina_name">Goat Story Gina</string>
+    <string name="equip_gina_tag">Smart dripper, 3 valves</string>
+    <string name="equip_siphon_modern_name">Modern Siphon</string>
+    <string name="equip_siphon_modern_tag">Halogen, precise control</string>
+    <string name="equip_phin_large_name">Phin Large</string>
+    <string name="equip_phin_large_tag">Large single-cup drip</string>
+    <string name="equip_clever_xl_name">Clever XL</string>
+    <string name="equip_clever_xl_tag">Large immersion, 350 ml</string>
 
     <!-- Search -->
     <string name="search_hint_equipment">Search brewers…</string>
@@ -1087,6 +1108,9 @@
     <string name="drink_affogato_name">Affogato</string>
     <string name="drink_affogato_summary">Italian dessert — vanilla gelato drowned in hot espresso</string>
     <string name="drink_affogato_body">Italian dessert masquerading as coffee: a scoop of vanilla gelato (or fior di latte) drowned in a hot double espresso shot poured at the table. The espresso melts the gelato, creating a pool of sweet, creamy, bitter, cold-and-hot contrast that defies easy categorization. Eat with a spoon before it becomes soup — the first bite is three distinct experiences (cold gelato, hot espresso, and the melty boundary between them), and each subsequent spoonful changes as the espresso and gelato continue to mingle.\n\nIngredients:\n• Double espresso (~50–60 ml)\n• 1 large scoop vanilla gelato or fior di latte\n\nSteps:\n1. Place a scoop of gelato in a wide, shallow glass or bowl.\n2. Pull a double espresso. Do NOT let it cool.\n3. At the table, pour the hot espresso directly over the gelato.\n4. Hand the diner a spoon — start immediately.\n5. The gelato should be cold enough to create distinct hot-and-cold zones in the early spoonfuls, before gradually melting into a delicious sweet coffee soup.</string>
+    <string name="drink_affogato_iced_name">Iced Affogato</string>
+    <string name="drink_affogato_iced_summary">Modern twist — affogato over ice with cold brew shot</string>
+    <string name="drink_affogato_iced_body">A modern iced twist on the classic affogato: vanilla gelato served over ice with a chilled espresso shot poured tableside, lighter and more refreshing than the hot original.\n\nIngredients:\n• Double espresso, chilled (~50 ml)\n• 1 large scoop vanilla gelato\n• 3–4 ice cubes\n\nSteps:\n1. Place gelato and ice in a chilled glass.\n2. Pull espresso and chill briefly or use cold brew concentrate.\n3. Pour the cold espresso over the gelato and ice.\n4. Serve with a spoon and straw — stir lightly before sipping.</string>
 
     <!-- Coffee varieties -->
     <string name="variety_typica_name">Arabica Typica</string>
@@ -1393,4 +1417,212 @@
     <string name="brew_complete_nudge">Logged! Your streak continues — brew again tomorrow?</string>
     <string name="settings_about_footer">Made with love by a Turkish home barista. Open source, MIT licensed, no ads, no tracking.</string>
     <string name="google_server_client_id">196980582414-fv03bbj1dba2g82t8jo37132gf3u9fbj.apps.googleusercontent.com</string>
+
+    <!-- ===== v5 god-tier depth l86-l100 ===== -->
+    <string name="learn_l86_title">Anaerobic Extended: pH, Pressure &amp; LAB Control</string>
+    <string name="learn_l86_body">Sealed anaerobic tanks let lactic-acid bacteria dominate without oxygen: keep pH above 3.9 in the first 48h to avoid vinegary over-acidification, then let it drift to 3.5–3.7 for tropical fruit esters. Pressurize lightly with CO2 at 1–2 bar and hold slurry at 18–22°C; every +5°C roughly doubles microbial activity and risks boozy off-notes. Cup every 12h — pineapple/mango signals peak; nail-polish or onion means you overran. Smallholders often use reused plastic drums — purge oxygen twice by flushing CO2 after sealing, otherwise residual O2 flips you back to aerobic.</string>
+    <string name="learn_l87_title">Scale Calibration: 0.1 g Repeatability</string>
+    <string name="learn_l87_body">A $15 scale can swing 0.3–0.5 g with drift, tilt, or low battery — enough to shift a 15 g dose by 3% and move extraction by ~0.4%. Calibrate monthly with a 100 g or 500 g F2 weight, zero with the brewer on the pan, and never brew on a warm scale (heat drift). Weigh water as you pour for pour-over; flow calculators assume cumulative mass, so taring mid-brew ruins the target. Keep a spare AAA set in your bar — voltage sag under load is the silent killer of repeatability.</string>
+    <string name="learn_l88_title">Water Chemistry: Mg vs Ca</string>
+    <string name="learn_l88_body">Magnesium (Mg2+) binds flavor compounds more aggressively than calcium (Ca2+), lifting brightness and fruit clarity but also amplifying astringency if total hardness exceeds 120 ppm. Calcium adds creamy body and mutes acidity, ideal for chocolate-forward Brazils but dulling for washed Ethiopians. SCA target 50–175 ppm total hardness; try a 2:1 Mg:Ca split (e.g., 70 ppm Mg, 35 ppm Ca as CaCO3) for filter clarity, and invert it for espresso body. Test with GH/KH drops — TDS alone cannot tell you the ratio.</string>
+    <string name="learn_l89_title">SCA Cupping Protocol, Step by Step</string>
+    <string name="learn_l89_body">Follow SCA 2024 CVA cupping: 8.25 g coffee to 150 ml at 92–94°C, fragrance at 15 min after grind, break crust at exactly 4:00 and inhale, skim, then taste at 8 min and as it cools to 35°C. Score fragrance, aroma, flavor, aftertaste, acidity, body, uniformity, clean cup, sweetness, and overall — or use descriptive CVA without points. Slurp aggressively to aerosolize across the palate and calibrate with reference leathers: grind, water, and roast must be identical or the comparison is meaningless.</string>
+    <string name="learn_l90_title">Defect Taints: Phenol, Potato, Ferment, Baggy</string>
+    <string name="learn_l90_body">Phenolic (medicinal, iodine) comes from Rio/earthy over-fermentation or contaminated water; potato defect from antestia-bug bacteria is unmistakable raw-potato stench in Rwandans — one bad bean ruins a pot. Ferment/vinegar is sweet-sour booze from overripe pickings; baggy/jute is papery sack from past-crop storage above 12% moisture or Aw over 0.65. Buy current crop, store below 60% RH, and cup every new bag — defects show best at 72–96h post-roast.</string>
+    <string name="learn_l91_title">Espresso Pressure Profiling</string>
+    <string name="learn_l91_body">Beyond flat 9 bar, profiling shapes extraction phases: 2–3 bar pre-infusion for 8–12 s to saturate, ramp to 9 bar to build flow, then decline to 6 bar as blonding starts to avoid over-extracting tail bitters. Lower peak (6–7 bar) emphasizes sweetness and reduces channeling on light roasts; a sharp 9-bar spike maximizes body for dark blends. Flow control kits (Bianca paddle, DE1+) let you hold 1.5–2.0 ml/s through the shot — measure yield by mass, not time, when profiling.</string>
+    <string name="learn_l92_title">Grinder Alignment &amp; Seasoning</string>
+    <string name="learn_l92_body">Misaligned burrs produce bimodal tails that mimic dull burrs: marker-test your flats (dry-erase on burr face, chirp, check wipe pattern) and shim until 95%+ contact. New burrs need 3–8 kg seasoning — first kilos taste metallic and produce excess fines as micro-burrs break in; dial back 1–2 clicks coarser until seasoned. Check zero point monthly: chirp, back off to brew setting, and log it — a shifting zero signals carrier wear or thread backlash.</string>
+    <string name="learn_l93_title">Green Storage: Water Activity</string>
+    <string name="learn_l93_body">Green coffee is alive at 10–12% moisture and Aw 0.53–0.59; above Aw 0.65 mold risk spikes, below 0.45 beans turn hollow and woody. Store in GrainPro or Ecotact hermetic bags at 15–22°C and 50–65% RH, never in jute alone in humid climates. Condensation is the enemy — moving beans from cold to warm without sealed bags sweats them and invites fermentation again. Vault greens for no more than 9–12 months before past-crop paper flavors emerge.</string>
+    <string name="learn_l94_title">Roast Development: ROR &amp; DTR</string>
+    <string name="learn_l94_body">Rate of Rise (ROR, °C/min) should decline smoothly through drying, Maillard, and development; a crash or flick (ROR spike at first crack) bakes or scorches the profile. Development Time Ratio (DTR) = development time / total time: 18–22% suits washed Ethiopians for floral clarity, 22–26% for honey/naturals needing body. Log bean-temp every 15 s — a steady declining ROR is more predictive than final color alone.</string>
+    <string name="learn_l95_title">Milk Chemistry &amp; Foam Physics</string>
+    <string name="learn_l95_body">Foam stability comes from denatured whey proteins wrapping air bubbles: stretch (inject air) only while milk is below 37°C when proteins are still flexible, then roll to polish. Fat destabilizes foam — whole milk (3.5% fat) gives silkier but shorter-lived microfoam than skim; oat barista blends add dipotassium phosphate to mimic casein stability. Never exceed 65°C; above 70°C proteins tighten and squeeze water, turning foam soapy and milk sweet-faded.</string>
+    <string name="learn_l96_title">Sensory Calibration: Triangulation</string>
+    <string name="learn_l96_body">Professional palates are calibrated, not born: run triangle tests (two identical, one different) and score blind; 7/9 correct is statistically significant (p &lt; 0.05). Build a reference kit — citric, malic, acetic acids at 0.5 g/L, sucrose at 10 g/L, quinine at 0.02 g/L — and taste weekly to anchor acidity, sweetness, and bitterness. Cup the same coffee at 48h, 7d, and 14d to map degassing; log every note or your memory invents flavors.</string>
+    <string name="learn_l97_title">Caffeine Pharmacokinetics</string>
+    <string name="learn_l97_body">Caffeine half-life averages 5–6h but CYP1A2 genotype splits fast vs slow metabolizers: AA carriers clear caffeine in ~3h, AC/CC in 6–8h, explaining why one person sleeps after midnight espresso and another cannot. Tolerance builds via adenosine-receptor upregulation — a 7-day washout resets sensitivity. Dose safely: 400 mg/day ceiling for healthy adults, but single doses over 200 mg spike anxiety and tremor in sensitive drinkers.</string>
+    <string name="learn_l98_title">Refractometry: Measure to Master</string>
+    <string name="learn_l98_body">A $300 refractometer turns guesswork into data: measure TDS, then compute Extraction Yield = TDS × beverage mass / dose. Target filter 1.15–1.55% TDS at 18–22% yield; espresso 8–12% TDS at 18–22% yield — same yield window, different strength. Zero with distilled water at brew temp, cool samples to 25°C or use ATC, and filter fines through syringe paper. Log every shot and plot on the SCA Control Chart to see your grinder, not your mood.</string>
+    <string name="learn_l99_title">Lactic vs Washed Extended Fermentation</string>
+    <string name="learn_l99_body">Lactic inoculation pitches Lactobacillus to produce creamy, yogurt-like acidity in 36–72h at 20–24°C — cleaner than spontaneous anaerobic funk, with peach and vanilla notes. Washed extended (anaerobic washed) ferments depulped beans submerged in water under CO2 for 48–96h, adding layered fruit without natural heaviness. Both need daily pH and Brix checks; stop when pH hits 3.6–3.8 or Brix drop stalls, otherwise acidity sharpens to vinegar.</string>
+    <string name="learn_l100_title">Competition Coffee: WBC Signature</string>
+    <string name="learn_l100_body">World Barista Championship rules demand 4 espressos, 4 milk drinks, and 4 signature drinks in 15 minutes — signature must be non-alcoholic and espresso-based, judged on creativity and flavor harmony. Champions like Berg Wu and Diego Campos used carbonic Geshas with precise 1:2.15 yields to maximize florals. Home takeaway: build signature logic — acid + sweet + texture (e.g., espresso, reduced cascara, carbonated water) — and test on refractometer for balance.</string>
+
+    <!-- ===== v5 new drinks ===== -->
+    <string name="drink_shakerato_name">Shakerato</string>
+    <string name="drink_shakerato_summary">Italian iced shaken espresso — frothy, sweet, cocktail-shaken</string>
+    <string name="drink_shakerato_body">Italy's summer cocktail without alcohol: a double espresso shaken hard over ice with sugar, strained into a chilled coupe glass. The shake emulsifies sugars and crema into a dense, pale, frothy cap that looks like a shaken daiquiri. Served without ice in the glass, sipped like a dessert.
+
+Ingredients:
+• Double espresso (~50–60 ml)
+• 1–2 tsp sugar or simple syrup
+• Ice cubes
+
+Steps:
+1. Chill a coupe or martini glass.
+2. Pull a double espresso into a shaker with ice and sugar.
+3. Shake vigorously 15–20 s until frothy, cold, and pale.
+4. Strain into the chilled glass — no ice in the final serve.</string>
+    <string name="drink_tonic_name">Espresso Tonic</string>
+    <string name="drink_tonic_summary">Scandinavian espresso over tonic water — bitter, fizzy, refreshing</string>
+    <string name="drink_tonic_body">Born in Scandinavia's third-wave cafes: cold tonic water topped with a floating shot of espresso. The tonic's quinine bitterness amplifies espresso's fruit, and the carbonation lifts aromatics. Serve in a highball over large ice, never stirred — the cascading layers are the theatre.
+
+Ingredients:
+• 150 ml quality tonic water
+• 1 shot espresso (~30 ml)
+• Large ice cubes, lemon or orange twist
+
+Steps:
+1. Fill a glass with large ice and tonic water.
+2. Slowly pour a fresh espresso shot over the back of a spoon to float on top.
+3. Garnish with citrus twist. Stir only before sipping.</string>
+    <string name="drink_kaapi_name">South Indian Kaapi</string>
+    <string name="drink_kaapi_summary">South Indian filter kaapi — decoction with jaggery and frothed milk</string>
+    <string name="drink_kaapi_body">South India's daily ritual: strong decoction from a stainless-steel filter, cut with jaggery and hot frothed milk, then poured between two tumblers (dhavara) to aerate into foam. Earthy, sweet, and deeply comforting.
+
+Ingredients:
+• 15–20 g South Indian filter coffee (chicory blend optional)
+• 150 ml water at 95°C
+• 100 ml hot milk, frothed
+• Jaggery or sugar to taste
+
+Steps:
+1. Add grounds to upper chamber, tamp lightly, pour hot water and let percolate 5–10 min.
+2. Collect dark decoction in lower chamber.
+3. Sweeten with jaggery, add hot frothed milk (40–60% decoction).
+4. Pour between dhavara and tumbler from height to create foam. Serve hot.</string>
+    <string name="drink_oliang_name">Oliang</string>
+    <string name="drink_oliang_summary">Thai traditional coffee — dark roast with corn, soy, sesame, brewed in a cloth bag</string>
+    <string name="drink_oliang_body">Thailand's street coffee since the 1950s: dark robusta roasted with corn, soybeans and sesame, brewed through a long muslin “sock” (thung tong) and sweetened with condensed milk. Served hot or over ice as oliang yok lor.
+
+Ingredients:
+• 15–20 g oliang blend (dark robusta + corn/soy mix)
+• 200–250 ml boiling water
+• 2–3 tbsp condensed milk
+
+Steps:
+1. Place grounds in cloth bag over metal ring.
+2. Pour boiling water through, steep 2–3 min, pull bag and re-pour once for strength.
+3. Add condensed milk and stir. Serve hot or pour over ice.</string>
+    <string name="drink_berber_name">Berber Spiced Coffee</string>
+    <string name="drink_berber_summary">Moroccan spiced coffee with ginger, cinnamon, pepper and cardamom</string>
+    <string name="drink_berber_body">Moroccan Berber cafés roast spices with the beans, grinding ginger, cinnamon, black pepper, cloves and cardamom together with coffee for a warming, aromatic cup traditionally brewed in a cezve-like pot.
+
+Ingredients:
+• 10 g coffee, fine
+• Pinch each: ginger, cinnamon, cardamom, black pepper, clove
+• 100 ml water, sugar to taste
+
+Steps:
+1. Mix spices with coffee grounds.
+2. Add to cold water in a small pot, sweeten, heat slowly to foam.
+3. Let foam rise twice, pour with grounds into a small cup.</string>
+    <string name="drink_qahwa_gulf_name">Gulf Qahwa</string>
+    <string name="drink_qahwa_gulf_summary">Gulf Arabic qahwa — lightly roasted coffee with cardamom, saffron, served with dates</string>
+    <string name="drink_qahwa_gulf_body">Gulf hospitality coffee: lightly roasted Arabica simmered with cardamom, saffron and sometimes rosewater, served in tiny finjan cups with dates on the side. Pale gold, fragrant, and sipped slowly — a symbol of generosity across Saudi, UAE and Kuwait.
+
+Ingredients:
+• 10 g lightly roasted Arabica, coarsely ground
+• 2–3 crushed cardamom pods, pinch saffron
+• 150 ml water, dates to serve
+
+Steps:
+1. Boil water with cardamom and saffron.
+2. Add coffee, simmer gently 15–20 min without boiling hard.
+3. Strain and serve in finjan cups with dates. No sugar in the pot — guests add if wanted.</string>
+    <string name="drink_gibraltar_name">Gibraltar</string>
+    <string name="drink_gibraltar_summary">Blue Bottle Gibraltar — double ristretto with ~85 ml microfoam in a 4.5 oz glass</string>
+    <string name="drink_gibraltar_body">Blue Bottle's San Francisco creation named after the 4.5 oz Libbey Gibraltar glass it's served in: a double ristretto cut with velvety steamed milk, stronger and smaller than a cortado with a Gibraltar tumbler's thick walls trapping heat.
+
+Ingredients:
+• Double ristretto (~30 ml)
+• ~85 ml steamed milk, thin microfoam
+• Total: ~115 ml in Gibraltar glass
+
+Steps:
+1. Pull a double ristretto into a 4.5 oz glass.
+2. Steam milk to latte microfoam, pour to integrate. Serve immediately.</string>
+    <string name="drink_raf_name">Raf Coffee</string>
+    <string name="drink_raf_summary">Russian Raf — espresso with vanilla sugar and cream steamed together</string>
+    <string name="drink_raf_body">Moscow's late-90s café hit: espresso, vanilla sugar and light cream steamed together until silky and sweet — thicker than a latte, lighter than a breve, with a soufflé-like vanilla aroma.
+
+Ingredients:
+• 1 shot espresso (~30 ml)
+• 150 ml light cream (10–15% fat) or half-and-half
+• 1 tsp vanilla sugar
+
+Steps:
+1. Add espresso, vanilla sugar and cream to a pitcher.
+2. Steam together to 60–65°C, stretching lightly to velvety foam.
+3. Pour into a cup — should be uniformly creamy with no separate foam cap.</string>
+    <string name="drink_melange_name">Wiener Melange</string>
+    <string name="drink_melange_summary">Viennese Melange — mild coffee topped with hot frothed milk, like a local cappuccino</string>
+    <string name="drink_melange_body">Vienna's answer to the cappuccino: mild, light-roast coffee topped with hot frothed milk and sometimes whipped cream, traditionally served on a silver tray with a glass of water.
+
+Ingredients:
+• 60 ml mild brewed coffee or lungo
+• 100 ml hot frothed milk
+• Optional: whipped cream, cocoa dusting
+
+Steps:
+1. Brew mild coffee into a cup.
+2. Froth milk to airy foam and spoon on top.
+3. Optional whipped cream and cocoa. Serve with water.</string>
+    <string name="drink_kyoto_name">Kyoto Cold Drip</string>
+    <string name="drink_kyoto_summary">Kyoto-style slow cold drip — 1 drop/sec for 6–8 hours, crystal clear and floral</string>
+    <string name="drink_kyoto_body">Kyoto slow-drip tower: ice water drips at 1 drop per second through a tall column of grounds for 6–8 hours, producing a crystal-clear, intensely floral concentrate served over one giant ice sphere.
+
+Ingredients:
+• 40 g medium-coarse coffee
+• 400 ml ice + 400 ml cold water in tower
+• Drip rate: 1 drop/sec, 6–8 h
+
+Steps:
+1. Add grounds to middle chamber, ice water to top.
+2. Set valve to 1 drop/sec and let drip overnight into lower carafe.
+3. Collect concentrate (~400 ml) and dilute 1:1 or serve over clear ice.</string>
+
+    <string name="glossary_term_81">Ristretto vs Lungo</string>
+    <string name="glossary_def_81">Ristretto restricts water (1:1 to 1:1.5) for intense sweetness; lungo extends water (1:3+) for lighter clarity. Same dose, opposite ends of the extraction spectrum — both diagnose grind and roast suitability.</string>
+    <string name="glossary_term_82">Pre-infusion</string>
+    <string name="glossary_def_82">Low-pressure wetting (2–4 bar for 5–12 s) before full 9 bar extraction. Pre-infusion saturates the puck evenly, reduces channeling, and is essential for light roasts and high doses.</string>
+    <string name="glossary_term_83">Pressure Profiling</string>
+    <string name="glossary_def_83">Variable pressure during an espresso shot — pre-infuse low, ramp to 9 bar, then decline to 6 bar. Profiling shapes flavor: lower peak favors sweetness, high peak favors body.</string>
+    <string name="glossary_term_84">Water Activity (Aw) Deep</string>
+    <string name="glossary_def_84">Free water in green coffee; keep Aw 0.53–0.59 in hermetic bags at 15–22°C and 50–65% RH to prevent mold or hollow, woody aging beyond 9–12 months.</string>
+    <string name="glossary_term_85">Development Time Ratio (DTR)</string>
+    <string name="glossary_def_85">Percentage of total roast time after first crack. Washed Ethiopians shine at 18–22% DTR for florals; naturals need 22–26% for body without tipping into baked flavors.</string>
+    <string name="glossary_term_86">Rate of Rise (ROR)</string>
+    <string name="glossary_def_86">Bean-temperature increase per minute during roasting. A smoothly declining ROR predicts a clean, sweet cup; a crash or flick predicts baked, roasty, or grassy defects.</string>
+    <string name="glossary_term_87">Microlot vs Nanolot</string>
+    <string name="glossary_def_87">Microlot is a few bags from one plot; nanolot is often a single picking pass under 100 kg. Both highlight peak quality and command premium prices for transparency.</string>
+    <string name="glossary_term_88">CYP1A2</string>
+    <string name="glossary_def_88">Liver enzyme gene determining caffeine metabolism speed. AA = fast (3 h half-life), AC/CC = slow (6–8 h). Explains individual tolerance and sleep sensitivity to the same dose.</string>
+    <string name="glossary_term_89">Triangulation</string>
+    <string name="glossary_def_89">Sensory calibration method using triangle tests — two identical, one different — scored blind. 7/9 correct is statistically significant and trains discrimination faster than open tasting.</string>
+    <string name="glossary_term_90">Tare Drift</string>
+    <string name="glossary_def_90">Scale drift from heat, tilt, or low battery causing 0.3–0.5 g error. Calibrate monthly with a 100–500 g weight, power-cycle before dosing, and never tare mid-pour.</string>
+    <string name="glossary_term_91">GrainPro</string>
+    <string name="glossary_def_91">Hermetic barrier bag that keeps green coffee at stable Aw and moisture for 9–12 months. Essential in humid origins; jute alone cannot protect against rehydration.</string>
+    <string name="glossary_term_92">SCA CVA</string>
+    <string name="glossary_def_92">Coffee Value Assessment, SCA 2023 successor to the 100-point form. Separates descriptive assessment from hedonic scoring and adds processing and sustainability context.</string>
+    <string name="glossary_term_93">Q-Grader Expanded</string>
+    <string name="glossary_def_93">Certified grader passing 22 SCA exams. Expanded scope now includes CVA calibration and the ability to detect phenol, potato, and ferment defects blind.</string>
+    <string name="glossary_term_94">Refractometer</string>
+    <string name="glossary_def_94">Optical device measuring TDS via light refraction. Use with distilled-water zero at brew temperature to compute Extraction Yield = TDS × beverage mass / dose.</string>
+    <string name="glossary_term_95">Bypass Brewing</string>
+    <string name="glossary_def_95">Controlled bypass dilutes a strong concentrate (e.g., AeroPress 1:10 to 1:16) without over-extraction; uncontrolled bypass (water around filter edge) weakens without adding strength.</string>
+    <string name="pro_tip_51">Shakerato trick: chill the shaker with ice first, dump that water, then add fresh ice and hot espresso. Pre-chilling prevents the first second of hot coffee from over-diluting before the shake.</string>
+    <string name="pro_tip_52">For espresso tonic, use a high-quality tonic with real quinine and low sugar. Fever-Tree or Thomas Henry highlight fruit; cheap tonic buries it in sweetness.</string>
+    <string name="pro_tip_53">Kaapi decoction improves if you let the South Indian filter percolate a full 10 minutes. Rushing it yields thin, sour concentrate — patience is the recipe.</string>
+    <string name="pro_tip_54">Oliang bag dosing: soak the cloth bag in boiling water for 30 seconds before the first brew. Dry cloth steals heat and the first cup comes out under-extracted.</string>
+    <string name="pro_tip_55">When dialing anaerobic naturals, start 2°C cooler than your washed recipe. Fermented coffees dissolve faster and tip into ferment-bitter if brewed hot.</string>
+    <string name="pro_tip_56">Refractometer hygiene: rinse the prism with distilled water, dry fully, then zero. Coffee oils left on the prism drift TDS by 0.05% — enough to misread extraction by 1%.</string>
+    <string name="pro_tip_57">Raf coffee fails if you steam cream and espresso separately. The magic is steaming them together — vanilla sugars emulsify with fat mid-steam for that soufflé sweetness.</string>
+    <string name="pro_tip_58">Gibraltar vs cortado: the difference is the glass wall thickness. Thin cortado glasses lose heat fast; the thick Libbey Gibraltar holds temperature, so shots stay sweet 30 seconds longer.</string>
+    <string name="pro_tip_59">Gulf qahwa should never boil. Keep it at 85–92°C for 15 minutes with the lid cracked — boiling strips cardamom aromatics and turns the pale gold murky.</string>
+    <string name="pro_tip_60">Kyoto cold drip: fix the drip rate before adding ice. Set 1 drop/sec with water only, then load ice — ice melt shifts rate, so re-check after 10 minutes and adjust.</string>
+
 </resources>

@@ -40,8 +40,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.theme.CoffeeMotion
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 import co.coffeery.app.R
 import co.coffeery.app.data.local.BrewLogEntity
 import co.coffeery.app.data.model.BrewCategory
@@ -519,14 +521,15 @@ private fun RoastSection(state: AppUiState, vm: AppViewModel) {
 private fun OutputSection(result: co.coffeery.app.util.BrewResult, eq: Equipment, temperatureUnit: String) {
     val colors = CoffeeTheme.colors
     val grindColor = lerp(colors.cremaLight, colors.cremaDark, result.grind.ordinal / 6f)
+    val reduced = LocalPrefersReducedMotion.current
     val animatedCoffee by animateFloatAsState(
         targetValue = result.coffeeGrams.toFloat(),
-        animationSpec = spring(dampingRatio = 0.5f, stiffness = 200f),
+        animationSpec = if (reduced) tween(0) else CoffeeMotion.counter,
         label = "coffeeAnim",
     )
     val animatedWater by animateFloatAsState(
         targetValue = result.waterMl.toFloat(),
-        animationSpec = spring(dampingRatio = 0.5f, stiffness = 200f),
+        animationSpec = if (reduced) tween(0) else CoffeeMotion.counter,
         label = "waterAnim",
     )
 

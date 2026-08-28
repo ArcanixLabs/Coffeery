@@ -17,15 +17,37 @@ import com.google.android.gms.common.api.Scope
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
+import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException
 import com.google.api.client.googleapis.json.GoogleJsonResponseException
+import com.google.api.client.http.javanet.NetHttpTransport
+import com.google.api.client.json.gson.GsonFactory
+import com.google.api.services.drive.Drive
 import com.google.api.services.drive.DriveScopes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.IOException
 
 class CloudBackupManager(private val context: Context) {
+    companion object {
+        private val httpTransport: NetHttpTransport by lazy { NetHttpTransport() }
+        private val jsonFactory by lazy { GsonFactory.getDefaultInstance() }
+    }
+
     private val prefs = context.getSharedPreferences("cloud", Context.MODE_PRIVATE)
 
-    fun isSignedIn(): Boolean = prefs.getBoolean("signed_in", false)
+    private var pendingRecoverableIntent: Intent? = null
+
+    fun getRecoverableIntent(): Intent? = pendingRecoverableIntent
+
+    fun consumeRecoverableIntent(): Intent? = pendingRecoverableIntent.also { pendingRecoverableIntent = null }
+
+    fun clearRecoverableIntent() {
+        pendingRecoverableIntent = null
+    }
+
+    class RecoverableAuthException(val intent: Intent, cause: Throwable) : IOException("Authorization required — please grant Drive permission", cause)
+
+    fun isSignedIn(): Boolean = prefs.getBoolean("signed_in", false) && GoogleSignIn.getLastSignedInAccount(context) != null
     fun getAccountEmail(): String? = prefs.getString("account_email", null)
 
     fun getProfilePhotoUrl(): android.net.Uri? {
@@ -106,18 +128,36 @@ class CloudBackupManager(private val context: Context) {
         }
     }
 
+    private fun buildDrive(account: GoogleSignInAccount, ctx: Context): Drive {
+        val credential = GoogleAccountCredential.usingOAuth2(ctx, listOf(DriveScopes.DRIVE_APPDATA))
+        credential.selectedAccount = account.account
+        return Drive.Builder(httpTransport, jsonFactory, credential)
+            .setApplicationName("Coffeery")
+            .build()
+    }
+
+    private fun extractRecoverableIntent(e: Exception): Intent? {
+        return try {
+            val m = e.javaClass.getMethod("getIntent")
+            m.invoke(e) as? Intent
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    private fun isUserRecoverable(e: Exception): Boolean {
+        val name = e.javaClass.name
+        return name.contains("UserRecoverableAuthIOException") || name.contains("UserRecoverableAuthException")
+    }
+
     suspend fun backupToDrive(activity: Activity, jsonData: String): Result<String> = withContext(Dispatchers.IO) {
         try {
-            val account = GoogleSignIn.getLastSignedInAccount(context) ?: return@withContext Result.failure(Exception("Not signed in"))
-            val credential = GoogleAccountCredential.usingOAuth2(context, listOf(DriveScopes.DRIVE_APPDATA))
-            credential.selectedAccount = account.account
-
-            val httpTransport = com.google.api.client.http.javanet.NetHttpTransport()
-            val jsonFactory = com.google.api.client.json.gson.GsonFactory.getDefaultInstance()
-            val drive = com.google.api.services.drive.Drive.Builder(httpTransport, jsonFactory, credential)
-                .setApplicationName("Coffeery")
-                .build()
-
+            val account = GoogleSignIn.getLastSignedInAccount(context)
+            if (account == null) {
+                Log.e("Coffeery", "backupToDrive failed: Not signed in")
+                return@withContext Result.failure(Exception("Not signed in — please sign in with Google first"))
+            }
+            val drive = buildDrive(account, context)
             val content = com.google.api.client.http.ByteArrayContent.fromString("application/json", jsonData)
             val existing = drive.files().list()
                 .setSpaces("appDataFolder")
@@ -140,24 +180,52 @@ class CloudBackupManager(private val context: Context) {
                     .setFields("id,name,modifiedTime")
                     .execute()
             }
+            Log.d("Coffeery", "backupToDrive success: ${file.name}")
             Result.success(file.name ?: "coffeery_backup.json")
+        } catch (e: UserRecoverableAuthIOException) {
+            pendingRecoverableIntent = e.intent
+            Log.w("Coffeery", "backupToDrive recoverable auth required", e)
+            Result.failure(RecoverableAuthException(e.intent, e))
+        } catch (e: GoogleJsonResponseException) {
+            Log.e("Coffeery", "backupToDrive Drive API error ${e.statusCode}: ${e.details?.message ?: e.message}", e)
+            val msg = when (e.statusCode) {
+                401, 403 -> "Authorization failed (${e.statusCode}) — please sign in again"
+                else -> "Drive error ${e.statusCode}: ${e.details?.message ?: e.message}"
+            }
+            Result.failure(Exception(msg, e))
+        } catch (e: IOException) {
+            if (isUserRecoverable(e as Exception)) {
+                val intent = extractRecoverableIntent(e as Exception)
+                if (intent != null) {
+                    pendingRecoverableIntent = intent
+                    Log.w("Coffeery", "backupToDrive recoverable auth (generic) required", e)
+                    return@withContext Result.failure(RecoverableAuthException(intent, e))
+                }
+            }
+            Log.e("Coffeery", "backupToDrive network/IO error", e)
+            Result.failure(Exception("Network error — check internet connection: ${e.message}", e))
         } catch (e: Exception) {
+            if (isUserRecoverable(e)) {
+                val intent = extractRecoverableIntent(e)
+                if (intent != null) {
+                    pendingRecoverableIntent = intent
+                    Log.w("Coffeery", "backupToDrive recoverable auth (generic) required", e)
+                    return@withContext Result.failure(RecoverableAuthException(intent, e))
+                }
+            }
+            Log.e("Coffeery", "backupToDrive failed", e)
             Result.failure(e)
         }
     }
 
     suspend fun restoreFromDrive(context: Context): Result<String> = withContext(Dispatchers.IO) {
         try {
-            val account = GoogleSignIn.getLastSignedInAccount(context) ?: return@withContext Result.failure(Exception("Not signed in"))
-            val credential = GoogleAccountCredential.usingOAuth2(context, listOf(DriveScopes.DRIVE_APPDATA))
-            credential.selectedAccount = account.account
-
-            val httpTransport = com.google.api.client.http.javanet.NetHttpTransport()
-            val jsonFactory = com.google.api.client.json.gson.GsonFactory.getDefaultInstance()
-            val drive = com.google.api.services.drive.Drive.Builder(httpTransport, jsonFactory, credential)
-                .setApplicationName("Coffeery")
-                .build()
-
+            val account = GoogleSignIn.getLastSignedInAccount(context)
+            if (account == null) {
+                Log.e("Coffeery", "restoreFromDrive failed: Not signed in")
+                return@withContext Result.failure(Exception("Not signed in — please sign in with Google first"))
+            }
+            val drive = buildDrive(account, context)
             val files = drive.files().list()
                 .setSpaces("appDataFolder")
                 .setQ("name='coffeery_backup.json' and trashed=false")
@@ -166,20 +234,54 @@ class CloudBackupManager(private val context: Context) {
                 .setPageSize(1)
                 .execute()
                 .files
-            if (files.isNullOrEmpty()) return@withContext Result.failure(Exception("No backup found"))
-
+            if (files.isNullOrEmpty()) {
+                Log.w("Coffeery", "restoreFromDrive: No backup found")
+                return@withContext Result.failure(Exception("No backup found in Drive"))
+            }
             val latestFile = files.first()
             val outputStream = java.io.ByteArrayOutputStream()
             drive.files().get(latestFile.id).executeMediaAndDownloadTo(outputStream)
+            Log.d("Coffeery", "restoreFromDrive success: ${latestFile.name}")
             Result.success(outputStream.toString("UTF-8"))
+        } catch (e: UserRecoverableAuthIOException) {
+            pendingRecoverableIntent = e.intent
+            Log.w("Coffeery", "restoreFromDrive recoverable auth required", e)
+            Result.failure(RecoverableAuthException(e.intent, e))
         } catch (e: GoogleJsonResponseException) {
-            Result.failure(e)
+            Log.e("Coffeery", "restoreFromDrive Drive API error ${e.statusCode}: ${e.details?.message ?: e.message}", e)
+            val msg = when (e.statusCode) {
+                401, 403 -> "Authorization failed (${e.statusCode}) — please sign in again"
+                404 -> "Backup not found (404)"
+                else -> "Drive error ${e.statusCode}: ${e.details?.message ?: e.message}"
+            }
+            Result.failure(Exception(msg, e))
+        } catch (e: IOException) {
+            if (isUserRecoverable(e as Exception)) {
+                val intent = extractRecoverableIntent(e as Exception)
+                if (intent != null) {
+                    pendingRecoverableIntent = intent
+                    Log.w("Coffeery", "restoreFromDrive recoverable auth (generic) required", e)
+                    return@withContext Result.failure(RecoverableAuthException(intent, e))
+                }
+            }
+            Log.e("Coffeery", "restoreFromDrive network/IO error", e)
+            Result.failure(Exception("Network error — check internet connection: ${e.message}", e))
         } catch (e: Exception) {
+            if (isUserRecoverable(e)) {
+                val intent = extractRecoverableIntent(e)
+                if (intent != null) {
+                    pendingRecoverableIntent = intent
+                    Log.w("Coffeery", "restoreFromDrive recoverable auth (generic) required", e)
+                    return@withContext Result.failure(RecoverableAuthException(intent, e))
+                }
+            }
+            Log.e("Coffeery", "restoreFromDrive failed", e)
             Result.failure(e)
         }
     }
 
     fun signOut(client: GoogleSignInClient) {
+        pendingRecoverableIntent = null
         prefs.edit().putBoolean("signed_in", false).remove("account_email").apply()
         client.signOut().addOnCompleteListener {
             client.revokeAccess().addOnCompleteListener {

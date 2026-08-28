@@ -1,9 +1,16 @@
 package co.coffeery.app.ui.screens.log
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -11,8 +18,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import co.coffeery.app.R
@@ -22,10 +36,13 @@ import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.components.LineIcon
+import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
+import kotlin.random.Random
 
 data class Achievement(
     val id: String,
@@ -155,23 +172,62 @@ private fun AchievementCard(achievement: Achievement, modifier: Modifier = Modif
     val iconColor = if (unlocked) colors.accent else colors.textSecondary
     val titleColor = if (unlocked) colors.textPrimary else colors.textSecondary
     val descColor = if (unlocked) colors.textSecondary else colors.textSecondary.copy(alpha = 0.4f)
+    val reduced = LocalPrefersReducedMotion.current
+    val scale = remember { Animatable(if (unlocked) 0.7f else 1f) }
+    var showConfetti by remember { mutableStateOf(false) }
+    LaunchedEffect(unlocked) {
+        if (unlocked && !reduced) {
+            scale.animateTo(1.1f, animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow))
+            scale.animateTo(1f, animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow))
+            showConfetti = true
+        } else if (unlocked) {
+            scale.snapTo(1f)
+        }
+    }
 
-    CoffeeCard(modifier = modifier) {
-        LineIcon(
-            glyph = achievement.glyph,
-            tint = iconColor,
-            modifier = Modifier.size(28.dp).padding(bottom = 4.dp),
-        )
-        AppText(
-            text = if (unlocked) stringResource(achievement.titleRes) else "???",
-            style = CoffeeTheme.type.headline,
-            color = titleColor,
-        )
-        Spacer(Modifier.height(2.dp))
-        AppText(
-            text = stringResource(achievement.descriptionRes),
-            style = CoffeeTheme.type.caption,
-            color = descColor,
-        )
+    Box(modifier = modifier.graphicsLayer(scaleX = scale.value, scaleY = scale.value)) {
+        CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+            LineIcon(
+                glyph = achievement.glyph,
+                tint = iconColor,
+                modifier = Modifier.size(28.dp).padding(bottom = 4.dp),
+            )
+            AppText(
+                text = if (unlocked) stringResource(achievement.titleRes) else "???",
+                style = CoffeeTheme.type.headline,
+                color = titleColor,
+            )
+            Spacer(Modifier.height(2.dp))
+            AppText(
+                text = stringResource(achievement.descriptionRes),
+                style = CoffeeTheme.type.caption,
+                color = descColor,
+            )
+        }
+        if (unlocked && showConfetti && !reduced) {
+            ConfettiOverlay(modifier = Modifier.matchParentSize())
+        }
+    }
+}
+
+@Composable
+private fun ConfettiOverlay(modifier: Modifier = Modifier) {
+    val colors = CoffeeTheme.colors
+    val confetti = remember { List(10) { Random.nextFloat() } }
+    val anim = remember { Animatable(0f) }
+    LaunchedEffect(Unit) {
+        anim.animateTo(1f, animationSpec = tween(durationMillis = 900, easing = CoffeeMotion.emphasized))
+    }
+    Canvas(modifier = modifier.fillMaxSize()) {
+        val w = size.width
+        val h = size.height
+        confetti.forEachIndexed { i, r ->
+            val x = r * w
+            val y = anim.value * h * 0.6f + (i % 3) * 8f
+            val alpha = (1f - anim.value).coerceIn(0f, 1f)
+            val radius = if (i % 2 == 0) 4f else 2.5f
+            val col = if (i % 3 == 0) colors.accent else if (i % 3 == 1) colors.cremaDark else colors.accentSoft
+            drawCircle(color = col.copy(alpha = alpha), radius = radius, center = Offset(x, y))
+        }
     }
 }

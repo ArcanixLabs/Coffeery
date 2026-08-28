@@ -151,11 +151,12 @@ private fun RowScope.StepButton(symbol: String, enabled: Boolean, onClick: () ->
     val colors = CoffeeTheme.colors
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val scale by animateFloatAsState(targetValue = if (isPressed) 0.97f else 1f, animationSpec = CoffeeMotion.press, label = "press")
+    val sx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
+    val sy by animateFloatAsState(targetValue = if (isPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "pressY")
     Box(
         modifier = Modifier
             .size(48.dp)
-            .graphicsLayer(scaleX = scale, scaleY = scale)
+            .graphicsLayer(scaleX = sx, scaleY = sy)
             .clip(CoffeeShapes.pill)
             .border(1.5.dp, if (enabled) colors.accent else colors.outline, CoffeeShapes.pill)
             .clickable(interactionSource = interactionSource, indication = null) { onClick() },

@@ -55,8 +55,9 @@ fun CoffeeCard(
     val hapticFeedback = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val scale by animateFloatAsState(targetValue = if (isPressed && onClick != null) 0.97f else 1f, animationSpec = CoffeeMotion.press, label = "press")
-    var m = modifier.graphicsLayer(scaleX = scale, scaleY = scale).clip(shape).background(colors.surfaceElevated)
+    val sx by animateFloatAsState(targetValue = if (isPressed && onClick != null) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
+    val sy by animateFloatAsState(targetValue = if (isPressed && onClick != null) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "pressY")
+    var m = modifier.graphicsLayer(scaleX = sx, scaleY = sy).clip(shape).background(colors.surfaceElevated)
     if (elevated) m = m.coffeeElevation(shape, colors) else m = m.border(1.dp, colors.outline, shape)
     if (onClick != null) {
         m = m.clickable(interactionSource = interactionSource, indication = null) {

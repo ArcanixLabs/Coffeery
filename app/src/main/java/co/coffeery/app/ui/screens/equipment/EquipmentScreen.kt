@@ -26,6 +26,7 @@ import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
 import co.coffeery.app.ui.components.AppTextField
 import co.coffeery.app.ui.components.ScreenHeader
+import co.coffeery.app.ui.components.CremaMascot
 import co.coffeery.app.ui.components.displayName
 import co.coffeery.app.ui.components.displayTag
 import co.coffeery.app.ui.components.glyph
@@ -142,12 +143,11 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
 
         AppText(stringResource(R.string.equipment_builtin), style = CoffeeTheme.type.headline, color = colors.textSecondary)
         if (filteredBuiltIns.isEmpty() && searchActive) {
-            AppText(
-                stringResource(R.string.search_no_results),
-                style = CoffeeTheme.type.body,
-                color = colors.textSecondary,
-                modifier = Modifier.fillMaxWidth(),
-            )
+            Column(modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                CremaMascot(mood = "curious", modifier = Modifier.size(96.dp))
+                Spacer(Modifier.height(10.dp))
+                AppText(stringResource(R.string.search_no_results), style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.fillMaxWidth(), align = TextAlign.Center)
+            }
         } else {
             filteredBuiltIns.chunked(2).forEach { pair ->
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(14.dp)) {

@@ -25,6 +25,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -36,11 +38,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.theme.CoffeeMotion
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import co.coffeery.app.R
 import co.coffeery.app.data.local.BrewLogEntity
@@ -50,6 +55,7 @@ import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.Chip
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.CoffeeDialog
+import co.coffeery.app.ui.components.CremaMascot
 import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
@@ -243,11 +249,19 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
                                 count == 1 -> colors.accentSoft.copy(alpha = 0.4f)
                                 else -> Color.Transparent
                             }
+                            val idx = col * 7 + row
+                            val reduced = LocalPrefersReducedMotion.current
+                            val cellAlpha by animateFloatAsState(
+                                targetValue = 1f,
+                                animationSpec = if (reduced) tween(0) else tween(durationMillis = CoffeeMotion.normal, delayMillis = idx * 20, easing = CoffeeMotion.emphasized),
+                                label = "heatmap$idx",
+                            )
                             Box(
                                 modifier = Modifier
                                     .size(14.dp)
                                     .padding(1.dp)
                                     .clip(RoundedCornerShape(3.dp))
+                                    .graphicsLayer(alpha = cellAlpha, scaleX = 0.7f + cellAlpha * 0.3f, scaleY = 0.7f + cellAlpha * 0.3f)
                                     .background(cellColor)
                                     .then(
                                         if (!isFuture && count == 0)
@@ -295,6 +309,12 @@ private fun StreakBanner(streak: Int) {
     val context = LocalContext.current
     val label = stringResource(R.string.streak_label)
     val subText = if (streak > 0) stringResource(R.string.streak_keep_going) else stringResource(R.string.streak_start)
+    val reduced = LocalPrefersReducedMotion.current
+    val animatedStreak by animateFloatAsState(
+        targetValue = streak.toFloat(),
+        animationSpec = if (reduced) tween(0) else CoffeeMotion.counter,
+        label = "streakCount",
+    )
     AccentStripeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -302,7 +322,7 @@ private fun StreakBanner(streak: Int) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                AppText("$streak", style = CoffeeTheme.type.number, color = colors.accent)
+                AppText("${animatedStreak.toInt()}", style = CoffeeTheme.type.number, color = colors.accent, modifier = Modifier.graphicsLayer(scaleX = 1f, scaleY = 1f))
                 Spacer(Modifier.width(8.dp))
                 AppText(label, style = CoffeeTheme.type.body, color = colors.textSecondary)
             }
@@ -344,9 +364,7 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(Modifier.height(40.dp))
-            Box(modifier = Modifier.size(104.dp).clip(CoffeeShapes.pill).background(colors.accentSoft.copy(alpha = 0.25f)), contentAlignment = Alignment.Center) {
-                LineIcon(Glyph.CUP, colors.accent.copy(alpha = 0.7f), Modifier.size(48.dp))
-            }
+            CremaMascot(mood = "sleepy", modifier = Modifier.size(104.dp))
             Spacer(Modifier.height(16.dp))
             AppText(stringResource(R.string.log_empty_title),
                 style = CoffeeTheme.type.title, align = TextAlign.Center,
@@ -446,6 +464,12 @@ private fun AnalyticsCard(brewLogs: List<BrewLogEntity>) {
         .maxByOrNull { it.value }
         ?.let { if (it.value > 0) it.key else null }
 
+    val reducedAnalytics = LocalPrefersReducedMotion.current
+    val animatedWeek by animateFloatAsState(
+        targetValue = totalThisWeek.toFloat(),
+        animationSpec = if (reducedAnalytics) tween(0) else CoffeeMotion.counter,
+        label = "weekCount",
+    )
     CoffeeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -453,7 +477,7 @@ private fun AnalyticsCard(brewLogs: List<BrewLogEntity>) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             AppText(stringResource(R.string.log_analytics_week), style = CoffeeTheme.type.label, color = colors.textSecondary)
-            AppText("$totalThisWeek", style = CoffeeTheme.type.display, color = colors.accent)
+            AppText("${animatedWeek.toInt()}", style = CoffeeTheme.type.display, color = colors.accent)
         }
         Spacer(Modifier.height(8.dp))
 
@@ -694,6 +718,17 @@ private fun CaffeineContent(brewLogs: List<BrewLogEntity>) {
     val brewsCount = todayLogs.size
     val maxMg = 600
     val fillRatio = (totalCaffeine.coerceAtMost(maxMg).toFloat() / maxMg)
+    val reduced = LocalPrefersReducedMotion.current
+    val animatedRatio by animateFloatAsState(
+        targetValue = fillRatio,
+        animationSpec = if (reduced) tween(0) else CoffeeMotion.cardExpand,
+        label = "caffeineBar",
+    )
+    val animatedTotal by animateFloatAsState(
+        targetValue = totalCaffeine.toFloat(),
+        animationSpec = if (reduced) tween(0) else CoffeeMotion.counter,
+        label = "caffeineTotal",
+    )
 
     val barColor = when {
         totalCaffeine <= 200 -> colors.accentSoft
@@ -706,7 +741,7 @@ private fun CaffeineContent(brewLogs: List<BrewLogEntity>) {
                 AppText(stringResource(R.string.caffeine_today), style = CoffeeTheme.type.label, color = colors.textSecondary)
                 Spacer(Modifier.height(4.dp))
                 AppText(
-                    "$totalCaffeine ${stringResource(R.string.caffeine_total, brewsCount)}",
+                    "${animatedTotal.toInt()} ${stringResource(R.string.caffeine_total, brewsCount)}",
                     style = CoffeeTheme.type.display,
                     color = barColor,
                 )
@@ -714,7 +749,7 @@ private fun CaffeineContent(brewLogs: List<BrewLogEntity>) {
                 Box(modifier = Modifier.fillMaxWidth().height(10.dp).clip(RoundedCornerShape(5.dp)).background(colors.outline.copy(alpha = 0.3f))) {
                     Box(
                         modifier = Modifier
-                            .fillMaxWidth(fillRatio)
+                            .fillMaxWidth(animatedRatio)
                             .height(10.dp)
                             .clip(RoundedCornerShape(5.dp))
                             .background(barColor),

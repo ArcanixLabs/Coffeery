@@ -32,6 +32,12 @@
 -dontwarn com.google.api.services.drive.**
 -keep class com.google.api.client.http.** { *; }
 -dontwarn com.google.api.client.http.**
+-keep class com.google.api.client.googleapis.extensions.android.gms.auth.** { *; }
+-dontwarn com.google.api.client.googleapis.extensions.android.gms.auth.**
+-keep class com.google.api.client.json.gson.** { *; }
+-dontwarn com.google.api.client.json.gson.**
+-keep class com.google.api.client.googleapis.json.** { *; }
+-dontwarn com.google.api.client.googleapis.json.**
 -keep class com.google.http.client.** { *; }
 -dontwarn com.google.http.client.**
 -keep class org.apache.http.** { *; }

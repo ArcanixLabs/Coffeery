@@ -171,6 +171,77 @@ private fun DrawScope.drawEquipment(key: String, tint: Color, stroke: Stroke) {
             line(tint, w * 0.52f, h * 0.56f, w * 0.52f, h * 0.68f, sw)
         }
 
+        "delter" -> {
+            p { moveTo(w * 0.32f, h * 0.3f); lineTo(w * 0.32f, h * 0.72f); lineTo(w * 0.68f, h * 0.72f); lineTo(w * 0.68f, h * 0.3f) }
+            line(tint, w * 0.36f, h * 0.22f, w * 0.64f, h * 0.22f, sw)
+            line(tint, w * 0.5f, h * 0.22f, w * 0.5f, h * 0.3f, sw)
+            p { moveTo(w * 0.68f, h * 0.42f); cubicTo(w * 0.82f, h * 0.44f, w * 0.82f, h * 0.6f, w * 0.68f, h * 0.62f) }
+            line(tint, w * 0.4f, h * 0.72f, w * 0.6f, h * 0.82f, sw * 0.8f)
+        }
+        "flair" -> {
+            line(tint, w * 0.22f, h * 0.82f, w * 0.78f, h * 0.82f, sw)
+            p { moveTo(w * 0.34f, h * 0.32f); lineTo(w * 0.38f, h * 0.58f); lineTo(w * 0.62f, h * 0.58f); lineTo(w * 0.66f, h * 0.32f) }
+            line(tint, w * 0.66f, h * 0.32f, w * 0.86f, h * 0.18f, sw)
+            dot(w * 0.86f, h * 0.16f, w * 0.04f)
+            line(tint, w * 0.46f, h * 0.58f, w * 0.46f, h * 0.68f, sw)
+            line(tint, w * 0.54f, h * 0.58f, w * 0.54f, h * 0.68f, sw)
+        }
+        "aeropress_go" -> {
+            p { moveTo(w * 0.34f, h * 0.34f); lineTo(w * 0.34f, h * 0.74f); lineTo(w * 0.66f, h * 0.74f); lineTo(w * 0.66f, h * 0.34f) }
+            line(tint, w * 0.3f, h * 0.34f, w * 0.7f, h * 0.34f, sw)
+            line(tint, w * 0.38f, h * 0.22f, w * 0.62f, h * 0.22f, sw)
+            line(tint, w * 0.5f, h * 0.22f, w * 0.5f, h * 0.34f, sw)
+            p { moveTo(w * 0.3f, h * 0.74f); cubicTo(w * 0.32f, h * 0.82f, w * 0.68f, h * 0.82f, w * 0.7f, h * 0.74f) }
+        }
+        "picopresso" -> {
+            p { moveTo(w * 0.3f, h * 0.4f); lineTo(w * 0.32f, h * 0.68f); lineTo(w * 0.68f, h * 0.68f); lineTo(w * 0.66f, h * 0.4f); close() }
+            line(tint, w * 0.28f, h * 0.4f, w * 0.72f, h * 0.4f, sw)
+            dot(w * 0.5f, h * 0.72f, w * 0.04f)
+            line(tint, w * 0.72f, h * 0.46f, w * 0.84f, h * 0.42f, sw)
+            p { moveTo(w * 0.36f, h * 0.28f); lineTo(w * 0.5f, h * 0.18f); lineTo(w * 0.64f, h * 0.28f) }
+        }
+        "moccamaster" -> {
+            p { moveTo(w * 0.26f, h * 0.22f); lineTo(w * 0.26f, h * 0.56f); lineTo(w * 0.42f, h * 0.56f); lineTo(w * 0.42f, h * 0.22f); close() }
+            line(tint, w * 0.42f, h * 0.28f, w * 0.7f, h * 0.28f, sw)
+            p { moveTo(w * 0.56f, h * 0.28f); lineTo(w * 0.58f, h * 0.44f); lineTo(w * 0.74f, h * 0.44f); lineTo(w * 0.76f, h * 0.28f); close() }
+            p { moveTo(w * 0.54f, h * 0.56f); lineTo(w * 0.56f, h * 0.78f); lineTo(w * 0.8f, h * 0.78f); lineTo(w * 0.82f, h * 0.56f); close() }
+            dot(w * 0.5f, h * 0.62f, w * 0.015f)
+        }
+        "nel" -> {
+            p { moveTo(w * 0.38f, h * 0.58f); lineTo(w * 0.62f, h * 0.58f); lineTo(w * 0.58f, h * 0.78f); lineTo(w * 0.42f, h * 0.78f); close() }
+            p { moveTo(w * 0.28f, h * 0.3f); cubicTo(w * 0.22f, h * 0.34f, w * 0.2f, h * 0.44f, w * 0.32f, h * 0.5f); cubicTo(w * 0.4f, h * 0.54f, w * 0.6f, h * 0.54f, w * 0.68f, h * 0.5f); cubicTo(w * 0.8f, h * 0.44f, w * 0.78f, h * 0.34f, w * 0.72f, h * 0.3f) }
+            line(tint, w * 0.32f, h * 0.3f, w * 0.68f, h * 0.3f, sw * 0.6f)
+            line(tint, w * 0.36f, h * 0.4f, w * 0.64f, h * 0.44f, sw * 0.5f)
+        }
+        "gina" -> {
+            p { moveTo(w * 0.26f, h * 0.24f); lineTo(w * 0.74f, h * 0.24f); lineTo(w * 0.6f, h * 0.52f); lineTo(w * 0.4f, h * 0.52f); close() }
+            line(tint, w * 0.4f, h * 0.52f, w * 0.4f, h * 0.68f, sw)
+            line(tint, w * 0.6f, h * 0.52f, w * 0.6f, h * 0.68f, sw)
+            dot(w * 0.5f, h * 0.6f, w * 0.03f)
+            line(tint, w * 0.74f, h * 0.34f, w * 0.84f, h * 0.3f, sw * 0.8f)
+            line(tint, w * 0.2f, h * 0.28f, w * 0.8f, h * 0.28f, sw * 0.6f)
+        }
+        "siphon_modern" -> {
+            dot(w * 0.5f, h * 0.28f, w * 0.15f)
+            p { moveTo(w * 0.42f, h * 0.42f); lineTo(w * 0.42f, h * 0.54f); cubicTo(w * 0.32f, h * 0.62f, w * 0.32f, h * 0.8f, w * 0.5f, h * 0.8f); cubicTo(w * 0.68f, h * 0.8f, w * 0.68f, h * 0.62f, w * 0.58f, h * 0.54f); lineTo(w * 0.58f, h * 0.42f) }
+            line(tint, w * 0.5f, h * 0.42f, w * 0.5f, h * 0.46f, sw)
+            line(tint, w * 0.34f, h * 0.78f, w * 0.66f, h * 0.78f, sw * 0.6f)
+        }
+        "phin_large" -> {
+            p { moveTo(w * 0.34f, h * 0.32f); lineTo(w * 0.34f, h * 0.6f); lineTo(w * 0.66f, h * 0.6f); lineTo(w * 0.66f, h * 0.32f) }
+            drawArc(tint, 180f, 180f, false, topLeft = Offset(w * 0.38f, h * 0.22f), size = Size(w * 0.24f, h * 0.18f), style = stroke)
+            line(tint, w * 0.5f, h * 0.16f, w * 0.5f, h * 0.22f, sw)
+            p { moveTo(w * 0.28f, h * 0.64f); cubicTo(w * 0.3f, h * 0.8f, w * 0.7f, h * 0.8f, w * 0.72f, h * 0.64f); close() }
+            line(tint, w * 0.36f, h * 0.42f, w * 0.64f, h * 0.42f, sw * 0.5f)
+        }
+        "clever_xl" -> {
+            p { moveTo(w * 0.24f, h * 0.26f); lineTo(w * 0.76f, h * 0.26f); lineTo(w * 0.64f, h * 0.68f); lineTo(w * 0.36f, h * 0.68f); close() }
+            line(tint, w * 0.22f, h * 0.32f, w * 0.18f, h * 0.32f, sw)
+            line(tint, w * 0.78f, h * 0.32f, w * 0.82f, h * 0.32f, sw)
+            drawPath(Path().apply { moveTo(w * 0.4f, h * 0.68f); lineTo(w * 0.4f, h * 0.76f); lineTo(w * 0.6f, h * 0.76f); lineTo(w * 0.6f, h * 0.68f) }, tint, style = stroke)
+            dot(w * 0.5f, h * 0.52f, w * 0.015f)
+        }
+
         // ---- Other / cultural ----
         "turkish" -> { // cezve: narrow-neck pot with long straight handle
             p { moveTo(w * 0.34f, h * 0.34f); lineTo(w * 0.32f, h * 0.72f); cubicTo(w * 0.32f, h * 0.82f, w * 0.58f, h * 0.82f, w * 0.58f, h * 0.72f); lineTo(w * 0.56f, h * 0.34f) }

@@ -89,11 +89,12 @@ fun <T> BottomNav(
                 )
                 val interactionSource = remember { MutableInteractionSource() }
                 val isPressed by interactionSource.collectIsPressedAsState()
-                val pressScale by animateFloatAsState(targetValue = if (isPressed) 0.97f else 1f, animationSpec = CoffeeMotion.press, label = "press")
+                val pressSx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
+                val pressSy by animateFloatAsState(targetValue = if (isPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "pressY")
                 Column(
                     modifier = Modifier
                         .weight(1f)
-                        .graphicsLayer(scaleX = pressScale, scaleY = pressScale)
+                        .graphicsLayer(scaleX = pressSx, scaleY = pressSy)
                         .clickable(
                             indication = null,
                             interactionSource = interactionSource,
