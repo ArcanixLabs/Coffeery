@@ -11,7 +11,7 @@ Local-first Android brewing companion — pick your gear, dial in strength and r
 
 ## Highlights
 
-- **36 brewing methods** — 24 standard brewers (V60, Chemex, Kalita, French Press, AeroPress, Moka Pot, Cezve, Ibrik, Cold Brew, Siphon, Espresso, Clever, Switch, Origami, April, Stagg X, Timemore, Beehouse, Cafec, Phin, Cold Drip, Percolator, Batch Brewer, Napoletana) + 12 equipment-free methods (Cowboy Coffee, Cupping, Cloth Filter, Sock Coffee, Decoction, Paper Towel, Swedish Egg Coffee, Improvised Turkish, Kopi Tubruk, Arabic Qahwa, Cafe de Olla, Mason Jar Cold Brew)
+- **59 brewing methods** — 24 standard brewers + 10 new (Pulsar, Tricolate, Delter, Flair, AeroPress Go, Picopresso, Moccamaster, Nel, Gina, Siphon Modern, Phin Large, Clever XL, Hoop, Paragon, Melodrip, December, Hario Switch, Aeropress XL, Flair58, Nanopresso, Phoenix70, Lunar) + 12 equipment-free methods (Cowboy Coffee, Cupping, Cloth Filter, Sock Coffee, Decoction, Paper Towel, Swedish Egg Coffee, Improvised Turkish, Kopi Tubruk, Arabic Qahwa, Cafe de Olla, Mason Jar Cold Brew)
 - **Custom gear** — add your own brewer with category defaults, auto-generated steps, and a 25-icon picker
 - **Live ratio recalculation** — three-field input (coffee / ratio / water) with instant cross-recalculation in manual mode, or strength-slider auto mode; ratio card with visual feedback
 - **Step-by-step brew timer** — per-method timed steps, pour targets, per-pour ±5% water adjustment, merge-pours mode, customizable step durations (bloom/pour/steep/drawdown), auto-advance toggle, step indicator with pulse animation, sound (custom chimes) + dual-tap haptic + vibration alerts
@@ -21,12 +21,12 @@ Local-first Android brewing companion — pick your gear, dial in strength and r
 - **Brew journal** — log every brew with rating, tasting notes, grind size, linked bean, and **photo capture**; 12-week calendar heatmap, streak counter, analytics card, caffeine tracker with safe-zone indicator, best-recipe suggestion; **compare brews**, **share card** (text + image), **PDF brew report export**, CSV export
 - **Bean inventory** — track beans with origin, roaster, roast date; dedicated Bean Detail screen
 - **Achievements & stats** — stats dashboard and achievement system with streak polish and brew reminders
-- **Learn — 86 knowledge cards across 14 chapters** (Basics, Grinding, Water, Extraction, Methods, Milk, Tasting, Caffeine, Equipment, Water Deep Dive, Sustainability, Espresso, Processing, Origins) with locked/unlocked step-map, **150 quizzes** with score tracker, Today's Lesson + Quiz, random lesson button, extraction calculator, water chemistry guide, 35-term glossary, 25+ rotating pro tips, grind size visual, brew troubleshooter, 30+ note flavor wheel, food pairings and culture facts
-- **Drinks — 66 drink recipes** (milk-based + regional) with full ingredient steps, **23 coffee variety profiles** with origin and flavor notes
+- **Learn — 127 knowledge cards across 14 chapters** (Basics, Grinding, Water, Extraction, Methods, Milk, Tasting, Caffeine, Equipment, Water Deep Dive, Sustainability, Espresso, Processing, Origins) with locked/unlocked step-map, **30+ quizzes** with score tracker, Today's Lesson + Quiz, random lesson button, extraction calculator, water chemistry guide, 100-term glossary, 75 rotating pro tips, grind size visual, brew troubleshooter, 30+ note flavor wheel, food pairings and culture facts
+- **Drinks — 87 drink recipes** (milk-based + regional) with full ingredient steps, **22 coffee variety profiles** with origin and flavor notes
 - **Search** — real-time text filter on Equipment, Learn, and Drinks screens
 - **Full i18n** — 1,229 strings each in English (default) + Turkish
 - **Cloud backup (optional)** — Google Sign-In (profile photo in header, silent sign-in) with Google Drive backup/restore: auto-backup on sign-in + manual backup/restore from Settings; fixed debug keystore for consistent SHA-1
-- **Zero Material Design** — custom `CoffeeColors` / `CoffeeTypography` / `CoffeeShapes` design system, 8 selectable palettes (Terracotta / Espresso / Matcha / Berry / Crema / Mocha / Caramel / Hazelnut) with light + dark warm gradient backgrounds, grain texture, vintage accent, spring/motion tokens, 64 hand-drawn Canvas line-art equipment icons, and Fraunces + Manrope serif display typography
+- **Zero Material Design** — custom `CoffeeColors` / `CoffeeTypography` / `CoffeeShapes` design system, 9 selectable palettes (Terracotta / Espresso / Matcha / Berry / Crema / Mocha / Caramel / Hazelnut / Copper) with light + dark warm gradient backgrounds, grain texture, vintage accent, spring/motion tokens, 59 hand-drawn Canvas line-art equipment icons, and Fraunces + Manrope serif display typography
 
 ## Screens
 
@@ -39,7 +39,7 @@ Local-first Android brewing companion — pick your gear, dial in strength and r
 
 | Brew Calculator | Timer | Brew Log | Learn | Settings |
 |---|---|---|---|---|
-| Category tabs, auto/manual ratio, strength slider, roast picker, dual-line segmented pills, ratio card, one-tap save, YouTube links | 72sp hero countdown in 260dp progress ring + pulse, per-pour adjustment, merge-pours, customizable durations, step indicator, auto-advance, haptics + chimes, proximity hands-free, background service, save-to-log dialog with bean picker + photo | Calendar heatmap, streak banner, analytics card, caffeine tracker, best-recipe suggestion, comparison tool, share card, PDF export, bean inventory, CSV export, achievements & stats tabs | 14-chapter step-map, 86 lessons, 150 quizzes (score + streak + random), Today's Lesson, extraction calculator, water chemistry, glossary, pro tips, grind visual, troubleshooter, flavor wheel, food pairing & culture | 8 palette swatch preview cards, warm gradient backgrounds, dark/light/system toggle, language switch, brew customization, Google Sign-In + Drive backup/restore, data export/import |
+| Category tabs, auto/manual ratio, strength slider, roast picker, dual-line segmented pills, ratio card, one-tap save, YouTube links | 72sp hero countdown in 260dp progress ring + pulse, per-pour adjustment, merge-pours, customizable durations, step indicator, auto-advance, haptics + chimes, proximity hands-free, background service, save-to-log dialog with bean picker + photo | Calendar heatmap, streak banner, analytics card, caffeine tracker, best-recipe suggestion (tap to apply), comparison tool, share card, PDF export, bean inventory, CSV export/import, achievements & stats tabs | 14-chapter step-map, 127 lessons, 30+ quizzes (score + streak + random), Today's Lesson, extraction calculator, water chemistry, 100-term searchable glossary, pro tips, grind visual, troubleshooter, flavor wheel, food pairing & culture | 9 palette gallery (160×110 split light/dark preview), warm gradient backgrounds, dark/light/system toggle, language switch, brew customization, Google Sign-In + Drive backup/restore (auto-retry), data export/import |
 
 ## Architecture
 
@@ -53,7 +53,7 @@ app/src/main/java/co/coffeery/app/
 │   └── repo/     CoffeeRepository (built-ins + custom gear, export/import/CSV)
 ├── service/      TimerService (foreground), TimerStopReceiver
 ├── ui/
-│   ├── theme/    Color (16 palette profiles), Type (Fraunces/Manrope), Shape, Texture (gradient + grain), Motion (spring tokens)
+│   ├── theme/    Color (18 palette profiles), Type (Fraunces/Manrope 32/18/12), Shape, Texture (gradient + grain linen), Motion (press/cardExpand/page/counter)
 │   ├── components/ 64 icons, buttons, cards, sliders, segmented controls
 │   └── screens/  brew (calculator + timer), equipment, recipes, log (timeline + stats + achievements + bean detail), learn (content + tools + quizzes), drinks, onboarding, root (nav + settings)
 └── util/         BrewMath (recipe engine), BrewPdfExporter, CloudBackupManager, Format, AppHaptics

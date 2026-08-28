@@ -76,6 +76,51 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
 
     suspend fun archiveBean(id: Long) = db.beanDao().archiveById(id)
 
+    suspend fun importLogsFromCsv(csv: String) {
+        val lines = csv.lines().filter { it.isNotBlank() }
+        if (lines.isEmpty()) return
+        val header = lines.first().lowercase()
+        val hasHeader = header.contains("date") && header.contains("equipment")
+        val data = if (hasHeader) lines.drop(1) else lines
+        db.withTransaction {
+            for (line in data) {
+                val parts = line.split(",").map { it.trim() }
+                if (parts.size < 8) continue
+                try {
+                    val ts = parts[0].toLongOrNull() ?: System.currentTimeMillis()
+                    val eqName = parts[1]
+                    val coffee = parts[2].toDoubleOrNull() ?: 0.0
+                    val water = parts[3].toIntOrNull() ?: 0
+                    val ratio = parts[4].substringAfter(":").toDoubleOrNull() ?: 16.0
+                    val grind = parts[5]
+                    val temp = parts[6].toIntOrNull() ?: 93
+                    val time = parts[7].toIntOrNull() ?: 0
+                    val rating = parts.getOrNull(8)?.toIntOrNull() ?: 0
+                    val notes = parts.getOrNull(9) ?: ""
+                    val bean = parts.getOrNull(10) ?: ""
+                    db.brewLogDao().insert(
+                        BrewLogEntity(
+                            timestamp = ts,
+                            equipmentId = eqName.lowercase().replace(" ", "_"),
+                            equipmentName = eqName,
+                            strength = 0.5f,
+                            roast = "MEDIUM",
+                            ratioDenominator = ratio,
+                            coffeeGrams = coffee,
+                            waterMl = water,
+                            grind = grind.ifBlank { "MEDIUM" },
+                            tempCelsius = temp,
+                            totalDurationSec = time,
+                            rating = rating,
+                            tastingNotes = notes,
+                            beanName = bean,
+                        )
+                    )
+                } catch (_: Exception) { }
+            }
+        }
+    }
+
     suspend fun clearAll() {
         db.recipeDao().deleteAll()
         db.customEquipmentDao().deleteAll()

@@ -102,6 +102,9 @@ class AppViewModel(app: Application, private val savedStateHandle: SavedStateHan
     val routeFlow: Flow<Route> = state.map { it.route }.distinctUntilChanged()
     val equipmentFlow: Flow<List<Equipment>> = state.map { it.equipment }.distinctUntilChanged()
     val brewLogsFlow: Flow<List<BrewLogEntity>> = state.map { it.brewLogs }.distinctUntilChanged()
+    val beansFlow: Flow<List<BeanEntity>> = state.map { it.beans }.distinctUntilChanged()
+    val settingsFlow: Flow<SettingsEntity> = state.map { it.settings }.distinctUntilChanged()
+    val achievementsFlow: Flow<List<Achievement>> = state.map { it.achievements }.distinctUntilChanged()
 
     private fun persistNav(s: AppUiState) {
         savedStateHandle["nav_route"] = routeToKey(s.route)
@@ -429,12 +432,15 @@ class AppViewModel(app: Application, private val savedStateHandle: SavedStateHan
                 val text = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
                 if (text != null) {
                     val trimmed = text.trimStart()
-                    if (!trimmed.startsWith("{") && !trimmed.startsWith("[")) {
-                        Toast.makeText(ctx, ctx.getString(co.coffeery.app.R.string.settings_import_invalid), Toast.LENGTH_SHORT).show()
-                        return@launch
-                    }
                     try {
-                        repo.importFromJson(text)
+                        if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+                            repo.importFromJson(text)
+                        } else if (trimmed.startsWith("Date,") || trimmed.contains("Equipment") && trimmed.contains(",")) {
+                            repo.importLogsFromCsv(text)
+                        } else {
+                            Toast.makeText(ctx, ctx.getString(co.coffeery.app.R.string.settings_import_invalid), Toast.LENGTH_SHORT).show()
+                            return@launch
+                        }
                         Toast.makeText(ctx, "Data imported. Restart the app.", Toast.LENGTH_SHORT).show()
                     } catch (e: org.json.JSONException) {
                         Toast.makeText(ctx, ctx.getString(co.coffeery.app.R.string.settings_import_invalid), Toast.LENGTH_SHORT).show()
@@ -451,7 +457,10 @@ class AppViewModel(app: Application, private val savedStateHandle: SavedStateHan
     fun importFromJsonString(ctx: Context, jsonString: String) {
         viewModelScope.launch {
             try {
-                repo.importFromJson(jsonString)
+                val trimmed = jsonString.trimStart()
+                if (trimmed.startsWith("{") || trimmed.startsWith("[")) repo.importFromJson(jsonString)
+                else if (trimmed.startsWith("Date,") || trimmed.contains("Equipment") && trimmed.contains(",")) repo.importLogsFromCsv(jsonString)
+                else repo.importFromJson(jsonString)
                 Toast.makeText(ctx, "Data imported. Restart the app.", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 Toast.makeText(ctx, "Import failed: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -486,6 +495,26 @@ class AppViewModel(app: Application, private val savedStateHandle: SavedStateHan
             route = Route.Tabs,
             backStack = emptyList(),
         ).also { persistNav(it) }
+    }
+
+    fun applyBestRecipe(best: co.coffeery.app.ui.screens.log.BestRecipeSuggestion) {
+        val eq = _state.value.equipment.firstOrNull { it.id == best.equipmentId }
+            ?: _state.value.equipment.firstOrNull { it.displayName() == best.equipmentName }
+            ?: return
+        _state.update { s ->
+            s.copy(
+                selectedEquipmentId = eq.id,
+                manualRatio = best.ratioDenominator.coerceIn(1.0, 30.0),
+                ratioMode = true,
+                tab = NavTab.BREW,
+                route = Route.Tabs,
+                backStack = emptyList(),
+            ).also { persistNav(it) }
+        }
+        viewModelScope.launch {
+            val cur = (repo.settings.first() ?: SettingsEntity()).copy(ratioMode = true, manualRatio = best.ratioDenominator.coerceIn(1.0, 30.0))
+            repo.upsertSettings(cur)
+        }
     }
 
     companion object {

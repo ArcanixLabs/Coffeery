@@ -533,7 +533,7 @@ private fun AnalyticsCard(brewLogs: List<BrewLogEntity>) {
 @Composable
 private fun BestRecipeBanner(best: BestRecipeSuggestion, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
-    AccentStripeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
+    AccentStripeCard(modifier = Modifier.fillMaxWidth().clickable { vm.applyBestRecipe(best) }, contentPadding = 14) {
         val grindStr = best.grind.lowercase().replace("_", "-")
         val tempStr = if (best.tempCelsius > 0) ", ${best.tempCelsius}°C" else ""
         AppText(stringResource(R.string.log_best_recipe_label, best.equipmentName), style = CoffeeTheme.type.caption, color = colors.accent)

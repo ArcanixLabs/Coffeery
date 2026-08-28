@@ -75,11 +75,22 @@ fun LearnScreen(vm: AppViewModel) {
     val filteredCards = remember(searchQuery) {
         if (searchQuery.isBlank()) LearnContent.cards
         else {
-            val q = searchQuery.lowercase()
+            val q = searchQuery.lowercase(java.util.Locale.ROOT)
             LearnContent.cards.filter { card ->
                 val title = context.getString(card.titleRes)
                 val body = context.getString(card.bodyRes)
-                (title + " " + body).lowercase().contains(q)
+                (title + " " + body).lowercase(java.util.Locale.ROOT).contains(q)
+            }
+        }
+    }
+    val filteredGlossary = remember(searchQuery) {
+        if (searchQuery.isBlank()) GlossaryTerms
+        else {
+            val q = searchQuery.lowercase(java.util.Locale.ROOT)
+            GlossaryTerms.filter { term ->
+                val t = context.getString(term.termRes).lowercase(java.util.Locale.ROOT)
+                val d = context.getString(term.defRes).lowercase(java.util.Locale.ROOT)
+                (t + " " + d).contains(q)
             }
         }
     }
@@ -202,11 +213,11 @@ fun LearnScreen(vm: AppViewModel) {
             GlossaryHeaderCard()
         }
         items(
-            count = GlossaryTerms.size,
-            key = { idx -> "glossary_${GlossaryTerms[idx].termRes}" },
+            count = filteredGlossary.size,
+            key = { idx -> "glossary_${filteredGlossary[idx].termRes}" },
             contentType = { "glossaryTerm" }
         ) { idx ->
-            GlossaryTermItem(term = GlossaryTerms[idx])
+            GlossaryTermItem(term = filteredGlossary[idx])
         }
         item(key = "foodPairing", contentType = "glossary") {
             FoodPairingCard()
@@ -214,7 +225,7 @@ fun LearnScreen(vm: AppViewModel) {
         item(key = "cultureFacts", contentType = "glossary") {
             CultureFactsCard()
         }
-        if (searchActive && filteredCards.isEmpty()) {
+        if (searchActive && filteredCards.isEmpty() && filteredGlossary.isEmpty()) {
             item(key = "no_results", contentType = "header") {
                 Column(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                     CremaMascot(mood = "curious", modifier = Modifier.size(96.dp))

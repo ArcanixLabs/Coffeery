@@ -12,16 +12,16 @@ Coffeery has been massively enhanced from its v3.0.1 baseline across a series of
 
 | Feature | Before (v3.0.1) | After |
 |---|---|---|
-| Design System | Basic CoffeeTheme | Full system: 8 palettes × light/dark, vintage accents, grain textures, 4 spring tokens |
-| Equipment | 36 brewers | 36 brewers (cleaned duplicates) |
-| Learn Content | 9 chapters, 60 cards | 14 chapters, 85 cards |
-| Drinks | 25 | 70+ |
+| Design System | Basic CoffeeTheme | Full system: 9 palettes × light/dark (Terracotta..Copper), vintage accents, linen+grain, 4 spring tokens (press/cardExpand/page/counter) |
+| Equipment | 36 brewers | 59 brewers (Pulsar/Tricolate/Delter/Flair/Go/Picopresso/Moccamaster/Nel/Gina/SiphonModern/PhinLarge/CleverXL/Hoop/Paragon/Melodrip/December/Switch etc) |
+| Learn Content | 9 chapters, 60 cards | 14 chapters, 127 cards (contiguous) + searchable 100-term glossary |
+| Drinks | 25 | 87 |
 | Coffee Varieties | 12 | 22 |
-| Pro Tips | 10 | 50 |
-| Glossary | 25 terms | 65 terms |
+| Pro Tips | 10 | 75 |
+| Glossary | 25 terms | 100 terms (virtualized LazyColumn) |
 | Brew Issues (Troubleshooter) | 4 | 10 |
 | Flavor Notes | 20 | 37 |
-| Quiz | None | 12 questions with score tracker |
+| Quiz | None | 30+ questions with score tracker (Today's Quiz) |
 | Achievements | None | 9 badges |
 | Stats Dashboard | None | Canvas charts (equipment, roast, time-of-day, ratio, rating) |
 | Brew Comparison | None | Side-by-side diff tool |
@@ -52,7 +52,7 @@ Coffeery has been massively enhanced from its v3.0.1 baseline across a series of
 | Database | Room 2.7.2 (5 entities, 5 DAOs, v6 schema) |
 | Architecture | MVVM with unidirectional data flow, manual DI (no Hilt/Koin) |
 | Image Loading | Coil 2.7.0 (Compose) |
-| Google Services | Play Services Auth 21.3.0, Drive 17.0.0, API Client 2.7.2 |
+| Google Services | Play Services Auth 21.3.0, Drive API v3 (REST), google-api-client 2.7.2, http-client-gson 1.45.3 |
 | Lifecycle | Lifecycle 2.10.0 (runtime + ViewModel + Compose) |
 | Build | Gradle 8.13, AGP 8.13.2, KSP 2.3.9, JDK 17 Temurin |
 | Min / Target / Compile SDK | 26 / 35 / 35 |
@@ -80,11 +80,11 @@ app/src/main/java/co/coffeery/app/
 │   └── TimerStopReceiver.kt   Broadcast receiver for timer stop action
 ├── ui/
 │   ├── theme/
-│   │   ├── Color.kt           8 palettes × 2 modes = 16 CoffeeColors profiles
-│   │   ├── Type.kt             Fraunces (serif/display) + Manrope (sans/body) type scale
-│   │   ├── Shape.kt           CoffeeShapes (4 corner radii) + CoffeeSpacing (6 size steps)
-│   │   ├── Texture.kt         Seeded grain texture rendered with Canvas drawBehind
-│   │   ├── Motion.kt          MotionTokens + 4 spring specs (press, cardExpand, page, counter)
+│   │   ├── Color.kt           9 palettes × 2 modes = 18 CoffeeColors profiles (Copper added)
+│   │   ├── Type.kt             Fraunces 32sp/-0.5 + Manrope 18/14/12 type scale
+│   │   ├── Shape.kt           CoffeeShapes (10/18/26/pill) + CoffeeSpacing (4/8/12/16/24/32)
+│   │   ├── Texture.kt         Linen 18dp + seeded grain (Random 42) 30-90 dots
+│   │   ├── Motion.kt          CoffeeMotion 4 springs press/cardExpand/page/counter + ReducedMotion
 │   │   └── Theme.kt           CoffeeTheme composition local (colors, typography, shapes)
 │   ├── components/
 │   │   ├── Bars.kt             Top bar, screen header
@@ -161,9 +161,9 @@ app/src/main/java/co/coffeery/app/
 
 Coffeery uses a fully custom design system — no Material Design, no third-party component library. Every color, shape, motion value, and texture is defined in `ui/theme/`.
 
-### CoffeeColors — 8 Palettes × 2 Modes
+### CoffeeColors — 9 Palettes × 2 Modes (18 profiles)
 
-Each palette defines 15 semantic color slots including background gradient stop, surface elevation, outline, text primary/secondary, accent/soft/vintage, crema light/dark for the strength slider, and an `isDark` flag.
+Each palette defines 15 semantic color slots including background gradient stop, surface elevation, outline, text primary/secondary, accent/soft/vintage, crema light/dark for the strength slider, and an `isDark` flag. Nine palettes: Terracotta, Espresso, Matcha, Berry, Crema, Mocha, Caramel, Hazelnut, **Copper** (warm copper #C47A3A).
 
 | Palette | Character |
 |---|---|
@@ -175,8 +175,9 @@ Each palette defines 15 semantic color slots including background gradient stop,
 | **Mocha** | Rich chocolate brown on latte beige |
 | **Caramel** | Amber-orange on warm buttercream |
 | **Hazelnut** | Warm nutty brown on oatmeal |
+| **Copper** | Warm copper #C47A3A on cream — fresh industrial accent |
 
-Each is defined for both light and dark modes, yielding 16 distinct `CoffeeColors` instances. All colors are **warm-tinted** — backgrounds use cream/paper tones instead of pure white, and dark backgrounds use deep warm charcoal instead of pure black.
+Each is defined for both light and dark modes, yielding 18 distinct `CoffeeColors` instances. All colors are **warm-tinted** — backgrounds use cream/paper tones instead of pure white, and dark backgrounds use deep warm charcoal instead of pure black. Preview gallery is `LazyRow 160×110` with selectable RadioButton and split light/dark `paletteColors(palette, darkTheme)` live preview.
 
 Helper methods:
 - `coffeeFor(strength: Float)` — lerps between `cremaLight` and `cremaDark` to color the strength slider fill as strength increases
@@ -188,14 +189,14 @@ Two font families driving an 8-style editorial type scale:
 
 | Style | Font | Weight | Size | Usage |
 |---|---|---|---|---|
-| `display` | **Fraunces** (serif) | Bold | 36sp / 40sp | Screen titles, hero numbers |
-| `title` | Fraunces (serif) | Bold | 20sp / 26sp | Section headers |
-| `headline` | **Manrope** (sans) | SemiBold | 16sp / 22sp | Card titles, item headers |
+| `display` | **Fraunces** (serif) | Bold | 32sp / 40sp (-0.5) | Screen titles, hero numbers |
+| `title` | Fraunces (serif) | Bold | 18sp / 24sp | Section headers |
+| `headline` | **Manrope** (sans) | SemiBold | 18sp / 24sp | Card titles, item headers |
 | `body` | Manrope (sans) | Normal | 14sp / 20sp | Paragraph text |
 | `bodyStrong` | Manrope (sans) | SemiBold | 14sp / 20sp | Emphasised body |
-| `label` | Manrope (sans) | Medium | 11sp / 15sp | Chips, tags, overlines (tracking 0.5) |
-| `caption` | Manrope (sans) | Normal | 11sp / 15sp | Secondary labels |
-| `number` | Fraunces (serif) | Bold | 30sp / 32sp | Recipe read-outs (tracking -0.8) |
+| `label` | Manrope (sans) | Medium | 12sp / 16sp (0.4) | Chips, tags, overlines |
+| `caption` | Manrope (sans) | Normal | 12sp / 16sp | Secondary labels |
+| `number` | Fraunces (serif) | Bold | 32sp / 40sp (-0.5) | Recipe read-outs |
 
 Fraunces and Manrope are bundled as `.otf` files in `res/font/` so the typeface renders identically on all devices.
 
@@ -208,7 +209,7 @@ Fraunces and Manrope are bundled as `.otf` files in `res/font/` so the typeface 
 | `large` | 26dp |
 | `pill` | 50% (fully rounded) |
 
-Spacing scale (via `CoffeeSpacing`): `4 | 8 | 12 | 16 | 24 | 32 dp`.
+Spacing scale (via `CoffeeSpacing`): `xs4 | s8 | m12 | l16 | xl24 | xxl32` — used in palette gallery (160×110, 12dp gaps).
 
 ### CoffeeMotion
 
@@ -223,9 +224,9 @@ Four spring specifications tuned for different interaction types:
 
 Duration constants: `quick` (120ms), `normal` (220ms), `slow` (420ms). Easing curves: `standard` (fast-out-slow-in) and `emphasized` (exaggerated deceleration).
 
-### Grain Texture
+### Grain Texture + Linen
 
-A subtle seeded-random noise overlay rendered via `Modifier.coffeeBackground()`. It draws 200–800 semi-transparent black circles (alpha ~0.02–0.06) with a fixed seed (42) so the pattern is deterministic and does not shimmer between recompositions. This adds a tactile, paper-like quality to all backgrounds.
+A warm paper feel via `Modifier.coffeeBackground()`: vertical gradient `background→backgroundEnd` + linen weave (horizontal line every 18dp, stroke 0.6dp, #5C4A32 α0.03) + seeded grain 30-90 dots (Random 42, radius 1-2.1, α0.02-0.04) deterministic. Paper-like, not cold flat white.
 
 ### Vintage Accent Colors
 
@@ -279,8 +280,8 @@ The timer screen is a full-screen immersive experience:
 
 ### Gear (Equipment)
 
-- **36 brewing methods** — 24 standard devices (V60, Chemex, Kalita, French Press, AeroPress, Moka Pot, Cezve/Ibrik, Cold Brew, Siphon, Espresso, Clever, Hario Switch, Origami, April, Stagg X, Timemore B75, Beehouse, Cafec Flower, Phin, Cold Drip, Percolator, Batch Brewer, Napoletana) + 12 equipment-free methods (Cowboy Coffee, Cupping, Cloth Filter, Sock Coffee, Decoction, Paper Towel, Swedish Egg Coffee, Improvised Turkish, Kopi Tubruk, Arabic Qahwa, Cafe de Olla, Mason Jar Cold Brew)
-- **Hand-drawn Canvas icons:** 64 unique line-art silhouettes rendered procedurally — no PNGs, perfectly crisp at all densities
+- **59 brewing methods** — V60, Chemex, Kalita, FrenchPress, AeroPress/Go/XL, Moka, Cezve/Ibrik, ColdBrew/Drip, Siphon/Modern, Espresso, Clever/XL, Switch, Origami, April, Stagg, Timemore, Beehouse, Cafec, Orea/Pulsar/Tricolate, Delter, Flair/58, Picopresso, Nanopresso, Phoenix70, Lunar, Hoop, Paragon, Melodrip, December, Moccamaster, Nel, Gina, Phin/Large + 12 equipment-free (Cowboy, Cupping, Cloth, Sock, Decoction, PaperTowel, SwedishEgg, ImprovisedTurkish, KopiTubruk, Qahwa, CafeDeOlla, MasonJar)
+- **Hand-drawn Canvas icons:** 59 bespoke + 64 line-art silhouettes (no shared glyph for v60/orea/pulsar/tricolate) — procedural Canvas, no PNGs
 - **Category tabs:** Pour-Over, Immersion, Pressure, Other
 - **Real-time search:** Text filter across equipment names and tags
 - **Quick access:** Long-press or tap-star to pin favourites to the top
@@ -292,7 +293,7 @@ The timer screen is a full-screen immersive experience:
 - **Load into calculator:** Tap any saved recipe to populate the calculator fields instantly
 - **Edit/delete:** Long-press for context actions
 - **Featured recent:** Top row shows the most recently used recipe for quick restart
-- **Drinks sub-tab:** 70+ coffee drink recipes (milk-based: Latte, Cappuccino, Flat White, Cortado, Macchiato, Mocha, Affogato, Americano, Red Eye, Espresso Con Panna, Freddo Espresso, Pumpkin Spice Latte; regional: Cà Phê Trứng, Cà Phê Sữa Đá, Greek Frappé, Irish Coffee, Café Bombón, Cuban Cortadito, Viennese, Eiskaffee, Kopi Joss, Espresso Yen, Mirra, Mazagran) with detailed ingredient lists and numbered steps
+- **Drinks sub-tab:** 87 coffee drink recipes (27 milk, 49 regional inc Nitro, Shakerato, Freddo, Mazagran, Einspänner, Marocchino, Gibraltar etc) with detailed ingredient lists and numbered steps
 - **Empty state CTA:** When no recipes are saved, a contextual empty state prompts recipe creation
 
 ### Log
@@ -336,16 +337,16 @@ The educational hub of the app, structured as a curriculum:
   12. Espresso Fundamentals
   13. Coffee Processing
   14. Coffee Origins
-- **85 knowledge cards:** Multi-paragraph lessons with chapter headers; cards are grouped by chapter and displayed in a locked/unlocked step-map
+- **127 knowledge cards (contiguous by chapter):** Multi-paragraph lessons with locked/unlocked step-map, searchable + 100-term virtualized glossary (LazyColumn items)
 - **Daily lesson:** A rotating "lesson of the day" shown first for bite-sized learning
 - **Real-time search:** Filter across all card titles and body text
 - **Interactive tools:**
   - **Extraction Calculator:** Input coffee dose, water volume, and TDS reading → computes extraction yield with colour-coded feedback (green = ideal 18–22%, amber = borderline, red = out of range)
   - **SCA Brew Control Chart:** Canvas-rendered chart with extraction % on X-axis, TDS % on Y-axis, ideal zone rectangle highlighted, and a dot showing the current brew's position
   - **Water Chemistry Guide:** Reference table showing ideal ranges for TDS (75–250 ppm), hardness (50–175 ppm), alkalinity (40–70 ppm), and pH (6.5–7.5) with target values
-- **12-question quiz:** Random question drawn from a pool; immediate correct/incorrect feedback; score tracker for the session
-- **50 pro tips:** Rotating quick tips covering technique, equipment, and troubleshooting
-- **65-term glossary:** Searchable coffee terminology dictionary
+- **30+ question quiz:** Random question drawn from a pool; immediate feedback; score tracker
+- **75 pro tips:** Rotating quick tips
+- **100-term searchable glossary:** Virtualized, filterable via Learn search
 - **37-note flavour wheel:** Fruity, Berry, Nutty, Spicy, Bright, Smooth, Bold, Citrus, Stone Fruit, Tropical, Floral, Jasmine, Rose, Chamomile, Lavender, Sweet, Chocolate, Caramel, Honey, Brown Sugar, Nutty/Spice, Almond, Cinnamon, Clove, Nutmeg, Earthy, Woody, Tobacco, Leather, Mushroom, Tropical Fruit, Red Berry, Hazelnut, Milk Chocolate, Dark Cocoa, Caramelized, Maple
 - **10 brew issues (troubleshooter):** "How was your cup?" interactive flow — select sour/bitter/astringent/weak/strong/balanced/dry/hollow/ferment/baggy for corrective brewing advice
 - **5 food pairings:** Ethiopian Yirgacheffe + Lemon Blueberry Scone, Sumatra Dark Roast + Dark Chocolate Brownie, Kenya AA + Lemon Bar, Guatemala Medium Roast + Cinnamon Coffee Cake, Espresso + Vanilla Ice Cream (Affogato)
@@ -355,7 +356,7 @@ The educational hub of the app, structured as a curriculum:
 
 Organised into logical sections:
 
-- **Appearance:** 8 palette swatch preview cards with live preview; Dark/Light/System theme toggle
+- **Appearance:** 9 palette gallery (160×110, selectable RadioButton, split light/dark preview, accent border, scale 1.02) ; Dark/Light/System toggle
 - **Language:** English / Turkish switch (applied immediately)
 - **Timer Settings:**
   - Custom step durations: bloom (default 40s), pour (45s), steep (240s), drawdown (55s)
@@ -436,23 +437,23 @@ While Coffeery is privacy-first and fully functional offline, optional Google in
 | JSON data lines | 1,667 |
 | String resources per locale | 1,226 (EN = TR, full parity) |
 | Total string resources | 2,452 |
-| Built-in equipment presets | 36 |
-| Equipment icons (Canvas) | 64 |
+| Built-in equipment presets | 59 |
+| Equipment icons (Canvas) | 59 bespoke (64 total inc system) |
 | System glyphs (Glyph enum) | 40+ |
 | Learn chapters | 14 |
-| Learn cards (lessons) | 85 |
-| Quiz questions | 12 |
-| Pro tips | 50 |
-| Glossary terms | 65 |
+| Learn cards (lessons) | 127 |
+| Quiz questions | 30+ |
+| Pro tips | 75 |
+| Glossary terms | 100 |
 | Flavour wheel notes | 37 |
-| Brew issue remedies | 10 |
-| Drink recipes | 70+ |
+| Brew issue remedies | 18 |
+| Drink recipes | 87 |
 | Coffee variety profiles | 22 |
 | Food pairings | 5 |
 | Culture facts | 4 |
 | Achievements | 9 |
 | Stats chart types | 6 |
-| Colour palettes | 8 (× 2 modes = 16 profiles) |
+| Colour palettes | 9 (× 2 modes = 18 profiles) |
 | Fonts | 2 (Fraunces, Manrope) |
 | Spring animation specs | 4 |
 | APK (debug) | ~13 MB |
