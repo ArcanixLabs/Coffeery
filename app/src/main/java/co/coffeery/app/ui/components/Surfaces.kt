@@ -1,8 +1,11 @@
 package co.coffeery.app.ui.components
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -20,8 +23,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.ui.theme.CoffeeColors
+import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
 
@@ -43,10 +51,19 @@ fun CoffeeCard(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = CoffeeTheme.colors
-    var m = modifier.clip(shape).background(colors.surfaceElevated)
+    val haptics = rememberAppHaptics()
+    val hapticFeedback = LocalHapticFeedback.current
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(targetValue = if (isPressed && onClick != null) 0.97f else 1f, animationSpec = CoffeeMotion.press, label = "press")
+    var m = modifier.graphicsLayer(scaleX = scale, scaleY = scale).clip(shape).background(colors.surfaceElevated)
     if (elevated) m = m.coffeeElevation(shape, colors) else m = m.border(1.dp, colors.outline, shape)
     if (onClick != null) {
-        m = m.clickable { onClick() }
+        m = m.clickable(interactionSource = interactionSource, indication = null) {
+            haptics.tap()
+            hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            onClick()
+        }
     }
     Column(modifier = m.padding(contentPadding.dp), content = content)
 }

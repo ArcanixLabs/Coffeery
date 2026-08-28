@@ -344,7 +344,9 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(Modifier.height(40.dp))
-            LineIcon(Glyph.CUP, colors.accent, Modifier.size(48.dp))
+            Box(modifier = Modifier.size(104.dp).clip(CoffeeShapes.pill).background(colors.accentSoft.copy(alpha = 0.25f)), contentAlignment = Alignment.Center) {
+                LineIcon(Glyph.CUP, colors.accent.copy(alpha = 0.7f), Modifier.size(48.dp))
+            }
             Spacer(Modifier.height(16.dp))
             AppText(stringResource(R.string.log_empty_title),
                 style = CoffeeTheme.type.title, align = TextAlign.Center,

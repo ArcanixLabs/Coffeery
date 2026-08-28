@@ -1,5 +1,6 @@
 package co.coffeery.app.ui.screens.recipes
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -70,7 +71,9 @@ fun RecipesScreen(state: AppUiState, vm: AppViewModel) {
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                LineIcon(Glyph.BOOKMARK, colors.textSecondary.copy(alpha = 0.4f), Modifier.size(64.dp))
+                Box(modifier = Modifier.size(104.dp).clip(CoffeeShapes.pill).background(colors.accentSoft.copy(alpha = 0.25f)), contentAlignment = Alignment.Center) {
+                    LineIcon(Glyph.BOOKMARK, colors.accent.copy(alpha = 0.7f), Modifier.size(64.dp))
+                }
                 Spacer(Modifier.height(16.dp))
                 AppText(stringResource(R.string.empty_recipes_title), style = CoffeeTheme.type.title, align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
                 Spacer(Modifier.height(8.dp))

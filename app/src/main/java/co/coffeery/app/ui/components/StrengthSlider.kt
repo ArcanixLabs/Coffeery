@@ -3,12 +3,12 @@ package co.coffeery.app.ui.components
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -21,6 +21,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.ui.theme.CoffeeTheme
 
 /**
@@ -35,10 +36,29 @@ fun StrengthSlider(
     modifier: Modifier = Modifier,
 ) {
     val colors = CoffeeTheme.colors
+    val haptics = rememberAppHaptics()
+    val hapticFeedback = LocalHapticFeedback.current
     var width by remember { mutableFloatStateOf(0f) }
+    fun bucket(v: Float): Int = when {
+        v <= 0.02f -> 0
+        v < 0.33f -> 1
+        v < 0.66f -> 2
+        v < 0.98f -> 3
+        else -> 4
+    }
+    var lastBucket by remember { mutableIntStateOf(bucket(value.coerceIn(0f, 1f))) }
 
     fun update(x: Float) {
-        if (width > 0f) onValueChange((x / width).coerceIn(0f, 1f))
+        if (width > 0f) {
+            val nv = (x / width).coerceIn(0f, 1f)
+            val b = bucket(nv)
+            if (b != lastBucket) {
+                haptics.tick()
+                hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                lastBucket = b
+            }
+            onValueChange(nv)
+        }
     }
 
     Canvas(

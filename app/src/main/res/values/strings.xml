@@ -164,8 +164,8 @@
     <!-- Recipes screen -->
     <string name="recipes_title">Saved recipes</string>
     <string name="recipes_empty">No saved recipes yet.\nDial in a brew and tap Save.</string>
-    <string name="empty_recipes_title">No saved recipes yet</string>
-    <string name="empty_recipes_sub">Save your brew calculator settings as a recipe to reuse them later</string>
+    <string name="empty_recipes_title">Your recipe shelf is snoozing ☕</string>
+    <string name="empty_recipes_sub">Save a brew you love and it’ll perk up right here — ready to replay</string>
     <string name="empty_recipes_action">Start Brewing</string>
     <string name="recipes_summary">%1$s · %2$s g : %3$s ml</string>
     <string name="recipes_delete_confirm">Delete this recipe?</string>
@@ -262,6 +262,12 @@
     <string name="equip_batchbrew_tag">Automatic drip machine</string>
     <string name="equip_napoletana_name">Napoletana</string>
     <string name="equip_napoletana_tag">Neapolitan flip pot</string>
+    <string name="equip_orea_name">Orea V4</string>
+    <string name="equip_orea_tag">Flatbed modular, 4 bases</string>
+    <string name="equip_pulsar_name">NextLevel Pulsar</string>
+    <string name="equip_pulsar_tag">No-bypass valve hybrid</string>
+    <string name="equip_tricolate_name">Tricolate</string>
+    <string name="equip_tricolate_tag">Zero-bypass cylinder</string>
 
     <string name="equip_watch_video">Watch tutorial</string>
     <string name="calc_watch_video">Watch</string>
@@ -379,8 +385,8 @@
     <!-- Brew log -->
     <string name="save_brew_log">Log this brew</string>
     <string name="log_empty">No brews logged yet.\nComplete a brew and save it to start building your diary.</string>
-    <string name="empty_brews_title">No brews logged yet</string>
-    <string name="empty_brews_desc">Start brewing to track your coffee journey</string>
+    <string name="empty_brews_title">No brews logged — time to make magic ✨</string>
+    <string name="empty_brews_desc">Hit brew and watch your coffee story pour in</string>
     <string name="empty_brews_action">Start your first brew</string>
     <string name="log_rating">Rating</string>
     <string name="log_grind_size">Grind size</string>
@@ -398,8 +404,8 @@
     <!-- Beans -->
     <string name="beans_title">Beans</string>
     <string name="beans_empty">No beans added yet. Track your coffee bags here — origin, roaster, roast date.</string>
-    <string name="empty_beans_title">No beans yet</string>
-    <string name="empty_beans_sub">Add your first coffee bean to start tracking your collection</string>
+    <string name="empty_beans_title">No beans in the hopper yet</string>
+    <string name="empty_beans_sub">Add your first bag — origin, roaster, and all the tasty bits</string>
     <string name="empty_beans_action">Add Bean</string>
     <string name="beans_add">Add beans</string>
     <string name="beans_name_hint">Bean name (e.g. Ethiopia Yirgacheffe)</string>
@@ -428,8 +434,8 @@
     <string name="log_analytics_rating">Avg rating</string>
     <string name="log_analytics_bean">Best bean</string>
 
-    <string name="log_empty_title">No brews yet</string>
-    <string name="log_empty_sub">Start brewing to track your coffee journey</string>
+    <string name="log_empty_title">Your journal is empty ☕</string>
+    <string name="log_empty_sub">Brew something wonderful and it’ll appear here</string>
     <string name="log_start_brewing">Start brewing</string>
     <string name="log_rating_out">%1$d/5</string>
     <string name="log_date_today">Today</string>
@@ -649,6 +655,36 @@
     <string name="glossary_def_64">Coffee processing method where fruit skin and pulp are mechanically removed, beans ferment in water tanks to loosen remaining mucilage, then are washed and dried. Produces clean, bright cups emphasizing origin character.</string>
     <string name="glossary_term_65">Natural Process</string>
     <string name="glossary_def_65">The oldest processing method: whole coffee cherries are dried in the sun with fruit intact for 2–4 weeks before hulling. Long fruit contact creates intense fruit-forward, winey, and heavy-bodied flavor profiles.</string>
+    <string name="glossary_term_66">Anaerobic Fermentation</string>
+    <string name="glossary_def_66">Sealed, oxygen-free fermentation where cherries or beans ferment under CO2 pressure, encouraging lactic acid bacteria and fruity ester production. Typically 48–120 hours at controlled temperature, creating intense tropical, yogurt-like profiles.</string>
+    <string name="glossary_term_67">Carbonic Maceration</string>
+    <string name="glossary_def_67">Borrowed from Beaujolais winemaking, whole cherries ferment in a CO2-rich, oxygen-free tank where intracellular fermentation occurs inside the intact fruit. Produces bright, candy-like, winey coffees with pronounced red fruit and floral notes.</string>
+    <string name="glossary_term_68">Co-ferment vs Infused</string>
+    <string name="glossary_def_68">Co-ferment ferments coffee together with fruit, yeast or Koji so flavors integrate via microbial metabolism; infused adds flavoring after roasting. Many competitions and the SCA distinguish co-fermentation as processing innovation, while post-roast infusion is considered flavoring.</string>
+    <string name="glossary_term_69">Thermal Shock</string>
+    <string name="glossary_def_69">Technique pioneered by Diego Bermudez involving alternating hot and cold water washes to shock and fix specific flavor compounds during fermentation. Thermal shock can amplify acidity, sweetness or tropical fruit clarity by manipulating cell permeability.</string>
+    <string name="glossary_term_70">Koji</string>
+    <string name="glossary_def_70">Aspergillus oryzae mold used in sake and miso, now applied to coffee cherry fermentation to break down starches into sugars and add umami-sweet complexity. Koji-inoculated coffees often taste like peach, sake or brown sugar with enhanced sweetness.</string>
+    <string name="glossary_term_71">Bypass</string>
+    <string name="glossary_def_71">Brewing where part of total water bypasses the coffee bed and is added after brewing. Intentional bypass (e.g., AeroPress concentrate diluted to drinking strength) controls strength without over-extraction; unintentional bypass (water around V60 filter) causes under-extraction.</string>
+    <string name="glossary_term_72">WDT</string>
+    <string name="glossary_def_72">Weiss Distribution Technique — stirring ground coffee in the portafilter with fine needles (0.3–0.5 mm) to break clumps and homogenize density. WDT reduces channeling and is the single most effective improvement for consistent espresso.</string>
+    <string name="glossary_term_73">TDS</string>
+    <string name="glossary_def_73" formatted="false">Total Dissolved Solids, the percentage of brewed coffee that is dissolved material measured with a refractometer. Filter target is 1.15–1.55%, espresso 8–12%; TDS and extraction yield define the SCA Brewing Control Chart.</string>
+    <string name="glossary_term_74">Extraction Yield</string>
+    <string name="glossary_def_74" formatted="false">Percentage of dry coffee dose that dissolves into the beverage, calculated from TDS, beverage mass and dose. Ideal filter yield is 18–22%; below tastes sour and hollow, above tastes bitter and astringent.</string>
+    <string name="glossary_term_75">Alkalinity</string>
+    <string name="glossary_def_75">Measure of water buffering capacity, primarily bicarbonate (HCO3-), expressed as ppm CaCO3. Ideal 40–70 ppm for specialty brewing; too high mutes acidity, too low makes coffee sharp and sour.</string>
+    <string name="glossary_term_76">ROR</string>
+    <string name="glossary_def_76">Rate of Rise, the per-minute temperature increase of beans during roasting. A steadily declining ROR is the hallmark of a controlled roast; a rising ROR near the end risks scorching and baked flavors.</string>
+    <string name="glossary_term_77">Agtron</string>
+    <string name="glossary_def_77">Color scale measuring roast degree via near-infrared reflectance; lower numbers indicate darker roasts. Specialty light roasts often score Agtron 70–85 (ground), dark roasts 35–50; the meter provides objective consistency.</string>
+    <string name="glossary_term_78">Bypass Zero</string>
+    <string name="glossary_def_78">Brewing technique or dripper design aiming for zero unintended bypass by sealing the filter edge. No-bypass drippers (e.g., Ceado Hoop, APAX Lab) increase extraction evenness and sweetness versus classic V60.</string>
+    <string name="glossary_term_79">CVA</string>
+    <string name="glossary_def_79">Coffee Value Assessment, SCA 2023 replacement for the traditional 100-point cupping form. CVA separates descriptive assessment from hedonic scoring and adds context for processing and sustainability.</string>
+    <string name="glossary_term_80">Q-Grader</string>
+    <string name="glossary_def_80">Certified coffee quality grader licensed by the Coffee Quality Institute to score coffees using SCA cupping protocol. Q-graders must pass 22 exams covering sensory, olfactory and triangulation accuracy.</string>
 
     <!-- Grind size visual reference -->
     <string name="grind_vis_title">Grind Size Reference</string>
@@ -1249,6 +1285,26 @@
     <string name="learn_l74_body">From Guatemala to Panama, Central America produces diverse, high-quality Arabica. Guatemala\'s Antigua region (volcanic soil) yields chocolate, spice, and smoky notes. Costa Rica pioneered honey processing and produces clean, sweet, citrusy coffees. Honduras (now the region\'s largest producer) offers caramel, vanilla, and tropical fruit. Panama\'s Boquete region achieved fame through Hacienda La Esmeralda\'s Geisha — the most expensive coffee in the world, with explosive jasmine, bergamot, and stone fruit flavors that shattered auction records ($10,000+/kg for the top lots).</string>
     <string name="learn_l75_title">Asia-Pacific Coffees</string>
     <string name="learn_l75_body">Indonesia (Sumatra, Java, Sulawesi) produces earthy, full-bodied coffees with low acidity — prized for adding weight to espresso blends. The wet-hulling process creates their signature profile. Vietnam is the world\'s #2 producer but grows almost exclusively Robusta for instant coffee — the source of traditional Vietnamese cà phê with condensed milk. India grows both Arabica and Robusta, including the unique monsoon-aged Malabar. Papua New Guinea produces clean, sweet coffees similar to Central American profiles. Thailand, Laos, and Myanmar are emerging origins with growing specialty sectors.</string>
+    <string name="learn_l76_title">Anaerobic 101</string>
+    <string name="learn_l76_body">Anaerobic fermentation seals cherries in oxygen-free tanks, often pressurized with CO2, for 48–120 hours. Without oxygen, lactobacillus and specific yeasts dominate, producing lactic acidity and esters that taste like tropical fruit, yogurt, or wine. The method creates intense, polarizing cups — some love the explosive fruit, others find it masks terroir. Control variables: time, temperature, pH, and whether cherries are whole, pulped, or de-pulped.</string>
+    <string name="learn_l77_title">Carbonic Maceration</string>
+    <string name="learn_l77_body">Borrowed from Beaujolais winemaking, carbonic maceration ferments whole cherries in a CO2-saturated tank. Intracellular fermentation happens inside the intact berry before yeast breaks the skin, generating bright, candy-like esters. The result is intensely floral and fruit-forward — strawberry, bubblegum, rose — with amplified sweetness and lifted acidity. Pioneered in coffee by Sasa Sestic and Project Origin.</string>
+    <string name="learn_l78_title">Thermal Shock</string>
+    <string name="learn_l78_body">Thermal shock, developed by Diego Bermudez in Colombia, alternates hot and cold water washes during fermentation. The temperature swing shocks cell walls, fixing volatile aroma compounds and modulating acidity. Bermudez uses 40°C then 12°C cycles to lock in flavors like peach, lychee, and rose water. It requires precise hygiene and temperature control, but yields competition-winning clarity.</string>
+    <string name="learn_l79_title">Co-ferments vs Infused</string>
+    <string name="learn_l79_body">Co-ferment means coffee ferments together with another ingredient — fruit, spices, or Koji — so microbes metabolize both substrates together. Infused means flavor is added after roasting, like barrel-aging or spraying. Co-fermentation can be exquisite when restrained, but excessive fruit masks origin; infusion is generally considered flavoring, not processing. The SCA and many competitions now require disclosure of co-fermentation ingredients.</string>
+    <string name="learn_l80_title">Bypass Physics</string>
+    <string name="learn_l80_body">Bypass is water that reaches the cup without extracting coffee, either intentionally (diluting a concentrate) or unintentionally (water slipping around the filter edge). Intentional bypass — e.g., AeroPress 1:10 concentrate diluted to 1:16 — lowers TDS without over-extraction. Unintentional bypass in pour-over creates weak, hollow cups. No-bypass drippers and careful pouring minimize the latter.</string>
+    <string name="learn_l81_title">Water Alkalinity</string>
+    <string name="learn_l81_body">Alkalinity is water buffering capacity, mainly bicarbonate (HCO3-), measured as ppm CaCO3. Ideal specialty brewing alkalinity is 40–70 ppm. Too high and coffee tastes flat, dull, and muted because acids are neutralized; too low and acidity turns sharp, sour, and aggressive. Alkalinity works with general hardness (GH) to define extraction; GH pulls flavor, KH shapes its expression.</string>
+    <string name="learn_l82_title">Roast Universal Curve</string>
+    <string name="learn_l82_body">The universal roast curve plots bean temperature versus time and its derivative ROR (Rate of Rise, °C/min). A controlled roast shows a steadily declining ROR from the drying phase through Maillard to development. Crashes or spikes in ROR correlate with baked, grassy, or scorched flavors. Understanding ROR helps home roasters diagnose why a coffee tastes underdeveloped or bitter, independent of final color.</string>
+    <string name="learn_l83_title">Koji Starter</string>
+    <string name="learn_l83_body">Koji (Aspergillus oryzae) is the mold behind sake, miso, and soy sauce, now used to inoculate coffee cherry fermentation. Koji enzymes break down starches and proteins into sugars and amino acids, boosting sweetness and umami. Koji coffees often taste like white peach, melon, sake, or brown sugar with silky body. It is a gentle, enzymatic alternative to aggressive anaerobic funk.</string>
+    <string name="learn_l84_title">Extraction Mastery</string>
+    <string name="learn_l84_body" formatted="false">Extraction mastery ties TDS and yield together. Measure TDS with a refractometer, then calculate Extraction Yield = TDS × beverage mass / dose. Target 18–22% at 1.15–1.55% TDS for filter. If sour and under 18%, grind finer or raise temperature; if bitter above 22%, grind coarser or lower temperature. One variable at a time and a refractometer remove guesswork.</string>
+    <string name="learn_l85_title">Decaf Science</string>
+    <string name="learn_l85_body">Modern decaf prioritizes flavor preservation. Swiss Water Process soaks beans in flavor-charged water and filters caffeine with activated carbon — chemical-free. CO2 process uses pressurized carbon dioxide as a selective solvent, and Sugarcane EA uses naturally occurring ethyl acetate. All still leave 2–5 mg caffeine per cup, but a well-executed SWP decaf can be indistinguishable from regular in blind tastings.</string>
     <string name="equip_siphon_name">Siphon</string>
     <string name="equip_siphon_tag">Theatrical &amp; aromatic</string>
     <string name="equip_clever_name">Clever Dripper</string>

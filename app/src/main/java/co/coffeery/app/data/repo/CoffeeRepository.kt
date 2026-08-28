@@ -15,6 +15,7 @@ import co.coffeery.app.data.model.Equipment
 import co.coffeery.app.data.model.Grind
 import co.coffeery.app.data.model.StepKind
 import co.coffeery.app.data.model.TempMode
+import androidx.room.withTransaction
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -130,6 +131,22 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
             o.put("completedChapters", settings.completedChapters)
             o.put("ratioMode", settings.ratioMode)
             o.put("manualRatio", settings.manualRatio)
+            o.put("timerPip", settings.timerPip)
+            o.put("timerBackground", settings.timerBackground)
+            o.put("timerSound", settings.timerSound)
+            o.put("timerVibrate", settings.timerVibrate)
+            o.put("timerShowNext", settings.timerShowNext)
+            o.put("timerMergeWeight", settings.timerMergeWeight)
+            o.put("notificationsBrewComplete", settings.notificationsBrewComplete)
+            o.put("notificationsStepChange", settings.notificationsStepChange)
+            o.put("bloomDurationSec", settings.bloomDurationSec)
+            o.put("pourDurationSec", settings.pourDurationSec)
+            o.put("steepDurationSec", settings.steepDurationSec)
+            o.put("drawdownDurationSec", settings.drawdownDurationSec)
+            o.put("timerAutoAdvance", settings.timerAutoAdvance)
+            o.put("timerDisplayMode", settings.timerDisplayMode)
+            o.put("temperatureUnit", settings.temperatureUnit)
+            o.put("hasCompletedOnboarding", settings.hasCompletedOnboarding)
             json.put("settings", o)
         }
         val logArr = JSONArray()
@@ -153,6 +170,12 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
             o.put("roastDate", b.roastDate ?: -1L); o.put("roastLevel", b.roastLevel)
             o.put("notes", b.notes); o.put("isArchived", b.isArchived)
             o.put("createdAt", b.createdAt)
+            o.put("processMethod", b.processMethod)
+            o.put("varietal", b.varietal)
+            o.put("altitude", b.altitude)
+            o.put("flavorNotes", b.flavorNotes)
+            if (b.scaScore != null) o.put("scaScore", b.scaScore) else o.put("scaScore", JSONObject.NULL)
+            o.put("purchaseDate", b.purchaseDate ?: -1L)
             beanArr.put(o)
         }
         json.put("beans", beanArr)
@@ -161,7 +184,8 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
 
     suspend fun importFromJson(jsonStr: String) {
         val json = JSONObject(jsonStr)
-        if (json.has("recipes")) {
+        db.withTransaction {
+            if (json.has("recipes")) {
             val arr = json.getJSONArray("recipes")
             for (i in 0 until arr.length()) {
                 val o = arr.getJSONObject(i)
@@ -196,6 +220,22 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
                 completedChapters = o.optString("completedChapters", ""),
                 ratioMode = o.optBoolean("ratioMode", false),
                 manualRatio = o.optDouble("manualRatio", 16.0),
+                timerPip = o.optBoolean("timerPip", true),
+                timerBackground = o.optBoolean("timerBackground", true),
+                timerSound = o.optBoolean("timerSound", true),
+                timerVibrate = o.optBoolean("timerVibrate", true),
+                timerShowNext = o.optBoolean("timerShowNext", true),
+                timerMergeWeight = o.optBoolean("timerMergeWeight", false),
+                notificationsBrewComplete = o.optBoolean("notificationsBrewComplete", true),
+                notificationsStepChange = o.optBoolean("notificationsStepChange", false),
+                bloomDurationSec = o.optInt("bloomDurationSec", 40),
+                pourDurationSec = o.optInt("pourDurationSec", 45),
+                steepDurationSec = o.optInt("steepDurationSec", 240),
+                drawdownDurationSec = o.optInt("drawdownDurationSec", 55),
+                timerAutoAdvance = o.optBoolean("timerAutoAdvance", false),
+                timerDisplayMode = o.optString("timerDisplayMode", "countdown"),
+                temperatureUnit = o.optString("temperatureUnit", "C"),
+                hasCompletedOnboarding = o.optBoolean("hasCompletedOnboarding", false),
             ))
         }
         if (json.has("brewLogs")) {
@@ -235,8 +275,15 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
                     notes = o.optString("notes", ""),
                     isArchived = o.optBoolean("isArchived", false),
                     createdAt = o.optLong("createdAt", System.currentTimeMillis()),
+                    processMethod = o.optString("processMethod", ""),
+                    varietal = o.optString("varietal", ""),
+                    altitude = o.optString("altitude", ""),
+                    flavorNotes = o.optString("flavorNotes", ""),
+                    scaScore = if (o.has("scaScore") && !o.isNull("scaScore")) o.optDouble("scaScore").toFloat() else null,
+                    purchaseDate = o.optLong("purchaseDate", -1L).takeIf { it >= 0 },
                 ))
             }
+        }
         }
     }
 

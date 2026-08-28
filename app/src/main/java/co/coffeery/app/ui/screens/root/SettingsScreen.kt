@@ -67,12 +67,12 @@ fun SettingsScreen(vm: AppViewModel) {
     val cloudEmail = remember(cloudSignedIn) { cloud.getAccountEmail() ?: "" }
     val scope = rememberCoroutineScope()
 
-    // Try silent sign-in on open
     LaunchedEffect(Unit) {
         if (!cloud.isPlayServicesAvailable()) {
             android.widget.Toast.makeText(ctx, "Google Play Services not available", android.widget.Toast.LENGTH_LONG).show()
         } else if (!cloud.isSignedIn()) {
-            cloud.silentSignIn()
+            val result = cloud.silentSignIn()
+            if (result.isSuccess) cloudSignedIn = true
         }
     }
 

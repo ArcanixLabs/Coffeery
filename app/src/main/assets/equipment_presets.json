@@ -1663,6 +1663,138 @@
       ],
       "youtubeUrl": "https://www.youtube.com/watch?v=323dNUeWhXY",
       "youtubeUrlTr": "https://www.youtube.com/watch?v=JqTNzDFEHMA"
+    },
+    {
+      "id": "orea",
+      "nameKey": "equip_orea_name",
+      "tagKey": "equip_orea_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.5,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MED_FINE",
+      "cupMl": 250,
+      "timeLabel": "2:30-3:30",
+      "youtubeUrl": "https://www.youtube.com/watch?v=OREA_PLACEHOLDER",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 40,
+          "waterTargetPct": 0.2
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 45,
+          "waterTargetPct": 0.6
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 45,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 55,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=OREA_TR_PLACEHOLDER"
+    },
+    {
+      "id": "pulsar",
+      "nameKey": "equip_pulsar_name",
+      "tagKey": "equip_pulsar_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.7,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MED_FINE",
+      "cupMl": 250,
+      "timeLabel": "3:30-6:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=PULSAR_PLACEHOLDER",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_rinse",
+          "kind": "RINSE",
+          "durationSec": 15,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 20,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 60,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_open_valve",
+          "kind": "DRAWDOWN",
+          "durationSec": 90,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=PULSAR_TR_PLACEHOLDER"
+    },
+    {
+      "id": "tricolate",
+      "nameKey": "equip_tricolate_name",
+      "tagKey": "equip_tricolate_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 16.0,
+      "ratioMax": 19.0,
+      "ratioDefault": 18.0,
+      "tempMode": "RANGE",
+      "tempMin": 96,
+      "tempMax": 100,
+      "grind": "FINE",
+      "cupMl": 250,
+      "timeLabel": "6:00-10:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=TRICOLATE_PLACEHOLDER",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 45,
+          "waterTargetPct": 0.24
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 60,
+          "waterTargetPct": 0.8
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 180,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 90,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=TRICOLATE_TR_PLACEHOLDER"
     }
   ]
 }

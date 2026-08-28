@@ -67,7 +67,7 @@ private fun DrawScope.drawEquipment(key: String, tint: Color, stroke: Stroke) {
 
     when (key) {
         // ---- Pour-over family ----
-        "v60" -> { // steep 60° cone, one big hole, interior spiral ridges
+        "v60", "orea", "pulsar", "tricolate" -> { // steep 60° cone, one big hole, interior spiral ridges
             p { moveTo(w * 0.2f, h * 0.24f); lineTo(w * 0.8f, h * 0.24f); lineTo(w * 0.54f, h * 0.72f); lineTo(w * 0.46f, h * 0.72f); close() }
             line(tint, w * 0.5f, h * 0.72f, w * 0.5f, h * 0.86f, sw) // single center drip
             line(tint, w * 0.34f, h * 0.34f, w * 0.5f, h * 0.62f, sw * 0.7f) // spiral ridge hint

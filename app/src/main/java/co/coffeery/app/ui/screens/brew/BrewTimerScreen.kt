@@ -551,26 +551,48 @@ private fun BrewComplete(
         animationSpec = androidx.compose.animation.core.spring(dampingRatio = 0.5f, stiffness = 120f),
         label = "glowScale",
     )
+    var showRain by remember { mutableStateOf(true) }
+    val rainProgress by animateFloatAsState(
+        targetValue = 1f,
+        animationSpec = tween(1800),
+        label = "beanRain",
+    )
+    LaunchedEffect(Unit) { delay(1800); showRain = false }
+    val beanSeeds = remember { List(18) { i -> Triple((i * 37 % 100) / 100f, (i * 61 % 80) / 100f, if (i % 2 == 0) 0 else 1) } }
 
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Spacer(Modifier.height(32.dp))
-        Box(contentAlignment = Alignment.Center) {
-            Box(
-                modifier = Modifier
-                    .size(96.dp)
-                    .clip(CoffeeShapes.pill)
-                    .background(colors.accentSoft.copy(alpha = 0.6f))
-                    .graphicsLayer(scaleX = glowScale, scaleY = glowScale),
-            )
-            LineIcon(
-                co.coffeery.app.ui.components.Glyph.CUP,
-                colors.accent,
-                Modifier.size(64.dp),
-            )
+    Box(modifier = Modifier.fillMaxWidth()) {
+        if (showRain) {
+            Canvas(modifier = Modifier.fillMaxWidth().height(320.dp).align(Alignment.TopCenter)) {
+                val w = size.width
+                val h = size.height
+                beanSeeds.forEachIndexed { idx, s ->
+                    val nx = s.first
+                    val startOffset = s.second
+                    val isAccent = s.third == 0
+                    val x = nx * w
+                    val y = (rainProgress * (h + 40.dp.toPx()) + startOffset * 60f - 40.dp.toPx()).coerceIn(-20f, h + 20f)
+                    val alpha = (1f - rainProgress).coerceIn(0f, 1f) * (1f - startOffset * 0.2f)
+                    val r = if (idx % 3 == 0) 7.dp.toPx() else 5.dp.toPx()
+                    drawCircle(if (isAccent) colors.accent.copy(alpha = alpha) else colors.cremaDark.copy(alpha = alpha * 0.9f), radius = r, center = Offset(x, y))
+                    drawCircle(Color.White.copy(alpha = alpha * 0.35f), radius = r * 0.35f, center = Offset(x - r * 0.2f, y - r * 0.22f))
+                }
+            }
         }
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Spacer(Modifier.height(32.dp))
+            Box(contentAlignment = Alignment.Center) {
+                Box(
+                    modifier = Modifier
+                        .size(96.dp)
+                        .clip(CoffeeShapes.pill)
+                        .background(colors.accentSoft.copy(alpha = 0.6f))
+                        .graphicsLayer(scaleX = glowScale, scaleY = glowScale),
+                )
+                co.coffeery.app.ui.components.CremaMascot(mood = "happy", modifier = Modifier.size(64.dp))
+            }
         Spacer(Modifier.height(20.dp))
         AppText(
             stringResource(R.string.brew_complete),
@@ -611,6 +633,7 @@ private fun BrewComplete(
         PrimaryButton(stringResource(R.string.save_brew_log), Modifier.fillMaxWidth()) { showSave = true }
         Spacer(Modifier.height(10.dp))
         SecondaryButton(stringResource(R.string.action_done), Modifier.fillMaxWidth()) { vm.back() }
+        }
     }
 
     if (showSave) {

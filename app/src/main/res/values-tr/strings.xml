@@ -262,6 +262,12 @@
     <string name="equip_batchbrew_tag">Otomatik filtre makinesi</string>
     <string name="equip_napoletana_name">Napoletana</string>
     <string name="equip_napoletana_tag">Napoli çevirmeli cezve</string>
+    <string name="equip_orea_name">Orea V4</string>
+    <string name="equip_orea_tag">Düz tabanlı modüler, 4 taban</string>
+    <string name="equip_pulsar_name">NextLevel Pulsar</string>
+    <string name="equip_pulsar_tag">Valfli hibrit, bypass yok</string>
+    <string name="equip_tricolate_name">Tricolate</string>
+    <string name="equip_tricolate_tag">Sıfır bypass silindiri</string>
 
     <string name="equip_watch_video">Video izle</string>
     <string name="calc_watch_video">İzle</string>
@@ -649,6 +655,36 @@
     <string name="glossary_def_64">Meyve kabuğu ve etinin mekanik olarak çıkarıldığı, çekirdeklerin kalan müsilajı gevşetmek için su tanklarında fermente edildiği, ardından yıkanıp kurutulduğu kahve işleme yöntemi. Köken karakterini öne çıkaran temiz, parlak fincanlar üretir.</string>
     <string name="glossary_term_65">Doğal İşleme</string>
     <string name="glossary_def_65">En eski işleme yöntemi: bütün kahve kirazları kabuk ayırmadan önce 2–4 hafta meyvesiyle birlikte güneşte kurutulur. Uzun meyve teması yoğun meyvemsi, şarapsı ve ağır gövdeli lezzet profilleri oluşturur.</string>
+    <string name="glossary_term_66">Anaerobik Fermantasyon</string>
+    <string name="glossary_def_66">Kiraz veya çekirdeklerin CO2 basıncı altında kapalı, oksijensiz ortamda fermente edilmesi; laktik asit bakterileri ve meyvemsi ester üretimini teşvik eder. Genellikle 48–120 saat kontrollü sıcaklıkta sürer; yoğun tropikal, yoğurt benzeri profiller yaratır.</string>
+    <string name="glossary_term_67">Karbik Maserasyon</string>
+    <string name="glossary_def_67">Beaujolais şarapçılığından ödünç alınmış yöntem; bütün kirazlar CO2 açısından zengin, oksijensiz tankta hücre içi fermantasyon geçirir. Parlak, şekerli, şarapsı, belirgin kırmızı meyve ve çiçeksi notalar verir.</string>
+    <string name="glossary_term_68">Co-ferment vs Aromalı</string>
+    <string name="glossary_def_68">Co-ferment, kahvenin meyve, maya veya Koji ile birlikte fermente edilerek aromaların mikrobiyal metabolizma ile bütünleşmesidir; aromalı kahve ise kavurma sonrası aroma eklemektir. Yarışmalar ve SCA, co-fermantasyonu işleme inovasyonu, sonradan aromatize etmeyi ise tatlandırma olarak ayırır.</string>
+    <string name="glossary_term_69">Termal Şok</string>
+    <string name="glossary_def_69">Diego Bermudez tarafından geliştirilen, fermantasyon sırasında belirli aroma bileşiklerini sabitlemek için sıcak ve soğuk su yıkamalarını dönüşümlü uygulama tekniği. Hücre geçirgenliğini değiştirerek asidite, tatlılık veya tropikal meyve berraklığını artırabilir.</string>
+    <string name="glossary_term_70">Koji</string>
+    <string name="glossary_def_70">Sake ve misoda kullanılan Aspergillus oryzae küfü; artık kahve kirazı fermantasyonunda nişastayı şekere dönüştürüp umami-tatlı komplekslik katmak için kullanılır. Koji ile aşılanmış kahveler şeftali, sake veya esmer şeker tadında, daha tatlı olur.</string>
+    <string name="glossary_term_71">Bypass (Seyreltme)</string>
+    <string name="glossary_def_71">Toplam suyun bir kısmının kahve yatağını tamamen atlayıp demleme sonrası eklenmesi. Kasıtlı bypass (örn. AeroPress konsantresini içim sertliğine seyreltme) aşırı ekstraksiyon olmadan sertliği kontrol eder; kasıtsız bypass (V60 filtresinin kenarından akan su) az ekstraksiyona yol açar.</string>
+    <string name="glossary_term_72">WDT</string>
+    <string name="glossary_def_72">Weiss Dağıtım Tekniği — portafiltredeki öğütülmüş kahvenin ince iğnelerle (0.3–0.5 mm) karıştırılarak topakların kırılması ve yoğunluğun homojenleştirilmesi. Kanallaşmayı azaltır ve espresso için en etkili iyileştirmedir.</string>
+    <string name="glossary_term_73">TDS</string>
+    <string name="glossary_def_73" formatted="false">Toplam Çözünmüş Katı Madde; demlenmiş kahvede çözünmüş kahve miktarının refraktometre ile ölçülen yüzdesi. Filtre hedefi %1.15–1.55, espresso %8–12; TDS ve ekstraksiyon verimi SCA Demleme Kontrol Grafiğini tanımlar.</string>
+    <string name="glossary_term_74">Ekstraksiyon Verimi</string>
+    <string name="glossary_def_74" formatted="false">Kuru kahve dozunun ne kadarının içeceğe çözündüğünün yüzdesi; TDS, içecek kütlesi ve dozdan hesaplanır. Filtrede ideal verim %18–22; altı ekşi ve boş, üstü acı ve buruk tattır.</string>
+    <string name="glossary_term_75">Alkalinite</string>
+    <string name="glossary_def_75">Suyun tamponlama kapasitesi ölçüsü; başlıca bikarbonat (HCO3-), ppm CaCO3 cinsinden ifade edilir. Özel kahve için ideal 40–70 ppm; çok yüksek asiditeyi bastırır, çok düşük keskin ve ekşi yapar.</string>
+    <string name="glossary_term_76">ROR</string>
+    <string name="glossary_def_76">Kavurma Sırasında Artış Hızı; çekirdek sıcaklığının dakikada ne kadar arttığı (°C/dk). Düzenli azalan ROR, kontrollü kavurmanın işaretidir; sonda yükselen ROR yanma ve fırınlanmış tat riski taşır.</string>
+    <string name="glossary_term_77">Agtron</string>
+    <string name="glossary_def_77">Kavurma derecesini yakın kızılötesi yansıma ile ölçen renk skalası; düşük sayı daha koyu kavrum demektir. Açık kavrumlar Agtron 70–85 (öğütülmüş), koyu kavrumlar 35–50; ölçer parti tutarlılığını sağlar.</string>
+    <string name="glossary_term_78">Bypass Zero</string>
+    <string name="glossary_def_78">Filtre kenarını sızdırmaz hale getirerek kasıtsız bypassı sıfırlamayı hedefleyen demleme tekniği veya dripper tasarımı. Bypassız dripperlar (örn. Ceado Hoop, APAX Lab) klasik V60\'a göre daha eşit ekstraksiyon ve tatlılık verir.</string>
+    <string name="glossary_term_79">CVA</string>
+    <string name="glossary_def_79">Coffee Value Assessment; SCA\'nın 2023\'te geleneksel 100 puanlık kupaj formunun yerini alan sistemi. CVA, betimleyici değerlendirmeyi hedonik puanlamadan ayırır ve işleme ile sürdürülebilirliğe bağlam ekler.</string>
+    <string name="glossary_term_80">Q-Grader</string>
+    <string name="glossary_def_80">Coffee Quality Institute tarafından lisanslı, SCA kupaj protokolüyle puan veren sertifikalı kahve tadımcısı. Q-grader olmak için duyusal, koku ve üçgen testlerini kapsayan 22 sınavı geçmek gerekir.</string>
 
     <!-- Öğütüm görsel referansı -->
     <string name="grind_vis_title">Öğütüm Boyutu Referansı</string>
@@ -1249,6 +1285,26 @@
     <string name="learn_l74_body">Guatemala\'dan Panama\'ya, Orta Amerika çeşitli, yüksek kaliteli Arabica üretir. Guatemala\'nın Antigua bölgesi (volkanik toprak) çikolata, baharat ve dumanlı notalar verir. Kosta Rika bal işlemeye öncülük etmiş ve temiz, tatlı, narenciyemsi kahveler üretir. Honduras (şimdi bölgenin en büyük üreticisi) karamel, vanilya ve tropikal meyve sunar. Panama\'nın Boquete bölgesi, Hacienda La Esmeralda\'nın Geisha\'sıyla üne kavuştu — dünyanın en pahalı kahvesi, açık artırma rekorlarını altüst eden patlayıcı yasemin, bergamot ve çekirdekli meyve aromalarıyla (en iyi lotlar için $10,000+/kg).</string>
     <string name="learn_l75_title">Asya-Pasifik Kahveleri</string>
     <string name="learn_l75_body">Endonezya (Sumatra, Java, Sulawesi) düşük asiditeli, topraksı, tam gövdeli kahveler üretir — espresso karışımlarına ağırlık katmak için değerlidir. Islak-kabuk ayırma işlemi imza profilini oluşturur. Vietnam dünyanın 2 numaralı üreticisidir ancak neredeyse tamamen hazır kahve için Robusta yetiştirir — yoğunlaştırılmış sütlü geleneksel Vietnam cà phê\'sinin kaynağıdır. Hindistan hem Arabica hem Robusta yetiştirir, benzersiz musonlanmış Malabar dahil. Papua Yeni Gine, Orta Amerika profillerine benzer temiz, tatlı kahveler üretir. Tayland, Laos ve Myanmar büyüyen özel kahve sektörleriyle yükselen kökenlerdir.</string>
+    <string name="learn_l76_title">Anaerobik 101</string>
+    <string name="learn_l76_body">Anaerobik fermantasyon, kirazların genellikle CO2 ile basınçlandırılmış oksijensiz tanklarda 48–120 saat mühürlenmesidir. Oksijensiz ortamda laktobasil ve özel mayalar baskındır; tropikal meyve, yoğurt veya şarap benzeri laktik asidite ve esterler üretir. Sonuç yoğun ve kutuplaştırıcıdır — bazıları patlayıcı meyveyi sever, bazıları yöresel karakteri maskelediğini düşünür. Değişkenler: süre, sıcaklık, pH ve kirazın bütün, ezilmiş veya çekirdek halinde olması.</string>
+    <string name="learn_l77_title">Karbik Maserasyon</string>
+    <string name="learn_l77_body">Beaujolais şarapçılığından ödünç alınmış karbik maserasyon, bütün kirazların CO2 ile doymuş tankta fermente edilmesidir. Hücre içi fermantasyon, maya kabuğu kırmadan önce meyvenin içinde gerçekleşir; parlak, şekerli esterler oluşturur. Sonuç yoğun çiçeksi ve meyvemsi — çilek, sakız, gül — artmış tatlılık ve yükseltilmiş asidite ile. Kahvede Sasa Sestic ve Project Origin öncülük etmiştir.</string>
+    <string name="learn_l78_title">Termal Şok</string>
+    <string name="learn_l78_body">Diego Bermudez tarafından Kolombiya\'da geliştirilen termal şok, fermantasyon sırasında sıcak ve soğuk su yıkamalarını dönüşümlü uygular. Sıcaklık dalgalanması hücre duvarlarını şoklayarak uçucu aroma bileşiklerini sabitler ve asiditeyi düzenler. Bermudez şeftali, liçi ve gül suyu gibi tatları kilitlemek için 40°C ve ardından 12°C döngüleri kullanır. Hassas hijyen ve ısı kontrolü gerektirir, ancak yarışma kazandıran berraklık verir.</string>
+    <string name="learn_l79_title">Co-ferment vs Aromalı</string>
+    <string name="learn_l79_body">Co-ferment, kahvenin meyve, baharat veya Koji gibi başka bir bileşenle birlikte fermente edilmesi demektir; mikroplar her iki substratı birlikte metabolize eder. Aromalı ise kavurma sonrası aroma eklemektir, fıçı bekletme veya püskürtme gibi. Co-fermantasyon ölçülü olduğunda enfes olabilir; aşırı meyve kökeni maskeler. Aromalı işlem genellikle tatlandırma sayılır. SCA ve birçok yarışma artık co-ferment bileşenlerinin beyan edilmesini ister.</string>
+    <string name="learn_l80_title">Bypass Fiziği</string>
+    <string name="learn_l80_body">Bypass, suyun kahveyi ekstrakte etmeden fincana ulaşmasıdır; kasıtlı (konsantreyi seyreltme) veya kasıtsız (filtre kenarından sızma) olabilir. Kasıtlı bypass — örn. AeroPress 1:10 konsantresini 1:16\'ya seyreltme — TDS\'yi aşırı ekstraksiyon olmadan düşürür. Süzmede kasıtsız bypass zayıf, boş fincanlar yaratır. Bypass önleyici dripperlar ve dikkatli döküş bunu en aza indirir.</string>
+    <string name="learn_l81_title">Su Alkalinitesi</string>
+    <string name="learn_l81_body">Alkalinite, suyun tamponlama kapasitesidir; başlıca bikarbonat (HCO3-), ppm CaCO3 cinsinden ölçülür. Özel kahve için ideal alkalinite 40–70 ppm\'dir. Çok yüksekse kahve düz ve donuk olur çünkü asitler nötralize edilir; çok düşükse asidite keskin ve ekşi hale gelir. Alkalinite, genel sertlik (GH) ile birlikte ekstraksiyonu tanımlar; GH tadı çeker, KH ifadesini şekillendirir.</string>
+    <string name="learn_l82_title">Kavurma Evrensel Eğrisi</string>
+    <string name="learn_l82_body">Evrensel kavurma eğrisi, çekirdek sıcaklığının zamana karşı grafiği ve türevi ROR\'dur (Artış Hızı, °C/dk). Kontrollü kavurma, kuruma aşamasından Maillard ve gelişim aşamasına kadar düzenli azalan ROR gösterir. ROR\'daki çökmeler veya sıçramalar fırınlanmış, çimensi veya yanık tatlarla ilişkilidir. ROR\'u anlamak, ev kavurmacılarının bir kahvenin neden az gelişmiş veya acı olduğunu teşhis etmesine yardımcı olur.</string>
+    <string name="learn_l83_title">Koji Başlangıcı</string>
+    <string name="learn_l83_body">Koji (Aspergillus oryzae), sake, miso ve soya sosunun arkasındaki küftür; artık kahve kirazı fermantasyonunu aşılamak için kullanılmaktadır. Koji enzimleri nişasta ve proteinleri şeker ve amino asitlere parçalayarak tatlılığı ve umamiyi artırır. Koji kahveleri şeftali, kavun, sake veya esmer şeker gibi tadar, ipeksi gövde sunar. Agresif anaerobik funk\'a nazik, enzimatik bir alternatiftir.</string>
+    <string name="learn_l84_title">Ekstraksiyon Ustalığı</string>
+    <string name="learn_l84_body" formatted="false">Ekstraksiyon ustalığı TDS ve verimi birleştirir. TDS\'yi refraktometre ile ölçün, ardından Ekstraksiyon Verimi = TDS × içecek kütlesi / doz formülüyle hesaplayın. Filtre için hedef %18–22 ve %1.15–1.55 TDS\'dir. Ekşi ve %18 altındaysa daha ince öğütün veya sıcaklığı yükseltin; acı ve %22 üstündeyse daha kalın öğütün veya sıcaklığı düşürün. Her seferinde bir değişken ve bir refraktometre tahmini ortadan kaldırır.</string>
+    <string name="learn_l85_title">Kafeinsiz Bilimi</string>
+    <string name="learn_l85_body">Modern kafeinsizleştirme lezzet korumaya odaklanır. Swiss Water, çekirdekleri aroma yüklü suda bekletir ve kafeini aktif karbonla süzer — kimyasal içermez. CO2 yöntemi basınçlı karbondioksiti seçici çözücü olarak kullanır, Sugarcane EA doğal etil asetat kullanır. Hepsi fincan başına 2–5 mg kafein bırakır; iyi yapılmış SWP kafeinsiz, kör tadımda normal kahveden ayırt edilemez.</string>
     <string name="equip_siphon_name">Siphon</string>
     <string name="equip_siphon_tag">Gösterişli ve aromatik</string>
     <string name="equip_clever_name">Clever Dripper</string>

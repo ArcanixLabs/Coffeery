@@ -15,7 +15,10 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Scope
 import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
+import com.google.api.client.googleapis.json.GoogleJsonResponseException
+import com.google.api.services.drive.DriveScopes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -35,16 +38,23 @@ class CloudBackupManager(private val context: Context) {
         return result == ConnectionResult.SUCCESS
     }
 
-    fun silentSignIn() {
-        val client = getSignInClient()
-        client.silentSignIn().addOnCompleteListener { task: Task<GoogleSignInAccount> ->
-            if (task.isSuccessful && task.result != null) {
-                val account = task.result
+    suspend fun silentSignIn(): Result<GoogleSignInAccount> = withContext(Dispatchers.IO) {
+        try {
+            val client = getSignInClient()
+            val account = Tasks.await(client.silentSignIn())
+            if (account != null) {
                 prefs.edit()
                     .putBoolean("signed_in", true)
                     .putString("account_email", account.email)
                     .apply()
+                Result.success(account)
+            } else {
+                Result.failure(Exception("Silent sign-in returned null"))
             }
+        } catch (e: ApiException) {
+            Result.failure(e)
+        } catch (e: Exception) {
+            Result.failure(e)
         }
     }
 
@@ -53,6 +63,7 @@ class CloudBackupManager(private val context: Context) {
             .requestEmail()
             .requestProfile()
             .requestIdToken(context.getString(R.string.google_server_client_id))
+            .requestScopes(Scope(DriveScopes.DRIVE_APPDATA))
             .build()
         return GoogleSignIn.getClient(context, gso)
     }
@@ -98,7 +109,7 @@ class CloudBackupManager(private val context: Context) {
     suspend fun backupToDrive(activity: Activity, jsonData: String): Result<String> = withContext(Dispatchers.IO) {
         try {
             val account = GoogleSignIn.getLastSignedInAccount(context) ?: return@withContext Result.failure(Exception("Not signed in"))
-            val credential = GoogleAccountCredential.usingOAuth2(context, listOf("https://www.googleapis.com/auth/drive.appdata"))
+            val credential = GoogleAccountCredential.usingOAuth2(context, listOf(DriveScopes.DRIVE_APPDATA))
             credential.selectedAccount = account.account
 
             val httpTransport = com.google.api.client.http.javanet.NetHttpTransport()
@@ -107,17 +118,29 @@ class CloudBackupManager(private val context: Context) {
                 .setApplicationName("Coffeery")
                 .build()
 
-            val timestamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.US).format(java.util.Date())
-            val metadata = com.google.api.services.drive.model.File()
-                .setName("coffeery_backup_$timestamp.json")
-                .setParents(listOf("appDataFolder"))
-                .setMimeType("application/json")
-
             val content = com.google.api.client.http.ByteArrayContent.fromString("application/json", jsonData)
-            val file = drive.files().create(metadata, content)
-                .setFields("id,name,modifiedTime")
+            val existing = drive.files().list()
+                .setSpaces("appDataFolder")
+                .setQ("name='coffeery_backup.json' and trashed=false")
+                .setFields("files(id,name)")
+                .setPageSize(1)
                 .execute()
-            Result.success(file.name)
+                .files
+            val file = if (!existing.isNullOrEmpty()) {
+                val fileId = existing.first().id
+                drive.files().update(fileId, com.google.api.services.drive.model.File(), content)
+                    .setFields("id,name,modifiedTime")
+                    .execute()
+            } else {
+                val metadata = com.google.api.services.drive.model.File()
+                    .setName("coffeery_backup.json")
+                    .setParents(listOf("appDataFolder"))
+                    .setMimeType("application/json")
+                drive.files().create(metadata, content)
+                    .setFields("id,name,modifiedTime")
+                    .execute()
+            }
+            Result.success(file.name ?: "coffeery_backup.json")
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -126,7 +149,7 @@ class CloudBackupManager(private val context: Context) {
     suspend fun restoreFromDrive(context: Context): Result<String> = withContext(Dispatchers.IO) {
         try {
             val account = GoogleSignIn.getLastSignedInAccount(context) ?: return@withContext Result.failure(Exception("Not signed in"))
-            val credential = GoogleAccountCredential.usingOAuth2(context, listOf("https://www.googleapis.com/auth/drive.appdata"))
+            val credential = GoogleAccountCredential.usingOAuth2(context, listOf(DriveScopes.DRIVE_APPDATA))
             credential.selectedAccount = account.account
 
             val httpTransport = com.google.api.client.http.javanet.NetHttpTransport()
@@ -137,16 +160,20 @@ class CloudBackupManager(private val context: Context) {
 
             val files = drive.files().list()
                 .setSpaces("appDataFolder")
+                .setQ("name='coffeery_backup.json' and trashed=false")
                 .setFields("files(id,name,modifiedTime)")
                 .setOrderBy("modifiedTime desc")
                 .setPageSize(1)
                 .execute()
-                .files ?: return@withContext Result.failure(Exception("No backup found"))
+                .files
+            if (files.isNullOrEmpty()) return@withContext Result.failure(Exception("No backup found"))
 
             val latestFile = files.first()
             val outputStream = java.io.ByteArrayOutputStream()
             drive.files().get(latestFile.id).executeMediaAndDownloadTo(outputStream)
             Result.success(outputStream.toString("UTF-8"))
+        } catch (e: GoogleJsonResponseException) {
+            Result.failure(e)
         } catch (e: Exception) {
             Result.failure(e)
         }

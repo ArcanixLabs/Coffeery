@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,6 +25,9 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.animation.animateColorAsState
@@ -33,6 +37,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
@@ -48,6 +53,8 @@ fun <T> BottomNav(
     modifier: Modifier = Modifier,
 ) {
     val colors = CoffeeTheme.colors
+    val haptics = rememberAppHaptics()
+    val hapticFeedback = LocalHapticFeedback.current
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -80,13 +87,21 @@ fun <T> BottomNav(
                     animationSpec = tween(CoffeeMotion.normal),
                     label = "navScale",
                 )
+                val interactionSource = remember { MutableInteractionSource() }
+                val isPressed by interactionSource.collectIsPressedAsState()
+                val pressScale by animateFloatAsState(targetValue = if (isPressed) 0.97f else 1f, animationSpec = CoffeeMotion.press, label = "press")
                 Column(
                     modifier = Modifier
                         .weight(1f)
+                        .graphicsLayer(scaleX = pressScale, scaleY = pressScale)
                         .clickable(
                             indication = null,
-                            interactionSource = remember { MutableInteractionSource() },
-                        ) { onSelect(item) },
+                            interactionSource = interactionSource,
+                        ) {
+                            haptics.segment()
+                            hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            onSelect(item)
+                        },
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Box(

@@ -107,6 +107,22 @@ object LearnContent {
         LearnCard(R.string.learn_l73_title, R.string.learn_l73_body, R.string.learn_ch_origins),
         LearnCard(R.string.learn_l74_title, R.string.learn_l74_body, R.string.learn_ch_origins),
         LearnCard(R.string.learn_l75_title, R.string.learn_l75_body, R.string.learn_ch_origins),
+
+        // Advanced Processing (processing)
+        LearnCard(R.string.learn_l76_title, R.string.learn_l76_body, R.string.learn_ch_processing),
+        LearnCard(R.string.learn_l77_title, R.string.learn_l77_body, R.string.learn_ch_processing),
+        LearnCard(R.string.learn_l78_title, R.string.learn_l78_body, R.string.learn_ch_processing),
+        LearnCard(R.string.learn_l79_title, R.string.learn_l79_body, R.string.learn_ch_processing),
+        LearnCard(R.string.learn_l83_title, R.string.learn_l83_body, R.string.learn_ch_processing),
+
+        // Advanced Water (water_deep)
+        LearnCard(R.string.learn_l80_title, R.string.learn_l80_body, R.string.learn_ch_water_deep),
+        LearnCard(R.string.learn_l81_title, R.string.learn_l81_body, R.string.learn_ch_water_deep),
+        LearnCard(R.string.learn_l84_title, R.string.learn_l84_body, R.string.learn_ch_water_deep),
+
+        // Sustainability & Science (sustainability)
+        LearnCard(R.string.learn_l82_title, R.string.learn_l82_body, R.string.learn_ch_sustainability),
+        LearnCard(R.string.learn_l85_title, R.string.learn_l85_body, R.string.learn_ch_sustainability),
     )
 
     val chapterOrder: List<Int> = listOf(
