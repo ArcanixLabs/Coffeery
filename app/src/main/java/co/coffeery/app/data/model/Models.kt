@@ -5,8 +5,8 @@ import co.coffeery.app.R
 
 /** The four families a brewer can belong to. */
 enum class BrewCategory(
-    @StringRes val labelRes: Int,
-    @StringRes val descRes: Int,
+    @param:StringRes val labelRes: Int,
+    @param:StringRes val descRes: Int,
 ) {
     POUR_OVER(R.string.cat_pour_over, R.string.cat_pour_over_desc),
     IMMERSION(R.string.cat_immersion, R.string.cat_immersion_desc),
@@ -23,8 +23,8 @@ enum class BrewCategory(
  * Grind sizes ordered fine -> coarse. Ordinal is used to nudge grind by roast.
  */
 enum class Grind(
-    @StringRes val labelRes: Int,
-    @StringRes val refRes: Int,
+    @param:StringRes val labelRes: Int,
+    @param:StringRes val refRes: Int,
 ) {
     EXTRA_FINE(R.string.grind_extra_fine, R.string.grindref_extra_fine),
     FINE(R.string.grind_fine, R.string.grindref_fine),
@@ -54,7 +54,7 @@ enum class TempMode { RANGE, SLOW, COLD;
     }
 }
 
-enum class ThemeMode(@StringRes val labelRes: Int) {
+enum class ThemeMode(@param:StringRes val labelRes: Int) {
     SYSTEM(R.string.theme_system),
     LIGHT(R.string.theme_light),
     DARK(R.string.theme_dark);
@@ -65,7 +65,7 @@ enum class ThemeMode(@StringRes val labelRes: Int) {
     }
 }
 
-enum class Palette(@StringRes val labelRes: Int) {
+enum class Palette(@param:StringRes val labelRes: Int) {
     TERRACOTTA(R.string.palette_terracotta),
     ESPRESSO(R.string.palette_espresso),
     MATCHA(R.string.palette_matcha),
@@ -88,8 +88,8 @@ enum class Palette(@StringRes val labelRes: Int) {
  * (denser light roasts grind finer, brittle dark roasts grind coarser).
  */
 enum class RoastLevel(
-    @StringRes val labelRes: Int,
-    @StringRes val descRes: Int,
+    @param:StringRes val labelRes: Int,
+    @param:StringRes val descRes: Int,
     val tempOffset: Int,
     val grindShift: Int,
 ) {

@@ -5,13 +5,13 @@ import co.coffeery.app.R
 
 /** A knowledge lesson distilled from the coffee research report, grouped by chapter. */
 data class LearnCard(
-    @StringRes val titleRes: Int,
-    @StringRes val bodyRes: Int,
-    @StringRes val chapterRes: Int,
+    @param:StringRes val titleRes: Int,
+    @param:StringRes val bodyRes: Int,
+    @param:StringRes val chapterRes: Int,
 )
 
 /** A tasting-feedback option mapped to a corrective suggestion. */
-data class TasteOption(@StringRes val labelRes: Int, @StringRes val adviceRes: Int)
+data class TasteOption(@param:StringRes val labelRes: Int, @param:StringRes val adviceRes: Int)
 
 object LearnContent {
     /** Ordered so cards sharing a chapter are contiguous (drives section headers). */

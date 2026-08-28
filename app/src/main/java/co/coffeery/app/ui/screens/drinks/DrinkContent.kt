@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import co.coffeery.app.R
 
 /** Which catalog section a drink belongs to. */
-enum class DrinkGroup(@StringRes val labelRes: Int) {
+enum class DrinkGroup(@param:StringRes val labelRes: Int) {
     MILK(R.string.drink_group_milk),
     REGIONAL(R.string.drink_group_regional),
 }
@@ -12,9 +12,9 @@ enum class DrinkGroup(@StringRes val labelRes: Int) {
 /** A built (not ratio-brewed) drink recipe: milk-based or regional. */
 data class DrinkItem(
     val id: String,
-    @StringRes val nameRes: Int,
-    @StringRes val summaryRes: Int,
-    @StringRes val bodyRes: Int,
+    @param:StringRes val nameRes: Int,
+    @param:StringRes val summaryRes: Int,
+    @param:StringRes val bodyRes: Int,
     val group: DrinkGroup,
 )
 
@@ -101,10 +101,10 @@ object DrinkContent {
 }
 
 data class CoffeeVariety(
-    @StringRes val nameRes: Int,
-    @StringRes val originRes: Int,
-    @StringRes val flavorRes: Int,
-    @StringRes val bestBrewRes: Int,
+    @param:StringRes val nameRes: Int,
+    @param:StringRes val originRes: Int,
+    @param:StringRes val flavorRes: Int,
+    @param:StringRes val bestBrewRes: Int,
 )
 
 object VarietyContent {

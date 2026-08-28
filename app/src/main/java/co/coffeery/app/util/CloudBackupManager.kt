@@ -27,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
 
+@Suppress("DEPRECATION")
 class CloudBackupManager(private val context: Context) {
     companion object {
         private val httpTransport: NetHttpTransport by lazy { NetHttpTransport() }

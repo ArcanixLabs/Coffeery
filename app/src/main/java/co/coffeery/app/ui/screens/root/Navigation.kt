@@ -5,7 +5,7 @@ import co.coffeery.app.R
 import co.coffeery.app.ui.components.Glyph
 
 /** Bottom navigation destinations. */
-enum class NavTab(@StringRes val labelRes: Int, val glyph: Glyph) {
+enum class NavTab(@param:StringRes val labelRes: Int, val glyph: Glyph) {
     BREW(R.string.nav_brew, Glyph.DROP),
     GEAR(R.string.nav_equipment, Glyph.CONE),
     RECIPES(R.string.nav_recipes, Glyph.BOOKMARK),
