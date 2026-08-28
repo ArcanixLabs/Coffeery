@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -81,7 +82,7 @@ fun DrinksScreen(vm: AppViewModel) {
 
         if (searchActive && filteredDrinks.isEmpty()) {
             Column(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                CremaMascot(mood = "curious", modifier = Modifier.size(96.dp))
+                CremaMascot(mood = "curious", modifier = Modifier.height(96.dp).width(96.dp))
                 Spacer(Modifier.height(12.dp))
                 AppText(stringResource(R.string.search_no_results), style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.fillMaxWidth(), align = TextAlign.Center)
             }

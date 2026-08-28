@@ -111,7 +111,7 @@ fun CremaMascot(mood: String = "happy", modifier: Modifier = Modifier.size(64.dp
             } else {
                 val mouth = androidx.compose.ui.graphics.Path().apply {
                     moveTo(cx - w * 0.02f, eyeY + w * 0.10f)
-                    cubicTo(cx, eyeY + w * 0.13f, cx + w * 0.02f, eyeY + w * 0.10f)
+                    cubicTo(cx - w * 0.005f, eyeY + w * 0.13f, cx + w * 0.005f, eyeY + w * 0.13f, cx + w * 0.02f, eyeY + w * 0.10f)
                 }
                 drawPath(mouth, colors.textPrimary.copy(0.45f), style = Stroke(w * 0.014f, cap = androidx.compose.ui.graphics.StrokeCap.Round))
             }
