@@ -90,7 +90,7 @@
     <string name="calc_change">Change</string>
     <string name="calc_input_cups">Cups</string>
     <string name="calc_input_water">Water (ml)</string>
-    <string name="calc_cups_value">%1$d cups</string>
+    <string name="calc_cups_value" formatted="false">%1$d cups
     <string name="calc_strength">Strength</string>
     <string name="calc_weaker">Milder</string>
     <string name="calc_stronger">Bolder</string>
@@ -100,9 +100,9 @@
     <string name="calc_out_temp">Water temp</string>
     <string name="calc_out_grind">Grind</string>
     <string name="calc_ratio">Ratio</string>
-    <string name="calc_grams">%1$s g</string>
-    <string name="calc_ml">%1$s ml</string>
-    <string name="calc_celsius">%1$s°C</string>
+    <string name="calc_grams" formatted="false">%1$s g
+    <string name="calc_ml" formatted="false">%1$s ml
+    <string name="calc_celsius" formatted="false">%1$s°C
     <string name="calc_temp_slow">Low heat, near boiling</string>
     <string name="calc_temp_cold">Room temp / fridge</string>
     <string name="calc_time">Brew time</string>
@@ -116,20 +116,20 @@
     <string name="strength_light_label">light, everyday drinking</string>
     <string name="strength_balanced_label">balanced, standard</string>
     <string name="strength_strong_label">strong, intense</string>
-    <string name="strength_ratio_summary">1:%1$s — %2$s</string>
+    <string name="strength_ratio_summary" formatted="false">1:%1$s — %2$s
 
     <!-- Brew timer -->
-    <string name="brew_title">Brewing %1$s</string>
-    <string name="brew_step_counter">Step %1$d of %2$d</string>
+    <string name="brew_title" formatted="false">Brewing %1$s
+    <string name="brew_step_counter" formatted="false">Step %1$d of %2$d
     <string name="brew_tap_start">Tap to start the timer</string>
     <string name="brew_pause">Pause</string>
     <string name="brew_resume">Resume</string>
     <string name="brew_finish">Finish</string>
-    <string name="brew_next_up">Next: %1$s</string>
-    <string name="brew_pour_to">Pour to %1$d g total</string>
+    <string name="brew_next_up" formatted="false">Next: %1$s
+    <string name="brew_pour_to" formatted="false">Pour to %1$d g total
     <string name="brew_complete">Enjoy your coffee ☕</string>
     <string name="timer_hands_free">Hands-free</string>
-    <string name="brew_complete_sub">Brewed with %1$s</string>
+    <string name="brew_complete_sub" formatted="false">Brewed with %1$s
     <string name="brew_elapsed">Total elapsed</string>
     <string name="brew_adjust_pour">Adjust pour</string>
     <string name="brew_adjust_less">−</string>
@@ -139,7 +139,7 @@
     <string name="step_rinse">Rinse the filter</string>
     <string name="step_bloom">Bloom</string>
     <string name="step_pour">Pour</string>
-    <string name="step_pour_n">Pour %1$d</string>
+    <string name="step_pour_n" formatted="false">Pour %1$d
     <string name="step_swirl">Swirl gently</string>
     <string name="step_steep">Steep</string>
     <string name="step_stir">Stir once</string>
@@ -153,7 +153,7 @@
     <string name="step_serve">Serve</string>
     <string name="step_wait">Wait</string>
     <string name="step_add_coffee">Add coffee &amp; water</string>
-    <string name="step_desc_bloom">Wet all the grounds with %1$d g water and let the coffee de-gas.</string>
+    <string name="step_desc_bloom" formatted="false">Wet all the grounds with %1$d g water and let the coffee de-gas.
     <string name="step_desc_generic">Follow the pour and keep the flow steady.</string>
 
     <!-- Save recipe -->
@@ -167,7 +167,7 @@
     <string name="empty_recipes_title">Your recipe shelf is snoozing ☕</string>
     <string name="empty_recipes_sub">Save a brew you love and it’ll perk up right here — ready to replay</string>
     <string name="empty_recipes_action">Start Brewing</string>
-    <string name="recipes_summary">%1$s · %2$s g : %3$s ml</string>
+    <string name="recipes_summary" formatted="false">%1$s · %2$s g : %3$s ml
     <string name="recipes_delete_confirm">Delete this recipe?</string>
     <string name="recipe_load">View recipe</string>
     <string name="recipe_recent">Recent recipe</string>
@@ -198,8 +198,8 @@
     <string name="learn_quiz_title">Quick Quiz</string>
     <string name="learn_quiz_correct">Correct!</string>
     <string name="learn_quiz_wrong">Not quite</string>
-    <string name="learn_quiz_score">Score: %1$d/150 correct today</string>
-    <string name="learn_quiz_streak">Streak: %1$d in a row! 🔥</string>
+    <string name="learn_quiz_score" formatted="false">Score: %1$d/150 correct today
+    <string name="learn_quiz_streak" formatted="false">Streak: %1$d in a row! 🔥
     <string name="learn_quiz_random">Random Question</string>
     <string name="taste_sour">Sour</string>
     <string name="taste_bitter">Bitter</string>
@@ -424,7 +424,7 @@
     <string name="streak_label">day streak!</string>
     <string name="streak_keep_going">Keep brewing!</string>
     <string name="streak_start">Start your streak!</string>
-    <string name="brew_reminder_streak">🔥 %1$d day streak — keep it going!</string>
+    <string name="brew_reminder_streak" formatted="false">🔥 %1$d day streak — keep it going!
     <string name="log_share_streak">Share your streak</string>
     <string name="log_share_streak_text" formatted="false">I\'ve brewed coffee %d days in a row with Coffeery! ☕</string>
 
@@ -437,7 +437,7 @@
     <string name="log_empty_title">Your journal is empty ☕</string>
     <string name="log_empty_sub">Brew something wonderful and it’ll appear here</string>
     <string name="log_start_brewing">Start brewing</string>
-    <string name="log_rating_out">%1$d/5</string>
+    <string name="log_rating_out" formatted="false">%1$d/5
     <string name="log_date_today">Today</string>
     <string name="log_date_yesterday">Yesterday</string>
     <string name="log_compare_title">Compare your brews</string>
@@ -829,8 +829,8 @@
     <string name="settings_timer_show_next">Show next step</string>
     <string name="settings_timer_merge_weight">Merge weight display</string>
     <string name="notification_channel_name">Brew Timer</string>
-    <string name="notification_brewing_title">Brewing %1$s</string>
-    <string name="notification_step">Step %1$d/%2$d</string>
+    <string name="notification_brewing_title" formatted="false">Brewing %1$s
+    <string name="notification_step" formatted="false">Step %1$d/%2$d
     <string name="notification_stop">Stop</string>
     <string name="notification_open">Open</string>
 
@@ -1436,15 +1436,15 @@
     <string name="cloud_error_8">Error 8: Network error. Check internet connection.</string>
     <string name="cloud_error_13">Error 13: Play Services outdated. Update Google Play Services.</string>
     <string name="cloud_error_15">Error 15: Wrong package name or SHA-1</string>
-    <string name="cloud_error_generic">Error %1$d: %2$s</string>
+    <string name="cloud_error_generic" formatted="false">Error %1$d: %2$s
     <string name="cloud_error_unknown">Unknown</string>
-    <string name="cloud_error_exception">Error: %1$s — %2$s</string>
+    <string name="cloud_error_exception" formatted="false">Error: %1$s — %2$s
     <string name="cloud_error_not_signed_in">Not signed in — please sign in with Google first</string>
-    <string name="cloud_error_auth_failed">Authorization failed (%1$d) — please sign in again</string>
+    <string name="cloud_error_auth_failed" formatted="false">Authorization failed (%1$d) — please sign in again
     <string name="cloud_error_404">Backup not found (404)</string>
     <string name="cloud_error_429">Too many requests (429) — please retry shortly</string>
-    <string name="cloud_error_drive">Drive error %1$d: %2$s</string>
-    <string name="cloud_error_network">Network error — check internet connection: %1$s</string>
+    <string name="cloud_error_drive" formatted="false">Drive error %1$d: %2$s
+    <string name="cloud_error_network" formatted="false">Network error — check internet connection: %1$s
     <string name="cloud_error_no_backup">No backup found in Drive</string>
     <string name="bean_detail_title">Bean Details</string>
     <string name="bean_detail_roast_date">Roast date</string>
@@ -1576,7 +1576,7 @@ Steps:
 3. Garnish with citrus twist. Stir only before sipping.</string>
     <string name="drink_kaapi_name">South Indian Kaapi</string>
     <string name="drink_kaapi_summary">South Indian filter kaapi — decoction with jaggery and frothed milk</string>
-    <string name="drink_kaapi_body">South India\'s daily ritual: strong decoction from a stainless-steel filter, cut with jaggery and hot frothed milk, then poured between two tumblers (dhavara) to aerate into foam. Earthy, sweet, and deeply comforting.
+    <string name="drink_kaapi_body" formatted="false">South India\'s daily ritual: strong decoction from a stainless-steel filter, cut with jaggery and hot frothed milk, then poured between two tumblers (dhavara) to aerate into foam. Earthy, sweet, and deeply comforting.
 
 Ingredients:
 • 15–20 g South Indian filter coffee (chicory blend optional)
@@ -1588,7 +1588,7 @@ Steps:
 1. Add grounds to upper chamber, tamp lightly, pour hot water and let percolate 5–10 min.
 2. Collect dark decoction in lower chamber.
 3. Sweeten with jaggery, add hot frothed milk (40–60% decoction).
-4. Pour between dhavara and tumbler from height to create foam. Serve hot.</string>
+4. Pour between dhavara and tumbler from height to create foam. Serve hot.
     <string name="drink_oliang_name">Oliang</string>
     <string name="drink_oliang_summary">Thai traditional coffee — dark roast with corn, soy, sesame, brewed in a cloth bag</string>
     <string name="drink_oliang_body">Thailand\'s street coffee since the 1950s: dark robusta roasted with corn, soybeans and sesame, brewed through a long muslin “sock” (thung tong) and sweetened with condensed milk. Served hot or over ice as oliang yok lor.
@@ -1642,7 +1642,7 @@ Steps:
 2. Steam milk to latte microfoam, pour to integrate. Serve immediately.</string>
     <string name="drink_raf_name">Raf Coffee</string>
     <string name="drink_raf_summary">Russian Raf — espresso with vanilla sugar and cream steamed together</string>
-    <string name="drink_raf_body">Moscow\'s late-90s café hit: espresso, vanilla sugar and light cream steamed together until silky and sweet — thicker than a latte, lighter than a breve, with a soufflé-like vanilla aroma.
+    <string name="drink_raf_body" formatted="false">Moscow\'s late-90s café hit: espresso, vanilla sugar and light cream steamed together until silky and sweet — thicker than a latte, lighter than a breve, with a soufflé-like vanilla aroma.
 
 Ingredients:
 • 1 shot espresso (~30 ml)
@@ -1652,7 +1652,7 @@ Ingredients:
 Steps:
 1. Add espresso, vanilla sugar and cream to a pitcher.
 2. Steam together to 60–65°C, stretching lightly to velvety foam.
-3. Pour into a cup — should be uniformly creamy with no separate foam cap.</string>
+3. Pour into a cup — should be uniformly creamy with no separate foam cap.
     <string name="drink_melange_name">Wiener Melange</string>
     <string name="drink_melange_summary">Viennese Melange — mild coffee topped with hot frothed milk, like a local cappuccino</string>
     <string name="drink_melange_body">Vienna\'s answer to the cappuccino: mild, light-roast coffee topped with hot frothed milk and sometimes whipped cream, traditionally served on a silver tray with a glass of water.
@@ -1773,13 +1773,13 @@ Steps:
     <string name="learn_l127_title">pH vs Alkalinity: Why pH Lies</string>
     <string name="learn_l127_body">pH tells you how acidic water is right now; alkalinity (KH) tells you how strongly it resists changing pH when it meets acidic coffee. A water at pH 7.0 can still taste flat if KH is 120 ppm — the buffer neutralizes fruit acids before you taste them — while a water at pH 6.5 with KH 40 ppm tastes bright and lively. SCA target 40 ppm KH (as CaCO₃) gives enough buffer to avoid sour, metallic under-extraction but not so much it mutes acidity. Test KH with drop kits (1 drop = 17.8 ppm), not pH strips. Low KH lets light roasts sing; higher KH rounds dark roasts. Never chase pH alone.</string>
     <string name="learn_l128_title">The Sieve Test: Measuring Grind Distribution</string>
-    <string name="learn_l128_body">You cannot see bimodal distribution without sieving. Stack 400 µm and 800 µm sieves, shake 20 g for 60 s, weigh each fraction. A good filter grind keeps 65–75% between 400–800 µm, fines (&lt;400 µm) under 15% and boulders (&gt;800 µm) under 15%. If fines exceed 20% you get bitter, silty cups; boulders over 20% give sour, hollow cups — even at the right average size. Sieve weekly to track burr wear: fresh burrs produce tight peaks, worn burrs spread wide. Compare grinders objectively by sieving the same dose at the same dial — the tighter the middle fraction, the cleaner the cup.</string>
+    <string name="learn_l128_body" formatted="false">You cannot see bimodal distribution without sieving. Stack 400 µm and 800 µm sieves, shake 20 g for 60 s, weigh each fraction. A good filter grind keeps 65–75% between 400–800 µm, fines (&lt;400 µm) under 15% and boulders (&gt;800 µm) under 15%. If fines exceed 20% you get bitter, silty cups; boulders over 20% give sour, hollow cups — even at the right average size. Sieve weekly to track burr wear: fresh burrs produce tight peaks, worn burrs spread wide. Compare grinders objectively by sieving the same dose at the same dial — the tighter the middle fraction, the cleaner the cup.
     <string name="learn_l129_title">Turbo Shot: 1:3 in 15 Seconds</string>
-    <string name="learn_l129_body">Champion James Hoffmann\'s turbo shot breaks every espresso rule: 15–18 g dose, coarsely ground (filter-like 400–500 µm), 1:2.5 to 1:3 ratio in 12–18 seconds at 6 bar with a paper filter on top of the puck. The coarser grind and lower pressure avoid channeling, while the fast, high-yield pull extracts 19–20% without bitter tail compounds that need 25–30 s at 9 bar. Result tastes like sweet filter coffee with espresso intensity — ideal for light roasts that choke at fine grinds. Use a fast-flow basket (VST 18 g) and pre-infuse 2 s. If it tastes thin, tighten to 1:2.2; if sour, extend to 18 s.</string>
+    <string name="learn_l129_body" formatted="false">Champion James Hoffmann\'s turbo shot breaks every espresso rule: 15–18 g dose, coarsely ground (filter-like 400–500 µm), 1:2.5 to 1:3 ratio in 12–18 seconds at 6 bar with a paper filter on top of the puck. The coarser grind and lower pressure avoid channeling, while the fast, high-yield pull extracts 19–20% without bitter tail compounds that need 25–30 s at 9 bar. Result tastes like sweet filter coffee with espresso intensity — ideal for light roasts that choke at fine grinds. Use a fast-flow basket (VST 18 g) and pre-infuse 2 s. If it tastes thin, tighten to 1:2.2; if sour, extend to 18 s.
     <string name="learn_l130_title">Bypass Brewing: Brew Strong, Dilute Smart</string>
-    <string name="learn_l130_body">Bypass brews a concentrated slurry then adds water after extraction, decoupling strength from yield. Example: 20 g to 150 ml at 1:7.5 gives 22% yield and 3.5% TDS, then add 150 ml bypass water to reach 1.75% TDS — same strength as a 1:15 pour-over but sweeter because the low water-to-coffee ratio limited over-extraction. Uncontrolled bypass is the opposite: water sneaking around the V60 filter edge or through a folded pleat weakens without adding strength — thin and under-developed. Zero-bypass drippers (Tricolate, Hoop) seal the edge to prove it; intentional bypass (Hoffmann AeroPress, bypass bloom) is a tool, accidental bypass is a defect.</string>
+    <string name="learn_l130_body" formatted="false">Bypass brews a concentrated slurry then adds water after extraction, decoupling strength from yield. Example: 20 g to 150 ml at 1:7.5 gives 22% yield and 3.5% TDS, then add 150 ml bypass water to reach 1.75% TDS — same strength as a 1:15 pour-over but sweeter because the low water-to-coffee ratio limited over-extraction. Uncontrolled bypass is the opposite: water sneaking around the V60 filter edge or through a folded pleat weakens without adding strength — thin and under-developed. Zero-bypass drippers (Tricolate, Hoop) seal the edge to prove it; intentional bypass (Hoffmann AeroPress, bypass bloom) is a tool, accidental bypass is a defect.
     <string name="learn_l131_title">Oat vs Dairy Microfoam: Fat, Protein &amp; Foam</string>
-    <string name="learn_l131_body">Dairy foam is whey protein wrapping air: flexible below 37°C, denaturing at 60–65°C into stable microfoam, collapsing above 70°C. Whole milk 3.5% fat tastes sweet but destabilizes faster than skim. Oat barista milk has almost no whey — it foams via added rapeseed oil and dipotassium phosphate mimicking casein, so it needs 15% less air: stop stretching 2 s earlier than dairy. Oat overheats faster and separates if held; dairy holds sheen longer after a 20 s rest and swirl. Taste trade: dairy adds lactose sweetness and body, oat adds cereal sweetness and lighter mouthfeel. Steam oat to 55–60°C max, dairy to 60–65°C, and never re-steam either.</string>
+    <string name="learn_l131_body" formatted="false">Dairy foam is whey protein wrapping air: flexible below 37°C, denaturing at 60–65°C into stable microfoam, collapsing above 70°C. Whole milk 3.5% fat tastes sweet but destabilizes faster than skim. Oat barista milk has almost no whey — it foams via added rapeseed oil and dipotassium phosphate mimicking casein, so it needs 15% less air: stop stretching 2 s earlier than dairy. Oat overheats faster and separates if held; dairy holds sheen longer after a 20 s rest and swirl. Taste trade: dairy adds lactose sweetness and body, oat adds cereal sweetness and lighter mouthfeel. Steam oat to 55–60°C max, dairy to 60–65°C, and never re-steam either.
     <string name="learn_l132_title">SCA Cupping Scoresheet: CVA Descriptive &amp; Affective</string>
     <string name="learn_l132_body">The 2024 Coffee Value Assessment splits the old 100-point form into two sheets: Descriptive Assessment (no score) logs fragrance, aroma, flavour, aftertaste, acidity, sweetness, mouthfeel and balance in words; Affective Assessment scores overall impression 0–100 plus extrinsic value (farm, sustainability info). Judge descriptive first blind — note what you taste — then affective separately after revealing processing context; co-ferments and thermals are no longer penalized as defects. For home: cup 8.25 g to 150 ml at 93°C, break at 4:00, taste at 8 min and as it cools, write descriptors before liking, and average across three tasters to cancel personal bias.</string>
     <string name="learn_l133_title">Direct Trade Receipt: The Transparency Report</string>
@@ -1817,13 +1817,13 @@ Steps:
     <string name="glossary_term_102">pH vs Alkalinity</string>
     <string name="glossary_def_102">pH is current acidity; alkalinity (KH) is buffering that resists pH change when coffee acids hit. Bright coffee wants ~40 ppm KH, not a specific pH.</string>
     <string name="glossary_term_103">Sieve Test</string>
-    <string name="glossary_def_103">Shaking ground coffee through 400 µm and 800 µm sieves to weigh fines, middle and boulders. Tight 65–75% middle fraction signals even burrs.</string>
+    <string name="glossary_def_103" formatted="false">Shaking ground coffee through 400 µm and 800 µm sieves to weigh fines, middle and boulders. Tight 65–75% middle fraction signals even burrs.
     <string name="glossary_term_104">Turbo Shot</string>
     <string name="glossary_def_104">Coarse, fast espresso: 15–18 g at 400–500 µm, 1:2.5–1:3 in 12–18 s at 6 bar with paper filter puck. Sweet, filter-like light roast shot.</string>
     <string name="glossary_term_105">Bypass Brewing</string>
     <string name="glossary_def_105">Brewing a strong concentrate then diluting with bypass water to tune strength without over-extracting. Accidental bypass around filter edge is a defect.</string>
     <string name="glossary_term_106">Oat Microfoam</string>
-    <string name="glossary_def_106">Oat barista milk foamed with added oil and phosphate instead of whey protein. Needs 15% less air, max 60°C, and splits if re-steamed.</string>
+    <string name="glossary_def_106" formatted="false">Oat barista milk foamed with added oil and phosphate instead of whey protein. Needs 15% less air, max 60°C, and splits if re-steamed.
     <string name="glossary_term_107">CVA Descriptive vs Affective</string>
     <string name="glossary_def_107">SCA 2024 split: Descriptive Assessment logs flavour words without score; Affective Assessment scores liking 0–100 plus extrinsic value.</string>
     <string name="glossary_term_108">Direct Trade Transparency</string>

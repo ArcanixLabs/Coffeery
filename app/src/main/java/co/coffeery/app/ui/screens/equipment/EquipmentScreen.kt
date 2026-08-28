@@ -154,13 +154,12 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun GearTile(eq: Equipment, selected: Boolean, modifier: Modifier = Modifier, onClick: () -> Unit) {
     val colors = CoffeeTheme.colors
     val ctx = LocalContext.current
     val outer = if (selected) modifier.border(2.dp, colors.accent, CoffeeShapes.medium) else modifier
-    CoffeeCard(onClick = onClick, modifier = outer.animateItem()) {
+    CoffeeCard(onClick = onClick, modifier = outer) {
         EquipmentIcon(eq, colors.accent, Modifier.size(30.dp))
         Spacer(Modifier.height(10.dp))
         AppText(eq.displayName(), style = CoffeeTheme.type.headline, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
