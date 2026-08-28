@@ -187,6 +187,26 @@ object PresetLoader {
         "equip_phoenix70_tag" -> R.string.equip_phoenix70_tag
         "equip_lunar_name" -> R.string.equip_lunar_name
         "equip_lunar_tag" -> R.string.equip_lunar_tag
+        "equip_mugen_name" -> R.string.equip_mugen_name
+        "equip_mugen_tag" -> R.string.equip_mugen_tag
+        "equip_graycano_name" -> R.string.equip_graycano_name
+        "equip_graycano_tag" -> R.string.equip_graycano_tag
+        "equip_kinto_slow_name" -> R.string.equip_kinto_slow_name
+        "equip_kinto_slow_tag" -> R.string.equip_kinto_slow_tag
+        "equip_fellow_aiden_name" -> R.string.equip_fellow_aiden_name
+        "equip_fellow_aiden_tag" -> R.string.equip_fellow_aiden_tag
+        "equip_kalita102_name" -> R.string.equip_kalita102_name
+        "equip_kalita102_tag" -> R.string.equip_kalita102_tag
+        "equip_espro_bloom_name" -> R.string.equip_espro_bloom_name
+        "equip_espro_bloom_tag" -> R.string.equip_espro_bloom_tag
+        "equip_bripe_name" -> R.string.equip_bripe_name
+        "equip_bripe_tag" -> R.string.equip_bripe_tag
+        "equip_cupping_bowl_set_name" -> R.string.equip_cupping_bowl_set_name
+        "equip_cupping_bowl_set_tag" -> R.string.equip_cupping_bowl_set_tag
+        "equip_modbar_pour_name" -> R.string.equip_modbar_pour_name
+        "equip_modbar_pour_tag" -> R.string.equip_modbar_pour_tag
+        "equip_timemore_b75_name" -> R.string.equip_timemore_b75_name
+        "equip_timemore_b75_tag" -> R.string.equip_timemore_b75_tag
         "equip_other_name" -> R.string.equip_other_name
         "equip_other_tag" -> R.string.equip_other_tag
         "step_bloom" -> R.string.step_bloom

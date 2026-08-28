@@ -813,6 +813,11 @@
     <string name="palette_caramel">Karamel</string>
     <string name="palette_hazelnut">Fındık</string>
     <string name="palette_copper">Bakır</string>
+    <string name="palette_cinnamon">Tarçın</string>
+    <string name="palette_chestnut">Kestane</string>
+    <string name="palette_french_roast">French Roast</string>
+    <string name="palette_vanilla_latte">Vanilla Latte</string>
+    <string name="palette_pumpkin_spice">Balkabağı Baharatı</string>
     <string name="settings_temperature">Sıcaklık birimi</string>
     <string name="settings_language">Dil</string>
     <string name="settings_language_desc">Tam etki için değişiklik sonrası uygulamayı yeniden başlatın.</string>
@@ -996,6 +1001,26 @@
     <string name="equip_phoenix70_tag">70 mm düz taban</string>
     <string name="equip_lunar_name">NextLevel Lunar</string>
     <string name="equip_lunar_tag">Yerçekimi beslemeli lunar</string>
+    <string name="equip_mugen_name">Hario Mugen</string>
+    <string name="equip_mugen_tag">Yıldız yivli tek döküm</string>
+    <string name="equip_graycano_name">Graycano</string>
+    <string name="equip_graycano_tag">Metal + silikon uzun demleme</string>
+    <string name="equip_kinto_slow_name">Kinto Slow Coffee Style</string>
+    <string name="equip_kinto_slow_tag">Yavaş damlama çelik demleyici</string>
+    <string name="equip_fellow_aiden_name">Fellow Aiden</string>
+    <string name="equip_fellow_aiden_tag">Hassas batch demleyici</string>
+    <string name="equip_kalita102_name">Kalita 102 Seramik</string>
+    <string name="equip_kalita102_tag">Düz taban küçük dem</string>
+    <string name="equip_espro_bloom_name">Espro Bloom</string>
+    <string name="equip_espro_bloom_tag">Kağıtsız mikro filtre</string>
+    <string name="equip_bripe_name">Bripe Demleme Piposu</string>
+    <string name="equip_bripe_tag">Pipo ritüeli — dumanlı</string>
+    <string name="equip_cupping_bowl_set_name">SCA Cupping Kasesi Seti</string>
+    <string name="equip_cupping_bowl_set_tag">Lab standart 150 ml kase</string>
+    <string name="equip_modbar_pour_name">Modbar Pour-Over</string>
+    <string name="equip_modbar_pour_tag">Tezgah altı kafe modülü</string>
+    <string name="equip_timemore_b75_name">Timemore B75</string>
+    <string name="equip_timemore_b75_tag">75° düz taban — hızlı akış</string>
 
     <!-- Arama -->
     <string name="search_hint_equipment">Ekipman ara…</string>
@@ -1732,6 +1757,41 @@ Hazırlanışı:
     <string name="pro_tip_73">Dara kayması: kettle tezgahı buharladıktan sonra teraziyi kapatıp açın — ısı ve nem görünmez hata kaynaklarıdır.</string>
     <string name="pro_tip_74">Bypass demleyiciler: 1:10 konsantre demleyip seyreltin — tatlılık, düz 1:16\'nın kuruluğa kaçıracağı yerde kalır.</string>
     <string name="pro_tip_75">Q-Grader kayması gerçektir — üçlü panellerde kupaj yapıp ortalayın; tek skorlar sertifikalılarda bile ±1,5 oynar.</string>
+    <!-- ===== l126-l135 ===== -->
+    <string name="learn_l126_title">DIY Su Tarifleri: Barista Hustle ve Lotus</string>
+    <string name="learn_l126_body">Musluk suyu iyi kahveyi bozar. DIY tarifler damıtık veya RO sudan (0 TDS) başlayıp hassas remineralizasyon yapar. Barista Hustle: litre başına 0.38 g Epsom tuzu (MgSO₄·7H₂O) + 0.18 g karbonat (NaHCO₃) ≈70 ppm GH ve 40 ppm KH — parlak, tatlı filtre suyu. Lotus Drops GH, KH ve tamponu ayrı konsantrelerde ayırır; 300+ ppm sert Londrada RO şarttır. 0.01 g terazide tartın, stok konsantre karıştırın, seyreltin. Ev tipi yumuşatıcılar Ca yerine Na verir — tat için daha kötü — bypass edin ve sıfırdan kurun. Bir litre konsantre haftalar gider ve şişe sudan tutarlıdır.</string>
+    <string name="learn_l127_title">pH ve Alkalinite: Neden pH Yalan Söyler</string>
+    <string name="learn_l127_body">pH suyun şu an ne kadar asidik olduğunu söyler; alkalinite (KH) kahvenin asidiyle buluşunca pH\'ın ne kadar direneceğini söyler. pH 7.0 bir su KH 120 ppm ise yavan tattırır — tampon meyve asitlerini tatmadan nötrler — pH 6.5 ama KH 40 ppm su ise canlı ve parlaktır. SCA hedef 40 ppm KH (CaCO₃) yeter tampon verir ama asiditeyi boğmaz. KH\'yi damla kitle ölçün (1 damla=17.8 ppm), pH şeridiyle değil. Düşük KH açık kavrumu canlandırır; yüksek KH koyu kavrumu yuvarlar. Sadece pH kovalamayın.</string>
+    <string name="learn_l128_title">Elek Testi: Öğütüm Dağılımını Ölçmek</string>
+    <string name="learn_l128_body">Bimodal dağılımı elemeden göremezsiniz. 400 µm ve 800 µm elekleri üst üste koyun, 20 g\'yi 60 sn sallayın, her fraksiyonu tartın. İyi filtre öğütümünde %65–75 400–800 µm arasında, ince &lt;400 µm %15 altı ve iri &gt;800 µm %15 altı olmalı. İnce %20 üstüyse acı ve tortulu; iri %20 üstüyse ekşi ve boş fincan — ortalama boyut doğru olsa bile. Haftalık eleyerek dişli aşınmasını takip edin: taze dişli dar tepe, aşınmış geniş dağılım verir. Öğütücüleri aynı doz ve ayarda eleyerek nesnel karşılaştırın — orta fraksiyon ne kadar darsa fincan o kadar temizdir.</string>
+    <string name="learn_l129_title">Turbo Shot: 15 Saniyede 1:3</string>
+    <string name="learn_l129_body">Şampiyon James Hoffmann\'ın turbo shot\'ı tüm kuralları yıkar: 15–18 g doz, kalın öğütüm (400–500 µm filtre gibi), puck üstünde kağıt filtreyle 6 bar\'da 12–18 sn\'de 1:2.5–1:3 verim. Kalın öğütüm ve düşük basınç kanallanmayı önler, hızlı yüksek verim 25–30 sn\'de çıkan acı kuyruk bileşiklerini almadan %19–20 ekstraksiyon verir. Sonuç espresso yoğunluğunda tatlı filtre kahvesi gibi — ince öğütümde tıkanan açık kavrumlar için ideal. Hızlı akış sepeti (VST 18 g) ve 2 sn ön demleme kullanın. İnce gelirse 1:2.2\'ye sıkın; ekşiyse 18 sn\'ye uzatın.</string>
+    <string name="learn_l130_title">Bypass Demleme: Güçlü Demle, Akıllıca Seyrelt</string>
+    <string name="learn_l130_body">Bypass yoğun bulamaç demleyip sonra su ekleyerek sertliği verimden ayırır. Örnek: 20 g\'yi 150 ml\'ye 1:7.5 demlemek %22 verim ve %3.5 TDS verir, sonra 150 ml bypass suyu ekleyip %1.75 TDS\'ye inmek — düz 1:15 pour-over ile aynı sertlik ama daha tatlı çünkü düşük su/kahve oranı aşırı ekstraksiyonu sınırladı. Kontrolsüz bypass tersidir: V60 filtre kenarı veya kat kıvrımından sızan su sertlik katmadan zayıflatır — ince ve az çözünmüş. Sıfır bypass dripper\'lar (Tricolate, Hoop) kenarı mühürleyerek farkı kanıtlar; kasıtlı bypass (Hoffmann AeroPress) araçtır, kazara bypass kusurdur.</string>
+    <string name="learn_l131_title">Yulaf ve Süt Köpüğü: Yağ, Protein ve Köpük</string>
+    <string name="learn_l131_body">Süt köpüğü whey proteininin havayı sarmasıdır: 37°C altında esnek, 60–65°C\'de denatüre olup stabil mikro köpük, 70°C üstünde çöker. %3.5 yağlı tam süt tatlıdır ama yağsızdan hızlı söner. Yulaf barista sütü whey içermez — kanola yağı ve dipotasyum fosfatla kazeini taklit eder, %15 daha az hava ister: süte göre 2 sn erken bırakın. Yulaf hızlı ısınır ve bekletilirse ayrışır; süt 20 sn dinlenip çalkalanınca parlaklığını korur. Yulafı 55–60°C, sütü 60–65°C\'de bırakın, asla tekrar buharlamayın.</string>
+    <string name="learn_l132_title">SCA Cupping Cetveli: CVA Betimleyici ve Hedonik</string>
+    <string name="learn_l132_body">2024 Coffee Value Assessment eski 100 puanlık formu ikiye böldü: Betimleyici Değerlendirme (puansız) koku, aroma, tat, bitiş, asidite, tatlılık, gövde ve dengeyi kelimelerle kaydeder; Duygusal Değerlendirme genel izlenimi 0–100 ve dışsal değeri (çiftlik, sürdürülebilirlik) puanlar. Önce kör betimleyin — ne tattığınızı yazın — sonra işleme bilgisini açıp beğeniyi ayrı puanlayın; co-ferment artık kusur sayılmaz. Evde: 8.25 g /150 ml 93°C, 4:00\'te kır, 8. dakikada ve soğurken tat, önce betimleyici yaz, üç kişi ortalaması alın.</string>
+    <string name="learn_l133_title">Direct Trade Makbuzu: Şeffaflık Raporu</string>
+    <string name="learn_l133_body">Direct trade kavurucunun çiftçiye ne ödediğini yayınlamasıdır — sadece \'çiftliği ziyaret ettik\' değil. Şeffaflık raporu kg başına FOB fiyatı, çiftçi payı, nakliye ve ithalat maliyetlerini listeler ve Fairtrade taban ($3.10/kg) ve C-piyasa ile karşılaştırır. Örnek: yıkanmış Etiyopya için $8.50/kg FOB, C $3.80 iken 2.2× primdir. Gerçek direct trade lot büyüklüğü, kontrat süresi ve kim kupaj yaptı bilgisini de yayınlar. Yeşil badana sinyali: fiyat yok, sadece fotoğraf veya makbuzsuz \'ilişki kahvesi\'. Yıllık şeffaflık PDF\'i yayınlayan kavurucuları arayın (Tim Wendelboe, Counter Culture, Onyx).</string>
+    <string name="learn_l134_title">WDT, RDT ve Stockfleth: Dağıtım Kapışması</string>
+    <string name="learn_l134_body">Kanallanma tamp\'tan önce başlar. WDT (Weiss Tekniği) 0.3–0.4 mm iğnelerle topakları kırar ve yoğunluğu homojenler — düz dişli ve açık kavrum için şart; Stockfleth parmakla düzler, hızlı ama yoğunluk gradyanı bırakır. RDT (Ross Damla Tekniği) öğütmeden önce çekirdeğe 0.1–0.2 ml su püskürterek statiği öldürür ve kalıntı/topaklanmayı azaltır — dağıtım düzeltmesi değil öğütücü hijyenidir. En iyi akış: öğütmeden önce RDT, doz sonrası WDT, sonra düz tamp. Harcanan puck\'ta iğne deliği WDT\'nin kaçırdığı topaktır.</string>
+    <string name="learn_l135_title">Yıkanmış ve Ballı Kör Üçgen: İşlemeyi Tatmak</string>
+    <string name="learn_l135_body">Yıkanmış (fully washed) kurutmadan önce tüm müsilajı sıyırır — temiz, sitrik, çay benzeri berraklık; ballı (pulped natural) müsilajla kurur, kırmızı meyve tatlılığı ve daha ağır gövde katar ama yavaş kurursa fermante riski. Kör üçgen yapın: aynı çeşidin yıkanmışı ve ballısı, aynı kavrum — üç fincan sunun (ikisi aynı, biri farklı) ve aykırıyı bulun. 9\'da 7 doğru anlamlıdır. Yıkanmış 1:16\'da daha parlak; ballı 1:15 ve 1–2°C soğuk ister. Aylık eğitin — işleme aroması incedir, kör olmadan hafıza yanılır.</string>
+
+    <string name="drink_oat_flat_white_name">Yulaflı Flat White</string>
+    <string name="drink_oat_flat_white_summary">Barista yulaf sütlü flat white — tahıl tatlı, ipeksi, vegan</string>
+    <string name="drink_oat_flat_white_body">Süt içermeyen flat white: barista yulaf sütüyle çift ristretto ve tahıl tatlı ipeksi mikro köpük.\n\nMalzemeler:\n• 2 ristretto shot (~30 ml)\n• 120–150 ml barista yulaf sütü (Oatly Barista vb.)\n• Toplam: 150–180 ml\n\nHazırlanışı:\n1. Küçük fincana iki ristretto çekin.\n2. Yulaf sütünü 55–60°C\'de parlak mikro köpüğe buharlayın — süte göre 2 sn erken bırakın.\n3. 10 sn çalkalayıp bütünleştirerek dökün.\n4. Tekrar buharlamayın — yulaf kesilir.</string>
+    <string name="drink_coconut_viet_name">Cà Phê Dừa</string>
+    <string name="drink_coconut_viet_summary">Vietnam hindistan cevizli kahvesi — hindistan cevizi kremasıyla buz üzerinde</string>
+    <string name="drink_coconut_viet_body">Hanoi\'nin ünlü hindistan cevizli kahvesi: güçlü Vietnam Robustası tatlı hindistan cevizi kremasıyla buzlu shake yapılır.\n\nMalzemeler:\n• 60 ml güçlü Phin kahvesi veya 2 shot espresso\n• 80 ml hindistan cevizi kreması\n• 2 yk yoğunlaştırılmış süt\n• Buz\n\nHazırlanışı:\n1. Çok güçlü kahve demleyip hafif soğutun.\n2. Hindistan cevizi kreması, yoğunlaştırılmış süt ve buzu kalın kar kıvamına blend edin.\n3. Kahveyi hindistan cevizi karı üzerine uzun bardakta dökün.\n4. Hafif karıştırın — katmanlar mermerleşmeli. Pipetle servis edin.</string>
+    <string name="drink_mazagran_portuguese_name">Mazagran Portekiz</string>
+    <string name="drink_mazagran_portuguese_summary">Portekiz buzlu limonlu kahve — espresso, limon, nane</string>
+    <string name="drink_mazagran_portuguese_body">Portekiz yaz klasiği: tatlandırılmış espresso buz üzerinde taze limon ve nane ile — parlak, acı ve ferahlatıcı.\n\nMalzemeler:\n• 2 shot espresso (~60 ml)\n• Yarım limon suyu (15–20 ml)\n• 1–2 tk şeker veya bal\n• Taze nane, buz\n• 100 ml soğuk su veya sodalı su\n\nHazırlanışı:\n1. Sıcak espressoda şekeri eritip limon ekleyin.\n2. Uzun bardağı buz ve naneyle doldurun.\n3. Kahve-limon karışımını buz üzerine döküp soğuk suyla tamamlayın.\n4. Hafif karıştırıp limon ve naneyle süsleyin.</string>
+    <string name="drink_nitro_flash_name">Nitro Flash</string>
+    <string name="drink_nitro_flash_summary">Flash soğutulmuş nitro kahve — sıcak demlenip anında soğutulan</string>
+    <string name="drink_nitro_flash_body">Flash nitro sıcak ve soğuğu birleştirir: kahve aromalar için sıcak demlenir, buz üzerinde şok soğutulur, sonra azotla kremsi kademeli döküm verilir.\n\nMalzemeler:\n• 20 g kahve 93°C\'de demlenmiş, 150 g buz üzerinde şok soğutulmuş\n• Gıda sınıfı N₂ 25–35 psi veya N₂O şarjör\n• Stout musluğu veya iSi sifon\n\nHazırlanışı:\n1. Sıcak pour-over\'ı doğrudan buz üzerine demleyin (1:10 konsantre, buz bypass\'tır).\n2. 2–4°C soğutup fıçı veya sifona alın.\n3. N₂ ile şarj edip çalkalayın.\n4. Sert dökün — azot çözeltiden çıkarken kademelenir. Fazla buz eklemeden servis edin.</string>
+
     <string name="glossary_term_96">Doz Tutarlılığı</string>
     <string name="glossary_def_96">Dozu sabitleyip verimi öğütümle değiştirin. Dozda ±1 g oynamak oranı kaydırır ve teşhisi karıştırır — dozu kilitleyin, öğütümü hareket ettirin.</string>
     <string name="glossary_term_97">Ön Demleme</string>
@@ -1742,6 +1802,26 @@ Hazırlanışı:
     <string name="glossary_def_99">Antestia böceği bakterisinden gelen çiğ patates / topraksı-bakteriyel kusur, Ruanda naturallerinde klasik. Eser miktarda bile temiz fincanı bozar.</string>
     <string name="glossary_term_100">Hermetik Saklama</string>
     <string name="glossary_def_100">Yeşili ortam nemine karşı Aw 0,55–0,59\'da tutan kapalı bariyer (GrainPro, Ecotact). Jutte 3–4 aya karşı 9–12 ay korur.</string>
+    <string name="glossary_term_101">DIY Su / Lotus Damlaları</string>
+    <string name="glossary_def_101">Damıtık suya Epsom (Mg), karbonat (KH) veya Lotus konsantreleri ekleyerek su kurma. Barista Hustle: 70 ppm GH / 40 ppm KH.</string>
+    <string name="glossary_term_102">pH ve Alkalinite</string>
+    <string name="glossary_def_102">pH anlık asidite; alkalinite (KH) kahve asidi gelince pH\'ın değişime direnci. Parlak kahve ~40 ppm KH ister.</string>
+    <string name="glossary_term_103">Elek Testi</string>
+    <string name="glossary_def_103">Öğütümü 400 µm ve 800 µm eleklerden sallayarak ince-orta-iri tartma. Dar orta fraksiyon iyi dişli demektir.</string>
+    <string name="glossary_term_104">Turbo Shot</string>
+    <string name="glossary_def_104">Kalın, hızlı espresso: 15–18 g 400–500 µm\'de, 6 bar\'da 12–18 sn\'de 1:2.5–1:3. Tatlı, filtre benzeri açık kavrum shot\'ı.</string>
+    <string name="glossary_term_105">Bypass Demleme</string>
+    <string name="glossary_def_105">Güçlü konsantreyi sonra bypass suyuyla seyrelterek sertliği aşırı ekstrakte etmeden ayarlama. Filtre kenarından kaçak kusurdur.</string>
+    <string name="glossary_term_106">Yulaf Mikro Köpüğü</string>
+    <string name="glossary_def_106">Whey yerine yağ ve fosfatla köpüren barista yulaf sütü. %15 az hava, max 60°C, tekrar buharlamada kesilir.</string>
+    <string name="glossary_term_107">CVA Betimleyici ve Hedonik</string>
+    <string name="glossary_def_107">SCA 2024 ikiliği: Betimleyici puansız aroma kaydı; Hedonik 0–100 beğeni + dışsal değer puanı.</string>
+    <string name="glossary_term_108">Direct Trade Şeffaflık</string>
+    <string name="glossary_def_108">FOB kg fiyatını ve çiftçi payını C-piyasaya karşı yayınlama. Gerçek şeffaflık fiyat ve lotu listeler; foto yetmez.</string>
+    <string name="glossary_term_109">WDT / RDT / Stockfleth</string>
+    <string name="glossary_def_109">WDT iğneyle topak kırar; RDT öğütmeden önce su püskürterek statiği öldürür; Stockfleth parmakla düzler. Sıra: RDT → WDT → tamp.</string>
+    <string name="glossary_term_110">Kör Üçgen</string>
+    <string name="glossary_def_110">İkisi aynı bir farklı kör test. 9\'da 7 doğru anlamlıdır. Yıkanmış ve ballı işlemeyi önyargısız tatmak için kullanılır.</string>
 
     <string name="drink_affogato_iced_name">Buzlu Affogato</string>
     <string name="drink_affogato_iced_summary">Modern dokunuş — buz üzerinde cold brew shot ile affogato</string>

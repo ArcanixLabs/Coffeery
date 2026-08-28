@@ -18,8 +18,6 @@ data class DrinkItem(
     val group: DrinkGroup,
 )
 
-private val carajasAlias = listOf(co.coffeery.app.R.string.drink_carajas_name, co.coffeery.app.R.string.drink_carajas_summary, co.coffeery.app.R.string.drink_carajas_body)
-
 object DrinkContent {
     /** Ordered so drinks sharing a group are contiguous (drives section headers). */
     val drinks: List<DrinkItem> = listOf(
@@ -107,7 +105,11 @@ object DrinkContent {
         DrinkItem("sig_mazagran", R.string.drink_sig_mazagran_name, R.string.drink_sig_mazagran_summary, R.string.drink_sig_mazagran_body, DrinkGroup.REGIONAL),
         DrinkItem("berber_brew", R.string.drink_berber_brew_name, R.string.drink_berber_brew_summary, R.string.drink_berber_brew_body, DrinkGroup.REGIONAL),
         DrinkItem("cortado_iced", R.string.drink_cortado_iced_name, R.string.drink_cortado_iced_summary, R.string.drink_cortado_iced_body, DrinkGroup.MILK),
+        DrinkItem("oat_flat_white", R.string.drink_oat_flat_white_name, R.string.drink_oat_flat_white_summary, R.string.drink_oat_flat_white_body, DrinkGroup.MILK),
         DrinkItem("kyoto", R.string.drink_kyoto_name, R.string.drink_kyoto_summary, R.string.drink_kyoto_body, DrinkGroup.REGIONAL),
+        DrinkItem("coconut_viet", R.string.drink_coconut_viet_name, R.string.drink_coconut_viet_summary, R.string.drink_coconut_viet_body, DrinkGroup.REGIONAL),
+        DrinkItem("mazagran_portuguese", R.string.drink_mazagran_portuguese_name, R.string.drink_mazagran_portuguese_summary, R.string.drink_mazagran_portuguese_body, DrinkGroup.REGIONAL),
+        DrinkItem("nitro_flash", R.string.drink_nitro_flash_name, R.string.drink_nitro_flash_summary, R.string.drink_nitro_flash_body, DrinkGroup.REGIONAL),
     )
 }
 

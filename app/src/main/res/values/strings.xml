@@ -813,6 +813,11 @@
     <string name="palette_caramel">Caramel</string>
     <string name="palette_hazelnut">Hazelnut</string>
     <string name="palette_copper">Copper</string>
+    <string name="palette_cinnamon">Cinnamon</string>
+    <string name="palette_chestnut">Chestnut</string>
+    <string name="palette_french_roast">French Roast</string>
+    <string name="palette_vanilla_latte">Vanilla Latte</string>
+    <string name="palette_pumpkin_spice">Pumpkin Spice</string>
     <string name="settings_temperature">Temperature unit</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_desc">Restart the app after changing for full effect.</string>
@@ -996,6 +1001,26 @@
     <string name="equip_phoenix70_tag">70 mm flat-bed</string>
     <string name="equip_lunar_name">NextLevel Lunar</string>
     <string name="equip_lunar_tag">Gravity-fed lunar</string>
+    <string name="equip_mugen_name">Hario Mugen</string>
+    <string name="equip_mugen_tag">Star-rib single-pour</string>
+    <string name="equip_graycano_name">Graycano</string>
+    <string name="equip_graycano_tag">Metal + silicone long draw</string>
+    <string name="equip_kinto_slow_name">Kinto Slow Coffee Style</string>
+    <string name="equip_kinto_slow_tag">Slow drop steel brewer</string>
+    <string name="equip_fellow_aiden_name">Fellow Aiden</string>
+    <string name="equip_fellow_aiden_tag">Precision batch brewer</string>
+    <string name="equip_kalita102_name">Kalita 102 Ceramic</string>
+    <string name="equip_kalita102_tag">Flat-bottom small batch</string>
+    <string name="equip_espro_bloom_name">Espro Bloom</string>
+    <string name="equip_espro_bloom_tag">Micro-filter paperless</string>
+    <string name="equip_bripe_name">Bripe Coffee Pipe</string>
+    <string name="equip_bripe_tag">Brew pipe — smoky ritual</string>
+    <string name="equip_cupping_bowl_set_name">SCA Cupping Bowl Set</string>
+    <string name="equip_cupping_bowl_set_tag">Lab-standard 150 ml bowl</string>
+    <string name="equip_modbar_pour_name">Modbar Pour-Over</string>
+    <string name="equip_modbar_pour_tag">Under-counter café module</string>
+    <string name="equip_timemore_b75_name">Timemore B75</string>
+    <string name="equip_timemore_b75_tag">Flat-bed 75°. Fast flow</string>
 
     <!-- Search -->
     <string name="search_hint_equipment">Search brewers…</string>
@@ -1742,6 +1767,41 @@ Steps:
     <string name="pro_tip_73">Tare drift: power-cycle the scale after the kettle steams the counter — heat and humidity are invisible error sources.</string>
     <string name="pro_tip_74">Bypass brewers: brew 1:10 concentrate then dilute — sweetness survives that straight 1:16 would over-extract into dryness.</string>
     <string name="pro_tip_75">Q-Grader drift is real — cup in panels of three and average; solo scores wander ±1.5 even for certified graders.</string>
+    <!-- ===== l126-l135 ===== -->
+    <string name="learn_l126_title">DIY Water Recipes: Barista Hustle &amp; Lotus</string>
+    <string name="learn_l126_body">Tap water ruins good coffee. DIY recipes start from distilled or RO water (0 TDS) and remineralize precisely. Barista Hustle recipe: 0.38 g Epsom salt (MgSO₄·7H₂O) + 0.18 g baking soda (NaHCO₃) per litre gives ~70 ppm GH and ~40 ppm KH — bright, sweet filter water. Lotus Drops split GH, KH and buffer into separate concentrates so you dial Mg vs Ca vs alkalinity independently; London tap with 300+ ppm hardness needs RO first. Measure with a 0.01 g scale, mix concentrate stock, then dilute. Whole-house softeners swap Ca for Na — worse for taste — so bypass them and build from zero. One litre of concentrate lasts weeks and beats bottled water for consistency.</string>
+    <string name="learn_l127_title">pH vs Alkalinity: Why pH Lies</string>
+    <string name="learn_l127_body">pH tells you how acidic water is right now; alkalinity (KH) tells you how strongly it resists changing pH when it meets acidic coffee. A water at pH 7.0 can still taste flat if KH is 120 ppm — the buffer neutralizes fruit acids before you taste them — while a water at pH 6.5 with KH 40 ppm tastes bright and lively. SCA target 40 ppm KH (as CaCO₃) gives enough buffer to avoid sour, metallic under-extraction but not so much it mutes acidity. Test KH with drop kits (1 drop = 17.8 ppm), not pH strips. Low KH lets light roasts sing; higher KH rounds dark roasts. Never chase pH alone.</string>
+    <string name="learn_l128_title">The Sieve Test: Measuring Grind Distribution</string>
+    <string name="learn_l128_body">You cannot see bimodal distribution without sieving. Stack 400 µm and 800 µm sieves, shake 20 g for 60 s, weigh each fraction. A good filter grind keeps 65–75% between 400–800 µm, fines (&lt;400 µm) under 15% and boulders (&gt;800 µm) under 15%. If fines exceed 20% you get bitter, silty cups; boulders over 20% give sour, hollow cups — even at the right average size. Sieve weekly to track burr wear: fresh burrs produce tight peaks, worn burrs spread wide. Compare grinders objectively by sieving the same dose at the same dial — the tighter the middle fraction, the cleaner the cup.</string>
+    <string name="learn_l129_title">Turbo Shot: 1:3 in 15 Seconds</string>
+    <string name="learn_l129_body">Champion James Hoffmann\'s turbo shot breaks every espresso rule: 15–18 g dose, coarsely ground (filter-like 400–500 µm), 1:2.5 to 1:3 ratio in 12–18 seconds at 6 bar with a paper filter on top of the puck. The coarser grind and lower pressure avoid channeling, while the fast, high-yield pull extracts 19–20% without bitter tail compounds that need 25–30 s at 9 bar. Result tastes like sweet filter coffee with espresso intensity — ideal for light roasts that choke at fine grinds. Use a fast-flow basket (VST 18 g) and pre-infuse 2 s. If it tastes thin, tighten to 1:2.2; if sour, extend to 18 s.</string>
+    <string name="learn_l130_title">Bypass Brewing: Brew Strong, Dilute Smart</string>
+    <string name="learn_l130_body">Bypass brews a concentrated slurry then adds water after extraction, decoupling strength from yield. Example: 20 g to 150 ml at 1:7.5 gives 22% yield and 3.5% TDS, then add 150 ml bypass water to reach 1.75% TDS — same strength as a 1:15 pour-over but sweeter because the low water-to-coffee ratio limited over-extraction. Uncontrolled bypass is the opposite: water sneaking around the V60 filter edge or through a folded pleat weakens without adding strength — thin and under-developed. Zero-bypass drippers (Tricolate, Hoop) seal the edge to prove it; intentional bypass (Hoffmann AeroPress, bypass bloom) is a tool, accidental bypass is a defect.</string>
+    <string name="learn_l131_title">Oat vs Dairy Microfoam: Fat, Protein &amp; Foam</string>
+    <string name="learn_l131_body">Dairy foam is whey protein wrapping air: flexible below 37°C, denaturing at 60–65°C into stable microfoam, collapsing above 70°C. Whole milk 3.5% fat tastes sweet but destabilizes faster than skim. Oat barista milk has almost no whey — it foams via added rapeseed oil and dipotassium phosphate mimicking casein, so it needs 15% less air: stop stretching 2 s earlier than dairy. Oat overheats faster and separates if held; dairy holds sheen longer after a 20 s rest and swirl. Taste trade: dairy adds lactose sweetness and body, oat adds cereal sweetness and lighter mouthfeel. Steam oat to 55–60°C max, dairy to 60–65°C, and never re-steam either.</string>
+    <string name="learn_l132_title">SCA Cupping Scoresheet: CVA Descriptive &amp; Affective</string>
+    <string name="learn_l132_body">The 2024 Coffee Value Assessment splits the old 100-point form into two sheets: Descriptive Assessment (no score) logs fragrance, aroma, flavour, aftertaste, acidity, sweetness, mouthfeel and balance in words; Affective Assessment scores overall impression 0–100 plus extrinsic value (farm, sustainability info). Judge descriptive first blind — note what you taste — then affective separately after revealing processing context; co-ferments and thermals are no longer penalized as defects. For home: cup 8.25 g to 150 ml at 93°C, break at 4:00, taste at 8 min and as it cools, write descriptors before liking, and average across three tasters to cancel personal bias.</string>
+    <string name="learn_l133_title">Direct Trade Receipt: The Transparency Report</string>
+    <string name="learn_l133_body">Direct trade means the roaster publishes what they paid the farmer — not just \'we visited the farm.\' A transparency report lists FOB price per kg, farm-gate share, transport and import costs, and compares to Fairtrade minimum ($3.10/kg) and C-market. Example: $8.50/kg FOB for a washed Ethiopian where C is $3.80 shows 2.2× premium. True direct trade also publishes lot size, contract length and who cupped it. Greenwashing signals: no price, only photos, or \'relationship coffee\' without receipts. Seek roasters posting yearly transparency PDFs (Tim Wendelboe, Counter Culture, Onyx) — price transparency pressures the whole chain upward.</string>
+    <string name="learn_l134_title">WDT vs RDT vs Stockfleth: Distribution Showdown</string>
+    <string name="learn_l134_body">Channeling starts before tamping. WDT (Weiss Distribution Technique) stirs grounds with 0.3–0.4 mm needles to break clumps and homogenize density — essential for flat burr grinders and light roasts; Stockfleth levels by finger-sweep, fast but leaves density gradients. RDT (Ross Droplet Technique) spritzes 0.1–0.2 ml water on beans before grinding to kill static and reduce retention and clumping — not a distribution fix but a grinder hygiene step. Best practice: RDT before grinding, WDT after dosing, Stockfleth only for quick cafe workflow, then level tamp. Observe the spent puck: pinholes mean WDT missed a clump.</string>
+    <string name="learn_l135_title">Washed vs Honey Blind Triangle: Taste Processing</string>
+    <string name="learn_l135_body">Washed (fully washed) removes all mucilage before drying for clean, citric, tea-like clarity; honey (pulped natural) dries with sticky mucilage on, adding red fruit sweetness and heavier body but risking ferment funk if dried too slowly. Run a blind triangle: two cups of the same variety, one washed, one honey, roasted identically — present three cups (two identical, one odd) and pick the outlier. 7/9 correct is significant. Washed shows brighter acidity and higher clarity at 1:16; honey needs 1:15 and 1–2°C cooler to tame sweetness. Train monthly — processing flavour is subtle and memory lies without blinding.</string>
+
+    <string name="drink_oat_flat_white_name">Oat Flat White</string>
+    <string name="drink_oat_flat_white_summary">Flat white with barista oat milk — cereal-sweet, silky, dairy-free</string>
+    <string name="drink_oat_flat_white_body">A dairy-free flat white built on barista oat milk: double ristretto softened by cereal-sweet, silky oat microfoam that needs less air than dairy.\n\nIngredients:\n• 2 ristretto shots (~30 ml)\n• 120–150 ml barista oat milk (Oatly Barista or similar)\n• Total: 150–180 ml\n\nSteps:\n1. Pull two ristretto shots into a small cup.\n2. Steam oat milk to glossy microfoam at 55–60°C — stop aerating 2 s earlier than dairy.\n3. Swirl 10 s to wet-paint sheen, pour to integrate.\n4. No re-steaming — oat splits if overheated.</string>
+    <string name="drink_coconut_viet_name">Cà Phê Dừa</string>
+    <string name="drink_coconut_viet_summary">Vietnamese coconut coffee — strong coffee blended with coconut cream over ice</string>
+    <string name="drink_coconut_viet_body">Hanoi\'s famous coconut coffee: strong Vietnamese Robusta whipped with sweetened coconut cream into a thick, frosty shake served over ice — part dessert, part caffeine hit.\n\nIngredients:\n• 60 ml strong Phin coffee or 2 shots espresso\n• 80 ml coconut cream (or blended frozen coconut)\n• 2 tbsp sweetened condensed milk\n• Ice cubes\n\nSteps:\n1. Brew very strong coffee (Phin or espresso) and chill slightly.\n2. Blend coconut cream, condensed milk and ice to a thick slush.\n3. Pour coffee over the coconut slush in a tall glass.\n4. Stir lightly — layers should marble. Serve with a straw.</string>
+    <string name="drink_mazagran_portuguese_name">Mazagran Portuguese</string>
+    <string name="drink_mazagran_portuguese_summary">Portuguese iced lemon coffee — espresso, lemon, mint over ice</string>
+    <string name="drink_mazagran_portuguese_body">Portuguese summer classic evolved from the French-Algerian mazagran: sweetened espresso poured over ice with fresh lemon juice and mint — bright, bitter, and fiercely refreshing.\n\nIngredients:\n• 2 shots espresso (~60 ml)\n• Juice of 1/2 lemon (15–20 ml)\n• 1–2 tsp sugar or honey\n• Fresh mint leaves, ice\n• 100 ml cold water or sparkling water\n\nSteps:\n1. Stir sugar into hot espresso to dissolve, add lemon juice.\n2. Fill a tall glass with ice and mint.\n3. Pour coffee-lemon mix over ice, top with cold water.\n4. Stir gently and garnish with lemon wheel and mint sprig.</string>
+    <string name="drink_nitro_flash_name">Nitro Flash</string>
+    <string name="drink_nitro_flash_summary">Flash-chilled nitro coffee — hot brew flash-cold, then nitrogen-charged</string>
+    <string name="drink_nitro_flash_body">Flash nitro bridges hot and cold: coffee brewed hot for full aromatics, flash-chilled over ice, then charged with nitrogen for a creamy, Guinness-like cascade without dairy.\n\nIngredients:\n• 20 g coffee brewed at 93°C (pour-over), flash-chilled over 150 g ice\n• Food-grade N₂ at 25–35 psi or N₂O charger\n• Stout faucet or iSi whipper\n\nSteps:\n1. Brew hot pour-over directly onto ice (1:10 concentrate, ice is the bypass).\n2. Chill to 2–4°C, keg or load into whipper.\n3. Charge with N₂ and shake to dissolve.\n4. Pour hard — the cascade forms as nitrogen leaves solution. Serve without extra ice.</string>
+
     <string name="glossary_term_96">Dose Consistency</string>
     <string name="glossary_def_96">Fix dose and adjust grind to change yield. Varying dose ±1 g shifts ratio and confuses diagnosis — lock dose, move grind.</string>
     <string name="glossary_term_97">Pre-infusion</string>
@@ -1752,5 +1812,25 @@ Steps:
     <string name="glossary_def_99">Raw-potato / earthy-bacterial taint from Antestia-bug bacteria, classic in Rwandan naturals. Even at trace levels it ruins clean cup.</string>
     <string name="glossary_term_100">Hermetic Storage</string>
     <string name="glossary_def_100">Sealed barrier (GrainPro, Ecotact) holding Aw 0.55–0.59 against ambient humidity. Preserves green 9–12 months vs 3–4 in jute.</string>
+    <string name="glossary_term_101">DIY Water / Lotus Drops</string>
+    <string name="glossary_def_101">Build water from distilled + Epsom (Mg), baking soda (KH) or Lotus GH/KH concentrates. Barista Hustle recipe: 70 ppm GH / 40 ppm KH. Measure with 0.01 g scale.</string>
+    <string name="glossary_term_102">pH vs Alkalinity</string>
+    <string name="glossary_def_102">pH is current acidity; alkalinity (KH) is buffering that resists pH change when coffee acids hit. Bright coffee wants ~40 ppm KH, not a specific pH.</string>
+    <string name="glossary_term_103">Sieve Test</string>
+    <string name="glossary_def_103">Shaking ground coffee through 400 µm and 800 µm sieves to weigh fines, middle and boulders. Tight 65–75% middle fraction signals even burrs.</string>
+    <string name="glossary_term_104">Turbo Shot</string>
+    <string name="glossary_def_104">Coarse, fast espresso: 15–18 g at 400–500 µm, 1:2.5–1:3 in 12–18 s at 6 bar with paper filter puck. Sweet, filter-like light roast shot.</string>
+    <string name="glossary_term_105">Bypass Brewing</string>
+    <string name="glossary_def_105">Brewing a strong concentrate then diluting with bypass water to tune strength without over-extracting. Accidental bypass around filter edge is a defect.</string>
+    <string name="glossary_term_106">Oat Microfoam</string>
+    <string name="glossary_def_106">Oat barista milk foamed with added oil and phosphate instead of whey protein. Needs 15% less air, max 60°C, and splits if re-steamed.</string>
+    <string name="glossary_term_107">CVA Descriptive vs Affective</string>
+    <string name="glossary_def_107">SCA 2024 split: Descriptive Assessment logs flavour words without score; Affective Assessment scores liking 0–100 plus extrinsic value.</string>
+    <string name="glossary_term_108">Direct Trade Transparency</string>
+    <string name="glossary_def_108">Publishing FOB price per kg and farm share vs C-market. True transparency lists price, lot size and buyer; photos alone are not proof.</string>
+    <string name="glossary_term_109">WDT / RDT / Stockfleth</string>
+    <string name="glossary_def_109">WDT stirs grounds with needles to break clumps; RDT spritzes water pre-grind to kill static; Stockfleth levels by finger sweep. Use RDT → WDT → tamp.</string>
+    <string name="glossary_term_110">Blind Triangle</string>
+    <string name="glossary_def_110">Sensory test with two identical and one odd cup blind. 7/9 correct is significant. Used to taste washed vs honey processing without bias.</string>
 
 </resources>

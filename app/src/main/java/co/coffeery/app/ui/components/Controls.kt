@@ -85,12 +85,16 @@ fun <T> SegmentedControl(
                             style = CoffeeTheme.type.label,
                             color = animatedTextColor,
                             align = TextAlign.Center,
+                            maxLines = 1,
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
                         )
                         AppText(
                             text = subtitle(option),
                             style = CoffeeTheme.type.caption,
                             color = animatedCaptionColor,
                             align = TextAlign.Center,
+                            maxLines = 1,
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
                         )
                     }
                 } else {
@@ -99,6 +103,8 @@ fun <T> SegmentedControl(
                         style = CoffeeTheme.type.label,
                         color = animatedTextColor,
                         align = TextAlign.Center,
+                        maxLines = 1,
+                        overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
                     )
                 }
             }

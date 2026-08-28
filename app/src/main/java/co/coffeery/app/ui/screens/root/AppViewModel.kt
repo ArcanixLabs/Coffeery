@@ -150,6 +150,7 @@ class AppViewModel(app: Application, private val savedStateHandle: SavedStateHan
                         completedChapters = chapters,
                         ratioMode = s.ratioMode,
                         manualRatio = s.manualRatio.coerceAtLeast(1.0),
+                        stepWaterOverrides = parseStepWaterOverrides(s.stepWaterOverridesJson),
                     )
                 }
             }
@@ -325,6 +326,7 @@ class AppViewModel(app: Application, private val savedStateHandle: SavedStateHan
 
     // --- Custom equipment ---
     fun addCustomEquipment(name: String, category: BrewCategory, iconKey: String = "icon_mug") {
+        if (name.trim().isBlank()) return
         val defaults = CoffeeRepository.defaultsFor(category)
         val id = "custom_${iconKey}_" + UUID.randomUUID().toString().take(8)
         viewModelScope.launch {
@@ -385,10 +387,21 @@ class AppViewModel(app: Application, private val savedStateHandle: SavedStateHan
         }
     }
 
-    fun setStepWaterOverride(stepIndex: Int, pct: Float) = _state.update {
-        it.copy(stepWaterOverrides = it.stepWaterOverrides + (stepIndex to pct.coerceIn(0f, 1f)))
+    fun setStepWaterOverride(stepIndex: Int, pct: Float) {
+        val newMap = _state.value.stepWaterOverrides + (stepIndex to pct.coerceIn(0f, 1f))
+        _state.update { it.copy(stepWaterOverrides = newMap) }
+        viewModelScope.launch {
+            val cur = (repo.settings.first() ?: SettingsEntity()).copy(stepWaterOverridesJson = serializeStepWaterOverrides(newMap))
+            repo.upsertSettings(cur)
+        }
     }
-    fun clearStepWaterOverrides() = _state.update { it.copy(stepWaterOverrides = emptyMap()) }
+    fun clearStepWaterOverrides() {
+        _state.update { it.copy(stepWaterOverrides = emptyMap()) }
+        viewModelScope.launch {
+            val cur = (repo.settings.first() ?: SettingsEntity()).copy(stepWaterOverridesJson = "")
+            repo.upsertSettings(cur)
+        }
+    }
 
     fun completeOnboarding() {
         _state.update { it.copy(hasCompletedOnboarding = true) }
@@ -547,6 +560,28 @@ private fun parseRoute(key: String): Route? = when {
     key.startsWith("DrinkDetail/") -> key.substringAfter("/").toIntOrNull()?.let { Route.DrinkDetail(it) }
     key.startsWith("BeanDetail/") -> key.substringAfter("/").toLongOrNull()?.let { Route.BeanDetail(it) }
     else -> null
+}
+
+private fun parseStepWaterOverrides(json: String): Map<Int, Float> {
+    if (json.isBlank()) return emptyMap()
+    return try {
+        val obj = org.json.JSONObject(json)
+        val map = mutableMapOf<Int, Float>()
+        val keys = obj.keys()
+        while (keys.hasNext()) {
+            val k = keys.next()
+            val idx = k.toIntOrNull() ?: continue
+            map[idx] = obj.optDouble(k, 0.0).toFloat().coerceIn(0f, 1f)
+        }
+        map
+    } catch (_: Exception) { emptyMap() }
+}
+
+private fun serializeStepWaterOverrides(map: Map<Int, Float>): String {
+    if (map.isEmpty()) return ""
+    val obj = org.json.JSONObject()
+    for ((k, v) in map) obj.put(k.toString(), v.toDouble())
+    return obj.toString()
 }
 
 private suspend fun <T> Flow<T>.collectSafely(action: suspend (T) -> Unit) {

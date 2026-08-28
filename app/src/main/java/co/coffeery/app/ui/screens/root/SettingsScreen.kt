@@ -229,145 +229,77 @@ fun SettingsScreen(vm: AppViewModel) {
             }
             AppText(stringResource(R.string.settings_palette), style = CoffeeTheme.type.body, color = colors.textPrimary)
             Spacer(Modifier.height(spacing.s))
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(spacing.m),
-                contentPadding = PaddingValues(horizontal = spacing.l, vertical = spacing.m),
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                items(Palette.entries) { palette ->
-                    val isSelected = palette == state.palette
-                    val swatchColors = remember(palette, darkTheme) { paletteColors(palette, darkTheme) }
-                    val borderWidth by animateDpAsState(
-                        targetValue = if (isSelected) 2.5.dp else 1.dp,
-                        animationSpec = if (prefersReducedMotion) tween(0) else spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
-                        label = "borderWidth",
-                    )
-                    val borderColor by animateColorAsState(
-                        targetValue = if (isSelected) swatchColors.accent else swatchColors.outline,
-                        animationSpec = if (prefersReducedMotion) tween(0) else tween(durationMillis = CoffeeMotion.normal),
-                        label = "borderColor",
-                    )
-                    val scale by animateFloatAsState(
-                        targetValue = if (isSelected) 1.02f else 1f,
-                        animationSpec = if (prefersReducedMotion) tween(durationMillis = 0) else CoffeeMotion.cardExpand,
-                        label = "scale",
-                    )
-                    Box(
-                        modifier = Modifier
-                            .width(160.dp)
-                            .height(110.dp)
-                            .graphicsLayer { scaleX = scale; scaleY = scale }
-                            .clip(CoffeeShapes.small)
-                            .border(borderWidth, borderColor, CoffeeShapes.small)
-                            .coffeeBackground(swatchColors)
-                            .selectable(
-                                selected = isSelected,
-                                role = Role.RadioButton,
-                                onClick = { vm.setPalette(palette) },
-                            ),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center,
-                            modifier = Modifier.padding(horizontal = spacing.s, vertical = spacing.s),
-                        ) {
+            val paletteRows = remember { Palette.entries.chunked(2) }
+            Column(verticalArrangement = Arrangement.spacedBy(spacing.m)) {
+                paletteRows.forEach { row ->
+                    Row(horizontalArrangement = Arrangement.spacedBy(spacing.m), modifier = Modifier.fillMaxWidth()) {
+                        row.forEach { palette ->
+                            val isSelected = palette == state.palette
+                            val light = remember(palette) { paletteColors(palette, false) }
+                            val dark = remember(palette) { paletteColors(palette, true) }
+                            val borderWidth by animateDpAsState(
+                                targetValue = if (isSelected) 2.dp else 1.dp,
+                                animationSpec = if (prefersReducedMotion) tween(0) else tween(durationMillis = CoffeeMotion.normal),
+                                label = "borderWidth",
+                            )
+                            val borderColor by animateColorAsState(
+                                targetValue = if (isSelected) colors.accent else colors.outline,
+                                animationSpec = if (prefersReducedMotion) tween(0) else tween(durationMillis = CoffeeMotion.normal),
+                                label = "borderColor",
+                            )
+                            val elevation = if (isSelected) 6.dp else 0.dp
+                            val selectColors = if (isSelected) light else light
                             Box(
                                 modifier = Modifier
-                                    .width(92.dp)
-                                    .height(54.dp)
-                                    .clip(RoundedCornerShape(10.dp))
-                                    .background(swatchColors.surfaceElevated)
-                                    .border(1.dp, swatchColors.outline, RoundedCornerShape(10.dp))
-                                    .padding(spacing.s),
-                                contentAlignment = Alignment.Center,
+                                    .weight(1f)
+                                    .height(112.dp)
+                                    .clip(CoffeeShapes.medium)
+                                    .border(borderWidth, borderColor, CoffeeShapes.medium)
+                                    .background(colors.surfaceElevated)
+                                    .selectable(
+                                        selected = isSelected,
+                                        role = Role.RadioButton,
+                                        onClick = { vm.setPalette(palette) },
+                                    ),
                             ) {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.spacedBy(spacing.xs),
-                                    modifier = Modifier.align(Alignment.Center),
-                                ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .width(36.dp)
-                                            .height(4.dp)
-                                            .clip(RoundedCornerShape(2.dp))
-                                            .background(swatchColors.accent),
-                                    )
-                                    Box(
-                                        modifier = Modifier
-                                            .width(52.dp)
-                                            .height(6.dp)
-                                            .clip(RoundedCornerShape(3.dp))
-                                            .background(swatchColors.accentSoft),
-                                    )
-                                    Row(
-                                        horizontalArrangement = Arrangement.spacedBy(spacing.xs),
-                                        verticalAlignment = Alignment.CenterVertically,
-                                    ) {
-                                        Box(
-                                            modifier = Modifier
-                                                .width(24.dp)
-                                                .height(2.dp)
-                                                .clip(RoundedCornerShape(1.dp))
-                                                .background(swatchColors.outline),
-                                        )
-                                        Box(
-                                            modifier = Modifier
-                                                .size(14.dp)
-                                                .clip(CircleShape)
-                                                .background(swatchColors.accent),
-                                            contentAlignment = Alignment.Center,
-                                        ) {
-                                            Box(
-                                                modifier = Modifier
-                                                    .size(6.dp)
-                                                    .clip(CircleShape)
-                                                    .background(swatchColors.onAccent),
-                                            )
+                                Column(modifier = Modifier.fillMaxWidth()) {
+                                    Row(modifier = Modifier.fillMaxWidth().height(64.dp).clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))) {
+                                        Box(modifier = Modifier.weight(1f).fillMaxWidth().height(64.dp).background(light.background)) {
+                                            Column(modifier = Modifier.align(Alignment.Center).padding(horizontal = 8.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                                Box(modifier = Modifier.width(28.dp).height(4.dp).clip(RoundedCornerShape(2.dp)).background(light.accent))
+                                                Box(modifier = Modifier.width(40.dp).height(5.dp).clip(RoundedCornerShape(2.dp)).background(light.accentSoft))
+                                                Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(light.accent))
+                                            }
+                                            Box(modifier = Modifier.align(Alignment.TopStart).padding(4.dp).size(6.dp).clip(CircleShape).background(light.accent.copy(alpha = 0.5f)))
+                                        }
+                                        Box(modifier = Modifier.weight(1f).fillMaxWidth().height(64.dp).background(dark.background)) {
+                                            Column(modifier = Modifier.align(Alignment.Center).padding(horizontal = 8.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                                Box(modifier = Modifier.width(28.dp).height(4.dp).clip(RoundedCornerShape(2.dp)).background(dark.accent))
+                                                Box(modifier = Modifier.width(40.dp).height(5.dp).clip(RoundedCornerShape(2.dp)).background(dark.accentSoft))
+                                                Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(dark.accent))
+                                            }
                                         }
                                     }
-                                    Box(
-                                        modifier = Modifier
-                                            .width(44.dp)
-                                            .height(2.dp)
-                                            .clip(RoundedCornerShape(1.dp))
-                                            .background(swatchColors.textPrimary.copy(alpha = 0.14f)),
-                                    )
+                                    Box(modifier = Modifier.fillMaxWidth().height(48.dp).background(if (isSelected) selectColors.accentSoft.copy(alpha = 0.18f) else colors.surface), contentAlignment = Alignment.Center) {
+                                        AppText(
+                                            stringResource(palette.labelRes),
+                                            style = CoffeeTheme.type.caption,
+                                            color = if (isSelected) colors.accent else colors.textPrimary,
+                                            maxLines = 1,
+                                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                                            align = androidx.compose.ui.text.style.TextAlign.Center,
+                                            modifier = Modifier.padding(horizontal = 8.dp),
+                                        )
+                                    }
                                 }
-                            }
-                            Spacer(Modifier.height(spacing.s))
-                            AnimatedContent(targetState = isSelected, label = "paletteLabel") { selected ->
-                                AppText(
-                                    stringResource(palette.labelRes),
-                                    style = CoffeeTheme.type.caption,
-                                    color = if (selected) swatchColors.accent else swatchColors.textPrimary,
-                                )
-                            }
-                        }
-                        Box(modifier = Modifier.align(Alignment.TopEnd).padding(spacing.s)) {
-                            androidx.compose.animation.AnimatedVisibility(
-                                visible = isSelected,
-                                enter = if (prefersReducedMotion) EnterTransition.None else fadeIn(tween(150)) + scaleIn(tween(150), initialScale = 0.8f),
-                                exit = if (prefersReducedMotion) ExitTransition.None else fadeOut(tween(150)) + scaleOut(tween(150)),
-                                label = "check",
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(18.dp)
-                                        .clip(CircleShape)
-                                        .background(swatchColors.accent),
-                                    contentAlignment = Alignment.Center,
-                                ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .size(6.dp)
-                                            .clip(CircleShape)
-                                            .background(swatchColors.onAccent),
-                                    )
+                                if (isSelected) {
+                                    Box(modifier = Modifier.align(Alignment.TopEnd).padding(6.dp).size(18.dp).clip(CircleShape).background(colors.accent), contentAlignment = Alignment.Center) {
+                                        Box(modifier = Modifier.size(6.dp).clip(CircleShape).background(colors.onAccent))
+                                    }
                                 }
                             }
                         }
+                        if (row.size == 1) Spacer(modifier = Modifier.weight(1f))
                     }
                 }
             }

@@ -172,7 +172,7 @@ fun LearnScreen(vm: AppViewModel) {
                     val filteredIdx = filteredCards.indexOfFirst { it.chapterRes == ch }
                     if (filteredIdx != -1) {
                         val headersBefore = filteredCards.take(filteredIdx).map { it.chapterRes }.distinct().size
-                        val staticCount = listOf("header", "todays", "quiz", "search", "stepMap", "troubleshoot", "protips", "quickRatio", "grindSize", "brewTroubleshooter", "flavorWheel", "extractionCalc", "waterMineral", "glossary", "foodPairing", "cultureFacts").size
+                        val staticCount = listOf("header", "todays", "quiz", "search", "stepMap", "troubleshoot", "protips", "quickRatio", "grindSize", "brewTroubleshooter", "flavorWheel", "varieties", "extractionCalc", "waterMineral", "glossary", "foodPairing", "cultureFacts").size
                         val target = staticCount + filteredIdx + headersBefore + 1
                         scope.launch {
                             lazyState.animateScrollToItem(target.coerceAtLeast(0))
@@ -202,6 +202,9 @@ fun LearnScreen(vm: AppViewModel) {
         }
         item(key = "flavorWheel", contentType = "tool") {
             FlavorWheelCard()
+        }
+        item(key = "varieties", contentType = "tool") {
+            VarietyCard()
         }
         item(key = "extractionCalc", contentType = "tool") {
             ExtractionCalculatorCard()
@@ -690,6 +693,16 @@ private val GlossaryTerms = listOf(
     GlossaryTerm(R.string.glossary_term_98, R.string.glossary_def_98),
     GlossaryTerm(R.string.glossary_term_99, R.string.glossary_def_99),
     GlossaryTerm(R.string.glossary_term_100, R.string.glossary_def_100),
+    GlossaryTerm(R.string.glossary_term_101, R.string.glossary_def_101),
+    GlossaryTerm(R.string.glossary_term_102, R.string.glossary_def_102),
+    GlossaryTerm(R.string.glossary_term_103, R.string.glossary_def_103),
+    GlossaryTerm(R.string.glossary_term_104, R.string.glossary_def_104),
+    GlossaryTerm(R.string.glossary_term_105, R.string.glossary_def_105),
+    GlossaryTerm(R.string.glossary_term_106, R.string.glossary_def_106),
+    GlossaryTerm(R.string.glossary_term_107, R.string.glossary_def_107),
+    GlossaryTerm(R.string.glossary_term_108, R.string.glossary_def_108),
+    GlossaryTerm(R.string.glossary_term_109, R.string.glossary_def_109),
+    GlossaryTerm(R.string.glossary_term_110, R.string.glossary_def_110),
 )
 
 private data class FlavorCategory(val labelRes: Int, val notes: List<Int>)
@@ -733,6 +746,42 @@ private fun FlavorWheelCard() {
 }
 
 @Composable
+private fun VarietyCard() {
+    val colors = CoffeeTheme.colors
+    var expandedIndex by remember { mutableStateOf<Int?>(null) }
+    val varieties = co.coffeery.app.ui.screens.drinks.VarietyContent.varieties
+    CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            LineIcon(Glyph.BEAN, colors.accent, Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            AppText("Coffee Varieties", style = CoffeeTheme.type.title)
+        }
+        Spacer(Modifier.height(8.dp))
+        varieties.forEachIndexed { index, v ->
+            val isExpanded = expandedIndex == index
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(8.dp))
+                    .clickable { expandedIndex = if (isExpanded) null else index }
+                    .padding(vertical = 6.dp),
+            ) {
+                AppText(stringResource(v.nameRes), style = CoffeeTheme.type.headline)
+                if (isExpanded) {
+                    Spacer(Modifier.height(2.dp))
+                    AppText(stringResource(v.originRes), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                    Spacer(Modifier.height(2.dp))
+                    AppText(stringResource(v.flavorRes), style = CoffeeTheme.type.body, color = colors.textSecondary)
+                    Spacer(Modifier.height(2.dp))
+                    AppText(stringResource(v.bestBrewRes), style = CoffeeTheme.type.caption, color = colors.accent)
+                }
+            }
+            if (index < varieties.lastIndex) Spacer(Modifier.height(4.dp))
+        }
+    }
+}
+
+@Composable
 private fun GlossaryHeaderCard() {
     val colors = CoffeeTheme.colors
     CoffeeCard(modifier = Modifier.fillMaxWidth()) {
@@ -753,29 +802,6 @@ private fun GlossaryTermItem(term: GlossaryTerm) {
         AppText(stringResource(term.termRes), style = CoffeeTheme.type.headline)
         Spacer(Modifier.height(2.dp))
         AppText(stringResource(term.defRes), style = CoffeeTheme.type.caption, color = colors.textSecondary)
-    }
-}
-
-@Composable
-private fun GlossaryCard() {
-    val colors = CoffeeTheme.colors
-    CoffeeCard(modifier = Modifier.fillMaxWidth()) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            LineIcon(Glyph.BOOK, colors.accent, Modifier.size(20.dp))
-            Spacer(Modifier.width(8.dp))
-            AppText(stringResource(R.string.glossary_title), style = CoffeeTheme.type.title)
-        }
-        Spacer(Modifier.height(8.dp))
-        GlossaryTerms.forEach { term ->
-            AppText(stringResource(term.termRes), style = CoffeeTheme.type.headline)
-            Spacer(Modifier.height(2.dp))
-            AppText(
-                stringResource(term.defRes),
-                style = CoffeeTheme.type.caption,
-                color = colors.textSecondary,
-            )
-            Spacer(Modifier.height(10.dp))
-        }
     }
 }
 

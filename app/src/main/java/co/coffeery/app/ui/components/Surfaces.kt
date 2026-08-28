@@ -1,5 +1,6 @@
 package co.coffeery.app.ui.components
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -106,13 +107,25 @@ fun Chip(
     modifier: Modifier = Modifier,
     background: Color = CoffeeTheme.colors.accentSoft,
     textColor: Color = CoffeeTheme.colors.accent,
+    maxLines: Int = 1,
+    onClick: (() -> Unit)? = null,
+    selected: Boolean = false,
 ) {
-    Box(
-        modifier = modifier
-            .clip(CoffeeShapes.pill)
-            .background(background)
-            .padding(horizontal = 12.dp, vertical = 6.dp),
-    ) {
-        AppText(text = text, style = CoffeeTheme.type.label, color = textColor)
+    val haptics = rememberAppHaptics()
+    val reduced = LocalPrefersReducedMotion.current
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val pressScale by animateFloatAsState(targetValue = if (isPressed && onClick != null) 0.94f else 1f, animationSpec = CoffeeMotion.press, label = "chipPress")
+    val selectScale by animateFloatAsState(targetValue = if (selected) 1.06f else 1f, animationSpec = if (reduced) tween(0) else CoffeeMotion.chipSelect, label = "chipSelect")
+    val animatedBg by animateColorAsState(targetValue = background, animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal), label = "chipBg")
+    var m = modifier
+        .graphicsLayer(scaleX = pressScale * selectScale, scaleY = pressScale * selectScale)
+        .clip(CoffeeShapes.pill)
+        .background(animatedBg)
+    if (onClick != null) {
+        m = m.clickable(interactionSource = interactionSource, indication = null) { haptics.tap(); onClick() }
+    }
+    Box(modifier = m.padding(horizontal = 12.dp, vertical = 6.dp)) {
+        AppText(text = text, style = CoffeeTheme.type.label, color = textColor, maxLines = maxLines, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
     }
 }

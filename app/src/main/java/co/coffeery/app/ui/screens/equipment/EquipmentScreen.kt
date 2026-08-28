@@ -2,6 +2,7 @@ package co.coffeery.app.ui.screens.equipment
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -32,6 +33,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.R
 import co.coffeery.app.data.model.Equipment
 import co.coffeery.app.ui.components.AppText
@@ -100,7 +102,7 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
                         CoffeeCard(onClick = { vm.selectEquipment(eq.id) }, modifier = if (selected) Modifier.border(2.dp, colors.accent, CoffeeShapes.medium) else Modifier) {
                             EquipmentIcon(eq, colors.accent, Modifier.size(32.dp))
                             Spacer(Modifier.height(4.dp))
-                            AppText(eq.displayName(), style = CoffeeTheme.type.caption, maxLines = 1)
+                            AppText(eq.displayName(), style = CoffeeTheme.type.caption, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                             val vUrl1 = eq.videoUrl()
                             if (vUrl1 != null) {
                                 Spacer(Modifier.height(2.dp))
@@ -123,7 +125,7 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
             }
         } else {
             items(filteredBuiltIns, key = { it.id }) { eq ->
-                GearTile(eq, selected = eq.id == state.selectedEquipmentId) { vm.selectEquipment(eq.id) }
+                GearTile(eq, selected = eq.id == state.selectedEquipmentId, modifier = Modifier.animateItem()) { vm.selectEquipment(eq.id) }
             }
         }
         item(span = { GridItemSpan(maxLineSpan) }) { AppText(stringResource(R.string.equipment_your), style = CoffeeTheme.type.headline, color = colors.textSecondary) }
@@ -145,24 +147,25 @@ fun EquipmentScreen(state: AppUiState, vm: AppViewModel) {
             }
         } else {
             items(filteredCustom, key = { it.id }, span = { GridItemSpan(maxLineSpan) }) { eq ->
-                CustomGearRow(eq = eq, selected = eq.id == state.selectedEquipmentId, onClick = { vm.selectEquipment(eq.id) }, onDelete = { vm.deleteCustomEquipment(eq.id) })
+                CustomGearRow(eq = eq, selected = eq.id == state.selectedEquipmentId, modifier = Modifier.animateItem(), onClick = { vm.selectEquipment(eq.id) }, onDelete = { vm.deleteCustomEquipment(eq.id) })
             }
         }
         item(span = { GridItemSpan(maxLineSpan) }) { Spacer(Modifier.height(88.dp)) }
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun GearTile(eq: Equipment, selected: Boolean, modifier: Modifier = Modifier, onClick: () -> Unit) {
     val colors = CoffeeTheme.colors
     val ctx = LocalContext.current
     val outer = if (selected) modifier.border(2.dp, colors.accent, CoffeeShapes.medium) else modifier
-    CoffeeCard(onClick = onClick, modifier = outer) {
+    CoffeeCard(onClick = onClick, modifier = outer.animateItem()) {
         EquipmentIcon(eq, colors.accent, Modifier.size(30.dp))
         Spacer(Modifier.height(10.dp))
-        AppText(eq.displayName(), style = CoffeeTheme.type.headline, maxLines = 1)
+        AppText(eq.displayName(), style = CoffeeTheme.type.headline, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
         val tag = eq.displayTag()
-        if (tag != null) AppText(tag, style = CoffeeTheme.type.caption, color = colors.textSecondary, maxLines = 1) else AppText(stringResource(eq.category.labelRes), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+        if (tag != null) AppText(tag, style = CoffeeTheme.type.caption, color = colors.textSecondary, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) else AppText(stringResource(eq.category.labelRes), style = CoffeeTheme.type.caption, color = colors.textSecondary, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
         val vUrl2 = eq.videoUrl()
         if (vUrl2 != null) {
             Spacer(Modifier.height(4.dp))
@@ -172,17 +175,18 @@ private fun GearTile(eq: Equipment, selected: Boolean, modifier: Modifier = Modi
 }
 
 @Composable
-private fun CustomGearRow(eq: Equipment, selected: Boolean, onClick: () -> Unit, onDelete: () -> Unit) {
+private fun CustomGearRow(eq: Equipment, selected: Boolean, modifier: Modifier = Modifier, onClick: () -> Unit, onDelete: () -> Unit) {
     val colors = CoffeeTheme.colors
-    val outer = if (selected) Modifier.fillMaxWidth().border(2.dp, colors.accent, CoffeeShapes.medium) else Modifier.fillMaxWidth()
-    CoffeeCard(onClick = onClick, modifier = outer) {
+    val haptics = rememberAppHaptics()
+    val outerBase = if (selected) modifier.fillMaxWidth().border(2.dp, colors.accent, CoffeeShapes.medium) else modifier.fillMaxWidth()
+    CoffeeCard(onClick = onClick, modifier = outerBase) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
             EquipmentIcon(eq, colors.accent, Modifier.size(28.dp))
             Column(Modifier.weight(1f)) {
-                AppText(eq.displayName(), style = CoffeeTheme.type.headline, maxLines = 1)
-                AppText(stringResource(eq.category.labelRes), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                AppText(eq.displayName(), style = CoffeeTheme.type.headline, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
+                AppText(stringResource(eq.category.labelRes), style = CoffeeTheme.type.caption, color = colors.textSecondary, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
             }
-            Box(modifier = Modifier.size(38.dp).clip(CoffeeShapes.pill).clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) { onDelete() }, contentAlignment = Alignment.Center) {
+            Box(modifier = Modifier.size(38.dp).clip(CoffeeShapes.pill).clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) { haptics.tap(); onDelete() }, contentAlignment = Alignment.Center) {
                 AppText(text = "✕", style = CoffeeTheme.type.headline, color = colors.textSecondary)
             }
         }

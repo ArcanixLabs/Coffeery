@@ -123,6 +123,8 @@ fun <T> BottomNav(
                                 text = labelFor(item),
                                 style = CoffeeTheme.type.caption,
                                 color = animatedColor,
+                                maxLines = 1,
+                                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
                             )
                         }
                     }
@@ -155,9 +157,9 @@ fun ScreenHeader(
                 .weight(1f)
                 .semantics { heading() },
         ) {
-            AppText(text = title, style = CoffeeTheme.type.display, color = colors.textPrimary)
+            AppText(text = title, style = CoffeeTheme.type.display, color = colors.textPrimary, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
             if (subtitle != null) {
-                AppText(text = subtitle, style = CoffeeTheme.type.body, color = colors.textSecondary)
+                AppText(text = subtitle, style = CoffeeTheme.type.body, color = colors.textSecondary, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
             }
         }
         if (trailing != null) trailing()

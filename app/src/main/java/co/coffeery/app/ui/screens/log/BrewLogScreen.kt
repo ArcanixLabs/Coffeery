@@ -216,18 +216,16 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
     }
 
     Column(modifier = Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 8.dp)) {
-        Row(modifier = Modifier.padding(start = 28.dp)) {
+        Row(modifier = Modifier.padding(start = 28.dp), horizontalArrangement = Arrangement.spacedBy(2.dp)) {
             for (col in 0 until 12) {
                 val weekDate = mondayOfThisWeek.minusWeeks((11 - col).toLong())
-                val show = col == 0 || weekDate.month != mondayOfThisWeek.minusWeeks((11 - (col - 1)).toLong()).month
-                Box(modifier = Modifier.width(14.dp)) {
+                val prevMonth = if (col > 0) mondayOfThisWeek.minusWeeks((11 - (col - 1)).toLong()).month else null
+                val prevYear = if (col > 0) mondayOfThisWeek.minusWeeks((11 - (col - 1)).toLong()).year else -1
+                val show = col == 0 || weekDate.month != prevMonth || weekDate.year != prevYear
+                Box(modifier = Modifier.width(30.dp)) {
                     if (show) {
-                        AppText(
-                            weekDate.month.getDisplayName(TextStyle.SHORT, Locale.getDefault()).take(3),
-                            style = CoffeeTheme.type.caption,
-                            color = colors.textSecondary,
-                            maxLines = 1,
-                        )
+                        val label = weekDate.month.getDisplayName(TextStyle.SHORT, Locale.getDefault()).take(3) + if (weekDate.year != today.year) " '${(weekDate.year % 100).toString().padStart(2, '0')}" else ""
+                        AppText(label, style = CoffeeTheme.type.caption, color = colors.textSecondary, maxLines = 1)
                     }
                 }
             }

@@ -55,6 +55,8 @@ fun PrimaryButton(
             text = text,
             style = CoffeeTheme.type.headline,
             color = if (enabled) colors.onAccent else colors.textSecondary,
+            maxLines = 1,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
         )
     }
 }
@@ -90,6 +92,8 @@ fun SecondaryButton(
             text = text,
             style = CoffeeTheme.type.headline,
             color = if (enabled) colors.textPrimary else colors.textSecondary,
+            maxLines = 1,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
         )
     }
 }

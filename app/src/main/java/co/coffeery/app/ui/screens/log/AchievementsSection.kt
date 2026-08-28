@@ -211,21 +211,24 @@ private fun AchievementCard(achievement: Achievement, modifier: Modifier = Modif
 @Composable
 private fun ConfettiOverlay(modifier: Modifier = Modifier) {
     val colors = CoffeeTheme.colors
-    val confetti = remember { List(10) { Random.nextFloat() } }
+    data class Particle(val angle: Float, val dist: Float, val r: Float, val colIndex: Int, val shape: Int)
+    val particles = remember { List(14) { Particle(Random.nextFloat() * 360f, 18f + Random.nextFloat() * 42f, if (it % 2 == 0) 4.5f else 2.8f, it % 3, it % 2) } }
     val anim = remember { Animatable(0f) }
-    LaunchedEffect(Unit) {
-        anim.animateTo(1f, animationSpec = tween(durationMillis = 900, easing = CoffeeMotion.emphasized))
-    }
+    LaunchedEffect(Unit) { anim.animateTo(1f, animationSpec = tween(durationMillis = 950, easing = CoffeeMotion.emphasized)) }
     Canvas(modifier = modifier.fillMaxSize()) {
-        val w = size.width
-        val h = size.height
-        confetti.forEachIndexed { i, r ->
-            val x = r * w
-            val y = anim.value * h * 0.6f + (i % 3) * 8f
-            val alpha = (1f - anim.value).coerceIn(0f, 1f)
-            val radius = if (i % 2 == 0) 4f else 2.5f
-            val col = if (i % 3 == 0) colors.accent else if (i % 3 == 1) colors.cremaDark else colors.accentSoft
-            drawCircle(color = col.copy(alpha = alpha), radius = radius, center = Offset(x, y))
+        val cx = size.width / 2f
+        val cy = size.height / 2f
+        val p = anim.value
+        val alpha = (1f - p).coerceIn(0f, 1f)
+        particles.forEach { pt ->
+            val rad = Math.toRadians(pt.angle.toDouble()).toFloat()
+            val gravity = p * p * 28f
+            val x = cx + kotlin.math.cos(rad) * pt.dist * p * 1.6f + (Random.nextFloat() - 0.5f) * 4f
+            val y = cy + kotlin.math.sin(rad) * pt.dist * p * 1.2f + gravity
+            val col = when (pt.colIndex) { 0 -> colors.accent; 1 -> colors.cremaDark; else -> colors.accentSoft }
+            if (pt.shape == 0) drawCircle(col.copy(alpha = alpha * 0.95f), radius = pt.r, center = Offset(x, y))
+            else drawCircle(col.copy(alpha = alpha * 0.85f), radius = pt.r * 0.6f, center = Offset(x, y))
+            if (p < 0.7f) drawCircle(col.copy(alpha = (0.35f * (1f - p))), radius = 1.2f, center = Offset(x + 2f, y - 2f))
         }
     }
 }

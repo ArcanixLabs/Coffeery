@@ -38,6 +38,7 @@ object LearnContent {
         LearnCard(R.string.learn_l92_title, R.string.learn_l92_body, R.string.learn_ch_grinding),
         LearnCard(R.string.learn_l116_title, R.string.learn_l116_body, R.string.learn_ch_grinding),
         LearnCard(R.string.learn_l121_title, R.string.learn_l121_body, R.string.learn_ch_grinding),
+        LearnCard(R.string.learn_l128_title, R.string.learn_l128_body, R.string.learn_ch_grinding),
         // water
         LearnCard(R.string.learn_c3_title, R.string.learn_c3_body, R.string.learn_ch_water),
         LearnCard(R.string.learn_c4_title, R.string.learn_c4_body, R.string.learn_ch_water),
@@ -67,10 +68,12 @@ object LearnContent {
         LearnCard(R.string.learn_l43_title, R.string.learn_l43_body, R.string.learn_ch_methods),
         LearnCard(R.string.learn_l48_title, R.string.learn_l48_body, R.string.learn_ch_methods),
         LearnCard(R.string.learn_l124_title, R.string.learn_l124_body, R.string.learn_ch_methods),
+        LearnCard(R.string.learn_l130_title, R.string.learn_l130_body, R.string.learn_ch_methods),
         // milk
         LearnCard(R.string.learn_l7_title, R.string.learn_l7_body, R.string.learn_ch_milk),
         LearnCard(R.string.learn_l28_title, R.string.learn_l28_body, R.string.learn_ch_milk),
         LearnCard(R.string.learn_l95_title, R.string.learn_l95_body, R.string.learn_ch_milk),
+        LearnCard(R.string.learn_l131_title, R.string.learn_l131_body, R.string.learn_ch_milk),
         LearnCard(R.string.learn_l119_title, R.string.learn_l119_body, R.string.learn_ch_milk),
         // tasting
         LearnCard(R.string.learn_c7_title, R.string.learn_c7_body, R.string.learn_ch_tasting),
@@ -86,6 +89,7 @@ object LearnContent {
         LearnCard(R.string.learn_l114_title, R.string.learn_l114_body, R.string.learn_ch_tasting),
         LearnCard(R.string.learn_l122_title, R.string.learn_l122_body, R.string.learn_ch_tasting),
         LearnCard(R.string.learn_l125_title, R.string.learn_l125_body, R.string.learn_ch_tasting),
+        LearnCard(R.string.learn_l132_title, R.string.learn_l132_body, R.string.learn_ch_tasting),
         // caffeine
         LearnCard(R.string.learn_l10_title, R.string.learn_l10_body, R.string.learn_ch_caffeine),
         LearnCard(R.string.learn_l11_title, R.string.learn_l11_body, R.string.learn_ch_caffeine),
@@ -116,6 +120,8 @@ object LearnContent {
         LearnCard(R.string.learn_l81_title, R.string.learn_l81_body, R.string.learn_ch_water_deep),
         LearnCard(R.string.learn_l84_title, R.string.learn_l84_body, R.string.learn_ch_water_deep),
         LearnCard(R.string.learn_l88_title, R.string.learn_l88_body, R.string.learn_ch_water_deep),
+        LearnCard(R.string.learn_l126_title, R.string.learn_l126_body, R.string.learn_ch_water_deep),
+        LearnCard(R.string.learn_l127_title, R.string.learn_l127_body, R.string.learn_ch_water_deep),
         LearnCard(R.string.learn_l112_title, R.string.learn_l112_body, R.string.learn_ch_water_deep),
         // sustainability
         LearnCard(R.string.learn_l56_title, R.string.learn_l56_body, R.string.learn_ch_sustainability),
@@ -125,6 +131,7 @@ object LearnContent {
         LearnCard(R.string.learn_l60_title, R.string.learn_l60_body, R.string.learn_ch_sustainability),
         LearnCard(R.string.learn_l82_title, R.string.learn_l82_body, R.string.learn_ch_sustainability),
         LearnCard(R.string.learn_l85_title, R.string.learn_l85_body, R.string.learn_ch_sustainability),
+        LearnCard(R.string.learn_l133_title, R.string.learn_l133_body, R.string.learn_ch_sustainability),
         LearnCard(R.string.learn_l117_title, R.string.learn_l117_body, R.string.learn_ch_sustainability),
         // espresso
         LearnCard(R.string.learn_l61_title, R.string.learn_l61_body, R.string.learn_ch_espresso),
@@ -135,6 +142,8 @@ object LearnContent {
         LearnCard(R.string.learn_l91_title, R.string.learn_l91_body, R.string.learn_ch_espresso),
         LearnCard(R.string.learn_l100_title, R.string.learn_l100_body, R.string.learn_ch_espresso),
         LearnCard(R.string.learn_l115_title, R.string.learn_l115_body, R.string.learn_ch_espresso),
+        LearnCard(R.string.learn_l129_title, R.string.learn_l129_body, R.string.learn_ch_espresso),
+        LearnCard(R.string.learn_l134_title, R.string.learn_l134_body, R.string.learn_ch_espresso),
         // processing
         LearnCard(R.string.learn_l66_title, R.string.learn_l66_body, R.string.learn_ch_processing),
         LearnCard(R.string.learn_l67_title, R.string.learn_l67_body, R.string.learn_ch_processing),
@@ -148,6 +157,7 @@ object LearnContent {
         LearnCard(R.string.learn_l83_title, R.string.learn_l83_body, R.string.learn_ch_processing),
         LearnCard(R.string.learn_l86_title, R.string.learn_l86_body, R.string.learn_ch_processing),
         LearnCard(R.string.learn_l99_title, R.string.learn_l99_body, R.string.learn_ch_processing),
+        LearnCard(R.string.learn_l135_title, R.string.learn_l135_body, R.string.learn_ch_processing),
         LearnCard(R.string.learn_l118_title, R.string.learn_l118_body, R.string.learn_ch_processing),
         // origins
         LearnCard(R.string.learn_l71_title, R.string.learn_l71_body, R.string.learn_ch_origins),

@@ -123,6 +123,8 @@ class CloudBackupManager(private val context: Context) {
             .requestScopes(Scope(DriveScopes.DRIVE_APPDATA))
         if (token.isNotBlank()) {
             gsoBuilder.requestIdToken(token)
+        } else {
+            Log.w("Coffeery", "Google Sign-In: no server client ID configured — continuing without ID token (Drive scope only)")
         }
         val gso = gsoBuilder.build()
         return GoogleSignIn.getClient(appContext, gso)
@@ -266,11 +268,6 @@ class CloudBackupManager(private val context: Context) {
             Log.e("Coffeery", "backupToDrive failed", e)
             Result.failure(e)
         }
-    }
-
-    @Suppress("DEPRECATION") // keep compatibility for callers passing Activity; uses applicationContext internally
-    suspend fun backupToDrive(activity: android.app.Activity, jsonData: String): Result<String> {
-        return backupToDrive(jsonData)
     }
 
     suspend fun restoreFromDrive(): Result<String> = withContext(Dispatchers.IO) {

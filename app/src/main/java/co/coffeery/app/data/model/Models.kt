@@ -74,7 +74,12 @@ enum class Palette(@param:StringRes val labelRes: Int) {
     MOCHA(R.string.palette_mocha),
     CARAMEL(R.string.palette_caramel),
     HAZELNUT(R.string.palette_hazelnut),
-    COPPER(R.string.palette_copper);
+    COPPER(R.string.palette_copper),
+    CINNAMON(R.string.palette_cinnamon),
+    CHESTNUT(R.string.palette_chestnut),
+    FRENCH_ROAST(R.string.palette_french_roast),
+    VANILLA_LATTE(R.string.palette_vanilla_latte),
+    PUMPKIN_SPICE(R.string.palette_pumpkin_spice);
 
     companion object {
         fun fromKey(key: String?): Palette =

@@ -192,6 +192,7 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
             o.put("timerDisplayMode", settings.timerDisplayMode)
             o.put("temperatureUnit", settings.temperatureUnit)
             o.put("hasCompletedOnboarding", settings.hasCompletedOnboarding)
+            o.put("stepWaterOverridesJson", settings.stepWaterOverridesJson)
             json.put("settings", o)
         }
         val logArr = JSONArray()
@@ -281,6 +282,7 @@ class CoffeeRepository(context: Context, private val db: AppDatabase) {
                 timerDisplayMode = o.optString("timerDisplayMode", "countdown"),
                 temperatureUnit = o.optString("temperatureUnit", "C"),
                 hasCompletedOnboarding = o.optBoolean("hasCompletedOnboarding", false),
+                stepWaterOverridesJson = o.optString("stepWaterOverridesJson", ""),
             ))
         }
         if (json.has("brewLogs")) {

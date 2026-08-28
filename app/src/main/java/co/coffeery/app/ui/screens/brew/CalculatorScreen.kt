@@ -39,9 +39,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 import co.coffeery.app.R
@@ -278,23 +281,19 @@ fun CalculatorScreen(state: AppUiState, vm: AppViewModel) {
 @Composable
 private fun CategoryChips(state: AppUiState, vm: AppViewModel, eq: Equipment) {
     val colors = CoffeeTheme.colors
-    Row(
-        modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
+    val haptics = rememberAppHaptics()
+    val reduced = LocalPrefersReducedMotion.current
+    Row(modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         BrewCategory.entries.forEach { cat ->
             val isSelected = cat == eq.category
-            val bg = if (isSelected) colors.accent else colors.accentSoft
+            val targetBg = if (isSelected) colors.accent else colors.accentSoft
             val fg = if (isSelected) colors.onAccent else colors.accent
-            Box(
-                modifier = Modifier
-                    .clip(CoffeeShapes.pill)
-                    .background(bg)
-                    .clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) {
-                        vm.selectCategoryEquipment(cat)
-                    }
-                    .padding(horizontal = 14.dp, vertical = 8.dp),
-            ) {
+            val animatedBg by animateColorAsState(targetValue = targetBg, animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal), label = "catBg")
+            val interactionSource = remember { MutableInteractionSource() }
+            val isPressed by interactionSource.collectIsPressedAsState()
+            val pressScale by animateFloatAsState(targetValue = if (isPressed) 0.94f else 1f, animationSpec = CoffeeMotion.press, label = "catPress")
+            val selectScale by animateFloatAsState(targetValue = if (isSelected) 1.06f else 1f, animationSpec = if (reduced) tween(0) else CoffeeMotion.chipSelect, label = "catSelect")
+            Box(modifier = Modifier.graphicsLayer(scaleX = pressScale * selectScale, scaleY = pressScale * selectScale).clip(CoffeeShapes.pill).background(animatedBg).clickable(indication = null, interactionSource = interactionSource) { haptics.segment(); vm.selectCategoryEquipment(cat) }.padding(horizontal = 14.dp, vertical = 8.dp)) {
                 AppText(stringResource(cat.labelRes), style = CoffeeTheme.type.label, color = fg)
             }
         }
@@ -311,7 +310,7 @@ private fun EquipmentDropdown(state: AppUiState, vm: AppViewModel, eq: Equipment
         CoffeeCard(onClick = { showPicker = true }, modifier = Modifier.fillMaxWidth()) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 EquipmentIcon(eq, colors.accent, Modifier.size(28.dp))
-                AppText(eq.displayName(), style = CoffeeTheme.type.title, modifier = Modifier.weight(1f))
+                AppText(eq.displayName(), style = CoffeeTheme.type.title, modifier = Modifier.weight(1f), maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                 AppText("▾", style = CoffeeTheme.type.title, color = colors.accent)
             }
         }
@@ -371,7 +370,7 @@ private fun EquipmentPickerDialog(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     EquipmentIcon(item, colors.accent, Modifier.size(24.dp))
-                    AppText(item.displayName(), style = CoffeeTheme.type.body, modifier = Modifier.weight(1f))
+                    AppText(item.displayName(), style = CoffeeTheme.type.body, modifier = Modifier.weight(1f), maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                     if (isSelected) {
                         AppText("✓", style = CoffeeTheme.type.label, color = colors.accent)
                     }
