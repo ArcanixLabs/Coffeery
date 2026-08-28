@@ -72,7 +72,7 @@ fun BeanListScreen(vm: AppViewModel) {
         } else {
             Column(
                 verticalArrangement = Arrangement.spacedBy(10.dp),
-                modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 state.beans.forEach { bean ->
                     BeanCard(bean, vm)

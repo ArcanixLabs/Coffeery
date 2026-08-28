@@ -143,7 +143,7 @@ fun AchievementsContent(achievements: List<Achievement>) {
 
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp),
-        modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
+        modifier = Modifier.fillMaxWidth(),
     ) {
         var row = mutableListOf<Achievement>()
         achievements.forEachIndexed { i, ach ->
