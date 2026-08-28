@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.animateItem
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -221,7 +220,7 @@ fun LearnScreen(vm: AppViewModel) {
             key = { idx -> "glossary_${filteredGlossary[idx].termRes}" },
             contentType = { "glossaryTerm" }
         ) { idx ->
-            Box(modifier = Modifier.animateItem()) { GlossaryTermItem(term = filteredGlossary[idx]) }
+            Box(modifier = Modifier) { GlossaryTermItem(term = filteredGlossary[idx]) }
         }
         item(key = "foodPairing", contentType = "glossary") {
             FoodPairingCard()
@@ -258,7 +257,7 @@ fun LearnScreen(vm: AppViewModel) {
             cardsInChapter.forEach { card ->
                 val globalIndex = LearnContent.cards.indexOf(card)
                 item(key = "card_${card.titleRes}", contentType = "card") {
-                    CoffeeCard(onClick = { vm.openRoute(Route.LearnDetail(globalIndex)) }, modifier = Modifier.fillMaxWidth().animateItem()) {
+                    CoffeeCard(onClick = { vm.openRoute(Route.LearnDetail(globalIndex)) }, modifier = Modifier.fillMaxWidth()) {
                         AppText(stringResource(card.titleRes), style = CoffeeTheme.type.headline)
                         Spacer(Modifier.height(6.dp))
                         AppText(

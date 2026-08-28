@@ -20,12 +20,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.animateItem
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.foundation.Canvas
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.RepeatMode
@@ -35,7 +35,6 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import co.coffeery.app.ui.haptic.rememberAppHaptics
-import co.coffeery.app.ui.theme.CoffeeMotion
 import kotlin.random.Random
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -500,7 +499,7 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
                     }
                 }
                 items(items = logs, key = { it.id }, contentType = { "logCard" }) { log ->
-                    Box(modifier = Modifier.animateItem()) { BrewLogCard(log, state.equipment, vm) }
+                    Box(modifier = Modifier) { BrewLogCard(log, state.equipment, vm) }
                 }
             }
         }

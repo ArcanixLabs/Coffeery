@@ -97,7 +97,6 @@ fun <T> BottomNav(
                     modifier = Modifier
                         .weight(1f)
                         .graphicsLayer(scaleX = pressSx, scaleY = pressSy)
-                        .semantics { role = Role.Tab; selected = isSelected }
                         .clickable(
                             role = Role.Tab,
                             indication = null,

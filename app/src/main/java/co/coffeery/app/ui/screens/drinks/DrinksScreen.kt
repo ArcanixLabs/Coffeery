@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.animateItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -56,11 +55,11 @@ fun DrinksScreen(vm: AppViewModel) {
             ScreenHeader(
                 title = stringResource(R.string.drinks_title),
                 subtitle = stringResource(R.string.drinks_intro),
-                modifier = Modifier.animateItem(),
+                modifier = Modifier,
             )
         }
         item(key = "search", contentType = "search") {
-            Box(modifier = Modifier.fillMaxWidth().animateItem()) {
+            Box(modifier = Modifier.fillMaxWidth()) {
                 AppTextField(
                     value = searchQuery,
                     onValueChange = { searchQuery = it },
@@ -84,7 +83,7 @@ fun DrinksScreen(vm: AppViewModel) {
         }
         if (searchActive && filteredDrinks.isEmpty()) {
             item(key = "no_results", contentType = "no_results") {
-                Column(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp).animateItem(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                     CremaMascot(mood = "curious", modifier = Modifier.height(96.dp).width(96.dp))
                     Spacer(Modifier.height(12.dp))
                     AppText(stringResource(R.string.search_no_results), style = CoffeeTheme.type.body, color = colors.textSecondary, modifier = Modifier.fillMaxWidth(), align = TextAlign.Center)
@@ -100,13 +99,13 @@ fun DrinksScreen(vm: AppViewModel) {
                         stringResource(drink.group.labelRes),
                         style = CoffeeTheme.type.label,
                         color = colors.accent,
-                        modifier = Modifier.animateItem().padding(top = 2.dp),
+                        modifier = Modifier.padding(top = 2.dp),
                     )
                 }
             }
             val globalIndex = DrinkContent.drinks.indexOf(drink)
             item(key = "drink_${drink.nameRes}", contentType = "drink") {
-                CoffeeCard(onClick = { vm.openRoute(Route.DrinkDetail(globalIndex)) }, modifier = Modifier.fillMaxWidth().animateItem()) {
+                CoffeeCard(onClick = { vm.openRoute(Route.DrinkDetail(globalIndex)) }, modifier = Modifier.fillMaxWidth()) {
                     AppText(stringResource(drink.nameRes), style = CoffeeTheme.type.headline)
                     Spacer(Modifier.height(6.dp))
                     AppText(

@@ -75,8 +75,7 @@ fun <T> SegmentedControl(
                     .graphicsLayer(scaleX = pressSx, scaleY = pressSy)
                     .clip(CoffeeShapes.pill)
                     .background(animatedBg)
-                    .semantics { role = Role.RadioButton; selected = isSelected }
-                    .clickable(role = Role.RadioButton, interactionSource = interactionSource, indication = null) {
+                    .clickable(interactionSource = interactionSource, indication = null) {
                         haptics.segment()
                         onSelect(option)
                     }
