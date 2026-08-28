@@ -3,9 +3,9 @@ import java.io.FileInputStream
 
 plugins {
     id("com.android.application") version "8.13.2"
-    id("org.jetbrains.kotlin.android") version "2.3.0"
-    id("org.jetbrains.kotlin.plugin.compose") version "2.3.0"
-    id("com.google.devtools.ksp") version "2.3.9"
+    id("org.jetbrains.kotlin.android") version "2.4.10"
+    id("org.jetbrains.kotlin.plugin.compose") version "2.4.10"
+    id("com.google.devtools.ksp") version "2.4.10-2.0.2"
 }
 
 android {
@@ -113,6 +113,11 @@ dependencies {
     implementation("com.google.api-client:google-api-client-android:2.7.2")
     implementation("com.google.apis:google-api-services-drive:v3-rev20240521-2.0.0")
     implementation("com.google.http-client:google-http-client-gson:1.45.3")
+
+    implementation("top.yukonga.miuix.kmp:miuix-ui-android:0.9.3")
+    implementation("top.yukonga.miuix.kmp:miuix-preference-android:0.9.3")
+    implementation("top.yukonga.miuix.kmp:miuix-icons-android:0.9.3")
+    implementation("top.yukonga.miuix.kmp:miuix-squircle-android:0.9.3")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
