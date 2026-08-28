@@ -3,23 +3,42 @@ package co.coffeery.app.ui.screens.log
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.foundation.Canvas
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import co.coffeery.app.ui.haptic.rememberAppHaptics
+import kotlin.random.Random
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -29,11 +48,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.components.CoffeeDialog
+import co.coffeery.app.ui.theme.CoffeeMotion
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
+import kotlinx.coroutines.delay
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import co.coffeery.app.R
 import co.coffeery.app.data.local.BrewLogEntity
@@ -43,6 +67,7 @@ import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.Chip
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.CoffeeDialog
+import co.coffeery.app.ui.components.CremaMascot
 import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
@@ -144,21 +169,34 @@ fun BrewLogScreen(vm: AppViewModel) {
         stringResource(R.string.achievements_title),
     )
 
-    Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 24.dp)) {
-        SegmentedControl(
-            options = listOf(0, 1, 2, 3, 4),
-            selected = section,
-            label = { sections[it] },
-            onSelect = { section = it },
-            modifier = Modifier.fillMaxWidth(),
-        )
-        Spacer(Modifier.height(14.dp))
-        when (section) {
-            0 -> BrewLogContent(state, vm)
-            1 -> BeanListScreen(vm)
-            2 -> CaffeineContent(state.brewLogs)
-            3 -> BrewStatsSection(state.brewLogs)
-            4 -> AchievementsContent(state.achievements)
+    if (section == 0) {
+        Column(modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 24.dp)) {
+            SegmentedControl(
+                options = listOf(0, 1, 2, 3, 4),
+                selected = section,
+                label = { sections[it] },
+                onSelect = { section = it },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Spacer(Modifier.height(14.dp))
+            BrewLogContent(state, vm, modifier = Modifier.weight(1f).fillMaxWidth())
+        }
+    } else {
+        Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 24.dp)) {
+            SegmentedControl(
+                options = listOf(0, 1, 2, 3, 4),
+                selected = section,
+                label = { sections[it] },
+                onSelect = { section = it },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Spacer(Modifier.height(14.dp))
+            when (section) {
+                1 -> BeanListScreen(vm)
+                2 -> CaffeineContent(state.brewLogs)
+                3 -> BrewStatsSection(state.brewLogs)
+                4 -> AchievementsContent(state.achievements)
+            }
         }
     }
 }
@@ -166,30 +204,33 @@ fun BrewLogScreen(vm: AppViewModel) {
 @Composable
 private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
     val colors = CoffeeTheme.colors
+    val haptics = rememberAppHaptics()
     val today = LocalDate.now()
     val mondayOfThisWeek = today.with(DayOfWeek.MONDAY)
+    var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
+    var selectedCount by remember { mutableIntStateOf(0) }
 
-    val countsByDate: Map<LocalDate, Int> = brewLogs
-        .groupBy {
-            Instant.ofEpochMilli(it.timestamp)
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate()
+    val countsByDate by remember(brewLogs) {
+        derivedStateOf {
+            brewLogs.groupBy {
+                Instant.ofEpochMilli(it.timestamp)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+            }.mapValues { it.value.size }
         }
-        .mapValues { it.value.size }
+    }
 
     Column(modifier = Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 8.dp)) {
-        Row(modifier = Modifier.padding(start = 28.dp)) {
+        Row(modifier = Modifier.padding(start = 28.dp), horizontalArrangement = Arrangement.spacedBy(2.dp)) {
             for (col in 0 until 12) {
                 val weekDate = mondayOfThisWeek.minusWeeks((11 - col).toLong())
-                val show = col == 0 || weekDate.month != mondayOfThisWeek.minusWeeks((11 - (col - 1)).toLong()).month
-                Box(modifier = Modifier.width(14.dp)) {
+                val prevMonth = if (col > 0) mondayOfThisWeek.minusWeeks((11 - (col - 1)).toLong()).month else null
+                val prevYear = if (col > 0) mondayOfThisWeek.minusWeeks((11 - (col - 1)).toLong()).year else -1
+                val show = col == 0 || weekDate.month != prevMonth || weekDate.year != prevYear
+                Box(modifier = Modifier.width(30.dp)) {
                     if (show) {
-                        AppText(
-                            weekDate.month.getDisplayName(TextStyle.SHORT, Locale.getDefault()).take(3),
-                            style = CoffeeTheme.type.caption,
-                            color = colors.textSecondary,
-                            maxLines = 1,
-                        )
+                        val label = weekDate.month.getDisplayName(TextStyle.SHORT, Locale.getDefault()).take(3) + if (weekDate.year != today.year) " '${(weekDate.year % 100).toString().padStart(2, '0')}" else ""
+                        AppText(label, style = CoffeeTheme.type.caption, color = colors.textSecondary, maxLines = 1)
                     }
                 }
             }
@@ -221,17 +262,32 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
                                 count == 1 -> colors.accentSoft.copy(alpha = 0.4f)
                                 else -> Color.Transparent
                             }
+                            val idx = col * 7 + row
+                            val reduced = LocalPrefersReducedMotion.current
+                            val anim = remember(idx) { Animatable(if (reduced) 1f else 0f) }
+                            LaunchedEffect(reduced) {
+                                if (reduced) anim.snapTo(1f) else { delay(idx * 18L); anim.animateTo(1f, tween(CoffeeMotion.normal, easing = CoffeeMotion.emphasized)) }
+                            }
+                            val cellAlpha = anim.value
+                            val reducedHeat = LocalPrefersReducedMotion.current
+                            val beat by rememberInfiniteTransition(label = "beat$idx").animateFloat(initialValue = 1f, targetValue = if (reducedHeat || count < 3) 1f else 1.12f, animationSpec = if (count >= 3 && !reducedHeat) infiniteRepeatable(tween(420), RepeatMode.Reverse) else infiniteRepeatable(tween(1000), RepeatMode.Restart), label = "beat")
                             Box(
                                 modifier = Modifier
                                     .size(14.dp)
                                     .padding(1.dp)
                                     .clip(RoundedCornerShape(3.dp))
+                                    .graphicsLayer(alpha = cellAlpha, scaleX = (0.7f + cellAlpha * 0.3f) * beat, scaleY = (0.7f + cellAlpha * 0.3f) * beat)
                                     .background(cellColor)
                                     .then(
                                         if (!isFuture && count == 0)
                                             Modifier.border(1.dp, colors.outline, RoundedCornerShape(3.dp))
                                         else Modifier
-                                    ),
+                                    )
+                                    .clickable(enabled = !isFuture) {
+                                        if (count >= 3) haptics.tick()
+                                        else if (count > 0) haptics.tap()
+                                        selectedDate = date; selectedCount = count
+                                    },
                             )
                         }
                     }
@@ -264,6 +320,14 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
             Spacer(Modifier.width(2.dp))
             AppText("3+", style = CoffeeTheme.type.caption, color = colors.textSecondary)
         }
+        if (selectedDate != null) {
+            CoffeeDialog(onDismiss = { selectedDate = null }) {
+                val fmt = java.time.format.DateTimeFormatter.ofPattern("d MMM yyyy", Locale.getDefault())
+                AppText(selectedDate!!.format(fmt), style = CoffeeTheme.type.label, color = colors.textPrimary)
+                Spacer(Modifier.height(4.dp))
+                AppText(if (selectedCount == 0) stringResource(R.string.log_brew_count) + " 0" else "$selectedCount brew" + if (selectedCount > 1) "s" else "", style = CoffeeTheme.type.body, color = colors.textSecondary)
+            }
+        }
     }
 }
 
@@ -271,57 +335,106 @@ private fun BrewHeatmap(brewLogs: List<BrewLogEntity>) {
 private fun StreakBanner(streak: Int) {
     val colors = CoffeeTheme.colors
     val context = LocalContext.current
+    val haptics = rememberAppHaptics()
     val label = stringResource(R.string.streak_label)
     val subText = if (streak > 0) stringResource(R.string.streak_keep_going) else stringResource(R.string.streak_start)
-    AccentStripeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                AppText("$streak", style = CoffeeTheme.type.number, color = colors.accent)
-                Spacer(Modifier.width(8.dp))
-                AppText(label, style = CoffeeTheme.type.body, color = colors.textSecondary)
-            }
-            LineIcon(Glyph.FLAME, colors.accent, Modifier.size(28.dp))
+    val reduced = LocalPrefersReducedMotion.current
+    val animatedStreak by animateFloatAsState(
+        targetValue = streak.toFloat(),
+        animationSpec = if (reduced) tween(0) else CoffeeMotion.counter,
+        label = "streakCount",
+    )
+    val pulse by rememberInfiniteTransition(label = "streakPulse").animateFloat(initialValue = 1f, targetValue = if (reduced || streak == 0) 1f else 1.08f, animationSpec = if (reduced || streak == 0) infiniteRepeatable(tween(1000), RepeatMode.Restart) else infiniteRepeatable(tween(CoffeeMotion.slow), RepeatMode.Reverse), label = "pulse")
+    var showConfetti by remember { mutableStateOf(false) }
+    LaunchedEffect(streak) {
+        if (streak >= 7 && !reduced) {
+            haptics.confirm()
+            showConfetti = true
+            delay(1800)
+            showConfetti = false
+        } else if (streak >= 7) {
+            haptics.confirm()
         }
-        Spacer(Modifier.height(4.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            AppText(subText, style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.weight(1f))
-            if (streak >= 7) {
-                val shareText = stringResource(R.string.log_share_streak_text, streak)
-                SecondaryButton(
-                    text = stringResource(R.string.log_share_streak),
-                    modifier = Modifier,
-                ) {
-                    val intent = Intent(Intent.ACTION_SEND).apply {
-                        type = "text/plain"
-                        putExtra(Intent.EXTRA_TEXT, shareText)
+    }
+    Box(modifier = Modifier.fillMaxWidth()) {
+        AccentStripeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    AppText("${animatedStreak.toInt()}", style = CoffeeTheme.type.number, color = colors.accent, modifier = Modifier.graphicsLayer(scaleX = pulse, scaleY = pulse))
+                    Spacer(Modifier.width(8.dp))
+                    AppText(label, style = CoffeeTheme.type.body, color = colors.textSecondary)
+                }
+                LineIcon(Glyph.FLAME, colors.accent, Modifier.size(28.dp).graphicsLayer(scaleX = pulse, scaleY = pulse))
+            }
+            Spacer(Modifier.height(4.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                AppText(subText, style = CoffeeTheme.type.caption, color = colors.textSecondary, modifier = Modifier.weight(1f))
+                if (streak >= 7) {
+                    val shareText = stringResource(R.string.log_share_streak_text, streak)
+                    SecondaryButton(
+                        text = stringResource(R.string.log_share_streak),
+                        modifier = Modifier,
+                    ) {
+                        val intent = Intent(Intent.ACTION_SEND).apply {
+                            type = "text/plain"
+                            putExtra(Intent.EXTRA_TEXT, shareText)
+                        }
+                        context.startActivity(Intent.createChooser(intent, null))
                     }
-                    context.startActivity(Intent.createChooser(intent, null))
                 }
             }
+        }
+        if (showConfetti) {
+            StreakConfettiOverlay(modifier = Modifier.matchParentSize())
         }
     }
 }
 
 @Composable
-private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm: AppViewModel) {
+private fun StreakConfettiOverlay(modifier: Modifier = Modifier) {
+    val colors = CoffeeTheme.colors
+    data class Particle(val angle: Float, val dist: Float, val r: Float, val colIndex: Int, val shape: Int)
+    val particles = remember { List(14) { Particle(Random.nextFloat() * 360f, 18f + Random.nextFloat() * 42f, if (it % 2 == 0) 4.5f else 2.8f, it % 3, it % 2) } }
+    val anim = remember { Animatable(0f) }
+    LaunchedEffect(Unit) { anim.animateTo(1f, animationSpec = tween(durationMillis = 950, easing = CoffeeMotion.emphasized)) }
+    Canvas(modifier = modifier.fillMaxSize()) {
+        val cx = size.width / 2f
+        val cy = size.height / 2f
+        val p = anim.value
+        val alpha = (1f - p).coerceIn(0f, 1f)
+        particles.forEach { pt ->
+            val rad = Math.toRadians(pt.angle.toDouble()).toFloat()
+            val gravity = p * p * 28f
+            val x = cx + kotlin.math.cos(rad) * pt.dist * p * 1.6f
+            val y = cy + kotlin.math.sin(rad) * pt.dist * p * 1.2f + gravity
+            val col = when (pt.colIndex) { 0 -> colors.accent; 1 -> colors.cremaDark; else -> colors.accentSoft }
+            if (pt.shape == 0) drawCircle(col.copy(alpha = alpha * 0.95f), radius = pt.r, center = Offset(x, y))
+            else drawCircle(col.copy(alpha = alpha * 0.85f), radius = pt.r * 0.6f, center = Offset(x, y))
+        }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm: AppViewModel, modifier: Modifier = Modifier) {
     val colors = CoffeeTheme.colors
     var showCompare by remember { mutableStateOf(false) }
 
     if (state.brewLogs.isEmpty()) {
-        Spacer(Modifier.height(40.dp))
         Column(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp),
+            modifier = modifier.fillMaxWidth().padding(horizontal = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            LineIcon(Glyph.CUP, colors.accent, Modifier.size(48.dp))
+            Spacer(Modifier.height(40.dp))
+            CremaMascot(mood = "sleepy", modifier = Modifier.size(104.dp))
             Spacer(Modifier.height(16.dp))
             AppText(stringResource(R.string.log_empty_title),
                 style = CoffeeTheme.type.title, align = TextAlign.Center,
@@ -337,51 +450,56 @@ private fun BrewLogContent(state: co.coffeery.app.ui.screens.root.AppUiState, vm
             )
         }
     } else {
-        val streak = currentStreak(state.brewLogs)
-        val grouped = state.brewLogs
-            .groupBy { Instant.ofEpochMilli(it.timestamp).atZone(ZoneId.systemDefault()).toLocalDate() }
-            .toList()
-            .sortedByDescending { it.first }
-        Column(
+        val streak by remember(state.brewLogs) { derivedStateOf { currentStreak(state.brewLogs) } }
+        val grouped by remember(state.brewLogs) {
+            derivedStateOf {
+                state.brewLogs.groupBy { Instant.ofEpochMilli(it.timestamp).atZone(ZoneId.systemDefault()).toLocalDate() }
+                    .toList().sortedByDescending { it.first }
+            }
+        }
+        val best by remember(state.brewLogs) { derivedStateOf { bestRecipeFromLogs(state.brewLogs) } }
+        val listState = rememberLazyListState()
+        LazyColumn(
+            state = listState,
+            modifier = modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(10.dp),
-            modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(bottom = 24.dp),
         ) {
-            StreakBanner(streak)
-            BrewHeatmap(state.brewLogs)
+            item(key = "streak", contentType = "streak") { StreakBanner(streak) }
+            item(key = "heatmap", contentType = "heatmap") { BrewHeatmap(state.brewLogs) }
             if (state.brewLogs.size >= 2) {
-                CoffeeCard(modifier = Modifier.fillMaxWidth().clickable { showCompare = true }, contentPadding = 14) {
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                        Column(modifier = Modifier.weight(1f)) {
-                            AppText(stringResource(R.string.log_compare_title), style = CoffeeTheme.type.headline, color = colors.textPrimary)
-                            Spacer(Modifier.height(2.dp))
-                            AppText(stringResource(R.string.log_compare_sub), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                item(key = "compare", contentType = "compare") {
+                    CoffeeCard(modifier = Modifier.fillMaxWidth().clickable { showCompare = true }, contentPadding = 14) {
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                AppText(stringResource(R.string.log_compare_title), style = CoffeeTheme.type.headline, color = colors.textPrimary)
+                                Spacer(Modifier.height(2.dp))
+                                AppText(stringResource(R.string.log_compare_sub), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                            }
+                            PrimaryButton(text = stringResource(R.string.log_compare_button), modifier = Modifier) { showCompare = true }
                         }
-                        PrimaryButton(text = stringResource(R.string.log_compare_button), modifier = Modifier) { showCompare = true }
                     }
                 }
             }
             if (state.brewLogs.size >= 3) {
-                AnalyticsCard(state.brewLogs)
+                item(key = "analytics", contentType = "analytics") { AnalyticsCard(state.brewLogs) }
             }
-            val best = bestRecipeFromLogs(state.brewLogs)
             if (best != null) {
-                BestRecipeBanner(best, vm)
+                item(key = "best", contentType = "best") { BestRecipeBanner(best!!, vm) }
             }
             grouped.forEach { (date, logs) ->
-                val dateLabel = when {
-                    date == LocalDate.now() -> stringResource(R.string.log_date_today)
-                    date == LocalDate.now().minusDays(1) -> stringResource(R.string.log_date_yesterday)
-                    else -> date.format(java.time.format.DateTimeFormatter.ofPattern("d MMMM", Locale.getDefault()))
+                stickyHeader(key = date.toString(), contentType = "header") {
+                    val dateLabel = when {
+                        date == LocalDate.now() -> stringResource(R.string.log_date_today)
+                        date == LocalDate.now().minusDays(1) -> stringResource(R.string.log_date_yesterday)
+                        else -> date.format(java.time.format.DateTimeFormatter.ofPattern("d MMMM", Locale.getDefault()))
+                    }
+                    Box(modifier = Modifier.fillMaxWidth().background(CoffeeTheme.colors.background).padding(start = 2.dp, top = 4.dp, bottom = 4.dp)) {
+                        AppText(dateLabel, style = CoffeeTheme.type.label, color = colors.textSecondary)
+                    }
                 }
-                Spacer(Modifier.height(4.dp))
-                AppText(
-                    dateLabel,
-                    style = CoffeeTheme.type.label,
-                    color = colors.textSecondary,
-                    modifier = Modifier.padding(start = 2.dp),
-                )
-                logs.forEach { log ->
-                    BrewLogCard(log, state.equipment, vm)
+                items(items = logs, key = { it.id }, contentType = { "logCard" }) { log ->
+                    Box(modifier = Modifier) { BrewLogCard(log, state.equipment, vm) }
                 }
             }
         }
@@ -416,6 +534,12 @@ private fun AnalyticsCard(brewLogs: List<BrewLogEntity>) {
         .maxByOrNull { it.value }
         ?.let { if (it.value > 0) it.key else null }
 
+    val reducedAnalytics = LocalPrefersReducedMotion.current
+    val animatedWeek by animateFloatAsState(
+        targetValue = totalThisWeek.toFloat(),
+        animationSpec = if (reducedAnalytics) tween(0) else CoffeeMotion.counter,
+        label = "weekCount",
+    )
     CoffeeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -423,7 +547,7 @@ private fun AnalyticsCard(brewLogs: List<BrewLogEntity>) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             AppText(stringResource(R.string.log_analytics_week), style = CoffeeTheme.type.label, color = colors.textSecondary)
-            AppText("$totalThisWeek", style = CoffeeTheme.type.display, color = colors.accent)
+            AppText("${animatedWeek.toInt()}", style = CoffeeTheme.type.display, color = colors.accent)
         }
         Spacer(Modifier.height(8.dp))
 
@@ -459,7 +583,7 @@ private fun AnalyticsCard(brewLogs: List<BrewLogEntity>) {
 @Composable
 private fun BestRecipeBanner(best: BestRecipeSuggestion, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
-    AccentStripeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
+    AccentStripeCard(modifier = Modifier.fillMaxWidth().clickable { vm.applyBestRecipe(best) }, contentPadding = 14) {
         val grindStr = best.grind.lowercase().replace("_", "-")
         val tempStr = if (best.tempCelsius > 0) ", ${best.tempCelsius}°C" else ""
         AppText(stringResource(R.string.log_best_recipe_label, best.equipmentName), style = CoffeeTheme.type.caption, color = colors.accent)
@@ -602,7 +726,11 @@ private fun BrewLogCard(log: BrewLogEntity, equipment: List<Equipment>, vm: AppV
         if (!log.photoUri.isNullOrBlank()) {
             Spacer(Modifier.height(6.dp))
             AsyncImage(
-                model = Uri.parse(log.photoUri),
+                model = coil.request.ImageRequest.Builder(LocalContext.current)
+                    .data(Uri.parse(log.photoUri))
+                    .size(480)
+                    .crossfade(true)
+                    .build(),
                 contentDescription = "Brew photo",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -646,13 +774,26 @@ private fun CaffeineContent(brewLogs: List<BrewLogEntity>) {
     }
 
     if (todayLogs.isEmpty()) {
-        Spacer(Modifier.height(40.dp))
-        AppText(
-            stringResource(R.string.caffeine_none),
-            style = CoffeeTheme.type.body,
-            color = colors.textSecondary,
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp),
-        )
+        Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            Spacer(Modifier.height(24.dp))
+            CremaMascot(mood = "sleepy", modifier = Modifier.size(96.dp))
+            Spacer(Modifier.height(12.dp))
+            AppText(
+                stringResource(R.string.caffeine_none),
+                style = CoffeeTheme.type.body,
+                color = colors.textSecondary,
+                modifier = Modifier.fillMaxWidth(),
+                align = TextAlign.Center,
+            )
+            Spacer(Modifier.height(8.dp))
+            AppText(
+                stringResource(R.string.log_empty_sub),
+                style = CoffeeTheme.type.caption,
+                color = colors.textSecondary,
+                modifier = Modifier.fillMaxWidth(),
+                align = TextAlign.Center,
+            )
+        }
         return
     }
 
@@ -660,6 +801,17 @@ private fun CaffeineContent(brewLogs: List<BrewLogEntity>) {
     val brewsCount = todayLogs.size
     val maxMg = 600
     val fillRatio = (totalCaffeine.coerceAtMost(maxMg).toFloat() / maxMg)
+    val reduced = LocalPrefersReducedMotion.current
+    val animatedRatio by animateFloatAsState(
+        targetValue = fillRatio,
+        animationSpec = if (reduced) tween(0) else CoffeeMotion.cardExpand,
+        label = "caffeineBar",
+    )
+    val animatedTotal by animateFloatAsState(
+        targetValue = totalCaffeine.toFloat(),
+        animationSpec = if (reduced) tween(0) else CoffeeMotion.counter,
+        label = "caffeineTotal",
+    )
 
     val barColor = when {
         totalCaffeine <= 200 -> colors.accentSoft
@@ -672,7 +824,7 @@ private fun CaffeineContent(brewLogs: List<BrewLogEntity>) {
                 AppText(stringResource(R.string.caffeine_today), style = CoffeeTheme.type.label, color = colors.textSecondary)
                 Spacer(Modifier.height(4.dp))
                 AppText(
-                    "$totalCaffeine ${stringResource(R.string.caffeine_total, brewsCount)}",
+                    "${animatedTotal.toInt()} ${stringResource(R.string.caffeine_total, brewsCount)}",
                     style = CoffeeTheme.type.display,
                     color = barColor,
                 )
@@ -680,7 +832,7 @@ private fun CaffeineContent(brewLogs: List<BrewLogEntity>) {
                 Box(modifier = Modifier.fillMaxWidth().height(10.dp).clip(RoundedCornerShape(5.dp)).background(colors.outline.copy(alpha = 0.3f))) {
                     Box(
                         modifier = Modifier
-                            .fillMaxWidth(fillRatio)
+                            .fillMaxWidth(animatedRatio)
                             .height(10.dp)
                             .clip(RoundedCornerShape(5.dp))
                             .background(barColor),

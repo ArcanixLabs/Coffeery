@@ -24,28 +24,36 @@ data class CoffeeTypography(
     val number: TextStyle,
 )
 
-val FrauncesFamily = FontFamily(Font(R.font.fraunces, FontWeight.Bold))
-val ManropeFamily = FontFamily(Font(R.font.manrope, FontWeight.Normal))
+val FrauncesFamily = FontFamily(
+    Font(R.font.fraunces, FontWeight.Normal),
+    Font(R.font.fraunces, FontWeight.Bold),
+)
+val ManropeFamily = FontFamily(
+    Font(R.font.manrope, FontWeight.Normal),
+    Font(R.font.manrope, FontWeight.Medium),
+    Font(R.font.manrope, FontWeight.SemiBold),
+    Font(R.font.manrope, FontWeight.Bold),
+)
 
 val DefaultCoffeeTypography = CoffeeTypography(
     display = TextStyle(
         fontFamily = FrauncesFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 36.sp,
+        fontSize = 32.sp,
         lineHeight = 40.sp,
         letterSpacing = (-0.5).sp,
     ),
     title = TextStyle(
         fontFamily = FrauncesFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
-        lineHeight = 26.sp,
+        fontSize = 18.sp,
+        lineHeight = 24.sp,
     ),
     headline = TextStyle(
         fontFamily = ManropeFamily,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 16.sp,
-        lineHeight = 22.sp,
+        fontSize = 18.sp,
+        lineHeight = 24.sp,
     ),
     body = TextStyle(
         fontFamily = ManropeFamily,
@@ -62,22 +70,22 @@ val DefaultCoffeeTypography = CoffeeTypography(
     label = TextStyle(
         fontFamily = ManropeFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 15.sp,
-        letterSpacing = 0.5.sp,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.4.sp,
     ),
     caption = TextStyle(
         fontFamily = ManropeFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 11.sp,
-        lineHeight = 15.sp,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
     ),
     number = TextStyle(
         fontFamily = FrauncesFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 30.sp,
-        lineHeight = 32.sp,
-        letterSpacing = (-0.8).sp,
+        fontSize = 32.sp,
+        lineHeight = 40.sp,
+        letterSpacing = (-0.5).sp,
     ),
 )
 

@@ -1,12 +1,19 @@
 package co.coffeery.app.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import co.coffeery.app.data.model.Palette
 import co.coffeery.app.data.model.ThemeMode
+import top.yukonga.miuix.kmp.theme.ColorSchemeMode
+import top.yukonga.miuix.kmp.theme.MiuixTheme
+import top.yukonga.miuix.kmp.theme.ThemeController
 
 /** Entry point for the design system. Provides colours, type and spacing and
  *  keeps a single identity across light/dark rather than a bare inversion. */
@@ -22,11 +29,37 @@ fun CoffeeTheme(
         ThemeMode.LIGHT -> false
         ThemeMode.DARK -> true
     }
-    val colors = paletteColors(palette, darkTheme)
+    if (palette == Palette.MIUIX) {
+        val controller = remember(darkTheme) {
+            ThemeController(
+                colorSchemeMode = if (darkTheme) ColorSchemeMode.Dark else ColorSchemeMode.Light,
+            )
+        }
+        MiuixTheme(controller = controller) {
+            val colors = remember(palette, darkTheme) { paletteColors(palette, darkTheme) }
+            val reducedMotion = rememberPrefersReducedMotion()
+            CompositionLocalProvider(
+                LocalCoffeeColors provides colors,
+                LocalCoffeeTypography provides DefaultCoffeeTypography,
+                LocalCoffeeSpacing provides DefaultSpacing,
+                LocalMotionTokens provides MotionTokens(),
+                LocalPrefersReducedMotion provides reducedMotion,
+            ) {
+                Box(Modifier.fillMaxSize().coffeeBackground(colors)) {
+                    content()
+                }
+            }
+        }
+        return
+    }
+    val colors = remember(palette, darkTheme) { paletteColors(palette, darkTheme) }
+    val reducedMotion = rememberPrefersReducedMotion()
     CompositionLocalProvider(
         LocalCoffeeColors provides colors,
         LocalCoffeeTypography provides DefaultCoffeeTypography,
-        LocalCoffeeSpacing provides CoffeeSpacing(),
+        LocalCoffeeSpacing provides DefaultSpacing,
+        LocalMotionTokens provides MotionTokens(),
+        LocalPrefersReducedMotion provides reducedMotion,
         content = content,
     )
 }

@@ -40,15 +40,22 @@ class TimerService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        if (isRunning) return START_NOT_STICKY
         val equipment = intent?.getStringExtra("equipment") ?: currentEquipment
         currentEquipment = equipment
         startForeground(NOTIFICATION_ID, buildNotification(this))
         isRunning = true
-        return START_STICKY
+        return START_NOT_STICKY
     }
 
     override fun onDestroy() {
         isRunning = false
+        currentEquipment = ""
+        currentStep = ""
+        currentRemaining = ""
+        stepIndex = 0
+        totalSteps = 0
+        try { stopForeground(androidx.core.app.ServiceCompat.STOP_FOREGROUND_REMOVE) } catch (_: Exception) {}
         super.onDestroy()
     }
 }
@@ -63,6 +70,8 @@ private fun buildNotification(context: Context): Notification {
 
     val openIntent = Intent(context, MainActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        putExtra("route", "Timer")
+        putExtra("deeplink_route", "Timer")
     }
     val openPending = PendingIntent.getActivity(
         context, 1, openIntent,

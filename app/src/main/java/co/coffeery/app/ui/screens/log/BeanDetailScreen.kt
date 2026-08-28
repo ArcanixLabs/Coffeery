@@ -47,9 +47,11 @@ fun BeanDetailScreen(beanId: Long, vm: AppViewModel) {
 
     Column(
         modifier = Modifier
+            .fillMaxWidth()
             .padding(horizontal = 20.dp)
             .padding(top = 12.dp, bottom = 96.dp),
     ) {
+
         ScreenHeader(
             title = bean?.name ?: stringResource(R.string.bean_detail_title),
             onBack = { vm.back() },
@@ -57,12 +59,23 @@ fun BeanDetailScreen(beanId: Long, vm: AppViewModel) {
 
         if (bean == null) {
             Spacer(Modifier.height(40.dp))
-            AppText(
-                stringResource(R.string.bean_detail_title),
-                style = CoffeeTheme.type.body,
-                color = colors.textSecondary,
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp),
-            )
+            Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                co.coffeery.app.ui.components.CremaMascot(mood = "curious", modifier = Modifier.size(96.dp))
+                Spacer(Modifier.height(12.dp))
+                AppText(
+                    stringResource(R.string.bean_detail_title) + " — not found",
+                    style = CoffeeTheme.type.title,
+                    color = colors.textPrimary,
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp),
+                )
+                Spacer(Modifier.height(4.dp))
+                AppText(
+                    "This bean may have been archived or removed.",
+                    style = CoffeeTheme.type.body,
+                    color = colors.textSecondary,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
             return
         }
 

@@ -90,7 +90,7 @@
     <string name="calc_change">Change</string>
     <string name="calc_input_cups">Cups</string>
     <string name="calc_input_water">Water (ml)</string>
-    <string name="calc_cups_value">%1$d cups</string>
+    <string name="calc_cups_value" formatted="false">%1$d cups</string>
     <string name="calc_strength">Strength</string>
     <string name="calc_weaker">Milder</string>
     <string name="calc_stronger">Bolder</string>
@@ -100,9 +100,9 @@
     <string name="calc_out_temp">Water temp</string>
     <string name="calc_out_grind">Grind</string>
     <string name="calc_ratio">Ratio</string>
-    <string name="calc_grams">%1$s g</string>
-    <string name="calc_ml">%1$s ml</string>
-    <string name="calc_celsius">%1$s°C</string>
+    <string name="calc_grams" formatted="false">%1$s g</string>
+    <string name="calc_ml" formatted="false">%1$s ml</string>
+    <string name="calc_celsius" formatted="false">%1$s°C</string>
     <string name="calc_temp_slow">Low heat, near boiling</string>
     <string name="calc_temp_cold">Room temp / fridge</string>
     <string name="calc_time">Brew time</string>
@@ -116,20 +116,20 @@
     <string name="strength_light_label">light, everyday drinking</string>
     <string name="strength_balanced_label">balanced, standard</string>
     <string name="strength_strong_label">strong, intense</string>
-    <string name="strength_ratio_summary">1:%1$s — %2$s</string>
+    <string name="strength_ratio_summary" formatted="false">1:%1$s — %2$s</string>
 
     <!-- Brew timer -->
-    <string name="brew_title">Brewing %1$s</string>
-    <string name="brew_step_counter">Step %1$d of %2$d</string>
+    <string name="brew_title" formatted="false">Brewing %1$s</string>
+    <string name="brew_step_counter" formatted="false">Step %1$d of %2$d</string>
     <string name="brew_tap_start">Tap to start the timer</string>
     <string name="brew_pause">Pause</string>
     <string name="brew_resume">Resume</string>
     <string name="brew_finish">Finish</string>
-    <string name="brew_next_up">Next: %1$s</string>
-    <string name="brew_pour_to">Pour to %1$d g total</string>
+    <string name="brew_next_up" formatted="false">Next: %1$s</string>
+    <string name="brew_pour_to" formatted="false">Pour to %1$d g total</string>
     <string name="brew_complete">Enjoy your coffee ☕</string>
     <string name="timer_hands_free">Hands-free</string>
-    <string name="brew_complete_sub">Brewed with %1$s</string>
+    <string name="brew_complete_sub" formatted="false">Brewed with %1$s</string>
     <string name="brew_elapsed">Total elapsed</string>
     <string name="brew_adjust_pour">Adjust pour</string>
     <string name="brew_adjust_less">−</string>
@@ -139,7 +139,7 @@
     <string name="step_rinse">Rinse the filter</string>
     <string name="step_bloom">Bloom</string>
     <string name="step_pour">Pour</string>
-    <string name="step_pour_n">Pour %1$d</string>
+    <string name="step_pour_n" formatted="false">Pour %1$d</string>
     <string name="step_swirl">Swirl gently</string>
     <string name="step_steep">Steep</string>
     <string name="step_stir">Stir once</string>
@@ -153,7 +153,7 @@
     <string name="step_serve">Serve</string>
     <string name="step_wait">Wait</string>
     <string name="step_add_coffee">Add coffee &amp; water</string>
-    <string name="step_desc_bloom">Wet all the grounds with %1$d g water and let the coffee de-gas.</string>
+    <string name="step_desc_bloom" formatted="false">Wet all the grounds with %1$d g water and let the coffee de-gas.</string>
     <string name="step_desc_generic">Follow the pour and keep the flow steady.</string>
 
     <!-- Save recipe -->
@@ -164,10 +164,10 @@
     <!-- Recipes screen -->
     <string name="recipes_title">Saved recipes</string>
     <string name="recipes_empty">No saved recipes yet.\nDial in a brew and tap Save.</string>
-    <string name="empty_recipes_title">No saved recipes yet</string>
-    <string name="empty_recipes_sub">Save your brew calculator settings as a recipe to reuse them later</string>
+    <string name="empty_recipes_title">Your recipe shelf is snoozing ☕</string>
+    <string name="empty_recipes_sub">Save a brew you love and it’ll perk up right here — ready to replay</string>
     <string name="empty_recipes_action">Start Brewing</string>
-    <string name="recipes_summary">%1$s · %2$s g : %3$s ml</string>
+    <string name="recipes_summary" formatted="false">%1$s · %2$s g : %3$s ml</string>
     <string name="recipes_delete_confirm">Delete this recipe?</string>
     <string name="recipe_load">View recipe</string>
     <string name="recipe_recent">Recent recipe</string>
@@ -198,8 +198,8 @@
     <string name="learn_quiz_title">Quick Quiz</string>
     <string name="learn_quiz_correct">Correct!</string>
     <string name="learn_quiz_wrong">Not quite</string>
-    <string name="learn_quiz_score">Score: %1$d/150 correct today</string>
-    <string name="learn_quiz_streak">Streak: %1$d in a row! 🔥</string>
+    <string name="learn_quiz_score" formatted="false">Score: %1$d/150 correct today</string>
+    <string name="learn_quiz_streak" formatted="false">Streak: %1$d in a row! 🔥</string>
     <string name="learn_quiz_random">Random Question</string>
     <string name="taste_sour">Sour</string>
     <string name="taste_bitter">Bitter</string>
@@ -226,8 +226,8 @@
     <string name="learn_c1_title">The Golden Cup</string>
     <string name="learn_c1_body" formatted="false">Only ~28–30% of a coffee bean is soluble. A great brew extracts 18–22% of those solids at a strength (TDS) of 1.15–1.45%. Below the window coffee tastes sour and thin; above it, bitter and astringent.</string>
     <string name="learn_c2_title">Grind is king</string>
-    <string name="learn_c2_body">Particle size decides extraction. Burr grinders keep ~75–85% of grounds at the target size; blade grinders scatter fines and boulders, giving you sourness and bitterness in the same cup. Grind right before brewing — ground coffee goes stale within 15 minutes.</string>
-    <string name="learn_c3_title">Water is 98% of your cup</string>
+    <string name="learn_c2_body" formatted="false">Particle size decides extraction. Burr grinders keep ~75–85% of grounds at the target size; blade grinders scatter fines and boulders, giving you sourness and bitterness in the same cup. Grind right before brewing — ground coffee goes stale within 15 minutes.</string>
+    <string name="learn_c3_title" formatted="false">Water is 98% of your cup</string>
     <string name="learn_c3_body">Aim for ~150 ppm TDS (SCA: 75–250), general hardness 50–175 ppm and alkalinity 40–70 ppm. Chlorine ruins delicate aromatics — a simple carbon filter is the cheapest upgrade you can make.</string>
     <string name="learn_c4_title">Water temperature</string>
     <string name="learn_c4_body">90–96°C suits most methods. Rest boiling water 30–60 seconds first. Light roasts like the lower end to protect delicate aromatics; a cooler pour (≈88°C) can tame a dark roast\'s bitterness.</string>
@@ -262,6 +262,12 @@
     <string name="equip_batchbrew_tag">Automatic drip machine</string>
     <string name="equip_napoletana_name">Napoletana</string>
     <string name="equip_napoletana_tag">Neapolitan flip pot</string>
+    <string name="equip_orea_name">Orea V4</string>
+    <string name="equip_orea_tag">Flatbed modular, 4 bases</string>
+    <string name="equip_pulsar_name">NextLevel Pulsar</string>
+    <string name="equip_pulsar_tag">No-bypass valve hybrid</string>
+    <string name="equip_tricolate_name">Tricolate</string>
+    <string name="equip_tricolate_tag">Zero-bypass cylinder</string>
 
     <string name="equip_watch_video">Watch tutorial</string>
     <string name="calc_watch_video">Watch</string>
@@ -317,7 +323,7 @@
     <string name="learn_l13_title">Coffee growing regions</string>
     <string name="learn_l13_body">Coffee grows in the Bean Belt between the Tropics. Each region leaves a distinct fingerprint. Ethiopia: floral, citrus, tea-like (Yirgacheffe) or winey, blueberry (Harrar). Kenya: bright blackcurrant acidity, full body. Colombia: balanced caramel sweetness, apple notes. Brazil: low acidity, chocolate, nutty — perfect espresso base. Guatemala: rich, spicy chocolate. Sumatra: earthy, woody, syrupy body. Higher altitude beans mature slower, growing denser with more sugar and brighter acidity.</string>
     <string name="learn_l14_title">Brew ratio &amp; strength</string>
-    <string name="learn_l14_body">The coffee-to-water ratio is the simplest lever you control. 1:15 = stronger, 1:17 = lighter. SCA Golden Cup: 55 g/L (≈1:18) with 18–22% extraction. Espresso is much tighter at 1:2 (18 g in → 36 g out). If your cup tastes watery, tighten the ratio. If it overwhelms, loosen it. Most pour-over lands at 1:15–1:17. Remember: ratio changes strength; grind and temperature change extraction. They are independent — adjust both to dial in.</string>
+    <string name="learn_l14_body" formatted="false">The coffee-to-water ratio is the simplest lever you control. 1:15 = stronger, 1:17 = lighter. SCA Golden Cup: 55 g/L (≈1:18) with 18–22% extraction. Espresso is much tighter at 1:2 (18 g in → 36 g out). If your cup tastes watery, tighten the ratio. If it overwhelms, loosen it. Most pour-over lands at 1:15–1:17. Remember: ratio changes strength; grind and temperature change extraction. They are independent — adjust both to dial in.</string>
     <string name="learn_l15_title">Decaf methods</string>
     <string name="learn_l15_body">Decaf removes caffeine before roasting. Swiss Water Process uses only water and carbon filters — no chemicals, best flavour preservation. CO₂ method uses pressurised carbon dioxide to selectively dissolve caffeine. Sugarcane (ethyl acetate) is natural-sourced. Solvent methods (methylene chloride) are regulated but some avoid them. All decaf still contains trace caffeine (~2–5 mg per cup). Swiss Water is the gold standard for specialty decaf.</string>
     <string name="learn_l16_title">Burr vs blade grinders</string>
@@ -379,8 +385,8 @@
     <!-- Brew log -->
     <string name="save_brew_log">Log this brew</string>
     <string name="log_empty">No brews logged yet.\nComplete a brew and save it to start building your diary.</string>
-    <string name="empty_brews_title">No brews logged yet</string>
-    <string name="empty_brews_desc">Start brewing to track your coffee journey</string>
+    <string name="empty_brews_title">No brews logged — time to make magic ✨</string>
+    <string name="empty_brews_desc">Hit brew and watch your coffee story pour in</string>
     <string name="empty_brews_action">Start your first brew</string>
     <string name="log_rating">Rating</string>
     <string name="log_grind_size">Grind size</string>
@@ -398,8 +404,8 @@
     <!-- Beans -->
     <string name="beans_title">Beans</string>
     <string name="beans_empty">No beans added yet. Track your coffee bags here — origin, roaster, roast date.</string>
-    <string name="empty_beans_title">No beans yet</string>
-    <string name="empty_beans_sub">Add your first coffee bean to start tracking your collection</string>
+    <string name="empty_beans_title">No beans in the hopper yet</string>
+    <string name="empty_beans_sub">Add your first bag — origin, roaster, and all the tasty bits</string>
     <string name="empty_beans_action">Add Bean</string>
     <string name="beans_add">Add beans</string>
     <string name="beans_name_hint">Bean name (e.g. Ethiopia Yirgacheffe)</string>
@@ -408,7 +414,7 @@
     <string name="beans_date_hint">Roast date (yyyy-MM-dd)</string>
     <string name="beans_notes_hint">Notes</string>
     <string name="log_reproduce">Reproduce</string>
-    <string name="log_best_recipe_label">Your best %s</string>
+    <string name="log_best_recipe_label" formatted="false">Your best %s</string>
     <string name="log_best_recipe_tap">Tap to load · based on your top brews</string>
     <string name="log_brew_count">Brews</string>
     <string name="log_streak_label">day streak</string>
@@ -418,9 +424,9 @@
     <string name="streak_label">day streak!</string>
     <string name="streak_keep_going">Keep brewing!</string>
     <string name="streak_start">Start your streak!</string>
-    <string name="brew_reminder_streak">🔥 %1$d day streak — keep it going!</string>
+    <string name="brew_reminder_streak" formatted="false">🔥 %1$d day streak — keep it going!</string>
     <string name="log_share_streak">Share your streak</string>
-    <string name="log_share_streak_text">I\'ve brewed coffee %d days in a row with Coffeery! ☕</string>
+    <string name="log_share_streak_text" formatted="false">I\'ve brewed coffee %d days in a row with Coffeery! ☕</string>
 
     <!-- Brew log analytics -->
     <string name="log_analytics_week">This Week</string>
@@ -428,10 +434,10 @@
     <string name="log_analytics_rating">Avg rating</string>
     <string name="log_analytics_bean">Best bean</string>
 
-    <string name="log_empty_title">No brews yet</string>
-    <string name="log_empty_sub">Start brewing to track your coffee journey</string>
+    <string name="log_empty_title">Your journal is empty ☕</string>
+    <string name="log_empty_sub">Brew something wonderful and it’ll appear here</string>
     <string name="log_start_brewing">Start brewing</string>
-    <string name="log_rating_out">%1$d/5</string>
+    <string name="log_rating_out" formatted="false">%1$d/5</string>
     <string name="log_date_today">Today</string>
     <string name="log_date_yesterday">Yesterday</string>
     <string name="log_compare_title">Compare your brews</string>
@@ -451,7 +457,7 @@
     <string name="learn_extraction_water_label">Water amount</string>
     <string name="learn_extraction_tds_label">TDS</string>
     <string name="learn_extraction_result">Extraction Yield</string>
-    <string name="learn_extraction_ideal">Golden Cup! Right in the 18–22% ideal band.</string>
+    <string name="learn_extraction_ideal" formatted="false">Golden Cup! Right in the 18–22% ideal band.</string>
     <string name="learn_extraction_under">Under-extracted — grind finer or increase brew time.</string>
     <string name="learn_extraction_over">Over-extracted — grind coarser or decrease brew time.</string>
 
@@ -505,8 +511,8 @@
     <string name="pro_tip_37">The \'cooling curve\' tasting technique: take your first sip at ~70°C, then keep tasting as it cools to room temperature over 10 minutes. Acidity peaks at 50-60°C. Sweetness at 40°C. Bitterness dominates when very hot. You\'ll taste notes you missed in the first sip.</string>
     <string name="pro_tip_38">Label your coffee bags with roast date, not \'best by\' date. Coffee isn\'t milk — it doesn\'t suddenly go bad on a printed date. Instead, it gradually declines from its peak. Knowing the roast date lets you calculate optimal brewing windows.</string>
     <string name="pro_tip_39">Keep a brew journal — even a simple notebook entry with grind setting, ratio, and one-sentence taste note. After 20 brews with the same coffee, you\'ll see clear patterns. This is the fastest path from \'I like this\' to \'I know why I like this.\'</string>
-    <string name="pro_tip_40">The 80/20 rule of coffee quality: 80% of your result comes from these four things — freshly roasted beans, a burr grinder, a scale, and filtered water. The remaining 20% is technique, equipment, and ritual. Master the 80% first.</string>
-    <string name="pro_tip_41">For iced pour-over, split your water: 60% hot for brewing, 40% as ice in the carafe. The ice flash-chills and dilutes to perfect strength. Use 1–2 clicks finer grind than your usual hot recipe.</string>
+    <string name="pro_tip_40" formatted="false">The 80/20 rule of coffee quality: 80% of your result comes from these four things — freshly roasted beans, a burr grinder, a scale, and filtered water. The remaining 20% is technique, equipment, and ritual. Master the 80% first.</string>
+    <string name="pro_tip_41" formatted="false">For iced pour-over, split your water: 60% hot for brewing, 40% as ice in the carafe. The ice flash-chills and dilutes to perfect strength. Use 1–2 clicks finer grind than your usual hot recipe.</string>
     <string name="pro_tip_42">The \'Hoffmann French Press\' technique: use medium grind (not coarse), steep 4 min, break the crust, scoop foam, wait 5+ minutes for fines to settle, then plunge just to the surface. Clean cup with full body.</string>
     <string name="pro_tip_43">Espresso grind size is set by your basket, not your preference. Under-dose a VST basket and you\'ll get a soggy puck. Fill to the basket\'s rated capacity (±1g) for best results.</string>
     <string name="pro_tip_44">Your coffee\'s bloom tells you its age: no bloom = 3+ weeks old. Violent bloom with large bubbles = 2–5 days post-roast, still degassing heavily. Gentle, even bloom = optimal drinking window (5–14 days).</string>
@@ -538,7 +544,7 @@
     <string name="glossary_term_9">Dialing In</string>
     <string name="glossary_def_9">The process of adjusting grind, dose, and yield to achieve optimal espresso extraction.</string>
     <string name="glossary_term_10">Extraction</string>
-    <string name="glossary_def_10">The process of dissolving soluble compounds from coffee grounds into water. Target: 18–22% extraction yield.</string>
+    <string name="glossary_def_10" formatted="false">The process of dissolving soluble compounds from coffee grounds into water. Target: 18–22% extraction yield.</string>
     <string name="glossary_term_11">Fines</string>
     <string name="glossary_def_11">Very small coffee particles produced during grinding. Excess fines cause clogging and bitterness.</string>
     <string name="glossary_term_12">First Crack</string>
@@ -550,7 +556,7 @@
     <string name="glossary_term_15">Mouthfeel</string>
     <string name="glossary_def_15">The tactile sensation of coffee in the mouth, influenced by body, oils, and suspended particles.</string>
     <string name="glossary_term_16">Over-extraction</string>
-    <string name="glossary_def_16">When too much coffee solubles dissolve, producing bitter, harsh, and astringent flavors (above 22% yield).</string>
+    <string name="glossary_def_16" formatted="false">When too much coffee solubles dissolve, producing bitter, harsh, and astringent flavors (above 22% yield).</string>
     <string name="glossary_term_17">Puck</string>
     <string name="glossary_def_17">The compressed disc of coffee grounds in an espresso portafilter after extraction.</string>
     <string name="glossary_term_18">Quakers</string>
@@ -566,9 +572,9 @@
     <string name="glossary_term_23">Terroir</string>
     <string name="glossary_def_23">The environmental factors — soil, climate, altitude — that give coffee from a specific region its unique character.</string>
     <string name="glossary_term_24">TDS</string>
-    <string name="glossary_def_24">Total Dissolved Solids. Measures brew strength. Ideal: 1.15–1.55% for filter coffee.</string>
+    <string name="glossary_def_24" formatted="false">Total Dissolved Solids. Measures brew strength. Ideal: 1.15–1.55% for filter coffee.</string>
     <string name="glossary_term_25">Under-extraction</string>
-    <string name="glossary_def_25">When too few solubles dissolve, resulting in sour, salty, and thin coffee (below 18% yield).</string>
+    <string name="glossary_def_25" formatted="false">When too few solubles dissolve, resulting in sour, salty, and thin coffee (below 18% yield).</string>
     <string name="glossary_term_26">Agitation</string>
     <string name="glossary_def_26">Any movement of the coffee bed during brewing — stirring, swirling, or pulse pouring — that increases extraction by exposing fresh particle surfaces to water.</string>
     <string name="glossary_term_27">Bypass</string>
@@ -614,7 +620,7 @@
     <string name="glossary_term_47">Hydrometer / Refractometer</string>
     <string name="glossary_def_47">A device that measures Total Dissolved Solids (TDS) in brewed coffee by analyzing light refraction through a coffee sample. Used with the SCA Brewing Control Chart to calculate extraction yield. VST and Atago are the industry standards. Now accessible to home baristas via relatively affordable devices.</string>
     <string name="glossary_term_48">Over-Extraction</string>
-    <string name="glossary_def_48">Removing more than the desirable ~22% of coffee solubles from the grounds. Results in bitter, astringent, hollow flavors as desirable compounds are extracted first, followed by less pleasant ones. Fix by grinding coarser, using cooler water, or reducing brew/contact time.</string>
+    <string name="glossary_def_48" formatted="false">Removing more than the desirable ~22% of coffee solubles from the grounds. Results in bitter, astringent, hollow flavors as desirable compounds are extracted first, followed by less pleasant ones. Fix by grinding coarser, using cooler water, or reducing brew/contact time.</string>
     <string name="glossary_term_49">SCA Score</string>
     <string name="glossary_def_49">The 100-point scale used by the Specialty Coffee Association to grade green coffee. Coffees scoring 80+ are \'specialty grade\'; 80-84.99 is \'Very Good\', 85-89.99 is \'Excellent\', 90-100 is \'Outstanding\' (rarely awarded). Cupping scores directly impact green coffee prices.</string>
     <string name="glossary_term_50">Screw/Thumbprint</string>
@@ -622,7 +628,7 @@
     <string name="glossary_term_51">Single Origin</string>
     <string name="glossary_def_51">Coffee sourced from a single producer, farm, cooperative, or region rather than blended from multiple sources. Single origins showcase terroir — the unique flavor fingerprint of a specific place. Counterpoint to blends, which aim for consistency and balance across origins.</string>
     <string name="glossary_term_52">Solubility</string>
-    <string name="glossary_def_52">The degree to which coffee compounds dissolve in water. Approximately 28-30% of coffee bean mass is water-soluble, but only 18-22% tastes good. Different compounds dissolve at different rates: acids and sugars extract quickly; bitter compounds extract slowly. Controlling solubility is the essence of brewing.</string>
+    <string name="glossary_def_52" formatted="false">The degree to which coffee compounds dissolve in water. Approximately 28-30% of coffee bean mass is water-soluble, but only 18-22% tastes good. Different compounds dissolve at different rates: acids and sugars extract quickly; bitter compounds extract slowly. Controlling solubility is the essence of brewing.</string>
     <string name="glossary_term_53">Tare</string>
     <string name="glossary_def_53">Resetting a scale to zero to measure only the weight of what\'s added. Always tare your scale with the empty dripper/cup/portafilter before adding coffee, and again before adding water. Taring at each step ensures accurate ratios and repeatable results.</string>
     <string name="glossary_term_54">Water Activity (Aw)</string>
@@ -632,7 +638,7 @@
     <string name="glossary_term_56">Chaff</string>
     <string name="glossary_def_56">The papery silver skin that flakes off coffee beans during roasting. Light roasts retain more chaff in the bean crease. Excessive chaff can clog grinders and add a papery taste if not removed.</string>
     <string name="glossary_term_57">Peaberry</string>
-    <string name="glossary_def_57">A natural mutation where only one round bean develops inside the coffee cherry instead of the usual two flat-sided beans. About 5% of any harvest. Often separated and sold at premium for perceived superior flavor concentration.</string>
+    <string name="glossary_def_57" formatted="false">A natural mutation where only one round bean develops inside the coffee cherry instead of the usual two flat-sided beans. About 5% of any harvest. Often separated and sold at premium for perceived superior flavor concentration.</string>
     <string name="glossary_term_58">Monsooned</string>
     <string name="glossary_def_58">Coffee exposed to monsoon winds and humidity for 12–16 weeks in open warehouses on India\'s Malabar coast. Beans swell, turn pale gold, and develop extremely low acidity with a unique musty, spicy profile.</string>
     <string name="glossary_term_59">Cup of Excellence</string>
@@ -649,6 +655,36 @@
     <string name="glossary_def_64">Coffee processing method where fruit skin and pulp are mechanically removed, beans ferment in water tanks to loosen remaining mucilage, then are washed and dried. Produces clean, bright cups emphasizing origin character.</string>
     <string name="glossary_term_65">Natural Process</string>
     <string name="glossary_def_65">The oldest processing method: whole coffee cherries are dried in the sun with fruit intact for 2–4 weeks before hulling. Long fruit contact creates intense fruit-forward, winey, and heavy-bodied flavor profiles.</string>
+    <string name="glossary_term_66">Anaerobic Fermentation</string>
+    <string name="glossary_def_66">Sealed, oxygen-free fermentation where cherries or beans ferment under CO2 pressure, encouraging lactic acid bacteria and fruity ester production. Typically 48–120 hours at controlled temperature, creating intense tropical, yogurt-like profiles.</string>
+    <string name="glossary_term_67">Carbonic Maceration</string>
+    <string name="glossary_def_67">Borrowed from Beaujolais winemaking, whole cherries ferment in a CO2-rich, oxygen-free tank where intracellular fermentation occurs inside the intact fruit. Produces bright, candy-like, winey coffees with pronounced red fruit and floral notes.</string>
+    <string name="glossary_term_68">Co-ferment vs Infused</string>
+    <string name="glossary_def_68">Co-ferment ferments coffee together with fruit, yeast or Koji so flavors integrate via microbial metabolism; infused adds flavoring after roasting. Many competitions and the SCA distinguish co-fermentation as processing innovation, while post-roast infusion is considered flavoring.</string>
+    <string name="glossary_term_69">Thermal Shock</string>
+    <string name="glossary_def_69">Technique pioneered by Diego Bermudez involving alternating hot and cold water washes to shock and fix specific flavor compounds during fermentation. Thermal shock can amplify acidity, sweetness or tropical fruit clarity by manipulating cell permeability.</string>
+    <string name="glossary_term_70">Koji</string>
+    <string name="glossary_def_70">Aspergillus oryzae mold used in sake and miso, now applied to coffee cherry fermentation to break down starches into sugars and add umami-sweet complexity. Koji-inoculated coffees often taste like peach, sake or brown sugar with enhanced sweetness.</string>
+    <string name="glossary_term_71">Bypass</string>
+    <string name="glossary_def_71">Brewing where part of total water bypasses the coffee bed and is added after brewing. Intentional bypass (e.g., AeroPress concentrate diluted to drinking strength) controls strength without over-extraction; unintentional bypass (water around V60 filter) causes under-extraction.</string>
+    <string name="glossary_term_72">WDT</string>
+    <string name="glossary_def_72">Weiss Distribution Technique — stirring ground coffee in the portafilter with fine needles (0.3–0.5 mm) to break clumps and homogenize density. WDT reduces channeling and is the single most effective improvement for consistent espresso.</string>
+    <string name="glossary_term_73">TDS</string>
+    <string name="glossary_def_73" formatted="false">Total Dissolved Solids, the percentage of brewed coffee that is dissolved material measured with a refractometer. Filter target is 1.15–1.55%, espresso 8–12%; TDS and extraction yield define the SCA Brewing Control Chart.</string>
+    <string name="glossary_term_74">Extraction Yield</string>
+    <string name="glossary_def_74" formatted="false">Percentage of dry coffee dose that dissolves into the beverage, calculated from TDS, beverage mass and dose. Ideal filter yield is 18–22%; below tastes sour and hollow, above tastes bitter and astringent.</string>
+    <string name="glossary_term_75">Alkalinity</string>
+    <string name="glossary_def_75">Measure of water buffering capacity, primarily bicarbonate (HCO3-), expressed as ppm CaCO3. Ideal 40–70 ppm for specialty brewing; too high mutes acidity, too low makes coffee sharp and sour.</string>
+    <string name="glossary_term_76">ROR</string>
+    <string name="glossary_def_76">Rate of Rise, the per-minute temperature increase of beans during roasting. A steadily declining ROR is the hallmark of a controlled roast; a rising ROR near the end risks scorching and baked flavors.</string>
+    <string name="glossary_term_77">Agtron</string>
+    <string name="glossary_def_77">Color scale measuring roast degree via near-infrared reflectance; lower numbers indicate darker roasts. Specialty light roasts often score Agtron 70–85 (ground), dark roasts 35–50; the meter provides objective consistency.</string>
+    <string name="glossary_term_78">Bypass Zero</string>
+    <string name="glossary_def_78">Brewing technique or dripper design aiming for zero unintended bypass by sealing the filter edge. No-bypass drippers (e.g., Ceado Hoop, APAX Lab) increase extraction evenness and sweetness versus classic V60.</string>
+    <string name="glossary_term_79">CVA</string>
+    <string name="glossary_def_79">Coffee Value Assessment, SCA 2023 replacement for the traditional 100-point cupping form. CVA separates descriptive assessment from hedonic scoring and adds context for processing and sustainability.</string>
+    <string name="glossary_term_80">Q-Grader</string>
+    <string name="glossary_def_80">Certified coffee quality grader licensed by the Coffee Quality Institute to score coffees using SCA cupping protocol. Q-graders must pass 22 exams covering sensory, olfactory and triangulation accuracy.</string>
 
     <!-- Grind size visual reference -->
     <string name="grind_vis_title">Grind Size Reference</string>
@@ -776,6 +812,23 @@
     <string name="palette_mocha">Mocha</string>
     <string name="palette_caramel">Caramel</string>
     <string name="palette_hazelnut">Hazelnut</string>
+    <string name="palette_copper">Copper</string>
+    <string name="palette_cinnamon">Cinnamon</string>
+    <string name="palette_chestnut">Chestnut</string>
+    <string name="palette_french_roast">French Roast</string>
+    <string name="palette_vanilla_latte">Vanilla Latte</string>
+    <string name="palette_pumpkin_spice">Pumpkin Spice</string>
+    <string name="palette_nordic_light">Nordic Light</string>
+    <string name="palette_kinetic">Kinetic</string>
+    <string name="palette_midnight_bloom">Midnight Bloom</string>
+    <string name="palette_aurora">Aurora</string>
+    <string name="palette_steam">Steam</string>
+    <string name="palette_honey">Honey</string>
+    <string name="palette_velvet">Velvet</string>
+    <string name="palette_crema_rose">Crema Rose</string>
+    <string name="palette_smoke">Smoke</string>
+    <string name="palette_ember">Ember</string>
+    <string name="palette_miuix">Miuix</string>
     <string name="settings_temperature">Temperature unit</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_desc">Restart the app after changing for full effect.</string>
@@ -787,8 +840,8 @@
     <string name="settings_timer_show_next">Show next step</string>
     <string name="settings_timer_merge_weight">Merge weight display</string>
     <string name="notification_channel_name">Brew Timer</string>
-    <string name="notification_brewing_title">Brewing %1$s</string>
-    <string name="notification_step">Step %1$d/%2$d</string>
+    <string name="notification_brewing_title" formatted="false">Brewing %1$s</string>
+    <string name="notification_step" formatted="false">Step %1$d/%2$d</string>
     <string name="notification_stop">Stop</string>
     <string name="notification_open">Open</string>
 
@@ -840,13 +893,13 @@
     <string name="learn_l24_title">Storage &amp; Freshness</string>
     <string name="learn_l24_body">Coffee\'s peak flavor window is 5–30 days after roast. Freshly roasted beans contain trapped CO₂ from the roasting process — this degassing protects the coffee initially but gradually escapes, leaving the beans vulnerable to oxidation. The enemies of freshness are oxygen, moisture, heat, light, and time.\n\nStore beans in an opaque, airtight container at room temperature away from direct sunlight. Ceramic or stainless steel canisters with one-way valves are ideal. Never store daily-use coffee in the refrigerator — condensation forms every time you open and close the container, accelerating staleness faster than room temperature storage would.\n\nFor long-term storage (weeks to months), vacuum-seal portions and freeze them. Once removed from the freezer, let them reach room temperature before opening to prevent condensation on the beans. Don\'t refreeze. One-way valve bags are excellent for short-term counter storage — they let CO₂ escape without letting oxygen in.</string>
     <string name="learn_l25_title">Water Chemistry Deep-Dive</string>
-    <string name="learn_l25_body">Coffee is 98.3–98.7% water, so your water quality is arguably more important than your grinder. Two key measurements matter: General Hardness (GH), which measures calcium and magnesium ions that extract flavor compounds, and Carbonate Hardness (KH/buffer), which neutralizes acids.\n\nThe SCA recommends 50–175 ppm total hardness with 40–75 ppm alkalinity. Too soft (distilled or reverse osmosis water under 50 ppm) produces flat, under-extracted coffee — there aren\'t enough minerals to pull flavor from the grounds. Too hard (over 175 ppm, common in London or parts of Germany) mutes acidity and produces chalky, dull coffee.\n\nTo improve your water: Third Wave Water packets add precise mineral blends to distilled water. Barista Hustle\'s DIY recipes let you mix magnesium sulfate (Epsom salt) and sodium bicarbonate (baking soda) at home. A simple Brita filter removes chlorine and reduces temporary hardness. If you brew the same coffee with different waters, you\'ll taste more difference than changing any other single variable.</string>
+    <string name="learn_l25_body" formatted="false">Coffee is 98.3–98.7% water, so your water quality is arguably more important than your grinder. Two key measurements matter: General Hardness (GH), which measures calcium and magnesium ions that extract flavor compounds, and Carbonate Hardness (KH/buffer), which neutralizes acids.\n\nThe SCA recommends 50–175 ppm total hardness with 40–75 ppm alkalinity. Too soft (distilled or reverse osmosis water under 50 ppm) produces flat, under-extracted coffee — there aren\'t enough minerals to pull flavor from the grounds. Too hard (over 175 ppm, common in London or parts of Germany) mutes acidity and produces chalky, dull coffee.\n\nTo improve your water: Third Wave Water packets add precise mineral blends to distilled water. Barista Hustle\'s DIY recipes let you mix magnesium sulfate (Epsom salt) and sodium bicarbonate (baking soda) at home. A simple Brita filter removes chlorine and reduces temporary hardness. If you brew the same coffee with different waters, you\'ll taste more difference than changing any other single variable.</string>
     <string name="learn_l26_title">Equipment-Free Brewing</string>
     <string name="learn_l26_body">You don\'t need a $50 dripper or a $200 grinder to make great coffee. The core principle is immersion: coffee grounds steep in hot water, then you separate the liquid from the grounds. This works in any container that holds hot water.\n\nEight proven zero-equipment methods: Cowboy coffee (boil coarse grounds, let settle, pour carefully — pioneers used this for centuries). Cupping (steep in a bowl, break the crust, skim, taste — this IS how professionals judge the world\'s best coffees). Cloth/cheesecloth filtration (steep then strain — cheap, reusable, removes sediment). Sock coffee (traditional Latin American fabric filter bag — produces clean, full-bodied coffee). Decoction (boil fine grounds, like South Indian filter coffee or chai — strong concentrate). Paper towel emergency (brew via cupping, filter through unscented paper towel — last resort only). Swedish egg coffee (crack a whole egg into the grounds, boil — the egg protein clarifies the brew beautifully). Improvised Turkish (use any small pot, powder-fine grind, watch for foam rise).\n\nEach method costs essentially zero dollars and produces unique, satisfying coffee. Try cupping first — it\'s the connoisseur\'s method and requires nothing but a bowl and spoon.</string>
     <string name="learn_l27_title">Dialing In Espresso</string>
     <string name="learn_l27_body">Dialing in espresso means adjusting grind size, dose, and yield to hit your target flavor. Start with a locked dose — typically 18g for a double basket — and a 1:2 ratio (18g in, 36g out). Your target extraction time is 25–32 seconds from pump start.\n\nIf the shot runs too fast (under 20 seconds, sour, thin), grind finer to create more resistance. If it chokes (over 35 seconds, bitter, harsh), grind coarser. Once you\'re in the 25–32 second window, taste. Sour and salty means under-extraction — extract more. Bitter and drying means over-extraction — extract less.\n\nFine-tuning: adjusting ratio changes flavor balance independent of grind. Ristretto (1:1.5 ratio) produces intense, syrupy shots. Normale (1:2) is the standard balanced starting point. Lungo (1:3 or higher) yields more clarity and lighter body — excellent for light roasts. Change only ONE variable at a time. Keep a notebook or mark your grinder setting — a good dial-in can take 3–8 shots.</string>
     <string name="learn_l28_title">Latte Art Basics</string>
-    <string name="learn_l28_body">Latte art isn\'t just for Instagram — it\'s a reliable indicator of properly textured milk. The fundamentals: start with cold milk (1–4°C), use a stainless steel pitcher, and purge your steam wand before and after use.\n\nSteaming technique: submerge the wand tip just below the surface to introduce air — you\'ll hear a gentle kissing or chirping sound (not a loud screech). This stretching phase adds 20–25% volume and creates microfoam. After 2–3 seconds, lower the wand deeper to create a vortex that polishes the foam into a silky, wet-paint consistency. The milk is ready at 60–65°C — any hotter and you scald the proteins, ruining both taste and texture.\n\nTwo foundational pours: the Monks Head / Heart (pour from ~3cm above, steady stream into the center — as the cup fills, lower the pitcher to near-contact, and the white dot expands into a heart) and the Rosetta / Fern (pour the base heart, then wiggle the pitcher side-to-side while pulling back toward you, finishing with a quick draw-through). Practice with water and a drop of dish soap before using real milk — it mimics the texture perfectly.</string>
+    <string name="learn_l28_body" formatted="false">Latte art isn\'t just for Instagram — it\'s a reliable indicator of properly textured milk. The fundamentals: start with cold milk (1–4°C), use a stainless steel pitcher, and purge your steam wand before and after use.\n\nSteaming technique: submerge the wand tip just below the surface to introduce air — you\'ll hear a gentle kissing or chirping sound (not a loud screech). This stretching phase adds 20–25% volume and creates microfoam. After 2–3 seconds, lower the wand deeper to create a vortex that polishes the foam into a silky, wet-paint consistency. The milk is ready at 60–65°C — any hotter and you scald the proteins, ruining both taste and texture.\n\nTwo foundational pours: the Monks Head / Heart (pour from ~3cm above, steady stream into the center — as the cup fills, lower the pitcher to near-contact, and the white dot expands into a heart) and the Rosetta / Fern (pour the base heart, then wiggle the pitcher side-to-side while pulling back toward you, finishing with a quick draw-through). Practice with water and a drop of dish soap before using real milk — it mimics the texture perfectly.</string>
     <string name="learn_l29_title">Coffee Origins &amp; Terroir</string>
     <string name="learn_l29_body">Terroir — the taste of a place — is as real for coffee as it is for wine. Three factors define it: altitude, latitude, and processing. Higher altitude (1,200–2,200m) means cooler temperatures and slower cherry maturation, producing denser beans packed with complex sugars and bright, sparkling acidity. Lower altitude (under 900m) yields softer, milder, less complex coffee.\n\nThe Bean Belt spans the equator between the Tropics of Cancer and Capricorn. Each origin has a fingerprint: Ethiopia (birthplace of Arabica) produces floral, citrusy coffees with tea-like body — Yirgacheffe is famous for jasmine and bergamot notes. Kenya offers intense, wine-like acidity with blackcurrant and tomato savoriness from its volcanic soils and SL-28/SL-34 varieties. Colombia\'s high Andes produce balanced, caramel-sweet, medium-bodied coffee with consistent quality. Brazil, the world\'s largest producer, yields chocolatey, nutty, low-acidity coffee — classic espresso base. Sumatra\'s wet-hulling (Giling Basah) creates earthy, herbaceous, full-bodied cups that divide opinion — some love the funk, others find it overwhelming.\n\nVariety matters: Bourbon is sweeter and more complex than Typica. Gesha (originally from Ethiopia\'s Gesha forest, made famous by Panama) can taste like jasmine, stone fruit, and bergamot — it\'s the most expensive coffee variety in the world. SL-28 from Kenya is prized for intense fruit acidity.</string>
     <string name="learn_l30_title">Brewing for Groups</string>
@@ -858,17 +911,17 @@
     <string name="learn_l33_title">Pour-Over Kettle Techniques</string>
     <string name="learn_l33_body">Water pouring technique is the single most underrated variable in pour-over brewing. A gooseneck kettle isn\'t just aesthetics — the narrow spout converts turbulent, splashing flow into a controlled, laminar stream that lets you place water exactly where you want it.\n\nThe ideal pour is a slow, steady, circular motion, starting from the center and spiraling outward. Keep the spout 2–4 cm above the slurry — too high creates splashing and agitation that disturbs the coffee bed; too low and you won\'t generate enough mixing. Pouring directly onto the paper filter at the edges creates bypass (water flowing around, not through, the coffee bed), which leads to under-extraction.\n\nKey techniques: the bloom pour (2–3× coffee weight in water, gentle spiral to saturate all grounds, wait 30–45 seconds) releases trapped CO₂ and prepares the bed for even extraction. Pulse pouring (multiple smaller pours with pauses) maintains higher slurry temperature and gives you more control over flow rate, but requires attention. Continuous pour (single slow pour) is simpler and produces a gentler agitation profile — better for delicate, floral coffees. The Rao Spin (a gentle swirl of the dripper after the final pour) flattens the coffee bed and knocks grounds off the filter walls, reducing bypass.</string>
     <string name="learn_l34_title">Filter Paper Comparisons</string>
-    <string name="learn_l34_body">The paper filter sitting between your coffee and your cup isn\'t neutral — it dictates flow rate, oil retention, and ultimately mouthfeel. Three main variables matter: material (paper, metal, cloth), thickness, and bleaching.\n\nBleached white papers (Hario V60, Kalita Wave) are treated with oxygen or chlorine to remove the papery taste. They produce the cleanest, brightest cups — minimal oils pass through, resulting in tea-like clarity. Unbleached natural brown papers (Chemex, Melitta) retain more of the paper\'s natural lignin, which can impart a subtle cardboard note if not thoroughly rinsed with hot water before brewing. Always pre-wet paper filters — it removes paper dust, preheats the dripper, and seals the filter to the dripper walls.\n\nChemex filters are uniquely thick — roughly 20–30% heavier than standard pour-over papers. This creates significantly slower flow and traps nearly all oils and micro-fines, producing an exceptionally clean, almost tea-like cup that highlights delicate floral and fruit notes. Cloth filters (cotton, hemp) allow oils to pass through, giving full body with no sediment. Metal filters (Able Kone, Fellow Prismo) let through the most oils and fines, producing the heaviest body and most texture, closest to French press. Experiment: brew the same coffee through paper, cloth, and metal. The difference in body and clarity will teach you more than any book.</string>
+    <string name="learn_l34_body" formatted="false">The paper filter sitting between your coffee and your cup isn\'t neutral — it dictates flow rate, oil retention, and ultimately mouthfeel. Three main variables matter: material (paper, metal, cloth), thickness, and bleaching.\n\nBleached white papers (Hario V60, Kalita Wave) are treated with oxygen or chlorine to remove the papery taste. They produce the cleanest, brightest cups — minimal oils pass through, resulting in tea-like clarity. Unbleached natural brown papers (Chemex, Melitta) retain more of the paper\'s natural lignin, which can impart a subtle cardboard note if not thoroughly rinsed with hot water before brewing. Always pre-wet paper filters — it removes paper dust, preheats the dripper, and seals the filter to the dripper walls.\n\nChemex filters are uniquely thick — roughly 20–30% heavier than standard pour-over papers. This creates significantly slower flow and traps nearly all oils and micro-fines, producing an exceptionally clean, almost tea-like cup that highlights delicate floral and fruit notes. Cloth filters (cotton, hemp) allow oils to pass through, giving full body with no sediment. Metal filters (Able Kone, Fellow Prismo) let through the most oils and fines, producing the heaviest body and most texture, closest to French press. Experiment: brew the same coffee through paper, cloth, and metal. The difference in body and clarity will teach you more than any book.</string>
     <string name="learn_l35_title">Health Benefits of Coffee</string>
-    <string name="learn_l35_body">Coffee is one of the most studied beverages in nutritional science, and the evidence consistently points to significant health benefits for moderate drinkers. Black coffee contains over 1,000 bioactive compounds — chlorogenic acid (a powerful antioxidant), trigonelline, cafestol, and kahweol among them.\n\nChlorogenic acid reduces oxidative stress and systemic inflammation — two drivers of chronic disease. Epidemiological studies show that 3–5 cups per day is associated with 10–15% lower all-cause mortality, reduced risk of type 2 diabetes (coffee improves insulin sensitivity), and lower rates of liver cirrhosis and liver cancer. Coffee also contains more antioxidant activity per serving than green tea or cocoa.\n\nCaffeine itself is a well-studied nootropic: it blocks adenosine receptors in the brain, reducing fatigue and improving reaction time, focus, and short-term memory. The cognitive boost peaks 30–60 minutes after consumption and lasts 3–5 hours. Regular consumption creates tolerance — cycling off periodically restores sensitivity. Important caveat: these benefits apply to black coffee or coffee with minimal milk. Unfiltered coffee (French press, Turkish, espresso) can raise LDL cholesterol in genetically susceptible individuals — paper filters trap these compounds.</string>
+    <string name="learn_l35_body" formatted="false">Coffee is one of the most studied beverages in nutritional science, and the evidence consistently points to significant health benefits for moderate drinkers. Black coffee contains over 1,000 bioactive compounds — chlorogenic acid (a powerful antioxidant), trigonelline, cafestol, and kahweol among them.\n\nChlorogenic acid reduces oxidative stress and systemic inflammation — two drivers of chronic disease. Epidemiological studies show that 3–5 cups per day is associated with 10–15% lower all-cause mortality, reduced risk of type 2 diabetes (coffee improves insulin sensitivity), and lower rates of liver cirrhosis and liver cancer. Coffee also contains more antioxidant activity per serving than green tea or cocoa.\n\nCaffeine itself is a well-studied nootropic: it blocks adenosine receptors in the brain, reducing fatigue and improving reaction time, focus, and short-term memory. The cognitive boost peaks 30–60 minutes after consumption and lasts 3–5 hours. Regular consumption creates tolerance — cycling off periodically restores sensitivity. Important caveat: these benefits apply to black coffee or coffee with minimal milk. Unfiltered coffee (French press, Turkish, espresso) can raise LDL cholesterol in genetically susceptible individuals — paper filters trap these compounds.</string>
     <string name="learn_l36_title">Sustainability and Fair Trade</string>
-    <string name="learn_l36_body">Specialty coffee exists at the intersection of agriculture, economics, and ecology. The coffee plant (Coffea arabica) is a picky understory shrub — it requires specific altitude, shade, rainfall, and temperature ranges. Climate change is shrinking the viable coffee-growing belt: by 2050, up to 50% of current coffee land may become unsuitable. Sustainable farming is not a luxury — it\'s survival.\n\nShade-grown coffee preserves forest canopy and bird habitats. Sun-grown coffee (intensive monoculture) produces higher yields but requires more fertilizer, pesticides, and irrigation — depleting soil and reducing biodiversity. Look for certifications like Rainforest Alliance and Bird Friendly (Smithsonian) that verify canopy preservation. Organic certification ensures no synthetic pesticides or fertilizers — important because coffee is one of the most chemically sprayed crops globally.\n\nOn the human side, Fair Trade certification sets a minimum price floor ($1.40/lb for washed Arabica as of 2024) and requires a social premium for community development. Direct trade — roasters buying directly from producers, often paying 3–5× commodity price — bypasses certification bureaucracy but relies on transparency. The average coffee farmer earns less than $2/day, far below the poverty line. Every specialty coffee purchase creates upward pressure on farmer incomes. Choose roasters who publish their green buying prices — transparency is the true certification.</string>
+    <string name="learn_l36_body" formatted="false">Specialty coffee exists at the intersection of agriculture, economics, and ecology. The coffee plant (Coffea arabica) is a picky understory shrub — it requires specific altitude, shade, rainfall, and temperature ranges. Climate change is shrinking the viable coffee-growing belt: by 2050, up to 50% of current coffee land may become unsuitable. Sustainable farming is not a luxury — it\'s survival.\n\nShade-grown coffee preserves forest canopy and bird habitats. Sun-grown coffee (intensive monoculture) produces higher yields but requires more fertilizer, pesticides, and irrigation — depleting soil and reducing biodiversity. Look for certifications like Rainforest Alliance and Bird Friendly (Smithsonian) that verify canopy preservation. Organic certification ensures no synthetic pesticides or fertilizers — important because coffee is one of the most chemically sprayed crops globally.\n\nOn the human side, Fair Trade certification sets a minimum price floor ($1.40/lb for washed Arabica as of 2024) and requires a social premium for community development. Direct trade — roasters buying directly from producers, often paying 3–5× commodity price — bypasses certification bureaucracy but relies on transparency. The average coffee farmer earns less than $2/day, far below the poverty line. Every specialty coffee purchase creates upward pressure on farmer incomes. Choose roasters who publish their green buying prices — transparency is the true certification.</string>
     <string name="learn_l37_title">Seasonal Coffee Selection</string>
     <string name="learn_l37_body">Coffee is not a pantry staple like flour — it\'s a fresh agricultural product with distinct harvest seasons that rotate around the globe. Understanding seasonality transforms your coffee experience: instead of buying the same blend year-round, you can ride the arrival of fresh crops from each origin at their peak.\n\nThe harvest calendar flows with the equator\'s seasons: Central America (Guatemala, Costa Rica, Honduras) harvests November–March, with fresh arrivals hitting roasters by February–April. East Africa (Ethiopia, Kenya) harvests October–January, arriving December–March. South America (Colombia, Brazil) has staggered harvests — Colombia\'s main crop is September–December (arrival January–March), while Brazil harvests May–September (arrival July–October). Indonesia (Sumatra) harvests year-round due to its equatorial climate.\n\nBuying seasonal coffee matters because green coffee is perishable. A coffee 3–6 months past harvest still tastes acceptable. At 9–12 months, acidity fades, body flattens, and "past-crop" flavors (paper, hay, wood) emerge. Look for roast dates within the past 2–4 weeks and ask your roaster about the harvest date. Fresh crop Kenyan arriving in February will be explosively fruity and acidic — the same coffee in September will be a shadow of itself.</string>
     <string name="learn_l38_title">Home Roasting Fundamentals</string>
     <string name="learn_l38_body">Home roasting is the frontier of coffee obsession — it gives you complete control over roast level and lets you taste coffee at its absolute freshest, often within hours of roasting. Entry cost: $20–200, depending on method.\n\nThe simplest method is the heat gun + dog bowl: green beans in a metal bowl, hot air gun directed into the beans while stirring constantly. A popcorn popper (the old-school hot-air type, not the stirring drum type) is the classic starter roaster — costs $20, roasts 80–100g per batch in 4–8 minutes. More serious: the Fresh Roast SR800 fluid-bed roaster ($250) gives you temperature and fan control. The endgame: a Behmor or Gene Cafe drum roaster ($400–600) for 300–500g batch capacity.\n\nThe roast timeline: after 2–3 minutes of drying (beans turn from green to yellow), browning begins around 150°C as the Maillard reaction kicks in. First crack (196°C) sounds like popcorn popping — this is the minimum roast level. Between first and second crack, sugars caramelize and the bean expands. Second crack (224°C) is a quieter, snapping sound — beyond this, the bean structure breaks down, oils migrate to the surface. For your first roasts, drop the beans 30–45 seconds after first crack ends — this gives you a solid City+ / light-medium roast. Let the beans degas for at least 12 hours, ideally 24–48, before brewing.</string>
     <string name="learn_l39_title">Deep Dive into Varietals</string>
-    <string name="learn_l39_body">Coffee varietals are to coffee what grape varieties are to wine — the genetic blueprint that sets the ceiling for quality and flavor potential. Within Arabica alone there are dozens of genetically distinct varietals, each with different cup profiles, disease resistance, and yield characteristics.\n\nTypica is the original Dutch-introduced variety from the 1700s — the genetic grandmother of most modern varietals, producing exceptional cup quality but low yields. Bourbon (a natural mutation of Typica found on Réunion Island) is 20–30% more productive and sweeter, with a distinct chocolate-nut profile. SL-28 and SL-34 (Scott Labs, Kenya) are drought-resistant Bourbon derivatives that produce intense blackcurrant and citrus acidity — they define the Kenyan coffee profile.\n\nGesha (Geisha) is the rockstar: originally from Ethiopia\'s Gesecha forest, made famous by Panama\'s Hacienda La Esmeralda. Gesha\'s elongated beans produce dramatically floral, jasmine-and-bergamot aromatics with silky body, fetching $50–$200/lb at auction. Caturra (a compact Bourbon mutation) is high-yielding and widely planted across Latin America. Pacamara (Pacas × Maragogipe cross from El Salvador) produces huge beans with intense, tropical fruit flavors. When buying coffee, the variety is a strong predictor of flavor. Learn your varietals — they\'re the grammar of the coffee language.</string>
+    <string name="learn_l39_body" formatted="false">Coffee varietals are to coffee what grape varieties are to wine — the genetic blueprint that sets the ceiling for quality and flavor potential. Within Arabica alone there are dozens of genetically distinct varietals, each with different cup profiles, disease resistance, and yield characteristics.\n\nTypica is the original Dutch-introduced variety from the 1700s — the genetic grandmother of most modern varietals, producing exceptional cup quality but low yields. Bourbon (a natural mutation of Typica found on Réunion Island) is 20–30% more productive and sweeter, with a distinct chocolate-nut profile. SL-28 and SL-34 (Scott Labs, Kenya) are drought-resistant Bourbon derivatives that produce intense blackcurrant and citrus acidity — they define the Kenyan coffee profile.\n\nGesha (Geisha) is the rockstar: originally from Ethiopia\'s Gesecha forest, made famous by Panama\'s Hacienda La Esmeralda. Gesha\'s elongated beans produce dramatically floral, jasmine-and-bergamot aromatics with silky body, fetching $50–$200/lb at auction. Caturra (a compact Bourbon mutation) is high-yielding and widely planted across Latin America. Pacamara (Pacas × Maragogipe cross from El Salvador) produces huge beans with intense, tropical fruit flavors. When buying coffee, the variety is a strong predictor of flavor. Learn your varietals — they\'re the grammar of the coffee language.</string>
     <string name="learn_l40_title">Brew Ratio Experimentation</string>
     <string name="learn_l40_body">The coffee-to-water ratio is the simplest variable to adjust and produces the most dramatic changes in your cup. Ratio determines both strength (how concentrated the dissolved solids are) and, indirectly, extraction (how much of the coffee has been dissolved). The two are linked but distinct.\n\nThe standard starting point is 60g per liter (1:16.7) — the SCA Golden Cup standard. This produces a balanced, medium-strength cup. Stronger ratios (1:15, 1:14, or even 1:12) use more coffee relative to water — the cup becomes more concentrated and intense, but note that the individual grounds are actually less extracted because there\'s less water per gram of coffee. This produces punchy, intense cups favored by Nordic roasters.\n\nWeaker ratios (1:17, 1:18, 1:20) use less coffee for the same water — the cup is thinner, but each coffee ground extracts more fully, which can increase extraction yield and improve sweetness. This is why cupping uses higher ratios (1:18.2) — it extracts each coffee to its limit for evaluation. The practical approach: brew three cups at 1:15, 1:16.7, and 1:18 with the same coffee. Taste them side by side. Your preference will depend on the coffee, roast level, and personal taste. Light roasts often shine at stronger ratios; dark roasts can become overwhelming.</string>
     <string name="learn_l41_title">Temperature Surfing</string>
@@ -917,6 +970,69 @@
     <string name="equip_cafedeolla_tag">Mexican clay pot · cinnamon</string>
     <string name="equip_masonjar_name">Mason Jar Cold Brew</string>
     <string name="equip_masonjar_tag">No equipment · concentrate</string>
+    <string name="equip_delter_name">Delter Press</string>
+    <string name="equip_delter_tag">Press + pour, jet-seal</string>
+    <string name="equip_flair_name">Flair Espresso</string>
+    <string name="equip_flair_tag">Manual lever, café shot</string>
+    <string name="equip_aeropress_go_name">AeroPress Go</string>
+    <string name="equip_aeropress_go_tag">Travel AeroPress, compact</string>
+    <string name="equip_picopresso_name">Wacaco Picopresso</string>
+    <string name="equip_picopresso_tag">Palm espresso, 18 bar</string>
+    <string name="equip_moccamaster_name">Moccamaster</string>
+    <string name="equip_moccamaster_tag">SCA certified brewer</string>
+    <string name="equip_nel_name">Nel Drip</string>
+    <string name="equip_nel_tag">Flannel filter, silky body</string>
+    <string name="equip_gina_name">Goat Story Gina</string>
+    <string name="equip_gina_tag">Smart dripper, 3 valves</string>
+    <string name="equip_siphon_modern_name">Modern Siphon</string>
+    <string name="equip_siphon_modern_tag">Halogen, precise control</string>
+    <string name="equip_phin_large_name">Phin Large</string>
+    <string name="equip_phin_large_tag">Large single-cup drip</string>
+    <string name="equip_clever_xl_name">Clever XL</string>
+    <string name="equip_clever_xl_tag">Large immersion, 350 ml</string>
+    <string name="equip_other_name">Other Brewer</string>
+    <string name="equip_other_tag">Custom method</string>
+    <string name="equip_deleted">Deleted brewer</string>
+    <string name="equip_hoop_name">Ceado Hoop</string>
+    <string name="equip_hoop_tag">Zero-bypass ring brew</string>
+    <string name="equip_paragon_name">Nucleus Paragon</string>
+    <string name="equip_paragon_tag">Chilled-rock espresso</string>
+    <string name="equip_melodrip_name">Melodrip</string>
+    <string name="equip_melodrip_tag">Gentle lift pour</string>
+    <string name="equip_december_name">December Dripper</string>
+    <string name="equip_december_tag">Flat-bottom, Dec 1</string>
+    <string name="equip_hario_switch_name">Hario Switch</string>
+    <string name="equip_hario_switch_tag">Hybrid immersion switch</string>
+    <string name="equip_aeropress_xl_name">AeroPress XL</string>
+    <string name="equip_aeropress_xl_tag">Double capacity press</string>
+    <string name="equip_flair58_name">Flair 58</string>
+    <string name="equip_flair58_tag">Manual 58 mm lever</string>
+    <string name="equip_nanopresso_name">Wacaco Nanopresso</string>
+    <string name="equip_nanopresso_tag">Handheld pump espresso</string>
+    <string name="equip_phoenix70_name">Phoenix 70</string>
+    <string name="equip_phoenix70_tag">70 mm flat-bed</string>
+    <string name="equip_lunar_name">NextLevel Lunar</string>
+    <string name="equip_lunar_tag">Gravity-fed lunar</string>
+    <string name="equip_mugen_name">Hario Mugen</string>
+    <string name="equip_mugen_tag">Star-rib single-pour</string>
+    <string name="equip_graycano_name">Graycano</string>
+    <string name="equip_graycano_tag">Metal + silicone long draw</string>
+    <string name="equip_kinto_slow_name">Kinto Slow Coffee Style</string>
+    <string name="equip_kinto_slow_tag">Slow drop steel brewer</string>
+    <string name="equip_fellow_aiden_name">Fellow Aiden</string>
+    <string name="equip_fellow_aiden_tag">Precision batch brewer</string>
+    <string name="equip_kalita102_name">Kalita 102 Ceramic</string>
+    <string name="equip_kalita102_tag">Flat-bottom small batch</string>
+    <string name="equip_espro_bloom_name">Espro Bloom</string>
+    <string name="equip_espro_bloom_tag">Micro-filter paperless</string>
+    <string name="equip_bripe_name">Bripe Coffee Pipe</string>
+    <string name="equip_bripe_tag">Brew pipe — smoky ritual</string>
+    <string name="equip_cupping_bowl_set_name">SCA Cupping Bowl Set</string>
+    <string name="equip_cupping_bowl_set_tag">Lab-standard 150 ml bowl</string>
+    <string name="equip_modbar_pour_name">Modbar Pour-Over</string>
+    <string name="equip_modbar_pour_tag">Under-counter café module</string>
+    <string name="equip_timemore_b75_name">Timemore B75</string>
+    <string name="equip_timemore_b75_tag">Flat-bed 75°. Fast flow</string>
 
     <!-- Search -->
     <string name="search_hint_equipment">Search brewers…</string>
@@ -990,7 +1106,7 @@
     <string name="drink_asiatico_body">From Cartagena in southeastern Spain, this elaborate coffee cocktail layers condensed milk, brandy, Licor 43, hot espresso, and a twist of lemon peel, finished with cinnamon and sometimes a coffee bean on top. It\'s sweet, boozy, spicy and intensely aromatic — a full sensory experience served in a special thick-walled glass.\n\nIngredients:\n• 2 tbsp condensed milk\n• 1 shot brandy (~30 ml)\n• 1 shot Licor 43 (~30 ml)\n• 1 shot espresso (~30 ml)\n• Lemon peel\n• Cinnamon and 2 coffee beans for garnish\n\nSteps:\n1. Pour condensed milk into the bottom of the glass.\n2. Add brandy and Licor 43 as the next layers.\n3. Slowly pour hot espresso over the back of a spoon.\n4. Flambé if desired for caramelised top notes.\n5. Garnish with lemon peel, a cinnamon stick, and two coffee beans.</string>
     <string name="drink_pharisaer_name">Pharisäer</string>
     <string name="drink_pharisaer_summary">North German coffee with rum and whipped cream — do not stir!</string>
-    <string name="drink_pharisaer_body">A classic drink from North Frisia (northern Germany), the Pharisäer combines strong black coffee with a generous pour of dark rum, topped with a thick cap of whipped cream. According to legend, it was invented in the 19th century to hide the alcohol from a strict pastor — hence the name "Pharisee." The golden rule: never stir. You drink through the cream.\n\nIngredients:\n• 150 ml strong black coffee\n• 40 ml dark rum (traditionally 54% rum)\n• Whipped cream\n• Optional: rock sugar at the bottom\n\nSteps:\n1. Optionally place a piece of rock sugar at the bottom of a cup.\n2. Pour hot strong coffee over it and stir.\n3. Add the dark rum.\n4. Carefully float a thick layer of whipped cream on top using a spoon.\n5. Serve immediately — tradition says whoever stirs buys the next round.</string>
+    <string name="drink_pharisaer_body" formatted="false">A classic drink from North Frisia (northern Germany), the Pharisäer combines strong black coffee with a generous pour of dark rum, topped with a thick cap of whipped cream. According to legend, it was invented in the 19th century to hide the alcohol from a strict pastor — hence the name "Pharisee." The golden rule: never stir. You drink through the cream.\n\nIngredients:\n• 150 ml strong black coffee\n• 40 ml dark rum (traditionally 54% rum)\n• Whipped cream\n• Optional: rock sugar at the bottom\n\nSteps:\n1. Optionally place a piece of rock sugar at the bottom of a cup.\n2. Pour hot strong coffee over it and stir.\n3. Add the dark rum.\n4. Carefully float a thick layer of whipped cream on top using a spoon.\n5. Serve immediately — tradition says whoever stirs buys the next round.</string>
     <string name="drink_kaffeost_name">Kaffeost</string>
     <string name="drink_kaffeost_summary">Swedish coffee poured over cubed bread cheese (leipäjuusto)</string>
     <string name="drink_kaffeost_body">A unique Scandinavian tradition (also Finnish: kaffejuusto): hot black coffee poured over cubes of leipäjuusto — a squeaky, mild bread cheese made from cow\'s, goat\'s, or reindeer milk. The heat softens the cheese, which absorbs the coffee while releasing its creamy dairy notes. The cheese cubes are eaten with a spoon after drinking — a rustic, satisfying combination that dates back to northern Sweden and Finnish Lapland.\n\nIngredients:\n• 200 ml hot black coffee\n• Several cubes of leipäjuusto (bread cheese)\n• Total: about one cup\n\nSteps:\n1. Cut leipäjuusto into small cubes (~2 cm) and place them in a cup or bowl.\n2. Pour very hot black coffee over the cheese cubes.\n3. Let it sit for 1–2 minutes so the cheese warms and absorbs coffee.\n4. Drink the coffee and eat the softened cheese cubes with a spoon.</string>
@@ -1051,6 +1167,40 @@
     <string name="drink_affogato_name">Affogato</string>
     <string name="drink_affogato_summary">Italian dessert — vanilla gelato drowned in hot espresso</string>
     <string name="drink_affogato_body">Italian dessert masquerading as coffee: a scoop of vanilla gelato (or fior di latte) drowned in a hot double espresso shot poured at the table. The espresso melts the gelato, creating a pool of sweet, creamy, bitter, cold-and-hot contrast that defies easy categorization. Eat with a spoon before it becomes soup — the first bite is three distinct experiences (cold gelato, hot espresso, and the melty boundary between them), and each subsequent spoonful changes as the espresso and gelato continue to mingle.\n\nIngredients:\n• Double espresso (~50–60 ml)\n• 1 large scoop vanilla gelato or fior di latte\n\nSteps:\n1. Place a scoop of gelato in a wide, shallow glass or bowl.\n2. Pull a double espresso. Do NOT let it cool.\n3. At the table, pour the hot espresso directly over the gelato.\n4. Hand the diner a spoon — start immediately.\n5. The gelato should be cold enough to create distinct hot-and-cold zones in the early spoonfuls, before gradually melting into a delicious sweet coffee soup.</string>
+    <string name="drink_affogato_iced_name">Iced Affogato</string>
+    <string name="drink_affogato_iced_summary">Modern twist — affogato over ice with cold brew shot</string>
+    <string name="drink_affogato_iced_body">A modern iced twist on the classic affogato: vanilla gelato served over ice with a chilled espresso shot poured tableside, lighter and more refreshing than the hot original.\n\nIngredients:\n• Double espresso, chilled (~50 ml)\n• 1 large scoop vanilla gelato\n• 3–4 ice cubes\n\nSteps:\n1. Place gelato and ice in a chilled glass.\n2. Pull espresso and chill briefly or use cold brew concentrate.\n3. Pour the cold espresso over the gelato and ice.\n4. Serve with a spoon and straw — stir lightly before sipping.</string>
+
+        <string name="learn_l111_title">Scale calibration &amp; tare drift</string>
+    <string name="learn_l111_body" formatted="false">Your 0.1 g scale is a precision instrument that drifts with temperature, tilt, battery voltage and dust. Heat from a cup warps the load cell causing tare drift of 0.3–0.5 g, battery sag under 3.2 V adds 1–2% error, and an unlevel surface skews readings by the cosine of the tilt angle. Calibrate monthly with a certified 100 g, 200 g or 500 g weight: power-cycle, tare to zero, place weight centrally, verify ±0.1 g. Rules: power-cycle before dosing, never tare mid-pour, keep the scale away from the kettle\'s steam, and replace batteries at 20% remaining. A calibrated scale turns ratio from guesswork into repeatability — 18.0 g vs 18.5 g is a full 3% strength shift.</string>
+    <string name="learn_l112_title">Mg vs Ca: the hardness split</string>
+    <string name="learn_l112_body">General hardness (GH) is not one number — it is calcium plus magnesium, and they extract differently. Mg²⁺ binds flavour compounds more aggressively, boosting perceived acidity, fruit and brightness; Ca²⁺ contributes more to body, mouthfeel and crema stability but mutes sparkle. The ideal GH 50–175 ppm at 40–75 ppm alkalinity (KH) is SCA shorthand, but the Ca:Mg ratio matters: a magnesium-heavy water brightens washed Ethiopians, a calcium-heavy water rounds chocolatey Brazils. Use Epsom salt (MgSO₄) to add Mg, calcium chloride or gypsum (CaSO₄) to add Ca, and baking soda (NaHCO₃) to set KH buffer. Hard water extracts more but scales boilers; soft water highlights acidity but risks hollow cups. Tailor your Mg:Ca to the coffee, not just the machine.</string>
+    <string name="learn_l113_title">SCA Cupping 2024 &amp; the CVA</string>
+    <string name="learn_l113_body">In 2024 the SCA retired the 2004 100-point cupping form and launched the Coffee Value Assessment (CVA) — a double-track system separating descriptive assessment from hedonic scoring. The old form compressed quality, processing innovation and sustainability into a single number; the CVA splits them: the Descriptive Assessment captures fragrance, aroma, flavour, aftertaste, acidity, sweetness, mouthfeel and balance without a score, while the Affective Assessment scores overall impression 0–100. Crucially, co-ferments, anaerobics and thermal-shock lots are now evaluated with processing context, and extrinsic value (farm information, sustainability) is scored separately. For home cuppers the practical takeaway is to taste descriptively first — note what you taste — then decide whether you like it, rather than collapsing both into one impression.</string>
+    <string name="learn_l114_title">Defect taints: phenol, ferment &amp; rubber</string>
+    <string name="learn_l114_body">Beyond sour/bitter/weak, some off-notes are true defect taints you should learn to name blind. Phenolic (medicinal,Band-Aid, iodine) comes from microbial contamination during drying on polluted patios or over-fermentation; potato defect (raw potato, earthy-bacterial) is caused by Antestia-bug bacteria in East African naturals, famously in Rwandan lots; ferment (vinegar, overripe fruit, boozy) indicates uncontrolled anaerobic activity before drying; baggy/hay (jute sack, straw, cardboard) signals past-crop aging or moisture abuse raising Aw above 0.65. Severity matters: clean defect-free 84+ cups have none; a faint ferment taint costs 2–4 points on the CVA scale, a strong phenol costs 4–6 and the lot is commercial grade. If your bag tastes like iodine or raw potato, it is not your brew — it is the green.</string>
+    <string name="learn_l115_title">Pressure profiling espresso</string>
+    <string name="learn_l115_body">Classic 9 bar constant-pressure espresso is only one profile. Modern profiling machines (Decent, Synesso, La Marzocco Strada) and lever groups vary pressure across the shot to manipulate which compounds extract when. Typical profiles: 2–3 s pre-infusion at 2–3 bar to saturate the puck and heal micro-cracks, ramp to 8–9 bar for the core extraction, then decline to 5–6 bar in the final third to avoid dragging bitter, dry tail-end solubles. Low-pressure bloom profiles (6 bar flat) reduce channeling on light roasts; high-pressure spikes boost body on traditional Italian blends. Flow profiling is the inverse: fix flow at 1–2 ml/s and let pressure float. The result is not magic — profiling buys forgiveness on problematic coffee — but a Declining profile consistently tastes sweeter and less astringent than a flat 9 bar shot of the same dose.</string>
+    <string name="learn_l116_title">Burr alignment &amp; zero point</string>
+    <string name="learn_l116_body">Bur accuracy means little if the burrs are not parallel. A misaligned flat burr set by 0.02 mm produces half-moon particle distribution and channeling even at the right grind setting. Symptoms: shot times swing 4–6 s between identical doses, you need impossibly fine settings, and the bed looks pockmarked after extraction. To find zero: with the grinder off and burrs clean, slowly close the gap while spinning by hand until you hear the first chirp — that is burr kiss, your absolute zero. Note the dial/mark, then back off to your brew setting (filter typically 8–12 notches from zero, espresso 3–5). For flat burrs, marker-test the burrs: coat one with dry-erase, kiss, and inspect the wipe pattern — even wipe means aligned. Shimming with foil fixes many commercial grinders.</string>
+    <string name="learn_l117_title">Water activity (Aw) &amp; storage</string>
+    <string name="learn_l117_body" formatted="false">Water activity (Aw) is not moisture content — it is the free, unbound water available to microbes, measured 0–1. Green coffee at 10–12% moisture can still be unstable if Aw is above 0.60–0.65: mould, ochratoxin and baggy flavour develop long before the beans feel damp. Importers target Aw 0.55–0.59 for long storage; above 0.65 germination and fungal risk spike, below 0.50 beans turn brittle, pale and lose aromatics. GrainPro hermetic liners hold Aw stable for 9–12 months by sealing out humid ambient air; jute alone cannot. At home, roasted coffee is hygroscopic — store in airtight, opaque, cool containers; never in the hopper; freeze only in sealed single doses and thaw sealed to avoid condensation re-hydrating the beans.</string>
+    <string name="learn_l118_title">Rate of Rise (ROR) in roasting</string>
+    <string name="learn_l118_body">Rate of Rise is the per-minute rise of bean temperature during roasting, the roaster\'s speedometer. A textbook roast shows ROR steadily declining from ~12°C/min after drying to 4–6°C/min at drop; any rise late in the roast is a flick, any sharp crash is a crash. A rising ROR near first crack scorches the surface while underdeveloping the core, producing roasty-bitter and grassy flavours simultaneously. A crashing ROR stalls caramelisation and bakes the coffee flat and bready. Roasters control ROR with gas/airflow: reduce heat before first crack, increase airflow to carry smoke away, and aim for a gently declining curve. For brewers, a smooth ROR predicts sweetness and clarity; a flick predicts ashy aftertaste you cannot brew away.</string>
+    <string name="learn_l119_title">Milk protein chemistry</string>
+    <string name="learn_l119_body" formatted="false">Milk texture is protein engineering. Whey proteins (beta-lactoglobulin, alpha-lactalbumin) denature at ~72°C, unfolding and wrapping air bubbles to create stable microfoam; casein micelles add body but scatter poorly. Fat interferes — whole milk (3.5% fat) needs slower aeration than skim, but tastes sweeter because lactose concentrates. Temperature window 55–65°C is ideal: below 50°C proteins are under-denatured and foam collapses, above 70°C whey over-denatures, squeezes water out, and the scalded milk tastes flat and soapy. Oat barista milks mimic dairy by adding rapeseed oil and dipotassium phosphate to stabilise foam. Secret: let steamed milk rest 20 s, tap out large bubbles, swirl to a wet-paint sheen — that is polymerised protein, not air.</string>
+    <string name="learn_l120_title">Extraction yield &amp; refractometry</string>
+    <string name="learn_l120_body" formatted="false">Extraction yield is mass balance, not taste opinion. Dissolve 18 g dose into 300 g beverage at 1.35% TDS: yield = TDS × beverage mass / dose = 0.0135 × 300 / 18 = 22.5% — at the top of the ideal 18–22% window. Below 18% tastes sour, salty and hollow; above 22% bitter, dry and ashy. A VST or Atago refractometer measures TDS via light refraction; zero it with distilled water at brew temperature, filter the sample through a 0.45 µm syringe filter, cool to 20°C, and read. Clean the prism every time — residual oils drift readings by 0.05% TDS, equal to a full 1% yield error. Track ratio, TDS and yield together on the SCA Brewing Control Chart instead of changing grind blindly.</string>
+    <string name="learn_l121_title">Grind retention &amp; single dosing</string>
+    <string name="learn_l121_body">Grind retention is the grams of yesterday\'s coffee still inside your grinder, mixing into today\'s dose — from 0.1 g in single-dose zero-retention grinders to 5–12 g in hopper-fed commercial grinders. Retention stales: oxidised fines migrate into the next shot, adding flat, woody baggy notes you cannot diagnose because you blame the new beans. Single dosing (weigh 18 g, grind with blower or bellows, purge) solves it but introduces exchange: the last bean through is the least ground — add 0.5 g seasoning purge when switching beans or settings. Blow out with a bellows hopper or Eureka bellows, and run the grinder for 1 s after dosing to clear the chute. The cleanest shot is always the second after a purge.</string>
+    <string name="learn_l122_title">Triangulation &amp; sensory calibration</string>
+    <string name="learn_l122_body">Triangulation is the fastest way to calibrate your palate: present three cups — two identical, one different — and ask the taster to pick the odd one out blind. 7 correct out of 9 is statistically significant (p&lt;0.05). Use it to test grind changes (coarse vs fines), water (tap vs filtered), roast level, or brew temperature. Procedure: brew all three at the same ratio and TDL, label A/B/C under cups, randomise, sip at 55°C. Q-graders pass nine triangulation sets of different acids, leaven and salt standards. At home, cup three mugs every Sunday — you will learn discrimination in weeks instead of months, and your recipe notes stop saying \'better\' and start saying \'more citric acidity, less body\'.</string>
+    <string name="learn_l123_title">Refractometer hygiene &amp; temperature</string>
+    <string name="learn_l123_body" formatted="false">A refractometer is only as good as its discipline. Workflow: filter 2 ml through a paper or 0.45 µm syringe filter to remove oils and fines, cool to 18–22°C (refraction is temperature-sensitive; hot coffee reads 0.10–0.15% high), place 4–5 drops on a dry prism, close the cover, wait 10 s, read. After each sample, rinse with distilled water, wipe fully dry, and zero-check: distilled water must read 0.00% ±0.02%, otherwise recalibrate. Prism scratches scatter light and bias low; oils raise baseline. Log dose, beverage mass, TDS and computed yield = TDS × mass / dose for every brew — within ten paired readings you will know your grinder\'s true extraction ceiling.</string>
+    <string name="learn_l124_title">Bypass brewing science</string>
+    <string name="learn_l124_body">Bypass is deliberate dilution: brew a concentrated slurry then add water after, controlling strength without dragging extraction into bitterness. AeroPress recipes brewed at 1:10 then diluted to 1:16 taste sweeter than a straight 1:16 pour-over of the same coffee because the lower water-to-coffee ratio limits extraction. Intentional bypass (Hoffmann AeroPress, bypass Bloom variants) is a tool; unintentional bypass (water streaming around the V60 filter edge, gap between filter and dripper wall, or a folded filter pleat) is a defect that weakens without increasing yield — your cup tastes thin and under-developed simultaneously. Zero-bypass drippers (Tricolate, Ceado Hoop) seal the edge to prove the difference.</string>
+    <string name="learn_l125_title">Q-Grader expanded calibration</string>
+    <string name="learn_l125_body">A Q-Grader is not a coffee sommelier — it is a calibrated instrument. The classic Q-course requires passing 22 exams: olfactory leeks tests, four acid kits, salt/sweet thresholds, 8 triangle tests, and three 6-sample cupping calibrations against the group mean. Since the 2024 CVA, expanded scope adds phenol, potato and ferment taint identification at 2× threshold, plus descriptive vs affective scoring. Re-calibration every three years keeps graders aligned; individual palate drift of ±1.5 points is normal and why panels cup, not individuals. For enthusiasts, the lesson is to cup with others and average — your personal bias toward acidity or body skews solo scoring more than you think.</string>
 
     <!-- Coffee varieties -->
     <string name="variety_typica_name">Arabica Typica</string>
@@ -1145,7 +1295,7 @@
     <!-- Caffeine tracking -->
     <string name="caffeine_title">Caffeine</string>
     <string name="caffeine_today">Today</string>
-    <string name="caffeine_total">mg from %d brews</string>
+    <string name="caffeine_total" formatted="false">mg from %d brews</string>
     <string name="caffeine_limit">FDA recommends max 400 mg/day</string>
     <string name="caffeine_none">No brews logged today</string>
 
@@ -1184,7 +1334,7 @@
     <string name="stats_equipment_breakdown">Equipment breakdown</string>
     <string name="stats_roast_preference">Roast preference</string>
     <string name="stats_time_of_day">Time of day</string>
-    <string name="stats_favorite_ratio">Favorite ratio · %d brews</string>
+    <string name="stats_favorite_ratio" formatted="false">Favorite ratio · %d brews</string>
     <string name="stats_morning">Morning (6–12)</string>
     <string name="stats_afternoon">Afternoon (12–18)</string>
     <string name="stats_evening">Evening (18–24)</string>
@@ -1210,13 +1360,13 @@
     <string name="learn_l58_title" formatted="false">Processing &amp; Water Usage</string>
     <string name="learn_l58_body" formatted="false">Coffee processing has a massive water footprint. The natural (dry) process uses almost no water — cherries dry whole in the sun for 2–4 weeks, making it the most eco-friendly method. The washed process is the thirstiest: 40–60 liters of water to process 1 kg of green coffee, with mucilage-polluted wastewater as a byproduct. Honey processing sits in the middle — some water is used to remove the skin, but mucilage stays on the bean. Modern eco-pulpers have reduced water usage by 90% compared to traditional pulpers, and closed-loop water recycling systems are becoming standard at progressive mills. In regions like Ethiopia and Kenya, coffee wastewater dumped into rivers has devastated aquatic ecosystems — proper treatment ponds and filtration are not optional extras, they are necessities for the industry\'s future.</string>
     <string name="learn_l59_title">Certifications &amp; What They Mean</string>
-    <string name="learn_l59_body">Coffee certifications are tools, not guarantees. Organic ensures no synthetic pesticides or fertilizers — important because coffee is one of the most chemically sprayed crops. Fair Trade provides a minimum price floor ($1.40/lb) and a social premium for community projects — but the per-farmer payout is modest. Rainforest Alliance focuses on ecosystem conservation and worker welfare. Bird Friendly (Smithsonian) is the strictest shade-grown certification, requiring 40% canopy cover. UTZ and 4C are industry baseline standards — better than nothing but far from rigorous. The catch: certification costs $3,000–10,000 annually, which smallholder farmers with 1–2 hectares cannot afford. Direct trade and relationship models attempt to bypass this bureaucracy. When reading coffee bags, look for specific farm names, lot numbers, and price transparency — those tell you more than any stamp.</string>
+    <string name="learn_l59_body" formatted="false">Coffee certifications are tools, not guarantees. Organic ensures no synthetic pesticides or fertilizers — important because coffee is one of the most chemically sprayed crops. Fair Trade provides a minimum price floor ($1.40/lb) and a social premium for community projects — but the per-farmer payout is modest. Rainforest Alliance focuses on ecosystem conservation and worker welfare. Bird Friendly (Smithsonian) is the strictest shade-grown certification, requiring 40% canopy cover. UTZ and 4C are industry baseline standards — better than nothing but far from rigorous. The catch: certification costs $3,000–10,000 annually, which smallholder farmers with 1–2 hectares cannot afford. Direct trade and relationship models attempt to bypass this bureaucracy. When reading coffee bags, look for specific farm names, lot numbers, and price transparency — those tell you more than any stamp.</string>
     <string name="learn_l60_title">Reducing Your Coffee Footprint</string>
     <string name="learn_l60_body">Small changes at home compound into meaningful impact. Switch to reusable filters: cloth (cotton or hemp) lasts a year with proper care, and metal filters last indefinitely — both eliminate paper waste entirely. Compost your coffee grounds — they are nitrogen-rich, slightly acidic, and beloved by worms, making them one of the best compost inputs you can add. Buy coffee in larger bags (1–2 kg) to reduce packaging waste per gram, then portion and freeze what you won\'t use within 2 weeks. Support roasters who publish transparency reports, carbon-neutral shipping, and sustainable sourcing policies. The most impactful choice is also the simplest: drink less coffee, but make every cup count — one memorable Gesha is worth more than ten forgettable pods.</string>
 
     <!-- Chapter 12: Espresso Fundamentals -->
     <string name="learn_l61_title">Understanding the Espresso Shot</string>
-    <string name="learn_l61_body">Unlike filter coffee where gravity pulls water through grounds, espresso forces water at 9 bars of pressure through a compacted puck of fine coffee. This pressurized extraction creates unique characteristics — emulsified oils form crema, dissolved solids reach 8-12% (vs 1.2-1.5% for filter), and extraction happens in 25-35 seconds. The result is concentrated, intense, and reveals flavors impossible to achieve with any other method. A single espresso is traditionally 7-9g coffee yielding 25-35ml; modern specialty typically uses 18-22g yielding 36-55g.</string>
+    <string name="learn_l61_body" formatted="false">Unlike filter coffee where gravity pulls water through grounds, espresso forces water at 9 bars of pressure through a compacted puck of fine coffee. This pressurized extraction creates unique characteristics — emulsified oils form crema, dissolved solids reach 8-12% (vs 1.2-1.5% for filter), and extraction happens in 25-35 seconds. The result is concentrated, intense, and reveals flavors impossible to achieve with any other method. A single espresso is traditionally 7-9g coffee yielding 25-35ml; modern specialty typically uses 18-22g yielding 36-55g.</string>
     <string name="learn_l62_title">Puck Preparation</string>
     <string name="learn_l62_body">Great espresso starts before water touches coffee. Distribution is critical — uneven density creates channels where water races through, overextracting some grounds and bypassing others entirely. WDT (Weiss Distribution Technique) uses thin needles to break clumps and evenly distribute grounds. RDT (Ross Droplet Technique) adds a tiny spritz of water to beans before grinding to reduce static. Tamping should be level (not angled) and consistent in force — anything above 10kg doesn\'t improve extraction. The goal: a perfectly flat, evenly dense puck that water flows through uniformly.</string>
     <string name="learn_l63_title">Dialing In Espresso</string>
@@ -1228,27 +1378,47 @@
 
     <!-- Chapter 13: Coffee Processing -->
     <string name="learn_l66_title">Washed Process</string>
-    <string name="learn_l66_body">Washed (wet) processing is the dominant method for specialty coffee. Cherries are depulped immediately after harvest, then fermented in water tanks for 12-36 hours to break down the sticky mucilage layer. After fermentation, beans are washed clean and dried on raised beds or patios to 10-12% moisture. The result: a clean, transparent cup where you taste the coffee itself — the origin, variety, and terroir — rather than processing flavors. Dominant in Colombia, Kenya, Central America. The downside: high water usage and potential for waterway pollution if waste water isn\'t treated.</string>
+    <string name="learn_l66_body" formatted="false">Washed (wet) processing is the dominant method for specialty coffee. Cherries are depulped immediately after harvest, then fermented in water tanks for 12-36 hours to break down the sticky mucilage layer. After fermentation, beans are washed clean and dried on raised beds or patios to 10-12% moisture. The result: a clean, transparent cup where you taste the coffee itself — the origin, variety, and terroir — rather than processing flavors. Dominant in Colombia, Kenya, Central America. The downside: high water usage and potential for waterway pollution if waste water isn\'t treated.</string>
     <string name="learn_l67_title">Natural &amp; Honey Processing</string>
     <string name="learn_l67_body">Natural (dry) processing is the oldest method — whole cherries are dried in the sun for 3-4 weeks, raked regularly, then hulled. This long contact with fruit pulp imparts intense berry, winey, and fermented notes with heavy body. Dominant in Brazil and Ethiopia. Honey processing (pulped natural) is the middle path: skin is removed but mucilage stays on during drying. White, yellow, red, and black honeys indicate increasing amounts of mucilage left on. Costa Rica pioneered this method. Honey coffees offer the sweetness and body of naturals with more clarity.</string>
     <string name="learn_l68_title">Experimental Processing</string>
     <string name="learn_l68_body">The last decade has seen explosive innovation in coffee processing, largely inspired by winemaking. Anaerobic fermentation seals coffee in oxygen-free tanks, stressing yeast metabolism to produce lactic acid and exotic fruit esters. Carbonic maceration (borrowed from Beaujolais wine) ferments whole cherries in CO2-pressurized tanks for intense red fruit and floral notes. Lactic fermentation deliberately introduces Lactobacillus bacteria for creamy, yogurt-like profiles. These methods produce intense, unusual flavors — but also risk overwhelming the coffee\'s origin character. Competition winners frequently use experimentally processed coffees.</string>
     <string name="learn_l69_title">Wet-Hulling &amp; Monsooning</string>
-    <string name="learn_l69_body">Indonesia\'s unique wet-hulling (giling basah) process was developed for the humid climate where slow drying is impossible. Cherries are pulped, partially dried to 25-40% moisture, then the parchment is hulled off while beans are still wet. This produces the characteristic blue-green color and earthy, funky, low-acidity profile of Sumatran coffee. Monsooning originated when coffee shipped from India around the Cape of Good Hope absorbed monsoon moisture during the long voyage. Today it\'s replicated by exposing beans to monsoon winds for 12-16 weeks, producing a pale, swollen bean with extremely low acidity and unique musty character.</string>
+    <string name="learn_l69_body" formatted="false">Indonesia\'s unique wet-hulling (giling basah) process was developed for the humid climate where slow drying is impossible. Cherries are pulped, partially dried to 25-40% moisture, then the parchment is hulled off while beans are still wet. This produces the characteristic blue-green color and earthy, funky, low-acidity profile of Sumatran coffee. Monsooning originated when coffee shipped from India around the Cape of Good Hope absorbed monsoon moisture during the long voyage. Today it\'s replicated by exposing beans to monsoon winds for 12-16 weeks, producing a pale, swollen bean with extremely low acidity and unique musty character.</string>
     <string name="learn_l70_title">Processing &amp; Flavor</string>
-    <string name="learn_l70_body">Processing method is as important as variety and terroir in determining flavor — some say it accounts for 30-40% of the final cup character. Washed coffees express acidity and origin character most clearly. Naturals emphasize body and fruit. Honeys balance both. Anaerobics add complexity and novelty. But processing can also mask quality: over-fermented naturals taste like vinegar; poorly washed coffees taste dirty. The specialty coffee revolution has pushed processing innovation further than any other variable in the last decade. Understanding processing helps you choose coffees that match your taste preferences.</string>
+    <string name="learn_l70_body" formatted="false">Processing method is as important as variety and terroir in determining flavor — some say it accounts for 30-40% of the final cup character. Washed coffees express acidity and origin character most clearly. Naturals emphasize body and fruit. Honeys balance both. Anaerobics add complexity and novelty. But processing can also mask quality: over-fermented naturals taste like vinegar; poorly washed coffees taste dirty. The specialty coffee revolution has pushed processing innovation further than any other variable in the last decade. Understanding processing helps you choose coffees that match your taste preferences.</string>
 
     <!-- Chapter 14: Coffee Origins -->
     <string name="learn_l71_title">Ethiopia — The Birthplace</string>
     <string name="learn_l71_body">Ethiopia is coffee\'s genetic homeland — the only place where Coffea arabica grows wild in forests. The Kaldi legend tells of a goatherd who noticed his goats dancing after eating red cherries. Ethiopian coffee is known for explosive fruit and floral notes: Yirgacheffe produces delicate jasmine, bergamot, and lemon; Sidamo offers blueberry and chocolate; Harrar is wild and winey with mocha notes. Thousands of unnamed heirloom varieties grow here, representing the world\'s greatest repository of coffee genetic diversity. Most coffee is grown by smallholders on less than one hectare, processed as natural or washed depending on region and water availability.</string>
     <string name="learn_l72_title">Colombia &amp; Brazil</string>
-    <string name="learn_l72_body">Colombia and Brazil dominate South American coffee. Brazil is the world\'s largest producer (~35% of global supply), known for chocolate, nut, and caramel notes with low acidity — ideal for espresso blends. Predominantly natural processed on vast mechanical farms in Minas Gerais and São Paulo. Colombia, the third-largest producer, focuses on quality through the Juan Valdez cooperative system. Colombian coffee is known for balanced sweetness, medium body, and clean profiles from washed processing at high altitudes. The Coffee Triangle (Eje Cafetero) is a UNESCO World Heritage site.</string>
+    <string name="learn_l72_body" formatted="false">Colombia and Brazil dominate South American coffee. Brazil is the world\'s largest producer (~35% of global supply), known for chocolate, nut, and caramel notes with low acidity — ideal for espresso blends. Predominantly natural processed on vast mechanical farms in Minas Gerais and São Paulo. Colombia, the third-largest producer, focuses on quality through the Juan Valdez cooperative system. Colombian coffee is known for balanced sweetness, medium body, and clean profiles from washed processing at high altitudes. The Coffee Triangle (Eje Cafetero) is a UNESCO World Heritage site.</string>
     <string name="learn_l73_title">Kenya &amp; East Africa</string>
     <string name="learn_l73_body">Kenyan coffee is arguably the world\'s most distinctive — intense blackcurrant, tomato, and citrus notes with searing, complex acidity. The SL28 and SL34 varieties, developed by Scott Laboratories in the 1930s, are legendary for cup quality. Kenya\'s auction system and smallholder cooperative structure reward quality over quantity. Neighboring Rwanda produces clean, sweet bourbon varieties with notes of raisin, orange, and honey — the \'Land of a Thousand Hills\' has invested heavily in washing stations. Burundi is an emerging origin with delicate, tea-like profiles.</string>
     <string name="learn_l74_title">Central America</string>
     <string name="learn_l74_body">From Guatemala to Panama, Central America produces diverse, high-quality Arabica. Guatemala\'s Antigua region (volcanic soil) yields chocolate, spice, and smoky notes. Costa Rica pioneered honey processing and produces clean, sweet, citrusy coffees. Honduras (now the region\'s largest producer) offers caramel, vanilla, and tropical fruit. Panama\'s Boquete region achieved fame through Hacienda La Esmeralda\'s Geisha — the most expensive coffee in the world, with explosive jasmine, bergamot, and stone fruit flavors that shattered auction records ($10,000+/kg for the top lots).</string>
     <string name="learn_l75_title">Asia-Pacific Coffees</string>
     <string name="learn_l75_body">Indonesia (Sumatra, Java, Sulawesi) produces earthy, full-bodied coffees with low acidity — prized for adding weight to espresso blends. The wet-hulling process creates their signature profile. Vietnam is the world\'s #2 producer but grows almost exclusively Robusta for instant coffee — the source of traditional Vietnamese cà phê with condensed milk. India grows both Arabica and Robusta, including the unique monsoon-aged Malabar. Papua New Guinea produces clean, sweet coffees similar to Central American profiles. Thailand, Laos, and Myanmar are emerging origins with growing specialty sectors.</string>
+    <string name="learn_l76_title">Anaerobic 101</string>
+    <string name="learn_l76_body">Anaerobic fermentation seals cherries in oxygen-free tanks, often pressurized with CO2, for 48–120 hours. Without oxygen, lactobacillus and specific yeasts dominate, producing lactic acidity and esters that taste like tropical fruit, yogurt, or wine. The method creates intense, polarizing cups — some love the explosive fruit, others find it masks terroir. Control variables: time, temperature, pH, and whether cherries are whole, pulped, or de-pulped.</string>
+    <string name="learn_l77_title">Carbonic Maceration</string>
+    <string name="learn_l77_body">Borrowed from Beaujolais winemaking, carbonic maceration ferments whole cherries in a CO2-saturated tank. Intracellular fermentation happens inside the intact berry before yeast breaks the skin, generating bright, candy-like esters. The result is intensely floral and fruit-forward — strawberry, bubblegum, rose — with amplified sweetness and lifted acidity. Pioneered in coffee by Sasa Sestic and Project Origin.</string>
+    <string name="learn_l78_title">Thermal Shock</string>
+    <string name="learn_l78_body">Thermal shock, developed by Diego Bermudez in Colombia, alternates hot and cold water washes during fermentation. The temperature swing shocks cell walls, fixing volatile aroma compounds and modulating acidity. Bermudez uses 40°C then 12°C cycles to lock in flavors like peach, lychee, and rose water. It requires precise hygiene and temperature control, but yields competition-winning clarity.</string>
+    <string name="learn_l79_title">Co-ferments vs Infused</string>
+    <string name="learn_l79_body">Co-ferment means coffee ferments together with another ingredient — fruit, spices, or Koji — so microbes metabolize both substrates together. Infused means flavor is added after roasting, like barrel-aging or spraying. Co-fermentation can be exquisite when restrained, but excessive fruit masks origin; infusion is generally considered flavoring, not processing. The SCA and many competitions now require disclosure of co-fermentation ingredients.</string>
+    <string name="learn_l80_title">Bypass Physics</string>
+    <string name="learn_l80_body">Bypass is water that reaches the cup without extracting coffee, either intentionally (diluting a concentrate) or unintentionally (water slipping around the filter edge). Intentional bypass — e.g., AeroPress 1:10 concentrate diluted to 1:16 — lowers TDS without over-extraction. Unintentional bypass in pour-over creates weak, hollow cups. No-bypass drippers and careful pouring minimize the latter.</string>
+    <string name="learn_l81_title">Water Alkalinity</string>
+    <string name="learn_l81_body">Alkalinity is water buffering capacity, mainly bicarbonate (HCO3-), measured as ppm CaCO3. Ideal specialty brewing alkalinity is 40–70 ppm. Too high and coffee tastes flat, dull, and muted because acids are neutralized; too low and acidity turns sharp, sour, and aggressive. Alkalinity works with general hardness (GH) to define extraction; GH pulls flavor, KH shapes its expression.</string>
+    <string name="learn_l82_title">Roast Universal Curve</string>
+    <string name="learn_l82_body">The universal roast curve plots bean temperature versus time and its derivative ROR (Rate of Rise, °C/min). A controlled roast shows a steadily declining ROR from the drying phase through Maillard to development. Crashes or spikes in ROR correlate with baked, grassy, or scorched flavors. Understanding ROR helps home roasters diagnose why a coffee tastes underdeveloped or bitter, independent of final color.</string>
+    <string name="learn_l83_title">Koji Starter</string>
+    <string name="learn_l83_body">Koji (Aspergillus oryzae) is the mold behind sake, miso, and soy sauce, now used to inoculate coffee cherry fermentation. Koji enzymes break down starches and proteins into sugars and amino acids, boosting sweetness and umami. Koji coffees often taste like white peach, melon, sake, or brown sugar with silky body. It is a gentle, enzymatic alternative to aggressive anaerobic funk.</string>
+    <string name="learn_l84_title">Extraction Mastery</string>
+    <string name="learn_l84_body" formatted="false">Extraction mastery ties TDS and yield together. Measure TDS with a refractometer, then calculate Extraction Yield = TDS × beverage mass / dose. Target 18–22% at 1.15–1.55% TDS for filter. If sour and under 18%, grind finer or raise temperature; if bitter above 22%, grind coarser or lower temperature. One variable at a time and a refractometer remove guesswork.</string>
+    <string name="learn_l85_title">Decaf Science</string>
+    <string name="learn_l85_body">Modern decaf prioritizes flavor preservation. Swiss Water Process soaks beans in flavor-charged water and filters caffeine with activated carbon — chemical-free. CO2 process uses pressurized carbon dioxide as a selective solvent, and Sugarcane EA uses naturally occurring ethyl acetate. All still leave 2–5 mg caffeine per cup, but a well-executed SWP decaf can be indistinguishable from regular in blind tastings.</string>
     <string name="equip_siphon_name">Siphon</string>
     <string name="equip_siphon_tag">Theatrical &amp; aromatic</string>
     <string name="equip_clever_name">Clever Dripper</string>
@@ -1263,13 +1433,31 @@
     <!-- Cloud settings -->
     <string name="settings_cloud_title">Cloud</string>
     <string name="settings_cloud_signin">Sign in with Google</string>
-    <string name="settings_cloud_signed_as">Signed in as %s</string>
+    <string name="settings_cloud_signed_as" formatted="false">Signed in as %s</string>
     <string name="settings_cloud_signout">Sign out</string>
     <string name="settings_cloud_error">Sign-in failed</string>
     <string name="settings_cloud_backup">Backup to Drive</string>
     <string name="settings_cloud_restore">Restore from Drive</string>
     <string name="settings_cloud_backup_done">Backup saved to Drive</string>
     <string name="settings_cloud_restore_done">Data restored. Restart the app.</string>
+    <string name="settings_cloud_working">Working…</string>
+    <string name="settings_cloud_retry_hint">Permission granted — retrying</string>
+    <string name="cloud_error_12500">Error 12500: Check Support Email in OAuth consent screen, and SHA-1 matches</string>
+    <string name="cloud_error_12501">Error 12501: Sign-in cancelled or Web Client ID mismatch</string>
+    <string name="cloud_error_10">Error 10: SHA-1 fingerprint mismatch. Run ./gradlew signingReport</string>
+    <string name="cloud_error_8">Error 8: Network error. Check internet connection.</string>
+    <string name="cloud_error_13">Error 13: Play Services outdated. Update Google Play Services.</string>
+    <string name="cloud_error_15">Error 15: Wrong package name or SHA-1</string>
+    <string name="cloud_error_generic" formatted="false">Error %1$d: %2$s</string>
+    <string name="cloud_error_unknown">Unknown</string>
+    <string name="cloud_error_exception" formatted="false">Error: %1$s — %2$s</string>
+    <string name="cloud_error_not_signed_in">Not signed in — please sign in with Google first</string>
+    <string name="cloud_error_auth_failed" formatted="false">Authorization failed (%1$d) — please sign in again</string>
+    <string name="cloud_error_404">Backup not found (404)</string>
+    <string name="cloud_error_429">Too many requests (429) — please retry shortly</string>
+    <string name="cloud_error_drive" formatted="false">Drive error %1$d: %2$s</string>
+    <string name="cloud_error_network" formatted="false">Network error — check internet connection: %1$s</string>
+    <string name="cloud_error_no_backup">No backup found in Drive</string>
     <string name="bean_detail_title">Bean Details</string>
     <string name="bean_detail_roast_date">Roast date</string>
     <string name="bean_detail_process">Process</string>
@@ -1330,6 +1518,354 @@
     <string name="drink_mirra_summary">Southeastern Turkish bitter coffee — dark roasted with cardamom, intense and ceremonial</string>
     <string name="drink_mirra_body">Southeastern Turkish strong bitter coffee brewed extremely dark with cardamom, served in tiny handleless cups. Unlike regular Turkish coffee, mirra is prepared by repeatedly pouring the brew through the grounds using a special pot with multiple chambers — each pass intensifies the extraction. Very bitter, intensely caffeinated, traditionally served at ceremonies and to honored guests as a mark of respect. Refusing a cup of mirra is unthinkable in Mardin and Şanlıurfa hospitality culture.\n\nIngredients:\n• 15–20 g fine ground dark roast coffee\n• 2–3 green cardamom pods, crushed\n• 150–200 ml water\n\nSteps:\n1. Grind coffee very fine with crushed cardamom pods.\n2. In a traditional mirra pot (or a small saucepan), add coffee-cardamom mix and water.\n3. Bring to a simmer but do not let it boil over.\n4. Pour the brew into another container, then pour it back through the grounds.\n5. Repeat this passing 2–3 times — each pass deepens extraction and bitterness.\n6. Serve in very small cups (30–40 ml) — mirra is sipped, not drunk quickly.\n7. Traditionally served unsweetened. The bitterness is the point — it signals strength and respect.</string>
 
+    <string name="bloom_phase_rinse">Rinse</string>
+    <string name="bloom_phase_bloom">Bloom</string>
+    <string name="bloom_phase_pour">Pour</string>
+    <string name="bloom_tap_hint">tap to cycle</string>
+    <string name="brew_complete_nudge">Logged! Your streak continues — brew again tomorrow?</string>
     <string name="settings_about_footer">Made with love by a Turkish home barista. Open source, MIT licensed, no ads, no tracking.</string>
     <string name="google_server_client_id">196980582414-fv03bbj1dba2g82t8jo37132gf3u9fbj.apps.googleusercontent.com</string>
+
+    <!-- ===== v5 god-tier depth l86-l100 ===== -->
+    <string name="learn_l86_title">Anaerobic Extended: pH, Pressure &amp; LAB Control</string>
+    <string name="learn_l86_body">Sealed anaerobic tanks let lactic-acid bacteria dominate without oxygen: keep pH above 3.9 in the first 48h to avoid vinegary over-acidification, then let it drift to 3.5–3.7 for tropical fruit esters. Pressurize lightly with CO2 at 1–2 bar and hold slurry at 18–22°C; every +5°C roughly doubles microbial activity and risks boozy off-notes. Cup every 12h — pineapple/mango signals peak; nail-polish or onion means you overran. Smallholders often use reused plastic drums — purge oxygen twice by flushing CO2 after sealing, otherwise residual O2 flips you back to aerobic.</string>
+    <string name="learn_l87_title">Scale Calibration: 0.1 g Repeatability</string>
+    <string name="learn_l87_body" formatted="false">A $15 scale can swing 0.3–0.5 g with drift, tilt, or low battery — enough to shift a 15 g dose by 3% and move extraction by ~0.4%. Calibrate monthly with a 100 g or 500 g F2 weight, zero with the brewer on the pan, and never brew on a warm scale (heat drift). Weigh water as you pour for pour-over; flow calculators assume cumulative mass, so taring mid-brew ruins the target. Keep a spare AAA set in your bar — voltage sag under load is the silent killer of repeatability.</string>
+    <string name="learn_l88_title">Water Chemistry: Mg vs Ca</string>
+    <string name="learn_l88_body">Magnesium (Mg2+) binds flavor compounds more aggressively than calcium (Ca2+), lifting brightness and fruit clarity but also amplifying astringency if total hardness exceeds 120 ppm. Calcium adds creamy body and mutes acidity, ideal for chocolate-forward Brazils but dulling for washed Ethiopians. SCA target 50–175 ppm total hardness; try a 2:1 Mg:Ca split (e.g., 70 ppm Mg, 35 ppm Ca as CaCO3) for filter clarity, and invert it for espresso body. Test with GH/KH drops — TDS alone cannot tell you the ratio.</string>
+    <string name="learn_l89_title">SCA Cupping Protocol, Step by Step</string>
+    <string name="learn_l89_body">Follow SCA 2024 CVA cupping: 8.25 g coffee to 150 ml at 92–94°C, fragrance at 15 min after grind, break crust at exactly 4:00 and inhale, skim, then taste at 8 min and as it cools to 35°C. Score fragrance, aroma, flavor, aftertaste, acidity, body, uniformity, clean cup, sweetness, and overall — or use descriptive CVA without points. Slurp aggressively to aerosolize across the palate and calibrate with reference leathers: grind, water, and roast must be identical or the comparison is meaningless.</string>
+    <string name="learn_l90_title">Defect Taints: Phenol, Potato, Ferment, Baggy</string>
+    <string name="learn_l90_body" formatted="false">Phenolic (medicinal, iodine) comes from Rio/earthy over-fermentation or contaminated water; potato defect from antestia-bug bacteria is unmistakable raw-potato stench in Rwandans — one bad bean ruins a pot. Ferment/vinegar is sweet-sour booze from overripe pickings; baggy/jute is papery sack from past-crop storage above 12% moisture or Aw over 0.65. Buy current crop, store below 60% RH, and cup every new bag — defects show best at 72–96h post-roast.</string>
+    <string name="learn_l91_title">Espresso Pressure Profiling</string>
+    <string name="learn_l91_body">Beyond flat 9 bar, profiling shapes extraction phases: 2–3 bar pre-infusion for 8–12 s to saturate, ramp to 9 bar to build flow, then decline to 6 bar as blonding starts to avoid over-extracting tail bitters. Lower peak (6–7 bar) emphasizes sweetness and reduces channeling on light roasts; a sharp 9-bar spike maximizes body for dark blends. Flow control kits (Bianca paddle, DE1+) let you hold 1.5–2.0 ml/s through the shot — measure yield by mass, not time, when profiling.</string>
+    <string name="learn_l92_title">Grinder Alignment &amp; Seasoning</string>
+    <string name="learn_l92_body" formatted="false">Misaligned burrs produce bimodal tails that mimic dull burrs: marker-test your flats (dry-erase on burr face, chirp, check wipe pattern) and shim until 95%+ contact. New burrs need 3–8 kg seasoning — first kilos taste metallic and produce excess fines as micro-burrs break in; dial back 1–2 clicks coarser until seasoned. Check zero point monthly: chirp, back off to brew setting, and log it — a shifting zero signals carrier wear or thread backlash.</string>
+    <string name="learn_l93_title">Green Storage: Water Activity</string>
+    <string name="learn_l93_body" formatted="false">Green coffee is alive at 10–12% moisture and Aw 0.53–0.59; above Aw 0.65 mold risk spikes, below 0.45 beans turn hollow and woody. Store in GrainPro or Ecotact hermetic bags at 15–22°C and 50–65% RH, never in jute alone in humid climates. Condensation is the enemy — moving beans from cold to warm without sealed bags sweats them and invites fermentation again. Vault greens for no more than 9–12 months before past-crop paper flavors emerge.</string>
+    <string name="learn_l94_title">Roast Development: ROR &amp; DTR</string>
+    <string name="learn_l94_body" formatted="false">Rate of Rise (ROR, °C/min) should decline smoothly through drying, Maillard, and development; a crash or flick (ROR spike at first crack) bakes or scorches the profile. Development Time Ratio (DTR) = development time / total time: 18–22% suits washed Ethiopians for floral clarity, 22–26% for honey/naturals needing body. Log bean-temp every 15 s — a steady declining ROR is more predictive than final color alone.</string>
+    <string name="learn_l95_title">Milk Chemistry &amp; Foam Physics</string>
+    <string name="learn_l95_body" formatted="false">Foam stability comes from denatured whey proteins wrapping air bubbles: stretch (inject air) only while milk is below 37°C when proteins are still flexible, then roll to polish. Fat destabilizes foam — whole milk (3.5% fat) gives silkier but shorter-lived microfoam than skim; oat barista blends add dipotassium phosphate to mimic casein stability. Never exceed 65°C; above 70°C proteins tighten and squeeze water, turning foam soapy and milk sweet-faded.</string>
+    <string name="learn_l96_title">Sensory Calibration: Triangulation</string>
+    <string name="learn_l96_body">Professional palates are calibrated, not born: run triangle tests (two identical, one different) and score blind; 7/9 correct is statistically significant (p &lt; 0.05). Build a reference kit — citric, malic, acetic acids at 0.5 g/L, sucrose at 10 g/L, quinine at 0.02 g/L — and taste weekly to anchor acidity, sweetness, and bitterness. Cup the same coffee at 48h, 7d, and 14d to map degassing; log every note or your memory invents flavors.</string>
+    <string name="learn_l97_title">Caffeine Pharmacokinetics</string>
+    <string name="learn_l97_body">Caffeine half-life averages 5–6h but CYP1A2 genotype splits fast vs slow metabolizers: AA carriers clear caffeine in ~3h, AC/CC in 6–8h, explaining why one person sleeps after midnight espresso and another cannot. Tolerance builds via adenosine-receptor upregulation — a 7-day washout resets sensitivity. Dose safely: 400 mg/day ceiling for healthy adults, but single doses over 200 mg spike anxiety and tremor in sensitive drinkers.</string>
+    <string name="learn_l98_title">Refractometry: Measure to Master</string>
+    <string name="learn_l98_body" formatted="false">A $300 refractometer turns guesswork into data: measure TDS, then compute Extraction Yield = TDS × beverage mass / dose. Target filter 1.15–1.55% TDS at 18–22% yield; espresso 8–12% TDS at 18–22% yield — same yield window, different strength. Zero with distilled water at brew temp, cool samples to 25°C or use ATC, and filter fines through syringe paper. Log every shot and plot on the SCA Control Chart to see your grinder, not your mood.</string>
+    <string name="learn_l99_title">Lactic vs Washed Extended Fermentation</string>
+    <string name="learn_l99_body">Lactic inoculation pitches Lactobacillus to produce creamy, yogurt-like acidity in 36–72h at 20–24°C — cleaner than spontaneous anaerobic funk, with peach and vanilla notes. Washed extended (anaerobic washed) ferments depulped beans submerged in water under CO2 for 48–96h, adding layered fruit without natural heaviness. Both need daily pH and Brix checks; stop when pH hits 3.6–3.8 or Brix drop stalls, otherwise acidity sharpens to vinegar.</string>
+    <string name="learn_l100_title">Competition Coffee: WBC Signature</string>
+    <string name="learn_l100_body">World Barista Championship rules demand 4 espressos, 4 milk drinks, and 4 signature drinks in 15 minutes — signature must be non-alcoholic and espresso-based, judged on creativity and flavor harmony. Champions like Berg Wu and Diego Campos used carbonic Geshas with precise 1:2.15 yields to maximize florals. Home takeaway: build signature logic — acid + sweet + texture (e.g., espresso, reduced cascara, carbonated water) — and test on refractometer for balance.</string>
+
+    <!-- ===== v5 new drinks ===== -->
+    <string name="drink_shakerato_name">Shakerato</string>
+    <string name="drink_shakerato_summary">Italian iced shaken espresso — frothy, sweet, cocktail-shaken</string>
+    <string name="drink_shakerato_body">Italy\'s summer cocktail without alcohol: a double espresso shaken hard over ice with sugar, strained into a chilled coupe glass. The shake emulsifies sugars and crema into a dense, pale, frothy cap that looks like a shaken daiquiri. Served without ice in the glass, sipped like a dessert.
+
+Ingredients:
+• Double espresso (~50–60 ml)
+• 1–2 tsp sugar or simple syrup
+• Ice cubes
+
+Steps:
+1. Chill a coupe or martini glass.
+2. Pull a double espresso into a shaker with ice and sugar.
+3. Shake vigorously 15–20 s until frothy, cold, and pale.
+4. Strain into the chilled glass — no ice in the final serve.</string>
+    <string name="drink_tonic_name">Espresso Tonic</string>
+    <string name="drink_tonic_summary">Scandinavian espresso over tonic water — bitter, fizzy, refreshing</string>
+    <string name="drink_tonic_body">Born in Scandinavia\'s third-wave cafes: cold tonic water topped with a floating shot of espresso. The tonic\'s quinine bitterness amplifies espresso\'s fruit, and the carbonation lifts aromatics. Serve in a highball over large ice, never stirred — the cascading layers are the theatre.
+
+Ingredients:
+• 150 ml quality tonic water
+• 1 shot espresso (~30 ml)
+• Large ice cubes, lemon or orange twist
+
+Steps:
+1. Fill a glass with large ice and tonic water.
+2. Slowly pour a fresh espresso shot over the back of a spoon to float on top.
+3. Garnish with citrus twist. Stir only before sipping.</string>
+    <string name="drink_kaapi_name">South Indian Kaapi</string>
+    <string name="drink_kaapi_summary">South Indian filter kaapi — decoction with jaggery and frothed milk</string>
+    <string name="drink_kaapi_body" formatted="false">South India\'s daily ritual: strong decoction from a stainless-steel filter, cut with jaggery and hot frothed milk, then poured between two tumblers (dhavara) to aerate into foam. Earthy, sweet, and deeply comforting.
+
+Ingredients:
+• 15–20 g South Indian filter coffee (chicory blend optional)
+• 150 ml water at 95°C
+• 100 ml hot milk, frothed
+• Jaggery or sugar to taste
+
+Steps:
+1. Add grounds to upper chamber, tamp lightly, pour hot water and let percolate 5–10 min.
+2. Collect dark decoction in lower chamber.
+3. Sweeten with jaggery, add hot frothed milk (40–60% decoction).
+4. Pour between dhavara and tumbler from height to create foam. Serve hot.</string>
+    <string name="drink_oliang_name">Oliang</string>
+    <string name="drink_oliang_summary">Thai traditional coffee — dark roast with corn, soy, sesame, brewed in a cloth bag</string>
+    <string name="drink_oliang_body">Thailand\'s street coffee since the 1950s: dark robusta roasted with corn, soybeans and sesame, brewed through a long muslin “sock” (thung tong) and sweetened with condensed milk. Served hot or over ice as oliang yok lor.
+
+Ingredients:
+• 15–20 g oliang blend (dark robusta + corn/soy mix)
+• 200–250 ml boiling water
+• 2–3 tbsp condensed milk
+
+Steps:
+1. Place grounds in cloth bag over metal ring.
+2. Pour boiling water through, steep 2–3 min, pull bag and re-pour once for strength.
+3. Add condensed milk and stir. Serve hot or pour over ice.</string>
+    <string name="drink_berber_name">Berber Spiced Coffee</string>
+    <string name="drink_berber_summary">Moroccan spiced coffee with ginger, cinnamon, pepper and cardamom</string>
+    <string name="drink_berber_body">Moroccan Berber cafés roast spices with the beans, grinding ginger, cinnamon, black pepper, cloves and cardamom together with coffee for a warming, aromatic cup traditionally brewed in a cezve-like pot.
+
+Ingredients:
+• 10 g coffee, fine
+• Pinch each: ginger, cinnamon, cardamom, black pepper, clove
+• 100 ml water, sugar to taste
+
+Steps:
+1. Mix spices with coffee grounds.
+2. Add to cold water in a small pot, sweeten, heat slowly to foam.
+3. Let foam rise twice, pour with grounds into a small cup.</string>
+    <string name="drink_qahwa_gulf_name">Gulf Qahwa</string>
+    <string name="drink_qahwa_gulf_summary">Gulf Arabic qahwa — lightly roasted coffee with cardamom, saffron, served with dates</string>
+    <string name="drink_qahwa_gulf_body">Gulf hospitality coffee: lightly roasted Arabica simmered with cardamom, saffron and sometimes rosewater, served in tiny finjan cups with dates on the side. Pale gold, fragrant, and sipped slowly — a symbol of generosity across Saudi, UAE and Kuwait.
+
+Ingredients:
+• 10 g lightly roasted Arabica, coarsely ground
+• 2–3 crushed cardamom pods, pinch saffron
+• 150 ml water, dates to serve
+
+Steps:
+1. Boil water with cardamom and saffron.
+2. Add coffee, simmer gently 15–20 min without boiling hard.
+3. Strain and serve in finjan cups with dates. No sugar in the pot — guests add if wanted.</string>
+    <string name="drink_gibraltar_name">Gibraltar</string>
+    <string name="drink_gibraltar_summary">Blue Bottle Gibraltar — double ristretto with ~85 ml microfoam in a 4.5 oz glass</string>
+    <string name="drink_gibraltar_body">Blue Bottle\'s San Francisco creation named after the 4.5 oz Libbey Gibraltar glass it\'s served in: a double ristretto cut with velvety steamed milk, stronger and smaller than a cortado with a Gibraltar tumbler\'s thick walls trapping heat.
+
+Ingredients:
+• Double ristretto (~30 ml)
+• ~85 ml steamed milk, thin microfoam
+• Total: ~115 ml in Gibraltar glass
+
+Steps:
+1. Pull a double ristretto into a 4.5 oz glass.
+2. Steam milk to latte microfoam, pour to integrate. Serve immediately.</string>
+    <string name="drink_raf_name">Raf Coffee</string>
+    <string name="drink_raf_summary">Russian Raf — espresso with vanilla sugar and cream steamed together</string>
+    <string name="drink_raf_body" formatted="false">Moscow\'s late-90s café hit: espresso, vanilla sugar and light cream steamed together until silky and sweet — thicker than a latte, lighter than a breve, with a soufflé-like vanilla aroma.
+
+Ingredients:
+• 1 shot espresso (~30 ml)
+• 150 ml light cream (10–15% fat) or half-and-half
+• 1 tsp vanilla sugar
+
+Steps:
+1. Add espresso, vanilla sugar and cream to a pitcher.
+2. Steam together to 60–65°C, stretching lightly to velvety foam.
+3. Pour into a cup — should be uniformly creamy with no separate foam cap.</string>
+    <string name="drink_melange_name">Wiener Melange</string>
+    <string name="drink_melange_summary">Viennese Melange — mild coffee topped with hot frothed milk, like a local cappuccino</string>
+    <string name="drink_melange_body">Vienna\'s answer to the cappuccino: mild, light-roast coffee topped with hot frothed milk and sometimes whipped cream, traditionally served on a silver tray with a glass of water.
+
+Ingredients:
+• 60 ml mild brewed coffee or lungo
+• 100 ml hot frothed milk
+• Optional: whipped cream, cocoa dusting
+
+Steps:
+1. Brew mild coffee into a cup.
+2. Froth milk to airy foam and spoon on top.
+3. Optional whipped cream and cocoa. Serve with water.</string>
+    <string name="drink_kyoto_name">Kyoto Cold Drip</string>
+    <string name="drink_kyoto_summary">Kyoto-style slow cold drip — 1 drop/sec for 6–8 hours, crystal clear and floral</string>
+    <string name="drink_kyoto_body">Kyoto slow-drip tower: ice water drips at 1 drop per second through a tall column of grounds for 6–8 hours, producing a crystal-clear, intensely floral concentrate served over one giant ice sphere.
+
+Ingredients:
+• 40 g medium-coarse coffee
+• 400 ml ice + 400 ml cold water in tower
+• Drip rate: 1 drop/sec, 6–8 h
+
+Steps:
+1. Add grounds to middle chamber, ice water to top.
+2. Set valve to 1 drop/sec and let drip overnight into lower carafe.
+3. Collect concentrate (~400 ml) and dilute 1:1 or serve over clear ice.</string>
+
+    <string name="glossary_term_81">Ristretto vs Lungo</string>
+    <string name="glossary_def_81">Ristretto restricts water (1:1 to 1:1.5) for intense sweetness; lungo extends water (1:3+) for lighter clarity. Same dose, opposite ends of the extraction spectrum — both diagnose grind and roast suitability.</string>
+    <string name="glossary_term_82">Pre-infusion</string>
+    <string name="glossary_def_82">Low-pressure wetting (2–4 bar for 5–12 s) before full 9 bar extraction. Pre-infusion saturates the puck evenly, reduces channeling, and is essential for light roasts and high doses.</string>
+    <string name="glossary_term_83">Pressure Profiling</string>
+    <string name="glossary_def_83">Variable pressure during an espresso shot — pre-infuse low, ramp to 9 bar, then decline to 6 bar. Profiling shapes flavor: lower peak favors sweetness, high peak favors body.</string>
+    <string name="glossary_term_84">Water Activity (Aw) Deep</string>
+    <string name="glossary_def_84" formatted="false">Free water in green coffee; keep Aw 0.53–0.59 in hermetic bags at 15–22°C and 50–65% RH to prevent mold or hollow, woody aging beyond 9–12 months.</string>
+    <string name="glossary_term_85">Development Time Ratio (DTR)</string>
+    <string name="glossary_def_85" formatted="false">Percentage of total roast time after first crack. Washed Ethiopians shine at 18–22% DTR for florals; naturals need 22–26% for body without tipping into baked flavors.</string>
+    <string name="glossary_term_86">Rate of Rise (ROR)</string>
+    <string name="glossary_def_86">Bean-temperature increase per minute during roasting. A smoothly declining ROR predicts a clean, sweet cup; a crash or flick predicts baked, roasty, or grassy defects.</string>
+    <string name="glossary_term_87">Microlot vs Nanolot</string>
+    <string name="glossary_def_87">Microlot is a few bags from one plot; nanolot is often a single picking pass under 100 kg. Both highlight peak quality and command premium prices for transparency.</string>
+    <string name="glossary_term_88">CYP1A2</string>
+    <string name="glossary_def_88">Liver enzyme gene determining caffeine metabolism speed. AA = fast (3 h half-life), AC/CC = slow (6–8 h). Explains individual tolerance and sleep sensitivity to the same dose.</string>
+    <string name="glossary_term_89">Triangulation</string>
+    <string name="glossary_def_89">Sensory calibration method using triangle tests — two identical, one different — scored blind. 7/9 correct is statistically significant and trains discrimination faster than open tasting.</string>
+    <string name="glossary_term_90">Tare Drift</string>
+    <string name="glossary_def_90">Scale drift from heat, tilt, or low battery causing 0.3–0.5 g error. Calibrate monthly with a 100–500 g weight, power-cycle before dosing, and never tare mid-pour.</string>
+    <string name="glossary_term_91">GrainPro</string>
+    <string name="glossary_def_91">Hermetic barrier bag that keeps green coffee at stable Aw and moisture for 9–12 months. Essential in humid origins; jute alone cannot protect against rehydration.</string>
+    <string name="glossary_term_92">SCA CVA</string>
+    <string name="glossary_def_92">Coffee Value Assessment, SCA 2023 successor to the 100-point form. Separates descriptive assessment from hedonic scoring and adds processing and sustainability context.</string>
+    <string name="glossary_term_93">Q-Grader Expanded</string>
+    <string name="glossary_def_93">Certified grader passing 22 SCA exams. Expanded scope now includes CVA calibration and the ability to detect phenol, potato, and ferment defects blind.</string>
+    <string name="glossary_term_94">Refractometer</string>
+    <string name="glossary_def_94">Optical device measuring TDS via light refraction. Use with distilled-water zero at brew temperature to compute Extraction Yield = TDS × beverage mass / dose.</string>
+    <string name="glossary_term_95">Bypass Brewing</string>
+    <string name="glossary_def_95">Controlled bypass dilutes a strong concentrate (e.g., AeroPress 1:10 to 1:16) without over-extraction; uncontrolled bypass (water around filter edge) weakens without adding strength.</string>
+    <string name="pro_tip_51">Shakerato trick: chill the shaker with ice first, dump that water, then add fresh ice and hot espresso. Pre-chilling prevents the first second of hot coffee from over-diluting before the shake.</string>
+    <string name="pro_tip_52">For espresso tonic, use a high-quality tonic with real quinine and low sugar. Fever-Tree or Thomas Henry highlight fruit; cheap tonic buries it in sweetness.</string>
+    <string name="pro_tip_53">Kaapi decoction improves if you let the South Indian filter percolate a full 10 minutes. Rushing it yields thin, sour concentrate — patience is the recipe.</string>
+    <string name="pro_tip_54">Oliang bag dosing: soak the cloth bag in boiling water for 30 seconds before the first brew. Dry cloth steals heat and the first cup comes out under-extracted.</string>
+    <string name="pro_tip_55">When dialing anaerobic naturals, start 2°C cooler than your washed recipe. Fermented coffees dissolve faster and tip into ferment-bitter if brewed hot.</string>
+    <string name="pro_tip_56" formatted="false">Refractometer hygiene: rinse the prism with distilled water, dry fully, then zero. Coffee oils left on the prism drift TDS by 0.05% — enough to misread extraction by 1%.</string>
+    <string name="pro_tip_57">Raf coffee fails if you steam cream and espresso separately. The magic is steaming them together — vanilla sugars emulsify with fat mid-steam for that soufflé sweetness.</string>
+    <string name="pro_tip_58">Gibraltar vs cortado: the difference is the glass wall thickness. Thin cortado glasses lose heat fast; the thick Libbey Gibraltar holds temperature, so shots stay sweet 30 seconds longer.</string>
+    <string name="pro_tip_59">Gulf qahwa should never boil. Keep it at 85–92°C for 15 minutes with the lid cracked — boiling strips cardamom aromatics and turns the pale gold murky.</string>
+    <string name="pro_tip_60">Kyoto cold drip: fix the drip rate before adding ice. Set 1 drop/sec with water only, then load ice — ice melt shifts rate, so re-check after 10 minutes and adjust.</string>
+
+    <string name="drink_carajillo_name">Carajillo</string>
+    <string name="drink_carajillo_summary">Spanish after-dinner cocktail — espresso with brandy, rum, or Licor 43</string>
+    <string name="drink_carajillo_body">Spanish after-dinner coffee cocktail — espresso with brandy, rum, or Licor 43, served over ice or hot. Legend says Spanish soldiers in Cuba drank this for courage (\'coraje\'). Modern version often includes a citrus peel twist.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• 1 shot Licor 43, brandy, or rum (~30 ml)\n• Ice (for iced version)\n• Optional: citrus peel twist\n\nSteps:\n1. Pull a fresh espresso shot.\n2. Hot version: add the spirit directly to the espresso and stir.\n3. Iced version: shake espresso and spirit with ice for 10–15 seconds, strain over fresh ice.\n4. Garnish with a citrus peel twist.\n5. Serve immediately — the name means \'courage\' in Spanish.</string>
+    <string name="drink_nitro_cold_brew_name">Nitro Cold Brew</string>
+    <string name="drink_nitro_cold_brew_summary">Silky cascade cold brew charged with nitrogen</string>
+    <string name="drink_nitro_cold_brew_body">Nitro cold brew is cold brew kegged and infused with pure nitrogen through a stout faucet, creating a cascading, Guinness-like pour with a creamy, velvety head without any dairy. The nitrogen bubbles are smaller than CO₂ and mute acidity, making the coffee taste sweeter, rounder and noticeably more mouth-filling than still cold brew.\n\nIngredients:\n• 100 g coarse coffee to 1 L cold water, steeped 16–18 h, filtered\n• Food-grade nitrogen (N₂) at 30–40 psi\n• Stout / nitro faucet or whipped-cream charger (N₂O as substitute)\n\nSteps:\n1. Make strong cold brew concentrate (1:10) and dilute to drinking strength.\n2. Keg it, chill to 2–4°C, charge with N₂ and shake to dissolve.\n3. Pour hard through a stout faucet — the cascade forms as N₂ comes out of solution.\n4. Serve immediately — no ice, no stirring; the foam is the drink.</string>
+    <string name="drink_flat_white_xl_name">Flat White XL</string>
+    <string name="drink_flat_white_xl_summary">Double-strength flat white in a larger cup — Melbourne meets Seattle</string>
+    <string name="drink_flat_white_xl_body">A larger, bolder flat white for those who want flat-white texture without the small cup constraint: double ristretto base with proportionally more steamed milk, served in a 240 ml cup but keeping the tight 1:3 coffee-to-milk ratio that defines a flat white.\n\nIngredients:\n• 2 double ristretto shots (~60 ml)\n• ~180 ml steamed milk with microfoam\n• Total: ~240 ml\n\nSteps:\n1. Pull two double ristrettos into a large cup.\n2. Steam milk to glossy microfoam (more volume than a standard flat white, same technique).\n3. Pour to integrate — the extra shot keeps intensity despite the larger milk volume.</string>
+    <string name="drink_kopi_gu_you_name">Kopi Gu You</string>
+    <string name="drink_kopi_gu_you_summary">Malaysian butter coffee — coffee roasted with butter and sugar</string>
+    <string name="drink_kopi_gu_you_body">Kopi Gu You (butter coffee) is Malaysia\'s kopitiam classic: Robusta beans roasted with butter/margarine and sugar until glossy and caramelised, then brewed through a cloth sock and sweetened with condensed milk. The butter adds a rich, almost buttery cookie sweetness that defines the Malaysian coffee shop.\n\nIngredients:\n• 20 g Kopi Gu You roast (butter-roasted Robusta), medium-coarse\n• 180 ml water, 96°C\n• 1–2 tbsp condensed milk\n• Cloth sock filter\n\nSteps:\n1. Brew coffee through the cloth sock — pour, steep 3–4 min, pull sock.\n2. Stir in condensed milk.\n3. Serve hot; optionally over ice as Kopi Gu You Peng.</string>
+    <string name="drink_cold_brew_tonic_name">Cold Brew Tonic</string>
+    <string name="drink_cold_brew_tonic_summary">Bright cold brew over tonic water with citrus</string>
+    <string name="drink_cold_brew_tonic_body">Cold brew tonic is the refreshing summer bridge between coffee and cocktail: chilled cold brew layered over tonic water with ice and a citrus twist, where quinine bitterness sings with coffee\'s fruit.\n\nIngredients:\n• 80 ml cold brew concentrate\n• 120 ml quality tonic water (Fever-Tree)\n• Ice\n• Orange or lemon peel\n\nSteps:\n1. Fill a glass with ice.\n2. Pour tonic water over ice first.\n3. Gently pour cold brew over the back of a spoon to layer.\n4. Express citrus peel over the drink and garnish.</string>
+    <string name="drink_honey_raf_name">Honey Raf</string>
+    <string name="drink_honey_raf_summary">Russian honey-cream latte — espresso steamed together with cream and honey</string>
+    <string name="drink_honey_raf_body" formatted="false">Raf coffee was born in Moscow\'s Coffee Bean in the late 1990s for a customer named Rafael: espresso, cream, vanilla and honey steamed together — not separately — creating a soufflé-like sweetness where honey sugars emulsify with milk fat mid-steam.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• 120 ml light cream (10–15% fat) or half-and-half\n• 1 tbsp honey\n• Pinch vanilla\n\nSteps:\n1. Add espresso, cream, honey and vanilla to the pitcher together.\n2. Steam together to 60–65°C — the joint steaming emulsifies honey into the foam.\n3. Pour into a cup — the foam should be glossy and marshmallow-soft.</string>
+    <string name="drink_cafezinho_aviacao_name">Cafezinho Aviacão</string>
+    <string name="drink_cafezinho_aviacao_summary">Brazilian cafezinho — strong, sweet, quick, served everywhere</string>
+    <string name="drink_cafezinho_aviacao_body">Cafezinho is Brazil\'s ubiquitous small sweet coffee: a very strong, dark-roast drip or cloth-filter brew sweetened while hot and served in a tiny 50 ml cup. The aviacao (aviation) style adds a splash of cachaça or rum — pilot\'s cafezinho.\n\nIngredients:\n• 15 g dark roast, fine\n• 150 ml water at 96°C\n• Sugar to taste (1–2 tsp)\n• Splash cachaça (aviacao variant)\n\nSteps:\n1. Brew strong coffee through a cloth filter (coador) or fine paper.\n2. Dissolve sugar while hot — it must be sweet.\n3. Add splash cachaça if aviacao.\n4. Serve in a 50–80 ml demitasse immediately.</string>
+    <string name="drink_sig_mazagran_name">Shakerato Mazagran</string>
+    <string name="drink_sig_mazagran_summary">Iced mazagran — Portuguese-Brazilian lemon cold brew</string>
+    <string name="drink_sig_mazagran_body">A shaker variant of mazagran heritage: strong cold brew or espresso shaken hard with ice, lemon and a touch of sugar — the original 19th-century French-Algerian coffee lemonade updated with specialty coffee.\n\nIngredients:\n• 60 ml strong cold brew\n• 60 ml fresh lemonade (or lemon + sugar)\n• Ice for shaking + serving\n\nSteps:\n1. Add cold brew, lemonade and ice to a shaker.\n2. Shake 10–15 s hard.\n3. Strain over fresh ice.\n4. Garnish lemon wheel.</string>
+    <string name="drink_berber_brew_name">Berber Brew</string>
+    <string name="drink_berber_brew_summary">North African spiced coffee — cardamom, cinnamon, cloves</string>
+    <string name="drink_berber_brew_body">Berber spiced coffee uses the warm spices of the Atlas Mountains: lightly roasted coffee brewed with cardamom, cinnamon, cloves and sometimes black pepper, representing the nomadic Berber café tradition.\n\nIngredients:\n• 15 g light roast, medium grind\n• 300 ml water\n• 2 cardamom pods, 1 cinnamon stick, 2 cloves\n• Sugar to taste\n\nSteps:\n1. Bring water, spices and sugar to a boil.\n2. Add coffee, reduce heat, simmer 3–4 min.\n3. Strain and serve hot; the spices should scent, not overpower.</string>
+    <string name="drink_cortado_iced_name">Iced Cortado</string>
+    <string name="drink_cortado_iced_summary">Chilled cortado — espresso over cold milk on ice</string>
+    <string name="drink_cortado_iced_body">An iced cortado keeps the 1:1 espresso-to-milk ratio but chilled: espresso shaken cold poured over cold milk and ice, preserving the cortado\'s balance without heat.\n\nIngredients:\n• 1 shot espresso (~30 ml)\n• 30 ml cold whole milk\n• Ice\n\nSteps:\n1. Chill espresso via shaker with ice or use cold brew concentrate.\n2. Fill small glass with ice, add cold milk.\n3. Pour espresso over — layer briefly then stir.\n4. Serve immediately.</string>
+
+    <string name="pro_tip_61">Bloom diagnosis: a vigorous, even dome at 30 s signals 5–14-day-old coffee; flat, patchy bloom says stale. Use it to set bloom time, not just to admire.</string>
+    <string name="pro_tip_62">Descale with sulfamic or citric acid, not vinegar — acetic acid attacks copper, brass and silicone gaskets while leaving scale behind.</string>
+    <string name="pro_tip_63">Freeze green in GrainPro at Aw 0.55–0.59: hermetic barrier beats jute for 9-month stability. At home, freeze roasted in single-dose vac bags, thaw sealed.</string>
+    <string name="pro_tip_64">ROR crash? Cut gas before first crack, not after — anticipatory heat management prevents the stall that bakes sweetness flat.</string>
+    <string name="pro_tip_65" formatted="false">Milk alternative tip: oat needs 15% less air than dairy — its added oil foams faster; stop stretching 2 s earlier than you would with whole milk.</string>
+    <string name="pro_tip_66">Keep your burrs at chirp-zero minus 10 for filter, minus 4 for espresso, and log clicks from zero — not from factory marks.</string>
+    <string name="pro_tip_67">CVA tasting at home: first note descriptors (fruity, sweet, clean), then separately score liking — never collapse both into one number.</string>
+    <string name="pro_tip_68">Taint check: cup at 93°C and again at 55°C — phenol and potato appear louder as coffee cools; hot hides them.</string>
+    <string name="pro_tip_69">Pre-infuse at 2 bar for 8 s on light roasts; the gentle soak evens density before full pressure hits.</string>
+    <string name="pro_tip_70" formatted="false">Refractometer zero every session with distilled water at 20°C; 0.02% drift equals 1% yield error — enough to chase a phantom fix.</string>
+    <string name="pro_tip_71">Purge 0.5 g after every grind change — retained fines pollute the first dose with yesterday\'s particle size.</string>
+    <string name="pro_tip_72">Triangulate monthly: invite a friend, randomise A/B/C cups, score blind. Your palate learns faster than solo sipping.</string>
+    <string name="pro_tip_73">Tare drift: power-cycle the scale after the kettle steams the counter — heat and humidity are invisible error sources.</string>
+    <string name="pro_tip_74">Bypass brewers: brew 1:10 concentrate then dilute — sweetness survives that straight 1:16 would over-extract into dryness.</string>
+    <string name="pro_tip_75">Q-Grader drift is real — cup in panels of three and average; solo scores wander ±1.5 even for certified graders.</string>
+    <!-- ===== l126-l135 ===== -->
+    <string name="learn_l126_title">DIY Water Recipes: Barista Hustle &amp; Lotus</string>
+    <string name="learn_l126_body">Tap water ruins good coffee. DIY recipes start from distilled or RO water (0 TDS) and remineralize precisely. Barista Hustle recipe: 0.38 g Epsom salt (MgSO₄·7H₂O) + 0.18 g baking soda (NaHCO₃) per litre gives ~70 ppm GH and ~40 ppm KH — bright, sweet filter water. Lotus Drops split GH, KH and buffer into separate concentrates so you dial Mg vs Ca vs alkalinity independently; London tap with 300+ ppm hardness needs RO first. Measure with a 0.01 g scale, mix concentrate stock, then dilute. Whole-house softeners swap Ca for Na — worse for taste — so bypass them and build from zero. One litre of concentrate lasts weeks and beats bottled water for consistency.</string>
+    <string name="learn_l127_title">pH vs Alkalinity: Why pH Lies</string>
+    <string name="learn_l127_body">pH tells you how acidic water is right now; alkalinity (KH) tells you how strongly it resists changing pH when it meets acidic coffee. A water at pH 7.0 can still taste flat if KH is 120 ppm — the buffer neutralizes fruit acids before you taste them — while a water at pH 6.5 with KH 40 ppm tastes bright and lively. SCA target 40 ppm KH (as CaCO₃) gives enough buffer to avoid sour, metallic under-extraction but not so much it mutes acidity. Test KH with drop kits (1 drop = 17.8 ppm), not pH strips. Low KH lets light roasts sing; higher KH rounds dark roasts. Never chase pH alone.</string>
+    <string name="learn_l128_title">The Sieve Test: Measuring Grind Distribution</string>
+    <string name="learn_l128_body" formatted="false">You cannot see bimodal distribution without sieving. Stack 400 µm and 800 µm sieves, shake 20 g for 60 s, weigh each fraction. A good filter grind keeps 65–75% between 400–800 µm, fines (&lt;400 µm) under 15% and boulders (&gt;800 µm) under 15%. If fines exceed 20% you get bitter, silty cups; boulders over 20% give sour, hollow cups — even at the right average size. Sieve weekly to track burr wear: fresh burrs produce tight peaks, worn burrs spread wide. Compare grinders objectively by sieving the same dose at the same dial — the tighter the middle fraction, the cleaner the cup.</string>
+    <string name="learn_l129_title">Turbo Shot: 1:3 in 15 Seconds</string>
+    <string name="learn_l129_body" formatted="false">Champion James Hoffmann\'s turbo shot breaks every espresso rule: 15–18 g dose, coarsely ground (filter-like 400–500 µm), 1:2.5 to 1:3 ratio in 12–18 seconds at 6 bar with a paper filter on top of the puck. The coarser grind and lower pressure avoid channeling, while the fast, high-yield pull extracts 19–20% without bitter tail compounds that need 25–30 s at 9 bar. Result tastes like sweet filter coffee with espresso intensity — ideal for light roasts that choke at fine grinds. Use a fast-flow basket (VST 18 g) and pre-infuse 2 s. If it tastes thin, tighten to 1:2.2; if sour, extend to 18 s.</string>
+    <string name="learn_l130_title">Bypass Brewing: Brew Strong, Dilute Smart</string>
+    <string name="learn_l130_body" formatted="false">Bypass brews a concentrated slurry then adds water after extraction, decoupling strength from yield. Example: 20 g to 150 ml at 1:7.5 gives 22% yield and 3.5% TDS, then add 150 ml bypass water to reach 1.75% TDS — same strength as a 1:15 pour-over but sweeter because the low water-to-coffee ratio limited over-extraction. Uncontrolled bypass is the opposite: water sneaking around the V60 filter edge or through a folded pleat weakens without adding strength — thin and under-developed. Zero-bypass drippers (Tricolate, Hoop) seal the edge to prove it; intentional bypass (Hoffmann AeroPress, bypass bloom) is a tool, accidental bypass is a defect.</string>
+    <string name="learn_l131_title">Oat vs Dairy Microfoam: Fat, Protein &amp; Foam</string>
+    <string name="learn_l131_body" formatted="false">Dairy foam is whey protein wrapping air: flexible below 37°C, denaturing at 60–65°C into stable microfoam, collapsing above 70°C. Whole milk 3.5% fat tastes sweet but destabilizes faster than skim. Oat barista milk has almost no whey — it foams via added rapeseed oil and dipotassium phosphate mimicking casein, so it needs 15% less air: stop stretching 2 s earlier than dairy. Oat overheats faster and separates if held; dairy holds sheen longer after a 20 s rest and swirl. Taste trade: dairy adds lactose sweetness and body, oat adds cereal sweetness and lighter mouthfeel. Steam oat to 55–60°C max, dairy to 60–65°C, and never re-steam either.</string>
+    <string name="learn_l132_title">SCA Cupping Scoresheet: CVA Descriptive &amp; Affective</string>
+    <string name="learn_l132_body">The 2024 Coffee Value Assessment splits the old 100-point form into two sheets: Descriptive Assessment (no score) logs fragrance, aroma, flavour, aftertaste, acidity, sweetness, mouthfeel and balance in words; Affective Assessment scores overall impression 0–100 plus extrinsic value (farm, sustainability info). Judge descriptive first blind — note what you taste — then affective separately after revealing processing context; co-ferments and thermals are no longer penalized as defects. For home: cup 8.25 g to 150 ml at 93°C, break at 4:00, taste at 8 min and as it cools, write descriptors before liking, and average across three tasters to cancel personal bias.</string>
+    <string name="learn_l133_title">Direct Trade Receipt: The Transparency Report</string>
+    <string name="learn_l133_body">Direct trade means the roaster publishes what they paid the farmer — not just \'we visited the farm.\' A transparency report lists FOB price per kg, farm-gate share, transport and import costs, and compares to Fairtrade minimum ($3.10/kg) and C-market. Example: $8.50/kg FOB for a washed Ethiopian where C is $3.80 shows 2.2× premium. True direct trade also publishes lot size, contract length and who cupped it. Greenwashing signals: no price, only photos, or \'relationship coffee\' without receipts. Seek roasters posting yearly transparency PDFs (Tim Wendelboe, Counter Culture, Onyx) — price transparency pressures the whole chain upward.</string>
+    <string name="learn_l134_title">WDT vs RDT vs Stockfleth: Distribution Showdown</string>
+    <string name="learn_l134_body">Channeling starts before tamping. WDT (Weiss Distribution Technique) stirs grounds with 0.3–0.4 mm needles to break clumps and homogenize density — essential for flat burr grinders and light roasts; Stockfleth levels by finger-sweep, fast but leaves density gradients. RDT (Ross Droplet Technique) spritzes 0.1–0.2 ml water on beans before grinding to kill static and reduce retention and clumping — not a distribution fix but a grinder hygiene step. Best practice: RDT before grinding, WDT after dosing, Stockfleth only for quick cafe workflow, then level tamp. Observe the spent puck: pinholes mean WDT missed a clump.</string>
+    <string name="learn_l135_title">Washed vs Honey Blind Triangle: Taste Processing</string>
+    <string name="learn_l135_body">Washed (fully washed) removes all mucilage before drying for clean, citric, tea-like clarity; honey (pulped natural) dries with sticky mucilage on, adding red fruit sweetness and heavier body but risking ferment funk if dried too slowly. Run a blind triangle: two cups of the same variety, one washed, one honey, roasted identically — present three cups (two identical, one odd) and pick the outlier. 7/9 correct is significant. Washed shows brighter acidity and higher clarity at 1:16; honey needs 1:15 and 1–2°C cooler to tame sweetness. Train monthly — processing flavour is subtle and memory lies without blinding.</string>
+
+    <string name="drink_oat_flat_white_name">Oat Flat White</string>
+    <string name="drink_oat_flat_white_summary">Flat white with barista oat milk — cereal-sweet, silky, dairy-free</string>
+    <string name="drink_oat_flat_white_body">A dairy-free flat white built on barista oat milk: double ristretto softened by cereal-sweet, silky oat microfoam that needs less air than dairy.\n\nIngredients:\n• 2 ristretto shots (~30 ml)\n• 120–150 ml barista oat milk (Oatly Barista or similar)\n• Total: 150–180 ml\n\nSteps:\n1. Pull two ristretto shots into a small cup.\n2. Steam oat milk to glossy microfoam at 55–60°C — stop aerating 2 s earlier than dairy.\n3. Swirl 10 s to wet-paint sheen, pour to integrate.\n4. No re-steaming — oat splits if overheated.</string>
+    <string name="drink_coconut_viet_name">Cà Phê Dừa</string>
+    <string name="drink_coconut_viet_summary">Vietnamese coconut coffee — strong coffee blended with coconut cream over ice</string>
+    <string name="drink_coconut_viet_body">Hanoi\'s famous coconut coffee: strong Vietnamese Robusta whipped with sweetened coconut cream into a thick, frosty shake served over ice — part dessert, part caffeine hit.\n\nIngredients:\n• 60 ml strong Phin coffee or 2 shots espresso\n• 80 ml coconut cream (or blended frozen coconut)\n• 2 tbsp sweetened condensed milk\n• Ice cubes\n\nSteps:\n1. Brew very strong coffee (Phin or espresso) and chill slightly.\n2. Blend coconut cream, condensed milk and ice to a thick slush.\n3. Pour coffee over the coconut slush in a tall glass.\n4. Stir lightly — layers should marble. Serve with a straw.</string>
+    <string name="drink_mazagran_portuguese_name">Mazagran Portuguese</string>
+    <string name="drink_mazagran_portuguese_summary">Portuguese iced lemon coffee — espresso, lemon, mint over ice</string>
+    <string name="drink_mazagran_portuguese_body">Portuguese summer classic evolved from the French-Algerian mazagran: sweetened espresso poured over ice with fresh lemon juice and mint — bright, bitter, and fiercely refreshing.\n\nIngredients:\n• 2 shots espresso (~60 ml)\n• Juice of 1/2 lemon (15–20 ml)\n• 1–2 tsp sugar or honey\n• Fresh mint leaves, ice\n• 100 ml cold water or sparkling water\n\nSteps:\n1. Stir sugar into hot espresso to dissolve, add lemon juice.\n2. Fill a tall glass with ice and mint.\n3. Pour coffee-lemon mix over ice, top with cold water.\n4. Stir gently and garnish with lemon wheel and mint sprig.</string>
+    <string name="drink_nitro_flash_name">Nitro Flash</string>
+    <string name="drink_nitro_flash_summary">Flash-chilled nitro coffee — hot brew flash-cold, then nitrogen-charged</string>
+    <string name="drink_nitro_flash_body">Flash nitro bridges hot and cold: coffee brewed hot for full aromatics, flash-chilled over ice, then charged with nitrogen for a creamy, Guinness-like cascade without dairy.\n\nIngredients:\n• 20 g coffee brewed at 93°C (pour-over), flash-chilled over 150 g ice\n• Food-grade N₂ at 25–35 psi or N₂O charger\n• Stout faucet or iSi whipper\n\nSteps:\n1. Brew hot pour-over directly onto ice (1:10 concentrate, ice is the bypass).\n2. Chill to 2–4°C, keg or load into whipper.\n3. Charge with N₂ and shake to dissolve.\n4. Pour hard — the cascade forms as nitrogen leaves solution. Serve without extra ice.</string>
+
+    <string name="glossary_term_96">Dose Consistency</string>
+    <string name="glossary_def_96">Fix dose and adjust grind to change yield. Varying dose ±1 g shifts ratio and confuses diagnosis — lock dose, move grind.</string>
+    <string name="glossary_term_97">Pre-infusion</string>
+    <string name="glossary_def_97">Low-pressure soak (2–3 bar, 5–8 s) before full pressure. Heals cracks, evens saturation and reduces channeling on dense light roasts.</string>
+    <string name="glossary_term_98">Phenol Taint</string>
+    <string name="glossary_def_98">Medicinal Band-Aid / iodine off-note from microbial contamination on drying patios or polluted water. Strong phenol = commercial grade.</string>
+    <string name="glossary_term_99">Potato Defect</string>
+    <string name="glossary_def_99">Raw-potato / earthy-bacterial taint from Antestia-bug bacteria, classic in Rwandan naturals. Even at trace levels it ruins clean cup.</string>
+    <string name="glossary_term_100">Hermetic Storage</string>
+    <string name="glossary_def_100">Sealed barrier (GrainPro, Ecotact) holding Aw 0.55–0.59 against ambient humidity. Preserves green 9–12 months vs 3–4 in jute.</string>
+    <string name="glossary_term_101">DIY Water / Lotus Drops</string>
+    <string name="glossary_def_101">Build water from distilled + Epsom (Mg), baking soda (KH) or Lotus GH/KH concentrates. Barista Hustle recipe: 70 ppm GH / 40 ppm KH. Measure with 0.01 g scale.</string>
+    <string name="glossary_term_102">pH vs Alkalinity</string>
+    <string name="glossary_def_102">pH is current acidity; alkalinity (KH) is buffering that resists pH change when coffee acids hit. Bright coffee wants ~40 ppm KH, not a specific pH.</string>
+    <string name="glossary_term_103">Sieve Test</string>
+    <string name="glossary_def_103" formatted="false">Shaking ground coffee through 400 µm and 800 µm sieves to weigh fines, middle and boulders. Tight 65–75% middle fraction signals even burrs.</string>
+    <string name="glossary_term_104">Turbo Shot</string>
+    <string name="glossary_def_104">Coarse, fast espresso: 15–18 g at 400–500 µm, 1:2.5–1:3 in 12–18 s at 6 bar with paper filter puck. Sweet, filter-like light roast shot.</string>
+    <string name="glossary_term_105">Bypass Brewing</string>
+    <string name="glossary_def_105">Brewing a strong concentrate then diluting with bypass water to tune strength without over-extracting. Accidental bypass around filter edge is a defect.</string>
+    <string name="glossary_term_106">Oat Microfoam</string>
+    <string name="glossary_def_106" formatted="false">Oat barista milk foamed with added oil and phosphate instead of whey protein. Needs 15% less air, max 60°C, and splits if re-steamed.</string>
+    <string name="glossary_term_107">CVA Descriptive vs Affective</string>
+    <string name="glossary_def_107">SCA 2024 split: Descriptive Assessment logs flavour words without score; Affective Assessment scores liking 0–100 plus extrinsic value.</string>
+    <string name="glossary_term_108">Direct Trade Transparency</string>
+    <string name="glossary_def_108">Publishing FOB price per kg and farm share vs C-market. True transparency lists price, lot size and buyer; photos alone are not proof.</string>
+    <string name="glossary_term_109">WDT / RDT / Stockfleth</string>
+    <string name="glossary_def_109">WDT stirs grounds with needles to break clumps; RDT spritzes water pre-grind to kill static; Stockfleth levels by finger sweep. Use RDT → WDT → tamp.</string>
+    <string name="glossary_term_110">Blind Triangle</string>
+    <string name="glossary_def_110">Sensory test with two identical and one odd cup blind. 7/9 correct is significant. Used to taste washed vs honey processing without bias.</string>
+
+    <!-- ===== l139-l142 learn cards ===== -->
+    <string name="learn_l139_title">Frozen Beans at –20 °C: Cryogenic Storage Science</string>
+    <string name="learn_l139_body" formatted="false">Freezing at –20 °C slows staling ~16× versus room temperature by halting volatile loss and oxidation. Christopher Hendon shows frozen beans fracture more uniformly, tightening particle distribution by 10–15% and boosting extraction evenness; Chahan Yeretzian warns condensation on thaw destroys it. Protocol: rest beans 7–14 days post-roast, dose into single-serve airtight vac-bags with one-way valve, freeze immediately, never open until fully thawed to room temp (2–3 h sealed), never re-freeze, grind frozen for best uniformity. Ideal for buying great coffee in bulk without the 3-week decline.</string>
+    <string name="learn_l140_title">Roast Curve: ROR and Development Time Ratio</string>
+    <string name="learn_l140_body" formatted="false">A roast curve plots bean temperature vs time; Rate of Rise (ROR) is °C/min increase. A smoothly declining ROR predicts sweetness and clarity; a crash (ROR dropping 40%+ near first crack) bakes the coffee flat, a flick (ROR rising again after crack) adds roasty bitterness. Development Time Ratio (DTR) is post-crack time as % of total roast: washed Ethiopians shine at 18–22% DTR for jasmine and citrus, honey/naturals need 22–26% for body without burnt sugar. Light filter roasts often land at 9–11 min total with DTR ~20%; espresso development runs 12–14 min with DTR ~23%. Home lesson: you cannot fix a crashed ROR with brewing — buy from roasters who publish curves or cup for baked vs clean finish.</string>
+    <string name="learn_l141_title">Koji &amp; Co-ferment: Ethics and Flavour</string>
+    <string name="learn_l141_body">Koji (Aspergillus oryzae) inoculation, borrowed from sake, enzymatically converts coffee cherry starch into glucose, adding peach, sake and brown-sugar sweetness with enhanced umami. Co-ferment ferments coffee together with fruit, yeast or koji so flavour integrates via microbial metabolism; infusion adds flavour after roasting. SCA and many competitions now distinguish co-fermentation as processing innovation while post-roast infusion is flavouring. Ethical notes: label transparency matters — drinkers deserve to know if peach came from koji metabolism or added syrup, farmers deserve premium sharing, and judges must not penalise yeast-inoculated lots as defects. Taste co-ferments at 1:16 and 2 °C cooler — they dissolve faster — and decide if the intensity is your preference.</string>
+    <string name="learn_l142_title">Cafe Dial-In Workflow: Opening to Service</string>
+    <string name="learn_l142_body" formatted="false">A cafe dials in before doors open, not on the first customer. Workflow: 1) Purge 2–3 g after overnight retention. 2) Pull baseline shot at locked 18 g / 36 g / 27 s and taste + weigh yield. 3) Adjust grind only — 1 click finer if sour/fast, 1 click coarser if bitter/slow — re-pull. 4) Lock grind, then fine-tune ratio: 1:2.15 for light florals, 1:2 for balance, 1:1.7 for chocolate-heavy comfort. 5) Check milk texture and temp (60–65 °C dairy, 55–60 °C oat) and log the recipe on the bar. Re-check every 30–45 min as humidity shifts grind. Home takeaway: dial in by the same single-variable discipline — dose locked, grind first, ratio second — and log 3 shots; consistency beats chasing a perfect single.</string>
+
+    <string name="drink_wac_aeropress_name">WAC Champion AeroPress</string>
+    <string name="drink_wac_aeropress_summary">World AeroPress Championship winning recipe — inverted, fine, 1:14, hard press</string>
+    <string name="drink_wac_aeropress_body">The World AeroPress Championship (WAC) winning style: inverted AeroPress, fine grind, short hot bloom, hard press through paper for syrupy clarity — the 2023 champion used 18 g to 250 ml at 85 °C inverted for 1:45 before flipping and pressing hard.\n\nIngredients:\n• 18 g coffee, fine (filter-fine, ~400 µm)\n• 250 ml water at 82–86 °C\n• AeroPress with paper filter, inverted\n\nSteps:\n1. Rinse paper, set inverted, add 18 g, tare.\n2. Pour 50 ml, stir 5×, bloom 30 s.\n3. Pour to 250 ml, stir 3×, steep to 1:45.\n4. Flip onto cup, press hard 20–30 s through hiss.\n5. Serve black — no bypass. For iced, brew to 150 ml and flash over 100 g ice.</string>
+
+    <string name="glossary_term_111">Frozen Bean Science / –20 °C</string>
+    <string name="glossary_def_111" formatted="false">Freezing single-dosed vac-bags at –20 °C slows aging ~16× and tightens grind distribution 10–15%. Thaw sealed to room temp; never re-freeze; grinding frozen improves uniformity.</string>
+    <string name="glossary_term_112">ROR / Development Time Ratio</string>
+    <string name="glossary_def_112" formatted="false">ROR is bean °C/min during roasting — declining is clean; crash or flick is defect. DTR is post-crack % of total time: 18–22% for washed florals, 22–26% for natural body.</string>
+    <string name="glossary_term_113">Koji / Co-ferment Ethics</string>
+    <string name="glossary_def_113">Koji (Aspergillus oryzae) converts starch to sugar for peach/sake notes; co-ferment integrates fruit via fermentation, infusion adds flavour post-roast. Label transparency is the ethical line.</string>
+    <string name="glossary_term_114">Cafe Dial-In</string>
+    <string name="glossary_def_114">Opening workflow: purge retention, pull baseline 18 g / 36 g, adjust grind only, then ratio (1:2.15 light, 1:2 balanced), log and re-check every 30–45 min.</string>
+
 </resources>

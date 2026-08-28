@@ -141,6 +141,74 @@ object PresetLoader {
         "equip_cafedeolla_tag" -> R.string.equip_cafedeolla_tag
         "equip_masonjar_name" -> R.string.equip_masonjar_name
         "equip_masonjar_tag" -> R.string.equip_masonjar_tag
+        "equip_orea_name" -> R.string.equip_orea_name
+        "equip_orea_tag" -> R.string.equip_orea_tag
+        "equip_pulsar_name" -> R.string.equip_pulsar_name
+        "equip_pulsar_tag" -> R.string.equip_pulsar_tag
+        "equip_tricolate_name" -> R.string.equip_tricolate_name
+        "equip_tricolate_tag" -> R.string.equip_tricolate_tag
+        "equip_delter_name" -> R.string.equip_delter_name
+        "equip_delter_tag" -> R.string.equip_delter_tag
+        "equip_flair_name" -> R.string.equip_flair_name
+        "equip_flair_tag" -> R.string.equip_flair_tag
+        "equip_aeropress_go_name" -> R.string.equip_aeropress_go_name
+        "equip_aeropress_go_tag" -> R.string.equip_aeropress_go_tag
+        "equip_picopresso_name" -> R.string.equip_picopresso_name
+        "equip_picopresso_tag" -> R.string.equip_picopresso_tag
+        "equip_moccamaster_name" -> R.string.equip_moccamaster_name
+        "equip_moccamaster_tag" -> R.string.equip_moccamaster_tag
+        "equip_nel_name" -> R.string.equip_nel_name
+        "equip_nel_tag" -> R.string.equip_nel_tag
+        "equip_gina_name" -> R.string.equip_gina_name
+        "equip_gina_tag" -> R.string.equip_gina_tag
+        "equip_siphon_modern_name" -> R.string.equip_siphon_modern_name
+        "equip_siphon_modern_tag" -> R.string.equip_siphon_modern_tag
+        "equip_phin_large_name" -> R.string.equip_phin_large_name
+        "equip_phin_large_tag" -> R.string.equip_phin_large_tag
+        "equip_clever_xl_name" -> R.string.equip_clever_xl_name
+        "equip_clever_xl_tag" -> R.string.equip_clever_xl_tag
+        "equip_hoop_name" -> R.string.equip_hoop_name
+        "equip_hoop_tag" -> R.string.equip_hoop_tag
+        "equip_paragon_name" -> R.string.equip_paragon_name
+        "equip_paragon_tag" -> R.string.equip_paragon_tag
+        "equip_melodrip_name" -> R.string.equip_melodrip_name
+        "equip_melodrip_tag" -> R.string.equip_melodrip_tag
+        "equip_december_name" -> R.string.equip_december_name
+        "equip_december_tag" -> R.string.equip_december_tag
+        "equip_hario_switch_name" -> R.string.equip_hario_switch_name
+        "equip_hario_switch_tag" -> R.string.equip_hario_switch_tag
+        "equip_aeropress_xl_name" -> R.string.equip_aeropress_xl_name
+        "equip_aeropress_xl_tag" -> R.string.equip_aeropress_xl_tag
+        "equip_flair58_name" -> R.string.equip_flair58_name
+        "equip_flair58_tag" -> R.string.equip_flair58_tag
+        "equip_nanopresso_name" -> R.string.equip_nanopresso_name
+        "equip_nanopresso_tag" -> R.string.equip_nanopresso_tag
+        "equip_phoenix70_name" -> R.string.equip_phoenix70_name
+        "equip_phoenix70_tag" -> R.string.equip_phoenix70_tag
+        "equip_lunar_name" -> R.string.equip_lunar_name
+        "equip_lunar_tag" -> R.string.equip_lunar_tag
+        "equip_mugen_name" -> R.string.equip_mugen_name
+        "equip_mugen_tag" -> R.string.equip_mugen_tag
+        "equip_graycano_name" -> R.string.equip_graycano_name
+        "equip_graycano_tag" -> R.string.equip_graycano_tag
+        "equip_kinto_slow_name" -> R.string.equip_kinto_slow_name
+        "equip_kinto_slow_tag" -> R.string.equip_kinto_slow_tag
+        "equip_fellow_aiden_name" -> R.string.equip_fellow_aiden_name
+        "equip_fellow_aiden_tag" -> R.string.equip_fellow_aiden_tag
+        "equip_kalita102_name" -> R.string.equip_kalita102_name
+        "equip_kalita102_tag" -> R.string.equip_kalita102_tag
+        "equip_espro_bloom_name" -> R.string.equip_espro_bloom_name
+        "equip_espro_bloom_tag" -> R.string.equip_espro_bloom_tag
+        "equip_bripe_name" -> R.string.equip_bripe_name
+        "equip_bripe_tag" -> R.string.equip_bripe_tag
+        "equip_cupping_bowl_set_name" -> R.string.equip_cupping_bowl_set_name
+        "equip_cupping_bowl_set_tag" -> R.string.equip_cupping_bowl_set_tag
+        "equip_modbar_pour_name" -> R.string.equip_modbar_pour_name
+        "equip_modbar_pour_tag" -> R.string.equip_modbar_pour_tag
+        "equip_timemore_b75_name" -> R.string.equip_timemore_b75_name
+        "equip_timemore_b75_tag" -> R.string.equip_timemore_b75_tag
+        "equip_other_name" -> R.string.equip_other_name
+        "equip_other_tag" -> R.string.equip_other_tag
         "step_bloom" -> R.string.step_bloom
         "step_pour" -> R.string.step_pour
         "step_drawdown" -> R.string.step_drawdown
@@ -157,6 +225,6 @@ object PresetLoader {
         "step_rinse" -> R.string.step_rinse
         "step_open_valve" -> R.string.step_open_valve
         "step_flip" -> R.string.step_flip
-        else -> 0
+        else -> if (key.endsWith("_tag")) R.string.equip_other_tag else R.string.equip_other_name
     }
 }

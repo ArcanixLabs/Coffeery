@@ -43,6 +43,7 @@ data class SettingsEntity(
     val timerAutoAdvance: Boolean = false,
     val timerDisplayMode: String = "countdown",
     val temperatureUnit: String = "C",
+    val stepWaterOverridesJson: String = "",
 )
 
 /** A completed brew session. Immutable after creation — history, not a preset. */

@@ -2,19 +2,39 @@ package co.coffeery.app.ui.screens.root
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +44,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.semantics.Role
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -34,8 +55,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.material3.CircularProgressIndicator
 import co.coffeery.app.BuildConfig
 import co.coffeery.app.R
 import co.coffeery.app.data.model.Palette
@@ -50,41 +73,126 @@ import co.coffeery.app.ui.components.PrimaryButton
 import co.coffeery.app.ui.components.ScreenHeader
 import co.coffeery.app.ui.components.SecondaryButton
 import co.coffeery.app.ui.components.SegmentedControl
+import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
+import co.coffeery.app.ui.theme.coffeeBackground
 import co.coffeery.app.ui.theme.paletteColors
 import co.coffeery.app.util.CloudBackupManager
 import kotlinx.coroutines.launch
+
+private enum class PendingCloudAction { BACKUP, RESTORE }
 
 @Composable
 fun SettingsScreen(vm: AppViewModel) {
     val state by vm.state.collectAsStateWithLifecycle()
     val ctx = LocalContext.current
+    val appCtx = ctx.applicationContext
     val colors = CoffeeTheme.colors
     var showImportDialog by remember { mutableStateOf(false) }
-    val cloud = remember { CloudBackupManager(ctx) }
+    val cloud = remember(appCtx) { CloudBackupManager(appCtx) }
     var cloudSignedIn by remember { mutableStateOf(cloud.isSignedIn()) }
+    var cloudBusy by remember { mutableStateOf(false) }
+    var pendingAction by remember { mutableStateOf<PendingCloudAction?>(null) }
     val cloudEmail = remember(cloudSignedIn) { cloud.getAccountEmail() ?: "" }
     val scope = rememberCoroutineScope()
 
-    // Try silent sign-in on open
     LaunchedEffect(Unit) {
         if (!cloud.isPlayServicesAvailable()) {
             android.widget.Toast.makeText(ctx, "Google Play Services not available", android.widget.Toast.LENGTH_LONG).show()
         } else if (!cloud.isSignedIn()) {
-            cloud.silentSignIn()
+            val result = cloud.silentSignIn()
+            if (result.isSuccess) cloudSignedIn = true
+        }
+    }
+
+    val recoverLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            cloud.consumeRecoverableIntent()
+            android.widget.Toast.makeText(ctx, ctx.getString(R.string.settings_cloud_retry_hint), android.widget.Toast.LENGTH_SHORT).show()
+            scope.launch {
+                cloudBusy = true
+                when (pendingAction) {
+                    PendingCloudAction.BACKUP -> {
+                        val json = vm.getExportJson()
+                        val r = cloud.backupToDrive(json)
+                        if (r.isSuccess) android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
+                        else {
+                            val ex = r.exceptionOrNull()
+                            val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
+                            android.util.Log.e("Coffeery", "Retry backup failed: $msg", ex)
+                            android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    PendingCloudAction.RESTORE -> {
+                        val r = cloud.restoreFromDrive()
+                        if (r.isSuccess) {
+                            vm.importFromJsonString(ctx, r.getOrDefault(""))
+                            android.widget.Toast.makeText(ctx, R.string.settings_cloud_restore_done, android.widget.Toast.LENGTH_SHORT).show()
+                        } else {
+                            val ex = r.exceptionOrNull()
+                            val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
+                            android.util.Log.e("Coffeery", "Retry restore failed: $msg", ex)
+                            android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    null -> {
+                        val json = vm.getExportJson()
+                        val r = cloud.backupToDrive(json)
+                        if (r.isSuccess) android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
+                        else {
+                            val ex = r.exceptionOrNull()
+                            val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
+                            android.util.Log.e("Coffeery", "Retry backup failed: $msg", ex)
+                            android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+                cloudBusy = false
+            }
+        } else {
+            cloud.clearRecoverableIntent()
+            android.widget.Toast.makeText(ctx, ctx.getString(R.string.settings_cloud_error), android.widget.Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun handleCloudResult(result: Result<String>, onSuccess: () -> Unit, rl: androidx.activity.result.ActivityResultLauncher<Intent>) {
+        if (result.isSuccess) {
+            onSuccess()
+        } else {
+            val ex = result.exceptionOrNull()
+            val recoverIntent = cloud.consumeRecoverableIntent() ?: (ex as? CloudBackupManager.RecoverableAuthException)?.intent
+            if (recoverIntent != null) {
+                try {
+                    rl.launch(recoverIntent)
+                } catch (e: Exception) {
+                    android.widget.Toast.makeText(ctx, ctx.getString(R.string.cloud_error_exception, e.javaClass.simpleName, e.message ?: ctx.getString(R.string.cloud_error_unknown)), android.widget.Toast.LENGTH_LONG).show()
+                }
+            } else {
+                val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
+                android.util.Log.e("Coffeery", "Cloud operation failed: $msg", ex)
+                android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+            }
         }
     }
 
     val signInLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        cloud.handleSignInResult(result.data) { success, msg ->
+        cloud.handleSignInResult(result.data) { success, _ ->
             cloudSignedIn = success
             if (success) {
                 scope.launch {
+                    cloudBusy = true
                     val json = vm.getExportJson()
-                    cloud.backupToDrive(ctx as android.app.Activity, json)
+                    val backupResult = cloud.backupToDrive(json)
+                    handleCloudResult(backupResult, {
+                        android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
+                    }, recoverLauncher)
+                    cloudBusy = false
                 }
             }
         }
@@ -111,85 +219,91 @@ fun SettingsScreen(vm: AppViewModel) {
                 modifier = Modifier.fillMaxWidth(),
             )
             Spacer(Modifier.height(12.dp))
+            val spacing = CoffeeTheme.spacing
+            val prefersReducedMotion = LocalPrefersReducedMotion.current
+            val systemDark = isSystemInDarkTheme()
+            val darkTheme = when (state.themeMode) {
+                ThemeMode.SYSTEM -> systemDark
+                ThemeMode.LIGHT -> false
+                ThemeMode.DARK -> true
+            }
             AppText(stringResource(R.string.settings_palette), style = CoffeeTheme.type.body, color = colors.textPrimary)
-            Spacer(Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.horizontalScroll(rememberScrollState()),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
-                Palette.entries.forEach { palette ->
-                    val isSelected = palette == state.palette
-                    val swatchColors = remember(colors.isDark, palette) { paletteColors(palette, colors.isDark) }
-                    Column(
-                        modifier = Modifier
-                            .width(120.dp)
-                            .height(80.dp)
-                            .clip(CoffeeShapes.small)
-                            .then(
-                                if (isSelected) Modifier.border(1.5.dp, colors.accent, CoffeeShapes.small)
-                                else Modifier
+            Spacer(Modifier.height(spacing.s))
+            val paletteRows = remember { Palette.entries.chunked(2) }
+            Column(verticalArrangement = Arrangement.spacedBy(spacing.m)) {
+                paletteRows.forEach { row ->
+                    Row(horizontalArrangement = Arrangement.spacedBy(spacing.m), modifier = Modifier.fillMaxWidth()) {
+                        row.forEach { palette ->
+                            val isSelected = palette == state.palette
+                            val light = remember(palette) { paletteColors(palette, false) }
+                            val dark = remember(palette) { paletteColors(palette, true) }
+                            val borderWidth by animateDpAsState(
+                                targetValue = if (isSelected) 2.dp else 1.dp,
+                                animationSpec = if (prefersReducedMotion) tween(0) else tween(durationMillis = CoffeeMotion.normal),
+                                label = "borderWidth",
                             )
-                            .clickable { vm.setPalette(palette) },
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(56.dp)
-                                .background(swatchColors.background),
-                            contentAlignment = Alignment.Center,
-                        ) {
+                            val borderColor by animateColorAsState(
+                                targetValue = if (isSelected) colors.accent else colors.outline,
+                                animationSpec = if (prefersReducedMotion) tween(0) else tween(durationMillis = CoffeeMotion.normal),
+                                label = "borderColor",
+                            )
+                            val elevation = if (isSelected) 6.dp else 0.dp
+                            val selectColors = if (isSelected) light else light
                             Box(
                                 modifier = Modifier
-                                    .fillMaxWidth(0.6f)
-                                    .height(40.dp)
-                                    .clip(RoundedCornerShape(4.dp))
-                                    .background(swatchColors.surfaceElevated),
-                                contentAlignment = Alignment.Center,
+                                    .weight(1f)
+                                    .height(112.dp)
+                                    .clip(CoffeeShapes.medium)
+                                    .border(borderWidth, borderColor, CoffeeShapes.medium)
+                                    .background(colors.surfaceElevated)
+                                    .selectable(
+                                        selected = isSelected,
+                                        role = Role.RadioButton,
+                                        onClick = { vm.setPalette(palette) },
+                                    ),
                             ) {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.Center,
-                                ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .width(40.dp)
-                                            .height(2.dp)
-                                            .background(swatchColors.accent),
-                                    )
-                                    Spacer(Modifier.height(4.dp))
-                                    Box(
-                                        modifier = Modifier
-                                            .width(30.dp)
-                                            .height(1.5.dp)
-                                            .background(swatchColors.outline),
-                                    )
-                                    Spacer(Modifier.height(3.dp))
-                                    Box(
-                                        modifier = Modifier
-                                            .width(20.dp)
-                                            .height(1.5.dp)
-                                            .background(swatchColors.outline),
-                                    )
+                                Column(modifier = Modifier.fillMaxWidth()) {
+                                    Row(modifier = Modifier.fillMaxWidth().height(64.dp).clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))) {
+                                        Box(modifier = Modifier.weight(1f).fillMaxWidth().height(64.dp).background(light.background)) {
+                                            Column(modifier = Modifier.align(Alignment.Center).padding(horizontal = 8.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                                Box(modifier = Modifier.width(28.dp).height(4.dp).clip(RoundedCornerShape(2.dp)).background(light.accent))
+                                                Box(modifier = Modifier.width(40.dp).height(5.dp).clip(RoundedCornerShape(2.dp)).background(light.accentSoft))
+                                                Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(light.accent))
+                                            }
+                                            Box(modifier = Modifier.align(Alignment.TopStart).padding(4.dp).size(6.dp).clip(CircleShape).background(light.accent.copy(alpha = 0.5f)))
+                                        }
+                                        Box(modifier = Modifier.weight(1f).fillMaxWidth().height(64.dp).background(dark.background)) {
+                                            Column(modifier = Modifier.align(Alignment.Center).padding(horizontal = 8.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                                Box(modifier = Modifier.width(28.dp).height(4.dp).clip(RoundedCornerShape(2.dp)).background(dark.accent))
+                                                Box(modifier = Modifier.width(40.dp).height(5.dp).clip(RoundedCornerShape(2.dp)).background(dark.accentSoft))
+                                                Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(dark.accent))
+                                            }
+                                        }
+                                    }
+                                    Box(modifier = Modifier.fillMaxWidth().height(48.dp).background(if (isSelected) selectColors.accentSoft.copy(alpha = 0.18f) else colors.surface), contentAlignment = Alignment.Center) {
+                                        AppText(
+                                            stringResource(palette.labelRes),
+                                            style = CoffeeTheme.type.caption,
+                                            color = if (isSelected) colors.accent else colors.textPrimary,
+                                            maxLines = 1,
+                                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                                            align = androidx.compose.ui.text.style.TextAlign.Center,
+                                            modifier = Modifier.padding(horizontal = 8.dp),
+                                        )
+                                    }
+                                }
+                                if (isSelected) {
+                                    Box(modifier = Modifier.align(Alignment.TopEnd).padding(6.dp).size(18.dp).clip(CircleShape).background(colors.accent), contentAlignment = Alignment.Center) {
+                                        Box(modifier = Modifier.size(6.dp).clip(CircleShape).background(colors.onAccent))
+                                    }
                                 }
                             }
                         }
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(24.dp)
-                                .background(swatchColors.background),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            AppText(
-                                stringResource(palette.labelRes),
-                                style = CoffeeTheme.type.caption,
-                                color = if (isSelected) colors.accent else colors.textPrimary,
-                            )
-                        }
+                        if (row.size == 1) Spacer(modifier = Modifier.weight(1f))
                     }
                 }
             }
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(spacing.m))
             AppText(stringResource(R.string.settings_temperature), style = CoffeeTheme.type.body, color = colors.textPrimary)
             Spacer(Modifier.height(8.dp))
             SegmentedControl(
@@ -326,6 +440,13 @@ fun SettingsScreen(vm: AppViewModel) {
         }
 
         SettingsSection(R.string.settings_cloud_title) {
+            if (cloudBusy) {
+                Row(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 2.dp, color = colors.accent)
+                    Spacer(Modifier.width(12.dp))
+                    AppText(stringResource(R.string.settings_cloud_working), style = CoffeeTheme.type.caption, color = colors.textSecondary)
+                }
+            }
             if (cloudSignedIn) {
                 AppText(
                     stringResource(R.string.settings_cloud_signed_as, cloudEmail),
@@ -334,32 +455,39 @@ fun SettingsScreen(vm: AppViewModel) {
                 )
                 Spacer(Modifier.height(12.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                    SecondaryButton(stringResource(R.string.settings_cloud_backup), Modifier.weight(1f)) {
+                    SecondaryButton(stringResource(R.string.settings_cloud_backup), Modifier.weight(1f), enabled = !cloudBusy) {
+                        val act = ctx as? Activity ?: return@SecondaryButton
+                        pendingAction = PendingCloudAction.BACKUP
                         scope.launch {
+                            cloudBusy = true
                             val json = vm.getExportJson()
-                            val result = cloud.backupToDrive(ctx as android.app.Activity, json)
-                            if (result.isSuccess) android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
-                            else android.widget.Toast.makeText(ctx, R.string.settings_cloud_error, android.widget.Toast.LENGTH_SHORT).show()
+                            val result = cloud.backupToDrive(json)
+                            handleCloudResult(result, {
+                                android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
+                            }, recoverLauncher)
+                            cloudBusy = false
                         }
                     }
                 }
                 Spacer(Modifier.height(8.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                    SecondaryButton(stringResource(R.string.settings_cloud_restore), Modifier.weight(1f)) {
+                    SecondaryButton(stringResource(R.string.settings_cloud_restore), Modifier.weight(1f), enabled = !cloudBusy) {
+                        pendingAction = PendingCloudAction.RESTORE
                         scope.launch {
-                            val result = cloud.restoreFromDrive(ctx)
-                            if (result.isSuccess) {
-                                vm.importFromJsonString(ctx, result.getOrDefault(""))
+                            cloudBusy = true
+                            val result = cloud.restoreFromDrive()
+                            handleCloudResult(result, {
+                                val data = result.getOrDefault("")
+                                vm.importFromJsonString(ctx, data)
                                 android.widget.Toast.makeText(ctx, R.string.settings_cloud_restore_done, android.widget.Toast.LENGTH_SHORT).show()
-                            } else {
-                                android.widget.Toast.makeText(ctx, R.string.settings_cloud_error, android.widget.Toast.LENGTH_SHORT).show()
-                            }
+                            }, recoverLauncher)
+                            cloudBusy = false
                         }
                     }
                 }
                 Spacer(Modifier.height(12.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                    SecondaryButton(stringResource(R.string.settings_cloud_signout), Modifier.weight(1f)) {
+                    SecondaryButton(stringResource(R.string.settings_cloud_signout), Modifier.weight(1f), enabled = !cloudBusy) {
                         cloud.signOut(cloud.getSignInClient())
                         cloudSignedIn = false
                     }
@@ -368,6 +496,7 @@ fun SettingsScreen(vm: AppViewModel) {
                 PrimaryButton(
                     stringResource(R.string.settings_cloud_signin),
                     modifier = Modifier.fillMaxWidth(),
+                    enabled = !cloudBusy,
                 ) {
                     val client = cloud.getSignInClient()
                     signInLauncher.launch(cloud.getSignInIntent(client))

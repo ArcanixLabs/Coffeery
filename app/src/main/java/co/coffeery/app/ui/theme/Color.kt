@@ -85,6 +85,23 @@ fun paletteColors(palette: Palette, isDark: Boolean): CoffeeColors = when (palet
     Palette.MOCHA -> if (isDark) DarkMochaColors else LightMochaColors
     Palette.CARAMEL -> if (isDark) DarkCaramelColors else LightCaramelColors
     Palette.HAZELNUT -> if (isDark) DarkHazelnutColors else LightHazelnutColors
+    Palette.COPPER -> if (isDark) DarkCopperColors else LightCopperColors
+    Palette.CINNAMON -> if (isDark) DarkCinnamonColors else LightCinnamonColors
+    Palette.CHESTNUT -> if (isDark) DarkChestnutColors else LightChestnutColors
+    Palette.FRENCH_ROAST -> if (isDark) DarkFrenchRoastColors else LightFrenchRoastColors
+    Palette.VANILLA_LATTE -> if (isDark) DarkVanillaLatteColors else LightVanillaLatteColors
+    Palette.PUMPKIN_SPICE -> if (isDark) DarkPumpkinSpiceColors else LightPumpkinSpiceColors
+    Palette.NORDIC_LIGHT -> if (isDark) DarkNordicLightColors else LightNordicLightColors
+    Palette.KINETIC -> if (isDark) DarkKineticColors else LightKineticColors
+    Palette.MIDNIGHT_BLOOM -> if (isDark) DarkMidnightBloomColors else LightMidnightBloomColors
+    Palette.AURORA -> if (isDark) DarkAuroraColors else LightAuroraColors
+    Palette.STEAM -> if (isDark) DarkSteamColors else LightSteamColors
+    Palette.HONEY -> if (isDark) DarkHoneyColors else LightHoneyColors
+    Palette.VELVET -> if (isDark) DarkVelvetColors else LightVelvetColors
+    Palette.CREMA_ROSE -> if (isDark) DarkCremaRoseColors else LightCremaRoseColors
+    Palette.SMOKE -> if (isDark) DarkSmokeColors else LightSmokeColors
+    Palette.EMBER -> if (isDark) DarkEmberColors else LightEmberColors
+    Palette.MIUIX -> if (isDark) DarkMiuixColors else LightMiuixColors
 }
 
 val LightEspressoColors = CoffeeColors(
@@ -102,6 +119,40 @@ val LightEspressoColors = CoffeeColors(
     cremaLight = Color(0xFFC9A07A),
     cremaDark = Color(0xFF3A2317),
     isDark = false,
+)
+
+val LightCopperColors = CoffeeColors(
+    background = Color(0xFFEDE3D0),
+    backgroundEnd = Color(0xFFF3E8CC),
+    surface = Color(0xFFFDF9F0),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE6D9C2),
+    textPrimary = Color(0xFF271E12),
+    textSecondary = Color(0xFF7A6A52),
+    accent = Color(0xFFC47A3A),
+    accentVintage = Color(0xFFB06A30),
+    accentSoft = Color(0xFFF0D9B8),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD9B98C),
+    cremaDark = Color(0xFF3B241A),
+    isDark = false,
+)
+
+val DarkCopperColors = CoffeeColors(
+    background = Color(0xFF1B1713),
+    backgroundEnd = Color(0xFF211D18),
+    surface = Color(0xFF251F1A),
+    surfaceElevated = Color(0xFF2E261E),
+    outline = Color(0xFF3A3228),
+    textPrimary = Color(0xFFF0E6D2),
+    textSecondary = Color(0xFFB8A890),
+    accent = Color(0xFFD48A4A),
+    accentVintage = Color(0xFFBC7A42),
+    accentSoft = Color(0xFF5A3A1E),
+    onAccent = Color(0xFF1A0F08),
+    cremaLight = Color(0xFFC9A57A),
+    cremaDark = Color(0xFF1C0F09),
+    isDark = true,
 )
 
 val DarkEspressoColors = CoffeeColors(
@@ -326,5 +377,549 @@ val DarkHazelnutColors = CoffeeColors(
     onAccent = Color(0xFF0A0603),
     cremaLight = Color(0xFFA88860),
     cremaDark = Color(0xFF180D06),
+    isDark = true,
+)
+
+val LightCinnamonColors = CoffeeColors(
+    background = Color(0xFFF5E8D9),
+    backgroundEnd = Color(0xFFF9EFE6),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE6D4BE),
+    textPrimary = Color(0xFF23190F),
+    textSecondary = Color(0xFF6E5A42),
+    accent = Color(0xFFC07A2E),
+    accentVintage = Color(0xFFAD6E2A),
+    accentSoft = Color(0xFFF0D8B0),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD9B98C),
+    cremaDark = Color(0xFF3B241A),
+    isDark = false,
+)
+
+val DarkCinnamonColors = CoffeeColors(
+    background = Color(0xFF1C1610),
+    backgroundEnd = Color(0xFF221C14),
+    surface = Color(0xFF271F15),
+    surfaceElevated = Color(0xFF30291D),
+    outline = Color(0xFF3D2F20),
+    textPrimary = Color(0xFFF2E6D5),
+    textSecondary = Color(0xFFB59A7A),
+    accent = Color(0xFFDFA065),
+    accentVintage = Color(0xFFC78F55),
+    accentSoft = Color(0xFF5A3A1E),
+    onAccent = Color(0xFF120C05),
+    cremaLight = Color(0xFFC9A57A),
+    cremaDark = Color(0xFF1C0F09),
+    isDark = true,
+)
+
+val LightChestnutColors = CoffeeColors(
+    background = Color(0xFFF0E6D9),
+    backgroundEnd = Color(0xFFF5EDE2),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE0D0BB),
+    textPrimary = Color(0xFF241A0F),
+    textSecondary = Color(0xFF6B5944),
+    accent = Color(0xFF8B5A2B),
+    accentVintage = Color(0xFF7D5127),
+    accentSoft = Color(0xFFE8D2B8),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD4A878),
+    cremaDark = Color(0xFF3A2415),
+    isDark = false,
+)
+
+val DarkChestnutColors = CoffeeColors(
+    background = Color(0xFF1A1410),
+    backgroundEnd = Color(0xFF1F1912),
+    surface = Color(0xFF241E16),
+    surfaceElevated = Color(0xFF2D251C),
+    outline = Color(0xFF3A2E20),
+    textPrimary = Color(0xFFF0E6D5),
+    textSecondary = Color(0xFFB5A090),
+    accent = Color(0xFFB87A3A),
+    accentVintage = Color(0xFFA66D34),
+    accentSoft = Color(0xFF5A3A22),
+    onAccent = Color(0xFF120A05),
+    cremaLight = Color(0xFFC9A57A),
+    cremaDark = Color(0xFF1C0F09),
+    isDark = true,
+)
+
+val LightFrenchRoastColors = CoffeeColors(
+    background = Color(0xFFECE5DC),
+    backgroundEnd = Color(0xFFF1EAE2),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFDAD0C2),
+    textPrimary = Color(0xFF1E1410),
+    textSecondary = Color(0xFF6B5E52),
+    accent = Color(0xFF4A2C1D),
+    accentVintage = Color(0xFF42281A),
+    accentSoft = Color(0xFFDED0C0),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFC9A07A),
+    cremaDark = Color(0xFF2A1A10),
+    isDark = false,
+)
+
+val DarkFrenchRoastColors = CoffeeColors(
+    background = Color(0xFF14100E),
+    backgroundEnd = Color(0xFF1A1512),
+    surface = Color(0xFF1E1912),
+    surfaceElevated = Color(0xFF262019),
+    outline = Color(0xFF332A20),
+    textPrimary = Color(0xFFEEE6DA),
+    textSecondary = Color(0xFFA89A8A),
+    accent = Color(0xFF8A5A3C),
+    accentVintage = Color(0xFF7D5136),
+    accentSoft = Color(0xFF3A2A1E),
+    onAccent = Color(0xFFF5EDE3),
+    cremaLight = Color(0xFFB8956E),
+    cremaDark = Color(0xFF1A0D07),
+    isDark = true,
+)
+
+val LightVanillaLatteColors = CoffeeColors(
+    background = Color(0xFFF6E8C8),
+    backgroundEnd = Color(0xFFFCF2DD),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE8D8B8),
+    textPrimary = Color(0xFF241E12),
+    textSecondary = Color(0xFF7A6A52),
+    accent = Color(0xFFC9A86A),
+    accentVintage = Color(0xFFB5975F),
+    accentSoft = Color(0xFFF0E0B8),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD9C08C),
+    cremaDark = Color(0xFF4A3520),
+    isDark = false,
+)
+
+val DarkVanillaLatteColors = CoffeeColors(
+    background = Color(0xFF1C1912),
+    backgroundEnd = Color(0xFF221E16),
+    surface = Color(0xFF28231A),
+    surfaceElevated = Color(0xFF312B1E),
+    outline = Color(0xFF3D3526),
+    textPrimary = Color(0xFFF5EEDD),
+    textSecondary = Color(0xFFB8A890),
+    accent = Color(0xFFD8BC86),
+    accentVintage = Color(0xFFC2A978),
+    accentSoft = Color(0xFF5A4A2E),
+    onAccent = Color(0xFF1A1206),
+    cremaLight = Color(0xFFC9A57A),
+    cremaDark = Color(0xFF1C0F09),
+    isDark = true,
+)
+
+val LightPumpkinSpiceColors = CoffeeColors(
+    background = Color(0xFFF3E6D9),
+    backgroundEnd = Color(0xFFF8EDE2),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE8D2B8),
+    textPrimary = Color(0xFF2A1A0F),
+    textSecondary = Color(0xFF7A5A42),
+    accent = Color(0xFFD86C27),
+    accentVintage = Color(0xFFC26123),
+    accentSoft = Color(0xFFF5D0B0),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD9A86A),
+    cremaDark = Color(0xFF4A2510),
+    isDark = false,
+)
+
+val DarkPumpkinSpiceColors = CoffeeColors(
+    background = Color(0xFF1E1510),
+    backgroundEnd = Color(0xFF241A12),
+    surface = Color(0xFF2A1F14),
+    surfaceElevated = Color(0xFF332618),
+    outline = Color(0xFF423022),
+    textPrimary = Color(0xFFF2E6D5),
+    textSecondary = Color(0xFFB89A80),
+    accent = Color(0xFFE8843A),
+    accentVintage = Color(0xFFD07734),
+    accentSoft = Color(0xFF5A3A20),
+    onAccent = Color(0xFF140A03),
+    cremaLight = Color(0xFFC9A57A),
+    cremaDark = Color(0xFF1C0F09),
+    isDark = true,
+)
+
+val LightNordicLightColors = CoffeeColors(
+    background = Color(0xFFF9F6F0),
+    backgroundEnd = Color(0xFFFEFDFB),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE8E0D4),
+    textPrimary = Color(0xFF2A251E),
+    textSecondary = Color(0xFF7A7064),
+    accent = Color(0xFF9AA89E),
+    accentVintage = Color(0xFF8A9890),
+    accentSoft = Color(0xFFDDE6E0),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD9C5A5),
+    cremaDark = Color(0xFF3A352E),
+    isDark = false,
+)
+
+val DarkNordicLightColors = CoffeeColors(
+    background = Color(0xFF1E1E1C),
+    backgroundEnd = Color(0xFF24221F),
+    surface = Color(0xFF2A2825),
+    surfaceElevated = Color(0xFF32302C),
+    outline = Color(0xFF3D3A35),
+    textPrimary = Color(0xFFF0EEE8),
+    textSecondary = Color(0xFFB8B2A5),
+    accent = Color(0xFFB5C2B5),
+    accentVintage = Color(0xFFA3AF9F),
+    accentSoft = Color(0xFF3A4038),
+    onAccent = Color(0xFF1A1E1A),
+    cremaLight = Color(0xFFC9B99A),
+    cremaDark = Color(0xFF1C1A15),
+    isDark = true,
+)
+
+val LightKineticColors = CoffeeColors(
+    background = Color(0xFFF0EDF5),
+    backgroundEnd = Color(0xFFF6F4FA),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE0D8E8),
+    textPrimary = Color(0xFF221E2A),
+    textSecondary = Color(0xFF6B6580),
+    accent = Color(0xFF7B6B8A),
+    accentVintage = Color(0xFF6E607C),
+    accentSoft = Color(0xFFDAD4E8),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFC9B5D0),
+    cremaDark = Color(0xFF3A2E48),
+    isDark = false,
+)
+
+val DarkKineticColors = CoffeeColors(
+    background = Color(0xFF1C1A22),
+    backgroundEnd = Color(0xFF201E28),
+    surface = Color(0xFF262430),
+    surfaceElevated = Color(0xFF2E2C38),
+    outline = Color(0xFF3A3848),
+    textPrimary = Color(0xFFEDE8F5),
+    textSecondary = Color(0xFFA8A2B8),
+    accent = Color(0xFF9A8BB5),
+    accentVintage = Color(0xFF8A7DA3),
+    accentSoft = Color(0xFF3A3050),
+    onAccent = Color(0xFF140F1E),
+    cremaLight = Color(0xFFB5A6C8),
+    cremaDark = Color(0xFF1A1520),
+    isDark = true,
+)
+
+val LightMidnightBloomColors = CoffeeColors(
+    background = Color(0xFFF2EDF5),
+    backgroundEnd = Color(0xFFF8F4FA),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE0D8E8),
+    textPrimary = Color(0xFF241E2C),
+    textSecondary = Color(0xFF6B5E7A),
+    accent = Color(0xFF6B5A7A),
+    accentVintage = Color(0xFF60516E),
+    accentSoft = Color(0xFFD8D0E0),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD0B8D8),
+    cremaDark = Color(0xFF3E2E48),
+    isDark = false,
+)
+
+val DarkMidnightBloomColors = CoffeeColors(
+    background = Color(0xFF181420),
+    backgroundEnd = Color(0xFF1E1A28),
+    surface = Color(0xFF221E30),
+    surfaceElevated = Color(0xFF2A2538),
+    outline = Color(0xFF352E48),
+    textPrimary = Color(0xFFEEE8F5),
+    textSecondary = Color(0xFFA8A0B8),
+    accent = Color(0xFF9A82B0),
+    accentVintage = Color(0xFF8A759E),
+    accentSoft = Color(0xFF3A2E50),
+    onAccent = Color(0xFF120E18),
+    cremaLight = Color(0xFFB8A6C8),
+    cremaDark = Color(0xFF1A1520),
+    isDark = true,
+)
+
+val LightAuroraColors = CoffeeColors(
+    background = Color(0xFFF6EFE8),
+    backgroundEnd = Color(0xFFFBF8F2),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE8DED4),
+    textPrimary = Color(0xFF2A2018),
+    textSecondary = Color(0xFF7A6E64),
+    accent = Color(0xFFD9B8A0),
+    accentVintage = Color(0xFFC3A690),
+    accentSoft = Color(0xFFEDDDD0),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFE8C9A8),
+    cremaDark = Color(0xFF4A3528),
+    isDark = false,
+)
+
+val DarkAuroraColors = CoffeeColors(
+    background = Color(0xFF1E1C1A),
+    backgroundEnd = Color(0xFF24211E),
+    surface = Color(0xFF2A2622),
+    surfaceElevated = Color(0xFF322E28),
+    outline = Color(0xFF3D3832),
+    textPrimary = Color(0xFFF0E8E0),
+    textSecondary = Color(0xFFB8AEA2),
+    accent = Color(0xFFE8C9A8),
+    accentVintage = Color(0xFFD0B598),
+    accentSoft = Color(0xFF4A3A2E),
+    onAccent = Color(0xFF1A1612),
+    cremaLight = Color(0xFFD9B8A0),
+    cremaDark = Color(0xFF1C1510),
+    isDark = true,
+)
+
+val LightSteamColors = CoffeeColors(
+    background = Color(0xFFF2F5F5),
+    backgroundEnd = Color(0xFFF7FAFA),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFD9E0E0),
+    textPrimary = Color(0xFF232828),
+    textSecondary = Color(0xFF6B7A7A),
+    accent = Color(0xFF6B8A8A),
+    accentVintage = Color(0xFF607C7C),
+    accentSoft = Color(0xFFD0DDDD),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFB8C5C5),
+    cremaDark = Color(0xFF2E3A3A),
+    isDark = false,
+)
+
+val DarkSteamColors = CoffeeColors(
+    background = Color(0xFF1A1E1E),
+    backgroundEnd = Color(0xFF1E2222),
+    surface = Color(0xFF242828),
+    surfaceElevated = Color(0xFF2C3030),
+    outline = Color(0xFF363A3A),
+    textPrimary = Color(0xFFE8F0F0),
+    textSecondary = Color(0xFF9AB0B0),
+    accent = Color(0xFF8AB0B0),
+    accentVintage = Color(0xFF7D9E9E),
+    accentSoft = Color(0xFF2E3A3A),
+    onAccent = Color(0xFF0F1A1A),
+    cremaLight = Color(0xFF9AB5B5),
+    cremaDark = Color(0xFF141E1E),
+    isDark = true,
+)
+
+val LightHoneyColors = CoffeeColors(
+    background = Color(0xFFF8F0D8),
+    backgroundEnd = Color(0xFFFCF6E2),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE8D8B0),
+    textPrimary = Color(0xFF2A2010),
+    textSecondary = Color(0xFF7A6E48),
+    accent = Color(0xFFC9A05E),
+    accentVintage = Color(0xFFB59055),
+    accentSoft = Color(0xFFEAD9A8),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD9B56A),
+    cremaDark = Color(0xFF4A3810),
+    isDark = false,
+)
+
+val DarkHoneyColors = CoffeeColors(
+    background = Color(0xFF1E1C14),
+    backgroundEnd = Color(0xFF24201A),
+    surface = Color(0xFF2A261C),
+    surfaceElevated = Color(0xFF322E22),
+    outline = Color(0xFF3D382C),
+    textPrimary = Color(0xFFF0E8D0),
+    textSecondary = Color(0xFFB8A88A),
+    accent = Color(0xFFE0B86A),
+    accentVintage = Color(0xFFC9A65F),
+    accentSoft = Color(0xFF4A3A18),
+    onAccent = Color(0xFF141008),
+    cremaLight = Color(0xFFD9B56A),
+    cremaDark = Color(0xFF1C1408),
+    isDark = true,
+)
+
+val LightVelvetColors = CoffeeColors(
+    background = Color(0xFFF5EDE8),
+    backgroundEnd = Color(0xFFFAF5F0),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE0D0C8),
+    textPrimary = Color(0xFF2A1A18),
+    textSecondary = Color(0xFF7A5A52),
+    accent = Color(0xFF8A4A3A),
+    accentVintage = Color(0xFF7C4234),
+    accentSoft = Color(0xFFD8B8B0),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFC28A7A),
+    cremaDark = Color(0xFF4A2A22),
+    isDark = false,
+)
+
+val DarkVelvetColors = CoffeeColors(
+    background = Color(0xFF1E1414),
+    backgroundEnd = Color(0xFF241A18),
+    surface = Color(0xFF2A1E1C),
+    surfaceElevated = Color(0xFF322624),
+    outline = Color(0xFF3D2C28),
+    textPrimary = Color(0xFFF0E0D8),
+    textSecondary = Color(0xFFB89A92),
+    accent = Color(0xFFB87A6A),
+    accentVintage = Color(0xFFA66E5F),
+    accentSoft = Color(0xFF4A2E28),
+    onAccent = Color(0xFF140A08),
+    cremaLight = Color(0xFFC28A7A),
+    cremaDark = Color(0xFF1C120E),
+    isDark = true,
+)
+
+val LightCremaRoseColors = CoffeeColors(
+    background = Color(0xFFF5E8E0),
+    backgroundEnd = Color(0xFFFAF0E8),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE0D0C8),
+    textPrimary = Color(0xFF2A1E1C),
+    textSecondary = Color(0xFF7A5E58),
+    accent = Color(0xFFC28A7A),
+    accentVintage = Color(0xFFAF7C6E),
+    accentSoft = Color(0xFFECD8D0),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD9A89A),
+    cremaDark = Color(0xFF4A2E28),
+    isDark = false,
+)
+
+val DarkCremaRoseColors = CoffeeColors(
+    background = Color(0xFF1E1818),
+    backgroundEnd = Color(0xFF241E1C),
+    surface = Color(0xFF2A2220),
+    surfaceElevated = Color(0xFF322A28),
+    outline = Color(0xFF3D3230),
+    textPrimary = Color(0xFFF0E0E0),
+    textSecondary = Color(0xFFB8A8A5),
+    accent = Color(0xFFD9A89A),
+    accentVintage = Color(0xFFC3978B),
+    accentSoft = Color(0xFF4A3230),
+    onAccent = Color(0xFF140E0C),
+    cremaLight = Color(0xFFD9A89A),
+    cremaDark = Color(0xFF1C1210),
+    isDark = true,
+)
+
+val LightSmokeColors = CoffeeColors(
+    background = Color(0xFFF0EDE8),
+    backgroundEnd = Color(0xFFF5F2F0),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFDAD4D0),
+    textPrimary = Color(0xFF2A2420),
+    textSecondary = Color(0xFF7A6E68),
+    accent = Color(0xFF6B5A52),
+    accentVintage = Color(0xFF60514A),
+    accentSoft = Color(0xFFD8D0C8),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFF9A8A82),
+    cremaDark = Color(0xFF3A3230),
+    isDark = false,
+)
+
+val DarkSmokeColors = CoffeeColors(
+    background = Color(0xFF1E1A18),
+    backgroundEnd = Color(0xFF241E1C),
+    surface = Color(0xFF2A2420),
+    surfaceElevated = Color(0xFF322C28),
+    outline = Color(0xFF3D3632),
+    textPrimary = Color(0xFFF0E8E0),
+    textSecondary = Color(0xFFB8AEA2),
+    accent = Color(0xFF9A8A82),
+    accentVintage = Color(0xFF8A7C75),
+    accentSoft = Color(0xFF3A3230),
+    onAccent = Color(0xFF140E0C),
+    cremaLight = Color(0xFF9A8A82),
+    cremaDark = Color(0xFF1C1816),
+    isDark = true,
+)
+
+val LightEmberColors = CoffeeColors(
+    background = Color(0xFFF8EDE6),
+    backgroundEnd = Color(0xFFFCF5F0),
+    surface = Color(0xFFFDFAF5),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE8D8D0),
+    textPrimary = Color(0xFF2A1810),
+    textSecondary = Color(0xFF7A4A38),
+    accent = Color(0xFFA64A2E),
+    accentVintage = Color(0xFF954228),
+    accentSoft = Color(0xFFE8C8B8),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFD9A06A),
+    cremaDark = Color(0xFF4A2010),
+    isDark = false,
+)
+
+val DarkEmberColors = CoffeeColors(
+    background = Color(0xFF1E1410),
+    backgroundEnd = Color(0xFF241A14),
+    surface = Color(0xFF2A1E18),
+    surfaceElevated = Color(0xFF322620),
+    outline = Color(0xFF3D2E28),
+    textPrimary = Color(0xFFF0E0D8),
+    textSecondary = Color(0xFFB89A82),
+    accent = Color(0xFFD86C4A),
+    accentVintage = Color(0xFFC26142),
+    accentSoft = Color(0xFF4A3028),
+    onAccent = Color(0xFF140A08),
+    cremaLight = Color(0xFFD9A06A),
+    cremaDark = Color(0xFF1C1008),
+    isDark = true,
+)
+
+val LightMiuixColors = CoffeeColors(
+    background = Color(0xFFF2F2F7),
+    backgroundEnd = Color(0xFFF9F9FB),
+    surface = Color(0xFFFFFFFF),
+    surfaceElevated = Color(0xFFFFFFFF),
+    outline = Color(0xFFE5E5EA),
+    textPrimary = Color(0xFF1C1C1E),
+    textSecondary = Color(0xFF8E8E93),
+    accent = Color(0xFF007AFF),
+    accentVintage = Color(0xFF006EE6),
+    accentSoft = Color(0xFFD0E4FF),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFFB0C4FF),
+    cremaDark = Color(0xFF0A0A1A),
+    isDark = false,
+)
+
+val DarkMiuixColors = CoffeeColors(
+    background = Color(0xFF000000),
+    backgroundEnd = Color(0xFF1C1C1E),
+    surface = Color(0xFF1C1C1E),
+    surfaceElevated = Color(0xFF2C2C2E),
+    outline = Color(0xFF38383A),
+    textPrimary = Color(0xFFF2F2F7),
+    textSecondary = Color(0xFF8E8E93),
+    accent = Color(0xFF0A84FF),
+    accentVintage = Color(0xFF0977E6),
+    accentSoft = Color(0xFF1C3A5A),
+    onAccent = Color(0xFFFFFFFF),
+    cremaLight = Color(0xFF8EA8D8),
+    cremaDark = Color(0xFF0A0A1E),
     isDark = true,
 )

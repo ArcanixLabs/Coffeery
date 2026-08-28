@@ -1,5 +1,6 @@
 package co.coffeery.app.ui.screens.recipes
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +34,7 @@ import co.coffeery.app.ui.components.AccentStripeCard
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.CoffeeDialog
+import co.coffeery.app.ui.components.CremaMascot
 import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.PrimaryButton
@@ -70,7 +72,7 @@ fun RecipesScreen(state: AppUiState, vm: AppViewModel) {
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                LineIcon(Glyph.BOOKMARK, colors.textSecondary.copy(alpha = 0.4f), Modifier.size(64.dp))
+                CremaMascot(mood = "sleepy", modifier = Modifier.size(104.dp))
                 Spacer(Modifier.height(16.dp))
                 AppText(stringResource(R.string.empty_recipes_title), style = CoffeeTheme.type.title, align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
                 Spacer(Modifier.height(8.dp))
@@ -125,7 +127,7 @@ fun RecipesScreen(state: AppUiState, vm: AppViewModel) {
 private fun FeaturedRecipeCard(recipe: RecipeEntity, state: AppUiState, onViewBrew: () -> Unit) {
     val colors = CoffeeTheme.colors
     val eq = state.equipment.firstOrNull { it.id == recipe.equipmentId }
-    val eqName = eq?.displayName() ?: "—"
+    val eqName = eq?.displayName() ?: stringResource(R.string.equip_deleted)
     val roast = runCatching { RoastLevel.valueOf(recipe.roast) }.getOrDefault(RoastLevel.MEDIUM)
     val result = if (eq != null) {
         BrewMath.compute(eq, recipe.strength, roast, recipe.inputByCups, recipe.cups, recipe.waterMl)
@@ -159,7 +161,7 @@ private fun FeaturedRecipeCard(recipe: RecipeEntity, state: AppUiState, onViewBr
 private fun RecipeRow(recipe: RecipeEntity, state: AppUiState, onClick: () -> Unit, onDelete: () -> Unit) {
     val colors = CoffeeTheme.colors
     val eq = state.equipment.firstOrNull { it.id == recipe.equipmentId }
-    val eqName = eq?.displayName() ?: "—"
+    val eqName = eq?.displayName() ?: stringResource(R.string.equip_deleted)
     val roast = runCatching { RoastLevel.valueOf(recipe.roast) }.getOrDefault(RoastLevel.MEDIUM)
     val result = if (eq != null) {
         BrewMath.compute(eq, recipe.strength, roast, recipe.inputByCups, recipe.cups, recipe.waterMl)

@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import co.coffeery.app.R
 
 /** Which catalog section a drink belongs to. */
-enum class DrinkGroup(@StringRes val labelRes: Int) {
+enum class DrinkGroup(@param:StringRes val labelRes: Int) {
     MILK(R.string.drink_group_milk),
     REGIONAL(R.string.drink_group_regional),
 }
@@ -12,9 +12,9 @@ enum class DrinkGroup(@StringRes val labelRes: Int) {
 /** A built (not ratio-brewed) drink recipe: milk-based or regional. */
 data class DrinkItem(
     val id: String,
-    @StringRes val nameRes: Int,
-    @StringRes val summaryRes: Int,
-    @StringRes val bodyRes: Int,
+    @param:StringRes val nameRes: Int,
+    @param:StringRes val summaryRes: Int,
+    @param:StringRes val bodyRes: Int,
     val group: DrinkGroup,
 )
 
@@ -34,6 +34,20 @@ object DrinkContent {
         DrinkItem("ristretto", R.string.drink_ristretto_name, R.string.drink_ristretto_summary, R.string.drink_ristretto_body, DrinkGroup.MILK),
         DrinkItem("lungo", R.string.drink_lungo_name, R.string.drink_lungo_summary, R.string.drink_lungo_body, DrinkGroup.MILK),
         DrinkItem("marocchino", R.string.drink_marocchino_name, R.string.drink_marocchino_summary, R.string.drink_marocchino_body, DrinkGroup.MILK),
+        DrinkItem("caramacchiato", R.string.drink_caramacchiato_name, R.string.drink_caramacchiato_summary, R.string.drink_caramacchiato_body, DrinkGroup.MILK),
+        DrinkItem("espressino", R.string.drink_espressino_name, R.string.drink_espressino_summary, R.string.drink_espressino_body, DrinkGroup.MILK),
+        DrinkItem("lagrima", R.string.drink_lagrima_name, R.string.drink_lagrima_summary, R.string.drink_lagrima_body, DrinkGroup.MILK),
+        DrinkItem("galao", R.string.drink_galao_name, R.string.drink_galao_summary, R.string.drink_galao_body, DrinkGroup.MILK),
+        DrinkItem("piccolo", R.string.drink_piccolo_name, R.string.drink_piccolo_summary, R.string.drink_piccolo_body, DrinkGroup.MILK),
+        DrinkItem("breve", R.string.drink_breve_name, R.string.drink_breve_summary, R.string.drink_breve_body, DrinkGroup.MILK),
+        DrinkItem("bulletproof", R.string.drink_bulletproof_name, R.string.drink_bulletproof_summary, R.string.drink_bulletproof_body, DrinkGroup.MILK),
+        DrinkItem("long_macchiato", R.string.drink_long_macchiato_name, R.string.drink_long_macchiato_summary, R.string.drink_long_macchiato_body, DrinkGroup.MILK),
+        DrinkItem("spanish_latte", R.string.drink_spanish_latte_name, R.string.drink_spanish_latte_summary, R.string.drink_spanish_latte_body, DrinkGroup.MILK),
+        DrinkItem("pumpkin_spice", R.string.drink_pumpkin_spice_name, R.string.drink_pumpkin_spice_summary, R.string.drink_pumpkin_spice_body, DrinkGroup.MILK),
+        DrinkItem("affogato_iced", R.string.drink_affogato_iced_name, R.string.drink_affogato_iced_summary, R.string.drink_affogato_iced_body, DrinkGroup.MILK),
+        DrinkItem("gibraltar", R.string.drink_gibraltar_name, R.string.drink_gibraltar_summary, R.string.drink_gibraltar_body, DrinkGroup.MILK),
+        DrinkItem("raf", R.string.drink_raf_name, R.string.drink_raf_summary, R.string.drink_raf_body, DrinkGroup.MILK),
+        DrinkItem("melange", R.string.drink_melange_name, R.string.drink_melange_summary, R.string.drink_melange_body, DrinkGroup.MILK),
         DrinkItem("caphetrung", R.string.drink_caphetrung_name, R.string.drink_caphetrung_summary, R.string.drink_caphetrung_body, DrinkGroup.REGIONAL),
         DrinkItem("caphesuada", R.string.drink_caphesuada_name, R.string.drink_caphesuada_summary, R.string.drink_caphesuada_body, DrinkGroup.REGIONAL),
         DrinkItem("greekfrappe", R.string.drink_greekfrappe_name, R.string.drink_greekfrappe_summary, R.string.drink_greekfrappe_body, DrinkGroup.REGIONAL),
@@ -46,17 +60,10 @@ object DrinkContent {
         DrinkItem("barraquito", R.string.drink_barraquito_name, R.string.drink_barraquito_summary, R.string.drink_barraquito_body, DrinkGroup.REGIONAL),
         DrinkItem("eiskaffee", R.string.drink_eiskaffee_name, R.string.drink_eiskaffee_summary, R.string.drink_eiskaffee_body, DrinkGroup.REGIONAL),
         DrinkItem("touba", R.string.drink_touba_name, R.string.drink_touba_summary, R.string.drink_touba_body, DrinkGroup.REGIONAL),
-        DrinkItem("caramacchiato", R.string.drink_caramacchiato_name, R.string.drink_caramacchiato_summary, R.string.drink_caramacchiato_body, DrinkGroup.MILK),
-        DrinkItem("espressino", R.string.drink_espressino_name, R.string.drink_espressino_summary, R.string.drink_espressino_body, DrinkGroup.MILK),
-        DrinkItem("lagrima", R.string.drink_lagrima_name, R.string.drink_lagrima_summary, R.string.drink_lagrima_body, DrinkGroup.MILK),
-        DrinkItem("galao", R.string.drink_galao_name, R.string.drink_galao_summary, R.string.drink_galao_body, DrinkGroup.MILK),
-        DrinkItem("piccolo", R.string.drink_piccolo_name, R.string.drink_piccolo_summary, R.string.drink_piccolo_body, DrinkGroup.MILK),
-        DrinkItem("breve", R.string.drink_breve_name, R.string.drink_breve_summary, R.string.drink_breve_body, DrinkGroup.MILK),
-        DrinkItem("bulletproof", R.string.drink_bulletproof_name, R.string.drink_bulletproof_summary, R.string.drink_bulletproof_body, DrinkGroup.MILK),
         DrinkItem("bicerin", R.string.drink_bicerin_name, R.string.drink_bicerin_summary, R.string.drink_bicerin_body, DrinkGroup.REGIONAL),
         DrinkItem("espresso_romano", R.string.drink_espresso_romano_name, R.string.drink_espresso_romano_summary, R.string.drink_espresso_romano_body, DrinkGroup.REGIONAL),
         DrinkItem("mazagran", R.string.drink_mazagran_name, R.string.drink_mazagran_summary, R.string.drink_mazagran_body, DrinkGroup.REGIONAL),
-        DrinkItem("carajillo", R.string.drink_carajas_name, R.string.drink_carajas_summary, R.string.drink_carajas_body, DrinkGroup.REGIONAL),
+        DrinkItem("carajillo", R.string.drink_carajillo_name, R.string.drink_carajillo_summary, R.string.drink_carajillo_body, DrinkGroup.REGIONAL),
         DrinkItem("asiatico", R.string.drink_asiatico_name, R.string.drink_asiatico_summary, R.string.drink_asiatico_body, DrinkGroup.REGIONAL),
         DrinkItem("pharisaer", R.string.drink_pharisaer_name, R.string.drink_pharisaer_summary, R.string.drink_pharisaer_body, DrinkGroup.REGIONAL),
         DrinkItem("kaffeost", R.string.drink_kaffeost_name, R.string.drink_kaffeost_summary, R.string.drink_kaffeost_body, DrinkGroup.REGIONAL),
@@ -65,7 +72,6 @@ object DrinkContent {
         DrinkItem("qishr", R.string.drink_qishr_name, R.string.drink_qishr_summary, R.string.drink_qishr_body, DrinkGroup.REGIONAL),
         DrinkItem("espresso_yen", R.string.drink_espresso_yen_name, R.string.drink_espresso_yen_summary, R.string.drink_espresso_yen_body, DrinkGroup.REGIONAL),
         DrinkItem("magic", R.string.drink_magic_name, R.string.drink_magic_summary, R.string.drink_magic_body, DrinkGroup.REGIONAL),
-        DrinkItem("long_macchiato", R.string.drink_long_macchiato_name, R.string.drink_long_macchiato_summary, R.string.drink_long_macchiato_body, DrinkGroup.MILK),
         DrinkItem("cafe_bombon", R.string.drink_cafe_bombon_name, R.string.drink_cafe_bombon_summary, R.string.drink_cafe_bombon_body, DrinkGroup.REGIONAL),
         DrinkItem("einspanner", R.string.drink_einspanner_name, R.string.drink_einspanner_summary, R.string.drink_einspanner_body, DrinkGroup.REGIONAL),
         DrinkItem("dalgona", R.string.drink_dalgona_name, R.string.drink_dalgona_summary, R.string.drink_dalgona_body, DrinkGroup.REGIONAL),
@@ -84,17 +90,35 @@ object DrinkContent {
         DrinkItem("es_alpukat", R.string.drink_es_alpukat_name, R.string.drink_es_alpukat_summary, R.string.drink_es_alpukat_body, DrinkGroup.REGIONAL),
         DrinkItem("menengic", R.string.drink_menengic_name, R.string.drink_menengic_summary, R.string.drink_menengic_body, DrinkGroup.REGIONAL),
         DrinkItem("mirra", R.string.drink_mirra_name, R.string.drink_mirra_summary, R.string.drink_mirra_body, DrinkGroup.REGIONAL),
-        DrinkItem("spanish_latte", R.string.drink_spanish_latte_name, R.string.drink_spanish_latte_summary, R.string.drink_spanish_latte_body, DrinkGroup.MILK),
-        DrinkItem("pumpkin_spice", R.string.drink_pumpkin_spice_name, R.string.drink_pumpkin_spice_summary, R.string.drink_pumpkin_spice_body, DrinkGroup.MILK),
-        DrinkItem("affogato", R.string.drink_affogato_name, R.string.drink_affogato_summary, R.string.drink_affogato_body, DrinkGroup.MILK),
+        DrinkItem("shakerato", R.string.drink_shakerato_name, R.string.drink_shakerato_summary, R.string.drink_shakerato_body, DrinkGroup.REGIONAL),
+        DrinkItem("tonic", R.string.drink_tonic_name, R.string.drink_tonic_summary, R.string.drink_tonic_body, DrinkGroup.REGIONAL),
+        DrinkItem("kaapi", R.string.drink_kaapi_name, R.string.drink_kaapi_summary, R.string.drink_kaapi_body, DrinkGroup.REGIONAL),
+        DrinkItem("oliang", R.string.drink_oliang_name, R.string.drink_oliang_summary, R.string.drink_oliang_body, DrinkGroup.REGIONAL),
+        DrinkItem("berber", R.string.drink_berber_name, R.string.drink_berber_summary, R.string.drink_berber_body, DrinkGroup.REGIONAL),
+        DrinkItem("qahwa_gulf", R.string.drink_qahwa_gulf_name, R.string.drink_qahwa_gulf_summary, R.string.drink_qahwa_gulf_body, DrinkGroup.REGIONAL),
+        DrinkItem("nitro_cold_brew", R.string.drink_nitro_cold_brew_name, R.string.drink_nitro_cold_brew_summary, R.string.drink_nitro_cold_brew_body, DrinkGroup.REGIONAL),
+        DrinkItem("flat_white_xl", R.string.drink_flat_white_xl_name, R.string.drink_flat_white_xl_summary, R.string.drink_flat_white_xl_body, DrinkGroup.MILK),
+        DrinkItem("kopi_gu_you", R.string.drink_kopi_gu_you_name, R.string.drink_kopi_gu_you_summary, R.string.drink_kopi_gu_you_body, DrinkGroup.REGIONAL),
+        DrinkItem("cold_brew_tonic", R.string.drink_cold_brew_tonic_name, R.string.drink_cold_brew_tonic_summary, R.string.drink_cold_brew_tonic_body, DrinkGroup.REGIONAL),
+        DrinkItem("honey_raf", R.string.drink_honey_raf_name, R.string.drink_honey_raf_summary, R.string.drink_honey_raf_body, DrinkGroup.MILK),
+        DrinkItem("cafezinho_aviacao", R.string.drink_cafezinho_aviacao_name, R.string.drink_cafezinho_aviacao_summary, R.string.drink_cafezinho_aviacao_body, DrinkGroup.REGIONAL),
+        DrinkItem("sig_mazagran", R.string.drink_sig_mazagran_name, R.string.drink_sig_mazagran_summary, R.string.drink_sig_mazagran_body, DrinkGroup.REGIONAL),
+        DrinkItem("berber_brew", R.string.drink_berber_brew_name, R.string.drink_berber_brew_summary, R.string.drink_berber_brew_body, DrinkGroup.REGIONAL),
+        DrinkItem("cortado_iced", R.string.drink_cortado_iced_name, R.string.drink_cortado_iced_summary, R.string.drink_cortado_iced_body, DrinkGroup.MILK),
+        DrinkItem("oat_flat_white", R.string.drink_oat_flat_white_name, R.string.drink_oat_flat_white_summary, R.string.drink_oat_flat_white_body, DrinkGroup.MILK),
+        DrinkItem("kyoto", R.string.drink_kyoto_name, R.string.drink_kyoto_summary, R.string.drink_kyoto_body, DrinkGroup.REGIONAL),
+        DrinkItem("coconut_viet", R.string.drink_coconut_viet_name, R.string.drink_coconut_viet_summary, R.string.drink_coconut_viet_body, DrinkGroup.REGIONAL),
+        DrinkItem("mazagran_portuguese", R.string.drink_mazagran_portuguese_name, R.string.drink_mazagran_portuguese_summary, R.string.drink_mazagran_portuguese_body, DrinkGroup.REGIONAL),
+        DrinkItem("nitro_flash", R.string.drink_nitro_flash_name, R.string.drink_nitro_flash_summary, R.string.drink_nitro_flash_body, DrinkGroup.REGIONAL),
+        DrinkItem("wac_aeropress", R.string.drink_wac_aeropress_name, R.string.drink_wac_aeropress_summary, R.string.drink_wac_aeropress_body, DrinkGroup.REGIONAL),
     )
 }
 
 data class CoffeeVariety(
-    @StringRes val nameRes: Int,
-    @StringRes val originRes: Int,
-    @StringRes val flavorRes: Int,
-    @StringRes val bestBrewRes: Int,
+    @param:StringRes val nameRes: Int,
+    @param:StringRes val originRes: Int,
+    @param:StringRes val flavorRes: Int,
+    @param:StringRes val bestBrewRes: Int,
 )
 
 object VarietyContent {

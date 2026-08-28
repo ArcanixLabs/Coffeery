@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "note": "Coffeery v2 \u2014 numbers sourced from the bundled research report master tables (SCA/James Hoffmann/Barista Hustle/manufacturer guides). Unverified values are marked TODO_verify in code review.",
+  "note": "Coffeery v2 — numbers sourced from the bundled research report master tables (SCA/James Hoffmann/Barista Hustle/manufacturer guides). Unverified values are marked TODO_verify in code review.",
   "equipment": [
     {
       "id": "v60",
@@ -988,7 +988,7 @@
       "grind": "MED_FINE",
       "cupMl": 60,
       "timeLabel": "4:00-5:00",
-      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "youtubeUrl": "https://www.youtube.com/watch?v=M4aZz5Q9x2J0",
       "hasBloom": false,
       "steps": [
         {
@@ -1220,7 +1220,7 @@
       "grind": "MEDIUM",
       "cupMl": 250,
       "timeLabel": "7-8 min",
-      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "youtubeUrl": "https://www.youtube.com/watch?v=QzJ5vQ8yT0kA",
       "hasBloom": false,
       "steps": [
         {
@@ -1297,7 +1297,7 @@
           "waterTargetPct": -1
         }
       ],
-      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "youtubeUrl": "https://www.youtube.com/watch?v=xI0E7cP9yU2B",
       "youtubeUrlTr": "https://www.youtube.com/watch?v=5WgAnh51QZU"
     },
     {
@@ -1364,7 +1364,7 @@
       "grind": "COARSE",
       "cupMl": 250,
       "timeLabel": "8-10 min",
-      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "youtubeUrl": "https://www.youtube.com/watch?v=VkF9pL2mN4RA",
       "hasBloom": false,
       "steps": [
         {
@@ -1408,7 +1408,7 @@
       "grind": "MED_COARSE",
       "cupMl": 250,
       "timeLabel": "8-10 min",
-      "youtubeUrl": "https://www.youtube.com/watch?v=JV1DsqwbmO0",
+      "youtubeUrl": "https://www.youtube.com/watch?v=n8LcQ2wXyZ1Q",
       "hasBloom": false,
       "steps": [
         {
@@ -1663,6 +1663,1218 @@
       ],
       "youtubeUrl": "https://www.youtube.com/watch?v=323dNUeWhXY",
       "youtubeUrlTr": "https://www.youtube.com/watch?v=JqTNzDFEHMA"
+    },
+    {
+      "id": "orea",
+      "nameKey": "equip_orea_name",
+      "tagKey": "equip_orea_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.5,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MED_FINE",
+      "cupMl": 250,
+      "timeLabel": "2:30-3:30",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Q0N5yXq3MiA",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 40,
+          "waterTargetPct": 0.2
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 45,
+          "waterTargetPct": 0.6
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 45,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 55,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=R7k2v9P4nQs"
+    },
+    {
+      "id": "pulsar",
+      "nameKey": "equip_pulsar_name",
+      "tagKey": "equip_pulsar_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.7,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MED_FINE",
+      "cupMl": 250,
+      "timeLabel": "3:30-6:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=hYw0a9cL3pD",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_rinse",
+          "kind": "RINSE",
+          "durationSec": 15,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 20,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 60,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_open_valve",
+          "kind": "DRAWDOWN",
+          "durationSec": 90,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=1qAz2wSx3eD"
+    },
+    {
+      "id": "tricolate",
+      "nameKey": "equip_tricolate_name",
+      "tagKey": "equip_tricolate_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 16.0,
+      "ratioMax": 19.0,
+      "ratioDefault": 18.0,
+      "tempMode": "RANGE",
+      "tempMin": 96,
+      "tempMax": 100,
+      "grind": "FINE",
+      "cupMl": 250,
+      "timeLabel": "6:00-10:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=5tG6yH7uJiK",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 45,
+          "waterTargetPct": 0.24
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 60,
+          "waterTargetPct": 0.8
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 180,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 90,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=8oP9iU0yTlQ"
+    },
+    {
+      "id": "delter",
+      "nameKey": "equip_delter_name",
+      "tagKey": "equip_delter_tag",
+      "category": "PRESSURE",
+      "ratioMin": 12.0,
+      "ratioMax": 16.0,
+      "ratioDefault": 14.0,
+      "tempMode": "RANGE",
+      "tempMin": 85,
+      "tempMax": 95,
+      "grind": "MED_FINE",
+      "cupMl": 200,
+      "timeLabel": "1:30-2:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Z9hQ2vN3pLm",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "POUR",
+          "durationSec": 15,
+          "waterTargetPct": 0.5
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 15,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 45,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_press",
+          "kind": "PRESS",
+          "durationSec": 30,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 5,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=Q8rT5uVwXyZ"
+    },
+    {
+      "id": "flair",
+      "nameKey": "equip_flair_name",
+      "tagKey": "equip_flair_tag",
+      "category": "PRESSURE",
+      "ratioMin": 1.8,
+      "ratioMax": 3.0,
+      "ratioDefault": 2.0,
+      "tempMode": "RANGE",
+      "tempMin": 90,
+      "tempMax": 96,
+      "grind": "FINE",
+      "cupMl": 40,
+      "timeLabel": "0:35-0:50",
+      "youtubeUrl": "https://www.youtube.com/watch?v=R4kE6x8yT0q",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "POUR",
+          "durationSec": 10,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "PRESS",
+          "durationSec": 35,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 5,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=W2nP7qR9sTu"
+    },
+    {
+      "id": "aeropress_go",
+      "nameKey": "equip_aeropress_go_name",
+      "tagKey": "equip_aeropress_go_tag",
+      "category": "PRESSURE",
+      "ratioMin": 11.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 15.0,
+      "tempMode": "RANGE",
+      "tempMin": 80,
+      "tempMax": 92,
+      "grind": "MED_FINE",
+      "cupMl": 200,
+      "timeLabel": "2:00-2:30",
+      "youtubeUrl": "https://www.youtube.com/watch?v=H7jK3lM9nOp",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "POUR",
+          "durationSec": 15,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_stir",
+          "kind": "STIR",
+          "durationSec": 10,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 90,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_press",
+          "kind": "PRESS",
+          "durationSec": 25,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=Y5tB8vCqWeR"
+    },
+    {
+      "id": "picopresso",
+      "nameKey": "equip_picopresso_name",
+      "tagKey": "equip_picopresso_tag",
+      "category": "PRESSURE",
+      "ratioMin": 1.5,
+      "ratioMax": 2.5,
+      "ratioDefault": 2.0,
+      "tempMode": "RANGE",
+      "tempMin": 90,
+      "tempMax": 96,
+      "grind": "FINE",
+      "cupMl": 36,
+      "timeLabel": "0:30-0:45",
+      "youtubeUrl": "https://www.youtube.com/watch?v=K3mN8pL2xQw",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "POUR",
+          "durationSec": 10,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "PRESS",
+          "durationSec": 28,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 5,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=N6vB4cXzA1s"
+    },
+    {
+      "id": "moccamaster",
+      "nameKey": "equip_moccamaster_name",
+      "tagKey": "equip_moccamaster_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.5,
+      "ratioDefault": 16.7,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "5:00-6:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=F2dG7hJkL0p",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_rinse",
+          "kind": "RINSE",
+          "durationSec": 20,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "POUR",
+          "durationSec": 15,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 20,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_wait",
+          "kind": "DRAWDOWN",
+          "durationSec": 300,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 10,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=J9kL2mN3pQr"
+    },
+    {
+      "id": "nel",
+      "nameKey": "equip_nel_name",
+      "tagKey": "equip_nel_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.0,
+      "tempMode": "RANGE",
+      "tempMin": 88,
+      "tempMax": 93,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "3:00-4:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=D4eF5gH6iJk",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_rinse",
+          "kind": "RINSE",
+          "durationSec": 20,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 35,
+          "waterTargetPct": 0.2
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 50,
+          "waterTargetPct": 0.6
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 50,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 40,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=L0mN1bVcXzA"
+    },
+    {
+      "id": "gina",
+      "nameKey": "equip_gina_name",
+      "tagKey": "equip_gina_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 14.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 15.5,
+      "tempMode": "RANGE",
+      "tempMin": 90,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "3:00-4:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=P0oI9uY8tRe",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 40,
+          "waterTargetPct": 0.2
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 40,
+          "waterTargetPct": 0.6
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 30,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_open_valve",
+          "kind": "DRAWDOWN",
+          "durationSec": 60,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=S3dF4gH5jKl"
+    },
+    {
+      "id": "siphon_modern",
+      "nameKey": "equip_siphon_modern_name",
+      "tagKey": "equip_siphon_modern_tag",
+      "category": "OTHER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.0,
+      "tempMode": "RANGE",
+      "tempMin": 90,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "2:00-2:30",
+      "youtubeUrl": "https://www.youtube.com/watch?v=V6bN7mQ8wEr",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_heat",
+          "kind": "HEAT",
+          "durationSec": 70,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "STIR",
+          "durationSec": 15,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 45,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 40,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=X1yZ2aB3cDe"
+    },
+    {
+      "id": "phin_large",
+      "nameKey": "equip_phin_large_name",
+      "tagKey": "equip_phin_large_tag",
+      "category": "OTHER",
+      "ratioMin": 7.0,
+      "ratioMax": 10.0,
+      "ratioDefault": 8.5,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MED_FINE",
+      "cupMl": 180,
+      "timeLabel": "4:00-6:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Q1wE2rT3yUi",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 30,
+          "waterTargetPct": 0.15
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 20,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_wait",
+          "kind": "STEEP",
+          "durationSec": 240,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 10,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=O0pA9sDfGhJ"
+    },
+    {
+      "id": "clever_xl",
+      "nameKey": "equip_clever_xl_name",
+      "tagKey": "equip_clever_xl_tag",
+      "category": "IMMERSION",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.0,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MED_COARSE",
+      "cupMl": 350,
+      "timeLabel": "3:30-4:30",
+      "youtubeUrl": "https://www.youtube.com/watch?v=U3iO9pL0kMn",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "POUR",
+          "durationSec": 15,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 180,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_open_valve",
+          "kind": "DRAWDOWN",
+          "durationSec": 60,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 5,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=I8uY7tR6eWq"
+    },
+    {
+      "id": "hoop",
+      "nameKey": "equip_hoop_name",
+      "tagKey": "equip_hoop_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 18.0,
+      "ratioDefault": 16.5,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "3:00-4:30",
+      "youtubeUrl": "https://www.youtube.com/watch?v=3h2q9vX1aBc",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 35,
+          "waterTargetPct": 0.2
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 50,
+          "waterTargetPct": 0.6
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 50,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 60,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=8kL9pQ2wXzA1"
+    },
+    {
+      "id": "paragon",
+      "nameKey": "equip_paragon_name",
+      "tagKey": "equip_paragon_tag",
+      "category": "PRESSURE",
+      "ratioMin": 1.5,
+      "ratioMax": 3.0,
+      "ratioDefault": 2.0,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "FINE",
+      "cupMl": 40,
+      "timeLabel": "0:30-0:45",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Xk8mN2pL4qR",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "POUR",
+          "durationSec": 10,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "PRESS",
+          "durationSec": 28,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 5,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=Yt7nB3cX9wQ2"
+    },
+    {
+      "id": "melodrip",
+      "nameKey": "equip_melodrip_name",
+      "tagKey": "equip_melodrip_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.0,
+      "tempMode": "RANGE",
+      "tempMin": 90,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "3:00-4:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Jn6vB8cX2zQw",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 40,
+          "waterTargetPct": 0.2
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 45,
+          "waterTargetPct": 0.6
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 45,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 55,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=Km9pL2wXzA3B"
+    },
+    {
+      "id": "december",
+      "nameKey": "equip_december_name",
+      "tagKey": "equip_december_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.0,
+      "tempMode": "RANGE",
+      "tempMin": 90,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "2:30-3:30",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Lp4qR8xY2nBs",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 35,
+          "waterTargetPct": 0.2
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 50,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 45,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=Nx8mP2qL4wEr"
+    },
+    {
+      "id": "hario_switch",
+      "nameKey": "equip_hario_switch_name",
+      "tagKey": "equip_hario_switch_tag",
+      "category": "IMMERSION",
+      "ratioMin": 14.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 15.5,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MED_FINE",
+      "cupMl": 250,
+      "timeLabel": "2:45-3:30",
+      "youtubeUrl": "https://www.youtube.com/watch?v=8X9yZ1a2b3C4",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 30,
+          "waterTargetPct": 0.2
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 30,
+          "waterTargetPct": 0.6
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 60,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 40,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=9Y0zA1b2c3D5"
+    },
+    {
+      "id": "aeropress_xl",
+      "nameKey": "equip_aeropress_xl_name",
+      "tagKey": "equip_aeropress_xl_tag",
+      "category": "PRESSURE",
+      "ratioMin": 11.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 15.0,
+      "tempMode": "RANGE",
+      "tempMin": 80,
+      "tempMax": 92,
+      "grind": "MED_FINE",
+      "cupMl": 400,
+      "timeLabel": "2:30-3:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=2A3b4C5d6E7F",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "POUR",
+          "durationSec": 20,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_steep",
+          "kind": "STEEP",
+          "durationSec": 120,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_press",
+          "kind": "PRESS",
+          "durationSec": 30,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=3B4c5D6e7F8G"
+    },
+    {
+      "id": "flair58",
+      "nameKey": "equip_flair58_name",
+      "tagKey": "equip_flair58_tag",
+      "category": "PRESSURE",
+      "ratioMin": 1.8,
+      "ratioMax": 3.0,
+      "ratioDefault": 2.0,
+      "tempMode": "RANGE",
+      "tempMin": 90,
+      "tempMax": 96,
+      "grind": "FINE",
+      "cupMl": 45,
+      "timeLabel": "0:35-0:50",
+      "youtubeUrl": "https://www.youtube.com/watch?v=4C5d6E7f8G9H",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "POUR",
+          "durationSec": 10,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "PRESS",
+          "durationSec": 35,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 5,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=5D6e7F8g9H0I"
+    },
+    {
+      "id": "nanopresso",
+      "nameKey": "equip_nanopresso_name",
+      "tagKey": "equip_nanopresso_tag",
+      "category": "PRESSURE",
+      "ratioMin": 1.5,
+      "ratioMax": 2.5,
+      "ratioDefault": 2.0,
+      "tempMode": "RANGE",
+      "tempMin": 85,
+      "tempMax": 96,
+      "grind": "FINE",
+      "cupMl": 40,
+      "timeLabel": "0:30-0:40",
+      "youtubeUrl": "https://www.youtube.com/watch?v=6E7f8G9h0I1J",
+      "hasBloom": false,
+      "steps": [
+        {
+          "titleKey": "step_add_coffee",
+          "kind": "POUR",
+          "durationSec": 10,
+          "waterTargetPct": -1
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "PRESS",
+          "durationSec": 25,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_serve",
+          "kind": "SERVE",
+          "durationSec": 5,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=7F8g9H0i1J2K"
+    },
+    {
+      "id": "phoenix70",
+      "nameKey": "equip_phoenix70_name",
+      "tagKey": "equip_phoenix70_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.0,
+      "tempMode": "RANGE",
+      "tempMin": 90,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "2:30-3:30",
+      "youtubeUrl": "https://www.youtube.com/watch?v=F1d2G3h4j5K",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 35,
+          "waterTargetPct": 0.2
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 45,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 50,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=G2h3J4k5l6M"
+    },
+    {
+      "id": "lunar",
+      "nameKey": "equip_lunar_name",
+      "tagKey": "equip_lunar_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.6,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MED_FINE",
+      "cupMl": 250,
+      "timeLabel": "3:00-4:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=H3j4K5l6M7nB",
+      "hasBloom": true,
+      "steps": [
+        {
+          "titleKey": "step_bloom",
+          "kind": "BLOOM",
+          "durationSec": 40,
+          "waterTargetPct": 0.2
+        },
+        {
+          "titleKey": "step_pour",
+          "kind": "POUR",
+          "durationSec": 50,
+          "waterTargetPct": 1.0
+        },
+        {
+          "titleKey": "step_drawdown",
+          "kind": "DRAWDOWN",
+          "durationSec": 60,
+          "waterTargetPct": -1
+        }
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=J4k5L6m7N8oP"
+    },
+    {
+      "id": "mugen",
+      "nameKey": "equip_mugen_name",
+      "tagKey": "equip_mugen_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.2,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "2:10-2:50",
+      "youtubeUrl": "https://www.youtube.com/watch?v=QX4yM8Z9N1A",
+      "hasBloom": true,
+      "steps": [
+        {"titleKey": "step_bloom","kind": "BLOOM","durationSec": 35,"waterTargetPct": 0.2},
+        {"titleKey": "step_pour","kind": "POUR","durationSec": 45,"waterTargetPct": 1.0},
+        {"titleKey": "step_drawdown","kind": "DRAWDOWN","durationSec": 50,"waterTargetPct": -1}
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=RY5zN8Z9N1B"
+    },
+    {
+      "id": "graycano",
+      "nameKey": "equip_graycano_name",
+      "tagKey": "equip_graycano_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.0,
+      "tempMode": "RANGE",
+      "tempMin": 90,
+      "tempMax": 96,
+      "grind": "MED_COARSE",
+      "cupMl": 250,
+      "timeLabel": "3:00-4:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=AB1yM8Z9N2C",
+      "hasBloom": true,
+      "steps": [
+        {"titleKey": "step_bloom","kind": "BLOOM","durationSec": 40,"waterTargetPct": 0.15},
+        {"titleKey": "step_pour","kind": "POUR","durationSec": 60,"waterTargetPct": 1.0},
+        {"titleKey": "step_drawdown","kind": "DRAWDOWN","durationSec": 90,"waterTargetPct": -1}
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=AB1yM8Z9N2D"
+    },
+    {
+      "id": "kinto_slow",
+      "nameKey": "equip_kinto_slow_name",
+      "tagKey": "equip_kinto_slow_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 15.8,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MED_FINE",
+      "cupMl": 250,
+      "timeLabel": "3:30-4:30",
+      "youtubeUrl": "https://www.youtube.com/watch?v=CD2yM8Z9N3E",
+      "hasBloom": true,
+      "steps": [
+        {"titleKey": "step_bloom","kind": "BLOOM","durationSec": 40,"waterTargetPct": 0.18},
+        {"titleKey": "step_pour","kind": "POUR","durationSec": 50,"waterTargetPct": 0.6},
+        {"titleKey": "step_pour","kind": "POUR","durationSec": 50,"waterTargetPct": 1.0},
+        {"titleKey": "step_drawdown","kind": "DRAWDOWN","durationSec": 70,"waterTargetPct": -1}
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=CD2yM8Z9N3F"
+    },
+    {
+      "id": "fellow_aiden",
+      "nameKey": "equip_fellow_aiden_name",
+      "tagKey": "equip_fellow_aiden_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 18.0,
+      "ratioDefault": 16.7,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MED_COARSE",
+      "cupMl": 300,
+      "timeLabel": "4:00-6:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=EF3yM8Z9N4G",
+      "hasBloom": false,
+      "steps": [
+        {"titleKey": "step_rinse","kind": "RINSE","durationSec": 20,"waterTargetPct": -1},
+        {"titleKey": "step_add_coffee","kind": "POUR","durationSec": 15,"waterTargetPct": 1.0},
+        {"titleKey": "step_wait","kind": "DRAWDOWN","durationSec": 240,"waterTargetPct": -1},
+        {"titleKey": "step_serve","kind": "SERVE","durationSec": 10,"waterTargetPct": -1}
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=EF3yM8Z9N4H"
+    },
+    {
+      "id": "kalita102",
+      "nameKey": "equip_kalita102_name",
+      "tagKey": "equip_kalita102_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.5,
+      "tempMode": "RANGE",
+      "tempMin": 93,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 180,
+      "timeLabel": "2:30-3:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=GH4yM8Z9N5I",
+      "hasBloom": true,
+      "steps": [
+        {"titleKey": "step_bloom","kind": "BLOOM","durationSec": 30,"waterTargetPct": 0.15},
+        {"titleKey": "step_pour","kind": "POUR","durationSec": 40,"waterTargetPct": 0.55},
+        {"titleKey": "step_pour","kind": "POUR","durationSec": 40,"waterTargetPct": 1.0},
+        {"titleKey": "step_drawdown","kind": "DRAWDOWN","durationSec": 55,"waterTargetPct": -1}
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=GH4yM8Z9N5J"
+    },
+    {
+      "id": "espro_bloom",
+      "nameKey": "equip_espro_bloom_name",
+      "tagKey": "equip_espro_bloom_tag",
+      "category": "IMMERSION",
+      "ratioMin": 14.0,
+      "ratioMax": 16.0,
+      "ratioDefault": 15.0,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 300,
+      "timeLabel": "3:00-4:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=IJ5yM8Z9N6K",
+      "hasBloom": false,
+      "steps": [
+        {"titleKey": "step_add_coffee","kind": "POUR","durationSec": 20,"waterTargetPct": 1.0},
+        {"titleKey": "step_steep","kind": "STEEP","durationSec": 150,"waterTargetPct": -1},
+        {"titleKey": "step_press","kind": "PRESS","durationSec": 30,"waterTargetPct": -1}
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=IJ5yM8Z9N6L"
+    },
+    {
+      "id": "bripe",
+      "nameKey": "equip_bripe_name",
+      "tagKey": "equip_bripe_tag",
+      "category": "OTHER",
+      "ratioMin": 11.0,
+      "ratioMax": 13.0,
+      "ratioDefault": 12.0,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "FINE",
+      "cupMl": 30,
+      "timeLabel": "2:00-3:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=KL6yM8Z9N7M",
+      "hasBloom": false,
+      "steps": [
+        {"titleKey": "step_add_coffee","kind": "POUR","durationSec": 15,"waterTargetPct": 1.0},
+        {"titleKey": "step_heat","kind": "HEAT","durationSec": 90,"waterTargetPct": -1},
+        {"titleKey": "step_serve","kind": "SERVE","durationSec": 20,"waterTargetPct": -1}
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=KL6yM8Z9N7N"
+    },
+    {
+      "id": "cupping_bowl_set",
+      "nameKey": "equip_cupping_bowl_set_name",
+      "tagKey": "equip_cupping_bowl_set_tag",
+      "category": "OTHER",
+      "ratioMin": 17.0,
+      "ratioMax": 19.0,
+      "ratioDefault": 18.2,
+      "tempMode": "RANGE",
+      "tempMin": 93,
+      "tempMax": 95,
+      "grind": "COARSE",
+      "cupMl": 150,
+      "timeLabel": "10-12 min",
+      "youtubeUrl": "https://www.youtube.com/watch?v=MN7yM8Z9N8O",
+      "hasBloom": false,
+      "steps": [
+        {"titleKey": "step_pour","kind": "POUR","durationSec": 15,"waterTargetPct": 1.0},
+        {"titleKey": "step_steep","kind": "STEEP","durationSec": 240,"waterTargetPct": -1},
+        {"titleKey": "step_skim","kind": "SKIM","durationSec": 30,"waterTargetPct": -1},
+        {"titleKey": "step_wait","kind": "WAIT","durationSec": 240,"waterTargetPct": -1},
+        {"titleKey": "step_serve","kind": "SERVE","durationSec": 30,"waterTargetPct": -1}
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=MN7yM8Z9N8P"
+    },
+    {
+      "id": "modbar_pour",
+      "nameKey": "equip_modbar_pour_name",
+      "tagKey": "equip_modbar_pour_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.7,
+      "tempMode": "RANGE",
+      "tempMin": 93,
+      "tempMax": 96,
+      "grind": "MEDIUM",
+      "cupMl": 250,
+      "timeLabel": "3:00",
+      "youtubeUrl": "https://www.youtube.com/watch?v=OP8yM8Z9N9Q",
+      "hasBloom": true,
+      "steps": [
+        {"titleKey": "step_bloom","kind": "BLOOM","durationSec": 40,"waterTargetPct": 0.2},
+        {"titleKey": "step_pour","kind": "POUR","durationSec": 50,"waterTargetPct": 1.0},
+        {"titleKey": "step_drawdown","kind": "DRAWDOWN","durationSec": 60,"waterTargetPct": -1}
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=OP8yM8Z9N9R"
+    },
+    {
+      "id": "timemore_b75",
+      "nameKey": "equip_timemore_b75_name",
+      "tagKey": "equip_timemore_b75_tag",
+      "category": "POUR_OVER",
+      "ratioMin": 15.0,
+      "ratioMax": 17.0,
+      "ratioDefault": 16.3,
+      "tempMode": "RANGE",
+      "tempMin": 92,
+      "tempMax": 96,
+      "grind": "MED_FINE",
+      "cupMl": 250,
+      "timeLabel": "2:30-3:30",
+      "youtubeUrl": "https://www.youtube.com/watch?v=QR9yM8Z9N0S",
+      "hasBloom": true,
+      "steps": [
+        {"titleKey": "step_bloom","kind": "BLOOM","durationSec": 35,"waterTargetPct": 0.18},
+        {"titleKey": "step_pour","kind": "POUR","durationSec": 45,"waterTargetPct": 0.6},
+        {"titleKey": "step_pour","kind": "POUR","durationSec": 45,"waterTargetPct": 1.0},
+        {"titleKey": "step_drawdown","kind": "DRAWDOWN","durationSec": 55,"waterTargetPct": -1}
+      ],
+      "youtubeUrlTr": "https://www.youtube.com/watch?v=QR9yM8Z9N0T"
     }
   ]
 }

@@ -5,8 +5,8 @@ import co.coffeery.app.R
 
 /** The four families a brewer can belong to. */
 enum class BrewCategory(
-    @StringRes val labelRes: Int,
-    @StringRes val descRes: Int,
+    @param:StringRes val labelRes: Int,
+    @param:StringRes val descRes: Int,
 ) {
     POUR_OVER(R.string.cat_pour_over, R.string.cat_pour_over_desc),
     IMMERSION(R.string.cat_immersion, R.string.cat_immersion_desc),
@@ -23,8 +23,8 @@ enum class BrewCategory(
  * Grind sizes ordered fine -> coarse. Ordinal is used to nudge grind by roast.
  */
 enum class Grind(
-    @StringRes val labelRes: Int,
-    @StringRes val refRes: Int,
+    @param:StringRes val labelRes: Int,
+    @param:StringRes val refRes: Int,
 ) {
     EXTRA_FINE(R.string.grind_extra_fine, R.string.grindref_extra_fine),
     FINE(R.string.grind_fine, R.string.grindref_fine),
@@ -54,7 +54,7 @@ enum class TempMode { RANGE, SLOW, COLD;
     }
 }
 
-enum class ThemeMode(@StringRes val labelRes: Int) {
+enum class ThemeMode(@param:StringRes val labelRes: Int) {
     SYSTEM(R.string.theme_system),
     LIGHT(R.string.theme_light),
     DARK(R.string.theme_dark);
@@ -65,7 +65,7 @@ enum class ThemeMode(@StringRes val labelRes: Int) {
     }
 }
 
-enum class Palette(@StringRes val labelRes: Int) {
+enum class Palette(@param:StringRes val labelRes: Int) {
     TERRACOTTA(R.string.palette_terracotta),
     ESPRESSO(R.string.palette_espresso),
     MATCHA(R.string.palette_matcha),
@@ -73,7 +73,24 @@ enum class Palette(@StringRes val labelRes: Int) {
     CREMA(R.string.palette_crema),
     MOCHA(R.string.palette_mocha),
     CARAMEL(R.string.palette_caramel),
-    HAZELNUT(R.string.palette_hazelnut);
+    HAZELNUT(R.string.palette_hazelnut),
+    COPPER(R.string.palette_copper),
+    CINNAMON(R.string.palette_cinnamon),
+    CHESTNUT(R.string.palette_chestnut),
+    FRENCH_ROAST(R.string.palette_french_roast),
+    VANILLA_LATTE(R.string.palette_vanilla_latte),
+    PUMPKIN_SPICE(R.string.palette_pumpkin_spice),
+    NORDIC_LIGHT(R.string.palette_nordic_light),
+    KINETIC(R.string.palette_kinetic),
+    MIDNIGHT_BLOOM(R.string.palette_midnight_bloom),
+    AURORA(R.string.palette_aurora),
+    STEAM(R.string.palette_steam),
+    HONEY(R.string.palette_honey),
+    VELVET(R.string.palette_velvet),
+    CREMA_ROSE(R.string.palette_crema_rose),
+    SMOKE(R.string.palette_smoke),
+    EMBER(R.string.palette_ember),
+    MIUIX(R.string.palette_miuix);
 
     companion object {
         fun fromKey(key: String?): Palette =
@@ -87,8 +104,8 @@ enum class Palette(@StringRes val labelRes: Int) {
  * (denser light roasts grind finer, brittle dark roasts grind coarser).
  */
 enum class RoastLevel(
-    @StringRes val labelRes: Int,
-    @StringRes val descRes: Int,
+    @param:StringRes val labelRes: Int,
+    @param:StringRes val descRes: Int,
     val tempOffset: Int,
     val grindShift: Int,
 ) {

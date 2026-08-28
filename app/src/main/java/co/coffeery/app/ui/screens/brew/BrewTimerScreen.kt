@@ -40,6 +40,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -60,6 +61,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -74,6 +76,7 @@ import co.coffeery.app.data.local.BrewLogEntity
 import co.coffeery.app.service.TimerService
 import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.AppTextField
+import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.CoffeeDialog
 import co.coffeery.app.ui.components.LineIcon
 import co.coffeery.app.ui.components.Glyph
@@ -90,21 +93,47 @@ import co.coffeery.app.data.model.Equipment
 import co.coffeery.app.data.model.StepKind
 import co.coffeery.app.util.BrewMath
 import co.coffeery.app.util.Format
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import co.coffeery.app.ui.haptic.rememberAppHaptics
+import co.coffeery.app.ui.theme.CoffeeMotion
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 import kotlinx.coroutines.delay
 
 @Composable
 fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     val colors = CoffeeTheme.colors
-    val eq = state.selectedEquipment ?: return
+    val eq = state.selectedEquipment
+    if (eq == null) {
+        BrewTimerEmpty(
+            title = stringResource(R.string.brew_title, stringResource(R.string.nav_brew)),
+            message = stringResource(R.string.log_empty_title),
+            cta = stringResource(R.string.equipment_add),
+            onCta = { vm.selectTab(co.coffeery.app.ui.screens.root.NavTab.GEAR) },
+            onBack = { vm.back() }
+        )
+        return
+    }
     val rawSteps = eq.steps
-    if (rawSteps.isEmpty()) return
+    if (rawSteps.isEmpty()) {
+        BrewTimerEmpty(
+            title = stringResource(R.string.brew_title, eq.displayName()),
+            message = stringResource(R.string.learn_troubleshoot_intro),
+            cta = stringResource(R.string.equipment_add),
+            onCta = { vm.selectTab(co.coffeery.app.ui.screens.root.NavTab.GEAR) },
+            onBack = { vm.back() }
+        )
+        return
+    }
     val steps = (if (state.settings.timerMergeWeight) mergePours(rawSteps) else rawSteps).map { step ->
         val override = when (step.kind) {
             StepKind.BLOOM -> state.settings.bloomDurationSec.takeIf { it > 0 }
@@ -129,54 +158,63 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
     var stepEndTime by rememberSaveable { mutableLongStateOf(0L) }
 
     val equipmentName = eq.displayName()
-    val stepTitles = steps.map { stringResource(it.titleRes) }
+    val stepTitles = remember(steps) { steps.map { it.titleRes } }
 
-    // Keep the screen awake for the whole brew session.
     val view = LocalView.current
     val context = LocalContext.current
-    DisposableEffect(Unit) {
+    DisposableEffect(view) {
         val window = (view.context as? Activity)?.window
         window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         onDispose { window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) }
     }
 
-    DisposableEffect(handsFree) {
+    DisposableEffect(handsFree, context) {
         if (!handsFree) return@DisposableEffect onDispose { }
-        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        val proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as? SensorManager
+        val proximitySensor = sensorManager?.getDefaultSensor(Sensor.TYPE_PROXIMITY)
         if (proximitySensor == null) return@DisposableEffect onDispose { }
-
+        val mainHandler = Handler(Looper.getMainLooper())
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent) {
-                val win = (context as? Activity)?.window ?: return
-                val attrs = win.attributes
-                if (event.values[0] < proximitySensor.maximumRange) {
-                    attrs.screenBrightness = 0.01f
-                } else {
-                    attrs.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+                mainHandler.post {
+                    val win = (context as? Activity)?.window ?: return@post
+                    val attrs = win.attributes
+                    if (event.values[0] < proximitySensor.maximumRange) {
+                        attrs.screenBrightness = 0.01f
+                    } else {
+                        attrs.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+                    }
+                    win.attributes = attrs
                 }
-                win.attributes = attrs
             }
             override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
         }
-        sensorManager.registerListener(listener, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager.registerListener(listener, proximitySensor, SensorManager.SENSOR_DELAY_UI)
         onDispose {
             sensorManager.unregisterListener(listener)
-            (context as? Activity)?.window?.attributes?.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+            mainHandler.post {
+                (context as? Activity)?.window?.let {
+                    it.attributes = it.attributes.apply { screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE }
+                }
+            }
         }
     }
 
     LaunchedEffect(running, finished) {
         if (running && state.settings.timerBackground && !finished) {
-            val intent = Intent(context, TimerService::class.java)
-            intent.putExtra("equipment", equipmentName)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                context.startForegroundService(intent)
-            } else {
-                context.startService(intent)
+            if (!TimerService.isRunning) {
+                val intent = Intent(context, TimerService::class.java)
+                intent.putExtra("equipment", equipmentName)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    context.startForegroundService(intent)
+                } else {
+                    context.startService(intent)
+                }
             }
         } else {
-            context.stopService(Intent(context, TimerService::class.java))
+            if (TimerService.isRunning) {
+                context.stopService(Intent(context, TimerService::class.java))
+            }
         }
     }
 
@@ -221,7 +259,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                 if (state.settings.notificationsStepChange) {
                     val currentStep = steps[stepIndex]
                     val stepTitle = context.getString(currentStep.titleRes)
-                    sendNotification(context, "Next step", "Step ${stepIndex+1}/${steps.size}: $stepTitle")
+                    sendNotification(context, "Next step", "Step ${stepIndex+1}/${steps.size}: $stepTitle", "Timer")
                 }
             } else if (remaining <= 0) {
                 remaining = 0
@@ -238,7 +276,8 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                         context.startService(intent)
                     }
                 } else {
-                    val title = stepTitles.getOrElse(stepIndex) { "" }
+                    val titleRes = stepTitles.getOrElse(stepIndex) { R.string.brew_title }
+                    val title = context.getString(titleRes)
                     TimerService.update(context, equipmentName, title, Format.clock(remaining), stepIndex, steps.size)
                 }
             }
@@ -258,7 +297,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                 playChime(2)
             }
             if (state.settings.notificationsBrewComplete) {
-                sendNotification(context, "Brew complete!", "Your $equipmentName is ready. Total time: ${Format.clock(elapsedTotal)}")
+                sendNotification(context, "Brew complete!", "Your $equipmentName is ready. Total time: ${Format.clock(elapsedTotal)}", "Timer")
             }
         }
     }
@@ -289,12 +328,10 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         val step = steps[stepIndex]
         val stepDur = step.durationSec.coerceAtLeast(1)
         val targetProgress = ((stepDur - remaining).toFloat() / stepDur).coerceIn(0f, 1f)
+        val prefersReducedMotion = LocalPrefersReducedMotion.current
         val animatedProgress by animateFloatAsState(
             targetValue = targetProgress,
-            animationSpec = spring(
-                dampingRatio = 0.6f,
-                stiffness = 300f,
-            ),
+            animationSpec = if (prefersReducedMotion) tween(0) else CoffeeMotion.page,
             label = "ringProgress",
         )
 
@@ -319,10 +356,16 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                     isCurrent -> CoffeeTheme.colors.accent
                     else -> CoffeeTheme.colors.outline
                 }
+                val targetWidth = if (isCurrent) 32.dp else 8.dp
+                val animatedWidth by animateDpAsState(
+                    targetValue = targetWidth,
+                    animationSpec = if (LocalPrefersReducedMotion.current) tween(0) else spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
+                    label = "dot$index",
+                )
                 Box(
                     modifier = Modifier
                         .padding(horizontal = 3.dp)
-                        .width(if (isCurrent) 32.dp else 8.dp)
+                        .width(animatedWidth)
                         .height(4.dp)
                         .clip(CoffeeShapes.pill)
                         .background(color)
@@ -331,15 +374,14 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
         }
         Spacer(Modifier.height(12.dp))
 
+        val isPulsing = !prefersReducedMotion && running && remaining in 1..10
         val pulseScale by rememberInfiniteTransition(label = "timerPulse").animateFloat(
             initialValue = 1f,
-            targetValue = 1.05f,
-            animationSpec = infiniteRepeatable(
-                animation = tween(250),
-                repeatMode = RepeatMode.Reverse,
-            ),
+            targetValue = if (isPulsing) 1.05f else 1f,
+            animationSpec = if (isPulsing) infiniteRepeatable(tween(250), RepeatMode.Reverse) else infiniteRepeatable(tween(1000), RepeatMode.Restart),
             label = "pulseScale",
         )
+        val displayScale = if (isPulsing) pulseScale else 1f
 
         Box(
             modifier = Modifier
@@ -355,7 +397,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                     lineHeight = 76.sp,
                 ),
                 color = colors.textPrimary,
-                modifier = Modifier.scale(if (running && remaining in 1..10) pulseScale else 1f),
+                modifier = Modifier.graphicsLayer(scaleX = displayScale, scaleY = displayScale),
             )
         }
 
@@ -440,24 +482,37 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            val hapticsHandsFree = rememberAppHaptics()
+            val hfInteraction = remember { MutableInteractionSource() }
+            val hfIsPressed by hfInteraction.collectIsPressedAsState()
+            val hfSx by animateFloatAsState(targetValue = if (hfIsPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "hfSx")
+            val hfSy by animateFloatAsState(targetValue = if (hfIsPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "hfSy")
             AppText(
                 stringResource(R.string.timer_hands_free),
                 style = CoffeeTheme.type.caption,
                 color = if (handsFree) colors.accent else colors.textSecondary,
-                modifier = Modifier.clickable { handsFree = !handsFree },
+                modifier = Modifier.clickable {
+                    hapticsHandsFree.tap()
+                    handsFree = !handsFree
+                },
             )
             val boxColor = if (handsFree) colors.accent else colors.outline
             Box(
                 modifier = Modifier
                     .padding(start = 8.dp)
-                    .size(16.dp)
+                    .sizeIn(minWidth = 48.dp, minHeight = 48.dp)
+                    .size(24.dp)
+                    .graphicsLayer(scaleX = hfSx, scaleY = hfSy)
                     .clip(CoffeeShapes.small)
                     .background(boxColor)
-                    .clickable { handsFree = !handsFree },
+                    .clickable(interactionSource = hfInteraction, indication = null) {
+                        hapticsHandsFree.tap()
+                        handsFree = !handsFree
+                    },
                 contentAlignment = Alignment.Center,
             ) {
                 if (handsFree) {
-                    AppText("\u2713", style = CoffeeTheme.type.caption.copy(fontSize = 10.sp), color = Color.White)
+                    AppText("\u2713", style = CoffeeTheme.type.caption.copy(fontSize = 10.sp), color = colors.onAccent)
                 }
             }
         }
@@ -524,27 +579,61 @@ private fun BrewComplete(
     val colors = CoffeeTheme.colors
     var showSave by remember { mutableStateOf(false) }
     val equipmentName = eq.displayName()
-    val pulse = 1f
+    val reducedComplete = LocalPrefersReducedMotion.current
+    val glowScale by animateFloatAsState(
+        targetValue = if (reducedComplete) 1f else 1.06f,
+        animationSpec = if (reducedComplete) tween(0) else CoffeeMotion.cardExpand,
+        label = "glowScale",
+    )
+    var showRain by remember { mutableStateOf(true) }
+    val rainProgress by animateFloatAsState(
+        targetValue = 1f,
+        animationSpec = if (reducedComplete) tween(0) else tween(CoffeeMotion.slow * 4),
+        label = "beanRain",
+    )
+    LaunchedEffect(Unit) { if (!reducedComplete) delay(1800); showRain = false }
+    val beanSeeds = remember { List(18) { i -> Triple((i * 37 % 100) / 100f, (i * 61 % 80) / 100f, if (i % 2 == 0) 0 else 1) } }
 
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Spacer(Modifier.height(40.dp))
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            LineIcon(
-                co.coffeery.app.ui.components.Glyph.CUP,
-                colors.accent,
-                Modifier.size(64.dp),
-            )
-            Spacer(Modifier.height(20.dp))
-            AppText(
-                stringResource(R.string.brew_complete),
-                style = CoffeeTheme.type.display,
-                align = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
-                )
+    Box(modifier = Modifier.fillMaxWidth()) {
+        if (showRain && !reducedComplete) {
+            Canvas(modifier = Modifier.fillMaxWidth().height(320.dp).align(Alignment.TopCenter)) {
+                val w = size.width
+                val h = size.height
+                beanSeeds.forEachIndexed { idx, s ->
+                    val nx = s.first
+                    val startOffset = s.second
+                    val isAccent = s.third == 0
+                    val x = nx * w
+                    val y = (rainProgress * (h + 40.dp.toPx()) + startOffset * 60f - 40.dp.toPx()).coerceIn(-20f, h + 20f)
+                    val alpha = (1f - rainProgress).coerceIn(0f, 1f) * (1f - startOffset * 0.2f)
+                    val r = if (idx % 3 == 0) 7.dp.toPx() else 5.dp.toPx()
+                    drawCircle(if (isAccent) colors.accent.copy(alpha = alpha) else colors.cremaDark.copy(alpha = alpha * 0.9f), radius = r, center = Offset(x, y))
+                    drawCircle(Color.White.copy(alpha = alpha * 0.35f), radius = r * 0.35f, center = Offset(x - r * 0.2f, y - r * 0.22f))
+                }
             }
+        }
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Spacer(Modifier.height(32.dp))
+            Box(contentAlignment = Alignment.Center) {
+                Box(
+                    modifier = Modifier
+                        .size(96.dp)
+                        .clip(CoffeeShapes.pill)
+                        .background(colors.accentSoft.copy(alpha = 0.6f))
+                        .graphicsLayer(scaleX = glowScale, scaleY = glowScale),
+                )
+                co.coffeery.app.ui.components.CremaMascot(mood = "happy", modifier = Modifier.size(64.dp))
+            }
+        Spacer(Modifier.height(20.dp))
+        AppText(
+            stringResource(R.string.brew_complete),
+            style = CoffeeTheme.type.display,
+            align = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth(),
+        )
         Spacer(Modifier.height(8.dp))
         AppText(
             stringResource(R.string.brew_complete_sub, equipmentName),
@@ -554,14 +643,31 @@ private fun BrewComplete(
             modifier = Modifier.fillMaxWidth(),
         )
         Spacer(Modifier.height(6.dp))
+        AppText(
+            "${co.coffeery.app.util.Format.grams(result.coffeeGrams)} g • ${result.waterMl} ml • ${result.tempCelsius}°C".takeIf { result.tempCelsius > 0 } ?: "${co.coffeery.app.util.Format.grams(result.coffeeGrams)} g • ${result.waterMl} ml",
+            style = CoffeeTheme.type.label,
+            color = colors.accent,
+            align = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Spacer(Modifier.height(4.dp))
         Row {
             AppText(stringResource(R.string.brew_elapsed) + ": ", style = CoffeeTheme.type.caption, color = colors.textSecondary)
             AppText(Format.clock(elapsedTotal), style = CoffeeTheme.type.caption, color = colors.textPrimary)
         }
-        Spacer(Modifier.height(24.dp))
+        Spacer(Modifier.height(20.dp))
+        CoffeeCard(modifier = Modifier.fillMaxWidth()) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                AppText("✓", style = CoffeeTheme.type.title, color = colors.accent)
+                Spacer(Modifier.width(8.dp))
+                AppText(stringResource(R.string.brew_complete_nudge), style = CoffeeTheme.type.body, color = colors.textPrimary)
+            }
+        }
+        Spacer(Modifier.height(20.dp))
         PrimaryButton(stringResource(R.string.save_brew_log), Modifier.fillMaxWidth()) { showSave = true }
         Spacer(Modifier.height(10.dp))
         SecondaryButton(stringResource(R.string.action_done), Modifier.fillMaxWidth()) { vm.back() }
+        }
     }
 
     if (showSave) {
@@ -597,6 +703,7 @@ private fun SaveBrewDialog(
     var selectedBean by remember { mutableStateOf<BeanEntity?>(null) }
     var flavorTags by remember { mutableStateOf<Set<String>>(emptySet()) }
     var photoUri by remember { mutableStateOf<Uri?>(null) }
+    val haptics = rememberAppHaptics()
     val context = LocalContext.current
     val cameraLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicture()
@@ -621,12 +728,12 @@ private fun SaveBrewDialog(
                     Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         Box(
                             modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
+                                .clip(CoffeeShapes.small)
                                 .background(if (selectedBean == null) colors.accent else colors.accentSoft)
                                 .clickable { selectedBean = null }
                                 .padding(horizontal = 10.dp, vertical = 6.dp),
                         ) {
-                            AppText(stringResource(R.string.log_bean_none), style = CoffeeTheme.type.caption, color = if (selectedBean == null) Color.White else colors.textPrimary)
+                            AppText(stringResource(R.string.log_bean_none), style = CoffeeTheme.type.caption, color = if (selectedBean == null) colors.onAccent else colors.textPrimary)
                         }
                     }
                     for (row in rows) {
@@ -635,7 +742,7 @@ private fun SaveBrewDialog(
                                 val isSelected = selectedBean?.id == bean.id
                                 Box(
                                     modifier = Modifier
-                                        .clip(RoundedCornerShape(8.dp))
+                                        .clip(CoffeeShapes.small)
                                         .background(if (isSelected) colors.accent else colors.accentSoft)
                                         .clickable { selectedBean = bean }
                                         .padding(horizontal = 10.dp, vertical = 6.dp),
@@ -643,7 +750,7 @@ private fun SaveBrewDialog(
                                     AppText(
                                         if (bean.name.length > 8) bean.name.take(8) + "…" else bean.name,
                                         style = CoffeeTheme.type.caption,
-                                        color = if (isSelected) Color.White else colors.textPrimary,
+                                        color = if (isSelected) colors.onAccent else colors.textPrimary,
                                     )
                                 }
                             }
@@ -659,11 +766,29 @@ private fun SaveBrewDialog(
             Spacer(Modifier.height(6.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 for (i in 1..5) {
+                    val reducedStar = LocalPrefersReducedMotion.current
+                    val starScale = remember { Animatable(1f) }
+                    LaunchedEffect(rating) {
+                        if (reducedStar) {
+                            starScale.snapTo(1f)
+                        } else if (i <= rating) {
+                            if (i == rating) {
+                                starScale.snapTo(0.9f)
+                                starScale.animateTo(1.4f, animationSpec = CoffeeMotion.cardExpand)
+                                starScale.animateTo(1f, animationSpec = CoffeeMotion.press)
+                            } else {
+                                starScale.animateTo(1f, animationSpec = CoffeeMotion.cardExpand)
+                            }
+                        } else {
+                            starScale.animateTo(0.95f, animationSpec = tween(CoffeeMotion.quick))
+                            starScale.animateTo(1f, animationSpec = tween(CoffeeMotion.quick))
+                        }
+                    }
                     AppText(
                         if (i <= rating) "★" else "☆",
                         style = CoffeeTheme.type.title,
                         color = if (i <= rating) colors.accent else colors.outline,
-                        modifier = Modifier.clickable { rating = i },
+                        modifier = Modifier.graphicsLayer(scaleX = starScale.value, scaleY = starScale.value).clickable { rating = i },
                     )
                 }
             }
@@ -716,7 +841,7 @@ private fun SaveBrewDialog(
                     val selected = key in flavorTags
                     Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(8.dp))
+                            .clip(CoffeeShapes.small)
                             .background(if (selected) colors.accent else colors.accentSoft)
                             .clickable {
                                 flavorTags = if (selected) flavorTags - key else flavorTags + key
@@ -726,7 +851,7 @@ private fun SaveBrewDialog(
                         AppText(
                             stringResource(labelRes),
                             style = CoffeeTheme.type.caption,
-                            color = if (selected) Color.White else colors.textPrimary,
+                            color = if (selected) colors.onAccent else colors.textPrimary,
                         )
                     }
                 }
@@ -756,6 +881,7 @@ private fun SaveBrewDialog(
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
             SecondaryButton(stringResource(R.string.action_cancel), Modifier.weight(1f)) { onDismiss() }
                 PrimaryButton(stringResource(R.string.action_save), Modifier.weight(1f)) {
+                    haptics.confirm()
                     onSave(
                         BrewLogEntity(
                             equipmentId = eq.id,
@@ -783,7 +909,27 @@ private fun SaveBrewDialog(
     }
 }
 
-private fun sendNotification(context: Context, title: String, body: String) {
+@Composable
+private fun BrewTimerEmpty(title: String, message: String, cta: String, onCta: () -> Unit, onBack: () -> Unit) {
+    Column(
+        modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).padding(top = 12.dp, bottom = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        ScreenHeader(title = title, onBack = onBack)
+        Spacer(Modifier.height(40.dp))
+        co.coffeery.app.ui.components.CremaMascot(mood = "sleepy", modifier = Modifier.size(120.dp))
+        Spacer(Modifier.height(16.dp))
+        AppText(message, style = CoffeeTheme.type.title, color = CoffeeTheme.colors.textPrimary, align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+        Spacer(Modifier.height(8.dp))
+        AppText(stringResource(R.string.learn_troubleshoot_intro), style = CoffeeTheme.type.body, color = CoffeeTheme.colors.textSecondary, align = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+        Spacer(Modifier.height(20.dp))
+        PrimaryButton(text = cta, modifier = Modifier.fillMaxWidth()) { onCta() }
+        Spacer(Modifier.height(10.dp))
+        SecondaryButton(text = stringResource(R.string.action_done), modifier = Modifier.fillMaxWidth()) { onBack() }
+    }
+}
+
+private fun sendNotification(context: Context, title: String, body: String, routeKey: String? = null) {
     try {
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -794,6 +940,8 @@ private fun sendNotification(context: Context, title: String, body: String) {
         }
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            if (routeKey != null) putExtra("route", routeKey)
+            putExtra("deeplink_route", routeKey ?: "Timer")
         }
         val pendingIntent = PendingIntent.getActivity(
             context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
@@ -821,53 +969,55 @@ private fun playChime(type: Int) {
             else -> 0.30f
         }
         val numSamples = (sampleRate * duration).toInt()
-        val samples = ShortArray(numSamples)
-
-        when (type) {
-            0 -> {
-                val freq1 = 523.25
-                val freq2 = 659.25
-                for (i in 0 until numSamples) {
-                    val t = i.toFloat() / sampleRate
-                    val envelope = 1f - (t / duration)
-                    samples[i] = ((envelope * 0.3 * (kotlin.math.sin(2.0 * Math.PI * freq1 * t) + kotlin.math.sin(2.0 * Math.PI * freq2 * t)).toFloat()) * Short.MAX_VALUE).toInt().toShort()
+        Thread {
+            try {
+                val samples = ShortArray(numSamples)
+                when (type) {
+                    0 -> {
+                        val freq1 = 523.25
+                        val freq2 = 659.25
+                        for (i in 0 until numSamples) {
+                            val t = i.toFloat() / sampleRate
+                            val envelope = 1f - (t / duration)
+                            samples[i] = ((envelope * 0.3 * (kotlin.math.sin(2.0 * Math.PI * freq1 * t) + kotlin.math.sin(2.0 * Math.PI * freq2 * t)).toFloat()) * Short.MAX_VALUE).toInt().toShort()
+                        }
+                    }
+                    2 -> {
+                        val notes = floatArrayOf(523.25f, 659.25f, 783.99f)
+                        val noteLen = numSamples / 3
+                        for (i in 0 until numSamples) {
+                            val t = i.toFloat() / sampleRate
+                            val noteIdx = (i / noteLen).coerceAtMost(2)
+                            val localT = t - (noteIdx * noteLen.toFloat() / sampleRate)
+                            val envelope = (1f - localT / (noteLen.toFloat() / sampleRate)).coerceAtLeast(0f)
+                            val freq = notes[noteIdx]
+                            samples[i] = ((envelope * 0.4 * kotlin.math.sin(2.0 * Math.PI * freq * localT)).toFloat() * Short.MAX_VALUE).toInt().toShort()
+                        }
+                    }
+                    else -> {
+                        val freq = 783.99f
+                        for (i in 0 until numSamples) {
+                            val t = i.toFloat() / sampleRate
+                            val envelope = 1f - (t / duration)
+                            samples[i] = ((envelope * 0.3 * kotlin.math.sin(2.0 * Math.PI * freq * t)).toFloat() * Short.MAX_VALUE).toInt().toShort()
+                        }
+                    }
                 }
-            }
-            2 -> {
-                val notes = floatArrayOf(523.25f, 659.25f, 783.99f)
-                val noteLen = numSamples / 3
-                for (i in 0 until numSamples) {
-                    val t = i.toFloat() / sampleRate
-                    val noteIdx = (i / noteLen).coerceAtMost(2)
-                    val localT = t - (noteIdx * noteLen.toFloat() / sampleRate)
-                    val envelope = (1f - localT / (noteLen.toFloat() / sampleRate)).coerceAtLeast(0f)
-                    val freq = notes[noteIdx]
-                    samples[i] = ((envelope * 0.4 * kotlin.math.sin(2.0 * Math.PI * freq * localT)).toFloat() * Short.MAX_VALUE).toInt().toShort()
-                }
-            }
-            else -> {
-                val freq = 783.99f
-                for (i in 0 until numSamples) {
-                    val t = i.toFloat() / sampleRate
-                    val envelope = 1f - (t / duration)
-                    samples[i] = ((envelope * 0.3 * kotlin.math.sin(2.0 * Math.PI * freq * t)).toFloat() * Short.MAX_VALUE).toInt().toShort()
-                }
-            }
-        }
-
-        val audioTrack = android.media.AudioTrack(
-            android.media.AudioManager.STREAM_NOTIFICATION,
-            sampleRate,
-            android.media.AudioFormat.CHANNEL_OUT_MONO,
-            android.media.AudioFormat.ENCODING_PCM_16BIT,
-            numSamples * 2,
-            android.media.AudioTrack.MODE_STATIC
-        )
-        audioTrack.write(samples, 0, numSamples)
-        audioTrack.play()
-        android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-            audioTrack.release()
-        }, (duration * 1000 + 100).toLong())
+                val audioTrack = AudioTrack(
+                    AudioManager.STREAM_NOTIFICATION,
+                    sampleRate,
+                    AudioFormat.CHANNEL_OUT_MONO,
+                    AudioFormat.ENCODING_PCM_16BIT,
+                    numSamples * 2,
+                    AudioTrack.MODE_STATIC
+                )
+                audioTrack.write(samples, 0, numSamples)
+                audioTrack.play()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    try { audioTrack.release() } catch (_: Exception) {}
+                }, (duration * 1000 + 100).toLong())
+            } catch (_: Exception) {}
+        }.start()
     } catch (_: Exception) {
     }
 }
@@ -890,6 +1040,6 @@ private fun mergePours(stepsInput: List<co.coffeery.app.data.model.BrewStepDef>)
 }
 
 private fun createTempImageFile(context: Context): java.io.File {
-    val dir = context.externalCacheDir ?: context.cacheDir
+    val dir = context.cacheDir
     return java.io.File(dir, "brew_photo_${System.currentTimeMillis()}.jpg").apply { createNewFile() }
 }

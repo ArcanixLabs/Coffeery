@@ -1,5 +1,6 @@
 package co.coffeery.app.ui.screens.log
 
+import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,9 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
@@ -26,19 +27,20 @@ import co.coffeery.app.ui.components.AppText
 import co.coffeery.app.ui.components.CoffeeCard
 import co.coffeery.app.ui.components.Glyph
 import co.coffeery.app.ui.components.LineIcon
+import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 import co.coffeery.app.util.Format
 import java.time.Instant
 import java.time.ZoneId
 import java.util.Locale
+import kotlinx.coroutines.delay
 
 @Composable
 fun BrewStatsSection(brewLogs: List<BrewLogEntity>) {
-    val scrollState = rememberScrollState()
-
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp),
-        modifier = Modifier.fillMaxWidth().verticalScroll(scrollState),
+        modifier = Modifier.fillMaxWidth(),
     ) {
         TotalBrewsCard(brewLogs)
         EquipmentBreakdownCard(brewLogs)
@@ -77,18 +79,31 @@ private fun EquipmentBreakdownCard(brewLogs: List<BrewLogEntity>) {
     if (grouped.isEmpty()) return
 
     val maxCount = grouped.maxOf { it.value }.toFloat()
+    val reduced = LocalPrefersReducedMotion.current
+    val animatables = remember(grouped) { grouped.map { Animatable(if (reduced) it.value / maxCount else 0f) } }
+    LaunchedEffect(grouped, reduced) {
+        if (reduced) {
+            grouped.forEachIndexed { i, e -> animatables[i].snapTo(e.value / maxCount) }
+        } else {
+            animatables.forEach { it.snapTo(0f) }
+            grouped.forEachIndexed { i, e ->
+                delay(i * 80L)
+                animatables[i].animateTo(e.value / maxCount, animationSpec = CoffeeMotion.cardExpand)
+            }
+        }
+    }
 
     CoffeeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
         AppText(stringResource(R.string.stats_equipment_breakdown), style = CoffeeTheme.type.label, color = colors.textSecondary)
         Spacer(Modifier.height(10.dp))
-        grouped.forEach { (name, count) ->
+        grouped.forEachIndexed { idx, (name, count) ->
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp),
             ) {
                 AppText(name, style = CoffeeTheme.type.caption, color = colors.textPrimary, modifier = Modifier.width(80.dp))
                 BarCanvas(
-                    ratio = count / maxCount,
+                    ratio = animatables[idx].value,
                     color = colors.accent,
                     modifier = Modifier.weight(1f).height(24.dp),
                 )
@@ -112,6 +127,19 @@ private fun RoastPreferenceCard(brewLogs: List<BrewLogEntity>) {
         brewLogs.count { it.roast.equals(roast, ignoreCase = true) }
     }
     val maxCount = counts.max().toFloat().coerceAtLeast(1f)
+    val reduced = LocalPrefersReducedMotion.current
+    val animatables = remember(counts) { counts.map { Animatable(if (reduced) it / maxCount else 0f) } }
+    LaunchedEffect(counts, reduced) {
+        if (reduced) {
+            counts.forEachIndexed { i, c -> animatables[i].snapTo(c / maxCount) }
+        } else {
+            animatables.forEach { it.snapTo(0f) }
+            counts.forEachIndexed { i, c ->
+                delay(i * 80L)
+                animatables[i].animateTo(c / maxCount, animationSpec = CoffeeMotion.cardExpand)
+            }
+        }
+    }
 
     CoffeeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
         AppText(stringResource(R.string.stats_roast_preference), style = CoffeeTheme.type.label, color = colors.textSecondary)
@@ -123,7 +151,7 @@ private fun RoastPreferenceCard(brewLogs: List<BrewLogEntity>) {
             ) {
                 AppText(labels[i], style = CoffeeTheme.type.caption, color = colors.textPrimary, modifier = Modifier.width(60.dp))
                 BarCanvas(
-                    ratio = count / maxCount,
+                    ratio = animatables[i].value,
                     color = colors.accent,
                     modifier = Modifier.weight(1f).height(24.dp),
                 )
@@ -180,6 +208,19 @@ private fun TimeOfDayCard(brewLogs: List<BrewLogEntity>) {
 
     val total = counts.sum().coerceAtLeast(1)
     val percentages = counts.map { it * 100f / total }
+    val reduced = LocalPrefersReducedMotion.current
+    val animatables = remember(percentages) { percentages.map { Animatable(if (reduced) it / 100f else 0f) } }
+    LaunchedEffect(percentages, reduced) {
+        if (reduced) {
+            percentages.forEachIndexed { i, p -> animatables[i].snapTo(p / 100f) }
+        } else {
+            animatables.forEach { it.snapTo(0f) }
+            percentages.forEachIndexed { i, p ->
+                delay(i * 80L)
+                animatables[i].animateTo(p / 100f, animationSpec = CoffeeMotion.cardExpand)
+            }
+        }
+    }
 
     CoffeeCard(modifier = Modifier.fillMaxWidth(), contentPadding = 14) {
         AppText(stringResource(R.string.stats_time_of_day), style = CoffeeTheme.type.label, color = colors.textSecondary)
@@ -192,7 +233,7 @@ private fun TimeOfDayCard(brewLogs: List<BrewLogEntity>) {
             ) {
                 AppText(label, style = CoffeeTheme.type.caption, color = colors.textPrimary, modifier = Modifier.width(140.dp))
                 BarCanvas(
-                    ratio = pct / 100f,
+                    ratio = animatables[i].value,
                     color = colors.accent,
                     modifier = Modifier.weight(1f).height(24.dp),
                 )
@@ -239,14 +280,18 @@ private fun BarCanvas(
     color: androidx.compose.ui.graphics.Color,
     modifier: Modifier = Modifier,
 ) {
+    val barH = 16.dp
+    val barTop = 4.dp
+    val corner = 8.dp
     Canvas(modifier = modifier) {
         val w = size.width
         val safeRatio = ratio.coerceIn(0f, 1f)
+        val bh = barH.toPx()
         drawRoundRect(
             color = color,
-            topLeft = Offset(0f, 4.dp.toPx()),
-            size = Size(w * safeRatio, 16.dp.toPx()),
-            cornerRadius = CornerRadius(8.dp.toPx(), 8.dp.toPx()),
+            topLeft = Offset(0f, barTop.toPx()),
+            size = Size(w * safeRatio, bh),
+            cornerRadius = CornerRadius(corner.toPx(), corner.toPx()),
         )
     }
 }

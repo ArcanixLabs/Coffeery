@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,14 +25,24 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.haptic.rememberAppHaptics
+import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
+import co.coffeery.app.ui.theme.LocalPrefersReducedMotion
 
 /** Custom bottom navigation. */
 @Composable
@@ -44,6 +55,8 @@ fun <T> BottomNav(
     modifier: Modifier = Modifier,
 ) {
     val colors = CoffeeTheme.colors
+    val haptics = rememberAppHaptics()
+    val reduced = LocalPrefersReducedMotion.current
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -63,26 +76,35 @@ fun <T> BottomNav(
                 val isSelected = item == selected
                 val animatedColor by animateColorAsState(
                     targetValue = if (isSelected) colors.accent else colors.textSecondary,
-                    animationSpec = tween(220),
+                    animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal),
                     label = "navColor",
                 )
                 val animatedBgColor by animateColorAsState(
                     targetValue = if (isSelected) colors.accentSoft else colors.surface,
-                    animationSpec = tween(220),
+                    animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal),
                     label = "navBg",
                 )
                 val animatedScale by animateFloatAsState(
                     targetValue = if (isSelected) 1.1f else 1.0f,
-                    animationSpec = tween(220),
+                    animationSpec = if (reduced) tween(0) else tween(CoffeeMotion.normal),
                     label = "navScale",
                 )
+                val interactionSource = remember { MutableInteractionSource() }
+                val isPressed by interactionSource.collectIsPressedAsState()
+                val pressSx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
+                val pressSy by animateFloatAsState(targetValue = if (isPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "pressY")
                 Column(
                     modifier = Modifier
                         .weight(1f)
+                        .graphicsLayer(scaleX = pressSx, scaleY = pressSy)
                         .clickable(
+                            role = Role.Tab,
                             indication = null,
-                            interactionSource = remember { MutableInteractionSource() },
-                        ) { onSelect(item) },
+                            interactionSource = interactionSource,
+                        ) {
+                            haptics.segment()
+                            onSelect(item)
+                        },
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Box(
@@ -105,6 +127,8 @@ fun <T> BottomNav(
                                 text = labelFor(item),
                                 style = CoffeeTheme.type.caption,
                                 color = animatedColor,
+                                maxLines = 1,
+                                overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
                             )
                         }
                     }
@@ -132,10 +156,14 @@ fun ScreenHeader(
             BackButton(onBack)
             Spacer(Modifier.width(12.dp))
         }
-        Column(Modifier.weight(1f)) {
-            AppText(text = title, style = CoffeeTheme.type.display, color = colors.textPrimary)
+        Column(
+            Modifier
+                .weight(1f)
+                .semantics { heading() },
+        ) {
+            AppText(text = title, style = CoffeeTheme.type.display, color = colors.textPrimary, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
             if (subtitle != null) {
-                AppText(text = subtitle, style = CoffeeTheme.type.body, color = colors.textSecondary)
+                AppText(text = subtitle, style = CoffeeTheme.type.body, color = colors.textSecondary, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
             }
         }
         if (trailing != null) trailing()
@@ -145,12 +173,22 @@ fun ScreenHeader(
 @Composable
 fun BackButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     val colors = CoffeeTheme.colors
+    val haptics = rememberAppHaptics()
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val pressSx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
+    val pressSy by animateFloatAsState(targetValue = if (isPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "pressY")
     androidx.compose.foundation.layout.Box(
         modifier = modifier
-            .size(42.dp)
+            .sizeIn(minWidth = 48.dp, minHeight = 48.dp)
+            .size(48.dp)
+            .graphicsLayer(scaleX = pressSx, scaleY = pressSy)
             .clip(CoffeeShapes.pill)
             .background(colors.surfaceElevated)
-            .clickable(indication = null, interactionSource = remember { MutableInteractionSource() }) { onClick() },
+            .clickable(interactionSource = interactionSource, indication = null) {
+                haptics.tap()
+                onClick()
+            },
         contentAlignment = Alignment.Center,
     ) {
         Canvas(Modifier.size(20.dp)) {

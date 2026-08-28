@@ -14,9 +14,11 @@
 -keep class co.coffeery.app.ui.screens.root.AppUiState { *; }
 -keep class co.coffeery.app.util.BrewResult { *; }
 
-# Compose
--keep class androidx.compose.** { *; }
--dontwarn androidx.compose.**
+# BuildConfig — GOOGLE_SERVER_CLIENT_ID field accessed via reflection by some tools
+-keep class co.coffeery.app.BuildConfig { *; }
+
+# Compose — fine-grained (remove broad keep that disabled R8)
+-keep class androidx.compose.runtime.** { *; }
 
 # General
 -keepattributes Signature
@@ -28,14 +30,26 @@
 -keep class com.google.android.gms.auth.** { *; }
 -dontwarn com.google.android.gms.auth.**
 
-# Google Drive API
+# Google Drive API — keep model and scopes for Gson reflection
 -keep class com.google.api.services.drive.** { *; }
+-keep class com.google.api.services.drive.model.** { *; }
 -dontwarn com.google.api.services.drive.**
 -keep class com.google.api.client.http.** { *; }
 -dontwarn com.google.api.client.http.**
+-keep class com.google.api.client.googleapis.extensions.android.gms.auth.** { *; }
+-dontwarn com.google.api.client.googleapis.extensions.android.gms.auth.**
+-keep class com.google.api.client.googleapis.extensions.android.http.** { *; }
+-dontwarn com.google.api.client.googleapis.extensions.android.http.**
+-keep class com.google.api.client.json.gson.** { *; }
+-dontwarn com.google.api.client.json.gson.**
+-keep class com.google.api.client.googleapis.json.** { *; }
+-dontwarn com.google.api.client.googleapis.json.**
+-keep class com.google.api.client.googleapis.media.** { *; }
+-dontwarn com.google.api.client.googleapis.media.**
 -keep class com.google.http.client.** { *; }
 -dontwarn com.google.http.client.**
 -keep class org.apache.http.** { *; }
 -dontwarn org.apache.http.**
 -dontwarn javax.naming.**
 -dontwarn com.google.api.client.http.**
+-dontwarn com.google.android.gms.common.**

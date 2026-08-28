@@ -1,8 +1,11 @@
 package co.coffeery.app.ui.components
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
@@ -16,6 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
+import co.coffeery.app.ui.haptic.rememberAppHaptics
+import co.coffeery.app.ui.theme.CoffeeMotion
 import co.coffeery.app.ui.theme.CoffeeShapes
 import co.coffeery.app.ui.theme.CoffeeTheme
 
@@ -28,12 +33,21 @@ fun PrimaryButton(
     onClick: () -> Unit,
 ) {
     val colors = CoffeeTheme.colors
+    val haptics = rememberAppHaptics()
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val sx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
+    val sy by animateFloatAsState(targetValue = if (isPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "pressY")
     Box(
         modifier = modifier
+            .graphicsLayer(scaleX = sx, scaleY = sy)
             .defaultMinSize(minWidth = 120.dp)
             .clip(shape)
             .background(if (enabled) colors.accent else colors.outline)
-            .clickable(enabled = enabled) { onClick() }
+            .clickable(enabled = enabled, interactionSource = interactionSource, indication = null) {
+                haptics.tap()
+                onClick()
+            }
             .padding(horizontal = 24.dp, vertical = 15.dp),
         contentAlignment = Alignment.Center,
     ) {
@@ -41,6 +55,8 @@ fun PrimaryButton(
             text = text,
             style = CoffeeTheme.type.headline,
             color = if (enabled) colors.onAccent else colors.textSecondary,
+            maxLines = 1,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
         )
     }
 }
@@ -53,13 +69,22 @@ fun SecondaryButton(
     onClick: () -> Unit,
 ) {
     val colors = CoffeeTheme.colors
+    val haptics = rememberAppHaptics()
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val sx by animateFloatAsState(targetValue = if (isPressed) 0.96f else 1f, animationSpec = CoffeeMotion.press, label = "pressX")
+    val sy by animateFloatAsState(targetValue = if (isPressed) 0.98f else 1f, animationSpec = CoffeeMotion.press, label = "pressY")
     Box(
         modifier = modifier
+            .graphicsLayer(scaleX = sx, scaleY = sy)
             .defaultMinSize(minWidth = 120.dp)
             .clip(CoffeeShapes.pill)
             .background(colors.surface)
             .border(1.5.dp, colors.outline, CoffeeShapes.pill)
-            .clickable(enabled = enabled) { onClick() }
+            .clickable(enabled = enabled, interactionSource = interactionSource, indication = null) {
+                haptics.tap()
+                onClick()
+            }
             .padding(horizontal = 24.dp, vertical = 15.dp),
         contentAlignment = Alignment.Center,
     ) {
@@ -67,6 +92,8 @@ fun SecondaryButton(
             text = text,
             style = CoffeeTheme.type.headline,
             color = if (enabled) colors.textPrimary else colors.textSecondary,
+            maxLines = 1,
+            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
         )
     }
 }
