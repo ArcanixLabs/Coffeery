@@ -34,14 +34,7 @@ class CloudBackupManager(private val context: Context) {
     private val appContext: Context = context.applicationContext
 
     companion object {
-        private val httpTransport by lazy {
-            try {
-                @Suppress("DEPRECATION") // AndroidHttp.newCompatibleTransport uses deprecated Apache on old devices
-                com.google.api.client.extensions.android.http.AndroidHttp.newCompatibleTransport()
-            } catch (_: Exception) {
-                NetHttpTransport()
-            }
-        }
+        private val httpTransport by lazy { NetHttpTransport() }
         private val jsonFactory by lazy { GsonFactory.getDefaultInstance() }
     }
 

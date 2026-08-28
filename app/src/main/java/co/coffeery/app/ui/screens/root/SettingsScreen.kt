@@ -107,45 +107,6 @@ fun SettingsScreen(vm: AppViewModel) {
         }
     }
 
-    fun handleCloudResult(result: Result<String>, onSuccess: () -> Unit, rl: androidx.activity.result.ActivityResultLauncher<Intent>) {
-        if (result.isSuccess) {
-            onSuccess()
-        } else {
-            val ex = result.exceptionOrNull()
-            val recoverIntent = cloud.consumeRecoverableIntent() ?: (ex as? CloudBackupManager.RecoverableAuthException)?.intent
-            if (recoverIntent != null) {
-                try {
-                    rl.launch(recoverIntent)
-                } catch (e: Exception) {
-                    android.widget.Toast.makeText(ctx, ctx.getString(R.string.cloud_error_exception, e.javaClass.simpleName, e.message ?: ctx.getString(R.string.cloud_error_unknown)), android.widget.Toast.LENGTH_LONG).show()
-                }
-            } else {
-                val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
-                android.util.Log.e("Coffeery", "Cloud operation failed: $msg", ex)
-                android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
-    val signInLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        cloud.handleSignInResult(result.data) { success, _ ->
-            cloudSignedIn = success
-            if (success) {
-                scope.launch {
-                    cloudBusy = true
-                    val json = vm.getExportJson()
-                    val backupResult = cloud.backupToDrive(json)
-                    handleCloudResult(backupResult, {
-                        android.widget.Toast.makeText(ctx, R.string.settings_cloud_backup_done, android.widget.Toast.LENGTH_SHORT).show()
-                    }, recoverLauncher)
-                    cloudBusy = false
-                }
-            }
-        }
-    }
-
     val recoverLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -195,6 +156,26 @@ fun SettingsScreen(vm: AppViewModel) {
         } else {
             cloud.clearRecoverableIntent()
             android.widget.Toast.makeText(ctx, ctx.getString(R.string.settings_cloud_error), android.widget.Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun handleCloudResult(result: Result<String>, onSuccess: () -> Unit, rl: androidx.activity.result.ActivityResultLauncher<Intent>) {
+        if (result.isSuccess) {
+            onSuccess()
+        } else {
+            val ex = result.exceptionOrNull()
+            val recoverIntent = cloud.consumeRecoverableIntent() ?: (ex as? CloudBackupManager.RecoverableAuthException)?.intent
+            if (recoverIntent != null) {
+                try {
+                    rl.launch(recoverIntent)
+                } catch (e: Exception) {
+                    android.widget.Toast.makeText(ctx, ctx.getString(R.string.cloud_error_exception, e.javaClass.simpleName, e.message ?: ctx.getString(R.string.cloud_error_unknown)), android.widget.Toast.LENGTH_LONG).show()
+                }
+            } else {
+                val msg = ex?.message ?: ctx.getString(R.string.settings_cloud_error)
+                android.util.Log.e("Coffeery", "Cloud operation failed: $msg", ex)
+                android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -258,12 +239,12 @@ fun SettingsScreen(vm: AppViewModel) {
                     val swatchColors = remember(palette, darkTheme) { paletteColors(palette, darkTheme) }
                     val borderWidth by animateDpAsState(
                         targetValue = if (isSelected) 2.5.dp else 1.dp,
-                        animationSpec = if (prefersReducedMotion) tween(0) else CoffeeMotion.cardExpand,
+                        animationSpec = if (prefersReducedMotion) tween(0) else spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
                         label = "borderWidth",
                     )
                     val borderColor by animateColorAsState(
                         targetValue = if (isSelected) swatchColors.accent else swatchColors.outline,
-                        animationSpec = if (prefersReducedMotion) tween(0) else CoffeeMotion.cardExpand,
+                        animationSpec = if (prefersReducedMotion) tween(0) else tween(durationMillis = CoffeeMotion.normal),
                         label = "borderColor",
                     )
                     val scale by animateFloatAsState(
@@ -364,27 +345,27 @@ fun SettingsScreen(vm: AppViewModel) {
                                 )
                             }
                         }
-                        AnimatedVisibility(
-                            visible = isSelected,
-                            enter = if (prefersReducedMotion) EnterTransition.None else fadeIn(tween(150)) + scaleIn(tween(150), initialScale = 0.8f),
-                            exit = if (prefersReducedMotion) ExitTransition.None else fadeOut(tween(150)) + scaleOut(tween(150)),
-                            modifier = Modifier.align(Alignment.TopEnd),
-                            label = "check",
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .padding(spacing.s)
-                                    .size(18.dp)
-                                    .clip(CircleShape)
-                                    .background(swatchColors.accent),
-                                contentAlignment = Alignment.Center,
+                        Box(modifier = Modifier.align(Alignment.TopEnd).padding(spacing.s)) {
+                            androidx.compose.animation.AnimatedVisibility(
+                                visible = isSelected,
+                                enter = if (prefersReducedMotion) EnterTransition.None else fadeIn(tween(150)) + scaleIn(tween(150), initialScale = 0.8f),
+                                exit = if (prefersReducedMotion) ExitTransition.None else fadeOut(tween(150)) + scaleOut(tween(150)),
+                                label = "check",
                             ) {
                                 Box(
                                     modifier = Modifier
-                                        .size(6.dp)
+                                        .size(18.dp)
                                         .clip(CircleShape)
-                                        .background(swatchColors.onAccent),
-                                )
+                                        .background(swatchColors.accent),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(6.dp)
+                                            .clip(CircleShape)
+                                            .background(swatchColors.onAccent),
+                                    )
+                                }
                             }
                         }
                     }

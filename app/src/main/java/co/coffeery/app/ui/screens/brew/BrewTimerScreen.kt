@@ -102,7 +102,6 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.RepeatMode
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import co.coffeery.app.ui.haptic.rememberAppHaptics
 import co.coffeery.app.ui.theme.CoffeeMotion
@@ -359,7 +358,7 @@ fun BrewTimerScreen(state: AppUiState, vm: AppViewModel) {
                 val targetWidth = if (isCurrent) 32.dp else 8.dp
                 val animatedWidth by animateDpAsState(
                     targetValue = targetWidth,
-                    animationSpec = if (LocalPrefersReducedMotion.current) tween(0) else CoffeeMotion.cardExpand,
+                    animationSpec = if (LocalPrefersReducedMotion.current) tween(0) else spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow),
                     label = "dot$index",
                 )
                 Box(
