@@ -90,7 +90,7 @@
     <string name="calc_change">Değiştir</string>
     <string name="calc_input_cups">Fincan</string>
     <string name="calc_input_water">Su (ml)</string>
-    <string name="calc_cups_value" formatted="false">%1$d fincan
+    <string name="calc_cups_value" formatted="false">%1$d fincan</string>
     <string name="calc_strength">Sertlik</string>
     <string name="calc_weaker">Daha hafif</string>
     <string name="calc_stronger">Daha güçlü</string>
@@ -100,9 +100,9 @@
     <string name="calc_out_temp">Su sıcaklığı</string>
     <string name="calc_out_grind">Öğütüm</string>
     <string name="calc_ratio">Oran</string>
-    <string name="calc_grams" formatted="false">%1$s g
-    <string name="calc_ml" formatted="false">%1$s ml
-    <string name="calc_celsius" formatted="false">%1$s°C
+    <string name="calc_grams" formatted="false">%1$s g</string>
+    <string name="calc_ml" formatted="false">%1$s ml</string>
+    <string name="calc_celsius" formatted="false">%1$s°C</string>
     <string name="calc_temp_slow">Düşük ateş, kaynamaya yakın</string>
     <string name="calc_temp_cold">Oda sıcaklığı / buzdolabı</string>
     <string name="calc_time">Demleme süresi</string>
@@ -116,20 +116,20 @@
     <string name="strength_light_label">hafif, günlük içim</string>
     <string name="strength_balanced_label">dengeli, standart</string>
     <string name="strength_strong_label">güçlü, yoğun</string>
-    <string name="strength_ratio_summary" formatted="false">1:%1$s — %2$s
+    <string name="strength_ratio_summary" formatted="false">1:%1$s — %2$s</string>
 
     <!-- Demleme zamanlayıcı -->
-    <string name="brew_title" formatted="false">%1$s demleniyor
-    <string name="brew_step_counter" formatted="false">Adım %1$d / %2$d
+    <string name="brew_title" formatted="false">%1$s demleniyor</string>
+    <string name="brew_step_counter" formatted="false">Adım %1$d / %2$d</string>
     <string name="brew_tap_start">Zamanlayıcıyı başlatmak için dokun</string>
     <string name="brew_pause">Duraklat</string>
     <string name="brew_resume">Devam et</string>
     <string name="brew_finish">Bitir</string>
-    <string name="brew_next_up" formatted="false">Sıradaki: %1$s
-    <string name="brew_pour_to" formatted="false">Toplam %1$d g\'a kadar dök
+    <string name="brew_next_up" formatted="false">Sıradaki: %1$s</string>
+    <string name="brew_pour_to" formatted="false">Toplam %1$d g\'a kadar dök</string>
     <string name="brew_complete">Kahvenin tadını çıkar ☕</string>
     <string name="timer_hands_free">Eller serbest</string>
-    <string name="brew_complete_sub" formatted="false">%1$s ile demlendi
+    <string name="brew_complete_sub" formatted="false">%1$s ile demlendi</string>
     <string name="brew_elapsed">Toplam süre</string>
     <string name="brew_adjust_pour">Dökümü ayarla</string>
     <string name="brew_adjust_less">−</string>
@@ -139,7 +139,7 @@
     <string name="step_rinse">Filtreyi yıka</string>
     <string name="step_bloom">Bloom (ön ıslatma)</string>
     <string name="step_pour">Dök</string>
-    <string name="step_pour_n" formatted="false">%1$d. döküm
+    <string name="step_pour_n" formatted="false">%1$d. döküm</string>
     <string name="step_swirl">Hafifçe çalkala</string>
     <string name="step_steep">Demle</string>
     <string name="step_stir">Bir kez karıştır</string>
@@ -153,7 +153,7 @@
     <string name="step_serve">Servis et</string>
     <string name="step_wait">Bekle</string>
     <string name="step_add_coffee">Kahve ve suyu ekle</string>
-    <string name="step_desc_bloom" formatted="false">Tüm kahveyi %1$d g su ile ıslat ve gazını salmasını bekle.
+    <string name="step_desc_bloom" formatted="false">Tüm kahveyi %1$d g su ile ıslat ve gazını salmasını bekle.</string>
     <string name="step_desc_generic">Dökümü takip et ve akışı sabit tut.</string>
 
     <!-- Tarif kaydetme -->
@@ -167,7 +167,7 @@
     <string name="empty_recipes_title">Henüz kayıtlı tarif yok</string>
     <string name="empty_recipes_sub">Demleme ayarlarını tekrar kullanmak için tarif olarak kaydet</string>
     <string name="empty_recipes_action">Demlemeye Başla</string>
-    <string name="recipes_summary" formatted="false">%1$s · %2$s g : %3$s ml
+    <string name="recipes_summary" formatted="false">%1$s · %2$s g : %3$s ml</string>
     <string name="recipes_delete_confirm">Bu tarif silinsin mi?</string>
     <string name="recipe_load">Tarifi görüntüle</string>
     <string name="recipe_recent">Son tarif</string>
@@ -198,8 +198,8 @@
     <string name="learn_quiz_title">Hızlı Test</string>
     <string name="learn_quiz_correct">Doğru!</string>
     <string name="learn_quiz_wrong">Tam değil</string>
-    <string name="learn_quiz_score" formatted="false">Skor: %1$d/150 bugün doğru
-    <string name="learn_quiz_streak" formatted="false">Seri: %1$d art arda! 🔥
+    <string name="learn_quiz_score" formatted="false">Skor: %1$d/150 bugün doğru</string>
+    <string name="learn_quiz_streak" formatted="false">Seri: %1$d art arda! 🔥</string>
     <string name="learn_quiz_random">Rastgele Soru</string>
     <string name="taste_sour">Ekşi</string>
     <string name="taste_bitter">Acı</string>
@@ -424,7 +424,7 @@
     <string name="streak_label">günlük seri!</string>
     <string name="streak_keep_going">Demlemeye devam!</string>
     <string name="streak_start">Seriye başla!</string>
-    <string name="brew_reminder_streak" formatted="false">🔥 %1$d günlük seri — devam et!
+    <string name="brew_reminder_streak" formatted="false">🔥 %1$d günlük seri — devam et!</string>
     <string name="log_share_streak">Serini paylaş</string>
     <string name="log_share_streak_text" formatted="false">Coffeery ile %d gündür kahve demliyorum! ☕</string>
 
@@ -437,7 +437,7 @@
     <string name="log_empty_title">Henüz demleme yok</string>
     <string name="log_empty_sub">Kahve yolculuğunu takip etmek için demlemeye başla</string>
     <string name="log_start_brewing">Demlemeye başla</string>
-    <string name="log_rating_out" formatted="false">%1$d/5
+    <string name="log_rating_out" formatted="false">%1$d/5</string>
     <string name="log_date_today">Bugün</string>
     <string name="log_date_yesterday">Dün</string>
     <string name="log_compare_title">Demlemelerini karşılaştır</string>
@@ -829,8 +829,8 @@
     <string name="settings_timer_show_next">Sonraki adımı göster</string>
     <string name="settings_timer_merge_weight">Ağırlık göstergesini birleştir</string>
     <string name="notification_channel_name">Demleme Zamanlayıcı</string>
-    <string name="notification_brewing_title" formatted="false">%1$s demleniyor
-    <string name="notification_step" formatted="false">Adım %1$d/%2$d
+    <string name="notification_brewing_title" formatted="false">%1$s demleniyor</string>
+    <string name="notification_step" formatted="false">Adım %1$d/%2$d</string>
     <string name="notification_stop">Durdur</string>
     <string name="notification_open">Aç</string>
 
@@ -1402,15 +1402,15 @@
     <string name="cloud_error_8">Hata 8: Ağ hatası. İnternet bağlantınızı kontrol edin.</string>
     <string name="cloud_error_13">Hata 13: Play Hizmetleri güncel değil. Google Play Hizmetlerini güncelleyin.</string>
     <string name="cloud_error_15">Hata 15: Yanlış paket adı veya SHA-1</string>
-    <string name="cloud_error_generic" formatted="false">Hata %1$d: %2$s
+    <string name="cloud_error_generic" formatted="false">Hata %1$d: %2$s</string>
     <string name="cloud_error_unknown">Bilinmiyor</string>
-    <string name="cloud_error_exception" formatted="false">Hata: %1$s — %2$s
+    <string name="cloud_error_exception" formatted="false">Hata: %1$s — %2$s</string>
     <string name="cloud_error_not_signed_in">Giriş yapılmadı — lütfen önce Google ile giriş yapın</string>
-    <string name="cloud_error_auth_failed" formatted="false">Yetkilendirme başarısız (%1$d) — lütfen tekrar giriş yapın
+    <string name="cloud_error_auth_failed" formatted="false">Yetkilendirme başarısız (%1$d) — lütfen tekrar giriş yapın</string>
     <string name="cloud_error_404">Yedek bulunamadı (404)</string>
     <string name="cloud_error_429">Çok fazla istek (429) — lütfen kısa süre sonra tekrar deneyin</string>
-    <string name="cloud_error_drive" formatted="false">Drive hatası %1$d: %2$s
-    <string name="cloud_error_network" formatted="false">Ağ hatası — internet bağlantınızı kontrol edin: %1$s
+    <string name="cloud_error_drive" formatted="false">Drive hatası %1$d: %2$s</string>
+    <string name="cloud_error_network" formatted="false">Ağ hatası — internet bağlantınızı kontrol edin: %1$s</string>
     <string name="cloud_error_no_backup">Drive\'da yedek bulunamadı</string>
     <string name="bean_detail_title">Çekirdek Detayı</string>
     <string name="bean_detail_roast_date">Kavurma tarihi</string>
@@ -1613,7 +1613,7 @@ Malzemeler:
 Hazırlanışı:
 1. Espresso, vanilya şekeri ve kremayı aynı pitcher\'a koyun.
 2. 60–65°C\'ye birlikte buharlayın.
-3. Fincana dökün — tek tip kremsi olmalı.
+3. Fincana dökün — tek tip kremsi olmalı.</string>
     <string name="drink_melange_name">Wiener Melange</string>
     <string name="drink_melange_summary">Viyana Melange — sıcak köpürtülmüş sütlü hafif kahve</string>
     <string name="drink_melange_body">Viyana\'nın cappuccino cevabı: hafif kahve üzerine sıcak köpürtülmüş süt, bazen krem şanti.
@@ -1763,13 +1763,13 @@ Hazırlanışı:
     <string name="learn_l127_title">pH ve Alkalinite: Neden pH Yalan Söyler</string>
     <string name="learn_l127_body">pH suyun şu an ne kadar asidik olduğunu söyler; alkalinite (KH) kahvenin asidiyle buluşunca pH\'ın ne kadar direneceğini söyler. pH 7.0 bir su KH 120 ppm ise yavan tattırır — tampon meyve asitlerini tatmadan nötrler — pH 6.5 ama KH 40 ppm su ise canlı ve parlaktır. SCA hedef 40 ppm KH (CaCO₃) yeter tampon verir ama asiditeyi boğmaz. KH\'yi damla kitle ölçün (1 damla=17.8 ppm), pH şeridiyle değil. Düşük KH açık kavrumu canlandırır; yüksek KH koyu kavrumu yuvarlar. Sadece pH kovalamayın.</string>
     <string name="learn_l128_title">Elek Testi: Öğütüm Dağılımını Ölçmek</string>
-    <string name="learn_l128_body" formatted="false">Bimodal dağılımı elemeden göremezsiniz. 400 µm ve 800 µm elekleri üst üste koyun, 20 g\'yi 60 sn sallayın, her fraksiyonu tartın. İyi filtre öğütümünde %65–75 400–800 µm arasında, ince &lt;400 µm %15 altı ve iri &gt;800 µm %15 altı olmalı. İnce %20 üstüyse acı ve tortulu; iri %20 üstüyse ekşi ve boş fincan — ortalama boyut doğru olsa bile. Haftalık eleyerek dişli aşınmasını takip edin: taze dişli dar tepe, aşınmış geniş dağılım verir. Öğütücüleri aynı doz ve ayarda eleyerek nesnel karşılaştırın — orta fraksiyon ne kadar darsa fincan o kadar temizdir.
+    <string name="learn_l128_body" formatted="false">Bimodal dağılımı elemeden göremezsiniz. 400 µm ve 800 µm elekleri üst üste koyun, 20 g\'yi 60 sn sallayın, her fraksiyonu tartın. İyi filtre öğütümünde %65–75 400–800 µm arasında, ince &lt;400 µm %15 altı ve iri &gt;800 µm %15 altı olmalı. İnce %20 üstüyse acı ve tortulu; iri %20 üstüyse ekşi ve boş fincan — ortalama boyut doğru olsa bile. Haftalık eleyerek dişli aşınmasını takip edin: taze dişli dar tepe, aşınmış geniş dağılım verir. Öğütücüleri aynı doz ve ayarda eleyerek nesnel karşılaştırın — orta fraksiyon ne kadar darsa fincan o kadar temizdir.</string>
     <string name="learn_l129_title">Turbo Shot: 15 Saniyede 1:3</string>
-    <string name="learn_l129_body" formatted="false">Şampiyon James Hoffmann\'ın turbo shot\'ı tüm kuralları yıkar: 15–18 g doz, kalın öğütüm (400–500 µm filtre gibi), puck üstünde kağıt filtreyle 6 bar\'da 12–18 sn\'de 1:2.5–1:3 verim. Kalın öğütüm ve düşük basınç kanallanmayı önler, hızlı yüksek verim 25–30 sn\'de çıkan acı kuyruk bileşiklerini almadan %19–20 ekstraksiyon verir. Sonuç espresso yoğunluğunda tatlı filtre kahvesi gibi — ince öğütümde tıkanan açık kavrumlar için ideal. Hızlı akış sepeti (VST 18 g) ve 2 sn ön demleme kullanın. İnce gelirse 1:2.2\'ye sıkın; ekşiyse 18 sn\'ye uzatın.
+    <string name="learn_l129_body" formatted="false">Şampiyon James Hoffmann\'ın turbo shot\'ı tüm kuralları yıkar: 15–18 g doz, kalın öğütüm (400–500 µm filtre gibi), puck üstünde kağıt filtreyle 6 bar\'da 12–18 sn\'de 1:2.5–1:3 verim. Kalın öğütüm ve düşük basınç kanallanmayı önler, hızlı yüksek verim 25–30 sn\'de çıkan acı kuyruk bileşiklerini almadan %19–20 ekstraksiyon verir. Sonuç espresso yoğunluğunda tatlı filtre kahvesi gibi — ince öğütümde tıkanan açık kavrumlar için ideal. Hızlı akış sepeti (VST 18 g) ve 2 sn ön demleme kullanın. İnce gelirse 1:2.2\'ye sıkın; ekşiyse 18 sn\'ye uzatın.</string>
     <string name="learn_l130_title">Bypass Demleme: Güçlü Demle, Akıllıca Seyrelt</string>
-    <string name="learn_l130_body" formatted="false">Bypass yoğun bulamaç demleyip sonra su ekleyerek sertliği verimden ayırır. Örnek: 20 g\'yi 150 ml\'ye 1:7.5 demlemek %22 verim ve %3.5 TDS verir, sonra 150 ml bypass suyu ekleyip %1.75 TDS\'ye inmek — düz 1:15 pour-over ile aynı sertlik ama daha tatlı çünkü düşük su/kahve oranı aşırı ekstraksiyonu sınırladı. Kontrolsüz bypass tersidir: V60 filtre kenarı veya kat kıvrımından sızan su sertlik katmadan zayıflatır — ince ve az çözünmüş. Sıfır bypass dripper\'lar (Tricolate, Hoop) kenarı mühürleyerek farkı kanıtlar; kasıtlı bypass (Hoffmann AeroPress) araçtır, kazara bypass kusurdur.
+    <string name="learn_l130_body" formatted="false">Bypass yoğun bulamaç demleyip sonra su ekleyerek sertliği verimden ayırır. Örnek: 20 g\'yi 150 ml\'ye 1:7.5 demlemek %22 verim ve %3.5 TDS verir, sonra 150 ml bypass suyu ekleyip %1.75 TDS\'ye inmek — düz 1:15 pour-over ile aynı sertlik ama daha tatlı çünkü düşük su/kahve oranı aşırı ekstraksiyonu sınırladı. Kontrolsüz bypass tersidir: V60 filtre kenarı veya kat kıvrımından sızan su sertlik katmadan zayıflatır — ince ve az çözünmüş. Sıfır bypass dripper\'lar (Tricolate, Hoop) kenarı mühürleyerek farkı kanıtlar; kasıtlı bypass (Hoffmann AeroPress) araçtır, kazara bypass kusurdur.</string>
     <string name="learn_l131_title">Yulaf ve Süt Köpüğü: Yağ, Protein ve Köpük</string>
-    <string name="learn_l131_body" formatted="false">Süt köpüğü whey proteininin havayı sarmasıdır: 37°C altında esnek, 60–65°C\'de denatüre olup stabil mikro köpük, 70°C üstünde çöker. %3.5 yağlı tam süt tatlıdır ama yağsızdan hızlı söner. Yulaf barista sütü whey içermez — kanola yağı ve dipotasyum fosfatla kazeini taklit eder, %15 daha az hava ister: süte göre 2 sn erken bırakın. Yulaf hızlı ısınır ve bekletilirse ayrışır; süt 20 sn dinlenip çalkalanınca parlaklığını korur. Yulafı 55–60°C, sütü 60–65°C\'de bırakın, asla tekrar buharlamayın.
+    <string name="learn_l131_body" formatted="false">Süt köpüğü whey proteininin havayı sarmasıdır: 37°C altında esnek, 60–65°C\'de denatüre olup stabil mikro köpük, 70°C üstünde çöker. %3.5 yağlı tam süt tatlıdır ama yağsızdan hızlı söner. Yulaf barista sütü whey içermez — kanola yağı ve dipotasyum fosfatla kazeini taklit eder, %15 daha az hava ister: süte göre 2 sn erken bırakın. Yulaf hızlı ısınır ve bekletilirse ayrışır; süt 20 sn dinlenip çalkalanınca parlaklığını korur. Yulafı 55–60°C, sütü 60–65°C\'de bırakın, asla tekrar buharlamayın.</string>
     <string name="learn_l132_title">SCA Cupping Cetveli: CVA Betimleyici ve Hedonik</string>
     <string name="learn_l132_body">2024 Coffee Value Assessment eski 100 puanlık formu ikiye böldü: Betimleyici Değerlendirme (puansız) koku, aroma, tat, bitiş, asidite, tatlılık, gövde ve dengeyi kelimelerle kaydeder; Duygusal Değerlendirme genel izlenimi 0–100 ve dışsal değeri (çiftlik, sürdürülebilirlik) puanlar. Önce kör betimleyin — ne tattığınızı yazın — sonra işleme bilgisini açıp beğeniyi ayrı puanlayın; co-ferment artık kusur sayılmaz. Evde: 8.25 g /150 ml 93°C, 4:00\'te kır, 8. dakikada ve soğurken tat, önce betimleyici yaz, üç kişi ortalaması alın.</string>
     <string name="learn_l133_title">Direct Trade Makbuzu: Şeffaflık Raporu</string>
@@ -1813,7 +1813,7 @@ Hazırlanışı:
     <string name="glossary_term_105">Bypass Demleme</string>
     <string name="glossary_def_105">Güçlü konsantreyi sonra bypass suyuyla seyrelterek sertliği aşırı ekstrakte etmeden ayarlama. Filtre kenarından kaçak kusurdur.</string>
     <string name="glossary_term_106">Yulaf Mikro Köpüğü</string>
-    <string name="glossary_def_106" formatted="false">Whey yerine yağ ve fosfatla köpüren barista yulaf sütü. %15 az hava, max 60°C, tekrar buharlamada kesilir.
+    <string name="glossary_def_106" formatted="false">Whey yerine yağ ve fosfatla köpüren barista yulaf sütü. %15 az hava, max 60°C, tekrar buharlamada kesilir.</string>
     <string name="glossary_term_107">CVA Betimleyici ve Hedonik</string>
     <string name="glossary_def_107">SCA 2024 ikiliği: Betimleyici puansız aroma kaydı; Hedonik 0–100 beğeni + dışsal değer puanı.</string>
     <string name="glossary_term_108">Direct Trade Şeffaflık</string>
